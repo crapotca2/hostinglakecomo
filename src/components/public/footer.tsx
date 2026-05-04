@@ -25,7 +25,7 @@ export function Footer() {
           <span className="font-semibold italic">non si improvvisa</span>
         </h2>
         <p className="text-white/70 max-w-2xl mx-auto text-base leading-relaxed">
-          Gestione professionale di case vacanza e appartamenti sul Lago di
+          Gestione professionale di immobili sul Lago di
           Como. Massimizziamo la rendita del tuo immobile e lo portiamo al
           miglior rating possibile sulle piattaforme di riferimento.
         </p>

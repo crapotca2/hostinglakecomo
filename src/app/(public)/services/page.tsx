@@ -36,7 +36,7 @@ const OWNER_SERVICES: ServiceCardProps[] = [
   {
     icon: TrendingUp,
     title: "Promozione Multi-Canale",
-    desc: "Inserimento su Airbnb, Booking.com, Vrbo, Expedia e oltre 30 portali con descrizioni ottimizzate in 4 lingue e fotografie professionali.",
+    desc: "Inserimento su Airbnb, Booking.com, Expedia e altri top portali del mercato con descrizioni ottimizzate in 4 lingue e fotografie professionali.",
   },
   {
     icon: LineChart,

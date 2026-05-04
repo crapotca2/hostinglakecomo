@@ -65,7 +65,7 @@ export default function AboutPage() {
               Hosting Lake Como e un team giovane e dinamico di tre property
               manager. Ci occupiamo a 360 gradi della{" "}
               <strong>gestione, della pulizia e dell'organizzazione</strong>{" "}
-              delle case vacanza dei nostri clienti, con un focus specifico sul{" "}
+              degli immobili dei nostri clienti, con un focus specifico sul{" "}
               <strong>mercato internazionale</strong> che frequenta il Lago di
               Como ogni anno.
             </p>

@@ -98,7 +98,7 @@ export default function ProfitDirettoPage() {
                 Profit Diretto <span className="font-semibold">vs OTA</span>
               </h1>
               <p className="text-sm text-muted-foreground mt-1">
-                Quanto risparmi con le prenotazioni dirette rispetto a Airbnb, Booking e Vrbo
+                Quanto risparmi con le prenotazioni dirette rispetto a Airbnb, Booking ed Expedia
               </p>
             </div>
           </div>

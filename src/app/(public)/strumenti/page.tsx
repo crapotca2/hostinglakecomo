@@ -47,7 +47,7 @@ const TOOLS: Tool[] = [
   {
     slug: "profit-diretto",
     name: "Profit Diretto vs OTA",
-    desc: "Quanto puoi risparmiare sulle commissioni Airbnb, Booking e Vrbo con una strategia multi-canale equilibrata.",
+    desc: "Quanto puoi risparmiare sulle commissioni Airbnb, Booking ed Expedia con una strategia multi-canale equilibrata.",
     icon: Euro,
     status: "available",
     category: "simulator",
