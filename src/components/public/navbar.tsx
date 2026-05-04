@@ -49,7 +49,7 @@ export function Navbar() {
                 showSolid ? "/images/logo/logo-black.png" : "/images/logo/logo-white.png"
               }
               alt="Hosting Lake Como"
-              className="h-9 w-9 object-contain transition-opacity"
+              className="h-12 w-12 object-contain transition-opacity"
             />
             <span
               className={cn(
