@@ -180,8 +180,12 @@ export default function StrumentiPage() {
                   const content = (
                     <>
                       <div className="flex items-start justify-between mb-4">
-                        <div className="h-11 w-11 rounded-xl bg-primary/[0.08] flex items-center justify-center">
-                          <t.icon className="h-5 w-5 text-primary" />
+                        <div className="relative h-11 w-11 rounded-xl overflow-hidden bg-[url('/images/textures/services-bg.jpg')] bg-cover bg-center flex items-center justify-center shadow-sm">
+                          <div
+                            aria-hidden="true"
+                            className="absolute inset-0 bg-[#1D3A62]/85"
+                          />
+                          <t.icon className="relative h-5 w-5 text-white" />
                         </div>
                         {isMembersOnly && (
                           <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-primary bg-primary/[0.08] px-2 py-0.5 rounded-full">

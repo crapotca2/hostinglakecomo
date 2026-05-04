@@ -24,12 +24,14 @@ export function ServiceCard({
   return (
     <div className="bg-white rounded-2xl p-7 border border-border/50 card-hover flex flex-col">
       <div className="flex items-start justify-between mb-5">
-        <div
-          className={`h-12 w-12 rounded-xl flex items-center justify-center ${
-            isAccent ? "bg-accent/[0.12]" : "bg-primary/[0.08]"
-          }`}
-        >
-          <Icon className={`h-5 w-5 ${isAccent ? "text-accent" : "text-primary"}`} />
+        <div className="relative h-12 w-12 rounded-xl overflow-hidden bg-[url('/images/textures/services-bg.jpg')] bg-cover bg-center flex items-center justify-center shadow-sm">
+          <div
+            aria-hidden="true"
+            className={`absolute inset-0 ${
+              isAccent ? "bg-[#1D3A62]/70" : "bg-[#1D3A62]/85"
+            }`}
+          />
+          <Icon className="relative h-5 w-5 text-white" />
         </div>
         {badge && (
           <span
