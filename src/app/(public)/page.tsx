@@ -169,7 +169,7 @@ export default function HomePage() {
               <img
                 src="/images/host.webp"
                 alt="Hosting Lake Como — calendario unificato e gestione multi-piattaforma"
-                className="w-full h-auto"
+                className="w-full h-auto [mask-image:linear-gradient(to_right,black_82%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,black_82%,transparent_100%)]"
               />
               <div className="absolute -bottom-12 left-0 lg:left-4 bg-white rounded-2xl p-5 shadow-xl border border-border/50 hidden lg:block">
                 <div className="text-2xl font-bold text-primary">9+</div>

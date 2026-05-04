@@ -3,37 +3,10 @@ import { MapPin, Phone, Mail, Instagram, Facebook } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden">
-      {/* Brand-aligned background: services texture + navy #1D3A62 overlay (same pattern as services section) */}
-      <div className="absolute inset-0 -z-10">
-        <img
-          src="/images/textures/services-bg.jpg"
-          alt=""
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1D3A62]/88 via-[#1D3A62]/93 to-[#0F2440]/97" />
-      </div>
-
-      {/* Hero claim */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center">
-        <span className="inline-block text-[10px] font-semibold uppercase tracking-[0.3em] text-white/60 mb-4">
-          Co-hosting boutique sul Lago di Como
-        </span>
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light text-white mb-6 leading-[1.1]">
-          L'ospitalita
-          <br />
-          <span className="font-semibold italic">non si improvvisa</span>
-        </h2>
-        <p className="text-white/70 max-w-2xl mx-auto text-base leading-relaxed">
-          Gestione professionale di immobili sul Lago di
-          Como. Massimizziamo la rendita del tuo immobile e lo portiamo al
-          miglior rating possibile sulle piattaforme di riferimento.
-        </p>
-      </div>
-
+    <footer className="relative overflow-hidden bg-[#1F1F1F]">
       {/* Footer content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pt-12 border-t border-white/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-2.5">
@@ -45,11 +18,8 @@ export function Footer() {
               />
               <span className="text-lg font-semibold text-white">Hosting Lake Como</span>
             </div>
-            <p className="text-sm leading-relaxed text-white/60">
-              Co-hosting professionale sul Lago di Como. Gestione, pulizie e
-              organizzazione di alto livello per massimizzare la rendita
-              dell'immobile in gestione e ottenere il miglior rating sulle
-              piattaforme di riferimento.
+            <p className="text-sm leading-relaxed text-white/70">
+              L&apos;ospitalita non si improvvisa, affidati a un professionista.
             </p>
             <div className="flex items-center gap-3 pt-2">
               <a href="#" className="h-9 w-9 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
@@ -179,6 +149,18 @@ export function Footer() {
             </Link>
           </div>
         </div>
+      </div>
+
+      {/* Como typography watermark */}
+      <div className="px-4 sm:px-6 lg:px-8 pb-2">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/logo/como-typo-white.svg"
+          alt=""
+          aria-hidden="true"
+          draggable={false}
+          className="w-full h-auto block opacity-90 select-none pointer-events-none"
+        />
       </div>
     </footer>
   );
