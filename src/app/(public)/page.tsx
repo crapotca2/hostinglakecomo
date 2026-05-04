@@ -128,54 +128,56 @@ export default function HomePage() {
 
       {/* ═══ MULTI-CANALE / GESTIONE ═══ */}
       <section className="py-24 overflow-hidden">
-        <div className="grid lg:grid-cols-[5fr_7fr] gap-8 lg:gap-10 items-center">
-          <div className="px-4 sm:px-6 lg:pl-12 xl:pl-24 2xl:pl-[max(8rem,calc((100vw-80rem)/2+2rem))] lg:pr-0">
-            <div className="max-w-xl lg:ml-auto">
-              <span className="section-label">La nostra gestione</span>
-              <h2 className="text-3xl sm:text-4xl font-light text-foreground mt-3 mb-6">
-                Una sola gestione,{" "}
-                <span className="font-semibold">tutte le piattaforme</span>
-              </h2>
-              <p className="text-muted-foreground leading-relaxed mb-8">
-                Distribuiamo la tua proprieta sui principali canali del
-                mercato e adattiamo la formula di affitto stagione per
-                stagione. In alta stagione lavoriamo con i brevi soggiorni
-                turistici, in bassa stagione passiamo a locazioni medio-lunghe
-                quando piu convenienti. La tua casa resta in attivita 365
-                giorni l'anno, con un unico interlocutore.
-              </p>
-              <ul className="space-y-4 mb-8">
-                {WHY_US.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-3 text-sm text-foreground"
-                  >
-                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/services"
-                className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
-              >
-                Scopri tutti i servizi
-                <ChevronRight className="h-4 w-4" />
-              </Link>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-[5fr_7fr] gap-10 lg:gap-12 items-center">
+            <div>
+              <div className="max-w-xl">
+                <span className="section-label">La nostra gestione</span>
+                <h2 className="text-3xl sm:text-4xl font-light text-foreground mt-3 mb-6">
+                  Una sola gestione,{" "}
+                  <span className="font-semibold">tutte le piattaforme</span>
+                </h2>
+                <p className="text-muted-foreground leading-relaxed mb-8">
+                  Distribuiamo la tua proprieta sui principali canali del
+                  mercato e adattiamo la formula di affitto stagione per
+                  stagione. In alta stagione lavoriamo con i brevi soggiorni
+                  turistici, in bassa stagione passiamo a locazioni medio-lunghe
+                  quando piu convenienti. La tua casa resta in attivita 365
+                  giorni l'anno, con un unico interlocutore.
+                </p>
+                <ul className="space-y-4 mb-8">
+                  {WHY_US.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 text-sm text-foreground"
+                    >
+                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href="/services"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                >
+                  Scopri tutti i servizi
+                  <ChevronRight className="h-4 w-4" />
+                </Link>
+              </div>
             </div>
-          </div>
-          <div className="relative pl-4 sm:pl-0">
-            <img
-              src="/images/host.webp"
-              alt="Hosting Lake Como — calendario unificato e gestione multi-piattaforma"
-              className="w-full h-auto"
-            />
-            <div className="absolute -bottom-12 left-4 sm:left-6 lg:left-12 bg-white rounded-2xl p-5 shadow-xl border border-border/50 hidden lg:block">
-              <div className="text-2xl font-bold text-primary">9+</div>
-              <div className="text-xs text-muted-foreground">
-                anni di esperienza
-                <br />
-                da property manager a tua disposizione
+            <div className="relative">
+              <img
+                src="/images/host.webp"
+                alt="Hosting Lake Como — calendario unificato e gestione multi-piattaforma"
+                className="w-full h-auto"
+              />
+              <div className="absolute -bottom-12 left-0 lg:left-4 bg-white rounded-2xl p-5 shadow-xl border border-border/50 hidden lg:block">
+                <div className="text-2xl font-bold text-primary">9+</div>
+                <div className="text-xs text-muted-foreground">
+                  anni di esperienza
+                  <br />
+                  da property manager a tua disposizione
+                </div>
               </div>
             </div>
           </div>
