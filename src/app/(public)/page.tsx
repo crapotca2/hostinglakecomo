@@ -125,10 +125,10 @@ export default function HomePage() {
       </section>
 
       {/* ═══ MULTI-CANALE / GESTIONE ═══ */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
+      <section className="py-24 overflow-hidden">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="px-4 sm:px-6 lg:pl-12 xl:pl-24 2xl:pl-[max(8rem,calc((100vw-80rem)/2+2rem))] lg:pr-0">
+            <div className="max-w-xl lg:ml-auto">
               <span className="section-label">La nostra gestione</span>
               <h2 className="text-3xl sm:text-4xl font-light text-foreground mt-3 mb-6">
                 Una sola gestione,{" "}
@@ -161,19 +161,19 @@ export default function HomePage() {
                 <ChevronRight className="h-4 w-4" />
               </Link>
             </div>
-            <div className="relative">
-              <img
-                src="/images/host.webp"
-                alt="Hosting Lake Como — calendario unificato e gestione multi-piattaforma"
-                className="w-full h-auto"
-              />
-              <div className="absolute -bottom-12 -left-6 bg-white rounded-2xl p-5 shadow-xl border border-border/50 hidden lg:block">
-                <div className="text-2xl font-bold text-primary">9+</div>
-                <div className="text-xs text-muted-foreground">
-                  anni di esperienza
-                  <br />
-                  da property manager a tua disposizione
-                </div>
+          </div>
+          <div className="relative pl-4 sm:pl-0">
+            <img
+              src="/images/host.webp"
+              alt="Hosting Lake Como — calendario unificato e gestione multi-piattaforma"
+              className="w-full h-auto"
+            />
+            <div className="absolute -bottom-12 left-4 sm:left-6 lg:left-12 bg-white rounded-2xl p-5 shadow-xl border border-border/50 hidden lg:block">
+              <div className="text-2xl font-bold text-primary">9+</div>
+              <div className="text-xs text-muted-foreground">
+                anni di esperienza
+                <br />
+                da property manager a tua disposizione
               </div>
             </div>
           </div>
