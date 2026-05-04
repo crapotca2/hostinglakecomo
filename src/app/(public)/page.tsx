@@ -321,6 +321,43 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ═══ CTA BANNER ═══ */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative rounded-3xl overflow-hidden shadow-xl">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/banners/more-info.jpg"
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-[#1D3A62]/65" />
+            <div className="relative px-6 py-20 md:px-12 md:py-28 text-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/logo/logo-white.png"
+                alt=""
+                className="h-14 w-14 mx-auto mb-6 object-contain"
+              />
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white mb-5">
+                Affidaci la tua casa sul Lago
+              </h2>
+              <p className="text-white/85 text-base md:text-lg max-w-2xl mx-auto mb-8 uppercase tracking-wide font-medium">
+                Vuoi sapere quanto puo rendere la tua proprieta? Ti
+                contatteremo entro 24 ore.
+              </p>
+              <Link
+                href="/contact?interest=consulenza&from=cta-home"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#C99746] hover:bg-[#B07F2E] text-foreground font-semibold text-sm tracking-wide transition-colors shadow-lg"
+              >
+                Richiedi Consulenza
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
