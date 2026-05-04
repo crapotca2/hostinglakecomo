@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import {
@@ -34,6 +33,7 @@ import type { PortfolioPoi, PortfolioDistances } from "@/lib/portfolio";
 import { getPortfolioEntry, getZoneLabel, getTypeLabel } from "@/lib/portfolio";
 import { AirbnbReviewBlock } from "@/components/public/airbnb-review-block";
 import { GoogleMapEmbed } from "@/components/public/google-map-embed";
+import { PropertyGallery } from "@/components/public/property-gallery";
 import host from "@/data/host.json";
 
 function formatDistance(m: number | null | undefined): string {
@@ -187,7 +187,6 @@ export default function PropertyDetailPage() {
   const params = useParams<{ slug: string }>();
   const slug = params.slug;
   const property = getPortfolioEntry(slug);
-  const [activeImage, setActiveImage] = useState(0);
 
   if (!property) {
     return (
@@ -210,7 +209,6 @@ export default function PropertyDetailPage() {
     );
   }
 
-  const mainImage = property.images[activeImage]?.url ?? property.images[0]?.url;
   const sections = property.sections ?? {};
   const facts = property.facts ?? {};
   const nearby = property.nearby;
@@ -221,8 +219,58 @@ export default function PropertyDetailPage() {
     ? nearby.food.length + nearby.transport.length + nearby.shop.length + nearby.attraction.length > 0
     : false;
 
+  const SITE_URL = "https://hostinglakecomo.vercel.app";
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Accommodation",
+    name: property.name,
+    description: property.descriptionLong || property.description,
+    image: property.images
+      .slice(0, 8)
+      .map((img) => `${SITE_URL}${img.url}`),
+    numberOfRooms: property.details.bedrooms,
+    occupancy: {
+      "@type": "QuantitativeValue",
+      maxValue: property.details.maxGuests,
+    },
+    amenityFeature: property.amenities.map((name) => ({
+      "@type": "LocationFeatureSpecification",
+      name,
+    })),
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: property.address.street || undefined,
+      addressLocality: property.address.city,
+      addressRegion: "Lombardia",
+      postalCode: property.address.zip,
+      addressCountry: "IT",
+    },
+    ...(geo && {
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: geo.lat,
+        longitude: geo.lng,
+      },
+    }),
+    ...(airbnbListing?.rating && airbnbListing?.reviewCount
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: airbnbListing.rating,
+            reviewCount: airbnbListing.reviewCount,
+            bestRating: 5,
+          },
+        }
+      : {}),
+    ...(airbnbListing?.url && { sameAs: [airbnbListing.url] }),
+  };
+
   return (
     <div className="pt-24 pb-20 bg-muted/20 min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link
           href="/properties"
@@ -232,55 +280,11 @@ export default function PropertyDetailPage() {
           Tutte le proprieta
         </Link>
 
-        <div className="bg-white rounded-2xl overflow-hidden border border-border/50 mb-6">
-          <div className="relative">
-            {mainImage ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={mainImage}
-                alt={property.name}
-                className="w-full h-80 sm:h-[28rem] object-cover"
-              />
-            ) : (
-              <div className="w-full h-80 flex items-center justify-center bg-gradient-to-br from-primary/[0.08] to-primary/[0.02]">
-                <HomeIcon className="h-16 w-16 text-primary/40" />
-              </div>
-            )}
-            {property.details.hasLakeView && (
-              <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-primary/90 text-white text-[10px] font-semibold uppercase tracking-wider backdrop-blur-sm">
-                Vista Lago
-              </span>
-            )}
-            {property.images[activeImage]?.room && (
-              <span className="absolute top-4 right-4 px-3 py-1 rounded-full bg-white/90 text-foreground text-[10px] font-semibold uppercase tracking-wider backdrop-blur-sm">
-                {property.images[activeImage].room}
-              </span>
-            )}
-          </div>
-
-          {property.images.length > 1 && (
-            <div className="p-4 flex gap-2 overflow-x-auto">
-              {property.images.map((img, i) => (
-                <button
-                  key={img.url}
-                  onClick={() => setActiveImage(i)}
-                  className={`shrink-0 h-16 w-24 rounded-lg overflow-hidden border-2 transition-colors ${
-                    i === activeImage
-                      ? "border-primary"
-                      : "border-transparent opacity-70 hover:opacity-100"
-                  }`}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={img.url}
-                    alt={img.alt || `${property.name} ${i + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
+        <PropertyGallery
+          images={property.images}
+          propertyName={property.name}
+          hasLakeView={property.details.hasLakeView}
+        />
 
         <div className="space-y-6">
           <div className="bg-white rounded-2xl p-6 border border-border/50">

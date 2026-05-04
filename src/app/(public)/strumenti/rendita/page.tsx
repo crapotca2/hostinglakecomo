@@ -1,12 +1,24 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { Calculator, MapPin, Bed, Users, Eye, TrendingUp, CalendarDays, Euro } from "lucide-react";
 import { AirBibbyEstimateCard } from "@/components/strumenti/air-bibby-estimate-card";
 
-type Zone = "centro-como" | "primo-bacino" | "secondo-bacino" | "alto-lago";
-type PropertyType = "studio" | "apartment" | "house" | "villa";
+const FormSchema = z.object({
+  zone: z.enum(["centro-como", "primo-bacino", "secondo-bacino", "alto-lago"]),
+  propertyType: z.enum(["studio", "apartment", "house", "villa"]),
+  bedrooms: z.coerce.number().int().min(1).max(6),
+  lakeView: z.boolean(),
+  maxGuests: z.coerce.number().int().min(1).max(12),
+});
+
+type FormData = z.infer<typeof FormSchema>;
+type Zone = FormData["zone"];
+type PropertyType = FormData["propertyType"];
 
 // Base rates (EUR/night) derived from Hosting Lake Como portfolio averages per zone + type
 const BASE_RATES: Record<Zone, Record<PropertyType, number>> = {
@@ -47,11 +59,23 @@ function formatEuro(amount: number): string {
 }
 
 export default function RenditaPage() {
-  const [zone, setZone] = useState<Zone>("primo-bacino");
-  const [propertyType, setPropertyType] = useState<PropertyType>("apartment");
-  const [bedrooms, setBedrooms] = useState(2);
-  const [lakeView, setLakeView] = useState(true);
-  const [maxGuests, setMaxGuests] = useState(4);
+  const { register, watch, setValue } = useForm<FormData>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      zone: "primo-bacino",
+      propertyType: "apartment",
+      bedrooms: 2,
+      lakeView: true,
+      maxGuests: 4,
+    },
+    mode: "onChange",
+  });
+
+  const zone = watch("zone");
+  const propertyType = watch("propertyType");
+  const bedrooms = Number(watch("bedrooms")) || 2;
+  const lakeView = watch("lakeView");
+  const maxGuests = Number(watch("maxGuests")) || 4;
 
   const result = useMemo(() => {
     const baseRate = BASE_RATES[zone][propertyType];
@@ -128,8 +152,7 @@ export default function RenditaPage() {
                   <MapPin className="h-3 w-3" /> Zona
                 </label>
                 <select
-                  value={zone}
-                  onChange={(e) => setZone(e.target.value as Zone)}
+                  {...register("zone")}
                   className="w-full rounded-lg border border-border px-3 py-2.5 text-sm bg-white"
                 >
                   {(Object.keys(ZONE_LABELS) as Zone[]).map((k) => (
@@ -143,8 +166,9 @@ export default function RenditaPage() {
                 <div className="grid grid-cols-4 gap-2">
                   {(Object.keys(TYPE_LABELS) as PropertyType[]).map((t) => (
                     <button
+                      type="button"
                       key={t}
-                      onClick={() => setPropertyType(t)}
+                      onClick={() => setValue("propertyType", t, { shouldValidate: true })}
                       className={`px-2 py-2 rounded-lg text-xs font-medium border transition-colors ${
                         propertyType === t
                           ? "bg-primary text-white border-primary"
@@ -165,8 +189,7 @@ export default function RenditaPage() {
                   type="range"
                   min={1}
                   max={6}
-                  value={bedrooms}
-                  onChange={(e) => setBedrooms(parseInt(e.target.value))}
+                  {...register("bedrooms", { valueAsNumber: true })}
                   className="w-full accent-primary"
                 />
                 <div className="flex justify-between text-[10px] text-muted-foreground mt-1">
@@ -182,8 +205,7 @@ export default function RenditaPage() {
                   type="range"
                   min={1}
                   max={12}
-                  value={maxGuests}
-                  onChange={(e) => setMaxGuests(parseInt(e.target.value))}
+                  {...register("maxGuests", { valueAsNumber: true })}
                   className="w-full accent-primary"
                 />
               </div>
@@ -191,8 +213,7 @@ export default function RenditaPage() {
               <label className="flex items-center gap-3 cursor-pointer pt-2 border-t border-border/50">
                 <input
                   type="checkbox"
-                  checked={lakeView}
-                  onChange={(e) => setLakeView(e.target.checked)}
+                  {...register("lakeView")}
                   className="rounded border-border text-primary focus:ring-primary/30"
                 />
                 <div className="flex items-center gap-1.5 text-sm">

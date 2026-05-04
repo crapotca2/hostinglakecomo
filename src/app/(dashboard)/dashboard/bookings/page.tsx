@@ -1,7 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { Users, Search } from "lucide-react";
+import { useState, useMemo } from "react";
+import {
+  type ColumnDef,
+  type SortingState,
+  flexRender,
+  getCoreRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+import { Users, Search, ArrowUp, ArrowDown, ArrowUpDown } from "lucide-react";
 import { useBookings } from "@/hooks/use-bookings";
 import { useProperties } from "@/hooks/use-properties";
 
@@ -52,31 +60,149 @@ function formatDate(iso: string): string {
   });
 }
 
+type BookingRow = {
+  _id: string;
+  propertyId: string;
+  propertyName: string;
+  guestName: string;
+  checkIn: string;
+  checkOut: string;
+  nights: number;
+  source: string;
+  amount: number;
+  status: string;
+};
+
 export default function BookingsPage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("");
   const [sourceFilter, setSourceFilter] = useState<string>("");
+  const [sorting, setSorting] = useState<SortingState>([
+    { id: "checkIn", desc: true },
+  ]);
 
   const { data: bookings, isLoading } = useBookings({
     status: statusFilter || undefined,
   });
   const { data: properties } = useProperties();
 
-  const propertyMap = new Map(
-    (properties || []).map((p) => [p._id, p.name])
+  const propertyMap = useMemo(
+    () => new Map((properties || []).map((p) => [p._id, p.name])),
+    [properties]
   );
 
-  const filtered = (bookings || []).filter((b) => {
-    if (sourceFilter && b.source !== sourceFilter) return false;
-    if (search) {
-      const term = search.toLowerCase();
-      const propertyName = propertyMap.get(b.propertyId) || "";
-      return (
-        b.guestInfo.name.toLowerCase().includes(term) ||
-        propertyName.toLowerCase().includes(term)
-      );
-    }
-    return true;
+  const rows: BookingRow[] = useMemo(() => {
+    return (bookings || [])
+      .filter((b) => {
+        if (sourceFilter && b.source !== sourceFilter) return false;
+        if (search) {
+          const term = search.toLowerCase();
+          const propertyName = propertyMap.get(b.propertyId) || "";
+          return (
+            b.guestInfo.name.toLowerCase().includes(term) ||
+            propertyName.toLowerCase().includes(term)
+          );
+        }
+        return true;
+      })
+      .map((b) => ({
+        _id: b._id,
+        propertyId: b.propertyId,
+        propertyName: propertyMap.get(b.propertyId) || "—",
+        guestName: b.guestInfo.name,
+        checkIn: b.checkIn,
+        checkOut: b.checkOut,
+        nights: b.nights,
+        source: b.source,
+        amount: b.pricing.totalAmount,
+        status: b.status,
+      }));
+  }, [bookings, propertyMap, search, sourceFilter]);
+
+  const columns = useMemo<ColumnDef<BookingRow>[]>(
+    () => [
+      {
+        accessorKey: "guestName",
+        header: "Ospite",
+        cell: ({ row }) => (
+          <div className="flex items-center gap-3">
+            <div className="h-8 w-8 rounded-full bg-primary/[0.08] flex items-center justify-center shrink-0">
+              <Users className="h-3.5 w-3.5 text-primary" />
+            </div>
+            <span className="text-sm font-medium">{row.original.guestName}</span>
+          </div>
+        ),
+      },
+      {
+        accessorKey: "propertyName",
+        header: "Proprieta",
+        cell: ({ row }) => (
+          <span className="text-sm text-muted-foreground">
+            {row.original.propertyName}
+          </span>
+        ),
+      },
+      {
+        accessorKey: "checkIn",
+        header: "Date",
+        cell: ({ row }) => (
+          <span className="text-sm whitespace-nowrap">
+            {formatDate(row.original.checkIn)} →{" "}
+            {formatDate(row.original.checkOut)}
+          </span>
+        ),
+        sortingFn: "datetime",
+      },
+      {
+        accessorKey: "nights",
+        header: "Notti",
+        cell: ({ row }) => (
+          <span className="text-sm text-center block">{row.original.nights}</span>
+        ),
+      },
+      {
+        accessorKey: "source",
+        header: "Fonte",
+        cell: ({ row }) => (
+          <span
+            className={`text-sm font-medium ${SOURCE_COLORS[row.original.source]}`}
+          >
+            {SOURCE_LABELS[row.original.source] || row.original.source}
+          </span>
+        ),
+      },
+      {
+        accessorKey: "amount",
+        header: "Importo",
+        cell: ({ row }) => (
+          <span className="text-sm font-semibold text-right tabular-nums block">
+            {formatEuro(row.original.amount)}
+          </span>
+        ),
+      },
+      {
+        accessorKey: "status",
+        header: "Stato",
+        cell: ({ row }) => (
+          <span
+            className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${STATUS_STYLES[row.original.status]}`}
+          >
+            {STATUS_LABELS[row.original.status]}
+          </span>
+        ),
+        enableSorting: false,
+      },
+    ],
+    []
+  );
+
+  const table = useReactTable({
+    data: rows,
+    columns,
+    state: { sorting },
+    onSortingChange: setSorting,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
   });
 
   return (
@@ -86,7 +212,7 @@ export default function BookingsPage() {
           <span className="font-semibold">Prenotazioni</span>
         </h1>
         <p className="text-sm text-muted-foreground mt-1">
-          {isLoading ? "Caricamento..." : `${filtered.length} prenotazioni`}
+          {isLoading ? "Caricamento..." : `${rows.length} prenotazioni`}
         </p>
       </div>
 
@@ -128,52 +254,74 @@ export default function BookingsPage() {
 
       <div className="bg-white rounded-2xl border border-border/50 overflow-hidden">
         {isLoading ? (
-          <div className="p-12 text-center text-sm text-muted-foreground">Caricamento...</div>
-        ) : filtered.length === 0 ? (
-          <div className="p-12 text-center text-sm text-muted-foreground">Nessuna prenotazione trovata</div>
+          <div className="p-12 text-center text-sm text-muted-foreground">
+            Caricamento...
+          </div>
+        ) : rows.length === 0 ? (
+          <div className="p-12 text-center text-sm text-muted-foreground">
+            Nessuna prenotazione trovata
+          </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-border/40">
-                  <th className="text-left text-xs font-semibold text-muted-foreground px-6 py-3.5">Ospite</th>
-                  <th className="text-left text-xs font-semibold text-muted-foreground px-4 py-3.5">Proprieta</th>
-                  <th className="text-left text-xs font-semibold text-muted-foreground px-4 py-3.5">Date</th>
-                  <th className="text-center text-xs font-semibold text-muted-foreground px-4 py-3.5">Notti</th>
-                  <th className="text-left text-xs font-semibold text-muted-foreground px-4 py-3.5">Fonte</th>
-                  <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">Importo</th>
-                  <th className="text-center text-xs font-semibold text-muted-foreground px-6 py-3.5">Stato</th>
-                </tr>
+                {table.getHeaderGroups().map((hg) => (
+                  <tr key={hg.id} className="border-b border-border/40">
+                    {hg.headers.map((header) => {
+                      const canSort = header.column.getCanSort();
+                      const sortDir = header.column.getIsSorted();
+                      return (
+                        <th
+                          key={header.id}
+                          className="text-left text-xs font-semibold text-muted-foreground px-4 py-3.5 first:pl-6 last:pr-6"
+                        >
+                          {canSort ? (
+                            <button
+                              type="button"
+                              onClick={header.column.getToggleSortingHandler()}
+                              className="inline-flex items-center gap-1 hover:text-foreground transition-colors"
+                            >
+                              {flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                              {sortDir === "asc" ? (
+                                <ArrowUp className="h-3 w-3" />
+                              ) : sortDir === "desc" ? (
+                                <ArrowDown className="h-3 w-3" />
+                              ) : (
+                                <ArrowUpDown className="h-3 w-3 opacity-50" />
+                              )}
+                            </button>
+                          ) : (
+                            flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )
+                          )}
+                        </th>
+                      );
+                    })}
+                  </tr>
+                ))}
               </thead>
               <tbody className="divide-y divide-border/30">
-                {filtered.map((b) => (
-                  <tr key={b._id} className="hover:bg-muted/20 transition-colors cursor-pointer">
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
-                        <div className="h-8 w-8 rounded-full bg-primary/[0.08] flex items-center justify-center shrink-0">
-                          <Users className="h-3.5 w-3.5 text-primary" />
-                        </div>
-                        <span className="text-sm font-medium">{b.guestInfo.name}</span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-4 text-sm text-muted-foreground">
-                      {propertyMap.get(b.propertyId) || "—"}
-                    </td>
-                    <td className="px-4 py-4 text-sm whitespace-nowrap">
-                      {formatDate(b.checkIn)} → {formatDate(b.checkOut)}
-                    </td>
-                    <td className="px-4 py-4 text-sm text-center">{b.nights}</td>
-                    <td className={`px-4 py-4 text-sm font-medium ${SOURCE_COLORS[b.source]}`}>
-                      {SOURCE_LABELS[b.source] || b.source}
-                    </td>
-                    <td className="px-4 py-4 text-sm font-semibold text-right tabular-nums">
-                      {formatEuro(b.pricing.totalAmount)}
-                    </td>
-                    <td className="px-6 py-4 text-center">
-                      <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${STATUS_STYLES[b.status]}`}>
-                        {STATUS_LABELS[b.status]}
-                      </span>
-                    </td>
+                {table.getRowModel().rows.map((row) => (
+                  <tr
+                    key={row.id}
+                    className="hover:bg-muted/20 transition-colors cursor-pointer"
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <td
+                        key={cell.id}
+                        className="px-4 py-4 first:pl-6 last:pr-6"
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </td>
+                    ))}
                   </tr>
                 ))}
               </tbody>
