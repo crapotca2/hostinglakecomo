@@ -14,6 +14,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { getPortfolio, getZoneLabel, getTypeLabel } from "@/lib/portfolio";
+import { PartnersBanner } from "@/components/public/partners-banner";
 
 const FEATURED_PROPERTIES = (() => {
   const all = getPortfolio();
@@ -146,6 +147,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ═══ PARTNERS & CHANNELS ═══ */}
+      <PartnersBanner />
 
       {/* ═══ PERCHE AIR BIBBY ═══ */}
       <section className="py-24">
