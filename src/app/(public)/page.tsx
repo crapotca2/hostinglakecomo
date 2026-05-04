@@ -88,17 +88,14 @@ export default function HomePage() {
               Lago di Como, Italia
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-white leading-[1.05] mb-6">
-              Hosting the best
+              Il tuo immobile,
               <br />
-              <span className="font-semibold italic">experiences</span>
-              <br />
-              on Lake Como
+              <span className="font-semibold">il nostro mestiere.</span>
             </h1>
             <p className="text-lg sm:text-xl text-white/70 leading-relaxed mb-10 max-w-lg">
-              Gestione professionale di case vacanza e appartamenti sul Lago
-              di Como. Massimizziamo i tuoi guadagni e portiamo la tua
-              proprieta al miglior rating possibile sulle piattaforme di
-              riferimento.
+              Gestione professionale di case vacanza sul Lago di Como.
+              Massimizziamo la rendita del tuo immobile con tecnologia e
+              servizio a 5 stelle.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
@@ -198,7 +195,7 @@ export default function HomePage() {
             </span>
             <h2 className="text-3xl sm:text-4xl font-light text-white mt-3 mb-4">
               Tutto cio che serve per{" "}
-              <span className="font-semibold">guadagnare di piu</span>
+              <span className="font-semibold">massimizzare la rendita</span>
             </h2>
             <p className="text-white/80 max-w-2xl mx-auto">
               Dalla promozione alla gestione quotidiana, ci occupiamo di ogni
@@ -338,15 +335,15 @@ export default function HomePage() {
               <img
                 src="/images/logo/logo-white.png"
                 alt=""
-                className="h-20 w-20 md:h-24 md:w-24 mx-auto mb-5 object-contain"
+                className="h-24 w-24 md:h-28 md:w-28 mx-auto mb-5 object-contain [filter:drop-shadow(0_8px_24px_rgba(0,0,0,0.55))]"
               />
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white mb-4 [text-shadow:0_6px_24px_rgba(0,0,0,0.45)]">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white mb-4 [text-shadow:0_10px_36px_rgba(0,0,0,0.7)]">
                 Affidaci la tua casa sul Lago
               </h2>
               <p className="text-white text-sm md:text-base max-w-2xl mx-auto mb-7 uppercase tracking-wide font-medium leading-relaxed">
                 Vuoi sapere quanto puo rendere la tua proprieta?
                 <br />
-                Ti contatteremo entro 24 ore.
+                Ti contatteremo entro 48 ore.
               </p>
               <Link
                 href="/contact?interest=consulenza&from=cta-home"
