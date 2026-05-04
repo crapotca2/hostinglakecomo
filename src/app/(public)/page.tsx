@@ -55,7 +55,7 @@ const SERVICES_OWNER = [
 ];
 
 const WHY_US = [
-  "Distribuzione su Airbnb, Booking, Vrbo, Expedia e oltre 30 portali",
+  "Distribuzione su Airbnb, Booking, Expedia e altri top portali del mercato",
   "Pricing dinamico calibrato sulle dinamiche di mercato in tempo reale",
   "Affitti brevi nei picchi turistici, locazioni medio-lunghe in bassa stagione",
   "Calendario unificato e zero overbooking grazie alla sincronizzazione canali",
@@ -99,10 +99,10 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
-                href="/contact?interest=consulenza"
+                href="/contact?interest=consulenza&from=hero"
                 className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-white text-foreground text-sm font-semibold hover:bg-white/90 transition-all shadow-lg"
               >
-                Richiedi Consulenza
+                Affidati a noi
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
@@ -167,12 +167,12 @@ export default function HomePage() {
                 alt="Hosting Lake Como — calendario unificato e gestione multi-piattaforma"
                 className="w-full h-auto"
               />
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-5 shadow-xl border border-border/50 hidden lg:block">
-                <div className="text-2xl font-bold text-primary">30+</div>
+              <div className="absolute -bottom-12 -left-6 bg-white rounded-2xl p-5 shadow-xl border border-border/50 hidden lg:block">
+                <div className="text-2xl font-bold text-primary">9+</div>
                 <div className="text-xs text-muted-foreground">
-                  Canali di distribuzione
+                  anni di esperienza
                   <br />
-                  sincronizzati in tempo reale
+                  da property manager a tua disposizione
                 </div>
               </div>
             </div>
