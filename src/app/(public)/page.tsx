@@ -77,7 +77,9 @@ export default function HomePage() {
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" />
+        {/* Navy brand tint (Como #1D3A62) + dark gradient for text readability */}
+        <div className="absolute inset-0 bg-[#1D3A62]/55 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/25 to-transparent" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="max-w-2xl animate-fade-in-up">
@@ -184,9 +186,10 @@ export default function HomePage() {
 
       {/* ═══ SERVIZI PER PROPRIETARI ═══ */}
       <section className="py-24 relative bg-[url('/images/textures/services-bg.jpg')] bg-cover bg-center">
+        {/* Navy brand tint to align texture with Como blue #1D3A62 */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-black/55 pointer-events-none"
+          className="absolute inset-0 bg-[#1D3A62]/75 pointer-events-none"
         />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
