@@ -93,9 +93,10 @@ export default function HomePage() {
               <span className="font-semibold">il nostro mestiere.</span>
             </h1>
             <p className="text-lg sm:text-xl text-white/70 leading-relaxed mb-10 max-w-lg">
-              Gestione professionale di case vacanza sul Lago di Como.
-              Massimizziamo la rendita del tuo immobile con tecnologia e
-              servizio a 5 stelle.
+              Gestione professionale di case vacanza sul Lago di Como. Un
+              team di property manager con anni di esperienza diretta sul
+              Lago di Como. Gestiamo la tua proprieta su tutti i canali, in
+              ogni stagione.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
