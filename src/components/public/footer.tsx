@@ -4,14 +4,14 @@ import { MapPin, Phone, Mail, Instagram, Facebook } from "lucide-react";
 export function Footer() {
   return (
     <footer className="relative overflow-hidden">
-      {/* Sunset background image with gradient overlay */}
+      {/* Brand-aligned background: services texture + navy #1D3A62 overlay (same pattern as services section) */}
       <div className="absolute inset-0 -z-10">
         <img
-          src="/images/footer-sunset.jpg"
+          src="/images/textures/services-bg.jpg"
           alt=""
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#2a0f1a]/40 via-[#1a0a1f]/75 to-[#0a0a1f]/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1D3A62]/88 via-[#1D3A62]/93 to-[#0F2440]/97" />
       </div>
 
       {/* Hero claim */}

@@ -128,7 +128,7 @@ export default function HomePage() {
 
       {/* ═══ MULTI-CANALE / GESTIONE ═══ */}
       <section className="py-24 overflow-hidden">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-[5fr_7fr] gap-8 lg:gap-10 items-center">
           <div className="px-4 sm:px-6 lg:pl-12 xl:pl-24 2xl:pl-[max(8rem,calc((100vw-80rem)/2+2rem))] lg:pr-0">
             <div className="max-w-xl lg:ml-auto">
               <span className="section-label">La nostra gestione</span>
