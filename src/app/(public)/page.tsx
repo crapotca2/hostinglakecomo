@@ -214,15 +214,8 @@ export default function HomePage() {
             {SERVICES_OWNER.map((s) => (
               <div
                 key={s.title}
-                className="group bg-white rounded-2xl p-7 border border-border/50 card-hover"
+                className="group bg-white rounded-2xl p-7 border border-border/50 border-t-2 border-t-[#1D3A62]/40 card-hover"
               >
-                <div className="relative h-12 w-12 rounded-xl overflow-hidden bg-[url('/images/textures/services-bg.jpg')] bg-cover bg-center flex items-center justify-center shadow-sm mb-5">
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-[#1D3A62]/85 group-hover:bg-[#1D3A62]/75 transition-colors"
-                  />
-                  <s.icon className="relative h-5 w-5 text-white" />
-                </div>
                 <h3 className="text-base font-semibold text-foreground mb-2">
                   {s.title}
                 </h3>

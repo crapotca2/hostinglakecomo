@@ -179,27 +179,22 @@ export default function StrumentiPage() {
                   const isMembersOnly = t.status === "members-only";
                   const content = (
                     <>
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="relative h-11 w-11 rounded-xl overflow-hidden bg-[url('/images/textures/services-bg.jpg')] bg-cover bg-center flex items-center justify-center shadow-sm">
-                          <div
-                            aria-hidden="true"
-                            className="absolute inset-0 bg-[#1D3A62]/85"
-                          />
-                          <t.icon className="relative h-5 w-5 text-white" />
+                      {(isMembersOnly || t.status === "coming-soon") && (
+                        <div className="flex justify-end mb-3">
+                          {isMembersOnly && (
+                            <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-primary bg-primary/[0.08] px-2 py-0.5 rounded-full">
+                              <Lock className="h-2.5 w-2.5" />
+                              Area Clienti
+                            </span>
+                          )}
+                          {t.status === "coming-soon" && (
+                            <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
+                              <Lock className="h-2.5 w-2.5" />
+                              In arrivo
+                            </span>
+                          )}
                         </div>
-                        {isMembersOnly && (
-                          <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-primary bg-primary/[0.08] px-2 py-0.5 rounded-full">
-                            <Lock className="h-2.5 w-2.5" />
-                            Area Clienti
-                          </span>
-                        )}
-                        {t.status === "coming-soon" && (
-                          <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
-                            <Lock className="h-2.5 w-2.5" />
-                            In arrivo
-                          </span>
-                        )}
-                      </div>
+                      )}
                       <h3 className="text-base font-semibold mb-2">{t.name}</h3>
                       <p className="text-sm text-muted-foreground leading-relaxed mb-4">
                         {t.desc}
@@ -224,7 +219,7 @@ export default function StrumentiPage() {
                       <Link
                         key={t.slug}
                         href={`/strumenti/${t.slug}`}
-                        className="group bg-white rounded-2xl p-7 border border-border/50 card-hover block"
+                        className="group bg-white rounded-2xl p-7 border border-border/50 border-t-2 border-t-[#1D3A62]/40 card-hover block"
                       >
                         {content}
                       </Link>
@@ -235,7 +230,7 @@ export default function StrumentiPage() {
                       <Link
                         key={t.slug}
                         href={`/strumenti/${t.slug}`}
-                        className="group bg-white rounded-2xl p-7 border border-border/50 card-hover block"
+                        className="group bg-white rounded-2xl p-7 border border-border/50 border-t-2 border-t-[#1D3A62]/40 card-hover block"
                       >
                         {content}
                       </Link>
@@ -244,7 +239,7 @@ export default function StrumentiPage() {
                   return (
                     <div
                       key={t.slug}
-                      className="bg-white rounded-2xl p-7 border border-border/50 opacity-70"
+                      className="bg-white rounded-2xl p-7 border border-border/50 border-t-2 border-t-[#1D3A62]/40 opacity-70"
                     >
                       {content}
                     </div>
