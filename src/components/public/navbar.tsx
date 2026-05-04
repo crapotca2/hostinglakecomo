@@ -52,24 +52,14 @@ export function Navbar() {
             >
               HLC
             </div>
-            <div>
-              <span
-                className={cn(
-                  "text-lg font-semibold tracking-tight transition-colors",
-                  showSolid ? "text-foreground" : "text-white"
-                )}
-              >
-                Hosting Lake Como
-              </span>
-              <span
-                className={cn(
-                  "hidden sm:block text-[10px] -mt-0.5 transition-colors",
-                  showSolid ? "text-muted-foreground" : "text-white/60"
-                )}
-              >
-                Lago di Como
-              </span>
-            </div>
+            <span
+              className={cn(
+                "text-lg font-semibold tracking-tight transition-colors",
+                showSolid ? "text-foreground" : "text-white"
+              )}
+            >
+              Hosting Lake Como
+            </span>
           </Link>
 
           {/* Desktop nav */}

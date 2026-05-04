@@ -40,7 +40,7 @@ const PARTNERS: Partner[] = [
     name: "Lake Como Tourism",
     url: "https://lakecomotourism.it",
     logo: "/images/partners/lake-como-tourism.png",
-    heightClass: "h-10 sm:h-12",
+    heightClass: "h-14 sm:h-16",
   },
 ];
 
