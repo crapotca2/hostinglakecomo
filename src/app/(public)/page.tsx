@@ -214,7 +214,7 @@ export default function HomePage() {
             {SERVICES_OWNER.map((s) => (
               <div
                 key={s.title}
-                className="group bg-white rounded-2xl p-7 border border-border/50 border-t-2 border-t-[#1D3A62]/40 card-hover"
+                className="group bg-white rounded-2xl p-7 border border-border/50 border-t-[3px] border-t-[#1D3A62] card-hover"
               >
                 <h3 className="text-base font-semibold text-foreground mb-2">
                   {s.title}

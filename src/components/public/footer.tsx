@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden bg-[#1D3A62]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1.2fr] gap-10 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1.2fr_1fr] gap-10 lg:gap-12">
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-2.5">
@@ -66,65 +66,64 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Risorse e Legale */}
-          <div className="space-y-8">
-            <div>
-              <h4 className="text-xs font-semibold text-white mb-4 uppercase tracking-widest">
-                Contatti
-              </h4>
-              <ul className="space-y-3 text-sm text-white/75">
-                <li className="flex items-start gap-2.5">
-                  <Phone className="h-4 w-4 mt-0.5 shrink-0 text-white/90" />
-                  <span>+39 031 547 8072</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <Mail className="h-4 w-4 mt-0.5 shrink-0 text-white/90" />
-                  <span>info@airbibby.com</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-white/90" />
-                  <span>
-                    Via Maurizio Monti 46
-                    <br />
-                    22100 Como, Italia
-                  </span>
-                </li>
-              </ul>
-              <Link
-                href="/contact?interest=consulenza"
-                className="inline-flex items-center gap-2 mt-5 px-5 py-2.5 rounded-xl bg-white text-[#1D3A62] text-xs font-semibold hover:bg-white/90 transition-colors"
-              >
-                Richiedi Consulenza
-              </Link>
-            </div>
+          {/* Contatti */}
+          <div>
+            <h4 className="text-xs font-semibold text-white mb-4 uppercase tracking-widest">
+              Contatti
+            </h4>
+            <ul className="space-y-3 text-sm text-white/75">
+              <li className="flex items-start gap-2.5">
+                <Phone className="h-4 w-4 mt-0.5 shrink-0 text-white/90" />
+                <span>+39 031 547 8072</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <Mail className="h-4 w-4 mt-0.5 shrink-0 text-white/90" />
+                <span>info@airbibby.com</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-white/90" />
+                <span>
+                  Via Maurizio Monti 46
+                  <br />
+                  22100 Como, Italia
+                </span>
+              </li>
+            </ul>
+            <Link
+              href="/contact?interest=consulenza"
+              className="inline-flex items-center gap-2 mt-5 px-5 py-2.5 rounded-xl bg-white text-[#1D3A62] text-xs font-semibold hover:bg-white/90 transition-colors"
+            >
+              Richiedi Consulenza
+            </Link>
+          </div>
 
-            <div>
-              <h4 className="text-xs font-semibold text-white mb-4 uppercase tracking-widest">
-                Legale
-              </h4>
-              <ul className="space-y-2.5 text-sm text-white/75">
-                <li>
-                  <Link href="/privacy" className="hover:text-white transition-colors">
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/cookies" className="hover:text-white transition-colors">
-                    Cookie Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/terms" className="hover:text-white transition-colors">
-                    Termini di Servizio
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/note-legali" className="hover:text-white transition-colors">
-                    Note Legali
-                  </Link>
-                </li>
-              </ul>
-            </div>
+          {/* Legale */}
+          <div>
+            <h4 className="text-xs font-semibold text-white mb-4 uppercase tracking-widest">
+              Legale
+            </h4>
+            <ul className="space-y-2.5 text-sm text-white/75">
+              <li>
+                <Link href="/privacy" className="hover:text-white transition-colors">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/cookies" className="hover:text-white transition-colors">
+                  Cookie Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="hover:text-white transition-colors">
+                  Termini di Servizio
+                </Link>
+              </li>
+              <li>
+                <Link href="/note-legali" className="hover:text-white transition-colors">
+                  Note Legali
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
