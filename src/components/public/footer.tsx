@@ -179,16 +179,6 @@ export function Footer() {
           </div>
         </div>
       </div>
-
-      {/* Big 'como' wordmark — design statement at the very bottom */}
-      <div className="relative mt-6 -mb-2 overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/logo/como-typo-white.svg"
-          alt=""
-          className="block w-full h-auto"
-        />
-      </div>
     </footer>
   );
 }

@@ -338,21 +338,22 @@ export default function HomePage() {
               <img
                 src="/images/logo/logo-white.png"
                 alt=""
-                className="h-14 w-14 mx-auto mb-6 object-contain"
+                className="h-28 w-28 md:h-32 md:w-32 mx-auto mb-8 object-contain"
               />
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white mb-5">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white mb-6 [text-shadow:0_6px_24px_rgba(0,0,0,0.45)]">
                 Affidaci la tua casa sul Lago
               </h2>
-              <p className="text-white/85 text-base md:text-lg max-w-2xl mx-auto mb-8 uppercase tracking-wide font-medium">
-                Vuoi sapere quanto puo rendere la tua proprieta? Ti
-                contatteremo entro 24 ore.
+              <p className="text-white text-base md:text-lg max-w-2xl mx-auto mb-10 uppercase tracking-wide font-medium leading-relaxed">
+                Vuoi sapere quanto puo rendere la tua proprieta?
+                <br />
+                Ti contatteremo entro 24 ore.
               </p>
               <Link
                 href="/contact?interest=consulenza&from=cta-home"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#C99746] hover:bg-[#B07F2E] text-foreground font-semibold text-sm tracking-wide transition-colors shadow-lg"
+                className="inline-flex items-center gap-3 px-10 py-5 rounded-full bg-white hover:bg-white/90 text-foreground font-semibold text-base tracking-wide transition-colors shadow-xl"
               >
                 Richiedi Consulenza
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-5 w-5" />
               </Link>
             </div>
           </div>
