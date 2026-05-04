@@ -37,12 +37,6 @@ const PARTNERS: Partner[] = [
     heightClass: "h-12 sm:h-14",
   },
   {
-    name: "Comune di Como",
-    url: "https://www.comune.como.it",
-    logo: "/images/partners/comune-como.svg",
-    heightClass: "h-12 sm:h-14",
-  },
-  {
     name: "Lake Como Tourism",
     url: "https://lakecomotourism.it",
     logo: "/images/partners/lake-como-tourism.png",
@@ -54,17 +48,7 @@ export function PartnersBanner() {
   const loop = [...PARTNERS, ...PARTNERS];
 
   return (
-    <section className="py-14 sm:py-16 bg-white border-y border-border/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10">
-          <span className="section-label">Partner &amp; canali</span>
-          <h2 className="text-2xl sm:text-3xl font-light mt-3 text-foreground">
-            Distribuiamo le tue proprieta sui{" "}
-            <span className="font-semibold">canali leader</span> del mercato
-          </h2>
-        </div>
-      </div>
-
+    <section className="py-12 sm:py-14 bg-white border-y border-border/50">
       <div className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-24 bg-gradient-to-r from-white to-transparent z-10" />
         <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-24 bg-gradient-to-l from-white to-transparent z-10" />

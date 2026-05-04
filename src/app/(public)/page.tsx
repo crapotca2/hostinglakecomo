@@ -150,9 +150,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ PARTNERS & CHANNELS ═══ */}
-      <PartnersBanner />
-
       {/* ═══ PERCHE AIR BIBBY ═══ */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -206,6 +203,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ═══ PARTNERS & CHANNELS ═══ */}
+      <PartnersBanner />
 
       {/* ═══ SERVIZI PER PROPRIETARI ═══ */}
       <section className="py-24 bg-muted/30">
