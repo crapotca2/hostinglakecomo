@@ -3,13 +3,13 @@
     {
       "id": "angelo",
       "name": "Angelo",
-      "role": "Property Manager Senior · Direttore del team",
-      "shortRole": "Direttore",
+      "role": "Property Manager Senior",
+      "shortRole": "Hospitality",
       "yearsExperience": 9,
       "isSuperhost": true,
       "profilePicture": "/images/host/angelo.jpg",
       "airbnbProfileUrl": "https://www.airbnb.it/users/profile/1462513131563105498",
-      "bio": "Property manager con anni di esperienza diretta sul Lago di Como. Superhost Airbnb dal 2017 con tasso di risposta del 100%. Dirige il team e supervisiona la qualita complessiva del servizio.",
+      "bio": "Property manager con anni di esperienza diretta sul Lago di Como. Superhost Airbnb dal 2017 con tasso di risposta del 100%. Cura l'esperienza ospite e la qualita complessiva del servizio.",
       "highlights": [
         "Superhost Airbnb dal 2017",
         "Tasso di risposta 100%",
@@ -46,14 +46,14 @@
       "bio": "Definisce la strategia di pricing dinamico e la distribuzione multi-canale. Monitora KPI di occupancy, ADR e RevPAR; ottimizza listing su Airbnb, Booking, Expedia e gli altri top portali del mercato; cura foto, descrizioni e SEO delle inserzioni.",
       "highlights": [
         "Pricing dinamico data-driven",
-        "Distribuzione 30+ canali",
+        "Distribuzione 10+ canali",
         "SEO e ottimizzazione listing",
         "Reportistica mensile per i proprietari"
       ]
     }
   ],
   "summary": {
-    "headline": "Un team giovane e dinamico, diretto da chi il Lago lo conosce davvero",
+    "headline": "Property manager specializzati sul Lago di Como",
     "subline": "Tre property manager specializzati nella gestione, pulizia e organizzazione di immobili per ospiti internazionali.",
     "experience": {
       "yearsCombined": 9,

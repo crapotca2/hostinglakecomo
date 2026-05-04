@@ -528,7 +528,7 @@ export default function PropertyDetailPage() {
                     )}
                   </div>
                   <p className="text-xs text-muted-foreground mt-1">
-                    Direttore del team Hosting Lake Como ·{" "}
+                    Property manager Hosting Lake Como ·{" "}
                     {host.yearsHosting} anni di esperienza diretta ·{" "}
                     {host.responseTime}
                   </p>
@@ -549,10 +549,10 @@ export default function PropertyDetailPage() {
           <div className="bg-primary/[0.04] border border-primary/10 rounded-2xl p-5 flex items-start gap-3 text-sm text-muted-foreground">
             <Info className="h-4 w-4 text-primary shrink-0 mt-0.5" />
             <p>
-              Questa e la proprieta che il team Hosting Lake Como gestisce
-              oggi per {host.name}, direttore del nostro team. Lo stesso
-              metodo — hospitality, operations e revenue management — lo
-              applichiamo alle proprieta dei nostri clienti.{" "}
+              Questa e una delle proprieta che il team Hosting Lake Como
+              gestisce oggi: lo stesso metodo — hospitality, operations e
+              revenue management — lo applichiamo alle proprieta dei nostri
+              clienti.{" "}
               <Link
                 href="/contact?interest=consulenza&from=portfolio"
                 className="text-primary font-semibold hover:underline"

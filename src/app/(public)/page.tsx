@@ -45,7 +45,7 @@ const SERVICES_OWNER = [
   {
     icon: Home,
     title: "Promozione Multi-Canale",
-    desc: "Il tuo immobile su oltre 30 piattaforme con foto professionali, descrizioni ottimizzate e visibilita massima.",
+    desc: "Il tuo immobile su oltre 10 piattaforme con foto professionali, descrizioni ottimizzate e visibilita massima.",
   },
   {
     icon: Users,
@@ -214,7 +214,7 @@ export default function HomePage() {
             {SERVICES_OWNER.map((s) => (
               <div
                 key={s.title}
-                className="group bg-white rounded-2xl p-7 border border-border/50 border-t-[3px] border-t-[#1D3A62] card-hover"
+                className="group bg-white rounded-2xl p-7 border border-border/50 card-hover"
               >
                 <h3 className="text-base font-semibold text-foreground mb-2">
                   {s.title}

@@ -17,26 +17,26 @@ import team from "@/data/team.json";
 
 const STATS = [
   {
-    icon: Users,
-    value: `${team.members.length}`,
-    label: "Property manager nel team",
+    icon: Briefcase,
+    value: `${team.summary.experience.yearsCombined}+`,
+    label: "Anni di hosting sul Lago di Como",
   },
   {
     icon: Star,
     value: team.summary.experience.primaryRating
       ? team.summary.experience.primaryRating.toFixed(1).replace(".", ",")
       : "5,0",
-    label: "Rating Airbnb sulla listing del direttore",
+    label: "Rating medio Airbnb del team",
   },
   {
     icon: ShieldCheck,
     value: team.summary.experience.primarySuperhost ? "Superhost" : "Host",
-    label: "Certificazione Airbnb del direttore",
+    label: "Certificazione Airbnb",
   },
   {
     icon: MessageCircle,
     value: `${team.summary.experience.primaryResponseRate}%`,
-    label: "Tasso di risposta del direttore",
+    label: "Tasso di risposta agli ospiti",
   },
 ];
 
@@ -47,13 +47,14 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="section-label">Chi siamo</span>
           <h1 className="text-4xl sm:text-5xl font-light mt-3 mb-4">
-            Un team{" "}
-            <span className="font-semibold">giovane e dinamico</span>
+            Property manager{" "}
+            <span className="font-semibold">specializzati</span>
             <br />
-            per la tua casa sul Lago
+            sul Lago di Como
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            {team.summary.subline} Diretti da chi il mestiere lo fa da anni.
+            {team.summary.subline} Una sola realta dedicata, con
+            esperienza certificata Superhost dal 2017.
           </p>
         </div>
       </section>
@@ -62,33 +63,32 @@ export default function AboutPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto space-y-6 text-foreground leading-relaxed">
             <p className="text-lg">
-              Hosting Lake Como e un team giovane e dinamico di tre property
-              manager. Ci occupiamo a 360 gradi della{" "}
-              <strong>gestione, della pulizia e dell'organizzazione</strong>{" "}
-              degli immobili dei nostri clienti, con un focus specifico sul{" "}
+              Hosting Lake Como e una realta specializzata di tre property
+              manager dedicati alla{" "}
+              <strong>gestione, alla pulizia e all&apos;organizzazione</strong>{" "}
+              degli immobili dei nostri clienti, con focus specifico sul{" "}
               <strong>mercato internazionale</strong> che frequenta il Lago di
               Como ogni anno.
             </p>
             <p className="text-muted-foreground">
-              Il team e diretto da{" "}
-              <strong>
-                {team.members[0].name}, property manager con anni di esperienza
-                diretta come host sul Lago
-              </strong>
-              , certificato Superhost di Airbnb dal 2017 e con oltre{" "}
+              Il nostro lavoro poggia su <strong>oltre nove anni di hosting
+              diretto sul Lago</strong> e sulla certificazione{" "}
+              <strong>Superhost di Airbnb dal 2017</strong>, con tasso di
+              risposta del 100% e oltre{" "}
               {team.summary.experience.primaryReviews} recensioni a 5 stelle
-              sulla sua listing principale. Sotto la sua direzione, il team
-              copre tutto il ciclo: hospitality, operations &amp; compliance,
-              revenue &amp; channel management. Il proprietario ha un solo
-              interlocutore — la divisione del lavoro la gestiamo noi.
+              sulla listing principale. Le competenze sono distribuite su tre
+              aree complementari — hospitality, operations &amp; compliance,
+              revenue &amp; channel management — in modo che ogni proprieta
+              riceva l&apos;attenzione dello specialista giusto in ogni
+              momento, mentre il proprietario mantiene un solo interlocutore.
             </p>
             <p className="text-muted-foreground">
-              Lavoriamo solo sul Lago di Como: conosciamo le zone, i
+              Lavoriamo esclusivamente sul Lago di Como: conosciamo le zone, i
               ristoranti, i battelli, i tempi del traghetto, le abitudini dei
-              turisti che arrivano in primavera e quelli che restano fino a
+              turisti che arrivano in primavera e di quelli che restano fino a
               fine ottobre. Per noi gestire la tua casa significa portarla al
-              massimo del suo potenziale — sui revenue, sull'esperienza ospite,
-              sull'efficienza operativa.
+              massimo del suo potenziale, dal pricing alla qualita
+              dell&apos;esperienza ospite fino all&apos;efficienza operativa.
             </p>
             <ul className="grid sm:grid-cols-2 gap-3 pt-4">
               {[
