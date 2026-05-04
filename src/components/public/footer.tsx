@@ -37,15 +37,12 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-2.5">
-              <div
-                className="h-9 w-9 rounded-xl flex items-center justify-center text-white font-bold text-sm"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #1B3A6B 0%, #3470C7 100%)",
-                }}
-              >
-                HLC
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/logo/logo-white.png"
+                alt="Hosting Lake Como"
+                className="h-9 w-9 object-contain"
+              />
               <span className="text-lg font-semibold text-white">Hosting Lake Como</span>
             </div>
             <p className="text-sm leading-relaxed text-white/60">

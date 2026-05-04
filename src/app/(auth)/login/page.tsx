@@ -28,10 +28,12 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-white">
       <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-6 p-8">
         <div className="text-center space-y-2">
-          <div className="h-12 w-12 rounded-xl mx-auto flex items-center justify-center text-white font-bold"
-            style={{ background: "linear-gradient(135deg, #1B3A6B 0%, #3470C7 100%)" }}>
-            HLC
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/logo/logo-marble.png"
+            alt="Hosting Lake Como"
+            className="h-14 w-14 mx-auto object-contain"
+          />
           <h1 className="text-2xl font-light text-foreground mt-4">
             Hosting Lake Como
           </h1>

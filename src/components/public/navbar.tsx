@@ -43,15 +43,14 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5">
-            <div
-              className="h-9 w-9 rounded-xl flex items-center justify-center text-white font-bold text-sm"
-              style={{
-                background:
-                  "linear-gradient(135deg, #1B3A6B 0%, #3470C7 100%)",
-              }}
-            >
-              HLC
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={
+                showSolid ? "/images/logo/logo-black.png" : "/images/logo/logo-white.png"
+              }
+              alt="Hosting Lake Como"
+              className="h-9 w-9 object-contain transition-opacity"
+            />
             <span
               className={cn(
                 "text-lg font-semibold tracking-tight transition-colors",

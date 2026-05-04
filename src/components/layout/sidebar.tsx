@@ -37,12 +37,12 @@ export function Sidebar() {
     <aside className="w-[260px] shrink-0 bg-white h-screen sticky top-0 flex flex-col border-r border-border/60">
       {/* Logo */}
       <Link href="/" className="px-5 py-5 flex items-center gap-3 hover:bg-muted/30 transition-colors">
-        <div
-          className="h-9 w-9 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-sm"
-          style={{ background: "linear-gradient(135deg, #1B3A6B 0%, #3470C7 100%)" }}
-        >
-          HLC
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/logo/logo-black.png"
+          alt="Hosting Lake Como"
+          className="h-9 w-9 object-contain"
+        />
         <div className="flex-1 min-w-0">
           <div className="text-sm font-semibold text-foreground">Hosting Lake Como</div>
           <div className="text-[10px] text-muted-foreground">Dashboard Proprietario</div>
