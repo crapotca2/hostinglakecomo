@@ -3,6 +3,9 @@
 import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { MapPin, Phone, Mail, Send, MessageCircle } from "lucide-react";
+import { GoogleMapEmbed } from "@/components/public/google-map-embed";
+
+const OFFICE_ADDRESS = "Via Maurizio Monti 46, 22100 Como CO";
 
 const INTEREST_OPTIONS: { value: string; label: string }[] = [
   { value: "consulenza", label: "Consulenza Personalizzata" },
@@ -159,7 +162,7 @@ export default function ContactPage() {
                     <div>
                       <div className="text-sm font-medium">Indirizzo</div>
                       <div className="text-sm text-muted-foreground">
-                        Como, Lago di Como, Italia
+                        {OFFICE_ADDRESS}
                       </div>
                     </div>
                   </div>
@@ -204,6 +207,39 @@ export default function ContactPage() {
               <Suspense fallback={<ContactFormFallback />}>
                 <ContactForm />
               </Suspense>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-muted/20 border-t border-border/50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl font-light mb-6">
+            Il nostro ufficio sul{" "}
+            <span className="font-semibold">Lago di Como</span>
+          </h2>
+          <div className="bg-white rounded-2xl border border-border/50 overflow-hidden shadow-sm">
+            <GoogleMapEmbed
+              query={OFFICE_ADDRESS}
+              title="Ufficio Hosting Lake Como"
+              zoom={16}
+              className="h-[26rem]"
+            />
+            <div className="p-5 border-t border-border/40 flex items-center justify-between gap-3 flex-wrap">
+              <div className="flex items-center gap-2 text-sm">
+                <MapPin className="h-4 w-4 text-primary" />
+                <span>{OFFICE_ADDRESS}</span>
+              </div>
+              <a
+                href={`https://www.google.com/maps?q=${encodeURIComponent(
+                  OFFICE_ADDRESS
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-semibold text-primary hover:underline"
+              >
+                Apri in Google Maps
+              </a>
             </div>
           </div>
         </div>

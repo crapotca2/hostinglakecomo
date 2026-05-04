@@ -148,7 +148,7 @@ export function Footer() {
               <li className="flex items-start gap-2.5">
                 <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-white/80" />
                 <span>
-                  Via Giuseppe Garibaldi 30
+                  Via Maurizio Monti 46
                   <br />
                   22100 Como, Italia
                 </span>

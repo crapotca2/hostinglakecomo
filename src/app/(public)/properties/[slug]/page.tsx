@@ -33,6 +33,7 @@ import {
 import type { PortfolioPoi, PortfolioDistances } from "@/lib/portfolio";
 import { getPortfolioEntry, getZoneLabel, getTypeLabel } from "@/lib/portfolio";
 import { AirbnbReviewBlock } from "@/components/public/airbnb-review-block";
+import { GoogleMapEmbed } from "@/components/public/google-map-embed";
 import host from "@/data/host.json";
 
 function formatDistance(m: number | null | undefined): string {
@@ -42,15 +43,7 @@ function formatDistance(m: number | null | undefined): string {
 }
 
 function MapEmbed({ lat, lng, name }: { lat: number; lng: number; name: string }) {
-  const delta = 0.004;
-  const bbox = [
-    (lng - delta).toFixed(6),
-    (lat - delta * 0.6).toFixed(6),
-    (lng + delta).toFixed(6),
-    (lat + delta * 0.6).toFixed(6),
-  ].join("%2C");
-  const src = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat}%2C${lng}`;
-  const link = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=17/${lat}/${lng}`;
+  const link = `https://www.google.com/maps?q=${lat},${lng}`;
   return (
     <div className="bg-white rounded-2xl border border-border/50 overflow-hidden">
       <div className="p-5 flex items-center justify-between gap-3 border-b border-border/40">
@@ -66,14 +59,14 @@ function MapEmbed({ lat, lng, name }: { lat: number; lng: number; name: string }
           rel="noopener noreferrer"
           className="text-xs text-primary hover:underline"
         >
-          Apri in OpenStreetMap
+          Apri in Google Maps
         </a>
       </div>
-      <iframe
+      <GoogleMapEmbed
+        query={`${lat},${lng}`}
         title={`Mappa ${name}`}
-        src={src}
-        className="w-full h-72 border-0"
-        loading="lazy"
+        zoom={16}
+        className="h-72"
       />
     </div>
   );
