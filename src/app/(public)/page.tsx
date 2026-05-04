@@ -208,21 +208,17 @@ export default function HomePage() {
       <PartnersBanner />
 
       {/* ═══ SERVIZI PER PROPRIETARI ═══ */}
-      <section
-        className="py-24 relative isolate bg-[url('/images/textures/services-bg.jpg')] bg-repeat"
-      >
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-white/80"
-        />
+      <section className="py-24 relative bg-[url('/images/textures/services-bg.jpg')] bg-cover bg-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <span className="section-label">I nostri servizi</span>
-            <h2 className="text-3xl sm:text-4xl font-light text-foreground mt-3 mb-4">
+            <span className="text-xs font-semibold uppercase tracking-widest text-white/80">
+              I nostri servizi
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-light text-white mt-3 mb-4">
               Tutto cio che serve per{" "}
               <span className="font-semibold">guadagnare di piu</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-white/80 max-w-2xl mx-auto">
               Dalla promozione alla gestione quotidiana, ci occupiamo di ogni
               aspetto del tuo immobile con tecnologia avanzata e attenzione ai
               dettagli.
@@ -251,7 +247,7 @@ export default function HomePage() {
           <div className="text-center mt-10">
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-white/80 transition-colors"
             >
               Scopri tutti i servizi
               <ChevronRight className="h-4 w-4" />

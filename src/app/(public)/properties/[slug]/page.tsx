@@ -223,7 +223,7 @@ export default function PropertyDetailPage() {
 
   return (
     <div className="pt-24 pb-20 bg-muted/20 min-h-screen">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link
           href="/properties"
           className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground mb-4"
