@@ -34,7 +34,7 @@ const PARTNERS: Partner[] = [
     name: "Como 1907",
     url: "https://www.como1907.com",
     logo: "/images/partners/como-1907.svg",
-    heightClass: "h-12 sm:h-14",
+    heightClass: "h-14 sm:h-16",
   },
   {
     name: "Lake Como Tourism",
