@@ -5,6 +5,7 @@ export interface PortfolioImage {
   url: string;
   alt?: string;
   order: number;
+  room?: string;
 }
 
 export interface PortfolioSections {

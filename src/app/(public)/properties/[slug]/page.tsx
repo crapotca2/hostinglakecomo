@@ -258,9 +258,11 @@ export default function PropertyDetailPage() {
                 Vista Lago
               </span>
             )}
-            <span className="absolute top-4 right-4 px-3 py-1 rounded-full bg-white/90 text-foreground text-[10px] font-semibold uppercase tracking-wider backdrop-blur-sm">
-              Gestita da noi
-            </span>
+            {property.images[activeImage]?.room && (
+              <span className="absolute top-4 right-4 px-3 py-1 rounded-full bg-white/90 text-foreground text-[10px] font-semibold uppercase tracking-wider backdrop-blur-sm">
+                {property.images[activeImage].room}
+              </span>
+            )}
           </div>
 
           {property.images.length > 1 && (

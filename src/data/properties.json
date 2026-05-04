@@ -50,69 +50,46 @@
     ],
     "images": [
       {
-        "url": "/images/listing/casa-di-miriam/01-living-room-1.jpeg",
+        "url": "/images/listing/casa-di-miriam/01-soggiorno.jpeg",
         "alt": "Casa di Miriam — soggiorno",
+        "room": "Soggiorno",
         "order": 0
       },
       {
-        "url": "/images/listing/casa-di-miriam/02-living-room-2.jpeg",
-        "alt": "Casa di Miriam — soggiorno, vista alternativa",
+        "url": "/images/listing/casa-di-miriam/02-vista-lago.jpeg",
+        "alt": "Casa di Miriam — vista sul Primo Bacino del Lago di Como",
+        "room": "Vista lago",
         "order": 1
       },
       {
-        "url": "/images/listing/casa-di-miriam/03-lake-view.jpeg",
-        "alt": "Casa di Miriam — vista sul Primo Bacino del Lago di Como dalla terrazza",
+        "url": "/images/listing/casa-di-miriam/03-pranzo.jpeg",
+        "alt": "Casa di Miriam — zona pranzo",
+        "room": "Zona pranzo",
         "order": 2
       },
       {
-        "url": "/images/listing/casa-di-miriam/04-dining-area-1.jpeg",
-        "alt": "Casa di Miriam — zona pranzo",
+        "url": "/images/listing/casa-di-miriam/04-cucina.jpeg",
+        "alt": "Casa di Miriam — cucina attrezzata",
+        "room": "Cucina",
         "order": 3
       },
       {
-        "url": "/images/listing/casa-di-miriam/05-dining-area-2.jpeg",
-        "alt": "Casa di Miriam — zona pranzo, vista alternativa",
+        "url": "/images/listing/casa-di-miriam/05-camera.jpeg",
+        "alt": "Casa di Miriam — camera matrimoniale",
+        "room": "Camera matrimoniale",
         "order": 4
       },
       {
-        "url": "/images/listing/casa-di-miriam/06-kitchen-1.jpeg",
-        "alt": "Casa di Miriam — cucina attrezzata",
+        "url": "/images/listing/casa-di-miriam/06-bagno.jpeg",
+        "alt": "Casa di Miriam — bagno completo",
+        "room": "Bagno",
         "order": 5
       },
       {
-        "url": "/images/listing/casa-di-miriam/07-kitchen-2.jpeg",
-        "alt": "Casa di Miriam — cucina, dettaglio",
+        "url": "/images/listing/casa-di-miriam/07-panoramica.jpeg",
+        "alt": "Casa di Miriam — vista panoramica esterna sul lago",
+        "room": "Vista panoramica",
         "order": 6
-      },
-      {
-        "url": "/images/listing/casa-di-miriam/08-bedroom-1.jpeg",
-        "alt": "Casa di Miriam — camera matrimoniale",
-        "order": 7
-      },
-      {
-        "url": "/images/listing/casa-di-miriam/09-bedroom-2.jpeg",
-        "alt": "Casa di Miriam — camera matrimoniale, vista alternativa",
-        "order": 8
-      },
-      {
-        "url": "/images/listing/casa-di-miriam/10-bathroom-1.jpeg",
-        "alt": "Casa di Miriam — bagno completo",
-        "order": 9
-      },
-      {
-        "url": "/images/listing/casa-di-miriam/11-bathroom-2.jpeg",
-        "alt": "Casa di Miriam — bagno, dettaglio",
-        "order": 10
-      },
-      {
-        "url": "/images/listing/casa-di-miriam/12-additional-1.jpeg",
-        "alt": "Casa di Miriam — dettaglio dell'appartamento",
-        "order": 11
-      },
-      {
-        "url": "/images/listing/casa-di-miriam/13-additional-2.jpeg",
-        "alt": "Casa di Miriam — dettaglio dell'appartamento",
-        "order": 12
       }
     ],
     "pricing": {
