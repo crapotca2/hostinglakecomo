@@ -55,10 +55,10 @@ const SERVICES_OWNER = [
 ];
 
 const WHY_US = [
-  "Pricing dinamico e ottimizzazione listing su 30+ canali",
-  "Pulizie professionali standard hotel e supporto 24/7",
-  "Compliance normativa garantita: CIN, Questura, ISTAT, tassa di soggiorno",
-  "Reportistica trasparente con rendiconto mensile dettagliato",
+  "Distribuzione su Airbnb, Booking, Vrbo, Expedia e oltre 30 portali",
+  "Pricing dinamico calibrato sulle dinamiche di mercato in tempo reale",
+  "Affitti brevi nei picchi turistici, locazioni medio-lunghe in bassa stagione",
+  "Calendario unificato e zero overbooking grazie alla sincronizzazione canali",
 ];
 
 export default function HomePage() {
@@ -124,21 +124,23 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ PERCHE AIR BIBBY ═══ */}
+      {/* ═══ MULTI-CANALE / GESTIONE ═══ */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <span className="section-label">Perche sceglierci</span>
+              <span className="section-label">La nostra gestione</span>
               <h2 className="text-3xl sm:text-4xl font-light text-foreground mt-3 mb-6">
-                Risultati concreti,{" "}
-                <span className="font-semibold">zero pensieri</span>
+                Una sola gestione,{" "}
+                <span className="font-semibold">tutte le piattaforme</span>
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-8">
-                Gestiamo il tuo immobile come fosse il nostro. Dalla promozione
-                alla manutenzione, ci occupiamo di ogni aspetto con tecnologia
-                avanzata e attenzione ai dettagli. Tu incassi, noi facciamo il
-                resto.
+                Distribuiamo la tua proprieta sui principali canali del
+                mercato e adattiamo la formula di affitto stagione per
+                stagione. In alta stagione lavoriamo con i brevi soggiorni
+                turistici, in bassa stagione passiamo a locazioni medio-lunghe
+                quando piu convenienti. La tua casa resta in attivita 365
+                giorni l'anno, con un unico interlocutore.
               </p>
               <ul className="space-y-4 mb-8">
                 {WHY_US.map((item) => (
@@ -152,25 +154,25 @@ export default function HomePage() {
                 ))}
               </ul>
               <Link
-                href="/about"
+                href="/services"
                 className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
               >
-                Scopri chi siamo
+                Scopri tutti i servizi
                 <ChevronRight className="h-4 w-4" />
               </Link>
             </div>
             <div className="relative">
               <img
-                src="/images/como-lake-boat-2048x1366.jpg"
-                alt="Lago di Como — vista panoramica con barca"
-                className="rounded-2xl shadow-2xl w-full object-cover aspect-[4/3]"
+                src="/images/host.webp"
+                alt="Hosting Lake Como — calendario unificato e gestione multi-piattaforma"
+                className="w-full h-auto"
               />
               <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-5 shadow-xl border border-border/50 hidden lg:block">
-                <div className="text-2xl font-bold text-primary">+32%</div>
+                <div className="text-2xl font-bold text-primary">30+</div>
                 <div className="text-xs text-muted-foreground">
-                  Revenue medio
+                  Canali di distribuzione
                   <br />
-                  rispetto alla gestione autonoma
+                  sincronizzati in tempo reale
                 </div>
               </div>
             </div>
