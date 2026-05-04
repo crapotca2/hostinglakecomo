@@ -77,10 +77,10 @@ export default function HomePage() {
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>
         {/* Overlay */}
-        {/* Light blue top fade (rentallcomo style) — azzurro chiaro che scompare verso il basso */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#7FB3D5]/55 via-[#7FB3D5]/15 to-transparent" />
+        {/* Navy brand blue (rentallcomo style) — saturo in alto, si dissolve scendendo */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1D3A62]/80 via-[#1D3A62]/45 to-[#1D3A62]/10" />
         {/* Subtle dark gradient on left side for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/25 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/15 to-transparent" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="max-w-2xl animate-fade-in-up">

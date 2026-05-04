@@ -30,31 +30,16 @@ export type CategoryRatings = {
   value?: number;
 };
 
-function LaurelBranch({ flip }: { flip?: boolean }) {
+function LaurelBranch({ side }: { side: "left" | "right" }) {
   return (
-    <svg
-      viewBox="0 0 32 80"
-      width="32"
-      height="80"
-      className={`text-foreground ${flip ? "-scale-x-100" : ""}`}
+    /* eslint-disable-next-line @next/next/no-img-element */
+    <img
+      src={`/images/voto/${side}.png`}
+      alt=""
       aria-hidden="true"
-    >
-      <g fill="currentColor">
-        <path
-          d="M22 6 Q 12 40, 4 76"
-          stroke="currentColor"
-          strokeWidth="1.4"
-          fill="none"
-          strokeLinecap="round"
-        />
-        <ellipse cx="20" cy="14" rx="5.5" ry="2.4" transform="rotate(-30 20 14)" />
-        <ellipse cx="18" cy="26" rx="6.2" ry="2.6" transform="rotate(-32 18 26)" />
-        <ellipse cx="14" cy="38" rx="6.6" ry="2.8" transform="rotate(-34 14 38)" />
-        <ellipse cx="11" cy="50" rx="6.4" ry="2.7" transform="rotate(-36 11 50)" />
-        <ellipse cx="8" cy="62" rx="5.8" ry="2.5" transform="rotate(-38 8 62)" />
-        <ellipse cx="5" cy="73" rx="4.5" ry="2.0" transform="rotate(-40 5 73)" />
-      </g>
-    </svg>
+      className="h-20 sm:h-24 w-auto select-none"
+      draggable={false}
+    />
   );
 }
 
@@ -81,11 +66,11 @@ export function AirbnbReviewBlock({
   return (
     <div className="bg-white rounded-2xl p-6 sm:p-10 border border-border/50">
       <div className="flex items-center justify-center gap-2 sm:gap-6 mb-2">
-        <LaurelBranch />
+        <LaurelBranch side="left" />
         <div className="text-5xl sm:text-6xl font-semibold tabular-nums tracking-tight">
           {formatScore(overall)}
         </div>
-        <LaurelBranch flip />
+        <LaurelBranch side="right" />
       </div>
 
       {lovedByGuests && (
