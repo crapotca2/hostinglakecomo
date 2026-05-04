@@ -1,25 +1,16 @@
 "use client";
 
-import {
-  SprayCan,
-  CheckCircle2,
-  MessageSquare,
-  Map as MapIcon,
-  Tag,
-  ExternalLink,
-  type LucideIcon,
-} from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 const CATEGORIES: {
   key: keyof CategoryRatings;
   label: string;
-  icon: LucideIcon;
 }[] = [
-  { key: "cleanliness", label: "Pulizia", icon: SprayCan },
-  { key: "accuracy", label: "Precisione", icon: CheckCircle2 },
-  { key: "communication", label: "Comunicazione", icon: MessageSquare },
-  { key: "location", label: "Posizione", icon: MapIcon },
-  { key: "value", label: "Qualita/prezzo", icon: Tag },
+  { key: "cleanliness", label: "Pulizia" },
+  { key: "accuracy", label: "Precisione" },
+  { key: "communication", label: "Comunicazione" },
+  { key: "location", label: "Posizione" },
+  { key: "value", label: "Qualita/prezzo" },
 ];
 
 export type CategoryRatings = {
@@ -65,7 +56,7 @@ export function AirbnbReviewBlock({
 
   return (
     <div className="bg-white rounded-2xl p-6 sm:p-10 border border-border/50">
-      <div className="flex items-center justify-center gap-2 sm:gap-6 mb-2">
+      <div className="flex items-center justify-center gap-5 sm:gap-10 mb-2">
         <LaurelBranch side="left" />
         <div className="text-5xl sm:text-6xl font-semibold tabular-nums tracking-tight">
           {formatScore(overall)}
@@ -99,7 +90,6 @@ export function AirbnbReviewBlock({
                 <div className="text-2xl font-semibold tabular-nums">
                   {formatScore(v)}
                 </div>
-                <cat.icon className="h-6 w-6 text-foreground/80" strokeWidth={1.5} />
               </div>
             );
           })}
