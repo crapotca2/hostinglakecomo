@@ -19,7 +19,7 @@ export function AirBibbyEstimateCard({
           <div
             className="h-9 w-9 rounded-lg flex items-center justify-center text-white font-bold text-xs"
             style={{
-              background: "linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)",
+              background: "linear-gradient(135deg, #1B3A6B 0%, #3470C7 100%)",
             }}
           >
             AB
