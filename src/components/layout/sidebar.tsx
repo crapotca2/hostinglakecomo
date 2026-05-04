@@ -39,7 +39,7 @@ export function Sidebar() {
       <Link href="/" className="px-5 py-5 flex items-center gap-3 hover:bg-muted/30 transition-colors">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/logo/logo-black.png"
+          src="/images/logo/logo-marble.png"
           alt="Hosting Lake Como"
           className="h-9 w-9 object-contain"
         />

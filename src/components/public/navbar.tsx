@@ -46,7 +46,7 @@ export function Navbar() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={
-                showSolid ? "/images/logo/logo-black.png" : "/images/logo/logo-white.png"
+                showSolid ? "/images/logo/logo-marble.png" : "/images/logo/logo-white.png"
               }
               alt="Hosting Lake Como"
               className="h-12 w-12 object-contain transition-opacity"
