@@ -11,17 +11,14 @@ import {
   Bed,
   Bath,
   ChevronRight,
-  Play,
   CheckCircle2,
 } from "lucide-react";
 import { getPortfolio, getZoneLabel, getTypeLabel } from "@/lib/portfolio";
+import host from "@/data/host.json";
 
 const FEATURED_PROPERTIES = (() => {
   const all = getPortfolio();
-  const withImages = all.filter((p) => p.images.length > 0);
-  const lakeView = withImages.filter((p) => p.details.hasLakeView);
-  const picks = [...lakeView, ...withImages.filter((p) => !p.details.hasLakeView)];
-  return picks.slice(0, 3);
+  return all.filter((p) => p.images.length > 0).slice(0, 3);
 })();
 
 const SERVICES_OWNER = [
@@ -58,17 +55,22 @@ const SERVICES_OWNER = [
 ];
 
 const STATS = [
-  { value: "50+", label: "Proprieta Gestite" },
-  { value: "4,8", label: "Rating Medio" },
-  { value: "95%", label: "Occupazione Estate" },
-  { value: "€38K", label: "Revenue Medio Annuo" },
+  { value: `${host.yearsHosting}`, label: "Anni di hosting" },
+  {
+    value: host.primaryListing.rating
+      ? host.primaryListing.rating.toFixed(1)
+      : "5",
+    label: "Rating Airbnb",
+  },
+  { value: `${host.responseRate}%`, label: "Tasso di risposta" },
+  { value: host.isSuperhost ? "Superhost" : "Host", label: "Status Airbnb" },
 ];
 
 const WHY_US = [
-  "Revenue medio +32% rispetto alla gestione autonoma",
+  `${host.yearsHosting} anni di esperienza diretta come host sul Lago di Como`,
   "Compliance normativa garantita al 100%",
-  "Supporto e reperibilita 24/7",
-  "Zero pensieri: gestiamo tutto noi",
+  "Supporto e reperibilita continua durante il soggiorno",
+  "Reportistica trasparente con rendiconto mensile dettagliato",
 ];
 
 export default function HomePage() {
@@ -96,14 +98,16 @@ export default function HomePage() {
               Lago di Como, Italia
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-white leading-[1.05] mb-6">
-              Il tuo immobile,
+              Hosting the best
               <br />
-              <span className="font-semibold">il nostro mestiere.</span>
+              <span className="font-semibold italic">experiences</span>
+              <br />
+              on Lake Como
             </h1>
             <p className="text-lg sm:text-xl text-white/70 leading-relaxed mb-10 max-w-lg">
-              Gestione professionale di case vacanza sul Lago di Como.
-              Massimizziamo i tuoi guadagni con tecnologia e servizio a 5
-              stelle.
+              Affidaci la tua proprieta. Trasformiamo ogni soggiorno in
+              un'esperienza memorabile, sfruttando {host.yearsHosting} anni di
+              esperienza diretta come host sul Lago.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
@@ -114,11 +118,11 @@ export default function HomePage() {
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                href="/properties"
+                href="/services"
                 className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-white/10 text-white text-sm font-medium hover:bg-white/20 transition-all border border-white/20 backdrop-blur-sm"
               >
-                <Play className="h-4 w-4" />
-                Scopri le Proprieta
+                <Sparkles className="h-4 w-4" />
+                Scopri i servizi
               </Link>
             </div>
           </div>
@@ -258,7 +262,7 @@ export default function HomePage() {
             <div>
               <span className="section-label">Portfolio</span>
               <h2 className="text-3xl sm:text-4xl font-light text-foreground mt-3">
-                Proprieta in <span className="font-semibold">evidenza</span>
+                La proprieta che <span className="font-semibold">gestiamo oggi</span>
               </h2>
             </div>
             <Link
@@ -274,7 +278,7 @@ export default function HomePage() {
             {FEATURED_PROPERTIES.map((p) => (
               <Link
                 key={p.slug}
-                href={`/properties/${p.slug}/book`}
+                href={`/properties/${p.slug}`}
                 className="group bg-white rounded-2xl overflow-hidden border border-border/50 card-hover"
               >
                 <div className="relative h-56 overflow-hidden bg-muted">
@@ -319,27 +323,18 @@ export default function HomePage() {
                       <Users className="h-3.5 w-3.5" /> {p.details.maxGuests}
                     </span>
                   </div>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-lg font-bold text-foreground">
-                      €{p.pricing.basePrice}
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-semibold text-primary inline-flex items-center gap-1">
+                      Scopri di piu
+                      <ArrowRight className="h-3 w-3" />
                     </span>
-                    <span className="text-xs text-muted-foreground">
-                      / notte
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground bg-muted/60 px-2 py-0.5 rounded-full">
+                      Gestita
                     </span>
                   </div>
                 </div>
               </Link>
             ))}
-          </div>
-
-          <div className="text-center mt-8 sm:hidden">
-            <Link
-              href="/properties"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-border text-sm font-medium"
-            >
-              Vedi tutte le proprieta
-              <ArrowRight className="h-4 w-4" />
-            </Link>
           </div>
         </div>
       </section>

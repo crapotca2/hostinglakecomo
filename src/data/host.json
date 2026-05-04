@@ -1,0 +1,26 @@
+{
+  "name": "Angelo",
+  "userId": "1462513131563105498",
+  "profileUrl": "https://www.airbnb.it/users/profile/1462513131563105498",
+  "yearsHosting": 9,
+  "joinedYear": 2017,
+  "isSuperhost": true,
+  "responseRate": 100,
+  "responseTime": "Risponde entro un'ora",
+  "highlights": [
+    "Superhost",
+    "9 anni da host",
+    "Tasso di risposta 100%",
+    "Risponde entro un'ora"
+  ],
+  "languages": ["Italiano", "Inglese"],
+  "profilePicture": "/images/host/angelo.jpg",
+  "primaryListing": {
+    "id": "1379549245986609410",
+    "url": "https://www.airbnb.it/rooms/1379549245986609410",
+    "name": "Casa di Miriam",
+    "rating": 5,
+    "reviewCount": 16
+  },
+  "scrapedAt": "2026-04-21T00:00:00Z"
+}

@@ -8,11 +8,6 @@ import {
   Paintbrush,
   Wrench,
   FileText,
-  Compass,
-  Car,
-  Ship,
-  Wifi,
-  Zap,
   Star,
   LineChart,
   PackageCheck,
@@ -110,92 +105,27 @@ const OWNER_SERVICES: ServiceCardProps[] = [
   },
 ];
 
-const GUEST_SERVICES: ServiceCardProps[] = [
-  {
-    icon: Sparkles,
-    title: "Check-in Flessibile",
-    desc: "Self check-in con codice numerico e video guida. Accesso dalle 14:30 alle 23:00 con materiale informativo completo.",
-    variant: "accent",
-  },
-  {
-    icon: Compass,
-    title: "Tour Guidati",
-    desc: "Itinerari personalizzati sul Lago di Como con guide locali abilitate. Tour in italiano e inglese.",
-    variant: "accent",
-  },
-  {
-    icon: Car,
-    title: "NCC e Transfer",
-    desc: "Servizio di noleggio con conducente per transfer aeroporto, escursioni e spostamenti in totale comfort.",
-    variant: "accent",
-  },
-  {
-    icon: Ship,
-    title: "Noleggio Barche",
-    desc: "Esplora il lago dalla prospettiva migliore. Barche a motore, gommoni e esperienze in barca a vela.",
-    variant: "accent",
-  },
-  {
-    icon: Wifi,
-    title: "WiFi e Servizi",
-    desc: "Connessione internet ad alta velocita in ogni proprieta, Smart TV e tutto il necessario per lavorare da remoto.",
-    variant: "accent",
-  },
-  {
-    icon: Zap,
-    title: "Esperienze Locali",
-    desc: "Ristoranti, eventi, sport acquatici e attivita culturali selezionate per vivere il Lago di Como come un locale.",
-    variant: "accent",
-  },
-];
-
 export default function ServicesPage() {
   return (
     <div className="pt-20">
       <section className="py-20 border-b border-border/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="section-label">Cosa facciamo</span>
+          <span className="section-label">Per i proprietari</span>
           <h1 className="text-4xl sm:text-5xl font-light mt-3 mb-4">
-            I Nostri <span className="font-semibold">Servizi</span>
+            I nostri <span className="font-semibold">servizi</span>
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Gestione completa per proprietari e un'esperienza indimenticabile per
-            gli ospiti.
+            Tutto quello che facciamo per i proprietari che ci affidano la
+            gestione: rendita, operativita, adempimenti, reputazione. Tu firmi
+            il mandato, noi ci occupiamo di tutto il resto.
           </p>
         </div>
       </section>
 
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="section-label">Per i proprietari</span>
-            <h2 className="text-3xl font-light mt-3 mb-4">
-              Massimizza il <span className="font-semibold">rendimento</span>
-            </h2>
-            <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-              Un unico partner per rendita, operativita, adempimenti e
-              reputazione. Tu firmi il mandato, noi ci occupiamo di tutto il
-              resto.
-            </p>
-          </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {OWNER_SERVICES.map((s) => (
-              <ServiceCard key={s.title} {...s} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="section-label">Per gli ospiti</span>
-            <h2 className="text-3xl font-light mt-3 mb-4">
-              Un'esperienza <span className="font-semibold">a 5 stelle</span>
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {GUEST_SERVICES.map((s) => (
               <ServiceCard key={s.title} {...s} />
             ))}
           </div>

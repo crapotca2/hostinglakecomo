@@ -8,6 +8,7 @@ import {
   Search,
   Info,
   Home as HomeIcon,
+  ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -20,6 +21,7 @@ import {
 import type { PropertyZone, PropertyType } from "@/types/database";
 
 const PORTFOLIO = getPortfolio();
+const SHOW_FILTERS = PORTFOLIO.length > 3;
 
 const ZONES: { value: "all" | PropertyZone; label: string }[] = [
   { value: "all", label: "Tutte le zone" },
@@ -37,21 +39,13 @@ const TYPES: { value: "all" | PropertyType; label: string }[] = [
   { value: "house", label: "Casa" },
 ];
 
-function formatEuro(n: number): string {
-  return new Intl.NumberFormat("it-IT", {
-    style: "currency",
-    currency: "EUR",
-    maximumFractionDigits: 0,
-  }).format(n);
-}
-
 function PropertyCard({ property }: { property: PortfolioEntry }) {
   const firstImage = property.images[0]?.url;
   const cityZone = `${property.address.city} — ${getZoneLabel(property.zone)}`;
 
   return (
     <Link
-      href={`/properties/${property.slug}/book`}
+      href={`/properties/${property.slug}`}
       className="group bg-white rounded-2xl overflow-hidden border border-border/50 card-hover flex flex-col"
     >
       <div className="relative h-56 overflow-hidden bg-muted">
@@ -95,14 +89,12 @@ function PropertyCard({ property }: { property: PortfolioEntry }) {
           </span>
         </div>
         <div className="mt-auto flex items-center justify-between">
-          <div className="flex items-baseline gap-1">
-            <span className="text-lg font-bold">
-              {formatEuro(property.pricing.basePrice)}
-            </span>
-            <span className="text-xs text-muted-foreground">/ notte</span>
-          </div>
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground bg-muted/60 px-2 py-0.5 rounded-full">
-            Portfolio
+          <span className="text-xs font-semibold text-primary inline-flex items-center gap-1">
+            Scopri
+            <ArrowRight className="h-3 w-3" />
+          </span>
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-primary bg-primary/[0.08] px-2 py-0.5 rounded-full">
+            Gestita da noi
           </span>
         </div>
       </div>
@@ -132,14 +124,13 @@ export default function PropertiesPage() {
     <div className="pt-20">
       <section className="py-20 border-b border-border/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="section-label">Portfolio di riferimento</span>
+          <span className="section-label">Portfolio</span>
           <h1 className="text-4xl sm:text-5xl font-light mt-3 mb-4">
-            Portfolio di <span className="font-semibold">riferimento</span>
+            La nostra <span className="font-semibold">proprieta</span>
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Una selezione di immobili sul Lago di Como rappresentativa delle
-            tipologie che gestiamo: appartamenti nel centro storico, ville con
-            vista lago e dimore di charme.
+            Iniziamo da una listing reale, gestita ogni giorno con cura. Presto
+            se ne aggiungeranno altre — anche la tua.
           </p>
         </div>
       </section>
@@ -149,60 +140,67 @@ export default function PropertiesPage() {
           <div className="flex items-start gap-2.5 text-xs text-muted-foreground">
             <Info className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
             <p>
-              Le proprieta mostrate in questa pagina costituiscono un portfolio
-              di riferimento che illustra le tipologie che siamo in grado di
-              gestire. Per avviare la gestione del tuo immobile richiedi una
-              consulenza dedicata.
+              Le proprieta mostrate sono effettivamente in gestione con noi.
+              Per avviare la gestione del tuo immobile,{" "}
+              <Link
+                href="/contact?interest=consulenza"
+                className="text-primary font-semibold hover:underline"
+              >
+                richiedi una consulenza
+              </Link>
+              .
             </p>
           </div>
         </div>
       </section>
 
-      <section className="sticky top-16 md:top-20 z-30 bg-white/90 backdrop-blur-xl border-b border-border/50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="flex items-center gap-2 bg-muted/50 rounded-lg px-3 py-2 flex-1 min-w-[200px] max-w-md">
-              <Search className="h-4 w-4 text-muted-foreground" />
-              <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Cerca per nome o localita..."
-                className="text-sm bg-transparent border-none outline-none flex-1"
-              />
-            </div>
-            <select
-              value={zoneFilter}
-              onChange={(e) =>
-                setZoneFilter(e.target.value as "all" | PropertyZone)
-              }
-              className="rounded-lg border border-border px-3 py-2 text-sm bg-white"
-            >
-              {ZONES.map((z) => (
-                <option key={z.value} value={z.value}>
-                  {z.label}
-                </option>
-              ))}
-            </select>
-            <select
-              value={typeFilter}
-              onChange={(e) =>
-                setTypeFilter(e.target.value as "all" | PropertyType)
-              }
-              className="rounded-lg border border-border px-3 py-2 text-sm bg-white"
-            >
-              {TYPES.map((t) => (
-                <option key={t.value} value={t.value}>
-                  {t.label}
-                </option>
-              ))}
-            </select>
-            <div className="text-xs text-muted-foreground ml-auto">
-              {filtered.length} di {PORTFOLIO.length}
+      {SHOW_FILTERS && (
+        <section className="sticky top-16 md:top-20 z-30 bg-white/90 backdrop-blur-xl border-b border-border/50 shadow-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="flex items-center gap-2 bg-muted/50 rounded-lg px-3 py-2 flex-1 min-w-[200px] max-w-md">
+                <Search className="h-4 w-4 text-muted-foreground" />
+                <input
+                  type="text"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Cerca per nome o localita..."
+                  className="text-sm bg-transparent border-none outline-none flex-1"
+                />
+              </div>
+              <select
+                value={zoneFilter}
+                onChange={(e) =>
+                  setZoneFilter(e.target.value as "all" | PropertyZone)
+                }
+                className="rounded-lg border border-border px-3 py-2 text-sm bg-white"
+              >
+                {ZONES.map((z) => (
+                  <option key={z.value} value={z.value}>
+                    {z.label}
+                  </option>
+                ))}
+              </select>
+              <select
+                value={typeFilter}
+                onChange={(e) =>
+                  setTypeFilter(e.target.value as "all" | PropertyType)
+                }
+                className="rounded-lg border border-border px-3 py-2 text-sm bg-white"
+              >
+                {TYPES.map((t) => (
+                  <option key={t.value} value={t.value}>
+                    {t.label}
+                  </option>
+                ))}
+              </select>
+              <div className="text-xs text-muted-foreground ml-auto">
+                {filtered.length} di {PORTFOLIO.length}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
