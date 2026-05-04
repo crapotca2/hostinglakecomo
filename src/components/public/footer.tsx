@@ -41,7 +41,7 @@ export function Footer() {
                 className="h-9 w-9 rounded-xl flex items-center justify-center text-white font-bold text-sm"
                 style={{
                   background:
-                    "linear-gradient(135deg, #0C7489 0%, #119DB0 100%)",
+                    "linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)",
                 }}
               >
                 HLC

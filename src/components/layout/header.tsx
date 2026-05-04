@@ -38,7 +38,7 @@ export function Header() {
 
           <button className="flex items-center gap-2.5 hover:bg-background/80 rounded-xl px-2 py-1.5 transition-colors">
             <Avatar className="h-8 w-8">
-              <AvatarFallback className="bg-gradient-to-br from-[#0C7489] to-[#119DB0] text-white text-xs font-semibold">
+              <AvatarFallback className="bg-gradient-to-br from-[#1e40af] to-[#3b82f6] text-white text-xs font-semibold">
                 AC
               </AvatarFallback>
             </Avatar>

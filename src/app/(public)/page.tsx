@@ -54,13 +54,6 @@ const SERVICES_OWNER = [
   },
 ];
 
-const STATS = [
-  { value: "+32%", label: "Revenue medio vs gestione autonoma" },
-  { value: "30+", label: "Canali di distribuzione" },
-  { value: "24/7", label: "Reperibilita per ospiti e proprietari" },
-  { value: "100%", label: "Compliance normativa garantita" },
-];
-
 const WHY_US = [
   "Pricing dinamico e ottimizzazione listing su 30+ canali",
   "Pulizie professionali standard hotel e supporto 24/7",
@@ -132,24 +125,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ STATS ═══ */}
-      <section className="py-20 border-b border-border/50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-            {STATS.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-4xl sm:text-5xl font-bold text-primary mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-muted-foreground font-medium">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ═══ PERCHE AIR BIBBY ═══ */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -209,7 +184,11 @@ export default function HomePage() {
 
       {/* ═══ SERVIZI PER PROPRIETARI ═══ */}
       <section className="py-24 relative bg-[url('/images/textures/services-bg.jpg')] bg-cover bg-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-black/55 pointer-events-none"
+        />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <span className="text-xs font-semibold uppercase tracking-widest text-white/80">
               I nostri servizi

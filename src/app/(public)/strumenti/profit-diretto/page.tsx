@@ -164,7 +164,7 @@ export default function ProfitDirettoPage() {
                   <div className="p-6 space-y-3">
                     {result.breakdown.filter((b) => b.revenue > 0).map((b) => {
                       const meta = b.source === "direct"
-                        ? { label: "Prenotazioni dirette", color: "#0C7489" }
+                        ? { label: "Prenotazioni dirette", color: "#1e40af" }
                         : OTA_FEES[b.source as keyof typeof OTA_FEES];
                       return (
                         <div key={b.source}>

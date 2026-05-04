@@ -29,7 +29,7 @@ export default function LoginPage() {
       <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-6 p-8">
         <div className="text-center space-y-2">
           <div className="h-12 w-12 rounded-xl mx-auto flex items-center justify-center text-white font-bold"
-            style={{ background: "linear-gradient(135deg, #0C7489 0%, #119DB0 100%)" }}>
+            style={{ background: "linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)" }}>
             HLC
           </div>
           <h1 className="text-2xl font-light text-foreground mt-4">
