@@ -208,7 +208,13 @@ export default function HomePage() {
       <PartnersBanner />
 
       {/* ═══ SERVIZI PER PROPRIETARI ═══ */}
-      <section className="py-24 bg-muted/30">
+      <section
+        className="py-24 relative isolate bg-[url('/images/textures/services-bg.jpg')] bg-repeat"
+      >
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-white/80"
+        />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <span className="section-label">I nostri servizi</span>
