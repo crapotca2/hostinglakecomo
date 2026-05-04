@@ -14,7 +14,6 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { getPortfolio, getZoneLabel, getTypeLabel } from "@/lib/portfolio";
-import host from "@/data/host.json";
 
 const FEATURED_PROPERTIES = (() => {
   const all = getPortfolio();
@@ -55,21 +54,16 @@ const SERVICES_OWNER = [
 ];
 
 const STATS = [
-  { value: `${host.yearsHosting}`, label: "Anni di hosting" },
-  {
-    value: host.primaryListing.rating
-      ? host.primaryListing.rating.toFixed(1)
-      : "5",
-    label: "Rating Airbnb",
-  },
-  { value: `${host.responseRate}%`, label: "Tasso di risposta" },
-  { value: host.isSuperhost ? "Superhost" : "Host", label: "Status Airbnb" },
+  { value: "+32%", label: "Revenue medio vs gestione autonoma" },
+  { value: "30+", label: "Canali di distribuzione" },
+  { value: "24/7", label: "Reperibilita per ospiti e proprietari" },
+  { value: "100%", label: "Compliance normativa garantita" },
 ];
 
 const WHY_US = [
-  `${host.yearsHosting} anni di esperienza diretta come host sul Lago di Como`,
-  "Compliance normativa garantita al 100%",
-  "Supporto e reperibilita continua durante il soggiorno",
+  "Pricing dinamico e ottimizzazione listing su 30+ canali",
+  "Pulizie professionali standard hotel e supporto 24/7",
+  "Compliance normativa garantita: CIN, Questura, ISTAT, tassa di soggiorno",
   "Reportistica trasparente con rendiconto mensile dettagliato",
 ];
 
@@ -105,9 +99,8 @@ export default function HomePage() {
               on Lake Como
             </h1>
             <p className="text-lg sm:text-xl text-white/70 leading-relaxed mb-10 max-w-lg">
-              Affidaci la tua proprieta. Trasformiamo ogni soggiorno in
-              un'esperienza memorabile, sfruttando {host.yearsHosting} anni di
-              esperienza diretta come host sul Lago.
+              Gestione professionale di case vacanza e appartamenti sul Lago
+              di Como. Massimizza i tuoi guadagni con la nostra esperienza.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link

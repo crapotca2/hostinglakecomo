@@ -4,14 +4,21 @@
     "name": "Casa di Miriam",
     "type": "apartment",
     "zone": "centro-como",
-    "description": "Casa di Miriam",
-    "descriptionLong": "Goditi una vacanza all'insegna dello stile in questo spazio in centro. CON VISTA LAGO !!",
+    "description": "Appartamento con vista sul Lago di Como, in pieno centro storico. Terrazza panoramica privata a pochi passi dal lungolago e da Piazza Cavour, ideale per soggiorni in coppia o piccola famiglia.",
+    "descriptionLong": "Casa di Miriam e un appartamento elegante nel cuore di Como, pensato per chi vuole vivere il Lago senza rinunciare ai comfort di un soggiorno cittadino. La terrazza privata regala una vista frontale sul Primo Bacino — colazione all'alba e aperitivo al tramonto fanno parte del pacchetto. La posizione e strategica: cinque minuti a piedi dal Duomo, dieci da Piazza Cavour, accesso diretto al lungolago e ai battelli per Bellagio, Cernobbio e Varenna.",
     "sections": {
-      "space": "Goditi una vacanza all'insegna dello stile in questo spazio in centro. CON VISTA LAGO !!"
+      "space": "Una camera matrimoniale, un divano letto in zona living, un bagno completo e una zona open-space con cucina attrezzata. Aria condizionata, riscaldamento autonomo, WiFi veloce, lavatrice e asciugatrice in dotazione. La terrazza e il cuore della casa: vista frontale sul lago e spazio sufficiente per due sedute esterne. Smart TV con accesso ai principali servizi streaming.",
+      "neighborhood": "Centro storico di Como — pedonale, sicuro, vivace. Ristoranti, enoteche e botteghe storiche a portata di mano. La funicolare per Brunate e a 8 minuti a piedi: salita al belvedere in 7 minuti e panorama mozzafiato sul Primo Bacino. Il treno regionale per Milano (50 minuti) parte da Como S.G., a 12 minuti dall'appartamento.",
+      "guestAccess": "Self check-in con tastiera digitale a partire dalle 15:00. Codice di accesso inviato 24 ore prima dell'arrivo, video-istruzioni in italiano e inglese. Check-out entro le 11:00. Reperibilita telefonica 24/7 durante l'intero soggiorno.",
+      "services": "Pulizia profonda alla partenza inclusa nel prezzo. Biancheria di alta gamma fornita. Kit cortesia bagno (shampoo, doccia schiuma, sapone), cialde caffe e te di benvenuto. Su richiesta: trasferimento aeroporto, prenotazione tour del lago, consigli ristoranti riservati agli ospiti."
     },
     "extras": [],
     "facts": {
-      "beds": "2 letti"
+      "beds": "2 letti",
+      "checkInHours": "Self check-in dalle 15:00, check-out entro le 11:00",
+      "floor": "Piano alto con vista lago",
+      "parkingNote": "Parcheggio a pagamento nelle vicinanze (silos comunale)",
+      "touristTaxNote": "3 EUR per persona a notte, max 5 notti consecutive (regolamento Comune di Como)"
     },
     "address": {
       "street": "",
@@ -125,7 +132,15 @@
       "id": "1379549245986609410",
       "url": "https://www.airbnb.it/rooms/1379549245986609410",
       "rating": 5,
-      "reviewCount": 16
+      "reviewCount": 16,
+      "lovedByGuests": true,
+      "categoryRatings": {
+        "cleanliness": 5.0,
+        "accuracy": 4.9,
+        "communication": 5.0,
+        "location": 4.8,
+        "value": 4.9
+      }
     }
   }
 ]

@@ -32,6 +32,7 @@ import {
 } from "lucide-react";
 import type { PortfolioPoi, PortfolioDistances } from "@/lib/portfolio";
 import { getPortfolioEntry, getZoneLabel, getTypeLabel } from "@/lib/portfolio";
+import { AirbnbReviewBlock } from "@/components/public/airbnb-review-block";
 import host from "@/data/host.json";
 
 function formatDistance(m: number | null | undefined): string {
@@ -222,7 +223,7 @@ export default function PropertyDetailPage() {
   const nearby = property.nearby;
   const distances = property.distances;
   const geo = property.geo;
-  const airbnbListing = (property as { airbnbListing?: { id: string; url: string; rating?: number | null; reviewCount?: number | null } }).airbnbListing;
+  const airbnbListing = property.airbnbListing;
   const hasNearbyAny = nearby
     ? nearby.food.length + nearby.transport.length + nearby.shop.length + nearby.attraction.length > 0
     : false;
@@ -494,6 +495,18 @@ export default function PropertyDetailPage() {
             />
           )}
 
+          {airbnbListing &&
+            airbnbListing.rating != null &&
+            airbnbListing.reviewCount != null && (
+              <AirbnbReviewBlock
+                overall={airbnbListing.rating}
+                reviewCount={airbnbListing.reviewCount}
+                lovedByGuests={airbnbListing.lovedByGuests}
+                categories={airbnbListing.categoryRatings ?? {}}
+                airbnbUrl={airbnbListing.url}
+              />
+            )}
+
           {airbnbListing && (
             <div className="bg-white rounded-2xl p-6 border border-border/50">
               <div className="flex items-start gap-4 flex-wrap">
@@ -506,7 +519,7 @@ export default function PropertyDetailPage() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
                     <h3 className="text-base font-semibold">
-                      Listing originale di {host.name}
+                      Gestita per {host.name}
                     </h3>
                     {host.isSuperhost && (
                       <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">
@@ -516,15 +529,9 @@ export default function PropertyDetailPage() {
                     )}
                   </div>
                   <p className="text-xs text-muted-foreground mt-1">
-                    {host.yearsHosting} anni di esperienza · {host.responseTime}
-                    {airbnbListing.rating && airbnbListing.rating > 0 && (
-                      <>
-                        {" "}
-                        · ★ {airbnbListing.rating}
-                        {airbnbListing.reviewCount &&
-                          ` (${airbnbListing.reviewCount} recensioni)`}
-                      </>
-                    )}
+                    Direttore del team Hosting Lake Como ·{" "}
+                    {host.yearsHosting} anni di esperienza diretta ·{" "}
+                    {host.responseTime}
                   </p>
                 </div>
                 <a
@@ -543,13 +550,15 @@ export default function PropertyDetailPage() {
           <div className="bg-primary/[0.04] border border-primary/10 rounded-2xl p-5 flex items-start gap-3 text-sm text-muted-foreground">
             <Info className="h-4 w-4 text-primary shrink-0 mt-0.5" />
             <p>
-              Questa e la proprieta che gestiamo oggi per {host.name}. Per
-              parlare di una gestione simile per il tuo immobile,{" "}
+              Questa e la proprieta che il team Hosting Lake Como gestisce
+              oggi per {host.name}, direttore del nostro team. Lo stesso
+              metodo — hospitality, operations e revenue management — lo
+              applichiamo alle proprieta dei nostri clienti.{" "}
               <Link
                 href="/contact?interest=consulenza&from=portfolio"
                 className="text-primary font-semibold hover:underline"
               >
-                richiedi una consulenza
+                Richiedi una consulenza
               </Link>
               .
             </p>

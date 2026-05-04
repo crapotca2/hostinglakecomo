@@ -96,6 +96,22 @@ export interface PortfolioAirbnb {
   enrichedAt: string;
 }
 
+export interface PortfolioAirbnbListing {
+  id: string;
+  url: string;
+  rating?: number | null;
+  reviewCount?: number | null;
+  lovedByGuests?: boolean;
+  categoryRatings?: {
+    cleanliness?: number;
+    accuracy?: number;
+    checkIn?: number;
+    communication?: number;
+    location?: number;
+    value?: number;
+  };
+}
+
 export interface PortfolioEntry {
   slug: string;
   name: string;
@@ -111,6 +127,7 @@ export interface PortfolioEntry {
   distances?: PortfolioDistances;
   enrichedAt?: string;
   airbnb?: PortfolioAirbnb;
+  airbnbListing?: PortfolioAirbnbListing;
   address: {
     street: string;
     city: string;

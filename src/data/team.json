@@ -1,0 +1,66 @@
+{
+  "members": [
+    {
+      "id": "angelo",
+      "name": "Angelo",
+      "role": "Property Manager Senior · Direttore del team",
+      "shortRole": "Direttore",
+      "yearsExperience": 9,
+      "isSuperhost": true,
+      "profilePicture": "/images/host/angelo.jpg",
+      "airbnbProfileUrl": "https://www.airbnb.it/users/profile/1462513131563105498",
+      "bio": "Property manager con anni di esperienza diretta sul Lago di Como. Superhost Airbnb dal 2017 con tasso di risposta del 100%. Dirige il team e supervisiona la qualita complessiva del servizio.",
+      "highlights": [
+        "Superhost Airbnb dal 2017",
+        "Tasso di risposta 100%",
+        "Anni di hosting diretto sul Lago",
+        "Italiano e inglese fluenti"
+      ]
+    },
+    {
+      "id": "operations",
+      "name": null,
+      "role": "Operations & Compliance Manager",
+      "shortRole": "Operations",
+      "yearsExperience": null,
+      "isSuperhost": false,
+      "profilePicture": null,
+      "airbnbProfileUrl": null,
+      "bio": "Coordina pulizie professionali, manutenzioni programmate e ispezioni periodiche delle proprieta. Gestisce gli adempimenti normativi: CIN, comunicazione Questura via Alloggiati Web, ISTAT, tassa di soggiorno, archivio documentale.",
+      "highlights": [
+        "Network pulizie e manutenzione",
+        "Compliance CIN/Questura/ISTAT",
+        "Ispezioni e controllo qualita",
+        "Reperibilita 24/7"
+      ]
+    },
+    {
+      "id": "revenue",
+      "name": null,
+      "role": "Revenue & Channel Manager",
+      "shortRole": "Revenue",
+      "yearsExperience": null,
+      "isSuperhost": false,
+      "profilePicture": null,
+      "airbnbProfileUrl": null,
+      "bio": "Definisce la strategia di pricing dinamico e la distribuzione multi-canale. Monitora KPI di occupancy, ADR e RevPAR; ottimizza listing su Airbnb, Booking, Vrbo, Expedia e oltre 30 portali; cura foto, descrizioni e SEO delle inserzioni.",
+      "highlights": [
+        "Pricing dinamico data-driven",
+        "Distribuzione 30+ canali",
+        "SEO e ottimizzazione listing",
+        "Reportistica mensile per i proprietari"
+      ]
+    }
+  ],
+  "summary": {
+    "headline": "Un team giovane e dinamico, diretto da chi il Lago lo conosce davvero",
+    "subline": "Tre property manager specializzati nella gestione, pulizia e organizzazione di case vacanza per ospiti internazionali.",
+    "experience": {
+      "yearsCombined": 9,
+      "primarySuperhost": true,
+      "primaryRating": 5,
+      "primaryReviews": 16,
+      "primaryResponseRate": 100
+    }
+  }
+}
