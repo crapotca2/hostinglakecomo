@@ -101,7 +101,9 @@ export default function HomePage() {
             </h1>
             <p className="text-lg sm:text-xl text-white/70 leading-relaxed mb-10 max-w-lg">
               Gestione professionale di case vacanza e appartamenti sul Lago
-              di Como. Massimizza i tuoi guadagni con la nostra esperienza.
+              di Como. Massimizziamo i tuoi guadagni e portiamo la tua
+              proprieta al miglior rating possibile sulle piattaforme di
+              riferimento.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link

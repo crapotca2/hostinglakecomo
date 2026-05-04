@@ -26,7 +26,8 @@ export function Footer() {
         </h2>
         <p className="text-white/70 max-w-2xl mx-auto text-base leading-relaxed">
           Gestione professionale di case vacanza e appartamenti sul Lago di
-          Como. Massimizza i tuoi guadagni con la nostra esperienza.
+          Como. Massimizziamo i tuoi guadagni e portiamo la tua proprieta al
+          miglior rating possibile sulle piattaforme di riferimento.
         </p>
       </div>
 
@@ -48,9 +49,9 @@ export function Footer() {
               <span className="text-lg font-semibold text-white">Hosting Lake Como</span>
             </div>
             <p className="text-sm leading-relaxed text-white/60">
-              Co-hosting professionale sul Lago di Como. Massimizza i tuoi
-              guadagni con la nostra esperienza nella gestione, pulizie e
-              organizzazione.
+              Co-hosting professionale sul Lago di Como. Gestione, pulizie e
+              organizzazione di alto livello per massimizzare i guadagni e
+              ottenere il miglior rating sulle piattaforme di riferimento.
             </p>
             <div className="flex items-center gap-3 pt-2">
               <a href="#" className="h-9 w-9 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
