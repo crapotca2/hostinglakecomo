@@ -45,12 +45,12 @@ export default function ServicesPage() {
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
             Tu mantieni la proprietà, noi ci occupiamo di tutto il resto:
-            operazioni, compliance, revenue, accoglienza. Il risultato lo
-            vedi in tempo reale dalla tua{" "}
+            operazioni, adempimenti, ottimizzazione del valore e
+            accoglienza. Il risultato lo vedi in tempo reale dalla tua{" "}
             <strong className="text-foreground">dashboard personale</strong>{" "}
             e ogni mese arriva un{" "}
-            <strong className="text-foreground">recap dedicato</strong> nella
-            tua casella email.
+            <strong className="text-foreground">riepilogo dedicato</strong>{" "}
+            nella tua casella email.
           </p>
         </div>
       </section>

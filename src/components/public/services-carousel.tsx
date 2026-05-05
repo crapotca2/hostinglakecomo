@@ -17,39 +17,39 @@ import {
 
 const SERVICE_GROUPS = [
   {
-    title: "Setup & onboarding",
+    title: "Avvio e configurazione",
     desc: "Tutto quello che serve per portare la proprietà online al massimo del suo potenziale.",
     items: [
       {
         icon: HomeIcon,
-        title: "Audit & consulenza",
-        desc: "Sopralluogo, analisi del potenziale, benchmark di zona e piano d'azione su misura.",
+        title: "Analisi e consulenza",
+        desc: "Sopralluogo, analisi del potenziale, confronto con la zona e piano d'azione su misura.",
       },
       {
         icon: Camera,
         title: "Servizio fotografico",
-        desc: "Shooting professionale ad alta risoluzione, virtual tour 360, contenuti video per le piattaforme.",
+        desc: "Riprese professionali ad alta risoluzione, tour virtuale 360 e contenuti video per le piattaforme.",
       },
       {
         icon: Sparkles,
-        title: "Home staging",
-        desc: "Restyling mirato per alzare tariffa media e qualità delle recensioni, calibrato sul budget.",
+        title: "Allestimento casa",
+        desc: "Interventi mirati di restyling per alzare tariffa media e qualità delle recensioni, calibrati sul budget.",
       },
       {
         icon: ClipboardCheck,
-        title: "Onboarding tecnico",
-        desc: "Inventario, checklist conformità, setup completo per la prima pubblicazione.",
+        title: "Avviamento tecnico",
+        desc: "Inventario, lista controlli di conformità e configurazione completa per la prima pubblicazione.",
       },
     ],
   },
   {
-    title: "Operations quotidiane",
+    title: "Operazioni quotidiane",
     desc: "Il lavoro invisibile che fa la differenza fra una proprietà media e una a 5 stelle.",
     items: [
       {
         icon: Sparkles,
-        title: "Pulizia & biancheria",
-        desc: "Standard hotel, biancheria premium di proprietà, igienizzazione certificata fra un soggiorno e l'altro.",
+        title: "Pulizia e biancheria",
+        desc: "Standard alberghiero, biancheria di alta gamma di proprietà, igienizzazione certificata fra un soggiorno e l'altro.",
       },
       {
         icon: CalendarCheck,
@@ -59,7 +59,7 @@ const SERVICE_GROUPS = [
       {
         icon: HomeIcon,
         title: "Accoglienza ospiti",
-        desc: "Check-in professionale, self check-in con codice, video-istruzioni multilingua. Recensioni a 5 stelle by design.",
+        desc: "Accoglienza professionale, accesso autonomo con codice e video-istruzioni multilingua. Recensioni a 5 stelle garantite.",
       },
       {
         icon: ShieldCheck,
@@ -69,8 +69,8 @@ const SERVICE_GROUPS = [
     ],
   },
   {
-    title: "Revenue & visibilità",
-    desc: "Pricing dinamico, distribuzione multi-canale, gestione attiva della reputazione.",
+    title: "Ottimizzazione del valore",
+    desc: "Tariffe dinamiche, distribuzione multi-canale e gestione attiva della reputazione per portare l'immobile al suo massimo.",
     items: [
       {
         icon: TrendingUp,
@@ -79,44 +79,44 @@ const SERVICE_GROUPS = [
       },
       {
         icon: TrendingUp,
-        title: "Revenue management",
-        desc: "Algoritmo proprietario di dynamic pricing su competitor, eventi locali, stagionalità Lago di Como.",
+        title: "Tariffazione dinamica",
+        desc: "Algoritmo proprietario di prezzi dinamici basato su concorrenza, eventi locali e stagionalità del Lago di Como.",
       },
       {
         icon: Star,
-        title: "Review & reputation",
-        desc: "Monitoraggio recensioni multi-piattaforma, risposta professionale, gestione proattiva del feedback.",
+        title: "Recensioni e reputazione",
+        desc: "Monitoraggio recensioni multi-piattaforma, risposta professionale, gestione proattiva delle valutazioni.",
       },
       {
         icon: PackageCheck,
-        title: "Linen & amenities premium",
-        desc: "Kit cortesia firmato, prodotti bagno selezionati, cialde caffè, benvenuto con eccellenze locali.",
+        title: "Biancheria e accoglienza premium",
+        desc: "Kit cortesia firmato, prodotti bagno selezionati, cialde caffè e benvenuto con eccellenze locali.",
       },
     ],
   },
   {
-    title: "Reportistica & compliance",
-    desc: "Trasparenza totale e zero adempimenti dimenticati: i tuoi numeri sempre alla mano, la burocrazia archiviata.",
+    title: "Reportistica e adempimenti",
+    desc: "Trasparenza totale e zero scadenze dimenticate: i tuoi numeri sempre alla mano, la burocrazia archiviata.",
     items: [
       {
         icon: ShieldCheck,
         title: "Gestione amministrativa",
-        desc: "CIN, Questura (Alloggiati Web), ISTAT, tassa di soggiorno, cedolare secca: tutti gli adempimenti per te.",
+        desc: "CIN, Questura (Alloggiati Web), ISTAT, tassa di soggiorno e cedolare secca: tutti gli adempimenti gestiti per te.",
       },
       {
         icon: Calculator,
-        title: "Audit fiscale annuale",
-        desc: "Report fiscale di fine anno, quadro RL, calcolo cedolare, documentazione pronta per il commercialista.",
+        title: "Bilancio fiscale annuale",
+        desc: "Riepilogo fiscale di fine anno, quadro RL, calcolo cedolare e documentazione pronta per il commercialista.",
       },
       {
         icon: FileText,
         title: "Rendiconto mensile",
-        desc: "Prospetto economico per singola prenotazione, commissioni dettagliate, payout trasparente.",
+        desc: "Prospetto economico per singola prenotazione, commissioni dettagliate e pagamenti trasparenti al proprietario.",
       },
       {
         icon: ClipboardCheck,
         title: "Manutenzione programmata",
-        desc: "Piano preventivo stagionale: climatizzazione, caldaia, riparazioni, check quadrimestrale della proprietà.",
+        desc: "Piano preventivo stagionale: climatizzazione, caldaia, riparazioni e controllo quadrimestrale della proprietà.",
       },
     ],
   },
@@ -160,7 +160,7 @@ export function ServicesCarousel() {
 
   return (
     <div className="relative">
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="flex flex-wrap gap-2 mb-6 justify-center">
         {SERVICE_GROUPS.map((g, i) => (
           <button
             key={g.title}
