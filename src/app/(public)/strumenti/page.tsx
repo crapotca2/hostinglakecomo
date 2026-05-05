@@ -305,12 +305,7 @@ export default function StrumentiPage() {
                 >
                   <div className="flex items-start justify-between gap-3 mb-2">
                     <h3 className="text-base font-semibold">{t.name}</h3>
-                    {isReady ? (
-                      <span className="shrink-0 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-primary bg-primary/[0.08] border border-primary/20 px-2 py-0.5 rounded-full whitespace-nowrap">
-                        <Sparkles className="h-2.5 w-2.5" />
-                        AI
-                      </span>
-                    ) : (
+                    {!isReady && (
                       <span className="shrink-0 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground bg-muted px-2 py-0.5 rounded-full whitespace-nowrap">
                         <Clock className="h-2.5 w-2.5" />
                         In sviluppo
