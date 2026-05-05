@@ -27,32 +27,66 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  // Lock body scroll when mobile menu open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
   const showSolid = scrolled || !isHome;
 
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 transition-[background-color,box-shadow] duration-300",
         showSolid
           ? "bg-white/90 backdrop-blur-xl border-b border-border/50 shadow-sm"
           : "bg-transparent"
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between gap-4 h-16 lg:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={
-                showSolid ? "/images/logo/logo-marble.png" : "/images/logo/logo-white.png"
-              }
-              alt="Hosting Lake Como"
-              className="h-12 w-12 object-contain transition-opacity"
-            />
+          <Link
+            href="/"
+            className="flex items-center gap-2 sm:gap-2.5 shrink-0 min-w-0"
+            aria-label="Hosting Lake Como — home"
+          >
+            <span className="relative h-9 w-9 sm:h-11 sm:w-11 lg:h-12 lg:w-12 shrink-0">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/logo/logo-marble.png"
+                alt=""
+                aria-hidden="true"
+                className={cn(
+                  "absolute inset-0 h-full w-full object-contain transition-opacity duration-300",
+                  showSolid ? "opacity-100" : "opacity-0"
+                )}
+              />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/logo/logo-white.png"
+                alt="Hosting Lake Como"
+                className={cn(
+                  "absolute inset-0 h-full w-full object-contain transition-opacity duration-300",
+                  showSolid ? "opacity-0" : "opacity-100"
+                )}
+              />
+            </span>
             <span
               className={cn(
-                "text-lg font-semibold tracking-tight transition-colors",
+                "text-base sm:text-lg font-semibold tracking-tight transition-colors truncate",
                 showSolid ? "text-foreground" : "text-white"
               )}
             >
@@ -60,14 +94,14 @@ export function Navbar() {
             </span>
           </Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-1">
+          {/* Desktop nav (lg+) */}
+          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "px-3.5 py-2 rounded-lg text-sm font-medium transition-colors",
+                  "px-2.5 xl:px-3.5 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap",
                   pathname === item.href
                     ? showSolid
                       ? "text-primary bg-primary/[0.08]"
@@ -83,23 +117,26 @@ export function Navbar() {
           </nav>
 
           {/* CTA + mobile toggle */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <Link
               href="/contact?interest=consulenza"
               className={cn(
-                "hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors",
+                "hidden md:inline-flex items-center gap-2 px-3 lg:px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap",
                 showSolid
                   ? "bg-primary text-white hover:bg-primary/90"
                   : "bg-white text-primary hover:bg-white/90"
               )}
             >
-              Richiedi Consulenza
+              <span className="hidden lg:inline">Richiedi Consulenza</span>
+              <span className="lg:hidden">Consulenza</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? "Chiudi menu" : "Apri menu"}
+              aria-expanded={mobileOpen}
               className={cn(
-                "md:hidden h-10 w-10 rounded-lg flex items-center justify-center transition-colors",
+                "lg:hidden h-10 w-10 rounded-lg flex items-center justify-center transition-colors shrink-0",
                 showSolid
                   ? "hover:bg-muted/50 text-foreground"
                   : "hover:bg-white/10 text-white"
@@ -117,32 +154,42 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-white border-t border-border/40 animate-fade-in shadow-lg">
-          <nav className="max-w-7xl mx-auto px-4 py-4 space-y-1">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileOpen(false)}
-                className={cn(
-                  "block px-4 py-3 rounded-lg text-sm font-medium transition-colors",
-                  pathname === item.href
-                    ? "text-primary bg-primary/[0.08]"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                )}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <Link
-              href="/contact?interest=consulenza"
-              onClick={() => setMobileOpen(false)}
-              className="block px-4 py-3 rounded-lg bg-primary text-white text-sm font-medium text-center mt-3"
-            >
-              Richiedi Consulenza
-            </Link>
-          </nav>
-        </div>
+        <>
+          <div
+            className="lg:hidden fixed inset-0 top-16 bg-foreground/20 backdrop-blur-sm animate-fade-in"
+            onClick={() => setMobileOpen(false)}
+            aria-hidden="true"
+          />
+          <div className="lg:hidden absolute top-full inset-x-0 bg-white border-t border-border/40 shadow-xl animate-fade-in max-h-[calc(100vh-4rem)] overflow-y-auto">
+            <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-3 space-y-0.5">
+              {NAV_ITEMS.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={cn(
+                    "block px-4 py-3 rounded-lg text-sm font-medium transition-colors",
+                    pathname === item.href
+                      ? "text-primary bg-primary/[0.08]"
+                      : "text-foreground hover:bg-muted/50"
+                  )}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <div className="pt-2 mt-2 border-t border-border/40">
+                <Link
+                  href="/contact?interest=consulenza"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-white text-sm font-semibold"
+                >
+                  Richiedi Consulenza
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </nav>
+          </div>
+        </>
       )}
     </header>
   );
