@@ -82,9 +82,9 @@ export default function AboutPage() {
               ].map((item) => (
                 <li
                   key={item.text}
-                  className="flex items-start gap-3 text-sm text-foreground bg-white border border-border/50 rounded-xl p-4"
+                  className="flex items-start gap-3 text-sm text-white bg-[#1D3A62] bg-[url('/images/textures/host.webp')] bg-cover bg-center bg-blend-multiply rounded-xl p-4 shadow-sm"
                 >
-                  <item.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                  <item.icon className="h-5 w-5 text-white shrink-0 mt-0.5" />
                   {item.text}
                 </li>
               ))}
