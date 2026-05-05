@@ -1,8 +1,5 @@
-import Link from "next/link";
 import {
-  Users,
   Star,
-  ArrowRight,
   ExternalLink,
   CheckCircle2,
   Sparkles,
@@ -10,35 +7,9 @@ import {
   LineChart,
   ShieldCheck,
   UserCircle2,
-  MessageCircle,
   Globe2,
 } from "lucide-react";
 import team from "@/data/team.json";
-
-const STATS = [
-  {
-    icon: Briefcase,
-    value: `${team.summary.experience.yearsCombined}+`,
-    label: "Anni di hosting sul Lago di Como",
-  },
-  {
-    icon: Star,
-    value: team.summary.experience.primaryRating
-      ? team.summary.experience.primaryRating.toFixed(1).replace(".", ",")
-      : "5,0",
-    label: "Rating medio Airbnb del team",
-  },
-  {
-    icon: ShieldCheck,
-    value: team.summary.experience.primarySuperhost ? "Superhost" : "Host",
-    label: "Certificazione Airbnb",
-  },
-  {
-    icon: MessageCircle,
-    value: `${team.summary.experience.primaryResponseRate}%`,
-    label: "Tasso di risposta agli ospiti",
-  },
-];
 
 export default function AboutPage() {
   return (
@@ -61,7 +32,7 @@ export default function AboutPage() {
 
       <section className="py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto space-y-6 text-foreground leading-relaxed">
+          <div className="space-y-6 text-foreground leading-relaxed">
             <p className="text-lg">
               Hosting Lake Como e una realta specializzata di tre property
               manager dedicati alla{" "}
@@ -215,57 +186,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {STATS.map((stat) => (
-              <div
-                key={stat.label}
-                className="bg-white rounded-2xl p-6 text-center shadow-sm border border-border/50"
-              >
-                <stat.icon className="h-6 w-6 text-primary mx-auto mb-3" />
-                <div className="text-3xl font-bold text-foreground mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-xs text-muted-foreground font-medium leading-snug">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="section-label">Co-hosting</span>
-          <h2 className="text-3xl font-light mt-3 mb-4">
-            Quello che facciamo per <span className="font-semibold">te</span>
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Pricing dinamico, accoglienza standard hotel, compliance completa,
-            reportistica trasparente. Il team copre tutto il ciclo di gestione
-            — tu hai un solo interlocutore e una proprieta che lavora al
-            massimo delle sue capacita.
-          </p>
-          <div className="flex flex-wrap justify-center gap-3 mt-8">
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border bg-white text-sm font-semibold hover:bg-muted/40 transition-colors"
-            >
-              Vedi i servizi
-              <Users className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/contact?interest=consulenza&from=about"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-colors shadow-lg"
-            >
-              Vuoi che gestiamo la tua casa?
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

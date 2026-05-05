@@ -9,6 +9,7 @@ import {
   Info,
   Home as HomeIcon,
   ArrowRight,
+  Star,
 } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -76,7 +77,7 @@ function PropertyCard({ property }: { property: PortfolioEntry }) {
           {cityZone}
         </div>
         <h3 className="text-base font-semibold mb-3">{property.name}</h3>
-        <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
+        <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4 flex-wrap gap-y-1">
           <span className="flex items-center gap-1">
             <Bed className="h-3.5 w-3.5" /> {property.details.bedrooms}
           </span>
@@ -86,6 +87,13 @@ function PropertyCard({ property }: { property: PortfolioEntry }) {
           <span className="flex items-center gap-1">
             <Users className="h-3.5 w-3.5" /> {property.details.maxGuests}
           </span>
+          {property.airbnbListing?.rating != null &&
+            property.airbnbListing.rating > 0 && (
+              <span className="flex items-center gap-1 text-foreground font-medium">
+                <Star className="h-3.5 w-3.5 fill-foreground text-foreground" />
+                {property.airbnbListing.rating.toFixed(2)}
+              </span>
+            )}
         </div>
         <div className="mt-auto flex items-center justify-between">
           <span className="text-xs font-semibold text-primary inline-flex items-center gap-1">
