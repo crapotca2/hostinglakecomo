@@ -149,7 +149,7 @@ function ContactForm() {
       <div>
         <label className="text-sm font-medium mb-1.5 block">Messaggio</label>
         <textarea
-          rows={4}
+          rows={3}
           required
           className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none"
         />
@@ -174,27 +174,18 @@ function ContactFormFallback() {
 export default function ContactPage() {
   return (
     <div className="pt-20">
-      <section className="py-16 bg-[#1D3A62] text-white relative overflow-hidden">
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
-        />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
-          <h1 className="text-4xl sm:text-5xl font-light text-white">
-            <span className="font-semibold">Contattaci</span>
-          </h1>
-        </div>
-      </section>
-
       <section className="py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-[4fr_8fr] gap-12 lg:gap-16 items-center">
             {/* INFO LEFT */}
             <div>
-              <h2 className="text-2xl sm:text-3xl font-light text-foreground mb-4">
+              <span className="text-xs font-semibold uppercase tracking-widest text-primary">
+                Contattaci
+              </span>
+              <h1 className="text-3xl sm:text-4xl font-light text-foreground mt-3 mb-4">
                 Parliamo del tuo{" "}
                 <span className="font-semibold">immobile</span>
-              </h2>
+              </h1>
               <p className="text-muted-foreground leading-relaxed mb-8">
                 Richiedi un preventivo o contattaci per qualsiasi informazione.
                 Ti rispondiamo entro 48 ore con una valutazione preliminare e i
