@@ -240,12 +240,15 @@ export default function StrumentiPage() {
                     </>
                   );
 
+                  const cardClass = `bg-white text-foreground rounded-2xl p-7 border border-border/50 ${
+                    isDark ? "" : "border-t-[3px] border-t-[#1D3A62]"
+                  }`;
                   if (isAvailable) {
                     return (
                       <Link
                         key={t.slug}
                         href={`/strumenti/${t.slug}`}
-                        className="group bg-white rounded-2xl p-7 border border-border/50 card-hover block"
+                        className={`${cardClass} group card-hover block`}
                       >
                         {content}
                       </Link>
@@ -256,17 +259,14 @@ export default function StrumentiPage() {
                       <Link
                         key={t.slug}
                         href={`/strumenti/${t.slug}`}
-                        className="group bg-white rounded-2xl p-7 border border-border/50 card-hover block"
+                        className={`${cardClass} group card-hover block`}
                       >
                         {content}
                       </Link>
                     );
                   }
                   return (
-                    <div
-                      key={t.slug}
-                      className="bg-white rounded-2xl p-7 border border-border/50"
-                    >
+                    <div key={t.slug} className={cardClass}>
                       {content}
                     </div>
                   );
