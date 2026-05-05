@@ -40,7 +40,7 @@ export default function ServicesPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light mb-5 tracking-tight">
             Semplifichiamo la <span className="font-semibold">gestione</span>{" "}
-            del tuo immobile
+            per te
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
             Tu mantieni la proprietà, noi ci occupiamo di tutto il resto:
