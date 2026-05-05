@@ -1,11 +1,5 @@
 import Link from "next/link";
-import {
-  ArrowRight,
-  LayoutDashboard,
-  Mail,
-  ShieldCheck,
-  Wrench,
-} from "lucide-react";
+import { ArrowRight, LayoutDashboard, Mail, Wrench } from "lucide-react";
 import { DashboardMockup } from "@/components/public/dashboard-mockup";
 import { EmailRecapMockup } from "@/components/public/email-recap-mockup";
 import { ServicesCarousel } from "@/components/public/services-carousel";
@@ -64,7 +58,7 @@ export default function ServicesPage() {
       {/* PILLARS — split diagonal */}
       <section id="pillars" className="py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl p-1.5 bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center shadow-xl">
+          <div className="rounded-3xl p-1.5 bg-[#1D3A62] shadow-xl">
             <div className="rounded-[22px] bg-white relative overflow-hidden">
               {/* Diagonal divider — visible only on desktop */}
               <svg
@@ -165,11 +159,6 @@ export default function ServicesPage() {
                 }}
               />
 
-              {/* Connecting badge in the centre showing the two areas are halves of the same offering */}
-              <div className="hidden sm:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-2 px-4 py-2 rounded-full bg-white border border-border/60 shadow-md text-[10px] uppercase tracking-[0.18em] font-semibold text-primary">
-                <ShieldCheck className="h-3.5 w-3.5" />
-                Un solo interlocutore
-              </div>
             </div>
           </div>
         </div>
