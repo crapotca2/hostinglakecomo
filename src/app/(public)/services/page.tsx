@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { DashboardMockup } from "@/components/public/dashboard-mockup";
 import { EmailRecapMockup } from "@/components/public/email-recap-mockup";
+import { ServicesCarousel } from "@/components/public/services-carousel";
 
 const PILLARS = [
   {
@@ -255,46 +256,7 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          <div className="space-y-12">
-            {SERVICE_GROUPS.map((group, gi) => (
-              <div
-                key={group.title}
-                className="grid lg:grid-cols-[1fr_2fr] gap-8 lg:gap-12"
-              >
-                <div>
-                  <div className="text-[10px] uppercase tracking-[0.2em] text-primary font-semibold mb-2">
-                    {String(gi + 1).padStart(2, "0")} — Area
-                  </div>
-                  <h3 className="text-2xl font-light mb-3">
-                    <span className="font-semibold">{group.title}</span>
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {group.desc}
-                  </p>
-                </div>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {group.items.map((item) => (
-                    <div
-                      key={item.title}
-                      className="rounded-xl bg-white border border-border/50 p-4 flex gap-3"
-                    >
-                      <div className="h-9 w-9 rounded-lg bg-primary/[0.08] flex items-center justify-center shrink-0">
-                        <item.icon className="h-4 w-4 text-primary" />
-                      </div>
-                      <div className="min-w-0">
-                        <h4 className="text-sm font-semibold mb-1">
-                          {item.title}
-                        </h4>
-                        <p className="text-xs text-muted-foreground leading-relaxed">
-                          {item.desc}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+          <ServicesCarousel groups={SERVICE_GROUPS} />
         </div>
       </section>
 

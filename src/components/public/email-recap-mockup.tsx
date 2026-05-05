@@ -9,7 +9,7 @@ const HIGHLIGHTS = [
 
 export function EmailRecapMockup() {
   return (
-    <div className="rounded-2xl border border-border/60 bg-white shadow-2xl overflow-hidden select-none max-w-md mx-auto">
+    <div className="rounded-2xl border border-border/60 bg-white text-foreground shadow-2xl overflow-hidden select-none max-w-md mx-auto">
       {/* Mail header */}
       <div className="px-5 py-4 border-b border-border/50 bg-muted/20">
         <div className="flex items-center justify-between text-[10px] text-muted-foreground uppercase tracking-wider font-semibold mb-2.5">
