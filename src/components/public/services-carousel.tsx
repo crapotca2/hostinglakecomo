@@ -18,12 +18,13 @@ import {
 const SERVICE_GROUPS = [
   {
     title: "Avvio e configurazione",
-    desc: "Tutto quello che serve per portare la proprietà online al massimo del suo potenziale.",
+    desc: "Il setup iniziale dell'immobile. Ogni servizio è una voce a sé con costo dedicato, valutata insieme al proprietario prima di partire.",
     items: [
       {
         icon: HomeIcon,
         title: "Analisi e consulenza",
         desc: "Sopralluogo, analisi del potenziale, confronto con la zona e piano d'azione su misura.",
+        cost: "Su preventivo",
       },
       {
         icon: Camera,
@@ -94,7 +95,7 @@ const SERVICE_GROUPS = [
         icon: PackageCheck,
         title: "Biancheria e accoglienza premium",
         desc: "Kit cortesia firmato, prodotti bagno selezionati, cialde caffè e benvenuto con eccellenze locali.",
-        cost: "Costo amenities",
+        cost: "Costo extra",
       },
     ],
   },
