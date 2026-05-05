@@ -66,8 +66,8 @@ export default function ServicesPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center mb-14 max-w-2xl mx-auto">
             <h2 className="text-3xl sm:text-4xl font-light mb-3 text-white">
-              Lavoro <span className="font-semibold">invisibile</span>,
-              risultati <span className="font-semibold">visibili</span>
+              Hosting <span className="font-semibold">semplificato</span>,
+              ci occupiamo <span className="font-semibold">noi</span> di tutto
             </h2>
             <p className="text-white/80">
               Sedici servizi in quattro cluster — pulizia con standard

@@ -10,32 +10,15 @@ const HIGHLIGHTS = [
 export function EmailRecapMockup() {
   return (
     <div className="rounded-2xl border border-border/60 bg-white text-foreground shadow-2xl overflow-hidden select-none max-w-md mx-auto">
-      {/* Mail header */}
-      <div className="px-5 py-4 border-b border-border/50 bg-muted/20">
-        <div className="flex items-center justify-between text-[10px] text-muted-foreground uppercase tracking-wider font-semibold mb-2.5">
-          <span>Posta in arrivo</span>
-          <span>05 maggio · 09:14</span>
-        </div>
-        <div className="flex items-start gap-3">
-          <div className="h-9 w-9 rounded-full bg-[#1D3A62] text-white text-xs font-bold flex items-center justify-center shrink-0">
-            HLC
+      <div className="p-5 sm:p-6 space-y-5">
+        <div>
+          <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold mb-1">
+            Riepilogo aprile 2026
           </div>
-          <div className="min-w-0 flex-1">
-            <div className="text-xs text-muted-foreground">
-              Hosting Lake Como{" "}
-              <span className="text-muted-foreground/60">
-                &lt;report@hostinglakecomo.com&gt;
-              </span>
-            </div>
-            <div className="text-sm font-semibold mt-0.5 truncate">
-              Casa di Miriam — Recap aprile 2026
-            </div>
+          <div className="text-base font-semibold">
+            Casa di Miriam
           </div>
         </div>
-      </div>
-
-      {/* Mail body */}
-      <div className="p-5 space-y-5">
         <p className="text-sm leading-relaxed">
           Ciao Miriam, aprile ha chiuso <strong>sopra il target</strong>:
           €8.420 di ricavi (+12% rispetto a marzo) e tre nuove recensioni

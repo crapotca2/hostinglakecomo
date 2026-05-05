@@ -89,18 +89,6 @@ function OccupancyChart() {
 export function DashboardMockup() {
   return (
     <div className="rounded-2xl border border-border/60 bg-white shadow-2xl overflow-hidden select-none">
-      {/* Browser chrome */}
-      <div className="flex items-center gap-1.5 px-4 py-3 border-b border-border/50 bg-muted/30">
-        <span className="h-2.5 w-2.5 rounded-full bg-rose-400/80" />
-        <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
-        <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
-        <div className="ml-3 flex-1 max-w-md mx-auto">
-          <div className="rounded-md bg-white border border-border/40 px-3 py-1 text-[10px] text-muted-foreground text-center">
-            dashboard.hostinglakecomo.com / casa-di-miriam
-          </div>
-        </div>
-      </div>
-
       <div className="p-5 sm:p-6 space-y-5">
         {/* Top bar: property + period */}
         <div className="flex items-center justify-between flex-wrap gap-3">
