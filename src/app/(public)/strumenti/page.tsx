@@ -1,7 +1,5 @@
 import Link from "next/link";
 import {
-  Calculator,
-  TrendingUp,
   Euro,
   Sparkles,
   FileText,
@@ -26,34 +24,10 @@ interface Tool {
   desc: string;
   icon: React.ComponentType<{ className?: string }>;
   status: ToolStatus;
-  category: "simulator" | "dashboard" | "advanced";
+  category: "dashboard" | "advanced";
 }
 
 const TOOLS: Tool[] = [
-  {
-    slug: "rendita",
-    name: "Simulatore Rendita",
-    desc: "Stima preliminare del potenziale di reddito del tuo immobile sul Lago di Como in base a zona, tipologia e caratteristiche.",
-    icon: Calculator,
-    status: "available",
-    category: "simulator",
-  },
-  {
-    slug: "investimento",
-    name: "Simulatore Investimento",
-    desc: "Anteprima di ROI, cap rate e payback period per chi valuta l'acquisto di un immobile da reddito.",
-    icon: TrendingUp,
-    status: "available",
-    category: "simulator",
-  },
-  {
-    slug: "profit-diretto",
-    name: "Profit Diretto vs OTA",
-    desc: "Quanto puoi risparmiare sulle commissioni Airbnb, Booking ed Expedia con una strategia multi-canale equilibrata.",
-    icon: Euro,
-    status: "available",
-    category: "simulator",
-  },
   {
     slug: "nome-proprieta",
     name: "Nome Proprieta",
@@ -129,10 +103,6 @@ const TOOLS: Tool[] = [
 ];
 
 const CATEGORY_META: Record<Tool["category"], { label: string; desc: string }> = {
-  simulator: {
-    label: "Stima il potenziale del tuo immobile",
-    desc: "Tre simulatori per farti un'idea concreta del valore della tua proprietà sul Lago di Como. Stime preliminari basate sul nostro database storico — il valore effettivo richiede un'analisi dedicata con i nostri dati interni e l'algoritmo di pricing proprietario.",
-  },
   dashboard: {
     label: "Tool Area Clienti",
     desc: "Strumenti operativi riservati ai proprietari in gestione con Hosting Lake Como.",
@@ -143,53 +113,13 @@ const CATEGORY_META: Record<Tool["category"], { label: string; desc: string }> =
   },
 };
 
-const CATEGORIES: Tool["category"][] = ["simulator", "dashboard", "advanced"];
-
 export default function StrumentiPage() {
-  const simulators = TOOLS.filter((t) => t.category === "simulator");
   const advanced = TOOLS.filter((t) => t.category === "advanced");
 
   return (
     <div className="pt-20">
-      {/* HERO + SIMULATORI (continuo con sezione dashboard) */}
-      <section className="pt-24 pb-20 bg-[#1D3A62] text-white relative overflow-hidden">
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
-        />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-12 max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl font-light text-white mb-4">
-              Stima il <span className="font-semibold">potenziale</span> del
-              tuo immobile
-            </h1>
-            <p className="text-white/80 text-base sm:text-lg leading-relaxed">
-              {CATEGORY_META.simulator.desc}
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {simulators.map((t) => (
-              <Link
-                key={t.slug}
-                href={`/strumenti/${t.slug}`}
-                className="group card-hover block bg-white text-foreground rounded-2xl p-7 border border-border/50"
-              >
-                <h3 className="text-base font-semibold mb-2">{t.name}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                  {t.desc}
-                </p>
-                <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary">
-                  Prova il simulatore
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* TOOL AREA CLIENTI — stacked mockups, white */}
-      <section className="py-24 bg-white relative">
+      <section className="pt-24 pb-24 bg-white relative">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid lg:grid-cols-[5fr_6fr] gap-12 lg:gap-16 items-center">
             {/* TEXT */}
@@ -379,19 +309,19 @@ export default function StrumentiPage() {
       <section className="py-20 border-t border-border/50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-light mb-4">
-            Vuoi un'<span className="font-semibold">analisi completa</span> del tuo immobile?
+            Vuoi accedere agli{" "}
+            <span className="font-semibold">strumenti operativi</span>?
           </h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            I simulatori danno un'indicazione di massima. Il valore effettivo
-            dipende da storico prenotazioni area, dati competitor, pricing
-            dinamico e stagionalita locale: tutti elementi che calcoliamo solo
-            nella nostra analisi dedicata.
+            La suite completa di strumenti — generatore nomi, welcome letter
+            multilingua, percorsi Google Maps, dynamic pricing — e riservata
+            ai proprietari in gestione con Hosting Lake Como.
           </p>
           <Link
             href="/contact?interest=consulenza&from=strumenti"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-colors shadow-lg"
           >
-            Richiedi Analisi Completa
+            Richiedi Consulenza
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

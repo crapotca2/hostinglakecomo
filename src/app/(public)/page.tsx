@@ -319,6 +319,63 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ═══ SIMULATORI / POTENZIALE ═══ */}
+      <section className="py-24 bg-[#1D3A62] text-white relative overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
+        />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-12 max-w-3xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-light text-white mb-4">
+              Stima il <span className="font-semibold">potenziale</span> del
+              tuo immobile
+            </h2>
+            <p className="text-white/80 text-base sm:text-lg leading-relaxed">
+              Tre simulatori per farti un&apos;idea concreta del valore della
+              tua proprieta sul Lago di Como. Stime preliminari basate sul
+              nostro database storico — il valore effettivo richiede
+              un&apos;analisi dedicata con i nostri dati interni e
+              l&apos;algoritmo di pricing proprietario.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                slug: "rendita",
+                name: "Simulatore Rendita",
+                desc: "Stima preliminare del potenziale di reddito del tuo immobile sul Lago di Como in base a zona, tipologia e caratteristiche.",
+              },
+              {
+                slug: "investimento",
+                name: "Simulatore Investimento",
+                desc: "Anteprima di ROI, cap rate e payback period per chi valuta l'acquisto di un immobile da reddito.",
+              },
+              {
+                slug: "profit-diretto",
+                name: "Profit Diretto vs OTA",
+                desc: "Quanto puoi risparmiare sulle commissioni Airbnb, Booking ed Expedia con una strategia multi-canale equilibrata.",
+              },
+            ].map((t) => (
+              <Link
+                key={t.slug}
+                href={`/strumenti/${t.slug}`}
+                className="group card-hover block bg-white text-foreground rounded-2xl p-7 border border-border/50"
+              >
+                <h3 className="text-base font-semibold mb-2">{t.name}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                  {t.desc}
+                </p>
+                <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary">
+                  Prova il simulatore
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ═══ CTA BANNER ═══ */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
