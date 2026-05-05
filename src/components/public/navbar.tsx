@@ -15,13 +15,11 @@ const NAV_ITEMS = [
   { href: "/contact", label: "Contatti" },
 ];
 
-const NAVY_HERO_PATHS = new Set(["/", "/strumenti", "/contact"]);
-
 export function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const hasNavyHero = NAVY_HERO_PATHS.has(pathname);
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -55,12 +53,12 @@ export function Navbar() {
         "fixed top-0 left-0 right-0 z-50 transition-[background-color,box-shadow] duration-300",
         showSolid
           ? "bg-white/90 backdrop-blur-xl border-b border-border/50 shadow-sm"
-          : hasNavyHero
+          : isHome
           ? "bg-transparent"
           : "bg-[#1D3A62]"
       )}
     >
-      {!showSolid && !hasNavyHero && (
+      {!showSolid && !isHome && (
         <div
           aria-hidden
           className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center pointer-events-none"

@@ -231,7 +231,7 @@ export default function StrumentiPage() {
             {/* STACKED MOCKUPS */}
             <div className="relative h-[460px] sm:h-[480px] lg:h-[420px] mt-8 lg:mt-0">
               {/* Map mockup — back card */}
-              <div className="absolute right-0 bottom-0 w-[78%] sm:w-[70%] rounded-2xl bg-white shadow-2xl border border-border/40 overflow-hidden rotate-[3deg] translate-y-2">
+              <div className="absolute right-0 bottom-0 w-[78%] sm:w-[70%] rounded-2xl bg-white shadow-[0_25px_60px_-12px_rgba(29,58,98,0.55)] border border-border/40 overflow-hidden rotate-[3deg] translate-y-2">
                 <div className="px-4 py-3 border-b border-border/40 bg-muted/20 flex items-center gap-2">
                   <MapPin className="h-3.5 w-3.5 text-primary" />
                   <span className="text-xs font-semibold text-foreground">
@@ -277,7 +277,7 @@ export default function StrumentiPage() {
               </div>
 
               {/* Welcome letter mockup — middle card */}
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[72%] sm:w-[64%] rounded-2xl bg-white shadow-2xl border border-border/40 overflow-hidden -rotate-[2deg] z-10">
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[72%] sm:w-[64%] rounded-2xl bg-white shadow-[0_25px_60px_-12px_rgba(29,58,98,0.55)] border border-border/40 overflow-hidden -rotate-[2deg] z-10">
                 <div className="px-4 py-3 border-b border-border/40 bg-muted/20 flex items-center justify-between">
                   <span className="text-xs font-semibold text-foreground inline-flex items-center gap-1.5">
                     <Mail className="h-3.5 w-3.5 text-primary" />
@@ -304,7 +304,7 @@ export default function StrumentiPage() {
               </div>
 
               {/* Nome proprieta mockup — front card */}
-              <div className="absolute right-2 top-0 w-[74%] sm:w-[62%] rounded-2xl bg-white shadow-2xl border border-border/40 overflow-hidden rotate-[2deg] z-20">
+              <div className="absolute right-2 top-0 w-[74%] sm:w-[62%] rounded-2xl bg-white shadow-[0_25px_60px_-12px_rgba(29,58,98,0.55)] border border-border/40 overflow-hidden rotate-[2deg] z-20">
                 <div className="px-4 py-3 border-b border-border/40 bg-muted/20 flex items-center gap-2">
                   <Sparkles className="h-3.5 w-3.5 text-primary" />
                   <span className="text-xs font-semibold text-foreground">
