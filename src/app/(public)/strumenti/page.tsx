@@ -166,21 +166,38 @@ export default function StrumentiPage() {
       {CATEGORIES.map((cat) => {
         const tools = TOOLS.filter((t) => t.category === cat);
         const meta = CATEGORY_META[cat];
+        const isDark = cat !== "dashboard";
         return (
           <section
             key={cat}
-            className="py-20 bg-[#1D3A62] text-white relative overflow-hidden border-t border-white/10"
+            className={
+              isDark
+                ? "py-20 bg-[#1D3A62] text-white relative overflow-hidden border-t border-white/10"
+                : "py-20 bg-white relative"
+            }
           >
-            <div
-              aria-hidden
-              className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
-            />
+            {isDark && (
+              <div
+                aria-hidden
+                className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
+              />
+            )}
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
               <div className="mb-10">
-                <h2 className="text-2xl sm:text-3xl font-light text-white">
+                <h2
+                  className={`text-2xl sm:text-3xl font-light ${
+                    isDark ? "text-white" : "text-foreground"
+                  }`}
+                >
                   <span className="font-semibold">{meta.label}</span>
                 </h2>
-                <p className="text-white/75 mt-2">{meta.desc}</p>
+                <p
+                  className={`mt-2 ${
+                    isDark ? "text-white/75" : "text-muted-foreground"
+                  }`}
+                >
+                  {meta.desc}
+                </p>
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {tools.map((t) => {
@@ -248,7 +265,7 @@ export default function StrumentiPage() {
                   return (
                     <div
                       key={t.slug}
-                      className="bg-white rounded-2xl p-7 border border-border/50 opacity-70"
+                      className="bg-white rounded-2xl p-7 border border-border/50"
                     >
                       {content}
                     </div>
