@@ -11,9 +11,11 @@ import {
   PenTool,
   Lock,
   ArrowRight,
-  Wrench,
   Navigation,
   Map,
+  CheckCircle2,
+  MapPin,
+  Mail,
 } from "lucide-react";
 
 type ToolStatus = "available" | "members-only" | "coming-soon";
@@ -144,138 +146,239 @@ const CATEGORY_META: Record<Tool["category"], { label: string; desc: string }> =
 const CATEGORIES: Tool["category"][] = ["simulator", "dashboard", "advanced"];
 
 export default function StrumentiPage() {
+  const simulators = TOOLS.filter((t) => t.category === "simulator");
+  const advanced = TOOLS.filter((t) => t.category === "advanced");
+
   return (
     <div className="pt-20">
-      {CATEGORIES.map((cat) => {
-        const tools = TOOLS.filter((t) => t.category === cat);
-        const meta = CATEGORY_META[cat];
-        const isDark = cat !== "dashboard";
-        const isHero = cat === "simulator";
-        return (
-          <section
-            key={cat}
-            className={
-              isDark
-                ? `${isHero ? "pt-24 pb-20" : "py-20 border-t border-white/10"} bg-[#1D3A62] text-white relative overflow-hidden`
-                : "py-20 bg-white relative"
-            }
-          >
-            {isDark && (
-              <div
-                aria-hidden
-                className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
-              />
-            )}
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-              {isHero ? (
-                <div className="text-center mb-12 max-w-3xl mx-auto">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white text-xs font-medium mb-5">
-                    <Wrench className="h-3.5 w-3.5" />
-                    Simulatori Hosting Lake Como
-                  </div>
-                  <h1 className="text-4xl sm:text-5xl font-light text-white mb-4">
-                    Stima il <span className="font-semibold">potenziale</span> del
-                    tuo immobile
-                  </h1>
-                  <p className="text-white/80 text-base sm:text-lg leading-relaxed">
-                    {meta.desc}
-                  </p>
+      {/* HERO + SIMULATORI (continuo con sezione dashboard) */}
+      <section className="pt-24 pb-20 bg-[#1D3A62] text-white relative overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
+        />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-12 max-w-3xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl font-light text-white mb-4">
+              Stima il <span className="font-semibold">potenziale</span> del
+              tuo immobile
+            </h1>
+            <p className="text-white/80 text-base sm:text-lg leading-relaxed">
+              {CATEGORY_META.simulator.desc}
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {simulators.map((t) => (
+              <Link
+                key={t.slug}
+                href={`/strumenti/${t.slug}`}
+                className="group card-hover block bg-white text-foreground rounded-2xl p-7 border border-border/50"
+              >
+                <h3 className="text-base font-semibold mb-2">{t.name}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                  {t.desc}
+                </p>
+                <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary">
+                  Prova il simulatore
+                  <ArrowRight className="h-3.5 w-3.5" />
                 </div>
-              ) : (
-                <div className="mb-10">
-                  <h2
-                    className={`text-2xl sm:text-3xl font-light ${
-                      isDark ? "text-white" : "text-foreground"
-                    }`}
-                  >
-                    <span className="font-semibold">{meta.label}</span>
-                  </h2>
-                  <p
-                    className={`mt-2 ${
-                      isDark ? "text-white/75" : "text-muted-foreground"
-                    }`}
-                  >
-                    {meta.desc}
-                  </p>
-                </div>
-              )}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {tools.map((t) => {
-                  const isAvailable = t.status === "available";
-                  const isMembersOnly = t.status === "members-only";
-                  const content = (
-                    <>
-                      <div className="flex items-start justify-between gap-3 mb-2">
-                        <h3 className="text-base font-semibold">{t.name}</h3>
-                        {isMembersOnly && (
-                          <span className="shrink-0 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-primary bg-primary/[0.08] px-2 py-0.5 rounded-full whitespace-nowrap">
-                            <Lock className="h-2.5 w-2.5" />
-                            Area Clienti
-                          </span>
-                        )}
-                        {t.status === "coming-soon" && (
-                          <span className="shrink-0 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground bg-muted px-2 py-0.5 rounded-full whitespace-nowrap">
-                            <Lock className="h-2.5 w-2.5" />
-                            In arrivo
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                        {t.desc}
-                      </p>
-                      {isAvailable && (
-                        <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary">
-                          Prova il simulatore
-                          <ArrowRight className="h-3.5 w-3.5" />
-                        </div>
-                      )}
-                      {isMembersOnly && (
-                        <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary">
-                          Accedi all'area clienti
-                          <ArrowRight className="h-3.5 w-3.5" />
-                        </div>
-                      )}
-                    </>
-                  );
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                  const cardClass = `bg-white text-foreground rounded-2xl p-7 border border-border/50 ${
-                    isDark
-                      ? ""
-                      : "border-t-[3px] border-t-[#1D3A62] shadow-md hover:shadow-xl"
-                  }`;
-                  if (isAvailable) {
-                    return (
-                      <Link
-                        key={t.slug}
-                        href={`/strumenti/${t.slug}`}
-                        className={`${cardClass} group card-hover block`}
-                      >
-                        {content}
-                      </Link>
-                    );
-                  }
-                  if (isMembersOnly) {
-                    return (
-                      <Link
-                        key={t.slug}
-                        href={`/strumenti/${t.slug}`}
-                        className={`${cardClass} group card-hover block`}
-                      >
-                        {content}
-                      </Link>
-                    );
-                  }
-                  return (
-                    <div key={t.slug} className={cardClass}>
-                      {content}
+      {/* TOOL AREA CLIENTI — stacked mockups, continuo navy */}
+      <section className="pb-24 pt-6 bg-[#1D3A62] text-white relative overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
+        />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="grid lg:grid-cols-[5fr_6fr] gap-12 lg:gap-16 items-center">
+            {/* TEXT */}
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-light text-white mb-4">
+                Tool dedicati ai{" "}
+                <span className="font-semibold">proprietari in gestione</span>
+              </h2>
+              <p className="text-white/80 leading-relaxed mb-6">
+                Una suite di strumenti operativi pensata per chi affida la
+                gestione del proprio immobile a Hosting Lake Como. Risparmia
+                tempo, alza la qualità dell&apos;esperienza ospite e mantieni
+                il controllo della tua proprietà.
+              </p>
+              <ul className="space-y-3 mb-8">
+                {[
+                  "Generatore di nomi creativi per la tua casa vacanza",
+                  "Welcome letter multilingua pronte all'uso",
+                  "Link Google Maps ottimizzato con punti di riferimento",
+                ].map((line) => (
+                  <li
+                    key={line}
+                    className="flex items-start gap-3 text-sm text-white/90"
+                  >
+                    <CheckCircle2 className="h-5 w-5 text-white shrink-0 mt-0.5" />
+                    {line}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/dashboard"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-[#1D3A62] text-sm font-semibold hover:bg-white/90 transition-colors"
+              >
+                Accedi all&apos;area clienti
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+
+            {/* STACKED MOCKUPS */}
+            <div className="relative h-[460px] sm:h-[480px] lg:h-[420px] mt-8 lg:mt-0">
+              {/* Map mockup — back card */}
+              <div className="absolute right-0 bottom-0 w-[78%] sm:w-[70%] rounded-2xl bg-white shadow-2xl border border-border/40 overflow-hidden rotate-[3deg] translate-y-2">
+                <div className="px-4 py-3 border-b border-border/40 bg-muted/20 flex items-center gap-2">
+                  <MapPin className="h-3.5 w-3.5 text-primary" />
+                  <span className="text-xs font-semibold text-foreground">
+                    Percorso Google Maps
+                  </span>
+                </div>
+                <div className="relative h-32 bg-gradient-to-br from-emerald-50 via-blue-50 to-emerald-100 overflow-hidden">
+                  {/* Stylised roads */}
+                  <svg
+                    viewBox="0 0 200 120"
+                    className="absolute inset-0 w-full h-full"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M-10 70 Q 60 60, 110 80 T 220 70"
+                      stroke="#94a3b8"
+                      strokeWidth="3"
+                      fill="none"
+                      opacity="0.6"
+                    />
+                    <path
+                      d="M30 -10 L 80 90 L 130 130"
+                      stroke="#94a3b8"
+                      strokeWidth="2"
+                      fill="none"
+                      opacity="0.4"
+                    />
+                    <path
+                      d="M40 60 L 90 75 L 140 60 L 175 50"
+                      stroke="#1D3A62"
+                      strokeWidth="2.5"
+                      fill="none"
+                      strokeDasharray="4 3"
+                    />
+                  </svg>
+                  <div className="absolute" style={{ left: "44%", top: "55%" }}>
+                    <MapPin className="h-5 w-5 text-rose-500 fill-rose-500 drop-shadow" />
+                  </div>
+                </div>
+                <div className="px-4 py-2.5 text-[10px] text-muted-foreground border-t border-border/40">
+                  Via Maurizio Monti 46, Como — 8 min dalla stazione
+                </div>
+              </div>
+
+              {/* Welcome letter mockup — middle card */}
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[72%] sm:w-[64%] rounded-2xl bg-white shadow-2xl border border-border/40 overflow-hidden -rotate-[2deg] z-10">
+                <div className="px-4 py-3 border-b border-border/40 bg-muted/20 flex items-center justify-between">
+                  <span className="text-xs font-semibold text-foreground inline-flex items-center gap-1.5">
+                    <Mail className="h-3.5 w-3.5 text-primary" />
+                    Welcome Letter
+                  </span>
+                  <span className="text-[9px] text-muted-foreground uppercase tracking-wider">
+                    IT · EN · DE · FR
+                  </span>
+                </div>
+                <div className="p-4 space-y-2 bg-white">
+                  <div className="text-xs font-semibold text-foreground">
+                    Benvenuti a Casa di Miriam
+                  </div>
+                  <div className="space-y-1">
+                    <div className="h-1.5 rounded-full bg-muted/60 w-full" />
+                    <div className="h-1.5 rounded-full bg-muted/60 w-[92%]" />
+                    <div className="h-1.5 rounded-full bg-muted/60 w-[78%]" />
+                  </div>
+                  <div className="pt-1 space-y-1">
+                    <div className="h-1.5 rounded-full bg-muted/60 w-[88%]" />
+                    <div className="h-1.5 rounded-full bg-muted/60 w-[70%]" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Nome proprieta mockup — front card */}
+              <div className="absolute right-2 top-0 w-[74%] sm:w-[62%] rounded-2xl bg-white shadow-2xl border border-border/40 overflow-hidden rotate-[2deg] z-20">
+                <div className="px-4 py-3 border-b border-border/40 bg-muted/20 flex items-center gap-2">
+                  <Sparkles className="h-3.5 w-3.5 text-primary" />
+                  <span className="text-xs font-semibold text-foreground">
+                    Nome Proprietà
+                  </span>
+                </div>
+                <div className="p-4 space-y-2">
+                  {[
+                    "Casa di Miriam",
+                    "Loft del Lago",
+                    "Terrazza di Como",
+                    "Vista Cattedrale",
+                  ].map((name, i) => (
+                    <div
+                      key={name}
+                      className={`flex items-center justify-between rounded-lg px-3 py-2 text-xs ${
+                        i === 0
+                          ? "bg-primary/[0.08] border border-primary/20 text-foreground font-semibold"
+                          : "bg-muted/30 border border-border/40 text-muted-foreground"
+                      }`}
+                    >
+                      <span>{name}</span>
+                      {i === 0 && (
+                        <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                      )}
                     </div>
-                  );
-                })}
+                  ))}
+                </div>
               </div>
             </div>
-          </section>
-        );
-      })}
+          </div>
+        </div>
+      </section>
+
+      {/* IN ARRIVO */}
+      <section className="py-20 bg-[#1D3A62] text-white relative overflow-hidden border-t border-white/10">
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
+        />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="mb-10">
+            <h2 className="text-2xl sm:text-3xl font-light text-white">
+              <span className="font-semibold">In Arrivo</span>
+            </h2>
+            <p className="mt-2 text-white/75">
+              {CATEGORY_META.advanced.desc}
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {advanced.map((t) => (
+              <div
+                key={t.slug}
+                className="bg-white text-foreground rounded-2xl p-7 border border-border/50"
+              >
+                <div className="flex items-start justify-between gap-3 mb-2">
+                  <h3 className="text-base font-semibold">{t.name}</h3>
+                  <span className="shrink-0 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground bg-muted px-2 py-0.5 rounded-full whitespace-nowrap">
+                    <Lock className="h-2.5 w-2.5" />
+                    In arrivo
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {t.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="py-20 border-t border-border/50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
