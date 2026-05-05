@@ -38,8 +38,7 @@ export default function ServicesPage() {
       <section className="relative py-24 sm:py-28 overflow-hidden bg-gradient-to-b from-primary/[0.04] via-white to-white border-b border-border/50">
         <div className="absolute inset-0 -z-10 opacity-[0.03] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center" />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="section-label">Per i proprietari</span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light mt-3 mb-5 tracking-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light mb-5 tracking-tight">
             Semplifichiamo la <span className="font-semibold">gestione</span>{" "}
             del tuo immobile
           </h1>
@@ -168,8 +167,7 @@ export default function ServicesPage() {
       <section id="services" className="py-20 bg-muted/30 border-y border-border/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14 max-w-2xl mx-auto">
-            <span className="section-label">I servizi nel dettaglio</span>
-            <h2 className="text-3xl sm:text-4xl font-light mt-3 mb-3">
+            <h2 className="text-3xl sm:text-4xl font-light mb-3">
               Sedici servizi, <span className="font-semibold">quattro cluster operativi</span>
             </h2>
             <p className="text-muted-foreground">
@@ -189,8 +187,7 @@ export default function ServicesPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-[5fr_6fr] gap-10 lg:gap-14 items-center">
             <div>
-              <span className="section-label">La tua cabina di regia</span>
-              <h2 className="text-3xl sm:text-4xl font-light mt-3 mb-4">
+              <h2 className="text-3xl sm:text-4xl font-light mb-4">
                 Una <span className="font-semibold">dashboard personale</span>{" "}
                 per ogni proprietà
               </h2>
@@ -243,10 +240,7 @@ export default function ServicesPage() {
               <EmailRecapMockup />
             </div>
             <div className="order-1 lg:order-2">
-              <span className="text-[10px] uppercase tracking-[0.18em] text-white/70 font-semibold">
-                Direttamente in casella
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-light mt-3 mb-4 text-white">
+              <h2 className="text-3xl sm:text-4xl font-light mb-4 text-white">
                 Un <span className="font-semibold">recap mensile</span> che
                 puoi leggere in due minuti
               </h2>
@@ -259,9 +253,9 @@ export default function ServicesPage() {
               <ul className="space-y-2 text-sm text-white/90">
                 {[
                   "I 4 numeri chiave del mese, già confrontati con il precedente",
-                  "Trend di occupazione e revenue commentati dal team",
-                  "La recensione del mese e i feedback più rilevanti",
-                  "Suggerimenti operativi e flag su festività e prezzi",
+                  "Trend di occupazione e ricavi commentati dal team",
+                  "La recensione del mese e le valutazioni più rilevanti",
+                  "Le ottimizzazioni effettuate dal team e i loro risultati",
                 ].map((line) => (
                   <li key={line} className="flex items-start gap-2.5">
                     <ArrowRight className="h-3.5 w-3.5 text-white/70 shrink-0 mt-0.5" />

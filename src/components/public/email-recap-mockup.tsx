@@ -37,9 +37,9 @@ export function EmailRecapMockup() {
       {/* Mail body */}
       <div className="p-5 space-y-5">
         <p className="text-sm leading-relaxed">
-          Ciao Andrei, ecco il recap del mese: aprile è andato{" "}
-          <strong>sopra il target</strong> grazie al weekend di Pasqua e a
-          due dirette ricevute dal tuo profilo Instagram.
+          Ciao Miriam, aprile ha chiuso <strong>sopra il target</strong>:
+          €8.420 di ricavi (+12% rispetto a marzo) e tre nuove recensioni
+          a 5 stelle. Tutti gli indicatori in crescita.
         </p>
 
         <div className="grid grid-cols-2 gap-2.5">
@@ -65,8 +65,9 @@ export function EmailRecapMockup() {
           <div className="flex items-start gap-2">
             <Star className="h-3.5 w-3.5 text-amber-500 fill-amber-500 shrink-0 mt-0.5" />
             <div className="text-xs leading-relaxed">
-              <strong>Recensione del mese:</strong> &ldquo;Posizione perfetta,
-              terrazza sognante. Andrei e il team super reattivi.&rdquo;
+              <strong>Recensione del mese:</strong> &ldquo;Posizione
+              perfetta, terrazza sognante. Il team è stato super
+              reattivo.&rdquo;
               <span className="text-muted-foreground"> — Sophie M.</span>
             </div>
           </div>
@@ -74,20 +75,21 @@ export function EmailRecapMockup() {
 
         <div className="rounded-xl bg-[#1D3A62] text-white p-4">
           <div className="text-[10px] uppercase tracking-wider opacity-80 font-semibold mb-1">
-            Da segnalare
+            Ottimizzazioni del mese
           </div>
           <p className="text-xs leading-relaxed mb-2">
-            Maggio si sta riempiendo veloce: già 14 notti prenotate.
-            Suggeriamo +€20 sul weekend di Pentecoste (24–26 maggio).
+            Tariffe rialzate del 7% sui weekend di Pasqua: +€620 sul
+            mensile. Listing aggiornato con due nuove foto della terrazza
+            ed è arrivata la prima prenotazione diretta.
           </p>
           <span className="inline-flex items-center gap-1 text-[11px] font-semibold">
-            Vedi report completo
+            Vedi rendiconto completo
             <ArrowRight className="h-3 w-3" />
           </span>
         </div>
 
         <div className="text-[10px] text-muted-foreground text-center pt-1">
-          Hosting Lake Como · Recap mensile · puoi disattivarlo dalle preferenze
+          Hosting Lake Como · Riepilogo mensile · puoi disattivarlo dalle preferenze
         </div>
       </div>
     </div>
