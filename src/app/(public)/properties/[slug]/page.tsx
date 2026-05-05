@@ -221,6 +221,8 @@ export default function PropertyDetailPage() {
             )}
           </div>
 
+          {geo && <MapEmbed lat={geo.lat} lng={geo.lng} name={property.name} />}
+
           {airbnbListing &&
             airbnbListing.rating != null &&
             airbnbListing.reviewCount != null && (
@@ -232,8 +234,6 @@ export default function PropertyDetailPage() {
                 airbnbUrl={airbnbListing.url}
               />
             )}
-
-          {geo && <MapEmbed lat={geo.lat} lng={geo.lng} name={property.name} />}
 
           {!sections.space && !sections.neighborhood && property.descriptionLong && (
             <div className="bg-white rounded-2xl p-5 sm:p-6 border border-border/50">

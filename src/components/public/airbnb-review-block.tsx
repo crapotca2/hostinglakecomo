@@ -28,7 +28,7 @@ function LaurelBranch({ side }: { side: "left" | "right" }) {
       src={`/images/voto/${side}.png`}
       alt=""
       aria-hidden="true"
-      className="h-20 sm:h-24 w-auto select-none"
+      className="h-16 sm:h-20 w-auto select-none"
       draggable={false}
     />
   );
@@ -56,9 +56,9 @@ export function AirbnbReviewBlock({
 
   return (
     <div className="bg-white rounded-2xl p-6 sm:p-10 border border-border/50">
-      <div className="flex items-center justify-center gap-5 sm:gap-10 mb-2">
+      <div className="flex items-center justify-center gap-1 sm:gap-2 mb-2">
         <LaurelBranch side="left" />
-        <div className="text-5xl sm:text-6xl font-semibold tabular-nums tracking-tight">
+        <div className="text-6xl sm:text-7xl font-semibold tabular-nums tracking-tight leading-none">
           {formatScore(overall)}
         </div>
         <LaurelBranch side="right" />
