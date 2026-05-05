@@ -205,23 +205,21 @@ export default function StrumentiPage() {
                   const isMembersOnly = t.status === "members-only";
                   const content = (
                     <>
-                      {(isMembersOnly || t.status === "coming-soon") && (
-                        <div className="flex justify-end mb-3">
-                          {isMembersOnly && (
-                            <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-primary bg-primary/[0.08] px-2 py-0.5 rounded-full">
-                              <Lock className="h-2.5 w-2.5" />
-                              Area Clienti
-                            </span>
-                          )}
-                          {t.status === "coming-soon" && (
-                            <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
-                              <Lock className="h-2.5 w-2.5" />
-                              In arrivo
-                            </span>
-                          )}
-                        </div>
-                      )}
-                      <h3 className="text-base font-semibold mb-2">{t.name}</h3>
+                      <div className="flex items-start justify-between gap-3 mb-2">
+                        <h3 className="text-base font-semibold">{t.name}</h3>
+                        {isMembersOnly && (
+                          <span className="shrink-0 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-primary bg-primary/[0.08] px-2 py-0.5 rounded-full whitespace-nowrap">
+                            <Lock className="h-2.5 w-2.5" />
+                            Area Clienti
+                          </span>
+                        )}
+                        {t.status === "coming-soon" && (
+                          <span className="shrink-0 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground bg-muted px-2 py-0.5 rounded-full whitespace-nowrap">
+                            <Lock className="h-2.5 w-2.5" />
+                            In arrivo
+                          </span>
+                        )}
+                      </div>
                       <p className="text-sm text-muted-foreground leading-relaxed mb-4">
                         {t.desc}
                       </p>
@@ -241,7 +239,9 @@ export default function StrumentiPage() {
                   );
 
                   const cardClass = `bg-white text-foreground rounded-2xl p-7 border border-border/50 ${
-                    isDark ? "" : "border-t-[3px] border-t-[#1D3A62]"
+                    isDark
+                      ? ""
+                      : "border-t-[3px] border-t-[#1D3A62] shadow-md hover:shadow-xl"
                   }`;
                   if (isAvailable) {
                     return (

@@ -39,8 +39,7 @@ export default function ServicesPage() {
         <div className="absolute inset-0 -z-10 opacity-[0.03] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center" />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light mb-5 tracking-tight">
-            Semplifichiamo la <span className="font-semibold">gestione</span>{" "}
-            per te
+            Semplifichiamo la gestione <span className="font-semibold">per te</span>
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
             Tu mantieni la proprietà, noi ci occupiamo di tutto il resto:
