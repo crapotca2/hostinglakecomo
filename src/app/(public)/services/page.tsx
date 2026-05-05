@@ -3,18 +3,8 @@ import {
   ArrowRight,
   LayoutDashboard,
   Mail,
-  Sparkles,
   ShieldCheck,
-  TrendingUp,
   Wrench,
-  CalendarCheck,
-  ClipboardCheck,
-  Camera,
-  Star,
-  PackageCheck,
-  Calculator,
-  FileText,
-  Home as HomeIcon,
 } from "lucide-react";
 import { DashboardMockup } from "@/components/public/dashboard-mockup";
 import { EmailRecapMockup } from "@/components/public/email-recap-mockup";
@@ -42,113 +32,6 @@ const PILLARS = [
     title: "Recap mensile via email",
     desc: "Ogni mese ricevi nella casella un riassunto curato: numeri chiave, trend, recensioni, suggerimenti operativi.",
     highlight: true,
-  },
-];
-
-const SERVICE_GROUPS = [
-  {
-    title: "Setup & onboarding",
-    desc: "Tutto quello che serve per portare la proprietà online al massimo del suo potenziale.",
-    items: [
-      {
-        icon: HomeIcon,
-        title: "Audit & consulenza",
-        desc: "Sopralluogo, analisi del potenziale, benchmark di zona e piano d'azione su misura.",
-      },
-      {
-        icon: Camera,
-        title: "Servizio fotografico",
-        desc: "Shooting professionale ad alta risoluzione, virtual tour 360, contenuti video per le piattaforme.",
-      },
-      {
-        icon: Sparkles,
-        title: "Home staging",
-        desc: "Restyling mirato per alzare tariffa media e qualità delle recensioni, calibrato sul budget.",
-      },
-      {
-        icon: ClipboardCheck,
-        title: "Onboarding tecnico",
-        desc: "Inventario, checklist conformità, setup completo per la prima pubblicazione.",
-      },
-    ],
-  },
-  {
-    title: "Operations quotidiane",
-    desc: "Il lavoro invisibile che fa la differenza fra una proprietà media e una a 5 stelle.",
-    items: [
-      {
-        icon: Sparkles,
-        title: "Pulizia & biancheria",
-        desc: "Standard hotel, biancheria premium di proprietà, igienizzazione certificata fra un soggiorno e l'altro.",
-      },
-      {
-        icon: CalendarCheck,
-        title: "Gestione prenotazioni",
-        desc: "Calendario unificato in tempo reale, gestione richieste, modifiche e cancellazioni — un solo interlocutore.",
-      },
-      {
-        icon: HomeIcon,
-        title: "Accoglienza ospiti",
-        desc: "Check-in professionale, self check-in con codice, video-istruzioni multilingua. Recensioni a 5 stelle by design.",
-      },
-      {
-        icon: ShieldCheck,
-        title: "Emergenze 24/7",
-        desc: "Reperibilità continua e rete di professionisti per interventi idraulici, elettrici e manutenzione urgente.",
-      },
-    ],
-  },
-  {
-    title: "Revenue & visibilità",
-    desc: "Pricing dinamico, distribuzione multi-canale, gestione attiva della reputazione.",
-    items: [
-      {
-        icon: TrendingUp,
-        title: "Promozione multi-canale",
-        desc: "Inserimento su Airbnb, Booking, Expedia e altri portali con descrizioni ottimizzate in 4 lingue.",
-      },
-      {
-        icon: TrendingUp,
-        title: "Revenue management",
-        desc: "Algoritmo proprietario di dynamic pricing su competitor, eventi locali, stagionalità Lago di Como.",
-      },
-      {
-        icon: Star,
-        title: "Review & reputation",
-        desc: "Monitoraggio recensioni multi-piattaforma, risposta professionale, gestione proattiva del feedback.",
-      },
-      {
-        icon: PackageCheck,
-        title: "Linen & amenities premium",
-        desc: "Kit cortesia firmato, prodotti bagno selezionati, cialde caffè, benvenuto con eccellenze locali.",
-      },
-    ],
-  },
-  {
-    title: "Reportistica & compliance",
-    desc: "Trasparenza totale e zero adempimenti dimenticati: i tuoi numeri sempre alla mano, la burocrazia archiviata.",
-    items: [
-      {
-        icon: ShieldCheck,
-        title: "Gestione amministrativa",
-        desc: "CIN, Questura (Alloggiati Web), ISTAT, tassa di soggiorno, cedolare secca: tutti gli adempimenti per te.",
-      },
-      {
-        icon: Calculator,
-        title: "Audit fiscale annuale",
-        desc: "Report fiscale di fine anno, quadro RL, calcolo cedolare, documentazione pronta per il commercialista.",
-      },
-      {
-        icon: FileText,
-        title: "Rendiconto mensile",
-        desc: "Prospetto economico per singola prenotazione, commissioni dettagliate, payout trasparente.",
-      },
-      {
-        icon: ClipboardCheck,
-        title: "Manutenzione programmata",
-        desc: "Piano preventivo stagionale: climatizzazione, caldaia, riparazioni, check quadrimestrale della proprietà.",
-      },
-    ],
   },
 ];
 
@@ -216,18 +99,20 @@ export default function ServicesPage() {
                     : "bg-white border border-border/50 border-t-[3px] border-t-[#1D3A62]"
                 }`}
               >
-                <div
-                  className={`h-11 w-11 rounded-xl flex items-center justify-center mb-4 ${
-                    p.highlight ? "bg-white/10" : "bg-primary/[0.08]"
-                  }`}
-                >
-                  <p.icon
-                    className={`h-5 w-5 ${
-                      p.highlight ? "text-white" : "text-primary"
+                <div className="flex items-center gap-1">
+                  <div
+                    className={`h-11 w-11 rounded-xl flex items-center justify-center mb-4 ${
+                      p.highlight ? "bg-white/10" : "bg-primary/[0.08]"
                     }`}
-                  />
+                  >
+                    <p.icon
+                      className={`h-5 w-5 ${
+                        p.highlight ? "text-white" : "text-primary"
+                      }`}
+                    />
+                  </div>
+                  <h3 className="text-base font-semibold mb-2">{p.title}</h3>
                 </div>
-                <h3 className="text-base font-semibold mb-2">{p.title}</h3>
                 <p
                   className={`text-sm leading-relaxed ${
                     p.highlight ? "text-white/80" : "text-muted-foreground"
@@ -256,7 +141,7 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          <ServicesCarousel groups={SERVICE_GROUPS} />
+          <ServicesCarousel />
         </div>
       </section>
 
