@@ -172,38 +172,42 @@ function ContactFormFallback() {
 export default function ContactPage() {
   return (
     <div className="pt-20">
-      <section className="py-20 border-b border-border/50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl font-light mb-4">
+      <section className="py-20 bg-[#1D3A62] text-white relative overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
+        />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+          <h1 className="text-4xl sm:text-5xl font-light mb-4 text-white">
             <span className="font-semibold">Contattaci</span>
           </h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+          <p className="text-white/80 max-w-2xl mx-auto text-lg">
             Richiedi un preventivo o contattaci per qualsiasi informazione.
           </p>
           <div className="max-w-2xl mx-auto mt-10 grid sm:grid-cols-2 gap-6 text-left">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-xl bg-primary/[0.08] flex items-center justify-center shrink-0">
-                <Phone className="h-4 w-4 text-primary" />
+              <div className="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                <Phone className="h-4 w-4 text-white" />
               </div>
               <div>
-                <div className="text-sm font-medium">Telefono</div>
+                <div className="text-sm font-medium text-white">Telefono</div>
                 <a
                   href="tel:+39031547xxxx"
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  className="text-sm text-white/75 hover:text-white transition-colors"
                 >
                   +39 XXX XXX XXXX
                 </a>
               </div>
             </div>
             <div className="flex items-center gap-3 sm:justify-end">
-              <div className="h-10 w-10 rounded-xl bg-primary/[0.08] flex items-center justify-center shrink-0">
-                <Mail className="h-4 w-4 text-primary" />
+              <div className="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                <Mail className="h-4 w-4 text-white" />
               </div>
               <div>
-                <div className="text-sm font-medium">Email</div>
+                <div className="text-sm font-medium text-white">Email</div>
                 <a
                   href="mailto:info@airbibby.com"
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  className="text-sm text-white/75 hover:text-white transition-colors"
                 >
                   info@airbibby.com
                 </a>

@@ -53,6 +53,11 @@ export function Footer() {
                   Proprieta
                 </Link>
               </li>
+              <li>
+                <Link href="/dashboard" className="hover:text-white transition-colors">
+                  Area Proprietari
+                </Link>
+              </li>
             </ul>
           </div>
 

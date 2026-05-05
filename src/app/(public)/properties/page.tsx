@@ -152,7 +152,7 @@ export default function PropertiesPage() {
               href="/contact?interest=consulenza"
               className="inline-flex items-center gap-1 text-primary font-semibold hover:underline"
             >
-              Richiedi una valutazione gratuita
+              Richiedi una valutazione
               <ArrowRight className="h-3 w-3" />
             </Link>
           </div>
