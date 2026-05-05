@@ -34,9 +34,19 @@ function LaurelBranch({ side }: { side: "left" | "right" }) {
   );
 }
 
-function formatScore(value: number | undefined): string {
-  if (value == null) return "—";
-  return value.toFixed(1);
+function Score({ value }: { value: number | undefined }) {
+  if (value == null) return <>—</>;
+  const [intPart, decPart] = value.toFixed(1).split(".");
+  return (
+    <>
+      {intPart}
+      <span
+        className="inline-block w-[0.14em] h-[0.14em] bg-current align-baseline mx-[0.06em]"
+        aria-hidden="true"
+      />
+      {decPart}
+    </>
+  );
 }
 
 export function AirbnbReviewBlock({
@@ -59,7 +69,7 @@ export function AirbnbReviewBlock({
       <div className="flex items-end justify-center gap-1 sm:gap-2 mb-2">
         <LaurelBranch side="left" />
         <div className="text-6xl sm:text-7xl font-semibold tabular-nums tracking-tight leading-none -translate-y-2 sm:-translate-y-3">
-          {formatScore(overall)}
+          <Score value={overall} />
         </div>
         <LaurelBranch side="right" />
       </div>
@@ -88,7 +98,7 @@ export function AirbnbReviewBlock({
                   {cat.label}
                 </div>
                 <div className="text-2xl font-semibold tabular-nums">
-                  {formatScore(v)}
+                  <Score value={v} />
                 </div>
               </div>
             );

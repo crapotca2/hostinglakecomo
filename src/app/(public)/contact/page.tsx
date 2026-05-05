@@ -2,7 +2,7 @@
 
 import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Phone, Mail, Send, MessageCircle } from "lucide-react";
+import { Phone, Mail, Send } from "lucide-react";
 
 const INTEREST_OPTIONS: { value: string; label: string }[] = [
   { value: "consulenza", label: "Consulenza Personalizzata" },
@@ -23,6 +23,7 @@ function ContactForm() {
     : "gestione";
   const [interest, setInterest] = useState(initialInterest);
   const [sent, setSent] = useState(false);
+  const [onPlatform, setOnPlatform] = useState(false);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -106,6 +107,44 @@ function ContactForm() {
         </select>
       </div>
       <div>
+        <label className="text-sm font-medium mb-1.5 block">
+          Indirizzo dell&apos;immobile
+        </label>
+        <input
+          type="text"
+          placeholder="Via, città, provincia"
+          className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+        />
+      </div>
+      <div className="rounded-lg border border-border px-4 py-3 bg-muted/30">
+        <label className="flex items-start gap-3 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={onPlatform}
+            onChange={(e) => setOnPlatform(e.target.checked)}
+            className="mt-0.5 h-4 w-4 rounded border-border text-primary focus:ring-primary/30"
+          />
+          <span className="text-sm">
+            L&apos;immobile è già su una piattaforma di affitto
+            <span className="block text-xs text-muted-foreground mt-0.5">
+              Es. Airbnb, Booking, Vrbo, Expedia
+            </span>
+          </span>
+        </label>
+        {onPlatform && (
+          <div className="mt-3 pl-7">
+            <label className="text-xs font-medium mb-1.5 block text-muted-foreground">
+              Link dell&apos;annuncio
+            </label>
+            <input
+              type="url"
+              placeholder="https://www.airbnb.com/rooms/..."
+              className="w-full rounded-lg border border-border px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 bg-white"
+            />
+          </div>
+        )}
+      </div>
+      <div>
         <label className="text-sm font-medium mb-1.5 block">Messaggio</label>
         <textarea
           rows={4}
@@ -145,56 +184,46 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-5 gap-12">
-            <div className="lg:col-span-2 space-y-8">
+      <section className="pt-12 pb-6">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid sm:grid-cols-2 gap-6">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-xl bg-primary/[0.08] flex items-center justify-center shrink-0">
+                <Phone className="h-4 w-4 text-primary" />
+              </div>
               <div>
-                <h2 className="text-xl font-semibold mb-6">Contatti</h2>
-                <div className="space-y-5">
-                  <div className="flex items-start gap-3">
-                    <div className="h-10 w-10 rounded-xl bg-primary/[0.08] flex items-center justify-center shrink-0">
-                      <Phone className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-medium">Telefono</div>
-                      <div className="text-sm text-muted-foreground">
-                        +39 XXX XXX XXXX
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="h-10 w-10 rounded-xl bg-primary/[0.08] flex items-center justify-center shrink-0">
-                      <Mail className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-medium">Email</div>
-                      <div className="text-sm text-muted-foreground">
-                        info@airbibby.com
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="h-10 w-10 rounded-xl bg-emerald-500/[0.08] flex items-center justify-center shrink-0">
-                      <MessageCircle className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-medium">WhatsApp</div>
-                      <div className="text-sm text-muted-foreground">
-                        +39 XXX XXX XXXX
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <div className="text-sm font-medium">Telefono</div>
+                <a
+                  href="tel:+39031547xxxx"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
+                  +39 XXX XXX XXXX
+                </a>
               </div>
             </div>
-
-            <div className="lg:col-span-3">
-              <Suspense fallback={<ContactFormFallback />}>
-                <ContactForm />
-              </Suspense>
+            <div className="flex items-center gap-3 sm:justify-end">
+              <div className="h-10 w-10 rounded-xl bg-primary/[0.08] flex items-center justify-center shrink-0">
+                <Mail className="h-4 w-4 text-primary" />
+              </div>
+              <div>
+                <div className="text-sm font-medium">Email</div>
+                <a
+                  href="mailto:info@airbibby.com"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
+                  info@airbibby.com
+                </a>
+              </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="pb-24 pt-6 border-t border-border/50">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
+          <Suspense fallback={<ContactFormFallback />}>
+            <ContactForm />
+          </Suspense>
         </div>
       </section>
 
