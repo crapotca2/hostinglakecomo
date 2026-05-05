@@ -188,21 +188,17 @@ export default function StrumentiPage() {
         </div>
       </section>
 
-      {/* TOOL AREA CLIENTI — stacked mockups, continuo navy */}
-      <section className="pb-24 pt-6 bg-[#1D3A62] text-white relative overflow-hidden">
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
-        />
+      {/* TOOL AREA CLIENTI — stacked mockups, white */}
+      <section className="py-24 bg-white relative">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid lg:grid-cols-[5fr_6fr] gap-12 lg:gap-16 items-center">
             {/* TEXT */}
             <div>
-              <h2 className="text-3xl sm:text-4xl font-light text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl font-light text-foreground mb-4">
                 Tool dedicati ai{" "}
                 <span className="font-semibold">proprietari in gestione</span>
               </h2>
-              <p className="text-white/80 leading-relaxed mb-6">
+              <p className="text-muted-foreground leading-relaxed mb-6">
                 Una suite di strumenti operativi pensata per chi affida la
                 gestione del proprio immobile a Hosting Lake Como. Risparmia
                 tempo, alza la qualità dell&apos;esperienza ospite e mantieni
@@ -216,16 +212,16 @@ export default function StrumentiPage() {
                 ].map((line) => (
                   <li
                     key={line}
-                    className="flex items-start gap-3 text-sm text-white/90"
+                    className="flex items-start gap-3 text-sm text-foreground"
                   >
-                    <CheckCircle2 className="h-5 w-5 text-white shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                     {line}
                   </li>
                 ))}
               </ul>
               <Link
                 href="/dashboard"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-[#1D3A62] text-sm font-semibold hover:bg-white/90 transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#1D3A62] text-white text-sm font-semibold hover:bg-[#1D3A62]/90 transition-colors shadow-md"
               >
                 Accedi all&apos;area clienti
                 <ArrowRight className="h-4 w-4" />
