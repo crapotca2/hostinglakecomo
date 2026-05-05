@@ -11,7 +11,6 @@ const NAV_ITEMS = [
   { href: "/properties", label: "Proprieta" },
   { href: "/services", label: "Servizi" },
   { href: "/strumenti", label: "Strumenti" },
-  { href: "/report", label: "Report" },
   { href: "/about", label: "Chi Siamo" },
   { href: "/contact", label: "Contatti" },
 ];

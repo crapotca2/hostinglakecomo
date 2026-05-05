@@ -1,134 +1,412 @@
+import Link from "next/link";
 import {
-  TrendingUp,
-  CalendarCheck,
-  Shield,
+  ArrowRight,
+  LayoutDashboard,
+  Mail,
   Sparkles,
-  Home as HomeIcon,
-  Camera,
-  Paintbrush,
+  ShieldCheck,
+  TrendingUp,
   Wrench,
-  FileText,
-  Star,
-  LineChart,
-  PackageCheck,
+  CalendarCheck,
   ClipboardCheck,
+  Camera,
+  Star,
+  PackageCheck,
   Calculator,
+  FileText,
+  Home as HomeIcon,
 } from "lucide-react";
-import { ServiceCard, type ServiceCardProps } from "@/components/public/service-card";
+import { DashboardMockup } from "@/components/public/dashboard-mockup";
+import { EmailRecapMockup } from "@/components/public/email-recap-mockup";
 
-const OWNER_SERVICES: ServiceCardProps[] = [
-  {
-    icon: HomeIcon,
-    title: "Consulenza Personalizzata",
-    desc: "Audit della proprieta, analisi del potenziale di reddito, benchmark di zona e piano d'azione su misura. Erogata da un consulente senior Hosting Lake Como.",
-    badge: "Su Preventivo",
-    ctaLabel: "Richiedi Preventivo",
-    ctaHref: "/contact?interest=consulenza",
-  },
-  {
-    icon: Paintbrush,
-    title: "Home Staging",
-    desc: "Interventi mirati di restyling per aumentare tariffa media e recensioni. Progettiamo insieme al proprietario un intervento calibrato sul budget disponibile.",
-    badge: "Budget Personalizzato",
-    ctaLabel: "Richiedi Sopralluogo",
-    ctaHref: "/contact?interest=home-staging",
-  },
-  {
-    icon: TrendingUp,
-    title: "Promozione Multi-Canale",
-    desc: "Inserimento su Airbnb, Booking.com, Expedia e altri top portali del mercato con descrizioni ottimizzate in 4 lingue e fotografie professionali.",
-  },
-  {
-    icon: LineChart,
-    title: "Revenue Management",
-    desc: "Algoritmo di dynamic pricing proprietario con analisi competitor, eventi locali, stagionalita e storico della nostra rete sul Lago di Como.",
-  },
-  {
-    icon: CalendarCheck,
-    title: "Gestione Prenotazioni",
-    desc: "Calendario unificato in tempo reale, gestione richieste, modifiche e cancellazioni. Un solo interlocutore, tutte le piattaforme.",
-  },
-  {
-    icon: Sparkles,
-    title: "Accoglienza Ospiti",
-    desc: "Check-in professionale, self check-in con codice e video istruzioni. Ogni dettaglio curato per garantire recensioni a 5 stelle.",
-  },
-  {
-    icon: Star,
-    title: "Review & Reputation",
-    desc: "Monitoraggio recensioni su tutte le piattaforme, risposta professionale, gestione proattiva dei feedback per mantenere score elevato.",
-  },
-  {
-    icon: Shield,
-    title: "Gestione Amministrativa",
-    desc: "CIN, comunicazione Questura (Alloggiati Web), ISTAT, tassa di soggiorno, cedolare secca: gestiamo tutti gli adempimenti per te.",
-  },
-  {
-    icon: Calculator,
-    title: "Audit Fiscale Annuale",
-    desc: "Report fiscale di fine anno, quadro RL, calcolo cedolare secca e documentazione pronta per il commercialista.",
-    badge: "Costo Extra",
-  },
+const PILLARS = [
   {
     icon: Wrench,
-    title: "Pulizia & Biancheria",
-    desc: "Servizio professionale con standard hotel, biancheria premium di proprieta, igienizzazione certificata tra un soggiorno e l'altro.",
+    title: "Gestione operativa",
+    desc: "Pulizia hotel, biancheria premium, manutenzione 24/7, accoglienza ospiti. Tu firmi il mandato, noi ci occupiamo del resto.",
   },
   {
-    icon: PackageCheck,
-    title: "Linen & Amenities Premium",
-    desc: "Kit cortesia firmato, prodotti da bagno selezionati, cialde caffe, benvenuto con eccellenze locali.",
-    badge: "Costo Amenities",
+    icon: ShieldCheck,
+    title: "Compliance totale",
+    desc: "CIN, Alloggiati Web, ISTAT, tassa di soggiorno, cedolare secca. Niente scadenze da inseguire, niente sanzioni a sorpresa.",
   },
   {
-    icon: FileText,
-    title: "Gestione Emergenze 24/7",
-    desc: "Reperibilita continua con rete di professionisti per interventi idraulici, elettrici e manutenzione urgente.",
+    icon: LayoutDashboard,
+    title: "Dashboard personalizzata",
+    desc: "Una cabina di regia in tempo reale: revenue, occupazione, prenotazioni, recensioni. Tutto a portata di click, sempre.",
+    highlight: true,
   },
   {
-    icon: ClipboardCheck,
-    title: "Manutenzione Programmata",
-    desc: "Piano preventivo stagionale: climatizzazione, caldaia, piccoli interventi di riparazione, check quadrimestrale della proprieta.",
-    badge: "A Consuntivo",
+    icon: Mail,
+    title: "Recap mensile via email",
+    desc: "Ogni mese ricevi nella casella un riassunto curato: numeri chiave, trend, recensioni, suggerimenti operativi.",
+    highlight: true,
+  },
+];
+
+const SERVICE_GROUPS = [
+  {
+    title: "Setup & onboarding",
+    desc: "Tutto quello che serve per portare la proprietà online al massimo del suo potenziale.",
+    items: [
+      {
+        icon: HomeIcon,
+        title: "Audit & consulenza",
+        desc: "Sopralluogo, analisi del potenziale, benchmark di zona e piano d'azione su misura.",
+      },
+      {
+        icon: Camera,
+        title: "Servizio fotografico",
+        desc: "Shooting professionale ad alta risoluzione, virtual tour 360, contenuti video per le piattaforme.",
+      },
+      {
+        icon: Sparkles,
+        title: "Home staging",
+        desc: "Restyling mirato per alzare tariffa media e qualità delle recensioni, calibrato sul budget.",
+      },
+      {
+        icon: ClipboardCheck,
+        title: "Onboarding tecnico",
+        desc: "Inventario, checklist conformità, setup completo per la prima pubblicazione.",
+      },
+    ],
   },
   {
-    icon: Camera,
-    title: "Servizi Fotografici",
-    desc: "Shooting professionale con fotografie in alta risoluzione, virtual tour 360 e contenuti video ottimizzati per le piattaforme.",
-    badge: "A Progetto",
+    title: "Operations quotidiane",
+    desc: "Il lavoro invisibile che fa la differenza fra una proprietà media e una a 5 stelle.",
+    items: [
+      {
+        icon: Sparkles,
+        title: "Pulizia & biancheria",
+        desc: "Standard hotel, biancheria premium di proprietà, igienizzazione certificata fra un soggiorno e l'altro.",
+      },
+      {
+        icon: CalendarCheck,
+        title: "Gestione prenotazioni",
+        desc: "Calendario unificato in tempo reale, gestione richieste, modifiche e cancellazioni — un solo interlocutore.",
+      },
+      {
+        icon: HomeIcon,
+        title: "Accoglienza ospiti",
+        desc: "Check-in professionale, self check-in con codice, video-istruzioni multilingua. Recensioni a 5 stelle by design.",
+      },
+      {
+        icon: ShieldCheck,
+        title: "Emergenze 24/7",
+        desc: "Reperibilità continua e rete di professionisti per interventi idraulici, elettrici e manutenzione urgente.",
+      },
+    ],
   },
   {
-    icon: ClipboardCheck,
-    title: "Onboarding Tecnico",
-    desc: "Inventario dettagliato, checklist di conformita, setup della proprieta per la prima pubblicazione: sollevamo il proprietario da ogni incombenza.",
-    badge: "Una Tantum",
+    title: "Revenue & visibilità",
+    desc: "Pricing dinamico, distribuzione multi-canale, gestione attiva della reputazione.",
+    items: [
+      {
+        icon: TrendingUp,
+        title: "Promozione multi-canale",
+        desc: "Inserimento su Airbnb, Booking, Expedia e altri portali con descrizioni ottimizzate in 4 lingue.",
+      },
+      {
+        icon: TrendingUp,
+        title: "Revenue management",
+        desc: "Algoritmo proprietario di dynamic pricing su competitor, eventi locali, stagionalità Lago di Como.",
+      },
+      {
+        icon: Star,
+        title: "Review & reputation",
+        desc: "Monitoraggio recensioni multi-piattaforma, risposta professionale, gestione proattiva del feedback.",
+      },
+      {
+        icon: PackageCheck,
+        title: "Linen & amenities premium",
+        desc: "Kit cortesia firmato, prodotti bagno selezionati, cialde caffè, benvenuto con eccellenze locali.",
+      },
+    ],
+  },
+  {
+    title: "Reportistica & compliance",
+    desc: "Trasparenza totale e zero adempimenti dimenticati: i tuoi numeri sempre alla mano, la burocrazia archiviata.",
+    items: [
+      {
+        icon: ShieldCheck,
+        title: "Gestione amministrativa",
+        desc: "CIN, Questura (Alloggiati Web), ISTAT, tassa di soggiorno, cedolare secca: tutti gli adempimenti per te.",
+      },
+      {
+        icon: Calculator,
+        title: "Audit fiscale annuale",
+        desc: "Report fiscale di fine anno, quadro RL, calcolo cedolare, documentazione pronta per il commercialista.",
+      },
+      {
+        icon: FileText,
+        title: "Rendiconto mensile",
+        desc: "Prospetto economico per singola prenotazione, commissioni dettagliate, payout trasparente.",
+      },
+      {
+        icon: ClipboardCheck,
+        title: "Manutenzione programmata",
+        desc: "Piano preventivo stagionale: climatizzazione, caldaia, riparazioni, check quadrimestrale della proprietà.",
+      },
+    ],
+  },
+];
+
+const DASHBOARD_BLOCKS = [
+  {
+    title: "Panoramica & KPI",
+    desc: "RevPAR, ADR, occupazione, anticipo prenotazioni, ospiti ricorrenti — i 10 indicatori chiave aggiornati ogni giorno.",
+  },
+  {
+    title: "Soggiorni & calendario",
+    desc: "Vista operativa su check-in/check-out, disponibilità futura per periodo, segnalazioni sulle proprietà vuote.",
+  },
+  {
+    title: "Riepiloghi economici",
+    desc: "Prenotazioni per periodo e canale, pagamenti, tasse di soggiorno raccolte, confronto YoY.",
+  },
+  {
+    title: "Dettaglio nominativo",
+    desc: "Elenco prenotazioni con dati ospiti, registro pagamenti con rif. Stripe, commissioni OTA per singola prenotazione.",
+  },
+  {
+    title: "Analisi avanzate",
+    desc: "Anticipo prenotazioni, curve di occupazione, ospiti ricorrenti, performance comparata dei canali.",
+  },
+  {
+    title: "Rendiconto proprietario",
+    desc: "Riepilogo commissioni, rendiconto mensile, prospetto per prenotazione, documentazione per il commercialista.",
   },
 ];
 
 export default function ServicesPage() {
   return (
     <div className="pt-20">
-      <section className="py-20 border-b border-border/50">
+      {/* HERO */}
+      <section className="relative py-24 sm:py-28 overflow-hidden bg-gradient-to-b from-primary/[0.04] via-white to-white border-b border-border/50">
+        <div className="absolute inset-0 -z-10 opacity-[0.03] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center" />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="section-label">Per i proprietari</span>
-          <h1 className="text-4xl sm:text-5xl font-light mt-3 mb-4">
-            I nostri <span className="font-semibold">servizi</span>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light mt-3 mb-5 tracking-tight">
+            Semplifichiamo la <span className="font-semibold">gestione</span>{" "}
+            del tuo immobile
           </h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Tutto quello che facciamo per i proprietari che ci affidano la
-            gestione: rendita, operativita, adempimenti, reputazione. Tu firmi
-            il mandato, noi ci occupiamo di tutto il resto.
+          <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+            Tu mantieni la proprietà, noi ci occupiamo di tutto il resto:
+            operazioni, compliance, revenue, accoglienza. Il risultato lo
+            vedi in tempo reale dalla tua{" "}
+            <strong className="text-foreground">dashboard personale</strong>{" "}
+            e ogni mese arriva un{" "}
+            <strong className="text-foreground">recap dedicato</strong> nella
+            tua casella email.
           </p>
         </div>
       </section>
 
-      <section className="py-24">
+      {/* PILLARS */}
+      <section id="pillars" className="py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {OWNER_SERVICES.map((s) => (
-              <ServiceCard key={s.title} {...s} />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {PILLARS.map((p) => (
+              <div
+                key={p.title}
+                className={`rounded-2xl p-6 flex flex-col ${
+                  p.highlight
+                    ? "bg-[#1D3A62] text-white shadow-xl"
+                    : "bg-white border border-border/50 border-t-[3px] border-t-[#1D3A62]"
+                }`}
+              >
+                <div
+                  className={`h-11 w-11 rounded-xl flex items-center justify-center mb-4 ${
+                    p.highlight ? "bg-white/10" : "bg-primary/[0.08]"
+                  }`}
+                >
+                  <p.icon
+                    className={`h-5 w-5 ${
+                      p.highlight ? "text-white" : "text-primary"
+                    }`}
+                  />
+                </div>
+                <h3 className="text-base font-semibold mb-2">{p.title}</h3>
+                <p
+                  className={`text-sm leading-relaxed ${
+                    p.highlight ? "text-white/80" : "text-muted-foreground"
+                  }`}
+                >
+                  {p.desc}
+                </p>
+              </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* SERVICE GROUPS */}
+      <section id="services" className="py-20 bg-muted/30 border-y border-border/50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14 max-w-2xl mx-auto">
+            <span className="section-label">Cosa facciamo per te</span>
+            <h2 className="text-3xl sm:text-4xl font-light mt-3 mb-3">
+              Quattro aree, <span className="font-semibold">un solo interlocutore</span>
+            </h2>
+            <p className="text-muted-foreground">
+              I nostri servizi sono pensati per togliere lavoro al
+              proprietario e alzare il rendimento dell&apos;immobile. Ogni
+              area è coperta da uno specialista del team.
+            </p>
+          </div>
+
+          <div className="space-y-12">
+            {SERVICE_GROUPS.map((group, gi) => (
+              <div
+                key={group.title}
+                className="grid lg:grid-cols-[1fr_2fr] gap-8 lg:gap-12"
+              >
+                <div>
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-primary font-semibold mb-2">
+                    {String(gi + 1).padStart(2, "0")} — Area
+                  </div>
+                  <h3 className="text-2xl font-light mb-3">
+                    <span className="font-semibold">{group.title}</span>
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {group.desc}
+                  </p>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {group.items.map((item) => (
+                    <div
+                      key={item.title}
+                      className="rounded-xl bg-white border border-border/50 p-4 flex gap-3"
+                    >
+                      <div className="h-9 w-9 rounded-lg bg-primary/[0.08] flex items-center justify-center shrink-0">
+                        <item.icon className="h-4 w-4 text-primary" />
+                      </div>
+                      <div className="min-w-0">
+                        <h4 className="text-sm font-semibold mb-1">
+                          {item.title}
+                        </h4>
+                        <p className="text-xs text-muted-foreground leading-relaxed">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* DASHBOARD */}
+      <section id="dashboard" className="py-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-[5fr_6fr] gap-10 lg:gap-14 items-center">
+            <div>
+              <span className="section-label">La tua cabina di regia</span>
+              <h2 className="text-3xl sm:text-4xl font-light mt-3 mb-4">
+                Una <span className="font-semibold">dashboard personale</span>{" "}
+                per ogni proprietà
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                Accedi quando vuoi, da qualsiasi dispositivo. Dati aggiornati
+                ogni giorno, niente fogli Excel da incrociare, niente attese
+                per i numeri di fine mese. Più di trenta report già pronti,
+                organizzati in sei aree.
+              </p>
+              <ul className="space-y-3">
+                {DASHBOARD_BLOCKS.map((b) => (
+                  <li
+                    key={b.title}
+                    className="flex items-start gap-3 text-sm"
+                  >
+                    <div className="h-6 w-6 rounded-md bg-primary/[0.08] flex items-center justify-center shrink-0 mt-0.5">
+                      <ArrowRight className="h-3 w-3 text-primary" />
+                    </div>
+                    <div>
+                      <strong className="font-semibold">{b.title}</strong>
+                      <span className="text-muted-foreground">
+                        {" "}
+                        — {b.desc}
+                      </span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="lg:sticky lg:top-24">
+              <DashboardMockup />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* EMAIL RECAP */}
+      <section
+        id="email"
+        className="py-24 bg-[#1D3A62] text-white relative overflow-hidden"
+      >
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
+        />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="grid lg:grid-cols-[6fr_5fr] gap-10 lg:gap-14 items-center">
+            <div className="order-2 lg:order-1">
+              <EmailRecapMockup />
+            </div>
+            <div className="order-1 lg:order-2">
+              <span className="text-[10px] uppercase tracking-[0.18em] text-white/70 font-semibold">
+                Direttamente in casella
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-light mt-3 mb-4 text-white">
+                Un <span className="font-semibold">recap mensile</span> che
+                puoi leggere in due minuti
+              </h2>
+              <p className="text-white/80 leading-relaxed mb-5">
+                Il primo del mese ricevi nella tua casella un riassunto
+                curato: numeri chiave, recensione del mese, segnalazioni
+                operative su cosa sta per succedere. Niente file da scaricare,
+                niente login obbligatorio — basta aprire la mail.
+              </p>
+              <ul className="space-y-2 text-sm text-white/90">
+                {[
+                  "I 4 numeri chiave del mese, già confrontati con il precedente",
+                  "Trend di occupazione e revenue commentati dal team",
+                  "La recensione del mese e i feedback più rilevanti",
+                  "Suggerimenti operativi e flag su festività e prezzi",
+                ].map((line) => (
+                  <li key={line} className="flex items-start gap-2.5">
+                    <ArrowRight className="h-3.5 w-3.5 text-white/70 shrink-0 mt-0.5" />
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-24">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl sm:text-4xl font-light mb-4">
+            Vuoi che gestiamo anche{" "}
+            <span className="font-semibold">la tua proprietà</span>?
+          </h2>
+          <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Una sola conversazione per capire se Hosting Lake Como fa al caso
+            tuo. Valutazione gratuita, nessun impegno. Ti rispondiamo entro
+            48 ore.
+          </p>
+          <Link
+            href="/contact?interest=consulenza&from=services"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-colors shadow-lg"
+          >
+            Richiedi una valutazione
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
     </div>
