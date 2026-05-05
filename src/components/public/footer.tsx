@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MapPin, Phone, Mail } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
 
 export function Footer() {
   return (
@@ -79,14 +79,6 @@ export function Footer() {
               <li className="flex items-start gap-2.5">
                 <Mail className="h-4 w-4 mt-0.5 shrink-0 text-white/90" />
                 <span>info@airbibby.com</span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-white/90" />
-                <span>
-                  Via Maurizio Monti 46
-                  <br />
-                  22100 Como, Italia
-                </span>
               </li>
             </ul>
             <Link

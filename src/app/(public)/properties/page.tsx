@@ -123,15 +123,15 @@ export default function PropertiesPage() {
     <div className="pt-20">
       <section className="py-16 sm:py-20 border-b border-border/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="section-label">Case study</span>
+          <span className="section-label">Proprietà in gestione</span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light mt-3 mb-4">
-            Iniziamo da <span className="font-semibold">una proprietà</span> gestita davvero
+            Le case che curiamo sul <span className="font-semibold">Lago di Como</span>
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg">
-            Hosting Lake Como nasce dai nove anni di esperienza di Angelo come host
-            sul Lago. Questa è la prima proprietà che mostriamo come case study —
-            il livello di cura che applichiamo qui è lo stesso che riserveremmo al
-            tuo immobile.
+            Una panoramica degli immobili che gestiamo direttamente. Ogni proprietà
+            che vedi qui riceve la stessa cura: dal pricing dinamico alla pulizia,
+            dall&apos;accoglienza ospite alla reportistica mensile per il
+            proprietario.
           </p>
         </div>
       </section>
