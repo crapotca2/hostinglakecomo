@@ -29,16 +29,19 @@ const SERVICE_GROUPS = [
         icon: Camera,
         title: "Servizio fotografico",
         desc: "Riprese professionali ad alta risoluzione, tour virtuale 360 e contenuti video per le piattaforme.",
+        cost: "A progetto",
       },
       {
         icon: Sparkles,
         title: "Allestimento casa",
         desc: "Interventi mirati di restyling per alzare tariffa media e qualità delle recensioni, calibrati sul budget.",
+        cost: "Preventivo dedicato",
       },
       {
         icon: ClipboardCheck,
         title: "Avviamento tecnico",
         desc: "Inventario, lista controlli di conformità e configurazione completa per la prima pubblicazione.",
+        cost: "Una tantum",
       },
     ],
   },
@@ -91,6 +94,7 @@ const SERVICE_GROUPS = [
         icon: PackageCheck,
         title: "Biancheria e accoglienza premium",
         desc: "Kit cortesia firmato, prodotti bagno selezionati, cialde caffè e benvenuto con eccellenze locali.",
+        cost: "Costo amenities",
       },
     ],
   },
@@ -107,6 +111,7 @@ const SERVICE_GROUPS = [
         icon: Calculator,
         title: "Bilancio fiscale annuale",
         desc: "Riepilogo fiscale di fine anno, quadro RL, calcolo cedolare e documentazione pronta per il commercialista.",
+        cost: "Costo extra",
       },
       {
         icon: FileText,
@@ -117,6 +122,7 @@ const SERVICE_GROUPS = [
         icon: ClipboardCheck,
         title: "Manutenzione programmata",
         desc: "Piano preventivo stagionale: climatizzazione, caldaia, riparazioni e controllo quadrimestrale della proprietà.",
+        cost: "A consuntivo",
       },
     ],
   },
@@ -190,7 +196,7 @@ export function ServicesCarousel() {
               }}
               className="snap-start shrink-0 w-full sm:w-[92%] lg:w-full"
             >
-              <div className="rounded-2xl bg-white border border-border/50 p-6 sm:p-8 h-full">
+              <div className="rounded-2xl bg-white text-foreground border border-border/50 p-6 sm:p-8 h-full">
                 <div className="grid lg:grid-cols-[1fr_2fr] gap-6 lg:gap-10">
                   <div>
                     <div className="text-[10px] uppercase tracking-[0.2em] text-primary font-semibold mb-2">
@@ -208,15 +214,22 @@ export function ServicesCarousel() {
                     {g.items.map((item) => (
                       <div
                         key={item.title}
-                        className="rounded-xl bg-muted/30 border border-border/40 p-4 flex gap-3"
+                        className="rounded-xl bg-muted/30 border border-border/40 p-4 flex gap-3 relative"
                       >
                         <div className="h-9 w-9 rounded-lg bg-primary/[0.08] flex items-center justify-center shrink-0">
                           <item.icon className="h-4 w-4 text-primary" />
                         </div>
-                        <div className="min-w-0">
-                          <h4 className="text-sm font-semibold mb-1">
-                            {item.title}
-                          </h4>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-start justify-between gap-2 mb-1">
+                            <h4 className="text-sm font-semibold">
+                              {item.title}
+                            </h4>
+                            {"cost" in item && item.cost && (
+                              <span className="shrink-0 text-[9px] font-semibold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded-full whitespace-nowrap">
+                                {item.cost}
+                              </span>
+                            )}
+                          </div>
                           <p className="text-xs text-muted-foreground leading-relaxed">
                             {item.desc}
                           </p>
