@@ -82,7 +82,7 @@ export default function AboutPage() {
               ].map((item) => (
                 <li
                   key={item.text}
-                  className="flex items-center gap-3 text-sm text-white bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center rounded-xl p-4 shadow-sm min-h-[4.5rem]"
+                  className="flex items-center gap-3 text-sm text-white bg-[#1D3A62] rounded-xl p-4 shadow-sm min-h-[4.5rem]"
                 >
                   <item.icon className="h-5 w-5 text-white shrink-0" />
                   {item.text}
