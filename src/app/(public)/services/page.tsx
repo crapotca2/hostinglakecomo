@@ -64,12 +64,12 @@ export default function ServicesPage() {
           className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
         />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-14 max-w-2xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-light mb-3 text-white">
-              Hosting <span className="font-semibold">semplificato</span>,
-              ci occupiamo <span className="font-semibold">noi</span> di tutto
+          <div className="text-center mb-14">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light mb-3 text-white sm:whitespace-nowrap">
+              Hosting <span className="font-semibold">facile</span>, ci occupiamo{" "}
+              <span className="font-semibold">noi</span> di tutto
             </h2>
-            <p className="text-white/80">
+            <p className="text-white/80 max-w-2xl mx-auto">
               Sedici servizi in quattro cluster — pulizia con standard
               alberghiero, adempimenti completi, ottimizzazione del valore e
               una dashboard sempre a portata di click. Tu hai una sola

@@ -29,9 +29,13 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-6 text-foreground leading-relaxed">
+      <section className="py-20 bg-[#1D3A62] text-white relative overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
+        />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="space-y-6 leading-relaxed">
             <p className="text-lg">
               Hosting Lake Como e una realta specializzata di tre property
               manager dedicati alla{" "}
@@ -40,10 +44,10 @@ export default function AboutPage() {
               <strong>mercato internazionale</strong> che frequenta il Lago di
               Como ogni anno.
             </p>
-            <p>
-              Il nostro lavoro poggia su <strong>oltre nove anni di hosting
+            <p className="text-white/85">
+              Il nostro lavoro poggia su <strong className="text-white">oltre nove anni di hosting
               diretto sul Lago</strong> e sulla certificazione{" "}
-              <strong>Superhost di Airbnb dal 2017</strong>, con tasso di
+              <strong className="text-white">Superhost di Airbnb dal 2017</strong>, con tasso di
               risposta del 100% e oltre{" "}
               {team.summary.experience.primaryReviews} recensioni a 5 stelle
               sulla listing principale. Le competenze sono distribuite su tre
@@ -52,7 +56,7 @@ export default function AboutPage() {
               riceva l&apos;attenzione dello specialista giusto in ogni
               momento, mentre il proprietario mantiene un solo interlocutore.
             </p>
-            <p>
+            <p className="text-white/85">
               Lavoriamo esclusivamente sul Lago di Como: conosciamo le zone, i
               ristoranti, i battelli, i tempi del traghetto, le abitudini dei
               turisti che arrivano in primavera e di quelli che restano fino a
@@ -81,7 +85,7 @@ export default function AboutPage() {
               ].map((item) => (
                 <li
                   key={item.text}
-                  className="flex items-center gap-3 text-sm text-white bg-[#1D3A62] rounded-xl p-4 shadow-sm min-h-[4.5rem]"
+                  className="flex items-center gap-3 text-sm text-white bg-white/[0.08] border border-white/20 rounded-xl p-4 min-h-[4.5rem]"
                 >
                   <item.icon className="h-5 w-5 text-white shrink-0" />
                   {item.text}
