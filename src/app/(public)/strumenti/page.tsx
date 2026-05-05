@@ -128,8 +128,8 @@ const TOOLS: Tool[] = [
 
 const CATEGORY_META: Record<Tool["category"], { label: string; desc: string }> = {
   simulator: {
-    label: "Simulatori Pubblici",
-    desc: "Stime preliminari per farti un'idea. Il valore effettivo richiede i nostri dati interni.",
+    label: "Stima il potenziale del tuo immobile",
+    desc: "Tre simulatori per farti un'idea concreta del valore della tua proprietà sul Lago di Como. Stime preliminari basate sul nostro database storico — il valore effettivo richiede un'analisi dedicata con i nostri dati interni e l'algoritmo di pricing proprietario.",
   },
   dashboard: {
     label: "Tool Area Clienti",
@@ -146,33 +146,17 @@ const CATEGORIES: Tool["category"][] = ["simulator", "dashboard", "advanced"];
 export default function StrumentiPage() {
   return (
     <div className="pt-20">
-      <section className="py-20 border-b border-border/50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/[0.08] text-primary text-xs font-medium mb-4">
-            <Wrench className="h-3.5 w-3.5" />
-            Simulatori Hosting Lake Como
-          </div>
-          <h1 className="text-4xl sm:text-5xl font-light mb-4">
-            I nostri <span className="font-semibold">strumenti</span> per i proprietari
-          </h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Stime preliminari basate sul nostro database storico del Lago di Como.
-            Il valore reale del tuo immobile richiede un'analisi con i nostri dati
-            interni e l'algoritmo di pricing proprietario.
-          </p>
-        </div>
-      </section>
-
       {CATEGORIES.map((cat) => {
         const tools = TOOLS.filter((t) => t.category === cat);
         const meta = CATEGORY_META[cat];
         const isDark = cat !== "dashboard";
+        const isHero = cat === "simulator";
         return (
           <section
             key={cat}
             className={
               isDark
-                ? "py-20 bg-[#1D3A62] text-white relative overflow-hidden border-t border-white/10"
+                ? `${isHero ? "pt-24 pb-20" : "py-20 border-t border-white/10"} bg-[#1D3A62] text-white relative overflow-hidden`
                 : "py-20 bg-white relative"
             }
           >
@@ -183,22 +167,38 @@ export default function StrumentiPage() {
               />
             )}
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-              <div className="mb-10">
-                <h2
-                  className={`text-2xl sm:text-3xl font-light ${
-                    isDark ? "text-white" : "text-foreground"
-                  }`}
-                >
-                  <span className="font-semibold">{meta.label}</span>
-                </h2>
-                <p
-                  className={`mt-2 ${
-                    isDark ? "text-white/75" : "text-muted-foreground"
-                  }`}
-                >
-                  {meta.desc}
-                </p>
-              </div>
+              {isHero ? (
+                <div className="text-center mb-12 max-w-3xl mx-auto">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white text-xs font-medium mb-5">
+                    <Wrench className="h-3.5 w-3.5" />
+                    Simulatori Hosting Lake Como
+                  </div>
+                  <h1 className="text-4xl sm:text-5xl font-light text-white mb-4">
+                    Stima il <span className="font-semibold">potenziale</span> del
+                    tuo immobile
+                  </h1>
+                  <p className="text-white/80 text-base sm:text-lg leading-relaxed">
+                    {meta.desc}
+                  </p>
+                </div>
+              ) : (
+                <div className="mb-10">
+                  <h2
+                    className={`text-2xl sm:text-3xl font-light ${
+                      isDark ? "text-white" : "text-foreground"
+                    }`}
+                  >
+                    <span className="font-semibold">{meta.label}</span>
+                  </h2>
+                  <p
+                    className={`mt-2 ${
+                      isDark ? "text-white/75" : "text-muted-foreground"
+                    }`}
+                  >
+                    {meta.desc}
+                  </p>
+                </div>
+              )}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {tools.map((t) => {
                   const isAvailable = t.status === "available";

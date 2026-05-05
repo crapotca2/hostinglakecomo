@@ -84,8 +84,12 @@ export function CookieBanner() {
         aria-labelledby="cookie-banner-title"
         className="fixed inset-x-0 bottom-0 z-50 px-4 pb-4 sm:bottom-4 sm:right-4 sm:left-auto sm:px-0 sm:pb-0 sm:max-w-md"
       >
-        <div className="bg-[#1D3A62] text-white rounded-2xl shadow-2xl border border-white/10 p-5 sm:p-6">
-          <div className="flex items-start gap-3 mb-3">
+        <div className="relative overflow-hidden bg-[#1D3A62] text-white rounded-2xl shadow-2xl border border-white/10 p-5 sm:p-6">
+          <div
+            aria-hidden
+            className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center pointer-events-none"
+          />
+          <div className="relative flex items-start gap-3 mb-3">
             <div className="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center shrink-0">
               <Cookie className="h-4 w-4 text-white" />
             </div>
@@ -111,7 +115,7 @@ export function CookieBanner() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-2 mt-4">
+          <div className="relative flex flex-col gap-2 mt-4">
             <button
               type="button"
               onClick={acceptAll}

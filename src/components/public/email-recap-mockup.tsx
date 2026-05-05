@@ -56,16 +56,20 @@ export function EmailRecapMockup() {
           </div>
         </div>
 
-        <div className="rounded-xl bg-[#1D3A62] text-white p-4">
-          <div className="text-[10px] uppercase tracking-wider opacity-80 font-semibold mb-1">
+        <div className="relative rounded-xl bg-[#1D3A62] text-white p-4 overflow-hidden">
+          <div
+            aria-hidden
+            className="absolute inset-0 opacity-[0.1] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center pointer-events-none"
+          />
+          <div className="relative text-[10px] uppercase tracking-wider opacity-80 font-semibold mb-1">
             Ottimizzazioni del mese
           </div>
-          <p className="text-xs leading-relaxed mb-2">
+          <p className="relative text-xs leading-relaxed mb-2">
             Tariffe rialzate del 7% sui weekend di Pasqua: +€620 sul
             mensile. Listing aggiornato con due nuove foto della terrazza
             ed è arrivata la prima prenotazione diretta.
           </p>
-          <span className="inline-flex items-center gap-1 text-[11px] font-semibold">
+          <span className="relative inline-flex items-center gap-1 text-[11px] font-semibold">
             Vedi rendiconto completo
             <ArrowRight className="h-3 w-3" />
           </span>

@@ -59,7 +59,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/dashboard" className="hover:text-white transition-colors">
-                  Area Proprietari
+                  Dashboard Proprietari
                 </Link>
               </li>
             </ul>
