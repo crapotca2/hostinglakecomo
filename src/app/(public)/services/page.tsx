@@ -55,10 +55,13 @@ export default function ServicesPage() {
       </section>
 
       {/* PILLARS — split diagonal */}
-      <section id="pillars" className="py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl p-1.5 bg-[#1D3A62] shadow-xl">
-            <div className="rounded-[22px] bg-white relative overflow-hidden">
+      <section id="pillars" className="py-24 bg-[#1D3A62] text-white relative overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
+        />
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="rounded-3xl bg-white shadow-2xl relative overflow-hidden">
               {/* Diagonal divider — visible only on desktop */}
               <svg
                 aria-hidden="true"
@@ -157,8 +160,6 @@ export default function ServicesPage() {
                     "linear-gradient(to top right, rgba(29,58,98,0.04) 0%, rgba(29,58,98,0.04) 49.7%, transparent 50%, transparent 100%)",
                 }}
               />
-
-            </div>
           </div>
         </div>
       </section>
