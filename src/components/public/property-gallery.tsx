@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
-import useEmblaCarousel from "embla-carousel-react";
+import { useState, useCallback } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
@@ -28,29 +27,13 @@ type Props = {
 export function PropertyGallery({ images, propertyName, hasLakeView }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: "start",
-    containScroll: "trimSnaps",
-    dragFree: true,
-  });
 
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(false);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    const update = () => {
-      setCanScrollPrev(emblaApi.canScrollPrev());
-      setCanScrollNext(emblaApi.canScrollNext());
-    };
-    update();
-    emblaApi.on("select", update);
-    emblaApi.on("reInit", update);
-    emblaApi.on("scroll", update);
-  }, [emblaApi]);
-
-  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+  const goPrev = useCallback(() => {
+    setActiveIndex((i) => (i > 0 ? i - 1 : images.length - 1));
+  }, [images.length]);
+  const goNext = useCallback(() => {
+    setActiveIndex((i) => (i < images.length - 1 ? i + 1 : 0));
+  }, [images.length]);
 
   const mainImage = images[activeIndex]?.url ?? images[0]?.url;
   const currentRoom = images[activeIndex]?.room;
@@ -89,6 +72,32 @@ export function PropertyGallery({ images, propertyName, hasLakeView }: Props) {
               <HomeIcon className="h-16 w-16 text-primary/40" />
             </div>
           )}
+          {images.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goPrev();
+                }}
+                className="absolute left-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-white/95 hover:bg-white shadow-lg border border-border/50 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 sm:opacity-90"
+                aria-label="Foto precedente"
+              >
+                <ChevronLeft className="h-5 w-5 text-foreground" />
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goNext();
+                }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-white/95 hover:bg-white shadow-lg border border-border/50 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 sm:opacity-90"
+                aria-label="Foto successiva"
+              >
+                <ChevronRight className="h-5 w-5 text-foreground" />
+              </button>
+            </>
+          )}
           {hasLakeView && (
             <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-primary/90 text-white text-[10px] font-semibold uppercase tracking-wider backdrop-blur-sm">
               Vista Lago
@@ -103,8 +112,8 @@ export function PropertyGallery({ images, propertyName, hasLakeView }: Props) {
 
         {images.length > 1 && (
           <div className="relative p-4">
-            <div ref={emblaRef} className="overflow-hidden">
-              <div className="flex gap-2">
+            <div className="overflow-x-auto scrollbar-hide">
+              <div className="flex gap-2 w-max mx-auto">
                 {images.map((img, i) => (
                   <button
                     key={img.url}
@@ -124,24 +133,6 @@ export function PropertyGallery({ images, propertyName, hasLakeView }: Props) {
                 ))}
               </div>
             </div>
-            {canScrollPrev && (
-              <button
-                onClick={scrollPrev}
-                className="absolute left-2 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-white shadow-md hover:bg-muted/40 border border-border/50 flex items-center justify-center transition-colors"
-                aria-label="Foto precedenti"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </button>
-            )}
-            {canScrollNext && (
-              <button
-                onClick={scrollNext}
-                className="absolute right-2 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-white shadow-md hover:bg-muted/40 border border-border/50 flex items-center justify-center transition-colors"
-                aria-label="Foto successive"
-              >
-                <ChevronRight className="h-5 w-5" />
-              </button>
-            )}
           </div>
         )}
       </div>

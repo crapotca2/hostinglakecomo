@@ -147,18 +147,15 @@ export default function PropertyDetailPage() {
 
         <div className="space-y-6">
           <div className="bg-white rounded-2xl p-5 sm:p-6 border border-border/50">
-            <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
-              <MapPin className="h-3 w-3" />
-              {property.address.street ? `${property.address.street}, ` : ""}
-              {property.address.city} — {getZoneLabel(property.zone)}
+            <div className="mb-3">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-muted/60 text-foreground text-xs font-medium">
+                {getTypeLabel(property.type)}
+              </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-semibold mb-3">
               {property.name}
             </h1>
             <div className="flex items-center gap-3 sm:gap-4 text-sm text-muted-foreground flex-wrap gap-y-2">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-muted/60 text-foreground text-xs font-medium">
-                {getTypeLabel(property.type)}
-              </span>
               <span className="flex items-center gap-1">
                 <Bed className="h-4 w-4" /> {property.details.bedrooms}{" "}
                 {property.details.bedrooms === 1 ? "camera" : "camere"}
@@ -173,7 +170,7 @@ export default function PropertyDetailPage() {
               </span>
               {airbnbListing?.rating && airbnbListing.rating > 0 && (
                 <span className="flex items-center gap-1">
-                  <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
+                  <Star className="h-4 w-4 fill-foreground text-foreground" />
                   {airbnbListing.rating.toFixed(2)}
                   {airbnbListing.reviewCount && (
                     <span className="text-xs">

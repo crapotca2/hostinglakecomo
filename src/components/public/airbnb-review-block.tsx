@@ -36,7 +36,7 @@ function LaurelBranch({ side }: { side: "left" | "right" }) {
 
 function formatScore(value: number | undefined): string {
   if (value == null) return "—";
-  return value.toFixed(1).replace(".", ",");
+  return value.toFixed(1);
 }
 
 export function AirbnbReviewBlock({
@@ -58,7 +58,7 @@ export function AirbnbReviewBlock({
     <div className="bg-white rounded-2xl p-6 sm:p-10 border border-border/50">
       <div className="flex items-end justify-center gap-1 sm:gap-2 mb-2">
         <LaurelBranch side="left" />
-        <div className="text-6xl sm:text-7xl font-semibold tabular-nums tracking-tight leading-none">
+        <div className="text-6xl sm:text-7xl font-semibold tabular-nums tracking-tight leading-none -translate-y-2 sm:-translate-y-3">
           {formatScore(overall)}
         </div>
         <LaurelBranch side="right" />
