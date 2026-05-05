@@ -49,7 +49,7 @@ function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white rounded-2xl p-8 border border-border/50 shadow-sm space-y-5"
+      className="bg-white rounded-2xl p-8 border border-border/50 border-t-[3px] border-t-[#1D3A62] shadow-sm space-y-5"
     >
       <h2 className="text-xl font-semibold mb-2">Invia un Messaggio</h2>
       {from && (
@@ -127,7 +127,7 @@ function ContactForm() {
           <span className="text-sm">
             L&apos;immobile è già su una piattaforma di affitto
             <span className="block text-xs text-muted-foreground mt-0.5">
-              Es. Airbnb, Booking, Vrbo, Expedia
+              Es. Airbnb, Booking, Expedia
             </span>
           </span>
         </label>
@@ -181,12 +181,7 @@ export default function ContactPage() {
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             Richiedi un preventivo o contattaci per qualsiasi informazione.
           </p>
-        </div>
-      </section>
-
-      <section className="pt-12 pb-6">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid sm:grid-cols-2 gap-6">
+          <div className="max-w-2xl mx-auto mt-10 grid sm:grid-cols-2 gap-6 text-left">
             <div className="flex items-center gap-3">
               <div className="h-10 w-10 rounded-xl bg-primary/[0.08] flex items-center justify-center shrink-0">
                 <Phone className="h-4 w-4 text-primary" />
@@ -219,8 +214,8 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="pb-24 pt-6 border-t border-border/50">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
+      <section className="py-20">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <Suspense fallback={<ContactFormFallback />}>
             <ContactForm />
           </Suspense>

@@ -21,7 +21,7 @@ export function Footer() {
               L&apos;ospitalita non si improvvisa, affidati a un professionista.
             </p>
             <p className="text-sm leading-relaxed text-white/75">
-              Consulenza gratuita per valutare il potenziale di rendita del tuo
+              Consultaci per valutare il potenziale di rendita del tuo
               immobile sul Lago di Como. Ti rispondiamo entro 48 ore con
               un&apos;analisi personalizzata e senza impegno.
             </p>
