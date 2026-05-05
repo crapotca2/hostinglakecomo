@@ -13,9 +13,11 @@ import {
   CheckCircle2,
   MapPin,
   Mail,
+  Clock,
 } from "lucide-react";
 
 type ToolStatus = "available" | "members-only" | "coming-soon";
+type RoadmapStage = "ready" | "in-progress";
 
 interface Tool {
   slug: string;
@@ -24,6 +26,7 @@ interface Tool {
   icon: React.ComponentType<{ className?: string }>;
   status: ToolStatus;
   category: "dashboard" | "advanced";
+  roadmap?: RoadmapStage;
 }
 
 const TOOLS: Tool[] = [
@@ -56,24 +59,27 @@ const TOOLS: Tool[] = [
     name: "Dynamic Pricing",
     desc: "Algoritmo proprietario di tariffazione dinamica su domanda, competitor e stagionalita Lago di Como.",
     icon: Wand2,
-    status: "coming-soon",
+    status: "members-only",
     category: "advanced",
+    roadmap: "ready",
   },
   {
     slug: "istruzioni-arrivo-video",
     name: "Istruzioni Arrivo con Video",
     desc: "Video-guida per raggiungere la proprieta nella lingua nativa dell'ospite: spiegazioni passo-passo con riprese reali del percorso.",
     icon: Navigation,
-    status: "coming-soon",
+    status: "members-only",
     category: "advanced",
+    roadmap: "ready",
   },
   {
     slug: "listing-optimizer",
     name: "Listing Optimizer",
     desc: "Analisi AI della descrizione e delle foto con suggerimenti per aumentare le prenotazioni.",
     icon: Lightbulb,
-    status: "coming-soon",
+    status: "members-only",
     category: "advanced",
+    roadmap: "ready",
   },
   {
     slug: "calcolatore-tasse",
@@ -82,6 +88,7 @@ const TOOLS: Tool[] = [
     icon: Euro,
     status: "coming-soon",
     category: "advanced",
+    roadmap: "in-progress",
   },
   {
     slug: "welcome-book",
@@ -90,6 +97,7 @@ const TOOLS: Tool[] = [
     icon: BookOpen,
     status: "coming-soon",
     category: "advanced",
+    roadmap: "in-progress",
   },
   {
     slug: "logo",
@@ -98,6 +106,7 @@ const TOOLS: Tool[] = [
     icon: PenTool,
     status: "coming-soon",
     category: "advanced",
+    roadmap: "in-progress",
   },
 ];
 
@@ -107,13 +116,16 @@ const CATEGORY_META: Record<Tool["category"], { label: string; desc: string }> =
     desc: "Strumenti operativi riservati ai proprietari in gestione con Hosting Lake Como.",
   },
   advanced: {
-    label: "In Arrivo",
-    desc: "Funzionalita in sviluppo per la prossima release.",
+    label: "Roadmap prodotto",
+    desc: "Funzionalita gia disponibili nell'area clienti e in sviluppo per le prossime release.",
   },
 };
 
 export default function StrumentiPage() {
-  const advanced = TOOLS.filter((t) => t.category === "advanced");
+  const advanced = TOOLS.filter((t) => t.category === "advanced").sort(
+    (a, b) =>
+      (a.roadmap === "ready" ? 0 : 1) - (b.roadmap === "ready" ? 0 : 1)
+  );
 
   return (
     <div className="pt-20">
@@ -268,7 +280,7 @@ export default function StrumentiPage() {
         </div>
       </section>
 
-      {/* IN ARRIVO */}
+      {/* ROADMAP PRODOTTO */}
       <section className="py-20 bg-[#1D3A62] text-white relative overflow-hidden border-t border-white/10">
         <div
           aria-hidden
@@ -277,30 +289,40 @@ export default function StrumentiPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="mb-10">
             <h2 className="text-2xl sm:text-3xl font-light text-white">
-              <span className="font-semibold">In Arrivo</span>
+              <span className="font-semibold">Roadmap prodotto</span>
             </h2>
             <p className="mt-2 text-white/75">
               {CATEGORY_META.advanced.desc}
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {advanced.map((t) => (
-              <div
-                key={t.slug}
-                className="bg-white text-foreground rounded-2xl p-7 border border-border/50"
-              >
-                <div className="flex items-start justify-between gap-3 mb-2">
-                  <h3 className="text-base font-semibold">{t.name}</h3>
-                  <span className="shrink-0 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-primary bg-primary/[0.08] border border-primary/20 px-2 py-0.5 rounded-full whitespace-nowrap">
-                    <Sparkles className="h-2.5 w-2.5" />
-                    AI
-                  </span>
+            {advanced.map((t) => {
+              const isReady = t.roadmap === "ready";
+              return (
+                <div
+                  key={t.slug}
+                  className="bg-white text-foreground rounded-2xl p-7 border border-border/50"
+                >
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <h3 className="text-base font-semibold">{t.name}</h3>
+                    {isReady ? (
+                      <span className="shrink-0 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-primary bg-primary/[0.08] border border-primary/20 px-2 py-0.5 rounded-full whitespace-nowrap">
+                        <Sparkles className="h-2.5 w-2.5" />
+                        AI
+                      </span>
+                    ) : (
+                      <span className="shrink-0 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground bg-muted px-2 py-0.5 rounded-full whitespace-nowrap">
+                        <Clock className="h-2.5 w-2.5" />
+                        In sviluppo
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {t.desc}
+                  </p>
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {t.desc}
-                </p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
