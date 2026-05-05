@@ -168,8 +168,8 @@ export function ServicesCarousel() {
             onClick={() => scrollTo(i)}
             className={`text-xs sm:text-sm font-semibold px-3.5 py-2 rounded-full border transition-colors ${
               i === active
-                ? "bg-[#1D3A62] text-white border-[#1D3A62]"
-                : "bg-white text-foreground border-border/60 hover:border-foreground/40"
+                ? "bg-white text-[#1D3A62] border-white"
+                : "bg-transparent text-white/85 border-white/30 hover:border-white/70 hover:text-white"
             }`}
           >
             {g.title}
@@ -239,7 +239,7 @@ export function ServicesCarousel() {
             onClick={() => scrollTo(i)}
             aria-label={`Vai a ${g.title}`}
             className={`h-1.5 rounded-full transition-all ${
-              i === active ? "w-8 bg-[#1D3A62]" : "w-1.5 bg-border"
+              i === active ? "w-8 bg-white" : "w-1.5 bg-white/30"
             }`}
           />
         ))}
