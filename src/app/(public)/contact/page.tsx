@@ -49,7 +49,7 @@ function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white rounded-2xl p-8 border border-border/50 border-t-[3px] border-t-[#1D3A62] shadow-[0_25px_60px_-12px_rgba(29,58,98,0.45)] space-y-5"
+      className="bg-white rounded-2xl p-8 border border-border/50 shadow-[0_25px_60px_-12px_rgba(29,58,98,0.45)] space-y-5"
     >
       <h2 className="text-xl font-semibold mb-2">Invia un Messaggio</h2>
       {from && (
@@ -92,29 +92,31 @@ function ContactForm() {
           />
         </div>
       </div>
-      <div>
-        <label className="text-sm font-medium mb-1.5 block">Interesse</label>
-        <select
-          value={interest}
-          onChange={(e) => setInterest(e.target.value)}
-          className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 bg-white"
-        >
-          {INTEREST_OPTIONS.map((o) => (
-            <option key={o.value} value={o.value}>
-              {o.label}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <label className="text-sm font-medium mb-1.5 block">
-          Indirizzo dell&apos;immobile
-        </label>
-        <input
-          type="text"
-          placeholder="Via, città, provincia"
-          className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-        />
+      <div className="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label className="text-sm font-medium mb-1.5 block">Interesse</label>
+          <select
+            value={interest}
+            onChange={(e) => setInterest(e.target.value)}
+            className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 bg-white"
+          >
+            {INTEREST_OPTIONS.map((o) => (
+              <option key={o.value} value={o.value}>
+                {o.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="text-sm font-medium mb-1.5 block">
+            Indirizzo dell&apos;immobile
+          </label>
+          <input
+            type="text"
+            placeholder="Via, città, provincia"
+            className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+          />
+        </div>
       </div>
       <div className="rounded-lg border border-border px-4 py-3 bg-muted/30">
         <label className="flex items-start gap-3 cursor-pointer">
@@ -186,9 +188,9 @@ export default function ContactPage() {
 
       <section className="py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-[5fr_7fr] gap-12 lg:gap-16 items-start">
+          <div className="grid lg:grid-cols-[4fr_8fr] gap-12 lg:gap-16 items-center">
             {/* INFO LEFT */}
-            <div className="lg:pt-2">
+            <div>
               <h2 className="text-2xl sm:text-3xl font-light text-foreground mb-4">
                 Parliamo del tuo{" "}
                 <span className="font-semibold">immobile</span>
