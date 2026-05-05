@@ -2,8 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-  ChevronLeft,
-  ChevronRight,
   Sparkles,
   ShieldCheck,
   TrendingUp,
@@ -160,48 +158,23 @@ export function ServicesCarousel() {
     }
   };
 
-  const canPrev = active > 0;
-  const canNext = active < SERVICE_GROUPS.length - 1;
-
   return (
     <div className="relative">
-      <div className="flex items-center justify-between gap-3 mb-6 flex-wrap">
-        <div className="flex flex-wrap gap-2">
-          {SERVICE_GROUPS.map((g, i) => (
-            <button
-              key={g.title}
-              type="button"
-              onClick={() => scrollTo(i)}
-              className={`text-xs sm:text-sm font-semibold px-3.5 py-2 rounded-full border transition-colors ${
-                i === active
-                  ? "bg-[#1D3A62] text-white border-[#1D3A62]"
-                  : "bg-white text-foreground border-border/60 hover:border-foreground/40"
-              }`}
-            >
-              {g.title}
-            </button>
-          ))}
-        </div>
-        <div className="hidden sm:flex items-center gap-2">
+      <div className="flex flex-wrap gap-2 mb-6">
+        {SERVICE_GROUPS.map((g, i) => (
           <button
+            key={g.title}
             type="button"
-            onClick={() => canPrev && scrollTo(active - 1)}
-            disabled={!canPrev}
-            aria-label="Area precedente"
-            className="h-9 w-9 rounded-full border border-border/60 bg-white flex items-center justify-center text-foreground hover:bg-muted/40 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+            onClick={() => scrollTo(i)}
+            className={`text-xs sm:text-sm font-semibold px-3.5 py-2 rounded-full border transition-colors ${
+              i === active
+                ? "bg-[#1D3A62] text-white border-[#1D3A62]"
+                : "bg-white text-foreground border-border/60 hover:border-foreground/40"
+            }`}
           >
-            <ChevronLeft className="h-4 w-4" />
+            {g.title}
           </button>
-          <button
-            type="button"
-            onClick={() => canNext && scrollTo(active + 1)}
-            disabled={!canNext}
-            aria-label="Area successiva"
-            className="h-9 w-9 rounded-full border border-border/60 bg-white flex items-center justify-center text-foreground hover:bg-muted/40 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-          >
-            <ChevronRight className="h-4 w-4" />
-          </button>
-        </div>
+        ))}
       </div>
 
       <div

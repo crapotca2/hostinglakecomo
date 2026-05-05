@@ -10,31 +10,6 @@ import { DashboardMockup } from "@/components/public/dashboard-mockup";
 import { EmailRecapMockup } from "@/components/public/email-recap-mockup";
 import { ServicesCarousel } from "@/components/public/services-carousel";
 
-const PILLARS = [
-  {
-    icon: Wrench,
-    title: "Gestione operativa",
-    desc: "Pulizia hotel, biancheria premium, manutenzione 24/7, accoglienza ospiti. Tu firmi il mandato, noi ci occupiamo del resto.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Compliance totale",
-    desc: "CIN, Alloggiati Web, ISTAT, tassa di soggiorno, cedolare secca. Niente scadenze da inseguire, niente sanzioni a sorpresa.",
-  },
-  {
-    icon: LayoutDashboard,
-    title: "Dashboard personalizzata",
-    desc: "Una cabina di regia in tempo reale: revenue, occupazione, prenotazioni, recensioni. Tutto a portata di click, sempre.",
-    highlight: true,
-  },
-  {
-    icon: Mail,
-    title: "Recap mensile via email",
-    desc: "Ogni mese ricevi nella casella un riassunto curato: numeri chiave, trend, recensioni, suggerimenti operativi.",
-    highlight: true,
-  },
-];
-
 const DASHBOARD_BLOCKS = [
   {
     title: "Panoramica & KPI",
@@ -86,42 +61,116 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* PILLARS */}
+      {/* PILLARS — split diagonal */}
       <section id="pillars" className="py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {PILLARS.map((p) => (
-              <div
-                key={p.title}
-                className={`rounded-2xl p-6 flex flex-col ${
-                  p.highlight
-                    ? "bg-[#1D3A62] text-white shadow-xl"
-                    : "bg-white border border-border/50 border-t-[3px] border-t-[#1D3A62]"
-                }`}
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="rounded-3xl p-1.5 bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center shadow-xl">
+            <div className="rounded-[22px] bg-white relative overflow-hidden">
+              {/* Diagonal divider — visible only on desktop */}
+              <svg
+                aria-hidden="true"
+                className="hidden sm:block absolute inset-0 w-full h-full pointer-events-none text-[#1D3A62]/15"
+                preserveAspectRatio="none"
+                viewBox="0 0 100 100"
               >
-                <div className="flex items-center gap-1">
-                  <div
-                    className={`h-11 w-11 rounded-xl flex items-center justify-center mb-4 ${
-                      p.highlight ? "bg-white/10" : "bg-primary/[0.08]"
-                    }`}
-                  >
-                    <p.icon
-                      className={`h-5 w-5 ${
-                        p.highlight ? "text-white" : "text-primary"
-                      }`}
-                    />
+                <line
+                  x1="100"
+                  y1="0"
+                  x2="0"
+                  y2="100"
+                  stroke="currentColor"
+                  strokeWidth="0.6"
+                  vectorEffect="non-scaling-stroke"
+                />
+              </svg>
+
+              <div className="relative grid sm:grid-cols-2 sm:min-h-[420px]">
+                {/* Operative — top-left half */}
+                <div className="p-8 sm:p-10 lg:p-12 sm:pr-16 lg:pr-20 sm:pb-20 lg:pb-24 border-b border-border/40 sm:border-b-0">
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="h-11 w-11 rounded-xl bg-primary/[0.08] flex items-center justify-center shrink-0">
+                      <Wrench className="h-5 w-5 text-primary" />
+                    </div>
+                    <span className="text-[10px] uppercase tracking-[0.18em] text-primary font-semibold">
+                      Operativo
+                    </span>
                   </div>
-                  <h3 className="text-base font-semibold mb-2">{p.title}</h3>
+                  <h3 className="text-2xl sm:text-3xl font-light mb-3">
+                    Lavoro <span className="font-semibold">invisibile</span>,
+                    risultati visibili
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-5">
+                    Pulizia con standard hotel, biancheria premium,
+                    accoglienza ospiti, manutenzione 24/7. Più la compliance
+                    completa: CIN, Alloggiati Web, ISTAT, tassa di soggiorno.
+                    Niente scadenze da inseguire, niente sanzioni a sorpresa.
+                  </p>
+                  <ul className="space-y-1.5 text-xs text-foreground">
+                    {[
+                      "Pulizia & biancheria standard hotel",
+                      "Accoglienza ospiti multilingua 24/7",
+                      "Compliance fiscale e amministrativa",
+                      "Manutenzione preventiva & emergenze",
+                    ].map((line) => (
+                      <li key={line} className="flex items-start gap-2">
+                        <ArrowRight className="h-3 w-3 text-primary shrink-0 mt-1" />
+                        <span>{line}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <p
-                  className={`text-sm leading-relaxed ${
-                    p.highlight ? "text-white/80" : "text-muted-foreground"
-                  }`}
-                >
-                  {p.desc}
-                </p>
+
+                {/* Reportistica — bottom-right half */}
+                <div className="p-8 sm:p-10 lg:p-12 sm:pl-16 lg:pl-20 sm:pt-20 lg:pt-24 bg-[#1D3A62] text-white sm:bg-transparent sm:text-foreground">
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="h-11 w-11 rounded-xl bg-white/15 sm:bg-primary/[0.08] flex items-center justify-center shrink-0">
+                      <LayoutDashboard className="h-5 w-5 text-white sm:text-primary" />
+                    </div>
+                    <span className="text-[10px] uppercase tracking-[0.18em] text-white/85 sm:text-primary font-semibold">
+                      Reportistica
+                    </span>
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-light mb-3">
+                    Numeri sempre <span className="font-semibold">a portata</span>
+                  </h3>
+                  <p className="text-sm text-white/85 sm:text-muted-foreground leading-relaxed mb-5">
+                    Una dashboard personale aggiornata ogni giorno e un
+                    recap mensile via email. Vedi in tempo reale revenue,
+                    occupazione, prenotazioni e recensioni — e ricevi nella
+                    casella un riassunto curato dei numeri che contano.
+                  </p>
+                  <ul className="space-y-1.5 text-xs text-white sm:text-foreground">
+                    {[
+                      "Dashboard real-time, accessibile 24/7",
+                      "30+ report aggiornati quotidianamente",
+                      "Recap mensile curato via email",
+                      "Suggerimenti operativi e flag stagionali",
+                    ].map((line) => (
+                      <li key={line} className="flex items-start gap-2">
+                        <Mail className="h-3 w-3 text-white/80 sm:text-primary shrink-0 mt-1" />
+                        <span>{line}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            ))}
+
+              {/* Decorative blue triangle bottom-right (subtle fill below diagonal) */}
+              <div
+                aria-hidden="true"
+                className="hidden sm:block absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(to top right, rgba(29,58,98,0.04) 0%, rgba(29,58,98,0.04) 49.7%, transparent 50%, transparent 100%)",
+                }}
+              />
+
+              {/* Connecting badge in the centre showing the two areas are halves of the same offering */}
+              <div className="hidden sm:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-2 px-4 py-2 rounded-full bg-white border border-border/60 shadow-md text-[10px] uppercase tracking-[0.18em] font-semibold text-primary">
+                <ShieldCheck className="h-3.5 w-3.5" />
+                Un solo interlocutore
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -130,14 +179,15 @@ export default function ServicesPage() {
       <section id="services" className="py-20 bg-muted/30 border-y border-border/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14 max-w-2xl mx-auto">
-            <span className="section-label">Cosa facciamo per te</span>
+            <span className="section-label">I servizi nel dettaglio</span>
             <h2 className="text-3xl sm:text-4xl font-light mt-3 mb-3">
-              Quattro aree, <span className="font-semibold">un solo interlocutore</span>
+              Sedici servizi, <span className="font-semibold">quattro cluster operativi</span>
             </h2>
             <p className="text-muted-foreground">
-              I nostri servizi sono pensati per togliere lavoro al
-              proprietario e alzare il rendimento dell&apos;immobile. Ogni
-              area è coperta da uno specialista del team.
+              Sotto le due macro-aree, quattro cluster coprono ogni momento
+              della vita dell&apos;immobile — dal primo sopralluogo al
+              rendiconto fiscale. Tu hai una sola conversazione, noi
+              coordiniamo tutti gli specialisti.
             </p>
           </div>
 
