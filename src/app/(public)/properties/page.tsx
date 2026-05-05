@@ -131,8 +131,7 @@ export default function PropertiesPage() {
     <div className="pt-20">
       <section className="py-16 sm:py-20 border-b border-border/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="section-label">Proprietà in gestione</span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light mt-3 mb-4">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light mb-4">
             Le case che curiamo sul <span className="font-semibold">Lago di Como</span>
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg">

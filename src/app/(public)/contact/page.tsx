@@ -174,8 +174,7 @@ export default function ContactPage() {
     <div className="pt-20">
       <section className="py-20 border-b border-border/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="section-label">Parliamone</span>
-          <h1 className="text-4xl sm:text-5xl font-light mt-3 mb-4">
+          <h1 className="text-4xl sm:text-5xl font-light mb-4">
             <span className="font-semibold">Contattaci</span>
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">

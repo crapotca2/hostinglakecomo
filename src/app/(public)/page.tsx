@@ -133,8 +133,7 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-[5fr_7fr] gap-10 lg:gap-12 items-center">
             <div>
               <div className="max-w-xl">
-                <span className="section-label">La nostra gestione</span>
-                <h2 className="text-3xl sm:text-4xl font-light text-foreground mt-3 mb-6">
+                <h2 className="text-3xl sm:text-4xl font-light text-foreground mb-6">
                   Una sola gestione,{" "}
                   <span className="font-semibold">tutte le piattaforme</span>
                 </h2>
@@ -244,8 +243,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between mb-12">
             <div>
-              <span className="section-label">Portfolio</span>
-              <h2 className="text-3xl sm:text-4xl font-light text-foreground mt-3">
+              <h2 className="text-3xl sm:text-4xl font-light text-foreground">
                 La proprieta che <span className="font-semibold">gestiamo oggi</span>
               </h2>
             </div>

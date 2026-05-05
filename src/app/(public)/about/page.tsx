@@ -16,8 +16,7 @@ export default function AboutPage() {
     <div className="pt-20">
       <section className="py-20 border-b border-border/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="section-label">Chi siamo</span>
-          <h1 className="text-4xl sm:text-5xl font-light mt-3 mb-4">
+          <h1 className="text-4xl sm:text-5xl font-light mb-4">
             Property manager{" "}
             <span className="font-semibold">specializzati</span>
             <br />
@@ -96,8 +95,7 @@ export default function AboutPage() {
       <section className="py-20 bg-muted/30 border-y border-border/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <span className="section-label">Il team</span>
-            <h2 className="text-3xl sm:text-4xl font-light mt-3 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-light mb-4">
               Tre <span className="font-semibold">property manager</span>, una
               persona di riferimento
             </h2>

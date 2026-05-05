@@ -167,11 +167,20 @@ export default function StrumentiPage() {
         const tools = TOOLS.filter((t) => t.category === cat);
         const meta = CATEGORY_META[cat];
         return (
-          <section key={cat} className="py-16 even:bg-muted/30">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <section
+            key={cat}
+            className="py-20 bg-[#1D3A62] text-white relative overflow-hidden border-t border-white/10"
+          >
+            <div
+              aria-hidden
+              className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
+            />
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
               <div className="mb-10">
-                <span className="section-label">{meta.label}</span>
-                <p className="text-muted-foreground mt-2">{meta.desc}</p>
+                <h2 className="text-2xl sm:text-3xl font-light text-white">
+                  <span className="font-semibold">{meta.label}</span>
+                </h2>
+                <p className="text-white/75 mt-2">{meta.desc}</p>
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {tools.map((t) => {
@@ -219,7 +228,7 @@ export default function StrumentiPage() {
                       <Link
                         key={t.slug}
                         href={`/strumenti/${t.slug}`}
-                        className="group bg-white rounded-2xl p-7 border border-border/50 border-t-[3px] border-t-[#1D3A62] card-hover block"
+                        className="group bg-white rounded-2xl p-7 border border-border/50 card-hover block"
                       >
                         {content}
                       </Link>
@@ -230,7 +239,7 @@ export default function StrumentiPage() {
                       <Link
                         key={t.slug}
                         href={`/strumenti/${t.slug}`}
-                        className="group bg-white rounded-2xl p-7 border border-border/50 border-t-[3px] border-t-[#1D3A62] card-hover block"
+                        className="group bg-white rounded-2xl p-7 border border-border/50 card-hover block"
                       >
                         {content}
                       </Link>
@@ -239,7 +248,7 @@ export default function StrumentiPage() {
                   return (
                     <div
                       key={t.slug}
-                      className="bg-white rounded-2xl p-7 border border-border/50 border-t-[3px] border-t-[#1D3A62] opacity-70"
+                      className="bg-white rounded-2xl p-7 border border-border/50 opacity-70"
                     >
                       {content}
                     </div>
