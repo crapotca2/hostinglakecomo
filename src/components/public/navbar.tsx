@@ -19,6 +19,7 @@ export function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -52,6 +53,8 @@ export function Navbar() {
         "fixed top-0 left-0 right-0 z-50 transition-[background-color,box-shadow] duration-300",
         showSolid
           ? "bg-white/90 backdrop-blur-xl border-b border-border/50 shadow-sm"
+          : isHome
+          ? "bg-transparent"
           : "bg-[#1D3A62]"
       )}
     >
