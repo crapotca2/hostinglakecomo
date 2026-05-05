@@ -15,6 +15,9 @@ import {
   Maximize2,
 } from "lucide-react";
 import type { PortfolioImage } from "@/lib/portfolio";
+import { PicWebp } from "@/components/ui/pic-webp";
+
+const toWebp = (url: string) => url.replace(/\.jpe?g$/i, ".webp");
 
 type Props = {
   images: PortfolioImage[];
@@ -53,7 +56,7 @@ export function PropertyGallery({ images, propertyName, hasLakeView }: Props) {
   const currentRoom = images[activeIndex]?.room;
 
   const slides = images.map((img) => ({
-    src: img.url,
+    src: toWebp(img.url),
     alt: img.alt || propertyName,
     title: img.room || propertyName,
   }));
@@ -69,11 +72,12 @@ export function PropertyGallery({ images, propertyName, hasLakeView }: Props) {
               className="block w-full text-left cursor-zoom-in"
               aria-label="Apri la gallery a tutto schermo"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <PicWebp
                 src={mainImage}
                 alt={images[activeIndex]?.alt || propertyName}
                 className="w-full h-80 sm:h-[32rem] object-cover"
+                loading="eager"
+                fetchPriority="high"
               />
               <span className="absolute bottom-4 right-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/95 text-foreground text-xs font-semibold backdrop-blur-sm shadow-md transition-opacity">
                 <Maximize2 className="h-3.5 w-3.5" />
@@ -111,8 +115,7 @@ export function PropertyGallery({ images, propertyName, hasLakeView }: Props) {
                         : "border-transparent opacity-70 hover:opacity-100"
                     }`}
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <PicWebp
                       src={img.url}
                       alt={img.alt || `${propertyName} ${i + 1}`}
                       className="w-full h-full object-cover"

@@ -44,7 +44,7 @@ export default function AboutPage() {
   return (
     <div className="pt-20">
       <section className="py-20 border-b border-border/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="section-label">Chi siamo</span>
           <h1 className="text-4xl sm:text-5xl font-light mt-3 mb-4">
             Property manager{" "}
@@ -60,7 +60,7 @@ export default function AboutPage() {
       </section>
 
       <section className="py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto space-y-6 text-foreground leading-relaxed">
             <p className="text-lg">
               Hosting Lake Como e una realta specializzata di tre property
@@ -216,7 +216,7 @@ export default function AboutPage() {
       </section>
 
       <section className="py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {STATS.map((stat) => (
               <div

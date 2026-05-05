@@ -99,7 +99,7 @@ export default function ReportPage() {
   return (
     <div className="pt-20">
       <section className="py-24 border-b border-border/50 bg-gradient-to-b from-primary/[0.04] via-white to-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="section-label">Centro di controllo</span>
           <h1 className="text-4xl sm:text-5xl font-light mt-3 mb-4">
             Dietro ogni proprieta, <span className="font-semibold">un centro di controllo</span>
@@ -126,7 +126,7 @@ export default function ReportPage() {
       </section>
 
       <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
             <span className="section-label">Sei aree di reportistica</span>
             <h2 className="text-3xl font-light mt-3 mb-3">

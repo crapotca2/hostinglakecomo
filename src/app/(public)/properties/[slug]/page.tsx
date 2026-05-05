@@ -7,40 +7,16 @@ import {
   Bed,
   Bath,
   Users,
-  CheckCircle2,
   Home as HomeIcon,
-  Compass,
-  Car,
   Info,
-  Building2,
-  Clock,
-  Wifi,
-  Wind,
-  Waves,
-  TreePine,
-  CookingPot,
-  Sparkles,
   ArrowLeft,
-  UtensilsCrossed,
-  Bus,
-  ShoppingBag,
-  Landmark,
-  Navigation,
-  ExternalLink,
   Star,
+  Navigation,
 } from "lucide-react";
-import type { PortfolioPoi, PortfolioDistances } from "@/lib/portfolio";
 import { getPortfolioEntry, getZoneLabel, getTypeLabel } from "@/lib/portfolio";
 import { AirbnbReviewBlock } from "@/components/public/airbnb-review-block";
 import { GoogleMapEmbed } from "@/components/public/google-map-embed";
 import { PropertyGallery } from "@/components/public/property-gallery";
-import host from "@/data/host.json";
-
-function formatDistance(m: number | null | undefined): string {
-  if (m == null) return "—";
-  if (m < 1000) return `${m} m`;
-  return `${(m / 1000).toFixed(1)} km`;
-}
 
 function MapEmbed({ lat, lng, name }: { lat: number; lng: number; name: string }) {
   const link = `https://www.google.com/maps?q=${lat},${lng}`;
@@ -66,119 +42,8 @@ function MapEmbed({ lat, lng, name }: { lat: number; lng: number; name: string }
         query={`${lat},${lng}`}
         title={`Mappa ${name}`}
         zoom={16}
-        className="h-72"
+        className="h-72 sm:h-80"
       />
-    </div>
-  );
-}
-
-function PoiGroup({
-  icon: Icon,
-  title,
-  items,
-}: {
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  items: PortfolioPoi[];
-}) {
-  if (!items || items.length === 0) return null;
-  return (
-    <div>
-      <div className="flex items-center gap-2 mb-2.5">
-        <Icon className="h-3.5 w-3.5 text-primary" />
-        <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          {title}
-        </h3>
-      </div>
-      <ul className="space-y-1.5">
-        {items.slice(0, 6).map((p, i) => (
-          <li
-            key={`${p.name}-${i}`}
-            className="flex items-center justify-between text-sm gap-3"
-          >
-            <span className="truncate">
-              <span className="text-foreground">{p.name}</span>
-              {p.subtype && (
-                <span className="text-muted-foreground"> · {p.subtype}</span>
-              )}
-            </span>
-            <span className="text-xs text-muted-foreground tabular-nums shrink-0">
-              {formatDistance(p.distance)}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function DistancesBar({ distances }: { distances: PortfolioDistances }) {
-  const items: { label: string; value?: number | null }[] = [
-    { label: "Duomo Como", value: distances.comoDuomo },
-    { label: "Piazza Cavour", value: distances.piazzaCavour },
-    { label: "Cernobbio", value: distances.cernobbio },
-    { label: "Bellagio", value: distances.bellagio },
-    { label: "Menaggio", value: distances.menaggio },
-    { label: "Varenna", value: distances.varenna },
-  ].filter((i) => typeof i.value === "number");
-  if (items.length === 0) return null;
-  return (
-    <div>
-      <div className="flex items-center gap-2 mb-2.5">
-        <Landmark className="h-3.5 w-3.5 text-primary" />
-        <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Distanze da punti chiave
-        </h3>
-      </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-        {items.map((i) => (
-          <div
-            key={i.label}
-            className="bg-muted/40 rounded-lg px-3 py-2 flex flex-col"
-          >
-            <span className="text-[10px] text-muted-foreground uppercase tracking-wider">
-              {i.label}
-            </span>
-            <span className="text-sm font-semibold tabular-nums">
-              {formatDistance(i.value as number)}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function AmenityIcon({ name }: { name: string }) {
-  const lower = name.toLowerCase();
-  if (lower.includes("wifi") || lower.includes("internet")) return <Wifi className="h-4 w-4" />;
-  if (lower.includes("aria condizionata")) return <Wind className="h-4 w-4" />;
-  if (lower.includes("piscina")) return <Waves className="h-4 w-4" />;
-  if (lower.includes("giardino") || lower.includes("terrazza")) return <TreePine className="h-4 w-4" />;
-  if (lower.includes("cucina") || lower.includes("elettrodomestici")) return <CookingPot className="h-4 w-4" />;
-  return <Sparkles className="h-4 w-4" />;
-}
-
-function SectionBlock({
-  icon: Icon,
-  title,
-  content,
-}: {
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  content: string;
-}) {
-  return (
-    <div className="bg-white rounded-2xl p-6 border border-border/50">
-      <div className="flex items-center gap-2 mb-3">
-        <div className="h-8 w-8 rounded-lg bg-primary/[0.08] flex items-center justify-center">
-          <Icon className="h-4 w-4 text-primary" />
-        </div>
-        <h2 className="text-sm font-semibold">{title}</h2>
-      </div>
-      <div className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
-        {content}
-      </div>
     </div>
   );
 }
@@ -190,7 +55,7 @@ export default function PropertyDetailPage() {
 
   if (!property) {
     return (
-      <div className="pt-32 pb-20 max-w-7xl mx-auto px-4">
+      <div className="pt-32 pb-20 max-w-6xl mx-auto px-4">
         <div className="text-center">
           <h1 className="text-2xl font-semibold mb-2">Proprieta non trovata</h1>
           <p className="text-sm text-muted-foreground mb-6">
@@ -210,14 +75,8 @@ export default function PropertyDetailPage() {
   }
 
   const sections = property.sections ?? {};
-  const facts = property.facts ?? {};
-  const nearby = property.nearby;
-  const distances = property.distances;
   const geo = property.geo;
   const airbnbListing = property.airbnbListing;
-  const hasNearbyAny = nearby
-    ? nearby.food.length + nearby.transport.length + nearby.shop.length + nearby.attraction.length > 0
-    : false;
 
   const SITE_URL = "https://hostinglakecomo.vercel.app";
   const structuredData = {
@@ -287,14 +146,16 @@ export default function PropertyDetailPage() {
         />
 
         <div className="space-y-6">
-          <div className="bg-white rounded-2xl p-6 border border-border/50">
+          <div className="bg-white rounded-2xl p-5 sm:p-6 border border-border/50">
             <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
               <MapPin className="h-3 w-3" />
               {property.address.street ? `${property.address.street}, ` : ""}
               {property.address.city} — {getZoneLabel(property.zone)}
             </div>
-            <h1 className="text-3xl font-semibold mb-3">{property.name}</h1>
-            <div className="flex items-center gap-4 text-sm text-muted-foreground flex-wrap">
+            <h1 className="text-2xl sm:text-3xl font-semibold mb-3">
+              {property.name}
+            </h1>
+            <div className="flex items-center gap-3 sm:gap-4 text-sm text-muted-foreground flex-wrap gap-y-2">
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-muted/60 text-foreground text-xs font-medium">
                 {getTypeLabel(property.type)}
               </span>
@@ -327,172 +188,38 @@ export default function PropertyDetailPage() {
                 {property.description}
               </p>
             )}
+
+            {(sections.space || sections.neighborhood) && (
+              <div className="mt-6 pt-6 border-t border-border/40 grid sm:grid-cols-2 gap-x-8 gap-y-6">
+                {sections.space && (
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <HomeIcon className="h-3.5 w-3.5 text-primary" />
+                      <h3 className="text-xs font-semibold uppercase tracking-wider text-primary">
+                        Lo spazio
+                      </h3>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
+                      {sections.space}
+                    </p>
+                  </div>
+                )}
+                {sections.neighborhood && (
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <MapPin className="h-3.5 w-3.5 text-primary" />
+                      <h3 className="text-xs font-semibold uppercase tracking-wider text-primary">
+                        Il quartiere
+                      </h3>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
+                      {sections.neighborhood}
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
-
-          {(facts.floor ||
-            facts.checkInHours ||
-            facts.parkingNote ||
-            facts.touristTaxNote) && (
-            <div className="bg-white rounded-2xl p-6 border border-border/50">
-              <h2 className="text-sm font-semibold mb-4">Informazioni pratiche</h2>
-              <dl className="grid sm:grid-cols-2 gap-x-6 gap-y-3 text-sm">
-                {facts.floor && (
-                  <div className="flex items-start gap-3">
-                    <Building2 className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" />
-                    <div>
-                      <dt className="text-xs text-muted-foreground">Piano</dt>
-                      <dd className="text-foreground">{facts.floor}</dd>
-                    </div>
-                  </div>
-                )}
-                {facts.checkInHours && (
-                  <div className="flex items-start gap-3">
-                    <Clock className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" />
-                    <div>
-                      <dt className="text-xs text-muted-foreground">Check-in</dt>
-                      <dd className="text-foreground">{facts.checkInHours}</dd>
-                    </div>
-                  </div>
-                )}
-                {facts.parkingNote && (
-                  <div className="flex items-start gap-3 sm:col-span-2">
-                    <Car className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" />
-                    <div>
-                      <dt className="text-xs text-muted-foreground">Parcheggio</dt>
-                      <dd className="text-foreground">{facts.parkingNote}</dd>
-                    </div>
-                  </div>
-                )}
-                {facts.touristTaxNote && (
-                  <div className="flex items-start gap-3 sm:col-span-2">
-                    <Info className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" />
-                    <div>
-                      <dt className="text-xs text-muted-foreground">
-                        Tassa di soggiorno
-                      </dt>
-                      <dd className="text-foreground">{facts.touristTaxNote}</dd>
-                    </div>
-                  </div>
-                )}
-              </dl>
-            </div>
-          )}
-
-          {property.amenities.length > 0 && (
-            <div className="bg-white rounded-2xl p-6 border border-border/50">
-              <h2 className="text-sm font-semibold mb-4">Servizi e comfort</h2>
-              <div className="grid grid-cols-2 gap-3">
-                {property.amenities.map((a) => (
-                  <div
-                    key={a}
-                    className="flex items-center gap-2 text-sm text-foreground"
-                  >
-                    <span className="text-primary">
-                      <AmenityIcon name={a} />
-                    </span>
-                    <span>{a}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {sections.space && (
-            <SectionBlock
-              icon={HomeIcon}
-              title="Lo spazio"
-              content={sections.space}
-            />
-          )}
-          {sections.neighborhood && (
-            <SectionBlock
-              icon={MapPin}
-              title="Il quartiere"
-              content={sections.neighborhood}
-            />
-          )}
-
-          {geo && <MapEmbed lat={geo.lat} lng={geo.lng} name={property.name} />}
-
-          {(hasNearbyAny || distances) && (
-            <div className="bg-white rounded-2xl p-6 border border-border/50 space-y-6">
-              <div className="flex items-center gap-2">
-                <div className="h-8 w-8 rounded-lg bg-primary/[0.08] flex items-center justify-center">
-                  <Compass className="h-4 w-4 text-primary" />
-                </div>
-                <h2 className="text-sm font-semibold">Cosa trovi in zona</h2>
-              </div>
-              {distances && <DistancesBar distances={distances} />}
-              {hasNearbyAny && nearby && (
-                <div className="grid sm:grid-cols-2 gap-x-8 gap-y-6">
-                  <PoiGroup
-                    icon={UtensilsCrossed}
-                    title="Mangiare & bere"
-                    items={nearby.food}
-                  />
-                  <PoiGroup icon={Bus} title="Trasporti" items={nearby.transport} />
-                  <PoiGroup
-                    icon={ShoppingBag}
-                    title="Negozi e servizi"
-                    items={nearby.shop}
-                  />
-                  <PoiGroup
-                    icon={Landmark}
-                    title="Attrazioni"
-                    items={nearby.attraction}
-                  />
-                </div>
-              )}
-              <p className="text-[10px] text-muted-foreground">
-                Dati OpenStreetMap — raggio 800 m dalla proprieta. Distanze in
-                linea d'aria.
-              </p>
-            </div>
-          )}
-
-          {sections.gettingAround && (
-            <SectionBlock
-              icon={Compass}
-              title="Come muoversi"
-              content={sections.gettingAround}
-            />
-          )}
-          {sections.directions && (
-            <SectionBlock
-              icon={Car}
-              title="Come arrivare"
-              content={sections.directions}
-            />
-          )}
-          {sections.guestAccess && (
-            <SectionBlock
-              icon={CheckCircle2}
-              title="Accesso ospiti"
-              content={sections.guestAccess}
-            />
-          )}
-          {sections.services && (
-            <SectionBlock
-              icon={Sparkles}
-              title="Servizi"
-              content={sections.services}
-            />
-          )}
-          {property.extras?.map((e) => (
-            <SectionBlock
-              key={e.title}
-              icon={Info}
-              title={e.title}
-              content={e.content}
-            />
-          ))}
-          {!sections.space && property.descriptionLong && (
-            <SectionBlock
-              icon={HomeIcon}
-              title="Descrizione"
-              content={property.descriptionLong}
-            />
-          )}
 
           {airbnbListing &&
             airbnbListing.rating != null &&
@@ -506,53 +233,28 @@ export default function PropertyDetailPage() {
               />
             )}
 
-          {airbnbListing && (
-            <div className="bg-white rounded-2xl p-6 border border-border/50">
-              <div className="flex items-start gap-4 flex-wrap">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={host.profilePicture}
-                  alt={host.name}
-                  className="h-14 w-14 rounded-full object-cover shrink-0 border border-border/50"
-                />
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <h3 className="text-base font-semibold">
-                      Gestita per {host.name}
-                    </h3>
-                    {host.isSuperhost && (
-                      <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">
-                        <Star className="h-2.5 w-2.5 fill-amber-500 text-amber-500" />
-                        Superhost
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Property manager Hosting Lake Como ·{" "}
-                    {host.yearsHosting} anni di esperienza diretta ·{" "}
-                    {host.responseTime}
-                  </p>
+          {geo && <MapEmbed lat={geo.lat} lng={geo.lng} name={property.name} />}
+
+          {!sections.space && !sections.neighborhood && property.descriptionLong && (
+            <div className="bg-white rounded-2xl p-5 sm:p-6 border border-border/50">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="h-8 w-8 rounded-lg bg-primary/[0.08] flex items-center justify-center">
+                  <HomeIcon className="h-4 w-4 text-primary" />
                 </div>
-                <a
-                  href={airbnbListing.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-border bg-white text-sm font-semibold hover:bg-muted/40 transition-colors"
-                >
-                  Vedi su Airbnb
-                  <ExternalLink className="h-3.5 w-3.5" />
-                </a>
+                <h2 className="text-sm font-semibold">Descrizione</h2>
               </div>
+              <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
+                {property.descriptionLong}
+              </p>
             </div>
           )}
 
           <div className="bg-primary/[0.04] border border-primary/10 rounded-2xl p-5 flex items-start gap-3 text-sm text-muted-foreground">
             <Info className="h-4 w-4 text-primary shrink-0 mt-0.5" />
             <p>
-              Questa e una delle proprieta che il team Hosting Lake Como
-              gestisce oggi: lo stesso metodo — hospitality, operations e
-              revenue management — lo applichiamo alle proprieta dei nostri
-              clienti.{" "}
+              Questa è una delle proprietà che il team Hosting Lake Como gestisce
+              oggi: lo stesso metodo — hospitality, operations e revenue
+              management — lo applichiamo agli immobili dei nostri clienti.{" "}
               <Link
                 href="/contact?interest=consulenza&from=portfolio"
                 className="text-primary font-semibold hover:underline"

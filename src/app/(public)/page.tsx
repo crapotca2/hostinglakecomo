@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { getPortfolio, getZoneLabel, getTypeLabel } from "@/lib/portfolio";
 import { PartnersBanner } from "@/components/public/partners-banner";
+import { PicWebp } from "@/components/ui/pic-webp";
 
 const FEATURED_PROPERTIES = (() => {
   const all = getPortfolio();
@@ -266,12 +267,10 @@ export default function HomePage() {
               >
                 <div className="relative h-56 overflow-hidden bg-muted">
                   {p.images[0]?.url ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <PicWebp
                       src={p.images[0].url}
                       alt={p.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/[0.08] to-primary/[0.02]">

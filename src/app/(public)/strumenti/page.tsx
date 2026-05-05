@@ -147,7 +147,7 @@ export default function StrumentiPage() {
   return (
     <div className="pt-20">
       <section className="py-20 border-b border-border/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/[0.08] text-primary text-xs font-medium mb-4">
             <Wrench className="h-3.5 w-3.5" />
             Simulatori Hosting Lake Como
@@ -168,7 +168,7 @@ export default function StrumentiPage() {
         const meta = CATEGORY_META[cat];
         return (
           <section key={cat} className="py-16 even:bg-muted/30">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="mb-10">
                 <span className="section-label">{meta.label}</span>
                 <p className="text-muted-foreground mt-2">{meta.desc}</p>

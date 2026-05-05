@@ -109,7 +109,7 @@ export default function ServicesPage() {
   return (
     <div className="pt-20">
       <section className="py-20 border-b border-border/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="section-label">Per i proprietari</span>
           <h1 className="text-4xl sm:text-5xl font-light mt-3 mb-4">
             I nostri <span className="font-semibold">servizi</span>
@@ -123,7 +123,7 @@ export default function ServicesPage() {
       </section>
 
       <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {OWNER_SERVICES.map((s) => (
               <ServiceCard key={s.title} {...s} />

@@ -19,6 +19,7 @@ import {
   type PortfolioEntry,
 } from "@/lib/portfolio";
 import type { PropertyZone, PropertyType } from "@/types/database";
+import { PicWebp } from "@/components/ui/pic-webp";
 
 const PORTFOLIO = getPortfolio();
 const SHOW_FILTERS = PORTFOLIO.length > 3;
@@ -50,12 +51,10 @@ function PropertyCard({ property }: { property: PortfolioEntry }) {
     >
       <div className="relative h-56 overflow-hidden bg-muted">
         {firstImage ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <PicWebp
             src={firstImage}
             alt={property.name}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            loading="lazy"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/[0.08] to-primary/[0.02]">
@@ -122,41 +121,40 @@ export default function PropertiesPage() {
 
   return (
     <div className="pt-20">
-      <section className="py-20 border-b border-border/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="section-label">Portfolio</span>
-          <h1 className="text-4xl sm:text-5xl font-light mt-3 mb-4">
-            La nostra <span className="font-semibold">proprieta</span>
+      <section className="py-16 sm:py-20 border-b border-border/50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span className="section-label">Case study</span>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light mt-3 mb-4">
+            Iniziamo da <span className="font-semibold">una proprietà</span> gestita davvero
           </h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Iniziamo da una listing reale, gestita ogni giorno con cura. Presto
-            se ne aggiungeranno altre — anche la tua.
+          <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg">
+            Hosting Lake Como nasce dai nove anni di esperienza di Angelo come host
+            sul Lago. Questa è la prima proprietà che mostriamo come case study —
+            il livello di cura che applichiamo qui è lo stesso che riserveremmo al
+            tuo immobile.
           </p>
         </div>
       </section>
 
-      <section className="py-4 bg-primary/[0.04] border-b border-primary/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-start gap-2.5 text-xs text-muted-foreground">
-            <Info className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
-            <p>
-              Le proprieta mostrate sono effettivamente in gestione con noi.
-              Per avviare la gestione del tuo immobile,{" "}
-              <Link
-                href="/contact?interest=consulenza"
-                className="text-primary font-semibold hover:underline"
-              >
-                richiedi una consulenza
-              </Link>
-              .
-            </p>
+      <section className="py-4 sm:py-5 bg-primary/[0.04] border-b border-primary/10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-center gap-2.5 text-xs sm:text-sm text-muted-foreground flex-wrap text-center">
+            <Info className="h-3.5 w-3.5 text-primary shrink-0" />
+            <span>Vuoi che la prossima proprietà a comparire qui sia la tua?</span>
+            <Link
+              href="/contact?interest=consulenza"
+              className="inline-flex items-center gap-1 text-primary font-semibold hover:underline"
+            >
+              Richiedi una valutazione gratuita
+              <ArrowRight className="h-3 w-3" />
+            </Link>
           </div>
         </div>
       </section>
 
       {SHOW_FILTERS && (
         <section className="sticky top-16 md:top-20 z-30 bg-white/90 backdrop-blur-xl border-b border-border/50 shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div className="flex flex-wrap items-center gap-3">
               <div className="flex items-center gap-2 bg-muted/50 rounded-lg px-3 py-2 flex-1 min-w-[200px] max-w-md">
                 <Search className="h-4 w-4 text-muted-foreground" />
@@ -203,7 +201,7 @@ export default function PropertiesPage() {
       )}
 
       <section className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {filtered.length === 0 ? (
             <div className="text-center py-20 text-sm text-muted-foreground">
               Nessuna proprieta corrisponde ai filtri selezionati.
