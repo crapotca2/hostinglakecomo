@@ -40,9 +40,7 @@ export default function ServicesPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light mb-5 tracking-tight">
             Semplifichiamo la{" "}
-            <span className="underline decoration-2 underline-offset-[6px]">
-              gestione <span className="font-semibold">per te</span>
-            </span>
+            <span className="font-semibold">gestione per te</span>
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
             Tu mantieni la proprietà, noi ci occupiamo di tutto il resto:
@@ -178,7 +176,9 @@ export default function ServicesPage() {
           </h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
             Una sola conversazione per capire se Hosting Lake Como fa al caso
-            tuo. Nessun impegno, ti rispondiamo entro 48 ore.
+            tuo.
+            <br />
+            Nessun impegno, ti rispondiamo entro 48 ore.
           </p>
           <Link
             href="/contact?interest=consulenza&from=services"
