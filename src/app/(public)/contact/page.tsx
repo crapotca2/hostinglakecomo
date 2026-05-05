@@ -49,7 +49,7 @@ function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white rounded-2xl p-8 border border-border/50 border-t-[3px] border-t-[#1D3A62] shadow-sm space-y-5"
+      className="bg-white rounded-2xl p-8 border border-border/50 border-t-[3px] border-t-[#1D3A62] shadow-[0_25px_60px_-12px_rgba(29,58,98,0.45)] space-y-5"
     >
       <h2 className="text-xl font-semibold mb-2">Invia un Messaggio</h2>
       {from && (
@@ -172,56 +172,75 @@ function ContactFormFallback() {
 export default function ContactPage() {
   return (
     <div className="pt-20">
-      <section className="py-20 bg-[#1D3A62] text-white relative overflow-hidden">
+      <section className="py-16 bg-[#1D3A62] text-white relative overflow-hidden">
         <div
           aria-hidden
           className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
         />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
-          <h1 className="text-4xl sm:text-5xl font-light mb-4 text-white">
+          <h1 className="text-4xl sm:text-5xl font-light text-white">
             <span className="font-semibold">Contattaci</span>
           </h1>
-          <p className="text-white/80 max-w-2xl mx-auto text-lg">
-            Richiedi un preventivo o contattaci per qualsiasi informazione.
-          </p>
-          <div className="max-w-2xl mx-auto mt-10 grid sm:grid-cols-2 gap-6 text-left">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-                <Phone className="h-4 w-4 text-white" />
-              </div>
-              <div>
-                <div className="text-sm font-medium text-white">Telefono</div>
-                <a
-                  href="tel:+39031547xxxx"
-                  className="text-sm text-white/75 hover:text-white transition-colors"
-                >
-                  +39 XXX XXX XXXX
-                </a>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-end">
-              <div className="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-                <Mail className="h-4 w-4 text-white" />
-              </div>
-              <div>
-                <div className="text-sm font-medium text-white">Email</div>
-                <a
-                  href="mailto:info@airbibby.com"
-                  className="text-sm text-white/75 hover:text-white transition-colors"
-                >
-                  info@airbibby.com
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
       <section className="py-20">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Suspense fallback={<ContactFormFallback />}>
-            <ContactForm />
-          </Suspense>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-[5fr_7fr] gap-12 lg:gap-16 items-start">
+            {/* INFO LEFT */}
+            <div className="lg:pt-2">
+              <h2 className="text-2xl sm:text-3xl font-light text-foreground mb-4">
+                Parliamo del tuo{" "}
+                <span className="font-semibold">immobile</span>
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-8">
+                Richiedi un preventivo o contattaci per qualsiasi informazione.
+                Ti rispondiamo entro 48 ore con una valutazione preliminare e i
+                prossimi passi per affidarci la tua proprieta sul Lago di Como.
+              </p>
+              <div className="space-y-5">
+                <a
+                  href="tel:+39031547xxxx"
+                  className="flex items-center gap-4 group"
+                >
+                  <div className="h-11 w-11 rounded-xl bg-primary/[0.08] border border-primary/20 flex items-center justify-center shrink-0 group-hover:bg-primary/[0.12] transition-colors">
+                    <Phone className="h-4 w-4 text-primary" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      Telefono
+                    </div>
+                    <div className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                      +39 XXX XXX XXXX
+                    </div>
+                  </div>
+                </a>
+                <a
+                  href="mailto:info@airbibby.com"
+                  className="flex items-center gap-4 group"
+                >
+                  <div className="h-11 w-11 rounded-xl bg-primary/[0.08] border border-primary/20 flex items-center justify-center shrink-0 group-hover:bg-primary/[0.12] transition-colors">
+                    <Mail className="h-4 w-4 text-primary" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      Email
+                    </div>
+                    <div className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                      info@airbibby.com
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            {/* FORM RIGHT */}
+            <div>
+              <Suspense fallback={<ContactFormFallback />}>
+                <ContactForm />
+              </Suspense>
+            </div>
+          </div>
         </div>
       </section>
 
