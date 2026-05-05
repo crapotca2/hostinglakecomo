@@ -41,7 +41,7 @@ export default function AboutPage() {
               <strong>mercato internazionale</strong> che frequenta il Lago di
               Como ogni anno.
             </p>
-            <p className="text-muted-foreground">
+            <p>
               Il nostro lavoro poggia su <strong>oltre nove anni di hosting
               diretto sul Lago</strong> e sulla certificazione{" "}
               <strong>Superhost di Airbnb dal 2017</strong>, con tasso di
@@ -53,7 +53,7 @@ export default function AboutPage() {
               riceva l&apos;attenzione dello specialista giusto in ogni
               momento, mentre il proprietario mantiene un solo interlocutore.
             </p>
-            <p className="text-muted-foreground">
+            <p>
               Lavoriamo esclusivamente sul Lago di Como: conosciamo le zone, i
               ristoranti, i battelli, i tempi del traghetto, le abitudini dei
               turisti che arrivano in primavera e di quelli che restano fino a
@@ -68,12 +68,12 @@ export default function AboutPage() {
                   text: "Comunicazione fluente in italiano e inglese, supporto a ospiti internazionali",
                 },
                 {
-                  icon: Sparkles,
-                  text: "Standard di pulizia e organizzazione paragonabili a quelli alberghieri",
-                },
-                {
                   icon: ShieldCheck,
                   text: "Compliance normativa garantita: CIN, Questura, ISTAT, tassa di soggiorno",
+                },
+                {
+                  icon: Sparkles,
+                  text: "Standard di pulizia e organizzazione paragonabili a quelli alberghieri",
                 },
                 {
                   icon: LineChart,
@@ -82,9 +82,9 @@ export default function AboutPage() {
               ].map((item) => (
                 <li
                   key={item.text}
-                  className="flex items-start gap-3 text-sm text-white bg-[#1D3A62] bg-[url('/images/textures/host.webp')] bg-cover bg-center bg-blend-multiply rounded-xl p-4 shadow-sm"
+                  className="flex items-center gap-3 text-sm text-white bg-[#1D3A62] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center bg-blend-multiply rounded-xl p-4 shadow-sm min-h-[4.5rem]"
                 >
-                  <item.icon className="h-5 w-5 text-white shrink-0 mt-0.5" />
+                  <item.icon className="h-5 w-5 text-white shrink-0" />
                   {item.text}
                 </li>
               ))}
