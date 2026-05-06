@@ -187,7 +187,7 @@ export default function ContactPage() {
               </p>
               <div className="space-y-5">
                 <a
-                  href="tel:+39031547xxxx"
+                  href="tel:+393517180435"
                   className="flex items-center gap-4 group"
                 >
                   <div className="h-11 w-11 rounded-xl bg-primary/[0.08] border border-primary/20 flex items-center justify-center shrink-0 group-hover:bg-primary/[0.12] transition-colors">
@@ -198,12 +198,12 @@ export default function ContactPage() {
                       Telefono
                     </div>
                     <div className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
-                      +39 XXX XXX XXXX
+                      +39 351 718 0435
                     </div>
                   </div>
                 </a>
                 <a
-                  href="mailto:info@airbibby.com"
+                  href="mailto:angelo.talarico@gmail.com"
                   className="flex items-center gap-4 group"
                 >
                   <div className="h-11 w-11 rounded-xl bg-primary/[0.08] border border-primary/20 flex items-center justify-center shrink-0 group-hover:bg-primary/[0.12] transition-colors">
@@ -214,7 +214,7 @@ export default function ContactPage() {
                       Email
                     </div>
                     <div className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
-                      info@airbibby.com
+                      angelo.talarico@gmail.com
                     </div>
                   </div>
                 </a>

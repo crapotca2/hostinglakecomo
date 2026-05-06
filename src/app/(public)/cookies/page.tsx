@@ -180,10 +180,10 @@ export default function CookiePolicyPage() {
               Per qualunque richiesta relativa alla presente Cookie Policy e
               possibile scrivere a{" "}
               <a
-                href="mailto:info@airbibby.com"
+                href="mailto:angelo.talarico@gmail.com"
                 className="text-primary hover:underline"
               >
-                info@airbibby.com
+                angelo.talarico@gmail.com
               </a>
               . La presente informativa puo essere aggiornata in qualunque
               momento; la versione vigente e sempre disponibile su questa

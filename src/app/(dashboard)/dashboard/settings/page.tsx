@@ -60,7 +60,7 @@ export default function SettingsPage() {
             <label className="text-sm font-medium mb-1.5 block">Telefono</label>
             <input
               type="tel"
-              defaultValue="+39 XXX XXX XXXX"
+              placeholder="+39 ___ ___ ____"
               className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
             />
           </div>

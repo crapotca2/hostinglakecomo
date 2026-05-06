@@ -58,12 +58,12 @@ export default function NoteLegaliPage() {
               e ai Servizi e possibile utilizzare i seguenti recapiti:
               indirizzo email{" "}
               <a
-                href="mailto:info@airbibby.com"
+                href="mailto:angelo.talarico@gmail.com"
                 className="text-primary hover:underline"
               >
-                info@airbibby.com
+                angelo.talarico@gmail.com
               </a>
-              , telefono <strong>+39 031 547 8072</strong>, indirizzo postale{" "}
+              , telefono <strong>+39 351 718 0435</strong>, indirizzo postale{" "}
               <strong>Via Maurizio Monti 46, 22100 Como, Italia</strong>.
             </p>
           </section>

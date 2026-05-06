@@ -49,10 +49,10 @@ export default function PrivacyPolicyPage() {
               richiesta in materia di protezione dei dati personali e possibile
               scrivere all&apos;indirizzo{" "}
               <a
-                href="mailto:info@airbibby.com"
+                href="mailto:angelo.talarico@gmail.com"
                 className="text-primary hover:underline"
               >
-                info@airbibby.com
+                angelo.talarico@gmail.com
               </a>
               . Non e nominato un Responsabile della Protezione dei Dati (DPO)
               ai sensi dell&apos;art. 37 GDPR in quanto non ricorrono i presupposti
@@ -165,10 +165,10 @@ export default function PrivacyPolicyPage() {
               sottoposto a decisioni automatizzate. Le richieste possono essere
               inviate all&apos;indirizzo{" "}
               <a
-                href="mailto:info@airbibby.com"
+                href="mailto:angelo.talarico@gmail.com"
                 className="text-primary hover:underline"
               >
-                info@airbibby.com
+                angelo.talarico@gmail.com
               </a>{" "}
               e verranno evase entro un mese dalla ricezione, prorogabile di due
               mesi in caso di richieste particolarmente complesse.

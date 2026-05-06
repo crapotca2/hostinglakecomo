@@ -169,10 +169,10 @@ export default function TermsPage() {
               Per qualunque richiesta relativa ai presenti Termini di Servizio
               e possibile scrivere a{" "}
               <a
-                href="mailto:info@airbibby.com"
+                href="mailto:angelo.talarico@gmail.com"
                 className="text-primary hover:underline"
               >
-                info@airbibby.com
+                angelo.talarico@gmail.com
               </a>
               .
             </p>
