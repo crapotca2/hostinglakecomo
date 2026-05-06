@@ -105,10 +105,7 @@ export default function AboutPage() {
       <section className="py-20 bg-muted/20 border-y border-border/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-              Il team
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-light mt-3 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-light mb-4">
               Dietro Hosting Lake <span className="font-semibold">Como</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">

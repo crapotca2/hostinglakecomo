@@ -32,7 +32,7 @@ export default function LoginPage() {
           <img
             src="/images/logo/logo-marble.png"
             alt="Hosting Lake Como"
-            className="h-14 w-14 mx-auto object-contain"
+            className="h-24 w-24 sm:h-28 sm:w-28 mx-auto object-contain"
           />
           <h1 className="text-2xl font-light text-foreground mt-4">
             Hosting Lake Como
