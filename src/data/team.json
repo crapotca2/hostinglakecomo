@@ -3,25 +3,25 @@
     {
       "id": "angelo",
       "name": "Angelo",
-      "role": "Property Manager Senior",
-      "shortRole": "Hospitality",
+      "role": "Gestore Senior",
+      "shortRole": "Accoglienza",
       "yearsExperience": 9,
       "isSuperhost": true,
       "profilePicture": "/images/host/angelo.jpg",
       "airbnbProfileUrl": "https://www.airbnb.it/users/profile/1462513131563105498",
-      "bio": "Property manager con anni di esperienza diretta sul Lago di Como. Superhost Airbnb dal 2017 con tasso di risposta del 100%. Cura l'esperienza ospite e la qualita complessiva del servizio.",
+      "bio": "Gestore con anni di esperienza diretta sul Lago di Como. Superhost Airbnb dal 2017 con tasso di risposta del 100%. Cura l'esperienza ospite e la qualita complessiva del servizio.",
       "highlights": [
         "Superhost Airbnb dal 2017",
         "Tasso di risposta 100%",
-        "Anni di hosting diretto sul Lago",
+        "Anni di ospitalita diretta sul Lago",
         "Italiano e inglese fluenti"
       ]
     },
     {
       "id": "operations",
       "name": null,
-      "role": "Operations & Compliance Manager",
-      "shortRole": "Operations",
+      "role": "Responsabile Operativita e Adempimenti",
+      "shortRole": "Operativita",
       "yearsExperience": null,
       "isSuperhost": false,
       "profilePicture": null,
@@ -29,7 +29,7 @@
       "bio": "Coordina pulizie professionali, manutenzioni programmate e ispezioni periodiche delle proprieta. Gestisce gli adempimenti normativi: CIN, comunicazione Questura via Alloggiati Web, ISTAT, tassa di soggiorno, archivio documentale.",
       "highlights": [
         "Network pulizie e manutenzione",
-        "Compliance CIN/Questura/ISTAT",
+        "Adempimenti CIN/Questura/ISTAT",
         "Ispezioni e controllo qualita",
         "Reperibilita 24/7"
       ]
@@ -37,24 +37,24 @@
     {
       "id": "revenue",
       "name": null,
-      "role": "Revenue & Channel Manager",
-      "shortRole": "Revenue",
+      "role": "Responsabile Tariffe e Canali",
+      "shortRole": "Tariffe",
       "yearsExperience": null,
       "isSuperhost": false,
       "profilePicture": null,
       "airbnbProfileUrl": null,
-      "bio": "Definisce la strategia di pricing dinamico e la distribuzione multi-canale. Monitora KPI di occupancy, ADR e RevPAR; ottimizza listing su Airbnb, Booking, Expedia e gli altri top portali del mercato; cura foto, descrizioni e SEO delle inserzioni.",
+      "bio": "Definisce la strategia di tariffe dinamiche e la distribuzione su piu canali. Monitora occupazione, tariffa media e ricavi per camera; ottimizza gli annunci su Airbnb, Booking, Expedia e gli altri principali portali del mercato; cura foto, descrizioni e indicizzazione delle inserzioni.",
       "highlights": [
-        "Pricing dinamico data-driven",
-        "Distribuzione 10+ canali",
-        "SEO e ottimizzazione listing",
+        "Tariffe dinamiche basate sui dati",
+        "Distribuzione su 10+ canali",
+        "Ottimizzazione annunci e indicizzazione",
         "Reportistica mensile per i proprietari"
       ]
     }
   ],
   "summary": {
-    "headline": "Property manager specializzati sul Lago di Como",
-    "subline": "Tre property manager specializzati nella gestione, pulizia e organizzazione di immobili per ospiti internazionali.",
+    "headline": "Gestori specialisti sul Lago di Como",
+    "subline": "Tre gestori specializzati nella gestione, pulizia e organizzazione di immobili per ospiti internazionali.",
     "experience": {
       "yearsCombined": 9,
       "primarySuperhost": true,

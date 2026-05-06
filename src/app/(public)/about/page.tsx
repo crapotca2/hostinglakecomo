@@ -7,7 +7,6 @@ import {
   LineChart,
   ShieldCheck,
   UserCircle2,
-  Globe2,
 } from "lucide-react";
 import team from "@/data/team.json";
 
@@ -17,8 +16,7 @@ export default function AboutPage() {
       <section className="py-20 border-b border-border/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl sm:text-5xl font-light mb-4">
-            Property manager{" "}
-            <span className="font-semibold">specializzati</span>
+            Gestori <span className="font-semibold">specialisti</span>
             <br />
             sul Lago di Como
           </h1>
@@ -35,30 +33,11 @@ export default function AboutPage() {
           className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
         />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          {/* Stats band */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-14 pb-12 border-b border-white/15">
-            {[
-              { value: "9+", label: "Anni di hosting" },
-              { value: "5.0", label: "Rating Airbnb" },
-              { value: `${team.summary.experience.primaryReviews}+`, label: "Recensioni 5 stelle" },
-              { value: "100%", label: "Tasso di risposta" },
-            ].map((s) => (
-              <div key={s.label} className="text-center sm:text-left">
-                <div className="text-3xl sm:text-4xl font-light tracking-tight">
-                  <span className="font-semibold">{s.value}</span>
-                </div>
-                <div className="text-[11px] uppercase tracking-widest text-white/60 mt-1.5 font-semibold">
-                  {s.label}
-                </div>
-              </div>
-            ))}
-          </div>
-
           <div className="grid lg:grid-cols-[6fr_5fr] gap-10 lg:gap-14">
             <div className="space-y-5 leading-relaxed">
               <p className="text-lg">
-                Hosting Lake Como e una realta specializzata di tre property
-                manager dedicati alla{" "}
+                Hosting Lake Como e una realta specializzata di tre gestori
+                dedicati alla{" "}
                 <strong>gestione, alla pulizia e all&apos;organizzazione</strong>{" "}
                 degli immobili dei nostri clienti, con focus specifico sul{" "}
                 <strong>mercato internazionale</strong> che frequenta il Lago di
@@ -67,7 +46,7 @@ export default function AboutPage() {
               <p className="text-white/85">
                 Il nostro lavoro poggia su{" "}
                 <strong className="text-white">
-                  oltre nove anni di hosting diretto sul Lago
+                  oltre nove anni di ospitalita diretta sul Lago
                 </strong>{" "}
                 e sulla certificazione{" "}
                 <strong className="text-white">Superhost di Airbnb dal 2017</strong>.
@@ -84,7 +63,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            {/* Three competence areas */}
+            {/* Tre aree di specializzazione */}
             <div className="space-y-3">
               <div className="text-[11px] uppercase tracking-widest text-white/60 font-semibold mb-1">
                 Tre aree, una squadra
@@ -92,18 +71,18 @@ export default function AboutPage() {
               {[
                 {
                   icon: Sparkles,
-                  title: "Hospitality",
+                  title: "Accoglienza",
                   desc: "Esperienza ospite, comunicazione multilingua, gestione recensioni.",
                 },
                 {
                   icon: ShieldCheck,
-                  title: "Operations &amp; Compliance",
-                  desc: "Pulizie alberghiere, manutenzione, adempimenti normativi end-to-end.",
+                  title: "Operativita e adempimenti",
+                  desc: "Pulizie alberghiere, manutenzione, adempimenti normativi completi.",
                 },
                 {
                   icon: LineChart,
-                  title: "Revenue &amp; Channel",
-                  desc: "Tariffazione dinamica, distribuzione multi-canale, reportistica trasparente.",
+                  title: "Tariffe e canali",
+                  desc: "Tariffe dinamiche, distribuzione su piu canali, reportistica trasparente.",
                 },
               ].map((c) => (
                 <div
@@ -114,10 +93,9 @@ export default function AboutPage() {
                     <c.icon className="h-4 w-4 text-white" />
                   </div>
                   <div className="min-w-0">
-                    <div
-                      className="text-sm font-semibold text-white"
-                      dangerouslySetInnerHTML={{ __html: c.title }}
-                    />
+                    <div className="text-sm font-semibold text-white">
+                      {c.title}
+                    </div>
                     <div className="text-[12px] text-white/75 leading-relaxed mt-0.5">
                       {c.desc}
                     </div>
@@ -125,43 +103,6 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* Feature pills */}
-          <div className="mt-14 pt-12 border-t border-white/15">
-            <div className="text-[11px] uppercase tracking-widest text-white/60 font-semibold mb-5">
-              Quello che il proprietario riceve
-            </div>
-            <ul className="grid sm:grid-cols-2 gap-3">
-              {[
-                {
-                  icon: Globe2,
-                  text: "Comunicazione fluente in italiano e inglese, supporto a ospiti internazionali",
-                },
-                {
-                  icon: ShieldCheck,
-                  text: "Compliance normativa garantita: CIN, Questura, ISTAT, tassa di soggiorno",
-                },
-                {
-                  icon: Sparkles,
-                  text: "Standard di pulizia e organizzazione paragonabili a quelli alberghieri",
-                },
-                {
-                  icon: LineChart,
-                  text: "Reportistica trasparente e rendiconto mensile dettagliato",
-                },
-              ].map((item) => (
-                <li
-                  key={item.text}
-                  className="flex items-center gap-4 text-sm text-white bg-white/[0.06] border border-white/15 rounded-2xl p-4"
-                >
-                  <div className="h-10 w-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
-                    <item.icon className="h-4 w-4 text-white" />
-                  </div>
-                  <span className="leading-relaxed">{item.text}</span>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>
@@ -173,12 +114,12 @@ export default function AboutPage() {
               Il team
             </span>
             <h2 className="text-3xl sm:text-4xl font-light mt-3 mb-4">
-              Tre <span className="font-semibold">property manager</span>,
+              Tre <span className="font-semibold">gestori</span>,
               una persona di riferimento
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Hospitality, operations e revenue management. Ogni proprieta che
-              gestiamo passa per tutte e tre le competenze, ogni giorno.
+              Accoglienza, operativita e tariffe. Ogni proprieta che gestiamo
+              passa per tutte e tre le competenze, ogni giorno.
             </p>
           </div>
 
