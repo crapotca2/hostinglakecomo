@@ -1,3 +1,5 @@
+"use client";
+
 import { Link } from "@/i18n/routing";
 import {
   MapPin,
@@ -8,16 +10,14 @@ import {
   ArrowRight,
   Star,
 } from "lucide-react";
-import {
-  getZoneLabel,
-  getTypeLabel,
-  type PortfolioEntry,
-} from "@/lib/portfolio";
+import { useTranslations } from "next-intl";
+import { type PortfolioEntry } from "@/lib/portfolio";
 import { PicWebp } from "@/components/ui/pic-webp";
 
 export function PropertyCard({ property }: { property: PortfolioEntry }) {
+  const t = useTranslations("properties");
   const firstImage = property.images[0]?.url;
-  const cityZone = `${property.address.city} — ${getZoneLabel(property.zone)}`;
+  const cityZone = `${property.address.city} — ${t(`zones.${property.zone}`)}`;
   const rating = property.airbnbListing?.rating;
 
   return (
@@ -39,11 +39,11 @@ export function PropertyCard({ property }: { property: PortfolioEntry }) {
         )}
         {property.details.hasLakeView && (
           <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-primary/90 text-white text-[10px] font-semibold uppercase tracking-wider backdrop-blur-sm">
-            Vista Lago
+            {t("card.lakeView")}
           </span>
         )}
         <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-white/90 text-foreground text-[10px] font-semibold uppercase tracking-wider backdrop-blur-sm">
-          {getTypeLabel(property.type)}
+          {t(`types.${property.type}`)}
         </span>
       </div>
       <div className="p-5 flex-1 flex flex-col">
@@ -71,11 +71,11 @@ export function PropertyCard({ property }: { property: PortfolioEntry }) {
         </div>
         <div className="mt-auto flex items-center justify-between">
           <span className="text-xs font-semibold text-primary inline-flex items-center gap-1">
-            Scopri
+            {t("card.discover")}
             <ArrowRight className="h-3 w-3" />
           </span>
           <span className="text-[10px] font-semibold uppercase tracking-wider text-primary bg-primary/[0.08] px-2 py-0.5 rounded-full">
-            Gestita da noi
+            {t("card.managed")}
           </span>
         </div>
       </div>

@@ -3,6 +3,7 @@
 import { Search, Info, ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { getPortfolio } from "@/lib/portfolio";
 import type { PropertyZone, PropertyType } from "@/types/database";
 import { PropertyCard } from "@/components/public/property-card";
@@ -10,23 +11,17 @@ import { PropertyCard } from "@/components/public/property-card";
 const PORTFOLIO = getPortfolio();
 const SHOW_FILTERS = PORTFOLIO.length > 3;
 
-const ZONES: { value: "all" | PropertyZone; label: string }[] = [
-  { value: "all", label: "Tutte le zone" },
-  { value: "centro-como", label: "Centro Como" },
-  { value: "primo-bacino", label: "Primo Bacino" },
-  { value: "secondo-bacino", label: "Secondo Bacino" },
-  { value: "alto-lago", label: "Alto Lago" },
+const ZONE_KEYS: PropertyZone[] = [
+  "centro-como",
+  "primo-bacino",
+  "secondo-bacino",
+  "alto-lago",
 ];
 
-const TYPES: { value: "all" | PropertyType; label: string }[] = [
-  { value: "all", label: "Qualsiasi tipo" },
-  { value: "apartment", label: "Appartamento" },
-  { value: "villa", label: "Villa" },
-  { value: "studio", label: "Studio" },
-  { value: "house", label: "Casa" },
-];
+const TYPE_KEYS: PropertyType[] = ["apartment", "villa", "studio", "house"];
 
 export default function PropertiesPage() {
+  const t = useTranslations("properties");
   const [query, setQuery] = useState("");
   const [zoneFilter, setZoneFilter] = useState<"all" | PropertyZone>("all");
   const [typeFilter, setTypeFilter] = useState<"all" | PropertyType>("all");
@@ -49,13 +44,11 @@ export default function PropertiesPage() {
       <section className="py-16 sm:py-20 border-b border-border/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light mb-4">
-            Le case che curiamo sul <span className="font-semibold">Lago di Como</span>
+            {t("hero.title1")}{" "}
+            <span className="font-semibold">{t("hero.title2")}</span>
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg">
-            Una panoramica degli immobili che gestiamo direttamente. Ogni proprietà
-            che vedi qui riceve la stessa cura: dal pricing dinamico alla pulizia,
-            dall&apos;accoglienza ospite alla reportistica mensile per il
-            proprietario.
+            {t("hero.subtitle")}
           </p>
         </div>
       </section>
@@ -64,12 +57,12 @@ export default function PropertiesPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center gap-2.5 text-xs sm:text-sm text-muted-foreground flex-wrap text-center">
             <Info className="h-3.5 w-3.5 text-primary shrink-0" />
-            <span>Vuoi che la prossima proprietà a comparire qui sia la tua?</span>
+            <span>{t("banner.text")}</span>
             <Link
               href="/contact?interest=consulenza"
               className="inline-flex items-center gap-1 text-primary font-semibold hover:underline"
             >
-              Richiedi una valutazione
+              {t("banner.cta")}
               <ArrowRight className="h-3 w-3" />
             </Link>
           </div>
@@ -86,7 +79,7 @@ export default function PropertiesPage() {
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Cerca per nome o localita..."
+                  placeholder={t("filters.searchPlaceholder")}
                   className="text-sm bg-transparent border-none outline-none flex-1"
                 />
               </div>
@@ -97,9 +90,10 @@ export default function PropertiesPage() {
                 }
                 className="rounded-lg border border-border px-3 py-2 text-sm bg-white"
               >
-                {ZONES.map((z) => (
-                  <option key={z.value} value={z.value}>
-                    {z.label}
+                <option value="all">{t("filters.zonesAll")}</option>
+                {ZONE_KEYS.map((k) => (
+                  <option key={k} value={k}>
+                    {t(`zones.${k}`)}
                   </option>
                 ))}
               </select>
@@ -110,14 +104,18 @@ export default function PropertiesPage() {
                 }
                 className="rounded-lg border border-border px-3 py-2 text-sm bg-white"
               >
-                {TYPES.map((t) => (
-                  <option key={t.value} value={t.value}>
-                    {t.label}
+                <option value="all">{t("filters.typesAll")}</option>
+                {TYPE_KEYS.map((k) => (
+                  <option key={k} value={k}>
+                    {t(`types.${k}`)}
                   </option>
                 ))}
               </select>
               <div className="text-xs text-muted-foreground ml-auto">
-                {filtered.length} di {PORTFOLIO.length}
+                {t("filters.countLabel", {
+                  filtered: filtered.length,
+                  total: PORTFOLIO.length,
+                })}
               </div>
             </div>
           </div>
@@ -128,7 +126,7 @@ export default function PropertiesPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {filtered.length === 0 ? (
             <div className="text-center py-20 text-sm text-muted-foreground">
-              Nessuna proprieta corrisponde ai filtri selezionati.
+              {t("empty")}
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

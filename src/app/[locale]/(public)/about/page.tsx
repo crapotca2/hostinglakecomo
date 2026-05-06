@@ -6,21 +6,34 @@ import {
   LineChart,
   ShieldCheck,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import team from "@/data/team.json";
 
+const COMPETENCE_AREAS = [
+  { key: "accoglienza", icon: Sparkles },
+  { key: "operativita", icon: ShieldCheck },
+  { key: "tariffe", icon: LineChart },
+] as const;
+
 export default function AboutPage() {
+  const tHero = useTranslations("about.hero");
+  const tNarr = useTranslations("about.narrative");
+  const tComp = useTranslations("about.competenceAreas");
+  const tTeam = useTranslations("about.team");
+  const tSpot = useTranslations("about.team.spotlight");
+
   return (
     <div className="pt-20">
       <section className="py-20 border-b border-border/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl sm:text-5xl font-light mb-4">
-            Gestori <span className="font-semibold">specialisti</span>
+            {tHero("title1")}{" "}
+            <span className="font-semibold">{tHero("title1Strong")}</span>
             <br />
-            sul Lago di Como
+            {tHero("title2")}
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            {team.summary.subline} Una sola realta dedicata, con
-            esperienza certificata Superhost dal 2017.
+            {tHero("subtitle")}
           </p>
         </div>
       </section>
@@ -34,54 +47,27 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-[6fr_5fr] gap-10 lg:gap-14 items-center">
             <div className="space-y-5 leading-relaxed">
               <p className="text-lg">
-                Hosting Lake Como e una realta specializzata di tre gestori
-                dedicati alla{" "}
-                <strong>gestione, alla pulizia e all&apos;organizzazione</strong>{" "}
-                degli immobili dei nostri clienti, con focus specifico sul{" "}
-                <strong>mercato internazionale</strong> che frequenta il Lago di
-                Como ogni anno.
+                {tNarr("p1Prefix")}
+                <strong>{tNarr("p1Strong1")}</strong>
+                {tNarr("p1Mid")}
+                <strong>{tNarr("p1Strong2")}</strong>
+                {tNarr("p1Suffix")}
               </p>
               <p className="text-white/85">
-                Il nostro lavoro poggia su{" "}
-                <strong className="text-white">
-                  oltre nove anni di ospitalita diretta sul Lago
-                </strong>{" "}
-                e sulla certificazione{" "}
-                <strong className="text-white">Superhost di Airbnb dal 2017</strong>.
-                Le competenze sono distribuite su tre aree complementari, in
-                modo che ogni proprieta riceva l&apos;attenzione dello
-                specialista giusto in ogni momento, mentre il proprietario
-                mantiene un solo interlocutore.
+                {tNarr("p2Prefix")}
+                <strong className="text-white">{tNarr("p2Strong1")}</strong>
+                {tNarr("p2Mid")}
+                <strong className="text-white">{tNarr("p2Strong2")}</strong>
+                {tNarr("p2Suffix")}
               </p>
-              <p className="text-white/85">
-                Lavoriamo esclusivamente sul Lago di Como: conosciamo le zone,
-                i ristoranti, i battelli, i tempi del traghetto, le abitudini
-                dei turisti che arrivano in primavera e di quelli che restano
-                fino a fine ottobre.
-              </p>
+              <p className="text-white/85">{tNarr("p3")}</p>
             </div>
 
             {/* Tre aree di specializzazione */}
             <div className="space-y-3">
-              {[
-                {
-                  icon: Sparkles,
-                  title: "Accoglienza",
-                  desc: "Esperienza ospite, comunicazione multilingua, gestione recensioni.",
-                },
-                {
-                  icon: ShieldCheck,
-                  title: "Operativita e adempimenti",
-                  desc: "Pulizie alberghiere, manutenzione, adempimenti normativi completi.",
-                },
-                {
-                  icon: LineChart,
-                  title: "Tariffe e canali",
-                  desc: "Tariffe dinamiche, distribuzione su piu canali, reportistica trasparente.",
-                },
-              ].map((c) => (
+              {COMPETENCE_AREAS.map((c) => (
                 <div
-                  key={c.title}
+                  key={c.key}
                   className="bg-white/[0.06] border border-white/15 rounded-xl px-5 py-4 flex items-start gap-3 backdrop-blur-sm"
                 >
                   <div className="h-9 w-9 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
@@ -89,10 +75,10 @@ export default function AboutPage() {
                   </div>
                   <div className="min-w-0">
                     <div className="text-sm font-semibold text-white">
-                      {c.title}
+                      {tComp(`${c.key}.title`)}
                     </div>
                     <div className="text-[12px] text-white/75 leading-relaxed mt-0.5">
-                      {c.desc}
+                      {tComp(`${c.key}.desc`)}
                     </div>
                   </div>
                 </div>
@@ -106,14 +92,11 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-light mb-4">
-              Dietro Hosting Lake <span className="font-semibold">Como</span>
+              {tTeam("title1")}{" "}
+              <span className="font-semibold">{tTeam("title1Strong")}</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Siamo una squadra di tre specialisti. L&apos;esperienza diretta
-              sul Lago la porta Angelo, Superhost di Airbnb dal 2017, che cura
-              l&apos;accoglienza e il rapporto con gli ospiti. Al suo fianco
-              lavorano due figure dedicate all&apos;operativita e agli
-              adempimenti normativi e alla strategia di tariffe e canali.
+              {tTeam("subtitle")}
             </p>
           </div>
 
@@ -136,14 +119,14 @@ export default function AboutPage() {
                     <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full border border-amber-200 shadow-sm">
                       <Star className="h-3 w-3 fill-amber-500 text-amber-500" />
                       <span className="text-[11px] font-semibold uppercase tracking-wider text-amber-700">
-                        Superhost dal 2017
+                        {tSpot("superhostBadge")}
                       </span>
                     </div>
                   )}
                 </div>
                 <div className="p-8 md:p-10 flex flex-col justify-center">
                   <span className="text-xs font-semibold uppercase tracking-widest text-primary mb-2">
-                    Esperienza diretta sul Lago
+                    {tSpot("eyebrow")}
                   </span>
                   <h3 className="text-2xl font-semibold mb-1">{angelo.name}</h3>
                   <p className="text-sm text-muted-foreground mb-5">
@@ -170,7 +153,7 @@ export default function AboutPage() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-border bg-white text-sm font-semibold hover:bg-muted/40 transition-colors w-fit"
                     >
-                      Vedi profilo Airbnb
+                      {tSpot("viewProfile")}
                       <ExternalLink className="h-3.5 w-3.5" />
                     </a>
                   )}

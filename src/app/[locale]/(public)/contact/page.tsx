@@ -3,21 +3,26 @@
 import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Phone, Mail, Send } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-const INTEREST_OPTIONS: { value: string; label: string }[] = [
-  { value: "consulenza", label: "Consulenza Personalizzata" },
-  { value: "home-staging", label: "Home Staging" },
-  { value: "gestione", label: "Gestione del mio immobile" },
-  { value: "valutazione", label: "Valutazione redditivita" },
-  { value: "prenotazione", label: "Prenotare un soggiorno" },
-  { value: "partnership", label: "Partnership" },
-  { value: "altro", label: "Altro" },
-];
+const INTEREST_KEYS = [
+  { value: "consulenza", labelKey: "consulenza" },
+  { value: "home-staging", labelKey: "homeStaging" },
+  { value: "gestione", labelKey: "gestione" },
+  { value: "valutazione", labelKey: "valutazione" },
+  { value: "prenotazione", labelKey: "prenotazione" },
+  { value: "partnership", labelKey: "partnership" },
+  { value: "altro", labelKey: "altro" },
+] as const;
 
 function ContactForm() {
+  const tForm = useTranslations("contact.form");
+  const tInt = useTranslations("contact.interestOptions");
   const searchParams = useSearchParams();
   const requestedInterest = searchParams.get("interest") ?? "";
-  const initialInterest = INTEREST_OPTIONS.some((o) => o.value === requestedInterest)
+  const initialInterest = INTEREST_KEYS.some(
+    (o) => o.value === requestedInterest,
+  )
     ? requestedInterest
     : "gestione";
   const [interest, setInterest] = useState(initialInterest);
@@ -36,11 +41,9 @@ function ContactForm() {
           <Send className="h-6 w-6 text-emerald-600" />
         </div>
         <h3 className="text-lg font-semibold text-emerald-800 mb-2">
-          Messaggio Inviato!
+          {tForm("successTitle")}
         </h3>
-        <p className="text-sm text-emerald-600">
-          Ti risponderemo entro 24 ore. Grazie per averci contattato.
-        </p>
+        <p className="text-sm text-emerald-600">{tForm("successBody")}</p>
       </div>
     );
   }
@@ -50,10 +53,12 @@ function ContactForm() {
       onSubmit={handleSubmit}
       className="bg-white rounded-2xl p-8 border border-border/50 shadow-[0_25px_60px_-12px_rgba(29,58,98,0.45)] space-y-5"
     >
-      <h2 className="text-xl font-semibold mb-2">Invia un Messaggio</h2>
+      <h2 className="text-xl font-semibold mb-2">{tForm("title")}</h2>
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
-          <label className="text-sm font-medium mb-1.5 block">Nome</label>
+          <label className="text-sm font-medium mb-1.5 block">
+            {tForm("nome")}
+          </label>
           <input
             type="text"
             required
@@ -61,7 +66,9 @@ function ContactForm() {
           />
         </div>
         <div>
-          <label className="text-sm font-medium mb-1.5 block">Cognome</label>
+          <label className="text-sm font-medium mb-1.5 block">
+            {tForm("cognome")}
+          </label>
           <input
             type="text"
             required
@@ -71,7 +78,9 @@ function ContactForm() {
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
-          <label className="text-sm font-medium mb-1.5 block">Email</label>
+          <label className="text-sm font-medium mb-1.5 block">
+            {tForm("emailLabel")}
+          </label>
           <input
             type="email"
             required
@@ -79,7 +88,9 @@ function ContactForm() {
           />
         </div>
         <div>
-          <label className="text-sm font-medium mb-1.5 block">Telefono</label>
+          <label className="text-sm font-medium mb-1.5 block">
+            {tForm("telefono")}
+          </label>
           <input
             type="tel"
             className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
@@ -88,26 +99,28 @@ function ContactForm() {
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
-          <label className="text-sm font-medium mb-1.5 block">Interesse</label>
+          <label className="text-sm font-medium mb-1.5 block">
+            {tForm("interesse")}
+          </label>
           <select
             value={interest}
             onChange={(e) => setInterest(e.target.value)}
             className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 bg-white"
           >
-            {INTEREST_OPTIONS.map((o) => (
+            {INTEREST_KEYS.map((o) => (
               <option key={o.value} value={o.value}>
-                {o.label}
+                {tInt(o.labelKey)}
               </option>
             ))}
           </select>
         </div>
         <div>
           <label className="text-sm font-medium mb-1.5 block">
-            Indirizzo dell&apos;immobile
+            {tForm("indirizzo")}
           </label>
           <input
             type="text"
-            placeholder="Via, città, provincia"
+            placeholder={tForm("indirizzoPlaceholder")}
             className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
           />
         </div>
@@ -121,27 +134,29 @@ function ContactForm() {
             className="mt-0.5 h-4 w-4 rounded border-border text-primary focus:ring-primary/30"
           />
           <span className="text-sm">
-            L&apos;immobile è già su una piattaforma di affitto
+            {tForm("piattaformaCheckbox")}
             <span className="block text-xs text-muted-foreground mt-0.5">
-              Es. Airbnb, Booking, Expedia
+              {tForm("piattaformaHint")}
             </span>
           </span>
         </label>
         {onPlatform && (
           <div className="mt-3 pl-7">
             <label className="text-xs font-medium mb-1.5 block text-muted-foreground">
-              Link dell&apos;annuncio
+              {tForm("linkAnnuncio")}
             </label>
             <input
               type="url"
-              placeholder="https://www.airbnb.com/rooms/..."
+              placeholder={tForm("linkAnnuncioPlaceholder")}
               className="w-full rounded-lg border border-border px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 bg-white"
             />
           </div>
         )}
       </div>
       <div>
-        <label className="text-sm font-medium mb-1.5 block">Messaggio</label>
+        <label className="text-sm font-medium mb-1.5 block">
+          {tForm("messaggio")}
+        </label>
         <textarea
           rows={3}
           required
@@ -153,7 +168,7 @@ function ContactForm() {
         className="w-full sm:w-auto px-6 py-3 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-colors flex items-center justify-center gap-2"
       >
         <Send className="h-4 w-4" />
-        Invia Messaggio
+        {tForm("invia")}
       </button>
     </form>
   );
@@ -166,6 +181,7 @@ function ContactFormFallback() {
 }
 
 export default function ContactPage() {
+  const t = useTranslations("contact");
   return (
     <div className="pt-20">
       <section className="py-20">
@@ -174,16 +190,14 @@ export default function ContactPage() {
             {/* INFO LEFT */}
             <div>
               <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-                Contattaci
+                {t("eyebrow")}
               </span>
               <h1 className="text-3xl sm:text-4xl font-light text-foreground mt-3 mb-4">
-                Parliamo del tuo{" "}
-                <span className="font-semibold">immobile</span>
+                {t("title1")}{" "}
+                <span className="font-semibold">{t("title1Strong")}</span>
               </h1>
               <p className="text-muted-foreground leading-relaxed mb-8">
-                Richiedi un preventivo o contattaci per qualsiasi informazione.
-                Ti rispondiamo entro 48 ore con una valutazione preliminare e i
-                prossimi passi per affidarci la tua proprieta sul Lago di Como.
+                {t("body")}
               </p>
               <div className="space-y-5">
                 <a
@@ -195,7 +209,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                      Telefono
+                      {t("telefono")}
                     </div>
                     <div className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
                       +39 351 718 0435
@@ -211,7 +225,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                      Email
+                      {t("email")}
                     </div>
                     <div className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
                       angelo.talarico@gmail.com

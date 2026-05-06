@@ -152,5 +152,656 @@
       "subtitleLine1": "Want to know how much your property can earn?",
       "subtitleLine2": "We will get back to you within 48 hours."
     }
+  },
+  "strumenti": {
+    "backToTools": "← All tools",
+    "disclaimer": "Indicative estimate based on public parameters. The actual figure factors in the area's booking history, competitor analysis, our proprietary dynamic pricing algorithm and local seasonal drivers — variables we only compute in our dedicated analysis.",
+    "cta": {
+      "title": "Want the full calculation for your property?",
+      "subtitle": "A dedicated analysis powered by our internal data and proprietary pricing algorithm.",
+      "button": "Request a Dedicated Analysis"
+    },
+    "indice": {
+      "section1": {
+        "title1": "Tools designed for",
+        "title2": "tangible results",
+        "body": "A suite of operational tools built for owners who entrust their property to Hosting Lake Como. Save time, raise the quality of the guest experience and stay in control of your property.",
+        "bullets": [
+          "Creative name generator for your holiday home",
+          "Multilingual welcome letters ready to use",
+          "Optimised Google Maps link with key landmarks"
+        ],
+        "ctaDashboard": "Access the client area",
+        "mockupMap": {
+          "title": "Google Maps Route",
+          "caption": "Via Maurizio Monti 46, Como — 8 min from the station"
+        },
+        "mockupWelcome": {
+          "title": "Welcome Letter",
+          "languages": "IT · EN · DE · FR",
+          "preview": "Welcome to Casa di Miriam"
+        },
+        "mockupName": {
+          "title": "Property Name",
+          "options": [
+            "Casa di Miriam",
+            "Loft del Lago",
+            "Terrazza di Como",
+            "Vista Cattedrale"
+          ]
+        }
+      },
+      "roadmap": {
+        "title": "Roadmap",
+        "subtitle": "Features already available in the client area and in development to further improve our service.",
+        "inProgress": "In development",
+        "tools": {
+          "dynamicPricing": {
+            "name": "Dynamic Pricing",
+            "desc": "Proprietary dynamic pricing algorithm tuned to demand, competitors and Lake Como seasonality."
+          },
+          "istruzioniArrivoVideo": {
+            "name": "Video Arrival Instructions",
+            "desc": "Video guide to reaching the property in the guest's native language: step-by-step explanations with real footage of the route."
+          },
+          "listingOptimizer": {
+            "name": "Listing Optimizer",
+            "desc": "AI analysis of description and photos with suggestions to increase bookings."
+          },
+          "calcolatoreTasse": {
+            "name": "Italian Tax Calculator",
+            "desc": "Flat tax 21%/26%, IMU and IRPEF: full estimate of the fiscal impact on your income."
+          },
+          "welcomeBook": {
+            "name": "Welcome Book",
+            "desc": "Complete digital book with check-in, house rules, local tips and useful contacts, all customisable."
+          },
+          "logo": {
+            "name": "Logo Creator",
+            "desc": "Generate a professional visual identity for your holiday home in just a few steps."
+          }
+        }
+      },
+      "finalCta": {
+        "title1": "Want access to the",
+        "title2": "operational tools",
+        "title3": "?",
+        "subtitle": "The full toolkit — name generator, multilingual welcome letters, Google Maps routes, dynamic pricing — reserved for owners managed by Hosting Lake Como.",
+        "button": "Request a Consultation"
+      }
+    },
+    "rendita": {
+      "title1": "Revenue",
+      "title2": "Calculator",
+      "subtitle": "Estimate how much your property on Lake Como can earn",
+      "formTitle": "Property details",
+      "fields": {
+        "zone": "Area",
+        "propertyType": "Property type",
+        "surface": "Floor area",
+        "bedrooms": "Bedrooms",
+        "maxGuests": "Maximum guests",
+        "lakeView": "Lake view",
+        "lakeViewBoost": "(+25%)"
+      },
+      "zones": {
+        "centro-como": "Como city centre",
+        "primo-bacino": "First Basin (Cernobbio, Moltrasio, Nesso)",
+        "secondo-bacino": "Second Basin (Bellagio, Menaggio, Tremezzo)",
+        "alto-lago": "Upper Lake Como (Colico, Gravedona)"
+      },
+      "zonesShort": {
+        "centro-como": "Como city centre",
+        "primo-bacino": "First Basin",
+        "secondo-bacino": "Second Basin",
+        "alto-lago": "Upper Lake Como"
+      },
+      "types": {
+        "studio": "Studio",
+        "apartment": "Apartment",
+        "house": "House",
+        "villa": "Villa"
+      },
+      "results": {
+        "grossAnnualLabel": "Estimated annual revenue",
+        "grossAnnualBreakdown": "{rate}/night × {nights} nights/year ({occupancy}% occupancy)",
+        "nightlyRate": "Nightly rate",
+        "occupancy": "Occupancy",
+        "nightsSold": "Nights sold",
+        "propertyValue": "Estimated property value",
+        "propertyValueBreakdown": "{surface} m² × {price}/m² ({zone})",
+        "grossYieldLabel": "Gross yield",
+        "grossYieldFootnote": "Revenue / value",
+        "comparisonTitle": "Self-management vs Hosting Lake Como",
+        "comparisonSubtitle": "Indicative comparison of annual net margins",
+        "selfTitle": "Self-management",
+        "selfBullets": [
+          "• Platform commissions ~18%",
+          "• Operating costs ~15%",
+          "• No dynamic pricing",
+          "• Time required: high"
+        ],
+        "abTitle": "With Hosting Lake Como",
+        "abBullets": [
+          "• All-inclusive management fee",
+          "• Optimised rates and occupancy",
+          "• Compliance handled automatically",
+          "• Time required: zero"
+        ],
+        "extraTitle": "Indicative extra earnings per year",
+        "extraSubtitle": "Difference between the net margin with Hosting Lake Como and the one under self-management."
+      }
+    },
+    "investimento": {
+      "title1": "Investment",
+      "title2": "Calculator",
+      "subtitle": "Return, cash flow and payback period for buyers of an income property on Lake Como",
+      "sections": {
+        "initial": "Initial investment",
+        "mortgage": "Mortgage",
+        "expectedReturn": "Expected return"
+      },
+      "fields": {
+        "purchasePrice": "Purchase price",
+        "renovation": "Renovation",
+        "downPayment": "Down payment",
+        "interestRate": "Interest rate",
+        "mortgageYears": "Mortgage term",
+        "yearsSuffix": " years",
+        "annualRevenue": "Gross annual revenue",
+        "operatingCosts": "Operating costs",
+        "operatingCostsSuffix": "% of revenue"
+      },
+      "results": {
+        "cashOnCash": "Cash-on-cash return",
+        "cashOnCashHint": "Annual return on the down payment",
+        "capRate": "Cap rate",
+        "capRateHint": "Net income / property value",
+        "payback": "Payback period",
+        "paybackYears": "{years} years",
+        "paybackHint": "Time to recover the down payment",
+        "monthlyCashFlow": "Monthly cash flow",
+        "monthlyCashFlowHint": "After mortgage and expenses",
+        "detailTitle": "Annual financial breakdown",
+        "rows": {
+          "totalInvestment": "Total investment",
+          "downPayment": "Down payment",
+          "mortgage": "Mortgage",
+          "monthlyMortgage": "Monthly mortgage payment",
+          "annualRevenue": "Gross annual revenue",
+          "operatingCosts": "Operating costs",
+          "noi": "Net operating income (NOI)",
+          "annualMortgage": "Annual mortgage"
+        },
+        "cashFlowTitle": "Annual cash flow",
+        "cashFlowHint": "Annual net cash after mortgage, operating costs and expenses."
+      }
+    },
+    "profitDiretto": {
+      "title1": "Direct Profit",
+      "title2": "vs platforms",
+      "subtitle": "How much you save with direct bookings compared to Airbnb, Booking and Expedia",
+      "fields": {
+        "annualRevenue": "Gross annual revenue",
+        "channelMixTitle": "Current channel mix",
+        "directBookings": "Direct bookings",
+        "overflowError": "The total exceeds 100%. Reduce the OTA percentages."
+      },
+      "channels": {
+        "airbnb": "Airbnb",
+        "booking": "Booking.com",
+        "vrbo": "Vrbo",
+        "expedia": "Expedia",
+        "direct": "Direct bookings"
+      },
+      "results": {
+        "fiveYearTitle": "Potential 5-year saving",
+        "fiveYearHint": "Assumption: 25% of platform bookings shifted to the direct channel",
+        "currentFeesTitle": "Current commissions by channel",
+        "scenariosTitle": "Scenario comparison",
+        "scenariosSubtitle": "Scenario modelled on our historical conversion data",
+        "currentMix": "Current mix",
+        "feesLine": "Commissions: {fees}",
+        "withMoreDirect": "With more direct bookings",
+        "perYearSaving": "+{amount}/year"
+      }
+    },
+    "lock": {
+      "common": {
+        "areaBadge": "Hosting Lake Como Client Area",
+        "headline": "Reserved for owners under management",
+        "includesTitle": "What's included",
+        "accessTitle": "Access the client area",
+        "accessHint": "Available to owners managed by Hosting Lake Como.",
+        "loginButton": "Sign in",
+        "manageButton": "Want us to manage your property?"
+      },
+      "nomeProprieta": {
+        "title": "Property Name",
+        "tagline": "Creative naming generator for your holiday home",
+        "description": "Our naming team builds a verbal identity for every property that is consistent with the area, the target audience and a premium positioning on Lake Como.",
+        "bullets": [
+          "Analysis of the area's competitive positioning",
+          "6 to 10 names proposed with linguistic and cultural rationale",
+          "Domain availability and social handle check",
+          "Consistency with the visual identity and tone of voice of Hosting Lake Como management"
+        ]
+      },
+      "welcomeLetter": {
+        "title": "Welcome Letter",
+        "tagline": "Multilingual welcome letter for your guests",
+        "description": "For every property under management we prepare a signed welcome letter, translated into four languages and calibrated on the guest profile. It is part of the Hosting Lake Como hospitality kit, not a generic template.",
+        "bullets": [
+          "Tone of voice tailored to the guest type (couples, families, business)",
+          "Check-in/check-out, Wi-Fi and house rules built in",
+          "Local recommendations curated by our concierge",
+          "Italian, English, French and German versions"
+        ]
+      },
+      "percorsoMaps": {
+        "title": "Google Maps Route",
+        "tagline": "Optimised link to guide guests to your property",
+        "description": "For every property under management Hosting Lake Como generates a curated Google Maps link: precise coordinates, waypoints with visual landmarks and dedicated public parking guidance. Not a simple automatic pin, but a route verified by our team.",
+        "bullets": [
+          "Pin on the exact entrance, not on the cadastral number",
+          "Waypoints for public car parks and nearby restricted-traffic zones",
+          "Alternative access in case of road closures or seasonal traffic",
+          "Link ready to paste into pre-arrival messages on every OTA"
+        ]
+      }
+    }
+  },
+  "about": {
+    "hero": {
+      "title1": "Specialist",
+      "title1Strong": "property managers",
+      "title2": "on Lake Como",
+      "subtitle": "Three property managers specialised in managing, cleaning and organising properties for international guests. A single dedicated team, with certified Superhost experience since 2017."
+    },
+    "narrative": {
+      "p1Prefix": "Hosting Lake Como is a specialist team of three property managers focused on the ",
+      "p1Strong1": "management, cleaning and organisation",
+      "p1Mid": " of our clients' properties, with a specific focus on the ",
+      "p1Strong2": "international market",
+      "p1Suffix": " that visits Lake Como every year.",
+      "p2Prefix": "Our work is built on ",
+      "p2Strong1": "more than nine years of direct hospitality on the Lake",
+      "p2Mid": " and on the ",
+      "p2Strong2": "Airbnb Superhost certification since 2017",
+      "p2Suffix": ". Skills are split across three complementary areas, so that every property gets the right specialist's attention at every moment, while the owner keeps a single point of contact.",
+      "p3": "We work exclusively on Lake Como: we know the areas, the restaurants, the boats, the ferry timetable, and the habits of the tourists who arrive in spring and those who stay until the end of October."
+    },
+    "competenceAreas": {
+      "accoglienza": {
+        "title": "Hospitality",
+        "desc": "Guest experience, multilingual communication, review management."
+      },
+      "operativita": {
+        "title": "Operations and compliance",
+        "desc": "Hotel-grade cleaning, maintenance, full regulatory compliance."
+      },
+      "tariffe": {
+        "title": "Pricing and channels",
+        "desc": "Dynamic pricing, multi-channel distribution, transparent reporting."
+      }
+    },
+    "team": {
+      "title1": "Behind Hosting Lake",
+      "title1Strong": "Como",
+      "subtitle": "We are a team of three specialists. Direct experience on the Lake is brought by Angelo, an Airbnb Superhost since 2017, who looks after hospitality and the relationship with guests. Alongside him, two dedicated colleagues handle operations and regulatory compliance, and the pricing-and-channels strategy.",
+      "spotlight": {
+        "superhostBadge": "Superhost since 2017",
+        "eyebrow": "Direct experience on the Lake",
+        "viewProfile": "View Airbnb profile"
+      }
+    }
+  },
+  "services": {
+    "hero": {
+      "title1": "We make management",
+      "title1Strong": "simple for you",
+      "bodyPrefix": "You keep ownership, we take care of everything else: operations, compliance, value optimisation and hospitality. You see the results in real time on your ",
+      "bodyStrong1": "personal dashboard",
+      "bodyMid": " and every month a ",
+      "bodyStrong2": "dedicated recap",
+      "bodySuffix": " arrives in your inbox."
+    },
+    "carousel": {
+      "title1": "Hosting made",
+      "title1Strong": "easy",
+      "title2": ", we handle",
+      "title2Strong": "all of it",
+      "title3": "for you",
+      "subtitle": "Sixteen services across four clusters — hotel-grade cleaning, full compliance, value optimisation and a dashboard always at hand. You have a single conversation, we coordinate every specialist on the team.",
+      "ofLabel": "of",
+      "goToAria": "Go to {title}",
+      "groups": {
+        "setup": {
+          "title": "Setup and configuration",
+          "desc": "The initial setup of the property. Each service is a standalone item with a dedicated cost, agreed with the owner before we start.",
+          "items": [
+            {
+              "title": "Analysis and consulting",
+              "desc": "On-site visit, potential analysis, benchmarking against the area and a tailored action plan.",
+              "cost": "On request"
+            },
+            {
+              "title": "Photography service",
+              "desc": "Professional high-resolution shoots, 360 virtual tour and video content for the platforms.",
+              "cost": "Per project"
+            },
+            {
+              "title": "Home staging",
+              "desc": "Targeted restyling work to lift the average daily rate and review quality, calibrated to the budget.",
+              "cost": "Custom quote"
+            },
+            {
+              "title": "Technical onboarding",
+              "desc": "Inventory, compliance checklist and full configuration ready for the first listing.",
+              "cost": "One-off"
+            }
+          ]
+        },
+        "operations": {
+          "title": "Day-to-day operations",
+          "desc": "The invisible work that turns an average property into a 5-star one.",
+          "items": [
+            {
+              "title": "Cleaning and linen",
+              "desc": "Hotel standards, premium linen, certified sanitisation between every stay."
+            },
+            {
+              "title": "Booking management",
+              "desc": "Real-time unified calendar, handling of enquiries, changes and cancellations — a single point of contact."
+            },
+            {
+              "title": "Guest hospitality",
+              "desc": "Professional welcome, self check-in by code and multilingual video instructions. 5-star reviews guaranteed."
+            },
+            {
+              "title": "24/7 emergencies",
+              "desc": "Round-the-clock availability and a network of professionals for plumbing, electrical and urgent maintenance work."
+            }
+          ]
+        },
+        "optimization": {
+          "title": "Value optimisation",
+          "desc": "Dynamic pricing, multi-channel distribution and active reputation management to bring the property to its best.",
+          "items": [
+            {
+              "title": "Multi-channel promotion",
+              "desc": "Listing on Airbnb, Booking, Expedia and other portals with optimised descriptions in 4 languages."
+            },
+            {
+              "title": "Dynamic pricing",
+              "desc": "Proprietary dynamic-pricing algorithm based on competition, local events and Lake Como seasonality."
+            },
+            {
+              "title": "Reviews and reputation",
+              "desc": "Multi-platform review monitoring, professional replies, proactive rating management."
+            },
+            {
+              "title": "Premium linen and welcome",
+              "desc": "Branded courtesy kit, selected bathroom products, coffee pods and a welcome with local delicacies.",
+              "cost": "Add-on cost"
+            }
+          ]
+        },
+        "reporting": {
+          "title": "Reporting and compliance",
+          "desc": "Full transparency and zero forgotten deadlines: your numbers always at hand, the paperwork archived.",
+          "items": [
+            {
+              "title": "Administrative management",
+              "desc": "CIN, Questura (Alloggiati Web), ISTAT, tourist tax and flat-rate withholding tax: we handle every requirement for you."
+            },
+            {
+              "title": "Annual tax statement",
+              "desc": "Year-end tax recap, RL form, flat-rate calculation and documentation ready for your accountant.",
+              "cost": "Add-on cost"
+            },
+            {
+              "title": "Monthly statement",
+              "desc": "Per-booking P&L, detailed commissions and transparent payouts to the owner."
+            },
+            {
+              "title": "Scheduled maintenance",
+              "desc": "Seasonal preventive plan: HVAC, boiler, repairs and a quarterly property check-up.",
+              "cost": "On actuals"
+            }
+          ]
+        }
+      }
+    },
+    "dashboard": {
+      "title1": "A",
+      "title1Strong": "personal dashboard",
+      "title2": "for every property",
+      "body": "Log in whenever you want, from any device. Daily updated data, no spreadsheets to cross-check, no waiting for end-of-month figures. Every number you might need across six clearly separated control areas.",
+      "blocks": [
+        {
+          "title": "Overview & KPIs",
+          "desc": "RevPAR, ADR, occupancy, booking lead time, returning guests — the 10 key indicators updated every day."
+        },
+        {
+          "title": "Stays & calendar",
+          "desc": "Operational view of check-in/check-out, future availability by period, alerts on empty properties."
+        },
+        {
+          "title": "Financial summaries",
+          "desc": "Bookings by period and channel, payments, tourist tax collected, YoY comparison."
+        },
+        {
+          "title": "Guest-level detail",
+          "desc": "Booking list with guest data, payment ledger with Stripe references, OTA commissions per booking."
+        },
+        {
+          "title": "Advanced analytics",
+          "desc": "Booking lead time, occupancy curves, returning guests, channel performance comparison."
+        },
+        {
+          "title": "Owner statement",
+          "desc": "Commission summary, monthly statement, per-booking breakdown, documentation for your accountant."
+        }
+      ]
+    },
+    "email": {
+      "title1": "A",
+      "title1Strong": "monthly recap",
+      "title2": "you can read in two minutes",
+      "body": "On the first of the month you receive a curated summary in your inbox: key numbers, review of the month, operational notes on what is about to happen. No files to download, no mandatory login — just open the email.",
+      "bullets": [
+        "The 4 key numbers of the month, already compared with the previous one",
+        "Occupancy and revenue trends commented by the team",
+        "The review of the month and the most relevant ratings",
+        "The optimisations carried out by the team and their results"
+      ]
+    },
+    "cta": {
+      "title1": "Want us to manage",
+      "title1Strong": "your property too",
+      "title2": "?",
+      "bodyLine1": "A single conversation to see whether Hosting Lake Como is a good fit for you.",
+      "bodyLine2": "No commitment, we reply within 48 hours.",
+      "button": "Request an assessment"
+    }
+  },
+  "contact": {
+    "eyebrow": "Get in touch",
+    "title1": "Let's talk about your",
+    "title1Strong": "property",
+    "body": "Request a quote or contact us for any information. We reply within 48 hours with a preliminary assessment and the next steps to entrust us with your property on Lake Como.",
+    "telefono": "Phone",
+    "email": "Email",
+    "form": {
+      "title": "Send a Message",
+      "nome": "First name",
+      "cognome": "Last name",
+      "emailLabel": "Email",
+      "telefono": "Phone",
+      "interesse": "Interest",
+      "indirizzo": "Property address",
+      "indirizzoPlaceholder": "Street, city, province",
+      "piattaformaCheckbox": "The property is already on a rental platform",
+      "piattaformaHint": "E.g. Airbnb, Booking, Expedia",
+      "linkAnnuncio": "Listing link",
+      "linkAnnuncioPlaceholder": "https://www.airbnb.com/rooms/...",
+      "messaggio": "Message",
+      "invia": "Send Message",
+      "successTitle": "Message Sent!",
+      "successBody": "We will reply within 24 hours. Thank you for getting in touch."
+    },
+    "interestOptions": {
+      "consulenza": "Personalised Consultation",
+      "homeStaging": "Home Staging",
+      "gestione": "Manage my property",
+      "valutazione": "Revenue assessment",
+      "prenotazione": "Book a stay",
+      "partnership": "Partnership",
+      "altro": "Other"
+    }
+  },
+  "mockups": {
+    "dashboard": {
+      "propertyLabel": "Property",
+      "propertyName": "Casa di Miriam",
+      "periodLabel": "Period",
+      "periodValue": "April 2026",
+      "kpis": {
+        "revpar": "RevPAR",
+        "occupancy": "Occupancy",
+        "adr": "ADR",
+        "rating": "Average rating"
+      },
+      "occupancy": {
+        "title": "Occupancy curve",
+        "range": "30 days",
+        "axisStart": "1 Apr",
+        "axisMid": "15 Apr",
+        "axisEnd": "30 Apr"
+      },
+      "channelsTitle": "Channels",
+      "channels": {
+        "airbnb": "Airbnb",
+        "booking": "Booking",
+        "direct": "Direct"
+      },
+      "stays": {
+        "title": "Recent stays",
+        "count": "4 of 18 in April",
+        "guest": "Guest",
+        "channel": "Channel",
+        "nights": "Nights",
+        "total": "Total",
+        "channelDirect": "Direct"
+      }
+    },
+    "email": {
+      "period": "April 2026 recap",
+      "propertyName": "Casa di Miriam",
+      "introPrefix": "Hi Miriam, April closed ",
+      "introStrong": "above target",
+      "introSuffix": ": EUR 8,420 in revenue (+12% vs March) and three new 5-star reviews. Every indicator is up.",
+      "kpis": {
+        "revenue": {
+          "label": "Monthly revenue",
+          "value": "EUR 8,420",
+          "delta": "+12% vs March"
+        },
+        "nights": {
+          "label": "Nights sold",
+          "value": "22",
+          "delta": "73% occupancy"
+        },
+        "adr": {
+          "label": "Average ADR",
+          "value": "EUR 242",
+          "delta": "+EUR 7 vs March"
+        },
+        "reviews": {
+          "label": "Reviews",
+          "value": "5.0",
+          "delta": "3 new"
+        }
+      },
+      "review": {
+        "label": "Review of the month:",
+        "quote": "Perfect location, dreamy terrace. The team has been super responsive.",
+        "author": "Sophie M."
+      },
+      "ottimizzazioni": {
+        "label": "Optimisations of the month",
+        "body": "Rates raised by 7% on Easter weekends: +EUR 620 on the month. Listing updated with two new photos of the terrace.",
+        "cta": "View full statement"
+      },
+      "footer": "Hosting Lake Como · Monthly recap · you can disable it from your preferences"
+    }
+  },
+  "properties": {
+    "hero": {
+      "title1": "The homes we curate on",
+      "title2": "Lake Como",
+      "subtitle": "An overview of the properties we manage directly. Every property you see here receives the same care: from dynamic pricing to cleaning, from guest experience to monthly reporting for the owner."
+    },
+    "banner": {
+      "text": "Want your property to be the next one shown here?",
+      "cta": "Request an evaluation"
+    },
+    "filters": {
+      "searchPlaceholder": "Search by name or location...",
+      "zonesAll": "All areas",
+      "typesAll": "Any type",
+      "countLabel": "{filtered} of {total}"
+    },
+    "empty": "No properties match the selected filters.",
+    "zones": {
+      "centro-como": "Como city centre",
+      "primo-bacino": "First Basin",
+      "secondo-bacino": "Second Basin",
+      "alto-lago": "Upper Lake Como"
+    },
+    "types": {
+      "studio": "Studio",
+      "apartment": "Apartment",
+      "house": "House",
+      "villa": "Villa"
+    },
+    "card": {
+      "lakeView": "Lake view",
+      "discover": "Discover",
+      "managed": "Managed by us"
+    },
+    "detail": {
+      "back": "← All properties",
+      "notFoundTitle": "Property not found",
+      "notFoundBody": "This property does not exist in our portfolio.",
+      "backToPortfolio": "Back to portfolio",
+      "bedroomsOne": "{count} bedroom",
+      "bedroomsOther": "{count} bedrooms",
+      "bathroomsOne": "{count} bathroom",
+      "bathroomsOther": "{count} bathrooms",
+      "guestsMax": "up to {count} guests",
+      "reviewsCount": "({count} reviews)",
+      "spaceTitle": "The space",
+      "neighborhoodTitle": "The neighbourhood",
+      "descriptionTitle": "Description",
+      "mapTitle": "Location",
+      "mapOpen": "Open in Google Maps",
+      "ctaIntroPart1": "This is one of the properties the Hosting Lake Como team manages today: the same method — hospitality, operations and revenue management — is what we apply to our clients' homes. ",
+      "ctaIntroLink": "Request a consultation",
+      "ctaIntroPart2": "."
+    }
+  },
+  "login": {
+    "brand": "Hosting Lake Como",
+    "subtitle": "Owners' private area",
+    "passwordPlaceholder": "Password",
+    "submit": "Sign in",
+    "errorInvalid": "Invalid password"
+  },
+  "legalDisclaimer": {
+    "title": "This page is available in Italian only",
+    "body": "The full legal text is published in Italian. Switch language to view it.",
+    "cta": "View Italian version"
   }
 }

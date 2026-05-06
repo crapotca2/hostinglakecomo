@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import { TrendingUp, Calendar, Home, Wallet, Landmark, Receipt, Coins, BadgeEuro } from "lucide-react";
 import { AirBibbyEstimateCard } from "@/components/strumenti/air-bibby-estimate-card";
 import { DisclaimerNote } from "@/components/strumenti/disclaimer-note";
@@ -9,6 +10,13 @@ import { FullAnalysisCTA } from "@/components/strumenti/full-analysis-cta";
 import { formatEuro, formatInteger } from "@/lib/format";
 
 export default function InvestimentoPage() {
+  const t = useTranslations("strumenti.investimento");
+  const tStr = useTranslations("strumenti");
+  const tSec = useTranslations("strumenti.investimento.sections");
+  const tFields = useTranslations("strumenti.investimento.fields");
+  const tRes = useTranslations("strumenti.investimento.results");
+  const tRows = useTranslations("strumenti.investimento.results.rows");
+
   const [purchasePrice, setPurchasePrice] = useState(400000);
   const [renovation, setRenovation] = useState(30000);
   const [downPaymentPct, setDownPaymentPct] = useState(30);
@@ -72,7 +80,7 @@ export default function InvestimentoPage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="pt-8 mb-6">
           <Link href="/strumenti" className="text-xs text-muted-foreground hover:text-foreground inline-block">
-            ← Tutti gli strumenti
+            {tStr("backToTools")}
           </Link>
         </div>
 
@@ -81,26 +89,25 @@ export default function InvestimentoPage() {
           <div className="lg:col-span-2 space-y-4">
             <div>
               <h1 className="text-3xl font-light">
-                Calcolatore <span className="font-semibold">Investimento</span>
+                {t("title1")} <span className="font-semibold">{t("title2")}</span>
               </h1>
               <p className="text-sm text-muted-foreground mt-1">
-                Rendimento, flusso di cassa e tempo di rientro per chi compra
-                un immobile sul Lago di Como
+                {t("subtitle")}
               </p>
             </div>
             <div className="bg-white rounded-2xl p-6 border border-border/50 space-y-5">
               <div>
-                <h2 className="text-sm font-semibold mb-3">Investimento iniziale</h2>
+                <h2 className="text-sm font-semibold mb-3">{tSec("initial")}</h2>
                 <div className="space-y-4">
                   <InputField
-                    label="Prezzo d'acquisto"
+                    label={tFields("purchasePrice")}
                     value={purchasePrice}
                     onChange={setPurchasePrice}
                     step={10000}
                     suffix="€"
                   />
                   <InputField
-                    label="Ristrutturazione"
+                    label={tFields("renovation")}
                     value={renovation}
                     onChange={setRenovation}
                     step={5000}
@@ -110,17 +117,17 @@ export default function InvestimentoPage() {
               </div>
 
               <div className="pt-4 border-t border-border/50">
-                <h2 className="text-sm font-semibold mb-3">Mutuo</h2>
+                <h2 className="text-sm font-semibold mb-3">{tSec("mortgage")}</h2>
                 <div className="space-y-4">
                   <RangeField
-                    label="Anticipo"
+                    label={tFields("downPayment")}
                     value={downPaymentPct}
                     onChange={setDownPaymentPct}
                     min={10} max={100} step={5}
                     suffix="%"
                   />
                   <RangeField
-                    label="Tasso d'interesse"
+                    label={tFields("interestRate")}
                     value={mortgageRate}
                     onChange={setMortgageRate}
                     min={0} max={10} step={0.1}
@@ -128,31 +135,31 @@ export default function InvestimentoPage() {
                     decimals={1}
                   />
                   <RangeField
-                    label="Durata mutuo"
+                    label={tFields("mortgageYears")}
                     value={mortgageYears}
                     onChange={setMortgageYears}
                     min={5} max={30} step={5}
-                    suffix=" anni"
+                    suffix={tFields("yearsSuffix")}
                   />
                 </div>
               </div>
 
               <div className="pt-4 border-t border-border/50">
-                <h2 className="text-sm font-semibold mb-3">Rendimento atteso</h2>
+                <h2 className="text-sm font-semibold mb-3">{tSec("expectedReturn")}</h2>
                 <div className="space-y-4">
                   <InputField
-                    label="Ricavi annui lordi"
+                    label={tFields("annualRevenue")}
                     value={annualRevenue}
                     onChange={setAnnualRevenue}
                     step={1000}
                     suffix="€"
                   />
                   <RangeField
-                    label="Costi operativi"
+                    label={tFields("operatingCosts")}
                     value={operatingCostsPct}
                     onChange={setOperatingCostsPct}
                     min={10} max={50} step={1}
-                    suffix="% dei ricavi"
+                    suffix={tFields("operatingCostsSuffix")}
                   />
                 </div>
               </div>
@@ -167,44 +174,46 @@ export default function InvestimentoPage() {
               <div className="space-y-4">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-5 text-white shadow-lg">
-                    <div className="text-white/70 text-xs uppercase tracking-wider mb-1">Rendimento sul capitale</div>
+                    <div className="text-white/70 text-xs uppercase tracking-wider mb-1">{tRes("cashOnCash")}</div>
                     <div className="text-3xl font-bold mb-1">{result.cashOnCash.toFixed(1)}%</div>
-                    <div className="text-white/80 text-xs">Ritorno annuo sull&apos;anticipo versato</div>
+                    <div className="text-white/80 text-xs">{tRes("cashOnCashHint")}</div>
                   </div>
                   <div className="bg-muted/30 rounded-2xl p-5 border border-border/40">
-                    <div className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Rendimento immobile</div>
+                    <div className="text-muted-foreground text-xs uppercase tracking-wider mb-1">{tRes("capRate")}</div>
                     <div className="text-3xl font-bold mb-1">{result.capRate.toFixed(1)}%</div>
-                    <div className="text-xs text-muted-foreground">Reddito netto / valore immobile</div>
+                    <div className="text-xs text-muted-foreground">{tRes("capRateHint")}</div>
                   </div>
                   <div className="bg-muted/30 rounded-2xl p-5 border border-border/40">
-                    <div className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Tempo di rientro</div>
+                    <div className="text-muted-foreground text-xs uppercase tracking-wider mb-1">{tRes("payback")}</div>
                     <div className="text-3xl font-bold mb-1">
-                      {isFinite(result.paybackYears) ? `${result.paybackYears.toFixed(1)} anni` : "—"}
+                      {isFinite(result.paybackYears)
+                        ? tRes("paybackYears", { years: result.paybackYears.toFixed(1) })
+                        : "—"}
                     </div>
-                    <div className="text-xs text-muted-foreground">Tempo per recuperare l&apos;anticipo</div>
+                    <div className="text-xs text-muted-foreground">{tRes("paybackHint")}</div>
                   </div>
                   <div className="bg-muted/30 rounded-2xl p-5 border border-border/40">
-                    <div className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Flusso mensile</div>
+                    <div className="text-muted-foreground text-xs uppercase tracking-wider mb-1">{tRes("monthlyCashFlow")}</div>
                     <div className={`text-3xl font-bold mb-1 ${result.monthlyCashFlow >= 0 ? "text-emerald-600" : "text-red-500"}`}>
                       {result.monthlyCashFlow >= 0 ? "+" : ""}{formatEuro(result.monthlyCashFlow)}
                     </div>
-                    <div className="text-xs text-muted-foreground">Dopo mutuo e spese</div>
+                    <div className="text-xs text-muted-foreground">{tRes("monthlyCashFlowHint")}</div>
                   </div>
                 </div>
 
                 <div className="bg-muted/30 rounded-2xl border border-border/40">
                   <div className="px-6 py-4 border-b border-border/40">
-                    <h3 className="text-sm font-semibold">Dettaglio economico annuale</h3>
+                    <h3 className="text-sm font-semibold">{tRes("detailTitle")}</h3>
                   </div>
                   <div className="divide-y divide-border/30">
-                    <Row label="Investimento totale" value={formatEuro(result.totalInvestment)} icon={Home} />
-                    <Row label="Anticipo" value={formatEuro(result.downPayment)} icon={Wallet} muted />
-                    <Row label="Mutuo" value={formatEuro(result.mortgageAmount)} icon={Landmark} muted />
-                    <Row label="Rata mensile mutuo" value={formatEuro(result.monthlyPayment)} icon={Calendar} />
-                    <Row label="Ricavi annui lordi" value={formatEuro(annualRevenue)} icon={TrendingUp} />
-                    <Row label="Costi operativi" value={`-${formatEuro(result.annualOperatingCosts)}`} icon={Receipt} negative />
-                    <Row label="Reddito operativo netto" value={formatEuro(result.noi)} icon={Coins} bold />
-                    <Row label="Mutuo annuo" value={`-${formatEuro(result.annualMortgage)}`} icon={BadgeEuro} negative />
+                    <Row label={tRows("totalInvestment")} value={formatEuro(result.totalInvestment)} icon={Home} />
+                    <Row label={tRows("downPayment")} value={formatEuro(result.downPayment)} icon={Wallet} muted />
+                    <Row label={tRows("mortgage")} value={formatEuro(result.mortgageAmount)} icon={Landmark} muted />
+                    <Row label={tRows("monthlyMortgage")} value={formatEuro(result.monthlyPayment)} icon={Calendar} />
+                    <Row label={tRows("annualRevenue")} value={formatEuro(annualRevenue)} icon={TrendingUp} />
+                    <Row label={tRows("operatingCosts")} value={`-${formatEuro(result.annualOperatingCosts)}`} icon={Receipt} negative />
+                    <Row label={tRows("noi")} value={formatEuro(result.noi)} icon={Coins} bold />
+                    <Row label={tRows("annualMortgage")} value={`-${formatEuro(result.annualMortgage)}`} icon={BadgeEuro} negative />
                   </div>
                 </div>
 
@@ -217,14 +226,14 @@ export default function InvestimentoPage() {
                 >
                   <div className="flex items-center gap-2 text-white/70 text-xs uppercase tracking-wider mb-2">
                     <Wallet className="h-3.5 w-3.5" />
-                    Flusso di cassa annuo
+                    {tRes("cashFlowTitle")}
                   </div>
                   <div className="text-4xl font-bold mb-1">
                     {result.annualCashFlow >= 0 ? "+" : ""}
                     {formatEuro(result.annualCashFlow)}
                   </div>
                   <div className="text-white/80 text-xs">
-                    Cassa netta annua dopo mutuo, costi operativi e spese.
+                    {tRes("cashFlowHint")}
                   </div>
                 </div>
               </div>

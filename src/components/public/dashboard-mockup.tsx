@@ -1,3 +1,5 @@
+"use client";
+
 import {
   TrendingUp,
   TrendingDown,
@@ -5,50 +7,43 @@ import {
   Users,
   Euro,
   Star,
+  type LucideIcon,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-const KPIS = [
-  {
-    label: "RevPAR",
-    value: "€187",
-    delta: "+14%",
-    up: true,
-    icon: Euro,
-  },
-  {
-    label: "Occupazione",
-    value: "73%",
-    delta: "+6 pt",
-    up: true,
-    icon: Calendar,
-  },
-  {
-    label: "ADR",
-    value: "€242",
-    delta: "+3%",
-    up: true,
-    icon: TrendingUp,
-  },
-  {
-    label: "Rating medio",
-    value: "4,9",
-    delta: "+0,1",
-    up: true,
-    icon: Star,
-  },
+const KPI_DEFS: {
+  key: "revpar" | "occupancy" | "adr" | "rating";
+  value: string;
+  delta: string;
+  up: boolean;
+  icon: LucideIcon;
+}[] = [
+  { key: "revpar", value: "€187", delta: "+14%", up: true, icon: Euro },
+  { key: "occupancy", value: "73%", delta: "+6 pt", up: true, icon: Calendar },
+  { key: "adr", value: "€242", delta: "+3%", up: true, icon: TrendingUp },
+  { key: "rating", value: "4,9", delta: "+0,1", up: true, icon: Star },
 ];
 
-const STAYS = [
-  { name: "S. Müller", channel: "Airbnb", nights: 4, total: "€968" },
-  { name: "M. Dubois", channel: "Booking", nights: 3, total: "€726" },
-  { name: "L. Rossi", channel: "Diretta", nights: 5, total: "€1.105" },
-  { name: "J. Smith", channel: "Airbnb", nights: 2, total: "€484" },
+const STAY_DEFS: {
+  name: string;
+  channelKey: "airbnb" | "booking" | "direct";
+  nights: number;
+  total: string;
+}[] = [
+  { name: "S. Müller", channelKey: "airbnb", nights: 4, total: "€968" },
+  { name: "M. Dubois", channelKey: "booking", nights: 3, total: "€726" },
+  { name: "L. Rossi", channelKey: "direct", nights: 5, total: "€1.105" },
+  { name: "J. Smith", channelKey: "airbnb", nights: 2, total: "€484" },
 ];
 
-const CHANNEL_BARS = [
-  { label: "Airbnb", value: 58, color: "bg-rose-500" },
-  { label: "Booking", value: 27, color: "bg-blue-500" },
-  { label: "Dirette", value: 15, color: "bg-emerald-500" },
+const CHANNEL_BAR_DEFS: {
+  key: "airbnb" | "booking" | "direct";
+  value: number;
+  color: string;
+}[] = [
+  { key: "airbnb", value: 58, color: "bg-rose-500" },
+  { key: "booking", value: 27, color: "bg-blue-500" },
+  { key: "direct", value: 15, color: "bg-emerald-500" },
 ];
 
 // Pre-built occupancy curve points (stylised, not real data)
@@ -87,6 +82,7 @@ function OccupancyChart() {
 }
 
 export function DashboardMockup() {
+  const t = useTranslations("mockups.dashboard");
   return (
     <div className="rounded-2xl border border-border/60 bg-white shadow-2xl overflow-hidden select-none">
       <div className="p-5 sm:p-6 space-y-5">
@@ -94,25 +90,25 @@ export function DashboardMockup() {
         <div className="flex items-center justify-between flex-wrap gap-3">
           <div>
             <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">
-              Proprietà
+              {t("propertyLabel")}
             </div>
-            <div className="text-base font-semibold">Casa di Miriam</div>
+            <div className="text-base font-semibold">{t("propertyName")}</div>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">
-              Periodo
+              {t("periodLabel")}
             </span>
             <span className="rounded-md border border-border/60 bg-white px-2.5 py-1 text-xs font-medium">
-              Aprile 2026
+              {t("periodValue")}
             </span>
           </div>
         </div>
 
         {/* KPI tiles */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {KPIS.map((k) => (
+          {KPI_DEFS.map((k) => (
             <div
-              key={k.label}
+              key={k.key}
               className="rounded-xl border border-border/60 bg-white p-3"
             >
               <div className="flex items-center justify-between mb-1.5">
@@ -134,7 +130,7 @@ export function DashboardMockup() {
                 {k.value}
               </div>
               <div className="text-[10px] text-muted-foreground uppercase tracking-wider mt-1.5 font-medium">
-                {k.label}
+                {t(`kpis.${k.key}`)}
               </div>
             </div>
           ))}
@@ -144,26 +140,30 @@ export function DashboardMockup() {
         <div className="grid sm:grid-cols-3 gap-3">
           <div className="sm:col-span-2 rounded-xl border border-border/60 p-4">
             <div className="flex items-center justify-between mb-2">
-              <div className="text-xs font-semibold">Curva di occupazione</div>
+              <div className="text-xs font-semibold">
+                {t("occupancy.title")}
+              </div>
               <span className="text-[10px] text-muted-foreground">
-                30 giorni
+                {t("occupancy.range")}
               </span>
             </div>
             <OccupancyChart />
             <div className="flex justify-between text-[9px] text-muted-foreground mt-1 px-0.5">
-              <span>1 apr</span>
-              <span>15 apr</span>
-              <span>30 apr</span>
+              <span>{t("occupancy.axisStart")}</span>
+              <span>{t("occupancy.axisMid")}</span>
+              <span>{t("occupancy.axisEnd")}</span>
             </div>
           </div>
 
           <div className="rounded-xl border border-border/60 p-4">
-            <div className="text-xs font-semibold mb-3">Canali</div>
+            <div className="text-xs font-semibold mb-3">
+              {t("channelsTitle")}
+            </div>
             <div className="space-y-2.5">
-              {CHANNEL_BARS.map((c) => (
-                <div key={c.label}>
+              {CHANNEL_BAR_DEFS.map((c) => (
+                <div key={c.key}>
                   <div className="flex items-center justify-between text-[11px] mb-1">
-                    <span className="font-medium">{c.label}</span>
+                    <span className="font-medium">{t(`channels.${c.key}`)}</span>
                     <span className="tabular-nums text-muted-foreground">
                       {c.value}%
                     </span>
@@ -185,30 +185,40 @@ export function DashboardMockup() {
           <div className="flex items-center justify-between px-4 py-2.5 bg-muted/30 border-b border-border/50">
             <span className="text-xs font-semibold inline-flex items-center gap-1.5">
               <Users className="h-3.5 w-3.5 text-primary" />
-              Soggiorni recenti
+              {t("stays.title")}
             </span>
             <span className="text-[10px] text-muted-foreground">
-              4 di 18 in aprile
+              {t("stays.count")}
             </span>
           </div>
           <table className="w-full text-xs">
             <thead className="text-[10px] uppercase tracking-wider text-muted-foreground">
               <tr className="border-b border-border/40">
-                <th className="text-left font-semibold px-4 py-2">Ospite</th>
-                <th className="text-left font-semibold px-4 py-2">Canale</th>
-                <th className="text-right font-semibold px-4 py-2">Notti</th>
-                <th className="text-right font-semibold px-4 py-2">Totale</th>
+                <th className="text-left font-semibold px-4 py-2">
+                  {t("stays.guest")}
+                </th>
+                <th className="text-left font-semibold px-4 py-2">
+                  {t("stays.channel")}
+                </th>
+                <th className="text-right font-semibold px-4 py-2">
+                  {t("stays.nights")}
+                </th>
+                <th className="text-right font-semibold px-4 py-2">
+                  {t("stays.total")}
+                </th>
               </tr>
             </thead>
             <tbody>
-              {STAYS.map((s, i) => (
+              {STAY_DEFS.map((s, i) => (
                 <tr
                   key={s.name}
-                  className={i < STAYS.length - 1 ? "border-b border-border/30" : ""}
+                  className={i < STAY_DEFS.length - 1 ? "border-b border-border/30" : ""}
                 >
                   <td className="px-4 py-2 font-medium">{s.name}</td>
                   <td className="px-4 py-2 text-muted-foreground">
-                    {s.channel}
+                    {s.channelKey === "direct"
+                      ? t("stays.channelDirect")
+                      : t(`channels.${s.channelKey}`)}
                   </td>
                   <td className="px-4 py-2 text-right tabular-nums">
                     {s.nights}

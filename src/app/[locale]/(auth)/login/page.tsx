@@ -3,8 +3,10 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function LoginPage() {
+  const t = useTranslations("login");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -18,7 +20,7 @@ export default function LoginPage() {
       redirect: false,
     });
     if (result?.error) {
-      setError("Password non valida");
+      setError(t("errorInvalid"));
     } else if (result?.url) {
       window.location.href = result.url;
     }
@@ -35,11 +37,9 @@ export default function LoginPage() {
             className="h-24 w-24 sm:h-28 sm:w-28 mx-auto object-contain"
           />
           <h1 className="text-2xl font-light text-foreground mt-4">
-            Hosting Lake Como
+            {t("brand")}
           </h1>
-          <p className="text-sm text-muted-foreground">
-            Area riservata proprietari
-          </p>
+          <p className="text-sm text-muted-foreground">{t("subtitle")}</p>
         </div>
         <div className="space-y-2">
           <div className="relative">
@@ -47,7 +47,7 @@ export default function LoginPage() {
               type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
+              placeholder={t("passwordPlaceholder")}
               className="w-full rounded-lg border px-4 py-3 pr-11 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
             />
             <button
@@ -65,7 +65,7 @@ export default function LoginPage() {
           type="submit"
           className="w-full rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary/90 transition"
         >
-          Accedi
+          {t("submit")}
         </button>
       </form>
     </div>

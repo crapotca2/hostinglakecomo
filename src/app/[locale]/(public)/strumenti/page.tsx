@@ -1,130 +1,55 @@
 import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import {
-  Euro,
   Sparkles,
-  FileText,
   Wand2,
   Lightbulb,
   BookOpen,
   PenTool,
   ArrowRight,
   Navigation,
-  Map,
+  Euro,
   CheckCircle2,
   MapPin,
   Mail,
   Clock,
 } from "lucide-react";
 
-type ToolStatus = "available" | "members-only" | "coming-soon";
 type RoadmapStage = "ready" | "in-progress";
+type RoadmapKey =
+  | "dynamicPricing"
+  | "istruzioniArrivoVideo"
+  | "listingOptimizer"
+  | "calcolatoreTasse"
+  | "welcomeBook"
+  | "logo";
 
-interface Tool {
-  slug: string;
-  name: string;
-  desc: string;
+interface RoadmapTool {
+  key: RoadmapKey;
+  stage: RoadmapStage;
   icon: React.ComponentType<{ className?: string }>;
-  status: ToolStatus;
-  category: "dashboard" | "advanced";
-  roadmap?: RoadmapStage;
 }
 
-const TOOLS: Tool[] = [
-  {
-    slug: "nome-proprieta",
-    name: "Nome Proprieta",
-    desc: "Generatore di nomi creativi per la tua casa vacanza. Anteprima riservata ai proprietari in gestione.",
-    icon: Sparkles,
-    status: "members-only",
-    category: "dashboard",
-  },
-  {
-    slug: "welcome-letter",
-    name: "Welcome Letter",
-    desc: "Template professionali multilingua per accogliere gli ospiti. Disponibile nell'area clienti Hosting Lake Como.",
-    icon: FileText,
-    status: "members-only",
-    category: "dashboard",
-  },
-  {
-    slug: "percorso-maps",
-    name: "Percorso Google Maps",
-    desc: "Genera il link Google Maps ottimizzato per la tua proprieta: punti di riferimento, parcheggi e accessi alternativi pronti per gli ospiti.",
-    icon: Map,
-    status: "members-only",
-    category: "dashboard",
-  },
-  {
-    slug: "dynamic-pricing",
-    name: "Dynamic Pricing",
-    desc: "Algoritmo proprietario di tariffazione dinamica su domanda, competitor e stagionalita Lago di Como.",
-    icon: Wand2,
-    status: "members-only",
-    category: "advanced",
-    roadmap: "ready",
-  },
-  {
-    slug: "istruzioni-arrivo-video",
-    name: "Istruzioni Arrivo con Video",
-    desc: "Video-guida per raggiungere la proprieta nella lingua nativa dell'ospite: spiegazioni passo-passo con riprese reali del percorso.",
-    icon: Navigation,
-    status: "members-only",
-    category: "advanced",
-    roadmap: "ready",
-  },
-  {
-    slug: "listing-optimizer",
-    name: "Listing Optimizer",
-    desc: "Analisi AI della descrizione e delle foto con suggerimenti per aumentare le prenotazioni.",
-    icon: Lightbulb,
-    status: "members-only",
-    category: "advanced",
-    roadmap: "ready",
-  },
-  {
-    slug: "calcolatore-tasse",
-    name: "Calcolatore Tasse IT",
-    desc: "Cedolare secca 21%/26%, IMU e IRPEF: stima completa dell'impatto fiscale sul tuo reddito.",
-    icon: Euro,
-    status: "coming-soon",
-    category: "advanced",
-    roadmap: "in-progress",
-  },
-  {
-    slug: "welcome-book",
-    name: "Welcome Book",
-    desc: "Libro digitale completo con check-in, regole, consigli locali e numeri utili personalizzabili.",
-    icon: BookOpen,
-    status: "coming-soon",
-    category: "advanced",
-    roadmap: "in-progress",
-  },
-  {
-    slug: "logo",
-    name: "Logo Creator",
-    desc: "Genera un'identita visiva professionale per la tua casa vacanza in pochi passi.",
-    icon: PenTool,
-    status: "coming-soon",
-    category: "advanced",
-    roadmap: "in-progress",
-  },
+const ROADMAP_TOOLS: RoadmapTool[] = [
+  { key: "dynamicPricing", stage: "ready", icon: Wand2 },
+  { key: "istruzioniArrivoVideo", stage: "ready", icon: Navigation },
+  { key: "listingOptimizer", stage: "ready", icon: Lightbulb },
+  { key: "calcolatoreTasse", stage: "in-progress", icon: Euro },
+  { key: "welcomeBook", stage: "in-progress", icon: BookOpen },
+  { key: "logo", stage: "in-progress", icon: PenTool },
 ];
 
-const CATEGORY_META: Record<Tool["category"], { label: string; desc: string }> = {
-  dashboard: {
-    label: "Tool Area Clienti",
-    desc: "Strumenti operativi riservati ai proprietari in gestione con Hosting Lake Como.",
-  },
-  advanced: {
-    label: "Roadmap",
-    desc: "Funzionalita gia disponibili nell'area clienti e in sviluppo per migliorare ulteriormente il nostro servizio.",
-  },
-};
-
 export default function StrumentiPage() {
-  const advanced = TOOLS.filter((t) => t.category === "advanced").sort(
+  const tSection = useTranslations("strumenti.indice.section1");
+  const tRoadmap = useTranslations("strumenti.indice.roadmap");
+  const tFinal = useTranslations("strumenti.indice.finalCta");
+
+  const sectionBullets = tSection.raw("bullets") as string[];
+  const mockupNameOptions = tSection.raw("mockupName.options") as string[];
+
+  const advanced = [...ROADMAP_TOOLS].sort(
     (a, b) =>
-      (a.roadmap === "ready" ? 0 : 1) - (b.roadmap === "ready" ? 0 : 1)
+      (a.stage === "ready" ? 0 : 1) - (b.stage === "ready" ? 0 : 1)
   );
 
   return (
@@ -136,21 +61,14 @@ export default function StrumentiPage() {
             {/* TEXT */}
             <div>
               <h2 className="text-3xl sm:text-4xl font-light text-foreground mb-4">
-                Tool dedicati per{" "}
-                <span className="font-semibold">risultati concreti</span>
+                {tSection("title1")}{" "}
+                <span className="font-semibold">{tSection("title2")}</span>
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Una suite di strumenti operativi pensata per chi affida la
-                gestione del proprio immobile a Hosting Lake Como. Risparmia
-                tempo, alza la qualità dell&apos;esperienza ospite e mantieni
-                il controllo della tua proprietà.
+                {tSection("body")}
               </p>
               <ul className="space-y-3 mb-8">
-                {[
-                  "Generatore di nomi creativi per la tua casa vacanza",
-                  "Welcome letter multilingua pronte all'uso",
-                  "Link Google Maps ottimizzato con punti di riferimento",
-                ].map((line) => (
+                {sectionBullets.map((line) => (
                   <li
                     key={line}
                     className="flex items-start gap-3 text-sm text-foreground"
@@ -164,7 +82,7 @@ export default function StrumentiPage() {
                 href="/dashboard"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#1D3A62] text-white text-sm font-semibold hover:bg-[#1D3A62]/90 transition-colors shadow-md"
               >
-                Accedi all&apos;area clienti
+                {tSection("ctaDashboard")}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -176,7 +94,7 @@ export default function StrumentiPage() {
                 <div className="px-4 py-3 border-b border-border/40 bg-muted/20 flex items-center gap-2">
                   <MapPin className="h-3.5 w-3.5 text-primary" />
                   <span className="text-xs font-semibold text-foreground">
-                    Percorso Google Maps
+                    {tSection("mockupMap.title")}
                   </span>
                 </div>
                 <div className="relative h-32 bg-gradient-to-br from-emerald-50 via-blue-50 to-emerald-100 overflow-hidden">
@@ -213,7 +131,7 @@ export default function StrumentiPage() {
                   </div>
                 </div>
                 <div className="px-4 py-2.5 text-[10px] text-muted-foreground border-t border-border/40">
-                  Via Maurizio Monti 46, Como — 8 min dalla stazione
+                  {tSection("mockupMap.caption")}
                 </div>
               </div>
 
@@ -222,15 +140,15 @@ export default function StrumentiPage() {
                 <div className="px-4 py-3 border-b border-border/40 bg-muted/20 flex items-center justify-between">
                   <span className="text-xs font-semibold text-foreground inline-flex items-center gap-1.5">
                     <Mail className="h-3.5 w-3.5 text-primary" />
-                    Welcome Letter
+                    {tSection("mockupWelcome.title")}
                   </span>
                   <span className="text-[9px] text-muted-foreground uppercase tracking-wider">
-                    IT · EN · DE · FR
+                    {tSection("mockupWelcome.languages")}
                   </span>
                 </div>
                 <div className="p-4 space-y-2 bg-white">
                   <div className="text-xs font-semibold text-foreground">
-                    Benvenuti a Casa di Miriam
+                    {tSection("mockupWelcome.preview")}
                   </div>
                   <div className="space-y-1">
                     <div className="h-1.5 rounded-full bg-muted/60 w-full" />
@@ -249,16 +167,11 @@ export default function StrumentiPage() {
                 <div className="px-4 py-3 border-b border-border/40 bg-muted/20 flex items-center gap-2">
                   <Sparkles className="h-3.5 w-3.5 text-primary" />
                   <span className="text-xs font-semibold text-foreground">
-                    Nome Proprietà
+                    {tSection("mockupName.title")}
                   </span>
                 </div>
                 <div className="p-4 space-y-2">
-                  {[
-                    "Casa di Miriam",
-                    "Loft del Lago",
-                    "Terrazza di Como",
-                    "Vista Cattedrale",
-                  ].map((name, i) => (
+                  {mockupNameOptions.map((name, i) => (
                     <div
                       key={name}
                       className={`flex items-center justify-between rounded-lg px-3 py-2 text-xs ${
@@ -289,31 +202,31 @@ export default function StrumentiPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="mb-10">
             <h2 className="text-2xl sm:text-3xl font-light text-white">
-              <span className="font-semibold">Roadmap</span>
+              <span className="font-semibold">{tRoadmap("title")}</span>
             </h2>
-            <p className="mt-2 text-white/75">
-              {CATEGORY_META.advanced.desc}
-            </p>
+            <p className="mt-2 text-white/75">{tRoadmap("subtitle")}</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {advanced.map((t) => {
-              const isReady = t.roadmap === "ready";
+            {advanced.map((tool) => {
+              const isReady = tool.stage === "ready";
               return (
                 <div
-                  key={t.slug}
+                  key={tool.key}
                   className="bg-white text-foreground rounded-2xl p-7 border border-border/50"
                 >
                   <div className="flex items-start justify-between gap-3 mb-2">
-                    <h3 className="text-base font-semibold">{t.name}</h3>
+                    <h3 className="text-base font-semibold">
+                      {tRoadmap(`tools.${tool.key}.name`)}
+                    </h3>
                     {!isReady && (
                       <span className="shrink-0 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground bg-muted px-2 py-0.5 rounded-full whitespace-nowrap">
                         <Clock className="h-2.5 w-2.5" />
-                        In sviluppo
+                        {tRoadmap("inProgress")}
                       </span>
                     )}
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    {t.desc}
+                    {tRoadmap(`tools.${tool.key}.desc`)}
                   </p>
                 </div>
               );
@@ -325,19 +238,18 @@ export default function StrumentiPage() {
       <section className="py-20 border-t border-border/50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-light mb-4">
-            Vuoi accedere agli{" "}
-            <span className="font-semibold">strumenti operativi</span>?
+            {tFinal("title1")}{" "}
+            <span className="font-semibold">{tFinal("title2")}</span>
+            {tFinal("title3")}
           </h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            La suite completa di strumenti — generatore nomi, welcome letter
-            multilingua, percorsi Google Maps, dynamic pricing — riservata
-            ai proprietari in gestione con Hosting Lake Como.
+            {tFinal("subtitle")}
           </p>
           <Link
             href="/contact?interest=consulenza&from=strumenti"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-colors shadow-lg"
           >
-            Richiedi Consulenza
+            {tFinal("button")}
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

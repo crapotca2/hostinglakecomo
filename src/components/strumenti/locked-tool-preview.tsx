@@ -1,5 +1,8 @@
+"use client";
+
 import { Link } from "@/i18n/routing";
 import { Lock, ArrowRight, type LucideIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface LockedToolPreviewProps {
   icon?: LucideIcon;
@@ -17,6 +20,8 @@ export function LockedToolPreview({
   bullets,
   backHref = "/strumenti",
 }: LockedToolPreviewProps) {
+  const t = useTranslations("strumenti");
+  const tl = useTranslations("strumenti.lock.common");
   return (
     <div className="pt-20 pb-20 bg-muted/20 min-h-screen">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,7 +30,7 @@ export function LockedToolPreview({
             href={backHref}
             className="text-xs text-muted-foreground hover:text-foreground inline-block"
           >
-            ← Tutti gli strumenti
+            {t("backToTools")}
           </Link>
         </div>
         <div className="mb-8">
@@ -41,11 +46,9 @@ export function LockedToolPreview({
                 <Lock className="h-7 w-7 text-primary" />
               </div>
               <div className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-primary bg-primary/[0.08] px-2.5 py-1 rounded-full mb-4">
-                Area Clienti Hosting Lake Como
+                {tl("areaBadge")}
               </div>
-              <h2 className="text-2xl font-semibold mb-3">
-                Riservato ai proprietari in gestione
-              </h2>
+              <h2 className="text-2xl font-semibold mb-3">{tl("headline")}</h2>
               <p className="text-muted-foreground max-w-xl mx-auto">
                 {description}
               </p>
@@ -54,7 +57,7 @@ export function LockedToolPreview({
 
           <div className="p-8">
             <div className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-4">
-              Cosa include
+              {tl("includesTitle")}
             </div>
             <ul className="space-y-3 mb-8">
               {bullets.map((b) => (
@@ -70,10 +73,10 @@ export function LockedToolPreview({
             <div className="bg-muted/40 rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
                 <div className="text-sm font-semibold mb-1">
-                  Accedi all'area clienti
+                  {tl("accessTitle")}
                 </div>
                 <div className="text-xs text-muted-foreground">
-                  Disponibile per i proprietari in gestione con Hosting Lake Como.
+                  {tl("accessHint")}
                 </div>
               </div>
               <div className="flex items-center gap-3 shrink-0">
@@ -81,13 +84,13 @@ export function LockedToolPreview({
                   href="/login"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-border bg-white text-sm font-semibold hover:bg-muted/40 transition-colors"
                 >
-                  Accedi
+                  {tl("loginButton")}
                 </Link>
                 <Link
                   href="/contact?interest=gestione"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-colors"
                 >
-                  Vuoi gestire con noi?
+                  {tl("manageButton")}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { LegalLanguageDisclaimer } from "@/components/public/legal-language-disclaimer";
 
 const LAST_UPDATED = "5 maggio 2026";
 
@@ -13,6 +14,7 @@ export default function TermsPage() {
     <div className="pt-20">
       <section className="py-16 border-b border-border/50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <LegalLanguageDisclaimer />
           <span className="text-xs font-semibold uppercase tracking-widest text-primary">
             Condizioni di utilizzo
           </span>

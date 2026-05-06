@@ -13,12 +13,14 @@ import {
   Star,
   Navigation,
 } from "lucide-react";
-import { getPortfolioEntry, getZoneLabel, getTypeLabel } from "@/lib/portfolio";
+import { useTranslations } from "next-intl";
+import { getPortfolioEntry } from "@/lib/portfolio";
 import { AirbnbReviewBlock } from "@/components/public/airbnb-review-block";
 import { GoogleMapEmbed } from "@/components/public/google-map-embed";
 import { PropertyGallery } from "@/components/public/property-gallery";
 
 function MapEmbed({ lat, lng, name }: { lat: number; lng: number; name: string }) {
+  const t = useTranslations("properties.detail");
   const link = `https://www.google.com/maps?q=${lat},${lng}`;
   return (
     <div className="bg-white rounded-2xl border border-border/50 overflow-hidden">
@@ -27,7 +29,7 @@ function MapEmbed({ lat, lng, name }: { lat: number; lng: number; name: string }
           <div className="h-8 w-8 rounded-lg bg-primary/[0.08] flex items-center justify-center">
             <Navigation className="h-4 w-4 text-primary" />
           </div>
-          <h2 className="text-sm font-semibold">Posizione</h2>
+          <h2 className="text-sm font-semibold">{t("mapTitle")}</h2>
         </div>
         <a
           href={link}
@@ -35,12 +37,12 @@ function MapEmbed({ lat, lng, name }: { lat: number; lng: number; name: string }
           rel="noopener noreferrer"
           className="text-xs text-primary hover:underline"
         >
-          Apri in Google Maps
+          {t("mapOpen")}
         </a>
       </div>
       <GoogleMapEmbed
         query={`${lat},${lng}`}
-        title={`Mappa ${name}`}
+        title={`Map ${name}`}
         zoom={16}
         className="h-72 sm:h-80"
       />
@@ -49,6 +51,8 @@ function MapEmbed({ lat, lng, name }: { lat: number; lng: number; name: string }
 }
 
 export default function PropertyDetailPage() {
+  const t = useTranslations("properties");
+  const tDetail = useTranslations("properties.detail");
   const params = useParams<{ slug: string }>();
   const slug = params.slug;
   const property = getPortfolioEntry(slug);
@@ -57,17 +61,16 @@ export default function PropertyDetailPage() {
     return (
       <div className="pt-32 pb-20 max-w-6xl mx-auto px-4">
         <div className="text-center">
-          <h1 className="text-2xl font-semibold mb-2">Proprieta non trovata</h1>
+          <h1 className="text-2xl font-semibold mb-2">{tDetail("notFoundTitle")}</h1>
           <p className="text-sm text-muted-foreground mb-6">
-            La proprieta <code className="text-xs">{slug}</code> non esiste nel
-            nostro portfolio.
+            {tDetail("notFoundBody")}
           </p>
           <Link
             href="/properties"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold"
           >
             <ArrowLeft className="h-4 w-4" />
-            Torna al portfolio
+            {tDetail("backToPortfolio")}
           </Link>
         </div>
       </div>
@@ -124,6 +127,9 @@ export default function PropertyDetailPage() {
     ...(airbnbListing?.url && { sameAs: [airbnbListing.url] }),
   };
 
+  const bedroomsKey = property.details.bedrooms === 1 ? "bedroomsOne" : "bedroomsOther";
+  const bathroomsKey = property.details.bathrooms === 1 ? "bathroomsOne" : "bathroomsOther";
+
   return (
     <div className="pt-24 pb-20 bg-muted/20 min-h-screen">
       <script
@@ -136,7 +142,7 @@ export default function PropertyDetailPage() {
           className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground mb-4"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
-          Tutte le proprieta
+          {tDetail("back")}
         </Link>
 
         <PropertyGallery
@@ -149,7 +155,7 @@ export default function PropertyDetailPage() {
           <div className="bg-white rounded-2xl p-5 sm:p-6 border border-border/50">
             <div className="mb-3">
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-muted/60 text-foreground text-xs font-medium">
-                {getTypeLabel(property.type)}
+                {t(`types.${property.type}`)}
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-semibold mb-3">
@@ -157,16 +163,16 @@ export default function PropertyDetailPage() {
             </h1>
             <div className="flex items-center gap-3 sm:gap-4 text-sm text-muted-foreground flex-wrap gap-y-2">
               <span className="flex items-center gap-1">
-                <Bed className="h-4 w-4" /> {property.details.bedrooms}{" "}
-                {property.details.bedrooms === 1 ? "camera" : "camere"}
+                <Bed className="h-4 w-4" />{" "}
+                {tDetail(bedroomsKey, { count: property.details.bedrooms })}
               </span>
               <span className="flex items-center gap-1">
-                <Bath className="h-4 w-4" /> {property.details.bathrooms}{" "}
-                {property.details.bathrooms === 1 ? "bagno" : "bagni"}
+                <Bath className="h-4 w-4" />{" "}
+                {tDetail(bathroomsKey, { count: property.details.bathrooms })}
               </span>
               <span className="flex items-center gap-1">
-                <Users className="h-4 w-4" /> max {property.details.maxGuests}{" "}
-                ospiti
+                <Users className="h-4 w-4" />{" "}
+                {tDetail("guestsMax", { count: property.details.maxGuests })}
               </span>
               {airbnbListing?.rating && airbnbListing.rating > 0 && (
                 <span className="flex items-center gap-1">
@@ -174,7 +180,9 @@ export default function PropertyDetailPage() {
                   {airbnbListing.rating.toFixed(2)}
                   {airbnbListing.reviewCount && (
                     <span className="text-xs">
-                      ({airbnbListing.reviewCount} recensioni)
+                      {tDetail("reviewsCount", {
+                        count: airbnbListing.reviewCount,
+                      })}
                     </span>
                   )}
                 </span>
@@ -193,7 +201,7 @@ export default function PropertyDetailPage() {
                     <div className="flex items-center gap-2 mb-2">
                       <HomeIcon className="h-3.5 w-3.5 text-primary" />
                       <h3 className="text-xs font-semibold uppercase tracking-wider text-primary">
-                        Lo spazio
+                        {tDetail("spaceTitle")}
                       </h3>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
@@ -206,7 +214,7 @@ export default function PropertyDetailPage() {
                     <div className="flex items-center gap-2 mb-2">
                       <MapPin className="h-3.5 w-3.5 text-primary" />
                       <h3 className="text-xs font-semibold uppercase tracking-wider text-primary">
-                        Il quartiere
+                        {tDetail("neighborhoodTitle")}
                       </h3>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
@@ -238,7 +246,7 @@ export default function PropertyDetailPage() {
                 <div className="h-8 w-8 rounded-lg bg-primary/[0.08] flex items-center justify-center">
                   <HomeIcon className="h-4 w-4 text-primary" />
                 </div>
-                <h2 className="text-sm font-semibold">Descrizione</h2>
+                <h2 className="text-sm font-semibold">{tDetail("descriptionTitle")}</h2>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
                 {property.descriptionLong}
@@ -249,16 +257,14 @@ export default function PropertyDetailPage() {
           <div className="bg-primary/[0.04] border border-primary/10 rounded-2xl p-5 flex items-start gap-3 text-sm text-muted-foreground">
             <Info className="h-4 w-4 text-primary shrink-0 mt-0.5" />
             <p>
-              Questa è una delle proprietà che il team Hosting Lake Como gestisce
-              oggi: lo stesso metodo — hospitality, operations e revenue
-              management — lo applichiamo agli immobili dei nostri clienti.{" "}
+              {tDetail("ctaIntroPart1")}
               <Link
                 href="/contact?interest=consulenza&from=portfolio"
                 className="text-primary font-semibold hover:underline"
               >
-                Richiedi una consulenza
+                {tDetail("ctaIntroLink")}
               </Link>
-              .
+              {tDetail("ctaIntroPart2")}
             </p>
           </div>
         </div>
