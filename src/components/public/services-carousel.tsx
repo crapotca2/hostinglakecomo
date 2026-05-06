@@ -53,7 +53,7 @@ const SERVICE_GROUPS = [
       {
         icon: Sparkles,
         title: "Pulizia e biancheria",
-        desc: "Standard alberghiero, biancheria di alta gamma di proprietà, igienizzazione certificata fra un soggiorno e l'altro.",
+        desc: "Standard alberghiero, biancheria di alta gamma, igienizzazione certificata fra un soggiorno e l'altro.",
       },
       {
         icon: CalendarCheck,
@@ -226,7 +226,7 @@ export function ServicesCarousel() {
                               {item.title}
                             </h4>
                             {"cost" in item && item.cost && (
-                              <span className="shrink-0 text-[9px] font-semibold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded-full whitespace-nowrap">
+                              <span className="shrink-0 text-[9px] font-semibold uppercase tracking-wider text-primary bg-primary/[0.08] border border-primary/20 px-1.5 py-0.5 rounded-full whitespace-nowrap">
                                 {item.cost}
                               </span>
                             )}

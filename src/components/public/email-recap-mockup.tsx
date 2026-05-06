@@ -66,8 +66,7 @@ export function EmailRecapMockup() {
           </div>
           <p className="relative text-xs leading-relaxed mb-2">
             Tariffe rialzate del 7% sui weekend di Pasqua: +€620 sul
-            mensile. Listing aggiornato con due nuove foto della terrazza
-            ed è arrivata la prima prenotazione diretta.
+            mensile. Listing aggiornato con due nuove foto della terrazza.
           </p>
           <span className="relative inline-flex items-center gap-1 text-[11px] font-semibold">
             Vedi rendiconto completo

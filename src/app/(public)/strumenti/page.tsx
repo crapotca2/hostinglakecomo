@@ -116,8 +116,8 @@ const CATEGORY_META: Record<Tool["category"], { label: string; desc: string }> =
     desc: "Strumenti operativi riservati ai proprietari in gestione con Hosting Lake Como.",
   },
   advanced: {
-    label: "Roadmap prodotto",
-    desc: "Funzionalita gia disponibili nell'area clienti e in sviluppo per le prossime release.",
+    label: "Roadmap",
+    desc: "Funzionalita gia disponibili nell'area clienti e in sviluppo per migliorare ulteriormente il nostro servizio.",
   },
 };
 
@@ -136,8 +136,8 @@ export default function StrumentiPage() {
             {/* TEXT */}
             <div>
               <h2 className="text-3xl sm:text-4xl font-light text-foreground mb-4">
-                Tool dedicati ai{" "}
-                <span className="font-semibold">proprietari in gestione</span>
+                Tool dedicati per{" "}
+                <span className="font-semibold">risultati concreti</span>
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
                 Una suite di strumenti operativi pensata per chi affida la
@@ -289,7 +289,7 @@ export default function StrumentiPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="mb-10">
             <h2 className="text-2xl sm:text-3xl font-light text-white">
-              <span className="font-semibold">Roadmap prodotto</span>
+              <span className="font-semibold">Roadmap</span>
             </h2>
             <p className="mt-2 text-white/75">
               {CATEGORY_META.advanced.desc}
@@ -330,7 +330,7 @@ export default function StrumentiPage() {
           </h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
             La suite completa di strumenti — generatore nomi, welcome letter
-            multilingua, percorsi Google Maps, dynamic pricing — e riservata
+            multilingua, percorsi Google Maps, dynamic pricing — riservata
             ai proprietari in gestione con Hosting Lake Como.
           </p>
           <Link

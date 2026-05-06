@@ -138,7 +138,7 @@ export default function HomePage() {
                   <span className="font-semibold">tutte le piattaforme</span>
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-8">
-                  Distribuiamo la tua proprieta sui principali canali del
+                  Registriamo la tua proprieta sui principali canali del
                   mercato e adattiamo la formula di affitto stagione per
                   stagione. In alta stagione lavoriamo con i brevi soggiorni
                   turistici, in bassa stagione passiamo a locazioni medio-lunghe
@@ -201,7 +201,7 @@ export default function HomePage() {
             </span>
             <h2 className="text-3xl sm:text-4xl font-light text-white mt-3 mb-4">
               Tutto cio che serve per{" "}
-              <span className="font-semibold">massimizzare la rendita</span>
+              <span className="font-semibold">una gestione perfetta</span>
             </h2>
             <p className="text-white/80 max-w-2xl mx-auto">
               Dalla promozione alla gestione quotidiana, ci occupiamo di ogni

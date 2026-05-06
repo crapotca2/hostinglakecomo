@@ -93,8 +93,8 @@ export default function ServicesPage() {
               <p className="text-muted-foreground leading-relaxed mb-6">
                 Accedi quando vuoi, da qualsiasi dispositivo. Dati aggiornati
                 ogni giorno, niente fogli Excel da incrociare, niente attese
-                per i numeri di fine mese. Più di trenta report già pronti,
-                organizzati in sei aree.
+                per i numeri di fine mese. Tutti i dati che ti possono servire
+                in sei aree di controllo ben distinte.
               </p>
               <ul className="space-y-3">
                 {DASHBOARD_BLOCKS.map((b) => (
