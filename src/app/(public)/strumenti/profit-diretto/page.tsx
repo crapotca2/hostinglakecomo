@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import { AirBibbyEstimateCard } from "@/components/strumenti/air-bibby-estimate-card";
 import { DisclaimerNote } from "@/components/strumenti/disclaimer-note";
+import { FullAnalysisCTA } from "@/components/strumenti/full-analysis-cta";
 
 function formatEuro(amount: number): string {
   return new Intl.NumberFormat("it-IT", {
@@ -13,11 +14,12 @@ function formatEuro(amount: number): string {
   }).format(amount);
 }
 
-// OTA commissions (approximate host-side fees)
+// Commissioni piattaforme — somma di service fee host + transaction fee.
+// Cifre prudenti, lato medio-alto del range osservato sul mercato 2025.
 const OTA_FEES = {
   airbnb: { label: "Airbnb", color: "#FF5A5F", commission: 15 },
-  booking: { label: "Booking.com", color: "#003580", commission: 15 },
-  vrbo: { label: "Vrbo", color: "#3B5998", commission: 8 },
+  booking: { label: "Booking.com", color: "#003580", commission: 17 },
+  vrbo: { label: "Vrbo", color: "#3B5998", commission: 13 },
   expedia: { label: "Expedia", color: "#FFC72C", commission: 18 },
 };
 
@@ -48,9 +50,11 @@ export default function ProfitDirettoPage() {
 
     const currentNet = annualRevenue - totalOtaFees - directFees;
 
-    // Scenario: shift 50% of OTA bookings to direct (realistic with Hosting Lake Como website + marketing)
+    // Scenario: spostiamo il 25% delle prenotazioni dalle piattaforme alle
+    // dirette grazie a sito proprio, riprenotazioni e ospiti ricorrenti.
+    // Cifra prudente: 50% sarebbe irrealistica nei primi anni.
     const otaRevenue = airbnbRevenue + bookingRevenue + vrboRevenue + expediaRevenue;
-    const shiftedAmount = otaRevenue * 0.5;
+    const shiftedAmount = otaRevenue * 0.25;
     const newDirectRevenue = directRevenue + shiftedAmount;
     const newOtaRevenue = otaRevenue - shiftedAmount;
 
@@ -97,12 +101,12 @@ export default function ProfitDirettoPage() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8 items-start">
+        <div className="grid lg:grid-cols-5 gap-8 items-center">
           {/* Form */}
           <div className="lg:col-span-2 space-y-4">
             <div className="bg-white rounded-2xl p-6 border border-border/50 space-y-5">
               <div>
-                <label className="text-xs font-medium mb-1.5 block text-muted-foreground">Revenue annuo lordo</label>
+                <label className="text-xs font-medium mb-1.5 block text-muted-foreground">Ricavi annui lordi</label>
                 <div className="relative">
                   <input
                     type="number"
@@ -116,7 +120,7 @@ export default function ProfitDirettoPage() {
               </div>
 
               <div className="pt-4 border-t border-border/50">
-                <h2 className="text-sm font-semibold mb-3">Mix canali attuale</h2>
+                <h2 className="text-sm font-semibold mb-3">Distribuzione canali attuale</h2>
                 <div className="space-y-4">
                   <ChannelSlider label="Airbnb" value={airbnbPct} onChange={setAirbnbPct} color="#FF5A5F" />
                   <ChannelSlider label="Booking.com" value={bookingPct} onChange={setBookingPct} color="#003580" />
@@ -142,13 +146,13 @@ export default function ProfitDirettoPage() {
 
           {/* Results */}
           <div className="lg:col-span-3">
-            <AirBibbyEstimateCard slug="profit-diretto">
+            <AirBibbyEstimateCard>
               <div className="space-y-4">
                 <div className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-8 text-white shadow-lg">
                   <div className="text-white/70 text-xs uppercase tracking-wider mb-2">Risparmio potenziale 5 anni</div>
                   <div className="text-5xl font-bold mb-2">+{formatEuro(result.fiveYearSavings)}</div>
                   <div className="text-white/80 text-sm">
-                    Ipotesi: 50% delle prenotazioni OTA convertite in dirette
+                    Ipotesi: 25% delle prenotazioni dalle piattaforme spostate sul canale diretto
                   </div>
                 </div>
 
@@ -186,19 +190,19 @@ export default function ProfitDirettoPage() {
                   <div className="px-6 py-4 border-b border-border/40">
                     <h3 className="text-sm font-semibold">Confronto scenari</h3>
                     <p className="text-xs text-muted-foreground mt-1">
-                      Scenario modellato sul nostro database di conversione storica
+                      Scenario modellato sui nostri dati storici di conversione
                     </p>
                   </div>
                   <div className="grid grid-cols-2 divide-x divide-border/40">
                     <div className="p-6">
-                      <div className="text-xs text-muted-foreground mb-1">Mix attuale</div>
+                      <div className="text-xs text-muted-foreground mb-1">Distribuzione attuale</div>
                       <div className="text-2xl font-bold">{formatEuro(result.currentNet)}</div>
                       <div className="text-[11px] text-muted-foreground mt-2">
                         Commissioni: {formatEuro(result.totalFees)}
                       </div>
                     </div>
                     <div className="p-6 bg-primary/[0.04]">
-                      <div className="text-xs text-primary font-semibold mb-1">Con piu' dirette</div>
+                      <div className="text-xs text-primary font-semibold mb-1">Con piu&apos; dirette</div>
                       <div className="text-2xl font-bold text-primary">{formatEuro(result.optimizedNet)}</div>
                       <div className="text-[11px] text-emerald-600 font-medium mt-2">
                         +{formatEuro(result.savings)}/anno
@@ -209,6 +213,10 @@ export default function ProfitDirettoPage() {
               </div>
             </AirBibbyEstimateCard>
           </div>
+        </div>
+
+        <div className="mt-6">
+          <FullAnalysisCTA slug="profit-diretto" />
         </div>
       </div>
     </div>

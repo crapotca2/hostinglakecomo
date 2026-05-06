@@ -8,6 +8,7 @@ import { z } from "zod";
 import { MapPin, Bed, Users, Eye, TrendingUp, CalendarDays, Euro, Ruler, Home } from "lucide-react";
 import { AirBibbyEstimateCard } from "@/components/strumenti/air-bibby-estimate-card";
 import { DisclaimerNote } from "@/components/strumenti/disclaimer-note";
+import { FullAnalysisCTA } from "@/components/strumenti/full-analysis-cta";
 
 const FormSchema = z.object({
   zone: z.enum(["centro-como", "primo-bacino", "secondo-bacino", "alto-lago"]),
@@ -22,20 +23,22 @@ type FormData = z.infer<typeof FormSchema>;
 type Zone = FormData["zone"];
 type PropertyType = FormData["propertyType"];
 
-// Base rates (EUR/night) derived from Hosting Lake Como portfolio averages per zone + type
+// Tariffe medie (EUR/notte) — calibrate per essere realistiche e prudenti.
+// Riferimenti: AirDNA Lake Como, scrape competitor portafoglio HLC.
 const BASE_RATES: Record<Zone, Record<PropertyType, number>> = {
-  "centro-como":    { studio: 95,  apartment: 140, house: 200, villa: 310 },
-  "primo-bacino":   { studio: 120, apartment: 175, house: 240, villa: 360 },
-  "secondo-bacino": { studio: 130, apartment: 195, house: 280, villa: 420 },
-  "alto-lago":      { studio: 80,  apartment: 125, house: 180, villa: 270 },
+  "centro-como":    { studio: 85,  apartment: 125, house: 175, villa: 270 },
+  "primo-bacino":   { studio: 105, apartment: 155, house: 215, villa: 320 },
+  "secondo-bacino": { studio: 115, apartment: 175, house: 250, villa: 380 },
+  "alto-lago":      { studio: 70,  apartment: 110, house: 160, villa: 240 },
 };
 
-// Indicative property value EUR/sqm by zone (residential market reference)
+// Prezzo indicativo al m² (mercato residenziale) — fonti: Borsino Immobiliare,
+// agenzie locali. Cifre prudenti, range medio.
 const PRICE_PER_SQM: Record<Zone, number> = {
-  "centro-como": 4200,
-  "primo-bacino": 5800,
-  "secondo-bacino": 7000,
-  "alto-lago": 2600,
+  "centro-como": 3800,
+  "primo-bacino": 5200,
+  "secondo-bacino": 6500,
+  "alto-lago": 2400,
 };
 
 const ZONE_LABELS: Record<Zone, string> = {
@@ -52,11 +55,12 @@ const TYPE_LABELS: Record<PropertyType, string> = {
   villa: "Villa",
 };
 
+// Tassi di occupazione annuali medi — mantenuti prudenti.
 const OCCUPANCY: Record<Zone, number> = {
-  "centro-como": 0.72,
-  "primo-bacino": 0.68,
-  "secondo-bacino": 0.70,
-  "alto-lago": 0.55,
+  "centro-como": 0.65,
+  "primo-bacino": 0.62,
+  "secondo-bacino": 0.63,
+  "alto-lago": 0.50,
 };
 
 function formatEuro(amount: number): string {
@@ -90,9 +94,10 @@ export default function RenditaPage() {
 
   const result = useMemo(() => {
     const baseRate = BASE_RATES[zone][propertyType];
-    const viewMultiplier = lakeView ? 1.3 : 1;
+    // Vista lago: +25% (prima +30%, ricalibrato verso il basso)
+    const viewMultiplier = lakeView ? 1.25 : 1;
     const extraBedrooms = Math.max(0, bedrooms - 2);
-    const nightlyRate = Math.round(baseRate * viewMultiplier + extraBedrooms * 40);
+    const nightlyRate = Math.round(baseRate * viewMultiplier + extraBedrooms * 35);
 
     const occupancy = OCCUPANCY[zone];
     const nightsSold = Math.round(365 * occupancy);
@@ -101,16 +106,23 @@ export default function RenditaPage() {
 
     const propertyValue = Math.round(surface * PRICE_PER_SQM[zone]);
 
-    const selfOtaCommission = grossAnnual * 0.17;
-    const selfExpenses = grossAnnual * 0.12;
+    // Scenario gestione autonoma: commissioni piattaforme medie 18%, costi
+    // operativi 15% (pulizia, utenze, manutenzione, ricambio biancheria,
+    // forniture), tassa di soggiorno €3 a persona/notte (max 4 notti).
+    const selfOtaCommission = grossAnnual * 0.18;
+    const selfExpenses = grossAnnual * 0.15;
     const selfTouristTax = nightsSold * Math.min(maxGuests, 4) * 3;
     const selfNet = grossAnnual - selfOtaCommission - selfExpenses - selfTouristTax;
 
-    const abGrossAnnual = Math.round(grossAnnual * 1.18 * 1.12);
+    // Scenario Hosting Lake Como: tariffazione dinamica +10% sul prezzo,
+    // occupazione +6 punti grazie a multi-canale e ottimizzazione listing,
+    // commissione gestione 12%, commissioni piattaforme 12% (mix piu' diretto),
+    // costi operativi 10% (economie di scala).
+    const abGrossAnnual = Math.round(grossAnnual * 1.10 * 1.06);
     const abOtaCommission = abGrossAnnual * 0.12;
-    const abAirbibbyFee = abGrossAnnual * 0.1;
-    const abExpenses = abGrossAnnual * 0.08;
-    const abTouristTax = selfTouristTax;
+    const abAirbibbyFee = abGrossAnnual * 0.12;
+    const abExpenses = abGrossAnnual * 0.10;
+    const abTouristTax = nightsSold * Math.min(maxGuests, 4) * 3;
     const abNet = abGrossAnnual - abOtaCommission - abAirbibbyFee - abExpenses - abTouristTax;
 
     const delta = abNet - selfNet;
@@ -148,7 +160,7 @@ export default function RenditaPage() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8 items-start">
+        <div className="grid lg:grid-cols-5 gap-8 items-center">
           {/* Form */}
           <div className="lg:col-span-2 space-y-4">
             <div className="bg-white rounded-2xl p-6 border border-border/50 space-y-5">
@@ -243,7 +255,7 @@ export default function RenditaPage() {
                 />
                 <div className="flex items-center gap-1.5 text-sm">
                   <Eye className="h-4 w-4 text-primary" />
-                  <span>Vista lago <span className="text-xs text-muted-foreground">(+30%)</span></span>
+                  <span>Vista lago <span className="text-xs text-muted-foreground">(+25%)</span></span>
                 </div>
               </label>
             </div>
@@ -251,12 +263,12 @@ export default function RenditaPage() {
             <DisclaimerNote />
           </div>
 
-          {/* Results */}
+          {/* Risultati */}
           <div className="lg:col-span-3">
-            <AirBibbyEstimateCard slug="rendita">
+            <AirBibbyEstimateCard>
               <div className="space-y-4">
                 <div className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-8 text-white shadow-lg">
-                  <div className="text-white/70 text-xs uppercase tracking-wider mb-2">Revenue Annuo Stimato</div>
+                  <div className="text-white/70 text-xs uppercase tracking-wider mb-2">Ricavi annui stimati</div>
                   <div className="text-5xl font-bold mb-2">{formatEuro(result.grossAnnual)}</div>
                   <div className="text-white/80 text-sm">
                     {formatEuro(result.nightlyRate)}/notte × {result.nightsSold} notti/anno ({result.occupancy}% occupazione)
@@ -296,12 +308,12 @@ export default function RenditaPage() {
                   </div>
                   <div className="text-right">
                     <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">
-                      Yield lordo
+                      Rendimento lordo
                     </div>
                     <div className="text-2xl font-bold text-primary tabular-nums">
                       {result.grossYieldOnValue.toFixed(1)}%
                     </div>
-                    <div className="text-[10px] text-muted-foreground">Revenue / valore</div>
+                    <div className="text-[10px] text-muted-foreground">Ricavi / valore</div>
                   </div>
                 </div>
 
@@ -317,9 +329,9 @@ export default function RenditaPage() {
                       <div className="text-xs text-muted-foreground mb-1">Gestione autonoma</div>
                       <div className="text-2xl font-bold text-foreground mb-3">{formatEuro(result.selfNet)}</div>
                       <div className="text-[11px] text-muted-foreground space-y-1">
-                        <div>• Commissioni OTA ~17%</div>
-                        <div>• Spese operative ~12%</div>
-                        <div>• No dynamic pricing</div>
+                        <div>• Commissioni piattaforme ~18%</div>
+                        <div>• Spese operative ~15%</div>
+                        <div>• Senza tariffazione dinamica</div>
                         <div>• Tempo richiesto: alto</div>
                       </div>
                     </div>
@@ -332,9 +344,9 @@ export default function RenditaPage() {
                       </div>
                       <div className="text-2xl font-bold text-primary mb-3">{formatEuro(result.abNet)}</div>
                       <div className="text-[11px] text-muted-foreground space-y-1">
-                        <div>• Commissione all-inclusive</div>
-                        <div>• Occupazione e pricing ottimizzati</div>
-                        <div>• Compliance automatica</div>
+                        <div>• Commissione tutto compreso</div>
+                        <div>• Tariffe e occupazione ottimizzate</div>
+                        <div>• Adempimenti automatici</div>
                         <div>• Tempo richiesto: zero</div>
                       </div>
                     </div>
@@ -347,6 +359,10 @@ export default function RenditaPage() {
               </div>
             </AirBibbyEstimateCard>
           </div>
+        </div>
+
+        <div className="mt-6">
+          <FullAnalysisCTA slug="rendita" />
         </div>
       </div>
     </div>

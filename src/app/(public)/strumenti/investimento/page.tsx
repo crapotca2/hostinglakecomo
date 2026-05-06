@@ -5,6 +5,7 @@ import Link from "next/link";
 import { TrendingUp, Euro, Calendar, Percent, Home } from "lucide-react";
 import { AirBibbyEstimateCard } from "@/components/strumenti/air-bibby-estimate-card";
 import { DisclaimerNote } from "@/components/strumenti/disclaimer-note";
+import { FullAnalysisCTA } from "@/components/strumenti/full-analysis-cta";
 
 function formatEuro(amount: number, decimals = 0): string {
   return new Intl.NumberFormat("it-IT", {
@@ -21,8 +22,8 @@ export default function InvestimentoPage() {
   const [downPaymentPct, setDownPaymentPct] = useState(30);
   const [mortgageRate, setMortgageRate] = useState(3.8);
   const [mortgageYears, setMortgageYears] = useState(25);
-  const [annualRevenue, setAnnualRevenue] = useState(48000);
-  const [operatingCostsPct, setOperatingCostsPct] = useState(25);
+  const [annualRevenue, setAnnualRevenue] = useState(42000);
+  const [operatingCostsPct, setOperatingCostsPct] = useState(30);
 
   const result = useMemo(() => {
     const totalInvestment = purchasePrice + renovation;
@@ -89,7 +90,7 @@ export default function InvestimentoPage() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8 items-start">
+        <div className="grid lg:grid-cols-5 gap-8 items-center">
           {/* Form */}
           <div className="lg:col-span-2 space-y-4">
             <div className="bg-white rounded-2xl p-6 border border-border/50 space-y-5">
@@ -145,7 +146,7 @@ export default function InvestimentoPage() {
                 <h2 className="text-sm font-semibold mb-3">Rendimento atteso</h2>
                 <div className="space-y-4">
                   <InputField
-                    label="Revenue annuo lordo"
+                    label="Ricavi annui lordi"
                     value={annualRevenue}
                     onChange={setAnnualRevenue}
                     step={1000}
@@ -156,7 +157,7 @@ export default function InvestimentoPage() {
                     value={operatingCostsPct}
                     onChange={setOperatingCostsPct}
                     min={10} max={50} step={1}
-                    suffix="% del revenue"
+                    suffix="% dei ricavi"
                   />
                 </div>
               </div>
@@ -165,30 +166,30 @@ export default function InvestimentoPage() {
             <DisclaimerNote />
           </div>
 
-          {/* Results */}
+          {/* Risultati */}
           <div className="lg:col-span-3">
-            <AirBibbyEstimateCard slug="investimento">
+            <AirBibbyEstimateCard>
               <div className="space-y-4">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-6 text-white shadow-lg">
-                    <div className="text-white/70 text-xs uppercase tracking-wider mb-1">Cash-on-Cash Return</div>
+                    <div className="text-white/70 text-xs uppercase tracking-wider mb-1">Rendimento sul capitale</div>
                     <div className="text-4xl font-bold mb-1">{result.cashOnCash.toFixed(1)}%</div>
-                    <div className="text-white/80 text-xs">Ritorno annuo sul capitale investito</div>
+                    <div className="text-white/80 text-xs">Ritorno annuo sull&apos;anticipo versato</div>
                   </div>
                   <div className="bg-muted/30 rounded-2xl p-6 border border-border/40">
-                    <div className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Cap Rate</div>
+                    <div className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Rendimento immobile</div>
                     <div className="text-4xl font-bold mb-1">{result.capRate.toFixed(1)}%</div>
-                    <div className="text-xs text-muted-foreground">Rendimento puro dell'immobile</div>
+                    <div className="text-xs text-muted-foreground">Reddito netto / valore immobile</div>
                   </div>
                   <div className="bg-muted/30 rounded-2xl p-6 border border-border/40">
-                    <div className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Payback Period</div>
+                    <div className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Tempo di rientro</div>
                     <div className="text-4xl font-bold mb-1">
                       {isFinite(result.paybackYears) ? `${result.paybackYears.toFixed(1)} anni` : "—"}
                     </div>
-                    <div className="text-xs text-muted-foreground">Tempo per recuperare l'anticipo</div>
+                    <div className="text-xs text-muted-foreground">Tempo per recuperare l&apos;anticipo</div>
                   </div>
                   <div className="bg-muted/30 rounded-2xl p-6 border border-border/40">
-                    <div className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Cash Flow Mensile</div>
+                    <div className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Flusso mensile</div>
                     <div className={`text-4xl font-bold mb-1 ${result.monthlyCashFlow >= 0 ? "text-emerald-600" : "text-red-500"}`}>
                       {result.monthlyCashFlow >= 0 ? "+" : ""}{formatEuro(result.monthlyCashFlow)}
                     </div>
@@ -205,16 +206,20 @@ export default function InvestimentoPage() {
                     <Row label="Anticipo" value={formatEuro(result.downPayment)} icon={Euro} muted />
                     <Row label="Mutuo" value={formatEuro(result.mortgageAmount)} icon={Euro} muted />
                     <Row label="Rata mensile mutuo" value={formatEuro(result.monthlyPayment)} icon={Calendar} />
-                    <Row label="Revenue annuo lordo" value={formatEuro(annualRevenue)} icon={TrendingUp} />
+                    <Row label="Ricavi annui lordi" value={formatEuro(annualRevenue)} icon={TrendingUp} />
                     <Row label="Costi operativi" value={`-${formatEuro(result.annualOperatingCosts)}`} icon={Euro} negative />
-                    <Row label="NOI (Net Operating Income)" value={formatEuro(result.noi)} icon={Euro} bold />
+                    <Row label="Reddito operativo netto" value={formatEuro(result.noi)} icon={Euro} bold />
                     <Row label="Mutuo annuo" value={`-${formatEuro(result.annualMortgage)}`} icon={Euro} negative />
-                    <Row label="Cash Flow Annuo" value={formatEuro(result.annualCashFlow)} icon={Percent} bold highlight={result.annualCashFlow >= 0} />
+                    <Row label="Flusso di cassa annuo" value={formatEuro(result.annualCashFlow)} icon={Percent} bold highlight={result.annualCashFlow >= 0} />
                   </div>
                 </div>
               </div>
             </AirBibbyEstimateCard>
           </div>
+        </div>
+
+        <div className="mt-6">
+          <FullAnalysisCTA slug="investimento" />
         </div>
       </div>
     </div>
