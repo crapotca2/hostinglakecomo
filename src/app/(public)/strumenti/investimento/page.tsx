@@ -76,7 +76,7 @@ export default function InvestimentoPage() {
           </Link>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8 items-start">
+        <div className="grid lg:grid-cols-5 gap-8 items-center">
           {/* Sinistra: titolo + form + disclaimer */}
           <div className="lg:col-span-2 space-y-4">
             <div>
@@ -166,26 +166,26 @@ export default function InvestimentoPage() {
             <AirBibbyEstimateCard>
               <div className="space-y-4">
                 <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-6 text-white shadow-lg">
+                  <div className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-5 text-white shadow-lg">
                     <div className="text-white/70 text-xs uppercase tracking-wider mb-1">Rendimento sul capitale</div>
-                    <div className="text-4xl font-bold mb-1">{result.cashOnCash.toFixed(1)}%</div>
+                    <div className="text-3xl font-bold mb-1">{result.cashOnCash.toFixed(1)}%</div>
                     <div className="text-white/80 text-xs">Ritorno annuo sull&apos;anticipo versato</div>
                   </div>
-                  <div className="bg-muted/30 rounded-2xl p-6 border border-border/40">
+                  <div className="bg-muted/30 rounded-2xl p-5 border border-border/40">
                     <div className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Rendimento immobile</div>
-                    <div className="text-4xl font-bold mb-1">{result.capRate.toFixed(1)}%</div>
+                    <div className="text-3xl font-bold mb-1">{result.capRate.toFixed(1)}%</div>
                     <div className="text-xs text-muted-foreground">Reddito netto / valore immobile</div>
                   </div>
-                  <div className="bg-muted/30 rounded-2xl p-6 border border-border/40">
+                  <div className="bg-muted/30 rounded-2xl p-5 border border-border/40">
                     <div className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Tempo di rientro</div>
-                    <div className="text-4xl font-bold mb-1">
+                    <div className="text-3xl font-bold mb-1">
                       {isFinite(result.paybackYears) ? `${result.paybackYears.toFixed(1)} anni` : "—"}
                     </div>
                     <div className="text-xs text-muted-foreground">Tempo per recuperare l&apos;anticipo</div>
                   </div>
-                  <div className="bg-muted/30 rounded-2xl p-6 border border-border/40">
+                  <div className="bg-muted/30 rounded-2xl p-5 border border-border/40">
                     <div className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Flusso mensile</div>
-                    <div className={`text-4xl font-bold mb-1 ${result.monthlyCashFlow >= 0 ? "text-emerald-600" : "text-red-500"}`}>
+                    <div className={`text-3xl font-bold mb-1 ${result.monthlyCashFlow >= 0 ? "text-emerald-600" : "text-red-500"}`}>
                       {result.monthlyCashFlow >= 0 ? "+" : ""}{formatEuro(result.monthlyCashFlow)}
                     </div>
                     <div className="text-xs text-muted-foreground">Dopo mutuo e spese</div>

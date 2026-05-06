@@ -147,7 +147,7 @@ export default function RenditaPage() {
           </Link>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8 items-start">
+        <div className="grid lg:grid-cols-5 gap-8 items-center">
           {/* Sinistra: titolo + form + disclaimer */}
           <div className="lg:col-span-2 space-y-4">
             <div>
@@ -262,9 +262,9 @@ export default function RenditaPage() {
           <div className="lg:col-span-3">
             <AirBibbyEstimateCard>
               <div className="space-y-4">
-                <div className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-8 text-white shadow-lg">
+                <div className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-6 text-white shadow-lg">
                   <div className="text-white/70 text-xs uppercase tracking-wider mb-2">Ricavi annui stimati</div>
-                  <div className="text-5xl font-bold mb-2">{formatEuro(result.grossAnnual)}</div>
+                  <div className="text-4xl font-bold mb-2">{formatEuro(result.grossAnnual)}</div>
                   <div className="text-white/80 text-sm">
                     {formatEuro(result.nightlyRate)}/notte × {result.nightsSold} notti/anno ({result.occupancy}% occupazione)
                   </div>
@@ -320,7 +320,7 @@ export default function RenditaPage() {
                     </p>
                   </div>
                   <div className="grid grid-cols-2 divide-x divide-border/40">
-                    <div className="p-6">
+                    <div className="p-5">
                       <div className="text-xs text-muted-foreground mb-1">Gestione autonoma</div>
                       <div className="text-2xl font-bold text-foreground mb-3">{formatEuro(result.selfNet)}</div>
                       <div className="text-[11px] text-muted-foreground space-y-1">
@@ -330,7 +330,7 @@ export default function RenditaPage() {
                         <div>• Tempo richiesto: alto</div>
                       </div>
                     </div>
-                    <div className="p-6 bg-primary/[0.04]">
+                    <div className="p-5 bg-primary/[0.04]">
                       <div className="flex items-center gap-2 mb-1">
                         <div className="text-xs text-primary font-semibold">Con Hosting Lake Como</div>
                         <span className="text-[10px] bg-primary/10 text-primary font-bold px-2 py-0.5 rounded-full">

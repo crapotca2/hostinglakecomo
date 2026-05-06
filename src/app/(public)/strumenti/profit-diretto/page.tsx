@@ -88,7 +88,7 @@ export default function ProfitDirettoPage() {
           </Link>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8 items-start">
+        <div className="grid lg:grid-cols-5 gap-8 items-center">
           {/* Sinistra: titolo + form + disclaimer */}
           <div className="lg:col-span-2 space-y-4">
             <div>
@@ -147,9 +147,9 @@ export default function ProfitDirettoPage() {
           <div className="lg:col-span-3">
             <AirBibbyEstimateCard>
               <div className="space-y-4">
-                <div className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-8 text-white shadow-lg">
+                <div className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-6 text-white shadow-lg">
                   <div className="text-white/70 text-xs uppercase tracking-wider mb-2">Risparmio potenziale 5 anni</div>
-                  <div className="text-5xl font-bold mb-2">+{formatEuro(result.fiveYearSavings)}</div>
+                  <div className="text-4xl font-bold mb-2">+{formatEuro(result.fiveYearSavings)}</div>
                   <div className="text-white/80 text-sm">
                     Ipotesi: 25% delle prenotazioni dalle piattaforme spostate sul canale diretto
                   </div>
@@ -193,14 +193,14 @@ export default function ProfitDirettoPage() {
                     </p>
                   </div>
                   <div className="grid grid-cols-2 divide-x divide-border/40">
-                    <div className="p-6">
+                    <div className="p-5">
                       <div className="text-xs text-muted-foreground mb-1">Distribuzione attuale</div>
                       <div className="text-2xl font-bold">{formatEuro(result.currentNet)}</div>
                       <div className="text-[11px] text-muted-foreground mt-2">
                         Commissioni: {formatEuro(result.totalFees)}
                       </div>
                     </div>
-                    <div className="p-6 bg-primary/[0.04]">
+                    <div className="p-5 bg-primary/[0.04]">
                       <div className="text-xs text-primary font-semibold mb-1">Con piu&apos; dirette</div>
                       <div className="text-2xl font-bold text-primary">{formatEuro(result.optimizedNet)}</div>
                       <div className="text-[11px] text-emerald-600 font-medium mt-2">
