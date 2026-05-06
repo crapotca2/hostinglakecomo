@@ -16,7 +16,6 @@ import { signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
-import { LanguageToggle } from "@/components/public/language-toggle";
 
 const NAV_ITEMS = [
   { href: "/dashboard", icon: LayoutDashboard, key: "overview" },
@@ -80,9 +79,6 @@ export function Sidebar() {
 
       {/* Bottom */}
       <div className="px-3 py-3 space-y-1">
-        <div className="px-3 pb-2">
-          <LanguageToggle variant="light" />
-        </div>
         <Link
           href="/"
           className="sidebar-item text-[13px] font-medium text-muted-foreground"

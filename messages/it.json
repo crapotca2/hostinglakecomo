@@ -819,6 +819,11 @@
     "cta": "View Italian version"
   },
   "dashboard": {
+    "header": {
+      "searchPlaceholder": "Cerca proprieta, prenotazione...",
+      "notifications": "Notifiche",
+      "role": "Admin"
+    },
     "sidebar": {
       "brand": "Hosting Lake Como",
       "tagline": "Dashboard Proprietario",

@@ -819,6 +819,11 @@
     "cta": "View Italian version"
   },
   "dashboard": {
+    "header": {
+      "searchPlaceholder": "Search property, booking...",
+      "notifications": "Notifications",
+      "role": "Admin"
+    },
     "sidebar": {
       "brand": "Hosting Lake Como",
       "tagline": "Owner Dashboard",

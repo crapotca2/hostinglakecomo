@@ -1,6 +1,16 @@
 "use client";
 
-import { Plus, MapPin, MoreHorizontal, Eye, Edit2 } from "lucide-react";
+import {
+  Plus,
+  MapPin,
+  MoreHorizontal,
+  Eye,
+  Edit2,
+  Bed,
+  Bath,
+  Users,
+  Home as HomeIcon,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useProperties } from "@/hooks/use-properties";
 
@@ -19,10 +29,12 @@ type ZoneKey =
   | "valle-intelvi"
   | "lecco"
   | "altro";
+type TypeKey = "studio" | "apartment" | "house" | "villa";
 
 export default function PropertiesPage() {
   const { data: properties, isLoading } = useProperties();
   const t = useTranslations("dashboard.properties");
+  const tProps = useTranslations("properties");
 
   return (
     <div className="p-6 space-y-6 animate-fade-in">
@@ -52,53 +64,91 @@ export default function PropertiesPage() {
           {t("emptyList")}
         </div>
       ) : (
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
           {properties.map((p) => {
             const zoneKey = (
-              ["centro-como", "primo-bacino", "secondo-bacino", "alto-lago", "valle-intelvi", "lecco", "altro"].includes(p.zone)
+              [
+                "centro-como",
+                "primo-bacino",
+                "secondo-bacino",
+                "alto-lago",
+                "valle-intelvi",
+                "lecco",
+                "altro",
+              ].includes(p.zone)
                 ? p.zone
                 : "altro"
             ) as ZoneKey;
             const statusKey = (
-              ["active", "draft", "inactive"].includes(p.status) ? p.status : "inactive"
+              ["active", "draft", "inactive"].includes(p.status)
+                ? p.status
+                : "inactive"
             ) as StatusKey;
+            const typeKey = (
+              ["studio", "apartment", "house", "villa"].includes(p.type)
+                ? p.type
+                : "apartment"
+            ) as TypeKey;
+            const cityZone = `${p.address.city} — ${t(`zones.${zoneKey}`)}`;
             return (
-              <div key={p._id} className="bg-white rounded-2xl overflow-hidden border border-border/50 card-hover">
-                <div className="relative h-44 overflow-hidden">
+              <div
+                key={p._id}
+                className="group bg-white rounded-2xl overflow-hidden border border-border/50 card-hover flex flex-col"
+              >
+                <div className="relative h-56 overflow-hidden bg-muted">
                   {p.images?.[0] ? (
                     /* eslint-disable-next-line @next/next/no-img-element */
-                    <img src={p.images[0].url} alt={p.name} className="w-full h-full object-cover" />
+                    <img
+                      src={p.images[0].url}
+                      alt={p.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   ) : (
-                    <div className="w-full h-full bg-muted flex items-center justify-center text-muted-foreground text-xs">
-                      {t("noImage")}
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/[0.08] to-primary/[0.02]">
+                      <HomeIcon className="h-10 w-10 text-primary/40" />
                     </div>
                   )}
-                  <span className={`absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider border ${STATUS_STYLES[p.status]}`}>
+                  <span
+                    className={`absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider border backdrop-blur-sm ${STATUS_STYLES[p.status]}`}
+                  >
                     {t(`status.${statusKey}`)}
                   </span>
-                  <button className="absolute top-3 right-3 h-8 w-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors">
+                  <span className="absolute top-3 right-12 px-2.5 py-1 rounded-full bg-white/90 text-foreground text-[10px] font-semibold uppercase tracking-wider backdrop-blur-sm">
+                    {tProps(`types.${typeKey}`)}
+                  </span>
+                  <button
+                    className="absolute top-3 right-3 h-8 w-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors"
+                    aria-label="More actions"
+                  >
                     <MoreHorizontal className="h-4 w-4 text-foreground" />
                   </button>
                 </div>
-                <div className="p-5">
-                  <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                <div className="p-5 flex-1 flex flex-col">
+                  <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1.5">
                     <MapPin className="h-3 w-3" />
-                    {p.address.city} — {t(`zones.${zoneKey}`)}
+                    {cityZone}
                   </div>
-                  <h3 className="text-base font-semibold mb-1">{p.name}</h3>
-                  <div className="text-xs text-muted-foreground mb-4">
-                    {t("details", {
-                      type: p.type,
-                      bedrooms: p.details.bedrooms,
-                      bathrooms: p.details.bathrooms,
-                      maxGuests: p.details.maxGuests,
-                    })}
+                  <h3 className="text-base font-semibold mb-3">{p.name}</h3>
+                  <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4 flex-wrap gap-y-1">
+                    <span className="flex items-center gap-1">
+                      <Bed className="h-3.5 w-3.5" /> {p.details.bedrooms}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Bath className="h-3.5 w-3.5" /> {p.details.bathrooms}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Users className="h-3.5 w-3.5" /> {p.details.maxGuests}
+                    </span>
                   </div>
                   <div className="pt-4 border-t border-border/50 flex items-baseline gap-1 mb-4">
-                    <span className="text-lg font-bold text-foreground">€{p.pricing.basePrice}</span>
-                    <span className="text-xs text-muted-foreground">{t("perNight")}</span>
+                    <span className="text-lg font-bold text-foreground">
+                      €{p.pricing.basePrice}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      {t("perNight")}
+                    </span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="mt-auto flex items-center gap-2">
                     <button className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-border text-xs font-medium hover:bg-muted/50 transition-colors">
                       <Eye className="h-3.5 w-3.5" />
                       {t("view")}
