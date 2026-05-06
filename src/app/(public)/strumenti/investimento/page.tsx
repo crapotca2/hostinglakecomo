@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import { TrendingUp, Euro, Calendar, Percent, Home } from "lucide-react";
 import { AirBibbyEstimateCard } from "@/components/strumenti/air-bibby-estimate-card";
+import { DisclaimerNote } from "@/components/strumenti/disclaimer-note";
 
 function formatEuro(amount: number, decimals = 0): string {
   return new Intl.NumberFormat("it-IT", {
@@ -76,26 +77,19 @@ export default function InvestimentoPage() {
   return (
     <div className="pt-20 pb-20 bg-muted/20 min-h-screen">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 pt-8">
+        <div className="mb-8 pt-8">
           <Link href="/strumenti" className="text-xs text-muted-foreground hover:text-foreground mb-3 inline-block">
             ← Tutti gli strumenti
           </Link>
-          <div className="flex items-center gap-3 mb-3">
-            <div className="h-12 w-12 rounded-xl bg-primary/[0.08] flex items-center justify-center">
-              <TrendingUp className="h-6 w-6 text-primary" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-light">
-                Calcolatore <span className="font-semibold">Investimento</span>
-              </h1>
-              <p className="text-sm text-muted-foreground mt-1">
-                ROI, cash flow, cap rate e payback per investitori sul Lago di Como
-              </p>
-            </div>
-          </div>
+          <h1 className="text-3xl font-light">
+            Calcolatore <span className="font-semibold">Investimento</span>
+          </h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            ROI, cash flow, cap rate e payback per investitori sul Lago di Como
+          </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8">
+        <div className="grid lg:grid-cols-5 gap-8 items-start">
           {/* Form */}
           <div className="lg:col-span-2 space-y-4">
             <div className="bg-white rounded-2xl p-6 border border-border/50 space-y-5">
@@ -167,11 +161,13 @@ export default function InvestimentoPage() {
                 </div>
               </div>
             </div>
+
+            <DisclaimerNote />
           </div>
 
           {/* Results */}
           <div className="lg:col-span-3">
-            <AirBibbyEstimateCard slug="investimento" title="Stima Investimento Hosting Lake Como">
+            <AirBibbyEstimateCard slug="investimento">
               <div className="space-y-4">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-6 text-white shadow-lg">

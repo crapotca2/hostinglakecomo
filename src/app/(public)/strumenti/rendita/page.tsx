@@ -5,13 +5,15 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Calculator, MapPin, Bed, Users, Eye, TrendingUp, CalendarDays, Euro } from "lucide-react";
+import { MapPin, Bed, Users, Eye, TrendingUp, CalendarDays, Euro, Ruler, Home } from "lucide-react";
 import { AirBibbyEstimateCard } from "@/components/strumenti/air-bibby-estimate-card";
+import { DisclaimerNote } from "@/components/strumenti/disclaimer-note";
 
 const FormSchema = z.object({
   zone: z.enum(["centro-como", "primo-bacino", "secondo-bacino", "alto-lago"]),
   propertyType: z.enum(["studio", "apartment", "house", "villa"]),
   bedrooms: z.coerce.number().int().min(1).max(6),
+  surface: z.coerce.number().int().min(20).max(400),
   lakeView: z.boolean(),
   maxGuests: z.coerce.number().int().min(1).max(12),
 });
@@ -28,6 +30,14 @@ const BASE_RATES: Record<Zone, Record<PropertyType, number>> = {
   "alto-lago":      { studio: 80,  apartment: 125, house: 180, villa: 270 },
 };
 
+// Indicative property value EUR/sqm by zone (residential market reference)
+const PRICE_PER_SQM: Record<Zone, number> = {
+  "centro-como": 4200,
+  "primo-bacino": 5800,
+  "secondo-bacino": 7000,
+  "alto-lago": 2600,
+};
+
 const ZONE_LABELS: Record<Zone, string> = {
   "centro-como": "Centro Como",
   "primo-bacino": "Primo Bacino (Cernobbio, Moltrasio, Nesso)",
@@ -42,7 +52,6 @@ const TYPE_LABELS: Record<PropertyType, string> = {
   villa: "Villa",
 };
 
-// Occupancy estimates per zone (annual average)
 const OCCUPANCY: Record<Zone, number> = {
   "centro-como": 0.72,
   "primo-bacino": 0.68,
@@ -65,6 +74,7 @@ export default function RenditaPage() {
       zone: "primo-bacino",
       propertyType: "apartment",
       bedrooms: 2,
+      surface: 80,
       lakeView: true,
       maxGuests: 4,
     },
@@ -74,12 +84,12 @@ export default function RenditaPage() {
   const zone = watch("zone");
   const propertyType = watch("propertyType");
   const bedrooms = Number(watch("bedrooms")) || 2;
+  const surface = Number(watch("surface")) || 80;
   const lakeView = watch("lakeView");
   const maxGuests = Number(watch("maxGuests")) || 4;
 
   const result = useMemo(() => {
     const baseRate = BASE_RATES[zone][propertyType];
-    // +30% for lake view, +€40/bedroom over 2
     const viewMultiplier = lakeView ? 1.3 : 1;
     const extraBedrooms = Math.max(0, bedrooms - 2);
     const nightlyRate = Math.round(baseRate * viewMultiplier + extraBedrooms * 40);
@@ -89,63 +99,60 @@ export default function RenditaPage() {
 
     const grossAnnual = nightlyRate * nightsSold;
 
-    // Self-managed scenario (OTA commissions + no dynamic pricing)
-    const selfOtaCommission = grossAnnual * 0.17; // avg across Airbnb/Booking/Vrbo
-    const selfExpenses = grossAnnual * 0.12; // cleaning, utilities, supplies
-    const selfTouristTax = nightsSold * Math.min(maxGuests, 4) * 3; // avg €3/person/night capped
+    const propertyValue = Math.round(surface * PRICE_PER_SQM[zone]);
+
+    const selfOtaCommission = grossAnnual * 0.17;
+    const selfExpenses = grossAnnual * 0.12;
+    const selfTouristTax = nightsSold * Math.min(maxGuests, 4) * 3;
     const selfNet = grossAnnual - selfOtaCommission - selfExpenses - selfTouristTax;
 
-    // Hosting Lake Como scenario (optimized pricing +18%, higher occupancy +12%, commission 10%)
     const abGrossAnnual = Math.round(grossAnnual * 1.18 * 1.12);
-    const abOtaCommission = abGrossAnnual * 0.12; // better channel mix
+    const abOtaCommission = abGrossAnnual * 0.12;
     const abAirbibbyFee = abGrossAnnual * 0.1;
-    const abExpenses = abGrossAnnual * 0.08; // optimized ops
+    const abExpenses = abGrossAnnual * 0.08;
     const abTouristTax = selfTouristTax;
     const abNet = abGrossAnnual - abOtaCommission - abAirbibbyFee - abExpenses - abTouristTax;
 
     const delta = abNet - selfNet;
     const deltaPercent = selfNet > 0 ? Math.round((delta / selfNet) * 100) : 0;
 
+    const grossYieldOnValue = propertyValue > 0 ? (grossAnnual / propertyValue) * 100 : 0;
+
     return {
       nightlyRate,
       occupancy: Math.round(occupancy * 100),
       nightsSold,
       grossAnnual,
+      propertyValue,
+      grossYieldOnValue,
       selfNet: Math.round(selfNet),
       abNet: Math.round(abNet),
       abGrossAnnual,
       delta: Math.round(delta),
       deltaPercent,
     };
-  }, [zone, propertyType, bedrooms, lakeView, maxGuests]);
+  }, [zone, propertyType, bedrooms, surface, lakeView, maxGuests]);
 
   return (
     <div className="pt-20 pb-20 bg-muted/20 min-h-screen">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 pt-8">
+        <div className="mb-8 pt-8">
           <Link href="/strumenti" className="text-xs text-muted-foreground hover:text-foreground mb-3 inline-block">
             ← Tutti gli strumenti
           </Link>
-          <div className="flex items-center gap-3 mb-3">
-            <div className="h-12 w-12 rounded-xl bg-primary/[0.08] flex items-center justify-center">
-              <Calculator className="h-6 w-6 text-primary" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-light">
-                Calcolatore <span className="font-semibold">Rendita</span>
-              </h1>
-              <p className="text-sm text-muted-foreground mt-1">
-                Stima quanto puo' guadagnare il tuo immobile sul Lago di Como
-              </p>
-            </div>
-          </div>
+          <h1 className="text-3xl font-light">
+            Calcolatore <span className="font-semibold">Rendita</span>
+          </h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Stima quanto puo guadagnare il tuo immobile sul Lago di Como
+          </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8">
+        <div className="grid lg:grid-cols-5 gap-8 items-start">
           {/* Form */}
           <div className="lg:col-span-2 space-y-4">
             <div className="bg-white rounded-2xl p-6 border border-border/50 space-y-5">
-              <h2 className="text-sm font-semibold mb-2">Dettagli proprieta'</h2>
+              <h2 className="text-sm font-semibold mb-2">Dettagli proprieta</h2>
 
               <div>
                 <label className="text-xs font-medium mb-1.5 block text-muted-foreground flex items-center gap-1.5">
@@ -162,8 +169,8 @@ export default function RenditaPage() {
               </div>
 
               <div>
-                <label className="text-xs font-medium mb-1.5 block text-muted-foreground">Tipo proprieta'</label>
-                <div className="grid grid-cols-4 gap-2">
+                <label className="text-xs font-medium mb-1.5 block text-muted-foreground">Tipo proprieta</label>
+                <div className="grid grid-cols-[1.1fr_1.7fr_0.9fr_0.9fr] gap-2">
                   {(Object.keys(TYPE_LABELS) as PropertyType[]).map((t) => (
                     <button
                       type="button"
@@ -178,6 +185,24 @@ export default function RenditaPage() {
                       {TYPE_LABELS[t]}
                     </button>
                   ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="text-xs font-medium mb-1.5 block text-muted-foreground flex items-center gap-1.5">
+                  <Ruler className="h-3 w-3" /> Superficie:{" "}
+                  <span className="font-bold text-foreground">{surface} m²</span>
+                </label>
+                <input
+                  type="range"
+                  min={20}
+                  max={400}
+                  step={5}
+                  {...register("surface", { valueAsNumber: true })}
+                  className="w-full accent-primary"
+                />
+                <div className="flex justify-between text-[10px] text-muted-foreground mt-1">
+                  <span>20</span><span>100</span><span>200</span><span>300</span><span>400</span>
                 </div>
               </div>
 
@@ -222,11 +247,13 @@ export default function RenditaPage() {
                 </div>
               </label>
             </div>
+
+            <DisclaimerNote />
           </div>
 
           {/* Results */}
           <div className="lg:col-span-3">
-            <AirBibbyEstimateCard slug="rendita" title="Stima Rendita Hosting Lake Como">
+            <AirBibbyEstimateCard slug="rendita">
               <div className="space-y-4">
                 <div className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-8 text-white shadow-lg">
                   <div className="text-white/70 text-xs uppercase tracking-wider mb-2">Revenue Annuo Stimato</div>
@@ -254,6 +281,27 @@ export default function RenditaPage() {
                       <CalendarDays className="h-3 w-3" /> Notti vendute
                     </div>
                     <div className="text-xl font-bold">{result.nightsSold}</div>
+                  </div>
+                </div>
+
+                <div className="bg-muted/30 rounded-2xl border border-border/40 p-6 flex items-center justify-between gap-4 flex-wrap">
+                  <div>
+                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                      <Home className="h-3 w-3" /> Valore stimato immobile
+                    </div>
+                    <div className="text-2xl font-bold">{formatEuro(result.propertyValue)}</div>
+                    <div className="text-[11px] text-muted-foreground mt-1">
+                      {surface} m² × {formatEuro(PRICE_PER_SQM[zone])}/m² ({ZONE_LABELS[zone].split(" (")[0]})
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">
+                      Yield lordo
+                    </div>
+                    <div className="text-2xl font-bold text-primary tabular-nums">
+                      {result.grossYieldOnValue.toFixed(1)}%
+                    </div>
+                    <div className="text-[10px] text-muted-foreground">Revenue / valore</div>
                   </div>
                 </div>
 
@@ -292,7 +340,7 @@ export default function RenditaPage() {
                     </div>
                   </div>
                   <div className="px-6 py-4 bg-primary/[0.05] border-t border-border/40">
-                    <div className="text-xs text-muted-foreground">Guadagno extra indicativo all'anno</div>
+                    <div className="text-xs text-muted-foreground">Guadagno extra indicativo all&apos;anno</div>
                     <div className="text-xl font-bold text-primary">+{formatEuro(result.delta)}</div>
                   </div>
                 </div>
