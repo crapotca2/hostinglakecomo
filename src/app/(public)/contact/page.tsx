@@ -174,7 +174,7 @@ function ContactFormFallback() {
 export default function ContactPage() {
   return (
     <div className="pt-20">
-      <section className="pt-20 pb-4">
+      <section className="pt-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-[4fr_8fr] gap-12 lg:gap-16 items-center">
             {/* INFO LEFT */}
