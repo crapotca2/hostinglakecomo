@@ -35,36 +35,104 @@ export default function AboutPage() {
           className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
         />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="space-y-6 leading-relaxed">
-            <p className="text-lg">
-              Hosting Lake Como e una realta specializzata di tre property
-              manager dedicati alla{" "}
-              <strong>gestione, alla pulizia e all&apos;organizzazione</strong>{" "}
-              degli immobili dei nostri clienti, con focus specifico sul{" "}
-              <strong>mercato internazionale</strong> che frequenta il Lago di
-              Como ogni anno.
-            </p>
-            <p className="text-white/85">
-              Il nostro lavoro poggia su <strong className="text-white">oltre nove anni di hosting
-              diretto sul Lago</strong> e sulla certificazione{" "}
-              <strong className="text-white">Superhost di Airbnb dal 2017</strong>, con tasso di
-              risposta del 100% e oltre{" "}
-              {team.summary.experience.primaryReviews} recensioni a 5 stelle
-              sulla listing principale. Le competenze sono distribuite su tre
-              aree complementari — hospitality, operations &amp; compliance,
-              revenue &amp; channel management — in modo che ogni proprieta
-              riceva l&apos;attenzione dello specialista giusto in ogni
-              momento, mentre il proprietario mantiene un solo interlocutore.
-            </p>
-            <p className="text-white/85">
-              Lavoriamo esclusivamente sul Lago di Como: conosciamo le zone, i
-              ristoranti, i battelli, i tempi del traghetto, le abitudini dei
-              turisti che arrivano in primavera e di quelli che restano fino a
-              fine ottobre. Per noi gestire la tua casa significa portarla al
-              massimo del suo potenziale, dal pricing alla qualita
-              dell&apos;esperienza ospite fino all&apos;efficienza operativa.
-            </p>
-            <ul className="grid sm:grid-cols-2 gap-3 pt-4">
+          {/* Stats band */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-14 pb-12 border-b border-white/15">
+            {[
+              { value: "9+", label: "Anni di hosting" },
+              { value: "5.0", label: "Rating Airbnb" },
+              { value: `${team.summary.experience.primaryReviews}+`, label: "Recensioni 5 stelle" },
+              { value: "100%", label: "Tasso di risposta" },
+            ].map((s) => (
+              <div key={s.label} className="text-center sm:text-left">
+                <div className="text-3xl sm:text-4xl font-light tracking-tight">
+                  <span className="font-semibold">{s.value}</span>
+                </div>
+                <div className="text-[11px] uppercase tracking-widest text-white/60 mt-1.5 font-semibold">
+                  {s.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid lg:grid-cols-[6fr_5fr] gap-10 lg:gap-14">
+            <div className="space-y-5 leading-relaxed">
+              <p className="text-lg">
+                Hosting Lake Como e una realta specializzata di tre property
+                manager dedicati alla{" "}
+                <strong>gestione, alla pulizia e all&apos;organizzazione</strong>{" "}
+                degli immobili dei nostri clienti, con focus specifico sul{" "}
+                <strong>mercato internazionale</strong> che frequenta il Lago di
+                Como ogni anno.
+              </p>
+              <p className="text-white/85">
+                Il nostro lavoro poggia su{" "}
+                <strong className="text-white">
+                  oltre nove anni di hosting diretto sul Lago
+                </strong>{" "}
+                e sulla certificazione{" "}
+                <strong className="text-white">Superhost di Airbnb dal 2017</strong>.
+                Le competenze sono distribuite su tre aree complementari, in
+                modo che ogni proprieta riceva l&apos;attenzione dello
+                specialista giusto in ogni momento, mentre il proprietario
+                mantiene un solo interlocutore.
+              </p>
+              <p className="text-white/85">
+                Lavoriamo esclusivamente sul Lago di Como: conosciamo le zone,
+                i ristoranti, i battelli, i tempi del traghetto, le abitudini
+                dei turisti che arrivano in primavera e di quelli che restano
+                fino a fine ottobre.
+              </p>
+            </div>
+
+            {/* Three competence areas */}
+            <div className="space-y-3">
+              <div className="text-[11px] uppercase tracking-widest text-white/60 font-semibold mb-1">
+                Tre aree, una squadra
+              </div>
+              {[
+                {
+                  icon: Sparkles,
+                  title: "Hospitality",
+                  desc: "Esperienza ospite, comunicazione multilingua, gestione recensioni.",
+                },
+                {
+                  icon: ShieldCheck,
+                  title: "Operations &amp; Compliance",
+                  desc: "Pulizie alberghiere, manutenzione, adempimenti normativi end-to-end.",
+                },
+                {
+                  icon: LineChart,
+                  title: "Revenue &amp; Channel",
+                  desc: "Tariffazione dinamica, distribuzione multi-canale, reportistica trasparente.",
+                },
+              ].map((c) => (
+                <div
+                  key={c.title}
+                  className="bg-white/[0.06] border border-white/15 rounded-xl px-5 py-4 flex items-start gap-3 backdrop-blur-sm"
+                >
+                  <div className="h-9 w-9 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                    <c.icon className="h-4 w-4 text-white" />
+                  </div>
+                  <div className="min-w-0">
+                    <div
+                      className="text-sm font-semibold text-white"
+                      dangerouslySetInnerHTML={{ __html: c.title }}
+                    />
+                    <div className="text-[12px] text-white/75 leading-relaxed mt-0.5">
+                      {c.desc}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Feature pills */}
+          <div className="mt-14 pt-12 border-t border-white/15">
+            <div className="text-[11px] uppercase tracking-widest text-white/60 font-semibold mb-5">
+              Quello che il proprietario riceve
+            </div>
+            <ul className="grid sm:grid-cols-2 gap-3">
               {[
                 {
                   icon: Globe2,
@@ -85,10 +153,12 @@ export default function AboutPage() {
               ].map((item) => (
                 <li
                   key={item.text}
-                  className="flex items-center gap-3 text-sm text-white bg-white/[0.08] border border-white/20 rounded-xl p-4 min-h-[4.5rem]"
+                  className="flex items-center gap-4 text-sm text-white bg-white/[0.06] border border-white/15 rounded-2xl p-4"
                 >
-                  <item.icon className="h-5 w-5 text-white shrink-0" />
-                  {item.text}
+                  <div className="h-10 w-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                    <item.icon className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="leading-relaxed">{item.text}</span>
                 </li>
               ))}
             </ul>
@@ -96,12 +166,15 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-muted/30 border-y border-border/50">
+      <section className="py-20 bg-muted/20 border-y border-border/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-light mb-4">
-              Tre <span className="font-semibold">property manager</span>, una
-              persona di riferimento
+            <span className="text-xs font-semibold uppercase tracking-widest text-primary">
+              Il team
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-light mt-3 mb-4">
+              Tre <span className="font-semibold">property manager</span>,
+              una persona di riferimento
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Hospitality, operations e revenue management. Ogni proprieta che
@@ -117,10 +190,16 @@ export default function AboutPage() {
                   : m.id === "revenue"
                   ? LineChart
                   : Sparkles;
+              const accent =
+                m.id === "operations"
+                  ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                  : m.id === "revenue"
+                  ? "bg-violet-50 text-violet-700 border-violet-200"
+                  : "bg-primary/[0.08] text-primary border-primary/20";
               return (
                 <div
                   key={m.id}
-                  className="bg-white rounded-2xl border border-border/50 overflow-hidden shadow-sm flex flex-col"
+                  className="group bg-white rounded-2xl border border-border/50 overflow-hidden shadow-sm hover:shadow-lg hover:border-primary/30 transition-all flex flex-col"
                 >
                   <div className="aspect-[4/3] bg-muted relative overflow-hidden">
                     {m.profilePicture ? (
@@ -128,37 +207,40 @@ export default function AboutPage() {
                       <img
                         src={m.profilePicture}
                         alt={`${m.name} — ${m.role}`}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/[0.08] to-primary/[0.02]">
                         <UserCircle2 className="h-20 w-20 text-primary/30" />
                       </div>
                     )}
-                    <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-full">
-                      <Icon className="h-3 w-3 text-primary" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+                    <div
+                      className={`absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border backdrop-blur-sm ${accent}`}
+                    >
+                      <Icon className="h-3 w-3" />
                       <span className="text-[10px] font-semibold uppercase tracking-wider">
                         {m.shortRole}
                       </span>
                     </div>
                     {m.isSuperhost && (
-                      <div className="absolute top-3 right-3 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">
+                      <div className="absolute top-3 right-3 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-amber-700 bg-white/95 border border-amber-200 px-2 py-0.5 rounded-full backdrop-blur-sm">
                         <Star className="h-2.5 w-2.5 fill-amber-500 text-amber-500" />
                         Superhost
                       </div>
                     )}
                   </div>
-                  <div className="p-5 flex-1 flex flex-col">
+                  <div className="p-6 flex-1 flex flex-col">
                     <h3 className="text-lg font-semibold mb-1">
                       {m.name ?? "In arrivo"}
                     </h3>
-                    <p className="text-xs text-primary font-medium mb-3">
+                    <p className="text-xs text-muted-foreground font-medium mb-4">
                       {m.role}
                     </p>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">
                       {m.bio}
                     </p>
-                    <ul className="space-y-1.5 mb-4">
+                    <ul className="space-y-2 mb-5">
                       {m.highlights.slice(0, 3).map((h) => (
                         <li
                           key={h}
@@ -169,7 +251,7 @@ export default function AboutPage() {
                         </li>
                       ))}
                     </ul>
-                    {m.airbnbProfileUrl && (
+                    {m.airbnbProfileUrl ? (
                       <a
                         href={m.airbnbProfileUrl}
                         target="_blank"
@@ -179,6 +261,10 @@ export default function AboutPage() {
                         Profilo Airbnb
                         <ExternalLink className="h-3 w-3" />
                       </a>
+                    ) : (
+                      <div className="text-[11px] text-muted-foreground italic mt-auto">
+                        Bio dettagliata in arrivo
+                      </div>
                     )}
                   </div>
                 </div>
