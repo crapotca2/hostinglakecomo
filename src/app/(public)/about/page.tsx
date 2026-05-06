@@ -3,10 +3,8 @@ import {
   ExternalLink,
   CheckCircle2,
   Sparkles,
-  Briefcase,
   LineChart,
   ShieldCheck,
-  UserCircle2,
 } from "lucide-react";
 import team from "@/data/team.json";
 
@@ -65,9 +63,6 @@ export default function AboutPage() {
 
             {/* Tre aree di specializzazione */}
             <div className="space-y-3">
-              <div className="text-[11px] uppercase tracking-widest text-white/60 font-semibold mb-1">
-                Tre aree, una squadra
-              </div>
               {[
                 {
                   icon: Sparkles,
@@ -109,109 +104,83 @@ export default function AboutPage() {
 
       <section className="py-20 bg-muted/20 border-y border-border/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
+          <div className="text-center mb-12">
             <span className="text-xs font-semibold uppercase tracking-widest text-primary">
               Il team
             </span>
             <h2 className="text-3xl sm:text-4xl font-light mt-3 mb-4">
-              Tre <span className="font-semibold">gestori</span>,
-              una persona di riferimento
+              Dietro Hosting Lake <span className="font-semibold">Como</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Accoglienza, operativita e tariffe. Ogni proprieta che gestiamo
-              passa per tutte e tre le competenze, ogni giorno.
+            <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Siamo una squadra di tre specialisti. L&apos;esperienza diretta
+              sul Lago la porta Angelo, Superhost di Airbnb dal 2017, che cura
+              l&apos;accoglienza e il rapporto con gli ospiti. Al suo fianco
+              lavorano due figure dedicate all&apos;operativita e agli
+              adempimenti normativi e alla strategia di tariffe e canali.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {team.members.map((m) => {
-              const Icon =
-                m.id === "operations"
-                  ? Briefcase
-                  : m.id === "revenue"
-                  ? LineChart
-                  : Sparkles;
-              const accent =
-                m.id === "operations"
-                  ? "bg-emerald-50 text-emerald-700 border-emerald-200"
-                  : m.id === "revenue"
-                  ? "bg-violet-50 text-violet-700 border-violet-200"
-                  : "bg-primary/[0.08] text-primary border-primary/20";
-              return (
-                <div
-                  key={m.id}
-                  className="group bg-white rounded-2xl border border-border/50 overflow-hidden shadow-sm hover:shadow-lg hover:border-primary/30 transition-all flex flex-col"
-                >
-                  <div className="aspect-[4/3] bg-muted relative overflow-hidden">
-                    {m.profilePicture ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={m.profilePicture}
-                        alt={`${m.name} — ${m.role}`}
-                        className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/[0.08] to-primary/[0.02]">
-                        <UserCircle2 className="h-20 w-20 text-primary/30" />
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
-                    <div
-                      className={`absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border backdrop-blur-sm ${accent}`}
-                    >
-                      <Icon className="h-3 w-3" />
-                      <span className="text-[10px] font-semibold uppercase tracking-wider">
-                        {m.shortRole}
+          {/* Spotlight Angelo */}
+          {(() => {
+            const angelo = team.members.find((m) => m.id === "angelo");
+            if (!angelo) return null;
+            return (
+              <div className="bg-white rounded-3xl border border-border/50 shadow-sm overflow-hidden grid md:grid-cols-[5fr_7fr] max-w-4xl mx-auto">
+                <div className="aspect-square md:aspect-auto bg-muted relative overflow-hidden">
+                  {angelo.profilePicture && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={angelo.profilePicture}
+                      alt={`${angelo.name} — ${angelo.role}`}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
+                  {angelo.isSuperhost && (
+                    <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full border border-amber-200 shadow-sm">
+                      <Star className="h-3 w-3 fill-amber-500 text-amber-500" />
+                      <span className="text-[11px] font-semibold uppercase tracking-wider text-amber-700">
+                        Superhost dal 2017
                       </span>
                     </div>
-                    {m.isSuperhost && (
-                      <div className="absolute top-3 right-3 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-amber-700 bg-white/95 border border-amber-200 px-2 py-0.5 rounded-full backdrop-blur-sm">
-                        <Star className="h-2.5 w-2.5 fill-amber-500 text-amber-500" />
-                        Superhost
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-lg font-semibold mb-1">
-                      {m.name ?? "In arrivo"}
-                    </h3>
-                    <p className="text-xs text-muted-foreground font-medium mb-4">
-                      {m.role}
-                    </p>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">
-                      {m.bio}
-                    </p>
-                    <ul className="space-y-2 mb-5">
-                      {m.highlights.slice(0, 3).map((h) => (
-                        <li
-                          key={h}
-                          className="flex items-start gap-2 text-xs text-foreground"
-                        >
-                          <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
-                          {h}
-                        </li>
-                      ))}
-                    </ul>
-                    {m.airbnbProfileUrl ? (
-                      <a
-                        href={m.airbnbProfileUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline mt-auto"
-                      >
-                        Profilo Airbnb
-                        <ExternalLink className="h-3 w-3" />
-                      </a>
-                    ) : (
-                      <div className="text-[11px] text-muted-foreground italic mt-auto">
-                        Bio dettagliata in arrivo
-                      </div>
-                    )}
-                  </div>
+                  )}
                 </div>
-              );
-            })}
-          </div>
+                <div className="p-8 md:p-10 flex flex-col justify-center">
+                  <span className="text-xs font-semibold uppercase tracking-widest text-primary mb-2">
+                    Esperienza diretta sul Lago
+                  </span>
+                  <h3 className="text-2xl font-semibold mb-1">{angelo.name}</h3>
+                  <p className="text-sm text-muted-foreground mb-5">
+                    {angelo.role}
+                  </p>
+                  <p className="text-foreground leading-relaxed mb-5">
+                    {angelo.bio}
+                  </p>
+                  <ul className="space-y-2 mb-6">
+                    {angelo.highlights.map((h) => (
+                      <li
+                        key={h}
+                        className="flex items-start gap-2.5 text-sm"
+                      >
+                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                  {angelo.airbnbProfileUrl && (
+                    <a
+                      href={angelo.airbnbProfileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-border bg-white text-sm font-semibold hover:bg-muted/40 transition-colors w-fit"
+                    >
+                      Vedi profilo Airbnb
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </section>
 
