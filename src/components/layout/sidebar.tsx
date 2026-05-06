@@ -37,12 +37,12 @@ export function Sidebar() {
   return (
     <aside className="w-[260px] shrink-0 bg-white h-screen sticky top-0 flex flex-col border-r border-border/60">
       {/* Logo */}
-      <Link href="/" className="px-5 py-5 flex items-center gap-3 hover:bg-muted/30 transition-colors">
+      <Link href="/" className="px-5 py-4 flex items-center gap-3 hover:bg-muted/30 transition-colors">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/logo/logo-marble.png"
           alt={t("brand")}
-          className="h-9 w-9 object-contain"
+          className="h-12 w-12 object-contain"
         />
         <div className="flex-1 min-w-0">
           <div className="text-sm font-semibold text-foreground">{t("brand")}</div>

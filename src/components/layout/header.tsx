@@ -16,7 +16,7 @@ export function Header() {
 
   return (
     <TooltipProvider>
-      <header className="sticky top-0 z-40 h-[76px] glass border-b border-border/40 flex items-center justify-between px-6">
+      <header className="sticky top-0 z-40 h-20 glass border-b border-border/40 flex items-center justify-between px-6">
         <div className="flex items-center gap-2.5 bg-background/80 rounded-xl px-3.5 py-2 border border-border/60 w-80 hover:border-border transition-colors">
           <Search className="h-4 w-4 text-muted-foreground/60" />
           <input
