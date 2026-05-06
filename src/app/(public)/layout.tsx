@@ -11,7 +11,7 @@ export default function PublicLayout({
   return (
     <QueryProvider>
       <Navbar />
-      <main className="min-h-screen">{children}</main>
+      <main>{children}</main>
       <Footer />
       <CookieBanner />
     </QueryProvider>
