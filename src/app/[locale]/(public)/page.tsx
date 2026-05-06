@@ -1,16 +1,12 @@
 import { Link } from "@/i18n/routing";
 import {
-  TrendingUp,
-  Shield,
-  CalendarCheck,
   Sparkles,
-  Home,
-  Users,
   ArrowRight,
   MapPin,
   ChevronRight,
   CheckCircle2,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { getPortfolio } from "@/lib/portfolio";
 import { PartnersBanner } from "@/components/public/partners-banner";
 import { PropertyCard } from "@/components/public/property-card";
@@ -20,52 +16,37 @@ const FEATURED_PROPERTIES = (() => {
   return all.filter((p) => p.images.length > 0).slice(0, 3);
 })();
 
-const SERVICES_OWNER = [
-  {
-    icon: TrendingUp,
-    title: "Dynamic Pricing",
-    desc: "Algoritmo di pricing che ottimizza le tariffe in base a stagionalita, domanda e concorrenza per massimizzare i tuoi ricavi.",
-  },
-  {
-    icon: CalendarCheck,
-    title: "Gestione Prenotazioni",
-    desc: "Calendario unificato sincronizzato con Airbnb, Booking.com ed Expedia. Zero doppie prenotazioni, zero stress.",
-  },
-  {
-    icon: Shield,
-    title: "Compliance Totale",
-    desc: "CIN, Questura, ISTAT, tassa di soggiorno: gestiamo tutti gli adempimenti normativi in automatico.",
-  },
-  {
-    icon: Sparkles,
-    title: "Accoglienza 5 Stelle",
-    desc: "Check-in professionale, pulizia certificata, biancheria di qualita. Ogni ospite vive un'esperienza premium.",
-  },
-  {
-    icon: Home,
-    title: "Promozione Multi-Canale",
-    desc: "Il tuo immobile su oltre 10 piattaforme con foto professionali, descrizioni ottimizzate e visibilita massima.",
-  },
-  {
-    icon: Users,
-    title: "Dashboard Proprietario",
-    desc: "Monitora revenue, occupazione e performance in tempo reale. Report mensili automatici con payout trasparenti.",
-  },
-];
+const OWNER_SERVICE_KEYS = [
+  "dynamicPricing",
+  "bookings",
+  "compliance",
+  "hospitality",
+  "promotion",
+  "dashboard",
+] as const;
 
-const WHY_US = [
-  "Distribuzione su Airbnb, Booking, Expedia e altri top portali del mercato",
-  "Pricing dinamico calibrato sulle dinamiche di mercato in tempo reale",
-  "Affitti brevi nei picchi turistici, locazioni medio-lunghe in bassa stagione",
-  "Calendario unificato e zero overbooking grazie alla sincronizzazione canali",
-];
+const SIMULATOR_SLUGS = ["rendita", "investimento", "profitDiretto"] as const;
+const SIMULATOR_HREFS: Record<(typeof SIMULATOR_SLUGS)[number], string> = {
+  rendita: "/strumenti/rendita",
+  investimento: "/strumenti/investimento",
+  profitDiretto: "/strumenti/profit-diretto",
+};
 
 export default function HomePage() {
+  const tc = useTranslations("common");
+  const tHero = useTranslations("home.hero");
+  const tMc = useTranslations("home.multiChannel");
+  const tOs = useTranslations("home.ownerServices");
+  const tFp = useTranslations("home.featuredProperties");
+  const tSim = useTranslations("home.simulators");
+  const tCta = useTranslations("home.ctaBanner");
+
+  const whyUs = tMc.raw("bullets") as string[];
+
   return (
     <>
       {/* ═══ VIDEO HERO ═══ */}
       <section className="relative h-screen min-h-[600px] max-h-[900px] flex items-center overflow-hidden">
-        {/* Video background */}
         <video
           autoPlay
           muted
@@ -75,35 +56,29 @@ export default function HomePage() {
         >
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>
-        {/* Overlay */}
-        {/* Navy brand blue (rentallcomo style) — saturo in alto, si dissolve scendendo */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#1D3A62]/80 via-[#1D3A62]/45 to-[#1D3A62]/10" />
-        {/* Subtle dark gradient on left side for text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/15 to-transparent" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="max-w-2xl animate-fade-in-up">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white/90 text-xs font-medium mb-6 backdrop-blur-sm border border-white/20">
               <MapPin className="h-3.5 w-3.5" />
-              Lago di Como, Italia
+              {tHero("location")}
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-white leading-[1.05] mb-6">
-              Il tuo immobile,
+              {tHero("title1")}
               <br />
-              <span className="font-semibold">il nostro mestiere.</span>
+              <span className="font-semibold">{tHero("title2")}</span>
             </h1>
             <p className="text-lg sm:text-xl text-white/70 leading-relaxed mb-10 max-w-lg">
-              Gestione professionale di immobili sul Lago di Como. Un team
-              di property manager con anni di esperienza diretta sul Lago di
-              Como. Gestiamo la tua proprieta su tutti i canali, in ogni
-              stagione.
+              {tHero("subtitle")}
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
                 href="/contact?interest=consulenza&from=hero"
                 className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-white text-foreground text-sm font-semibold hover:bg-white/90 transition-all shadow-lg"
               >
-                Affidati a noi
+                {tHero("ctaPrimary")}
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
@@ -111,13 +86,12 @@ export default function HomePage() {
                 className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-white/10 text-white text-sm font-medium hover:bg-white/20 transition-all border border-white/20 backdrop-blur-sm"
               >
                 <Sparkles className="h-4 w-4" />
-                Scopri i servizi
+                {tHero("ctaSecondary")}
               </Link>
             </div>
           </div>
         </div>
 
-        {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
           <div className="w-5 h-8 rounded-full border-2 border-white/30 flex items-start justify-center p-1">
             <div className="w-1 h-2 rounded-full bg-white/60 animate-bounce" />
@@ -132,19 +106,14 @@ export default function HomePage() {
             <div>
               <div className="max-w-xl">
                 <h2 className="text-3xl sm:text-4xl font-light text-foreground mb-6">
-                  Una sola gestione,{" "}
-                  <span className="font-semibold">tutte le piattaforme</span>
+                  {tMc("title1")}{" "}
+                  <span className="font-semibold">{tMc("title2")}</span>
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-8">
-                  Registriamo la tua proprieta sui principali canali del
-                  mercato e adattiamo la formula di affitto stagione per
-                  stagione. In alta stagione lavoriamo con i brevi soggiorni
-                  turistici, in bassa stagione passiamo a locazioni medio-lunghe
-                  quando piu convenienti. La tua casa resta in attivita 365
-                  giorni l'anno, con un unico interlocutore.
+                  {tMc("body")}
                 </p>
                 <ul className="space-y-4 mb-8">
-                  {WHY_US.map((item) => (
+                  {whyUs.map((item) => (
                     <li
                       key={item}
                       className="flex items-start gap-3 text-sm text-foreground"
@@ -158,23 +127,24 @@ export default function HomePage() {
                   href="/services"
                   className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
                 >
-                  Scopri tutti i servizi
+                  {tc("discoverServices")}
                   <ChevronRight className="h-4 w-4" />
                 </Link>
               </div>
             </div>
             <div className="relative">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/host.webp"
-                alt="Hosting Lake Como — calendario unificato e gestione multi-piattaforma"
+                alt={tMc("imageAlt")}
                 className="w-full h-auto [mask-image:linear-gradient(to_right,black_82%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,black_82%,transparent_100%)]"
               />
               <div className="absolute -bottom-12 left-0 lg:left-4 bg-white rounded-2xl p-5 shadow-xl border border-border/50 hidden lg:block">
-                <div className="text-2xl font-bold text-primary">9+</div>
-                <div className="text-xs text-muted-foreground">
-                  anni di esperienza
-                  <br />
-                  da property manager a tua disposizione
+                <div className="text-2xl font-bold text-primary">
+                  {tMc("yearsBadgeYears")}
+                </div>
+                <div className="text-xs text-muted-foreground whitespace-pre-line">
+                  {tMc("yearsBadgeText")}
                 </div>
               </div>
             </div>
@@ -187,7 +157,6 @@ export default function HomePage() {
 
       {/* ═══ SERVIZI PER PROPRIETARI ═══ */}
       <section className="py-24 relative bg-[url('/images/textures/services-bg.jpg')] bg-cover bg-center">
-        {/* Navy brand tint to align texture with Como blue #1D3A62 */}
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-[#1D3A62]/75 pointer-events-none"
@@ -195,30 +164,28 @@ export default function HomePage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <span className="text-xs font-semibold uppercase tracking-widest text-white/80">
-              I nostri servizi
+              {tOs("eyebrow")}
             </span>
             <h2 className="text-3xl sm:text-4xl font-light text-white mt-3 mb-4">
-              Tutto cio che serve per{" "}
-              <span className="font-semibold">una gestione perfetta</span>
+              {tOs("title1")}{" "}
+              <span className="font-semibold">{tOs("title2")}</span>
             </h2>
             <p className="text-white/80 max-w-2xl mx-auto">
-              Dalla promozione alla gestione quotidiana, ci occupiamo di ogni
-              aspetto del tuo immobile con tecnologia avanzata e attenzione ai
-              dettagli.
+              {tOs("subtitle")}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {SERVICES_OWNER.map((s) => (
+            {OWNER_SERVICE_KEYS.map((key) => (
               <div
-                key={s.title}
+                key={key}
                 className="group bg-white rounded-2xl p-7 border border-border/50 card-hover"
               >
                 <h3 className="text-base font-semibold text-foreground mb-2">
-                  {s.title}
+                  {tOs(`items.${key}.title`)}
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  {s.desc}
+                  {tOs(`items.${key}.desc`)}
                 </p>
               </div>
             ))}
@@ -229,7 +196,7 @@ export default function HomePage() {
               href="/services"
               className="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-white/80 transition-colors"
             >
-              Scopri tutti i servizi
+              {tc("discoverServices")}
               <ChevronRight className="h-4 w-4" />
             </Link>
           </div>
@@ -242,14 +209,15 @@ export default function HomePage() {
           <div className="flex items-end justify-between mb-12">
             <div>
               <h2 className="text-3xl sm:text-4xl font-light text-foreground">
-                La proprieta che <span className="font-semibold">gestiamo oggi</span>
+                {tFp("title1")}{" "}
+                <span className="font-semibold">{tFp("title2")}</span>
               </h2>
             </div>
             <Link
               href="/properties"
               className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-border text-sm font-medium hover:bg-muted/50 transition-colors"
             >
-              Vedi tutte
+              {tc("viewAll")}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -271,46 +239,29 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center mb-12 max-w-3xl mx-auto">
             <h2 className="text-3xl sm:text-4xl font-light text-white mb-4">
-              Stima il <span className="font-semibold">potenziale</span> del
-              tuo immobile
+              {tSim("title1")}{" "}
+              <span className="font-semibold">{tSim("title2")}</span>
+              {tSim("title3") ? ` ${tSim("title3")}` : ""}
             </h2>
             <p className="text-white/80 text-base sm:text-lg leading-relaxed">
-              Tre simulatori per farti un&apos;idea concreta del valore della
-              tua proprieta sul Lago di Como. Stime preliminari basate sul
-              nostro database storico — il valore effettivo richiede
-              un&apos;analisi dedicata con i nostri dati interni e
-              l&apos;algoritmo di pricing proprietario.
+              {tSim("subtitle")}
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                slug: "rendita",
-                name: "Simulatore Rendita",
-                desc: "Stima preliminare del potenziale di reddito del tuo immobile sul Lago di Como in base a zona, tipologia e caratteristiche.",
-              },
-              {
-                slug: "investimento",
-                name: "Simulatore Investimento",
-                desc: "Anteprima di ROI, cap rate e payback period per chi valuta l'acquisto di un immobile da reddito.",
-              },
-              {
-                slug: "profit-diretto",
-                name: "Profit Diretto vs OTA",
-                desc: "Quanto puoi risparmiare sulle commissioni Airbnb, Booking ed Expedia con una strategia multi-canale equilibrata.",
-              },
-            ].map((t) => (
+            {SIMULATOR_SLUGS.map((slug) => (
               <Link
-                key={t.slug}
-                href={`/strumenti/${t.slug}`}
+                key={slug}
+                href={SIMULATOR_HREFS[slug]}
                 className="group card-hover block bg-white text-foreground rounded-2xl p-7 border border-border/50"
               >
-                <h3 className="text-base font-semibold mb-2">{t.name}</h3>
+                <h3 className="text-base font-semibold mb-2">
+                  {tSim(`${slug}.name`)}
+                </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                  {t.desc}
+                  {tSim(`${slug}.desc`)}
                 </p>
                 <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary">
-                  Prova il simulatore
+                  {tc("tryTheTool")}
                   <ArrowRight className="h-3.5 w-3.5" />
                 </div>
               </Link>
@@ -338,18 +289,18 @@ export default function HomePage() {
                 className="h-24 w-24 md:h-28 md:w-28 mx-auto mb-5 object-contain [filter:drop-shadow(0_8px_24px_rgba(0,0,0,0.55))]"
               />
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white mb-4 [text-shadow:0_10px_36px_rgba(0,0,0,0.7)]">
-                Affidaci la tua casa sul Lago
+                {tCta("title")}
               </h2>
               <p className="text-white text-sm md:text-base max-w-2xl mx-auto mb-7 uppercase tracking-wide font-medium leading-relaxed">
-                Vuoi sapere quanto puo rendere la tua proprieta?
+                {tCta("subtitleLine1")}
                 <br />
-                Ti contatteremo entro 48 ore.
+                {tCta("subtitleLine2")}
               </p>
               <Link
                 href="/contact?interest=consulenza&from=cta-home"
                 className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-white hover:bg-white/90 text-foreground font-semibold text-sm tracking-wide transition-colors shadow-lg"
               >
-                Richiedi Consulenza
+                {tc("requestConsultation")}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

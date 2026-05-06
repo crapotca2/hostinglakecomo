@@ -62,5 +62,95 @@
     "label": "Cambia lingua",
     "it": "IT",
     "en": "EN"
+  },
+  "common": {
+    "discoverMore": "Scopri di piu",
+    "viewAll": "Vedi tutte",
+    "tryTheTool": "Prova il simulatore",
+    "discoverServices": "Scopri tutti i servizi",
+    "requestConsultation": "Richiedi Consulenza"
+  },
+  "home": {
+    "hero": {
+      "location": "Lago di Como, Italia",
+      "title1": "Il tuo immobile,",
+      "title2": "il nostro mestiere.",
+      "subtitle": "Gestione professionale di immobili sul Lago di Como. Un team di property manager con anni di esperienza diretta sul Lago di Como. Gestiamo la tua proprieta su tutti i canali, in ogni stagione.",
+      "ctaPrimary": "Affidati a noi",
+      "ctaSecondary": "Scopri i servizi"
+    },
+    "multiChannel": {
+      "title1": "Una sola gestione,",
+      "title2": "tutte le piattaforme",
+      "body": "Registriamo la tua proprieta sui principali canali del mercato e adattiamo la formula di affitto stagione per stagione. In alta stagione lavoriamo con i brevi soggiorni turistici, in bassa stagione passiamo a locazioni medio-lunghe quando piu convenienti. La tua casa resta in attivita 365 giorni l'anno, con un unico interlocutore.",
+      "bullets": [
+        "Distribuzione su Airbnb, Booking, Expedia e altri principali portali del mercato",
+        "Tariffe dinamiche calibrate sulle dinamiche di mercato in tempo reale",
+        "Affitti brevi nei picchi turistici, locazioni medio-lunghe in bassa stagione",
+        "Calendario unificato e zero sovrapposizioni grazie alla sincronizzazione canali"
+      ],
+      "imageAlt": "Hosting Lake Como — calendario unificato e gestione multi-piattaforma",
+      "yearsBadgeYears": "9+",
+      "yearsBadgeText": "anni di esperienza\nda property manager a tua disposizione"
+    },
+    "ownerServices": {
+      "eyebrow": "I nostri servizi",
+      "title1": "Tutto cio che serve per",
+      "title2": "una gestione perfetta",
+      "subtitle": "Dalla promozione alla gestione quotidiana, ci occupiamo di ogni aspetto del tuo immobile con tecnologia avanzata e attenzione ai dettagli.",
+      "items": {
+        "dynamicPricing": {
+          "title": "Tariffe Dinamiche",
+          "desc": "Algoritmo di tariffazione che ottimizza i prezzi in base a stagionalita, domanda e concorrenza per massimizzare i tuoi ricavi."
+        },
+        "bookings": {
+          "title": "Gestione Prenotazioni",
+          "desc": "Calendario unificato sincronizzato con Airbnb, Booking.com ed Expedia. Zero doppie prenotazioni, zero stress."
+        },
+        "compliance": {
+          "title": "Adempimenti Totali",
+          "desc": "CIN, Questura, ISTAT, tassa di soggiorno: gestiamo tutti gli adempimenti normativi in automatico."
+        },
+        "hospitality": {
+          "title": "Accoglienza 5 Stelle",
+          "desc": "Check-in professionale, pulizia certificata, biancheria di qualita. Ogni ospite vive un'esperienza premium."
+        },
+        "promotion": {
+          "title": "Promozione Multi-Canale",
+          "desc": "Il tuo immobile su oltre 10 piattaforme con foto professionali, descrizioni ottimizzate e visibilita massima."
+        },
+        "dashboard": {
+          "title": "Dashboard Proprietario",
+          "desc": "Monitora ricavi, occupazione e performance in tempo reale. Report mensili automatici con pagamenti trasparenti."
+        }
+      }
+    },
+    "featuredProperties": {
+      "title1": "La proprieta che",
+      "title2": "gestiamo oggi"
+    },
+    "simulators": {
+      "title1": "Stima il",
+      "title2": "potenziale",
+      "title3": "del tuo immobile",
+      "subtitle": "Tre simulatori per farti un'idea concreta del valore della tua proprieta sul Lago di Como. Stime preliminari basate sul nostro database storico — il valore effettivo richiede un'analisi dedicata con i nostri dati interni e l'algoritmo di tariffazione proprietario.",
+      "rendita": {
+        "name": "Simulatore Rendita",
+        "desc": "Stima preliminare del potenziale di reddito del tuo immobile sul Lago di Como in base a zona, tipologia e caratteristiche."
+      },
+      "investimento": {
+        "name": "Simulatore Investimento",
+        "desc": "Anteprima di rendimento sul capitale, rendimento immobile e tempo di rientro per chi valuta l'acquisto di un immobile da reddito."
+      },
+      "profitDiretto": {
+        "name": "Profit Diretto vs Piattaforme",
+        "desc": "Quanto puoi risparmiare sulle commissioni Airbnb, Booking ed Expedia con una strategia multi-canale equilibrata."
+      }
+    },
+    "ctaBanner": {
+      "title": "Affidaci la tua casa sul Lago",
+      "subtitleLine1": "Vuoi sapere quanto puo rendere la tua proprieta?",
+      "subtitleLine2": "Ti contatteremo entro 48 ore."
+    }
   }
 }

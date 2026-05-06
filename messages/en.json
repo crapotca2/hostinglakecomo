@@ -62,5 +62,95 @@
     "label": "Switch language",
     "it": "IT",
     "en": "EN"
+  },
+  "common": {
+    "discoverMore": "Discover",
+    "viewAll": "View all",
+    "tryTheTool": "Try the tool",
+    "discoverServices": "Discover all services",
+    "requestConsultation": "Request a Consultation"
+  },
+  "home": {
+    "hero": {
+      "location": "Lake Como, Italy",
+      "title1": "Your property,",
+      "title2": "our craft.",
+      "subtitle": "Professional management of properties on Lake Como. A team of property managers with years of direct experience on the lake. We handle your property across every channel, in every season.",
+      "ctaPrimary": "Trust us with your property",
+      "ctaSecondary": "Discover our services"
+    },
+    "multiChannel": {
+      "title1": "One management,",
+      "title2": "every platform",
+      "body": "We list your property on the main market channels and adapt the rental formula season by season. In high season we focus on short-stay tourism, in low season we shift to medium-to-long-term lets when more profitable. Your home stays active 365 days a year, with a single point of contact.",
+      "bullets": [
+        "Distribution on Airbnb, Booking, Expedia and other leading platforms",
+        "Dynamic pricing calibrated on real-time market dynamics",
+        "Short-stay rentals during peak season, longer lets in low season",
+        "Unified calendar and zero overlaps thanks to channel synchronisation"
+      ],
+      "imageAlt": "Hosting Lake Como — unified calendar and multi-platform management",
+      "yearsBadgeYears": "9+",
+      "yearsBadgeText": "years of experience\nas property managers at your service"
+    },
+    "ownerServices": {
+      "eyebrow": "Our services",
+      "title1": "Everything you need for",
+      "title2": "flawless management",
+      "subtitle": "From promotion to day-to-day operations, we take care of every aspect of your property with advanced technology and attention to detail.",
+      "items": {
+        "dynamicPricing": {
+          "title": "Dynamic Pricing",
+          "desc": "A pricing algorithm that optimises rates based on seasonality, demand and competition to maximise your revenue."
+        },
+        "bookings": {
+          "title": "Booking Management",
+          "desc": "Unified calendar synchronised with Airbnb, Booking.com and Expedia. Zero double bookings, zero stress."
+        },
+        "compliance": {
+          "title": "Full Compliance",
+          "desc": "CIN, Questura, ISTAT, tourist tax: we handle every regulatory requirement automatically."
+        },
+        "hospitality": {
+          "title": "5-Star Hospitality",
+          "desc": "Professional check-in, certified cleaning, premium linen. Every guest enjoys a top-tier experience."
+        },
+        "promotion": {
+          "title": "Multi-Channel Promotion",
+          "desc": "Your property on more than 10 platforms with professional photos, optimised descriptions and maximum visibility."
+        },
+        "dashboard": {
+          "title": "Owner Dashboard",
+          "desc": "Track revenue, occupancy and performance in real time. Automatic monthly reports with transparent payouts."
+        }
+      }
+    },
+    "featuredProperties": {
+      "title1": "The property we",
+      "title2": "manage today"
+    },
+    "simulators": {
+      "title1": "Estimate your property's",
+      "title2": "potential",
+      "title3": "",
+      "subtitle": "Three simulators to give you a concrete idea of your property's value on Lake Como. Preliminary estimates based on our historical database — the actual figure requires a dedicated analysis with our internal data and proprietary pricing algorithm.",
+      "rendita": {
+        "name": "Revenue Simulator",
+        "desc": "Preliminary estimate of your property's earning potential on Lake Como based on area, type and features."
+      },
+      "investimento": {
+        "name": "Investment Simulator",
+        "desc": "Preview of cash-on-cash return, cap rate and payback period for buyers evaluating an income property."
+      },
+      "profitDiretto": {
+        "name": "Direct vs Platforms Profit",
+        "desc": "How much you can save on Airbnb, Booking and Expedia commissions with a balanced multi-channel strategy."
+      }
+    },
+    "ctaBanner": {
+      "title": "Trust us with your home on the Lake",
+      "subtitleLine1": "Want to know how much your property can earn?",
+      "subtitleLine2": "We will get back to you within 48 hours."
+    }
   }
 }
