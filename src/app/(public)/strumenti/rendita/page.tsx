@@ -346,9 +346,16 @@ export default function RenditaPage() {
                       </div>
                     </div>
                   </div>
-                  <div className="px-6 py-4 bg-primary/[0.05] border-t border-border/40">
-                    <div className="text-xs text-muted-foreground">Guadagno extra indicativo all&apos;anno</div>
-                    <div className="text-xl font-bold text-primary">+{formatEuro(result.delta)}</div>
+                </div>
+
+                <div className="rounded-2xl p-6 text-white shadow-lg bg-gradient-to-br from-primary to-primary/80">
+                  <div className="text-white/70 text-xs uppercase tracking-wider mb-2">
+                    Guadagno extra indicativo all&apos;anno
+                  </div>
+                  <div className="text-4xl font-bold mb-1">+{formatEuro(result.delta)}</div>
+                  <div className="text-white/80 text-xs">
+                    Differenza tra il margine netto con Hosting Lake Como e
+                    quello in gestione autonoma.
                   </div>
                 </div>
               </div>
