@@ -82,24 +82,24 @@ export default function ProfitDirettoPage() {
   return (
     <div className="pt-20 pb-20 bg-muted/20 min-h-screen">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8 pt-8">
-          <Link href="/strumenti" className="text-xs text-muted-foreground hover:text-foreground mb-3 inline-block">
+        <div className="pt-8 mb-6">
+          <Link href="/strumenti" className="text-xs text-muted-foreground hover:text-foreground inline-block">
             ← Tutti gli strumenti
           </Link>
-          <div className="text-center mt-2">
-            <h1 className="text-3xl font-light">
-              Profit Diretto <span className="font-semibold">vs piattaforme</span>
-            </h1>
-            <p className="text-sm text-muted-foreground mt-1">
-              Quanto risparmi con le prenotazioni dirette rispetto a Airbnb,
-              Booking ed Expedia
-            </p>
-          </div>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8 items-center">
-          {/* Form */}
+        <div className="grid lg:grid-cols-5 gap-8 items-start">
+          {/* Sinistra: titolo + form + disclaimer */}
           <div className="lg:col-span-2 space-y-4">
+            <div>
+              <h1 className="text-3xl font-light">
+                Profit Diretto <span className="font-semibold">vs piattaforme</span>
+              </h1>
+              <p className="text-sm text-muted-foreground mt-1">
+                Quanto risparmi con le prenotazioni dirette rispetto a Airbnb,
+                Booking ed Expedia
+              </p>
+            </div>
             <div className="bg-white rounded-2xl p-6 border border-border/50 space-y-5">
               <div>
                 <label className="text-xs font-medium mb-1.5 block text-muted-foreground">Ricavi annui lordi</label>

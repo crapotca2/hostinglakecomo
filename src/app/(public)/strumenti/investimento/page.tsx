@@ -70,24 +70,24 @@ export default function InvestimentoPage() {
   return (
     <div className="pt-20 pb-20 bg-muted/20 min-h-screen">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8 pt-8">
-          <Link href="/strumenti" className="text-xs text-muted-foreground hover:text-foreground mb-3 inline-block">
+        <div className="pt-8 mb-6">
+          <Link href="/strumenti" className="text-xs text-muted-foreground hover:text-foreground inline-block">
             ← Tutti gli strumenti
           </Link>
-          <div className="text-center mt-2">
-            <h1 className="text-3xl font-light">
-              Calcolatore <span className="font-semibold">Investimento</span>
-            </h1>
-            <p className="text-sm text-muted-foreground mt-1">
-              Rendimento, flusso di cassa e tempo di rientro per chi compra
-              un immobile sul Lago di Como
-            </p>
-          </div>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8 items-center">
-          {/* Form */}
+        <div className="grid lg:grid-cols-5 gap-8 items-start">
+          {/* Sinistra: titolo + form + disclaimer */}
           <div className="lg:col-span-2 space-y-4">
+            <div>
+              <h1 className="text-3xl font-light">
+                Calcolatore <span className="font-semibold">Investimento</span>
+              </h1>
+              <p className="text-sm text-muted-foreground mt-1">
+                Rendimento, flusso di cassa e tempo di rientro per chi compra
+                un immobile sul Lago di Como
+              </p>
+            </div>
             <div className="bg-white rounded-2xl p-6 border border-border/50 space-y-5">
               <div>
                 <h2 className="text-sm font-semibold mb-3">Investimento iniziale</h2>

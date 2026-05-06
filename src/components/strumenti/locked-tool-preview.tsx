@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Lock, ArrowRight, type LucideIcon } from "lucide-react";
 
 interface LockedToolPreviewProps {
-  icon: LucideIcon;
+  icon?: LucideIcon;
   title: string;
   tagline: string;
   description: string;
@@ -11,7 +11,6 @@ interface LockedToolPreviewProps {
 }
 
 export function LockedToolPreview({
-  icon: Icon,
   title,
   tagline,
   description,
@@ -21,22 +20,17 @@ export function LockedToolPreview({
   return (
     <div className="pt-20 pb-20 bg-muted/20 min-h-screen">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 pt-8">
+        <div className="pt-8 mb-6">
           <Link
             href={backHref}
-            className="text-xs text-muted-foreground hover:text-foreground mb-3 inline-block"
+            className="text-xs text-muted-foreground hover:text-foreground inline-block"
           >
             ← Tutti gli strumenti
           </Link>
-          <div className="flex items-center gap-3 mb-3">
-            <div className="h-12 w-12 rounded-xl bg-primary/[0.08] flex items-center justify-center">
-              <Icon className="h-6 w-6 text-primary" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-light">{title}</h1>
-              <p className="text-sm text-muted-foreground mt-1">{tagline}</p>
-            </div>
-          </div>
+        </div>
+        <div className="mb-8">
+          <h1 className="text-3xl font-light">{title}</h1>
+          <p className="text-sm text-muted-foreground mt-1">{tagline}</p>
         </div>
 
         <div className="bg-white rounded-2xl border border-border/50 shadow-sm overflow-hidden">
