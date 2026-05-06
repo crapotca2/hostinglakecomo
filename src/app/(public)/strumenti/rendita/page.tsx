@@ -9,6 +9,7 @@ import { MapPin, Bed, Users, Eye, TrendingUp, CalendarDays, Euro, Ruler, Home } 
 import { AirBibbyEstimateCard } from "@/components/strumenti/air-bibby-estimate-card";
 import { DisclaimerNote } from "@/components/strumenti/disclaimer-note";
 import { FullAnalysisCTA } from "@/components/strumenti/full-analysis-cta";
+import { formatEuro } from "@/lib/format";
 
 const FormSchema = z.object({
   zone: z.enum(["centro-como", "primo-bacino", "secondo-bacino", "alto-lago"]),
@@ -62,14 +63,6 @@ const OCCUPANCY: Record<Zone, number> = {
   "secondo-bacino": 0.63,
   "alto-lago": 0.50,
 };
-
-function formatEuro(amount: number): string {
-  return new Intl.NumberFormat("it-IT", {
-    style: "currency",
-    currency: "EUR",
-    maximumFractionDigits: 0,
-  }).format(amount);
-}
 
 export default function RenditaPage() {
   const { register, watch, setValue } = useForm<FormData>({
@@ -152,12 +145,14 @@ export default function RenditaPage() {
           <Link href="/strumenti" className="text-xs text-muted-foreground hover:text-foreground mb-3 inline-block">
             ← Tutti gli strumenti
           </Link>
-          <h1 className="text-3xl font-light">
-            Calcolatore <span className="font-semibold">Rendita</span>
-          </h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Stima quanto puo guadagnare il tuo immobile sul Lago di Como
-          </p>
+          <div className="text-center mt-2">
+            <h1 className="text-3xl font-light">
+              Calcolatore <span className="font-semibold">Rendita</span>
+            </h1>
+            <p className="text-sm text-muted-foreground mt-1">
+              Stima quanto puo guadagnare il tuo immobile sul Lago di Como
+            </p>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-5 gap-8 items-center">

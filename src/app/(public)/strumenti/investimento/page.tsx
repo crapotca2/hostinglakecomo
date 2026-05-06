@@ -6,15 +6,7 @@ import { TrendingUp, Euro, Calendar, Percent, Home } from "lucide-react";
 import { AirBibbyEstimateCard } from "@/components/strumenti/air-bibby-estimate-card";
 import { DisclaimerNote } from "@/components/strumenti/disclaimer-note";
 import { FullAnalysisCTA } from "@/components/strumenti/full-analysis-cta";
-
-function formatEuro(amount: number, decimals = 0): string {
-  return new Intl.NumberFormat("it-IT", {
-    style: "currency",
-    currency: "EUR",
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals,
-  }).format(amount);
-}
+import { formatEuro, formatInteger } from "@/lib/format";
 
 export default function InvestimentoPage() {
   const [purchasePrice, setPurchasePrice] = useState(400000);
@@ -82,12 +74,15 @@ export default function InvestimentoPage() {
           <Link href="/strumenti" className="text-xs text-muted-foreground hover:text-foreground mb-3 inline-block">
             ← Tutti gli strumenti
           </Link>
-          <h1 className="text-3xl font-light">
-            Calcolatore <span className="font-semibold">Investimento</span>
-          </h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            ROI, cash flow, cap rate e payback per investitori sul Lago di Como
-          </p>
+          <div className="text-center mt-2">
+            <h1 className="text-3xl font-light">
+              Calcolatore <span className="font-semibold">Investimento</span>
+            </h1>
+            <p className="text-sm text-muted-foreground mt-1">
+              Rendimento, flusso di cassa e tempo di rientro per chi compra
+              un immobile sul Lago di Como
+            </p>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-5 gap-8 items-center">
@@ -230,13 +225,12 @@ function InputField({
   label,
   value,
   onChange,
-  step,
   suffix,
 }: {
   label: string;
   value: number;
   onChange: (v: number) => void;
-  step: number;
+  step?: number;
   suffix?: string;
 }) {
   return (
@@ -244,11 +238,14 @@ function InputField({
       <label className="text-xs font-medium mb-1.5 block text-muted-foreground">{label}</label>
       <div className="relative">
         <input
-          type="number"
-          value={value}
-          step={step}
-          onChange={(e) => onChange(Math.max(0, parseFloat(e.target.value) || 0))}
-          className="w-full rounded-lg border border-border px-3 py-2.5 text-sm pr-10"
+          type="text"
+          inputMode="numeric"
+          value={formatInteger(value)}
+          onChange={(e) => {
+            const raw = e.target.value.replace(/[^\d]/g, "");
+            onChange(raw === "" ? 0 : parseInt(raw, 10));
+          }}
+          className="w-full rounded-lg border border-border px-3 py-2.5 text-sm pr-10 tabular-nums"
         />
         {suffix && (
           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground">

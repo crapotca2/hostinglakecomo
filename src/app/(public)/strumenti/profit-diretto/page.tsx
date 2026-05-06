@@ -5,14 +5,7 @@ import Link from "next/link";
 import { AirBibbyEstimateCard } from "@/components/strumenti/air-bibby-estimate-card";
 import { DisclaimerNote } from "@/components/strumenti/disclaimer-note";
 import { FullAnalysisCTA } from "@/components/strumenti/full-analysis-cta";
-
-function formatEuro(amount: number): string {
-  return new Intl.NumberFormat("it-IT", {
-    style: "currency",
-    currency: "EUR",
-    maximumFractionDigits: 0,
-  }).format(amount);
-}
+import { formatEuro, formatInteger } from "@/lib/format";
 
 // Commissioni piattaforme — somma di service fee host + transaction fee.
 // Cifre prudenti, lato medio-alto del range osservato sul mercato 2025.
@@ -93,12 +86,15 @@ export default function ProfitDirettoPage() {
           <Link href="/strumenti" className="text-xs text-muted-foreground hover:text-foreground mb-3 inline-block">
             ← Tutti gli strumenti
           </Link>
-          <h1 className="text-3xl font-light">
-            Profit Diretto <span className="font-semibold">vs OTA</span>
-          </h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Quanto risparmi con le prenotazioni dirette rispetto a Airbnb, Booking ed Expedia
-          </p>
+          <div className="text-center mt-2">
+            <h1 className="text-3xl font-light">
+              Profit Diretto <span className="font-semibold">vs piattaforme</span>
+            </h1>
+            <p className="text-sm text-muted-foreground mt-1">
+              Quanto risparmi con le prenotazioni dirette rispetto a Airbnb,
+              Booking ed Expedia
+            </p>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-5 gap-8 items-center">
@@ -109,11 +105,14 @@ export default function ProfitDirettoPage() {
                 <label className="text-xs font-medium mb-1.5 block text-muted-foreground">Ricavi annui lordi</label>
                 <div className="relative">
                   <input
-                    type="number"
-                    value={annualRevenue}
-                    step={1000}
-                    onChange={(e) => setAnnualRevenue(Math.max(0, parseFloat(e.target.value) || 0))}
-                    className="w-full rounded-lg border border-border px-3 py-2.5 text-sm pr-10"
+                    type="text"
+                    inputMode="numeric"
+                    value={formatInteger(annualRevenue)}
+                    onChange={(e) => {
+                      const raw = e.target.value.replace(/[^\d]/g, "");
+                      setAnnualRevenue(raw === "" ? 0 : parseInt(raw, 10));
+                    }}
+                    className="w-full rounded-lg border border-border px-3 py-2.5 text-sm pr-10 tabular-nums"
                   />
                   <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground">€</span>
                 </div>
