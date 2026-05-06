@@ -3,22 +3,25 @@
 import { Link, usePathname } from "@/i18n/routing";
 import { useState, useEffect } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
-
-const NAV_ITEMS = [
-  { href: "/", label: "Home" },
-  { href: "/properties", label: "Proprieta" },
-  { href: "/services", label: "Servizi" },
-  { href: "/strumenti", label: "Strumenti" },
-  { href: "/about", label: "Chi Siamo" },
-  { href: "/contact", label: "Contatti" },
-];
+import { LanguageToggle } from "@/components/public/language-toggle";
 
 export function Navbar() {
+  const t = useTranslations("nav");
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const isHome = pathname === "/";
+
+  const navItems: { href: string; label: string }[] = [
+    { href: "/", label: t("home") },
+    { href: "/properties", label: t("properties") },
+    { href: "/services", label: t("services") },
+    { href: "/strumenti", label: t("tools") },
+    { href: "/about", label: t("about") },
+    { href: "/contact", label: t("contact") },
+  ];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -69,7 +72,7 @@ export function Navbar() {
           <Link
             href="/"
             className="flex items-center gap-2 sm:gap-2.5 shrink-0 min-w-0"
-            aria-label="Hosting Lake Como — home"
+            aria-label={t("homeAriaLabel")}
           >
             <span className="relative h-9 w-9 sm:h-11 sm:w-11 lg:h-12 lg:w-12 shrink-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -104,7 +107,7 @@ export function Navbar() {
 
           {/* Desktop nav (lg+) */}
           <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1">
-            {NAV_ITEMS.map((item) => (
+            {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -124,8 +127,11 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* CTA + mobile toggle */}
+          {/* Language toggle + CTA + mobile menu */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            <div className="hidden md:block">
+              <LanguageToggle variant={showSolid ? "light" : "dark"} />
+            </div>
             <Link
               href="/contact?interest=consulenza"
               className={cn(
@@ -135,13 +141,13 @@ export function Navbar() {
                   : "bg-white text-primary hover:bg-white/90"
               )}
             >
-              <span className="hidden lg:inline">Richiedi Consulenza</span>
-              <span className="lg:hidden">Consulenza</span>
+              <span className="hidden lg:inline">{t("cta")}</span>
+              <span className="lg:hidden">{t("ctaShort")}</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label={mobileOpen ? "Chiudi menu" : "Apri menu"}
+              aria-label={mobileOpen ? t("closeMenu") : t("openMenu")}
               aria-expanded={mobileOpen}
               className={cn(
                 "lg:hidden h-10 w-10 rounded-lg flex items-center justify-center transition-colors shrink-0",
@@ -170,7 +176,7 @@ export function Navbar() {
           />
           <div className="lg:hidden absolute top-full inset-x-0 bg-white border-t border-border/40 shadow-xl animate-fade-in max-h-[calc(100vh-4rem)] overflow-y-auto">
             <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-3 space-y-0.5">
-              {NAV_ITEMS.map((item) => (
+              {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
@@ -185,13 +191,14 @@ export function Navbar() {
                   {item.label}
                 </Link>
               ))}
-              <div className="pt-2 mt-2 border-t border-border/40">
+              <div className="pt-2 mt-2 border-t border-border/40 flex items-center justify-between gap-3">
+                <LanguageToggle variant="light" />
                 <Link
                   href="/contact?interest=consulenza"
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-white text-sm font-semibold"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-white text-sm font-semibold"
                 >
-                  Richiedi Consulenza
+                  {t("cta")}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>

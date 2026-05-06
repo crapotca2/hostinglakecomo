@@ -1,7 +1,11 @@
 import { Link } from "@/i18n/routing";
 import { Phone, Mail } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function Footer() {
+  const t = useTranslations("footer");
+  const tn = useTranslations("nav");
+
   return (
     <footer className="relative overflow-hidden bg-[#1D3A62]">
       <div
@@ -22,44 +26,42 @@ export function Footer() {
               <span className="text-xl font-semibold text-white">Hosting Lake Como</span>
             </div>
             <p className="text-base leading-relaxed text-white font-medium">
-              L&apos;ospitalita non si improvvisa, affidati a un professionista.
+              {t("tagline")}
             </p>
             <p className="text-sm leading-relaxed text-white/75">
-              Consultaci per valutare il potenziale di rendita del tuo
-              immobile sul Lago di Como. Ti rispondiamo entro 48 ore con
-              un&apos;analisi personalizzata e senza impegno.
+              {t("description")}
             </p>
           </div>
 
           {/* Naviga */}
           <div>
             <h4 className="text-xs font-semibold text-white mb-4 uppercase tracking-widest">
-              Naviga
+              {t("navigateTitle")}
             </h4>
             <ul className="space-y-2.5 text-sm text-white/75">
               <li>
                 <Link href="/about" className="hover:text-white transition-colors">
-                  Chi Siamo
+                  {tn("about")}
                 </Link>
               </li>
               <li>
                 <Link href="/services" className="hover:text-white transition-colors">
-                  Servizi
+                  {tn("services")}
                 </Link>
               </li>
               <li>
                 <Link href="/strumenti" className="hover:text-white transition-colors">
-                  Strumenti
+                  {tn("tools")}
                 </Link>
               </li>
               <li>
                 <Link href="/properties" className="hover:text-white transition-colors">
-                  Proprieta
+                  {tn("properties")}
                 </Link>
               </li>
               <li>
                 <Link href="/dashboard" className="hover:text-white transition-colors">
-                  Dashboard Proprietari
+                  {t("ownerDashboard")}
                 </Link>
               </li>
             </ul>
@@ -68,27 +70,27 @@ export function Footer() {
           {/* Legale */}
           <div>
             <h4 className="text-xs font-semibold text-white mb-4 uppercase tracking-widest">
-              Legale
+              {t("legalTitle")}
             </h4>
             <ul className="space-y-2.5 text-sm text-white/75">
               <li>
                 <Link href="/privacy" className="hover:text-white transition-colors">
-                  Privacy Policy
+                  {t("privacyPolicy")}
                 </Link>
               </li>
               <li>
                 <Link href="/cookies" className="hover:text-white transition-colors">
-                  Cookie Policy
+                  {t("cookiePolicy")}
                 </Link>
               </li>
               <li>
                 <Link href="/terms" className="hover:text-white transition-colors">
-                  Termini di Servizio
+                  {t("termsOfService")}
                 </Link>
               </li>
               <li>
                 <Link href="/note-legali" className="hover:text-white transition-colors">
-                  Note Legali
+                  {t("legalNotes")}
                 </Link>
               </li>
             </ul>
@@ -97,7 +99,7 @@ export function Footer() {
           {/* Contatti */}
           <div>
             <h4 className="text-xs font-semibold text-white mb-4 uppercase tracking-widest">
-              Contatti
+              {t("contactsTitle")}
             </h4>
             <ul className="space-y-3 text-sm text-white/75">
               <li className="flex items-start gap-2.5">
@@ -123,13 +125,13 @@ export function Footer() {
               href="/contact?interest=consulenza"
               className="inline-flex items-center gap-2 mt-5 px-5 py-2.5 rounded-xl bg-white text-[#1D3A62] text-xs font-semibold hover:bg-white/90 transition-colors"
             >
-              Richiedi Consulenza
+              {t("cta")}
             </Link>
           </div>
         </div>
       </div>
 
-      {/* Como wordmark — full width, slightly shorter than the natural 7.5:1 (anchored bottom so the cut happens at the top, matching the original watermark feel) */}
+      {/* Como wordmark */}
       <div className="overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

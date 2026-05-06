@@ -2,5 +2,65 @@
   "_meta": {
     "locale": "English",
     "code": "en"
+  },
+  "nav": {
+    "home": "Home",
+    "properties": "Properties",
+    "services": "Services",
+    "tools": "Tools",
+    "about": "About",
+    "contact": "Contact",
+    "cta": "Request a Consultation",
+    "ctaShort": "Consultation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "homeAriaLabel": "Hosting Lake Como — home"
+  },
+  "footer": {
+    "tagline": "Hospitality is not improvised — trust a professional.",
+    "description": "Get in touch to assess the rental potential of your property on Lake Como. We reply within 48 hours with a personalised, no-obligation analysis.",
+    "navigateTitle": "Navigate",
+    "legalTitle": "Legal",
+    "contactsTitle": "Contact",
+    "ownerDashboard": "Owner Dashboard",
+    "privacyPolicy": "Privacy Policy",
+    "cookiePolicy": "Cookie Policy",
+    "termsOfService": "Terms of Service",
+    "legalNotes": "Legal Notes",
+    "cta": "Request a Consultation"
+  },
+  "cookieBanner": {
+    "title": "We respect your privacy",
+    "intro": "We only use technical cookies required for the site to function. We do not currently use analytics or marketing cookies. For more details, read the",
+    "policyLink": "Cookie Policy",
+    "acceptAll": "Accept all",
+    "rejectAll": "Reject all",
+    "customize": "Customise",
+    "settingsTitle": "Customise cookies",
+    "close": "Close",
+    "savePreferences": "Save preferences",
+    "technical": {
+      "title": "Technical cookies",
+      "status": "Always on",
+      "description": "Required for the site to function: client area authentication session, theme preferences and technical routing. They do not profile the user.",
+      "ariaAlwaysOn": "Technical cookies (always on)"
+    },
+    "analytics": {
+      "title": "Analytics cookies",
+      "status": "Not currently in use",
+      "description": "Allow us to collect aggregated statistics on site usage (pages visited, session duration). Ready for future integrations; no analytics tool is currently in use.",
+      "ariaLabel": "Analytics cookies"
+    },
+    "marketing": {
+      "title": "Marketing cookies",
+      "status": "Not currently in use",
+      "description": "Used to profile the user and show personalised ads on other platforms. Ready for future campaigns; no marketing tool is currently in use.",
+      "ariaLabel": "Marketing cookies"
+    }
+  },
+  "languageToggle": {
+    "label": "Switch language",
+    "it": "IT",
+    "en": "EN"
   }
 }

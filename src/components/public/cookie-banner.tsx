@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@/i18n/routing";
 import { Cookie, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const STORAGE_KEY = "hlc-cookie-consent";
 const CONSENT_VERSION = 1;
@@ -33,6 +34,7 @@ function writeConsent(record: ConsentRecord) {
 }
 
 export function CookieBanner() {
+  const t = useTranslations("cookieBanner");
   const [visible, setVisible] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [analytics, setAnalytics] = useState(false);
@@ -98,17 +100,15 @@ export function CookieBanner() {
                 id="cookie-banner-title"
                 className="text-base font-semibold leading-tight"
               >
-                Rispettiamo la tua privacy
+                {t("title")}
               </h2>
               <p className="text-sm text-white/75 leading-relaxed mt-1.5">
-                Usiamo solo cookie tecnici necessari al funzionamento del sito.
-                Al momento non utilizziamo cookie analitici o di marketing. Per
-                approfondire leggi la{" "}
+                {t("intro")}{" "}
                 <Link
                   href="/cookies"
                   className="underline underline-offset-2 hover:text-white"
                 >
-                  Cookie Policy
+                  {t("policyLink")}
                 </Link>
                 .
               </p>
@@ -121,7 +121,7 @@ export function CookieBanner() {
               onClick={acceptAll}
               className="px-4 py-2.5 rounded-lg bg-white text-[#1D3A62] text-sm font-semibold hover:bg-white/90 transition-colors"
             >
-              Accetta tutti
+              {t("acceptAll")}
             </button>
             <div className="flex gap-2">
               <button
@@ -129,14 +129,14 @@ export function CookieBanner() {
                 onClick={rejectAll}
                 className="flex-1 px-4 py-2.5 rounded-lg bg-white/10 text-white text-sm font-medium hover:bg-white/15 transition-colors border border-white/15"
               >
-                Rifiuta tutti
+                {t("rejectAll")}
               </button>
               <button
                 type="button"
                 onClick={() => setShowSettings(true)}
                 className="flex-1 px-4 py-2.5 rounded-lg bg-white/10 text-white text-sm font-medium hover:bg-white/15 transition-colors border border-white/15"
               >
-                Personalizza
+                {t("customize")}
               </button>
             </div>
           </div>
@@ -162,12 +162,12 @@ export function CookieBanner() {
                 id="cookie-settings-title"
                 className="text-base font-semibold"
               >
-                Personalizza i cookie
+                {t("settingsTitle")}
               </h2>
               <button
                 type="button"
                 onClick={() => setShowSettings(false)}
-                aria-label="Chiudi"
+                aria-label={t("close")}
                 className="h-8 w-8 rounded-lg hover:bg-muted flex items-center justify-center transition-colors"
               >
                 <X className="h-4 w-4" />
@@ -178,71 +178,63 @@ export function CookieBanner() {
               <div className="rounded-xl border border-border/50 p-4">
                 <div className="flex items-start justify-between gap-3 mb-2">
                   <div>
-                    <h3 className="text-sm font-semibold">Cookie tecnici</h3>
+                    <h3 className="text-sm font-semibold">{t("technical.title")}</h3>
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      Sempre attivi
+                      {t("technical.status")}
                     </p>
                   </div>
                   <input
                     type="checkbox"
                     checked
                     disabled
-                    aria-label="Cookie tecnici (sempre attivi)"
+                    aria-label={t("technical.ariaAlwaysOn")}
                     className="mt-1 h-4 w-4 accent-[#1D3A62] cursor-not-allowed opacity-70"
                   />
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Necessari al funzionamento del sito: sessione di
-                  autenticazione dell&apos;area clienti, preferenze di tema e
-                  routing tecnico. Non profilano l&apos;utente.
+                  {t("technical.description")}
                 </p>
               </div>
 
               <div className="rounded-xl border border-border/50 p-4">
                 <div className="flex items-start justify-between gap-3 mb-2">
                   <div>
-                    <h3 className="text-sm font-semibold">Cookie analitici</h3>
+                    <h3 className="text-sm font-semibold">{t("analytics.title")}</h3>
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      Non utilizzati al momento
+                      {t("analytics.status")}
                     </p>
                   </div>
                   <input
                     type="checkbox"
                     checked={analytics}
                     onChange={(e) => setAnalytics(e.target.checked)}
-                    aria-label="Cookie analitici"
+                    aria-label={t("analytics.ariaLabel")}
                     className="mt-1 h-4 w-4 accent-[#1D3A62] cursor-pointer"
                   />
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Permettono di raccogliere statistiche aggregate
-                  sull&apos;utilizzo del sito (pagine visitate, durata sessione).
-                  Predisposizione attiva per future integrazioni; al momento
-                  nessuno strumento analitico e in uso.
+                  {t("analytics.description")}
                 </p>
               </div>
 
               <div className="rounded-xl border border-border/50 p-4">
                 <div className="flex items-start justify-between gap-3 mb-2">
                   <div>
-                    <h3 className="text-sm font-semibold">Cookie di marketing</h3>
+                    <h3 className="text-sm font-semibold">{t("marketing.title")}</h3>
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      Non utilizzati al momento
+                      {t("marketing.status")}
                     </p>
                   </div>
                   <input
                     type="checkbox"
                     checked={marketing}
                     onChange={(e) => setMarketing(e.target.checked)}
-                    aria-label="Cookie di marketing"
+                    aria-label={t("marketing.ariaLabel")}
                     className="mt-1 h-4 w-4 accent-[#1D3A62] cursor-pointer"
                   />
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Servono per profilare l&apos;utente e mostrargli annunci
-                  personalizzati su altre piattaforme. Predisposizione attiva
-                  per eventuali campagne future; al momento nessuno strumento
-                  di marketing e in uso.
+                  {t("marketing.description")}
                 </p>
               </div>
             </div>
@@ -253,14 +245,14 @@ export function CookieBanner() {
                 onClick={rejectAll}
                 className="flex-1 px-4 py-2.5 rounded-lg border border-border/50 text-sm font-medium hover:bg-muted/50 transition-colors"
               >
-                Rifiuta tutti
+                {t("rejectAll")}
               </button>
               <button
                 type="button"
                 onClick={saveCustom}
                 className="flex-1 px-4 py-2.5 rounded-lg bg-[#1D3A62] text-white text-sm font-semibold hover:bg-[#1D3A62]/90 transition-colors"
               >
-                Salva preferenze
+                {t("savePreferences")}
               </button>
             </div>
           </div>

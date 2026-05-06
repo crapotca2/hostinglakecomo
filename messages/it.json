@@ -2,5 +2,65 @@
   "_meta": {
     "locale": "Italiano",
     "code": "it"
+  },
+  "nav": {
+    "home": "Home",
+    "properties": "Proprieta",
+    "services": "Servizi",
+    "tools": "Strumenti",
+    "about": "Chi Siamo",
+    "contact": "Contatti",
+    "cta": "Richiedi Consulenza",
+    "ctaShort": "Consulenza",
+    "openMenu": "Apri menu",
+    "closeMenu": "Chiudi menu",
+    "homeAriaLabel": "Hosting Lake Como — home"
+  },
+  "footer": {
+    "tagline": "L'ospitalita non si improvvisa, affidati a un professionista.",
+    "description": "Consultaci per valutare il potenziale di rendita del tuo immobile sul Lago di Como. Ti rispondiamo entro 48 ore con un'analisi personalizzata e senza impegno.",
+    "navigateTitle": "Naviga",
+    "legalTitle": "Legale",
+    "contactsTitle": "Contatti",
+    "ownerDashboard": "Dashboard Proprietari",
+    "privacyPolicy": "Privacy Policy",
+    "cookiePolicy": "Cookie Policy",
+    "termsOfService": "Termini di Servizio",
+    "legalNotes": "Note Legali",
+    "cta": "Richiedi Consulenza"
+  },
+  "cookieBanner": {
+    "title": "Rispettiamo la tua privacy",
+    "intro": "Usiamo solo cookie tecnici necessari al funzionamento del sito. Al momento non utilizziamo cookie analitici o di marketing. Per approfondire leggi la",
+    "policyLink": "Cookie Policy",
+    "acceptAll": "Accetta tutti",
+    "rejectAll": "Rifiuta tutti",
+    "customize": "Personalizza",
+    "settingsTitle": "Personalizza i cookie",
+    "close": "Chiudi",
+    "savePreferences": "Salva preferenze",
+    "technical": {
+      "title": "Cookie tecnici",
+      "status": "Sempre attivi",
+      "description": "Necessari al funzionamento del sito: sessione di autenticazione dell'area clienti, preferenze di tema e routing tecnico. Non profilano l'utente.",
+      "ariaAlwaysOn": "Cookie tecnici (sempre attivi)"
+    },
+    "analytics": {
+      "title": "Cookie analitici",
+      "status": "Non utilizzati al momento",
+      "description": "Permettono di raccogliere statistiche aggregate sull'utilizzo del sito (pagine visitate, durata sessione). Predisposizione attiva per future integrazioni; al momento nessuno strumento analitico e in uso.",
+      "ariaLabel": "Cookie analitici"
+    },
+    "marketing": {
+      "title": "Cookie di marketing",
+      "status": "Non utilizzati al momento",
+      "description": "Servono per profilare l'utente e mostrargli annunci personalizzati su altre piattaforme. Predisposizione attiva per eventuali campagne future; al momento nessuno strumento di marketing e in uso.",
+      "ariaLabel": "Cookie di marketing"
+    }
+  },
+  "languageToggle": {
+    "label": "Cambia lingua",
+    "it": "IT",
+    "en": "EN"
   }
 }
