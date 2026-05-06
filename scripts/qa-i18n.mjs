@@ -121,8 +121,8 @@ const PATTERNS = [
   /\bvedi tutte\b/i,
   /\bvedi tutti\b/i,
   /\bappartamento\b/i,
-  /\bcase\b/i,
-  /\bvilla\b/i,
+  // "case" excluded: valid EN word ("in case of...")
+  // "villa" excluded: valid EN word in real-estate context
 ];
 
 const PATTERN_LABELS = PATTERNS.map((re) =>
