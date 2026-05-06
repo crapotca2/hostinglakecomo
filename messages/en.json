@@ -803,5 +803,752 @@
     "title": "This page is available in Italian only",
     "body": "The full legal text is published in Italian. Switch language to view it.",
     "cta": "View Italian version"
+  },
+  "dashboard": {
+    "sidebar": {
+      "brand": "Hosting Lake Como",
+      "tagline": "Owner Dashboard",
+      "section": "Management",
+      "items": {
+        "overview": "Overview",
+        "properties": "Properties",
+        "bookings": "Bookings",
+        "calendar": "Calendar",
+        "analytics": "Analytics",
+        "reports": "Reports",
+        "statements": "Statements",
+        "payments": "Payments",
+        "compliance": "Compliance",
+        "settings": "Settings"
+      },
+      "backToSite": "Back to Website",
+      "logout": "Sign out"
+    },
+    "overview": {
+      "greeting": "Good morning,",
+      "subtitle": "Here is the summary of your properties on Lake Como.",
+      "stats": {
+        "monthRevenue": "Monthly Revenue",
+        "activeBookings": "Active Bookings",
+        "occupancyRate": "Occupancy Rate",
+        "propertyCount": "Properties Managed"
+      },
+      "quickActions": {
+        "properties": "Properties",
+        "bookings": "Bookings",
+        "calendar": "Calendar",
+        "analytics": "Analytics"
+      },
+      "recent": {
+        "title": "Recent Bookings",
+        "viewAll": "View all",
+        "loading": "Loading...",
+        "empty": "No recent bookings",
+        "headers": {
+          "guest": "Guest",
+          "dates": "Dates",
+          "nights": "Nights",
+          "source": "Source",
+          "amount": "Amount",
+          "status": "Status"
+        }
+      },
+      "status": {
+        "confirmed": "Confirmed",
+        "checked_in": "In progress",
+        "pending": "Pending",
+        "cancelled": "Cancelled"
+      },
+      "source": {
+        "airbnb": "Airbnb",
+        "booking": "Booking.com",
+        "vrbo": "Vrbo",
+        "direct": "Direct",
+        "other": "Other"
+      }
+    },
+    "properties": {
+      "title1": "My",
+      "title2": "Properties",
+      "subtitleLoading": "Loading...",
+      "subtitleCount": "{count} properties in the portfolio",
+      "addButton": "Add Property",
+      "loadingList": "Loading properties...",
+      "emptyList": "No properties in the portfolio",
+      "noImage": "No image",
+      "perNight": "/ night",
+      "view": "View",
+      "edit": "Edit",
+      "details": "{type} · {bedrooms} bed · {bathrooms} bath · up to {maxGuests} guests",
+      "status": {
+        "active": "Active",
+        "draft": "Draft",
+        "inactive": "Inactive"
+      },
+      "zones": {
+        "centro-como": "Como city centre",
+        "primo-bacino": "First Basin",
+        "secondo-bacino": "Second Basin",
+        "alto-lago": "Upper Lake Como",
+        "valle-intelvi": "Valle Intelvi",
+        "lecco": "Lecco",
+        "altro": "Other"
+      }
+    },
+    "bookings": {
+      "title": "Bookings",
+      "subtitleLoading": "Loading...",
+      "subtitleCount": "{count} bookings",
+      "searchPlaceholder": "Search guest or property...",
+      "filters": {
+        "allStatuses": "All statuses",
+        "allSources": "All sources"
+      },
+      "loading": "Loading...",
+      "empty": "No bookings found",
+      "headers": {
+        "guest": "Guest",
+        "property": "Property",
+        "dates": "Dates",
+        "nights": "Nights",
+        "source": "Source",
+        "amount": "Amount",
+        "status": "Status"
+      },
+      "status": {
+        "confirmed": "Confirmed",
+        "checked_in": "In progress",
+        "checked_out": "Completed",
+        "pending": "Pending",
+        "cancelled": "Cancelled"
+      },
+      "source": {
+        "airbnb": "Airbnb",
+        "booking": "Booking.com",
+        "vrbo": "Vrbo",
+        "direct": "Direct",
+        "other": "Other"
+      }
+    },
+    "calendar": {
+      "title": "Calendar",
+      "subtitle": "Unified booking view with public holidays",
+      "holidaysTitle": "Holidays shown",
+      "loadingCalendar": "Loading calendar...",
+      "legendTitle": "Legend",
+      "channels": {
+        "airbnb": "Airbnb",
+        "booking": "Booking.com",
+        "vrbo": "Vrbo",
+        "direct": "Direct"
+      },
+      "countries": {
+        "IT": "Italy",
+        "DE": "Germany",
+        "FR": "France",
+        "GB": "United Kingdom",
+        "NL": "Netherlands",
+        "CH": "Switzerland",
+        "US": "United States"
+      }
+    },
+    "payments": {
+      "title": "Payments",
+      "subtitle": "Stripe transactions from direct bookings",
+      "kpis": {
+        "totalCollected": "Total Collected",
+        "transactions": "Transactions",
+        "averagePerTransaction": "Average per Transaction"
+      },
+      "loading": "Loading...",
+      "empty": "No transactions yet. Direct bookings paid via Stripe will appear here.",
+      "headers": {
+        "date": "Date",
+        "type": "Type",
+        "paymentId": "Payment ID",
+        "amount": "Amount",
+        "status": "Status"
+      },
+      "status": {
+        "succeeded": "Completed",
+        "pending": "Pending",
+        "failed": "Failed",
+        "refunded": "Refunded"
+      },
+      "type": {
+        "booking": "Booking",
+        "deposit": "Deposit",
+        "service": "Service",
+        "refund": "Refund"
+      }
+    },
+    "statements": {
+      "title": "Statements",
+      "subtitle": "Monthly payout summary — Year {year}",
+      "kpis": {
+        "ytdGross": "Gross Revenue YTD",
+        "totalCommissions": "Total Commissions",
+        "commissionsHint": "OTA + Hosting Lake Como",
+        "operatingExpenses": "Operating Expenses",
+        "expensesHint": "Cleaning + tourist tax",
+        "netPayoutYtd": "Net Payout YTD",
+        "netPayoutHint": "Your net earnings"
+      },
+      "loading": "Loading...",
+      "empty": "No statements available",
+      "headers": {
+        "period": "Period",
+        "bookings": "Bookings",
+        "gross": "Gross",
+        "commissions": "Commissions",
+        "expenses": "Expenses",
+        "net": "Net",
+        "status": "Status"
+      },
+      "status": {
+        "paid": "Paid",
+        "pending": "Processing"
+      }
+    },
+    "compliance": {
+      "title": "Compliance",
+      "subtitle": "Italian regulatory requirements for short-term lets",
+      "alloggiati": {
+        "title": "Alloggiati Web (Questura)",
+        "description": "Submission of guest data to the State Police within 24 hours of arrival. Export the fixed-width TXT file and upload it manually to the portal.",
+        "from": "From",
+        "to": "To",
+        "download": "Download TXT"
+      },
+      "istat": {
+        "title": "ISTAT (Lombardy Region)",
+        "description": "Monthly tourism flow report (arrivals, overnight stays, nationalities) to be submitted to the Lombardy Region via the tourism portal.",
+        "month": "Month",
+        "year": "Year",
+        "download": "Download CSV",
+        "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+      },
+      "tax": {
+        "title": "Tourist tax",
+        "description": "Quarterly calculation due to the Municipality. Rates are configured per property (typically EUR 2-4 per person/night, capped at 5 nights).",
+        "from": "From",
+        "to": "To",
+        "calculate": "Calculate",
+        "loading": "Loading...",
+        "headers": {
+          "property": "Property",
+          "bookings": "Bookings",
+          "nights": "Nights",
+          "guests": "Guests",
+          "owed": "Owed"
+        },
+        "totalLabel": "Total due to the Municipality",
+        "empty": "No bookings in the selected period"
+      }
+    },
+    "settings": {
+      "title": "Settings",
+      "subtitle": "Manage your profile and preferences",
+      "profile": {
+        "title": "Profile",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email",
+        "phone": "Phone",
+        "phonePlaceholder": "+39 ___ ___ ____"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "items": [
+          { "label": "New booking", "desc": "Receive a notification for every new booking" },
+          { "label": "Guest check-in", "desc": "Notification when guests check in" },
+          { "label": "Monthly report", "desc": "Receive the monthly statement by email" },
+          { "label": "Urgent maintenance", "desc": "Alerts for urgent maintenance requests" }
+        ]
+      },
+      "security": {
+        "title": "Security",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmPassword": "Confirm password"
+      },
+      "savedMessage": "Settings saved!",
+      "saveButton": "Save Changes"
+    },
+    "reports": {
+      "common": {
+        "backToReports": "All reports",
+        "exportCSV": "Export CSV",
+        "csv": "CSV",
+        "loading": "Loading...",
+        "noData": "No data available",
+        "from": "From",
+        "to": "To",
+        "period": "Period",
+        "presets": {
+          "7d": "Last 7 days",
+          "30d": "Last 30 days",
+          "mtd": "Month to date",
+          "ytd": "Year to date",
+          "all": "All time"
+        }
+      },
+      "index": {
+        "titleStrong": "Reporting",
+        "subtitle": "31 reports available to analyse every aspect of your portfolio",
+        "openCategory": "Open category",
+        "reportCount": "{count} reports",
+        "categories": {
+          "stay": {
+            "name": "Stays",
+            "desc": "Daily checklist, date range, available nights, empty units."
+          },
+          "summary": {
+            "name": "Summary",
+            "desc": "Aggregated summaries of bookings, payments and taxes."
+          },
+          "detail": {
+            "name": "Detail",
+            "desc": "Bookings, name crosscheck, email list, listing site fees."
+          },
+          "analysis": {
+            "name": "Analysis and statistics",
+            "desc": "Occupancy, gaps, lead time, repeat guests, performance."
+          },
+          "property-management": {
+            "name": "Property management",
+            "desc": "Commissions, owner remittance, statements per property."
+          }
+        },
+        "comingSoonTitle": "Reports coming soon",
+        "comingSoonBody": "Line items, expense detail, insurance, conversion speed, inquiries, quotes: these require schema extensions and will arrive in future releases."
+      },
+      "summary": {
+        "titleStrong": "Summary",
+        "subtitle": "Aggregated summaries by period",
+        "tabs": {
+          "bookings": "Bookings",
+          "payments": "Payments",
+          "taxes": "Taxes"
+        },
+        "bookings": {
+          "tableTitle": "Bookings by period",
+          "stats": {
+            "bookings": "Bookings",
+            "nightsSold": "Nights sold",
+            "totalRevenue": "Total revenue"
+          },
+          "columns": {
+            "period": "Period",
+            "bookings": "Bookings",
+            "nights": "Nights",
+            "guests": "Guests",
+            "avgStay": "Average stay",
+            "avgStayValue": "{n} nights",
+            "adr": "ADR",
+            "revenue": "Revenue"
+          }
+        },
+        "payments": {
+          "tableTitle": "Payments by period",
+          "stats": {
+            "transactions": "Transactions",
+            "successful": "Successful",
+            "gross": "Gross",
+            "net": "Net (after fees)",
+            "netHint": "Estimated 2.9% Stripe fee"
+          },
+          "columns": {
+            "period": "Period",
+            "count": "Transactions",
+            "succeeded": "Succeeded",
+            "failed": "Failed",
+            "refunded": "Refunds",
+            "gross": "Gross",
+            "net": "Net"
+          }
+        },
+        "taxes": {
+          "tableTitle": "Taxes by property",
+          "stats": {
+            "tourist": "Tourist tax",
+            "cedolare": "Cedolare secca (estimate)",
+            "cedolareHint": "21% of revenue",
+            "taxableRevenue": "Taxable revenue"
+          },
+          "columns": {
+            "property": "Property",
+            "bookings": "Bookings",
+            "guestNights": "Guest nights",
+            "revenue": "Revenue",
+            "tourist": "Tourist tax",
+            "cedolare": "Cedolare 21%"
+          }
+        }
+      },
+      "detail": {
+        "titleStrong": "Detail",
+        "subtitle": "Detailed reports, line by line",
+        "tabs": {
+          "bookings": "Bookings",
+          "guests": "Guest directory",
+          "transactions": "Transactions",
+          "taxes": "Taxes",
+          "listingFees": "Listing fees"
+        },
+        "bookings": {
+          "tableTitle": "Bookings detail ({count})",
+          "columns": {
+            "checkIn": "Check-in",
+            "checkOut": "Check-out",
+            "property": "Property",
+            "guest": "Guest",
+            "email": "Email",
+            "guests": "Guests",
+            "nights": "Nights",
+            "source": "Source",
+            "status": "Status",
+            "total": "Total",
+            "commission": "Commission",
+            "ownerNet": "Owner net"
+          }
+        },
+        "guests": {
+          "crosscheckTitle": "Name crosscheck (duplicates)",
+          "crosscheckSubtitle": "Guests with more than one booking, for identity verification",
+          "crosscheckEmpty": "No guests with multiple bookings",
+          "emailListTitle": "Email list",
+          "emailListSubtitle": "{count} unique addresses, exportable for marketing activities",
+          "columns": {
+            "name": "Name",
+            "bookings": "Bookings",
+            "emails": "Emails",
+            "phones": "Phones",
+            "totalSpent": "Total spent",
+            "email": "Email",
+            "country": "Country",
+            "lastBooking": "Last booking",
+            "totalBookings": "Bookings",
+            "total": "Total"
+          }
+        },
+        "transactions": {
+          "paymentsTitle": "Payments detail",
+          "ccTitle": "Credit card processing history",
+          "ccSubtitle": "Stripe transactions with Payment Intent only",
+          "columns": {
+            "date": "Date",
+            "type": "Type",
+            "status": "Status",
+            "paymentId": "Payment ID",
+            "amount": "Amount",
+            "stripeIntent": "Stripe intent"
+          }
+        },
+        "taxes": {
+          "tableTitle": "Taxes detail",
+          "columns": {
+            "checkIn": "Check-in",
+            "property": "Property",
+            "guests": "Guests",
+            "nights": "Nights",
+            "revenue": "Revenue",
+            "tourist": "Tourist tax",
+            "cedolare": "Cedolare 21%"
+          }
+        },
+        "listingFees": {
+          "tableTitle": "Listing site fees",
+          "subtitle": "Commissions paid by channel (Airbnb, Booking, Vrbo, direct)",
+          "columns": {
+            "channel": "Channel",
+            "bookings": "Bookings",
+            "rate": "Commission %",
+            "gross": "Gross",
+            "fees": "Fees",
+            "net": "Net"
+          }
+        }
+      },
+      "analysis": {
+        "titleStrong": "Analysis and statistics",
+        "subtitle": "Aggregated metrics, distributions and performance",
+        "tabs": {
+          "overview": "Overview",
+          "daysInAdvance": "Lead time",
+          "occupancy": "Occupancy",
+          "gaps": "Availability gaps",
+          "repeatGuests": "Repeat guests",
+          "sitePerformance": "Channel performance"
+        },
+        "overview": {
+          "totalBookings": "Total bookings",
+          "totalGuests": "Total guests",
+          "totalNights": "Nights sold",
+          "guestNights": "Guest nights",
+          "nightsPerBooking": "Nights per booking",
+          "guestsPerBooking": "Guests per booking",
+          "occupancyPct": "% occupied",
+          "totalRevenue": "Total revenue",
+          "adr": "Average daily rate (ADR)",
+          "adrHint": "Revenue / nights sold",
+          "revPar": "Revenue per available room (RevPAR)",
+          "revParHint": "Revenue / available nights"
+        },
+        "daysInAdvance": {
+          "tableTitle": "Booking lead time",
+          "subtitle": "How many days ahead of check-in guests book",
+          "columns": {
+            "bucket": "Lead time",
+            "bookings": "Bookings",
+            "distribution": "Distribution",
+            "revenue": "Revenue"
+          }
+        },
+        "occupancy": {
+          "tableTitle": "Occupancy by property",
+          "columns": {
+            "property": "Property",
+            "available": "Avail. nights",
+            "booked": "Booked nights",
+            "occupancyPct": "% occupied",
+            "guests": "Guests",
+            "guestNights": "Guest nights"
+          }
+        },
+        "gaps": {
+          "tableTitle": "Availability gaps",
+          "subtitle": "Empty nights between consecutive bookings: last-minute opportunities",
+          "columns": {
+            "property": "Property",
+            "from": "From",
+            "to": "To",
+            "emptyDays": "Empty days",
+            "lostRevenue": "Lost revenue"
+          }
+        },
+        "repeatGuests": {
+          "tableTitle": "Repeat guests",
+          "subtitle": "Guests with two or more stays: your most valuable customers",
+          "columns": {
+            "guest": "Guest",
+            "email": "Email",
+            "stays": "Stays",
+            "first": "First",
+            "last": "Last",
+            "avgRate": "Average rate",
+            "totalSpent": "Total"
+          }
+        },
+        "sitePerformance": {
+          "tableTitle": "Listing site performance",
+          "subtitle": "Performance by channel",
+          "columns": {
+            "channel": "Channel",
+            "bookings": "Bookings",
+            "nights": "Nights",
+            "guests": "Guests",
+            "avgStay": "Average stay",
+            "avgStayValue": "{n} nights",
+            "adr": "ADR",
+            "valuePerBooking": "Value per booking",
+            "revenue": "Revenue"
+          }
+        }
+      },
+      "propertyManagement": {
+        "titleStrong": "Property management",
+        "subtitle": "Commissions, owner remittance and detailed statements",
+        "tabs": {
+          "commissionSummary": "Commission summary",
+          "commissionDetail": "Commission detail",
+          "ownerSummary": "Owner remittance",
+          "ownerDetail": "Owner detail",
+          "bookingRemittance": "Booking remittance"
+        },
+        "commissionSummary": {
+          "tableTitle": "Commission summary by channel",
+          "stats": {
+            "grossRevenue": "Gross revenue",
+            "otaCommissions": "OTA commissions",
+            "ownCommission": "Hosting Lake Como commission",
+            "ownerNetTotal": "Owner net total"
+          },
+          "columns": {
+            "channel": "Channel",
+            "bookings": "Bookings",
+            "gross": "Gross",
+            "otaCommission": "OTA comm.",
+            "ownCommission": "HLC comm.",
+            "totalCommission": "Total commission",
+            "ownerNet": "Owner net"
+          }
+        },
+        "commissionDetail": {
+          "tableTitle": "Commission detail by booking",
+          "columns": {
+            "checkIn": "Check-in",
+            "property": "Property",
+            "guest": "Guest",
+            "source": "Source",
+            "nights": "Nights",
+            "gross": "Gross",
+            "otaRate": "OTA rate",
+            "otaCommission": "OTA comm.",
+            "ownCommission": "HLC comm.",
+            "ownerNet": "Owner net"
+          }
+        },
+        "ownerSummary": {
+          "stats": {
+            "grossRevenueYear": "Gross revenue {year}",
+            "netPayoutYear": "Net payout {year}"
+          },
+          "tableTitle": "Owner remittance summary {year}",
+          "subtitle": "Monthly breakdown of the owner net payout",
+          "columns": {
+            "period": "Period",
+            "bookings": "Bookings",
+            "gross": "Gross",
+            "ota": "OTA",
+            "ownCommission": "Hosting Lake Como",
+            "expenses": "Expenses",
+            "tax": "Tax",
+            "net": "Net"
+          }
+        },
+        "ownerDetail": {
+          "tableTitle": "Owner remittance detail",
+          "subtitle": "Breakdown by property and period",
+          "columns": {
+            "period": "Period",
+            "property": "Property",
+            "bookings": "Bookings",
+            "nights": "Nights",
+            "gross": "Gross",
+            "ota": "OTA",
+            "ownCommission": "Hosting Lake Como",
+            "expenses": "Expenses",
+            "tax": "Tax",
+            "net": "Net"
+          }
+        },
+        "bookingRemittance": {
+          "tableTitle": "Owner statement: bookings remittance",
+          "subtitle": "Each booking with the owner net payout calculated",
+          "columns": {
+            "checkIn": "Check-in",
+            "property": "Property",
+            "guest": "Guest",
+            "source": "Source",
+            "nights": "Nights",
+            "gross": "Gross",
+            "ota": "OTA",
+            "ownCommission": "HLC",
+            "expenses": "Expenses",
+            "tax": "Tax",
+            "net": "Net"
+          }
+        }
+      },
+      "stay": {
+        "titleStrong": "Stays",
+        "subtitle": "Check-in, check-out, availability and empty units",
+        "tabs": {
+          "daily": "Daily checklist",
+          "range": "Date range",
+          "available": "Available nights",
+          "empty": "Empty units"
+        },
+        "daily": {
+          "tableTitle": "Today's activity",
+          "stats": {
+            "checkinsToday": "Check-ins today",
+            "checkoutsToday": "Check-outs today",
+            "guestsInHouse": "Guests in house"
+          },
+          "columns": {
+            "type": "Type",
+            "property": "Property",
+            "guest": "Guest",
+            "guests": "Guests",
+            "nights": "Nights",
+            "source": "Source"
+          },
+          "badges": {
+            "checkin": "Check-in",
+            "checkout": "Check-out",
+            "inhouse": "In house"
+          }
+        },
+        "range": {
+          "tableTitle": "Bookings in range",
+          "stats": {
+            "bookings": "Bookings",
+            "totalNights": "Total nights",
+            "revenue": "Revenue"
+          },
+          "columns": {
+            "checkIn": "Check-in",
+            "property": "Property",
+            "guest": "Guest",
+            "source": "Source",
+            "nights": "Nights",
+            "status": "Status",
+            "amount": "Amount"
+          }
+        },
+        "available": {
+          "tableTitle": "Available nights",
+          "stats": {
+            "activeProperties": "Active properties",
+            "totalAvailable": "Total available nights",
+            "avgOccupancy": "Average occupancy"
+          },
+          "columns": {
+            "property": "Property",
+            "total": "Total",
+            "booked": "Booked",
+            "available": "Available",
+            "occupancy": "Occupancy"
+          }
+        },
+        "empty": {
+          "tableTitle": "Currently empty units",
+          "emptyMessage": "All units are occupied",
+          "stats": {
+            "emptyUnits": "Empty units",
+            "lostRevenue": "Potential lost revenue per day",
+            "lostRevenueHint": "Estimate at full occupancy at base price"
+          },
+          "columns": {
+            "property": "Property",
+            "type": "Type",
+            "zone": "Zone",
+            "basePrice": "Base price",
+            "daysEmpty": "Days empty"
+          }
+        }
+      }
+    },
+    "analytics": {
+      "titleStrong": "Analytics",
+      "subtitle": "Portfolio performance - Year {year}",
+      "kpis": {
+        "annualRevenue": "Annual revenue",
+        "totalBookings": "Total bookings",
+        "avgOccupancy": "Average occupancy",
+        "avgRate": "Average rate"
+      },
+      "monthlyRevenue": "Monthly revenue",
+      "propertyPerformance": "Property performance",
+      "bookingSources": "Booking sources",
+      "noData": "No data",
+      "loading": "Loading...",
+      "occupancy": "Occupancy",
+      "bookings": "Bookings",
+      "avgPerNight": "Average",
+      "perNightSuffix": "/night"
+    }
   }
 }

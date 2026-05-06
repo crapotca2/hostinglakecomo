@@ -1,6 +1,7 @@
 "use client";
 
 import { Euro, TrendingUp, CalendarDays, Home } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useAnalytics } from "@/hooks/use-analytics";
 
 function formatEuro(amount: number): string {
@@ -12,6 +13,7 @@ function formatEuro(amount: number): string {
 }
 
 export default function AnalyticsPage() {
+  const t = useTranslations("dashboard.analytics");
   const currentYear = new Date().getFullYear();
   const { data, isLoading } = useAnalytics(currentYear);
 
@@ -21,22 +23,22 @@ export default function AnalyticsPage() {
     <div className="p-6 space-y-6 animate-fade-in">
       <div>
         <h1 className="text-2xl font-light">
-          <span className="font-semibold">Analytics</span>
+          <span className="font-semibold">{t("titleStrong")}</span>
         </h1>
         <p className="text-sm text-muted-foreground mt-1">
-          Performance del portfolio — Anno {currentYear}
+          {t("subtitle", { year: currentYear })}
         </p>
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <KpiCard icon={Euro} label="Revenue Annuale" value={data ? formatEuro(data.kpis.totalRevenue) : "—"} loading={isLoading} />
-        <KpiCard icon={CalendarDays} label="Prenotazioni Totali" value={data ? String(data.kpis.totalBookings) : "—"} loading={isLoading} />
-        <KpiCard icon={TrendingUp} label="Occupazione Media" value={data ? `${data.kpis.avgOccupancy}%` : "—"} loading={isLoading} />
-        <KpiCard icon={Home} label="Tariffa Media" value={data ? formatEuro(data.kpis.avgRate) : "—"} loading={isLoading} />
+        <KpiCard icon={Euro} label={t("kpis.annualRevenue")} value={data ? formatEuro(data.kpis.totalRevenue) : "—"} loading={isLoading} />
+        <KpiCard icon={CalendarDays} label={t("kpis.totalBookings")} value={data ? String(data.kpis.totalBookings) : "—"} loading={isLoading} />
+        <KpiCard icon={TrendingUp} label={t("kpis.avgOccupancy")} value={data ? `${data.kpis.avgOccupancy}%` : "—"} loading={isLoading} />
+        <KpiCard icon={Home} label={t("kpis.avgRate")} value={data ? formatEuro(data.kpis.avgRate) : "—"} loading={isLoading} />
       </div>
 
       <div className="bg-white rounded-2xl p-6 border border-border/50">
-        <h2 className="text-sm font-semibold mb-6">Revenue Mensile</h2>
+        <h2 className="text-sm font-semibold mb-6">{t("monthlyRevenue")}</h2>
         {isLoading ? (
           <div className="h-48 bg-muted/20 animate-pulse rounded" />
         ) : (
@@ -60,12 +62,12 @@ export default function AnalyticsPage() {
       <div className="grid lg:grid-cols-2 gap-6">
         <div className="bg-white rounded-2xl border border-border/50">
           <div className="px-6 py-4 border-b border-border/40">
-            <h2 className="text-sm font-semibold">Performance per Proprieta</h2>
+            <h2 className="text-sm font-semibold">{t("propertyPerformance")}</h2>
           </div>
           {isLoading ? (
-            <div className="p-6 text-sm text-muted-foreground">Caricamento...</div>
+            <div className="p-6 text-sm text-muted-foreground">{t("loading")}</div>
           ) : !data || data.properties.length === 0 ? (
-            <div className="p-6 text-sm text-muted-foreground">Nessun dato</div>
+            <div className="p-6 text-sm text-muted-foreground">{t("noData")}</div>
           ) : (
             <div className="divide-y divide-border/30">
               {data.properties.map((p) => (
@@ -75,9 +77,9 @@ export default function AnalyticsPage() {
                     <span className="text-sm font-bold">{formatEuro(p.revenue)}</span>
                   </div>
                   <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                    <span>Occupazione: {p.occupancy}%</span>
-                    <span>Prenotazioni: {p.bookings}</span>
-                    <span>Media: {formatEuro(p.avgRate)}/notte</span>
+                    <span>{t("occupancy")}: {p.occupancy}%</span>
+                    <span>{t("bookings")}: {p.bookings}</span>
+                    <span>{t("avgPerNight")}: {formatEuro(p.avgRate)}{t("perNightSuffix")}</span>
                   </div>
                   <div className="mt-2 h-1.5 bg-muted rounded-full overflow-hidden">
                     <div
@@ -93,12 +95,12 @@ export default function AnalyticsPage() {
 
         <div className="bg-white rounded-2xl border border-border/50">
           <div className="px-6 py-4 border-b border-border/40">
-            <h2 className="text-sm font-semibold">Fonti di Prenotazione</h2>
+            <h2 className="text-sm font-semibold">{t("bookingSources")}</h2>
           </div>
           {isLoading ? (
-            <div className="p-6 text-sm text-muted-foreground">Caricamento...</div>
+            <div className="p-6 text-sm text-muted-foreground">{t("loading")}</div>
           ) : !data || data.sources.length === 0 ? (
-            <div className="p-6 text-sm text-muted-foreground">Nessun dato</div>
+            <div className="p-6 text-sm text-muted-foreground">{t("noData")}</div>
           ) : (
             <div className="p-6 space-y-4">
               {data.sources.map((s) => (

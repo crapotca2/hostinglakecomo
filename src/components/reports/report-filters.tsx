@@ -1,6 +1,6 @@
 "use client";
 
-import { Calendar } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface ReportFiltersProps {
   from: string;
@@ -12,13 +12,7 @@ interface ReportFiltersProps {
   extra?: React.ReactNode;
 }
 
-const PRESETS: { id: string; label: string }[] = [
-  { id: "7d", label: "Ultimi 7 giorni" },
-  { id: "30d", label: "Ultimi 30 giorni" },
-  { id: "mtd", label: "Mese corrente" },
-  { id: "ytd", label: "Anno corrente" },
-  { id: "all", label: "Tutto" },
-];
+const PRESET_IDS = ["7d", "30d", "mtd", "ytd", "all"] as const;
 
 export function ReportFilters({
   from,
@@ -29,25 +23,26 @@ export function ReportFilters({
   onPresetChange,
   extra,
 }: ReportFiltersProps) {
+  const t = useTranslations("dashboard.reports.common");
   return (
     <div className="bg-white rounded-2xl p-4 border border-border/50 flex flex-wrap items-end gap-3">
       {onPresetChange && (
         <div>
           <label className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider block mb-1.5">
-            Periodo
+            {t("period")}
           </label>
           <div className="flex rounded-lg border border-border overflow-hidden">
-            {PRESETS.map((p) => (
+            {PRESET_IDS.map((id) => (
               <button
-                key={p.id}
-                onClick={() => onPresetChange(p.id)}
+                key={id}
+                onClick={() => onPresetChange(id)}
                 className={`px-3 py-1.5 text-xs font-medium transition-colors ${
-                  preset === p.id
+                  preset === id
                     ? "bg-primary text-white"
                     : "bg-white text-muted-foreground hover:bg-muted/50"
                 }`}
               >
-                {p.label}
+                {t(`presets.${id}`)}
               </button>
             ))}
           </div>
@@ -57,7 +52,7 @@ export function ReportFilters({
       <div className="flex items-end gap-2">
         <div>
           <label className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider block mb-1.5">
-            Dal
+            {t("from")}
           </label>
           <div className="relative">
             <input
@@ -70,7 +65,7 @@ export function ReportFilters({
         </div>
         <div>
           <label className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider block mb-1.5">
-            Al
+            {t("to")}
           </label>
           <input
             type="date"

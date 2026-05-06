@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Link } from "@/i18n/routing";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 import { ArrowLeft, BarChart3, Clock, TrendingUp, Layers, Repeat, Globe, Euro, CalendarDays, Users, Percent } from "lucide-react";
 import { ReportTable, type ReportColumn } from "@/components/reports/report-table";
 import { ReportFilters, presetToDateRange } from "@/components/reports/report-filters";
@@ -16,6 +17,8 @@ function formatEuro(amount: number): string {
 }
 
 export default function AnalysisReportsPage() {
+  const t = useTranslations("dashboard.reports.analysis");
+  const tCommon = useTranslations("dashboard.reports.common");
   const [tab, setTab] = useState<Tab>("overview");
   const [preset, setPreset] = useState("ytd");
   const [{ from, to }, setRange] = useState(() => presetToDateRange("ytd"));
@@ -28,22 +31,22 @@ export default function AnalysisReportsPage() {
   return (
     <div className="p-6 space-y-6 animate-fade-in">
       <Link href="/dashboard/reports" className="text-xs text-muted-foreground hover:text-foreground inline-flex items-center gap-1">
-        <ArrowLeft className="h-3 w-3" /> Tutti i report
+        <ArrowLeft className="h-3 w-3" /> {tCommon("backToReports")}
       </Link>
       <div>
         <h1 className="text-2xl font-light">
-          <span className="font-semibold">Analysis & Statistics</span>
+          <span className="font-semibold">{t("titleStrong")}</span>
         </h1>
-        <p className="text-sm text-muted-foreground mt-1">Metriche aggregate, distribuzioni e performance</p>
+        <p className="text-sm text-muted-foreground mt-1">{t("subtitle")}</p>
       </div>
 
       <div className="flex items-center gap-1 bg-white rounded-xl p-1 border border-border/50 w-fit flex-wrap">
-        <TabBtn active={tab === "overview"} onClick={() => setTab("overview")} icon={BarChart3} label="Overview" />
-        <TabBtn active={tab === "days-in-advance"} onClick={() => setTab("days-in-advance")} icon={Clock} label="Days in Advance" />
-        <TabBtn active={tab === "occupancy"} onClick={() => setTab("occupancy")} icon={TrendingUp} label="Occupancy" />
-        <TabBtn active={tab === "gaps"} onClick={() => setTab("gaps")} icon={Layers} label="Availability Gaps" />
-        <TabBtn active={tab === "repeat-guests"} onClick={() => setTab("repeat-guests")} icon={Repeat} label="Repeat Guests" />
-        <TabBtn active={tab === "site-performance"} onClick={() => setTab("site-performance")} icon={Globe} label="Site Performance" />
+        <TabBtn active={tab === "overview"} onClick={() => setTab("overview")} icon={BarChart3} label={t("tabs.overview")} />
+        <TabBtn active={tab === "days-in-advance"} onClick={() => setTab("days-in-advance")} icon={Clock} label={t("tabs.daysInAdvance")} />
+        <TabBtn active={tab === "occupancy"} onClick={() => setTab("occupancy")} icon={TrendingUp} label={t("tabs.occupancy")} />
+        <TabBtn active={tab === "gaps"} onClick={() => setTab("gaps")} icon={Layers} label={t("tabs.gaps")} />
+        <TabBtn active={tab === "repeat-guests"} onClick={() => setTab("repeat-guests")} icon={Repeat} label={t("tabs.repeatGuests")} />
+        <TabBtn active={tab === "site-performance"} onClick={() => setTab("site-performance")} icon={Globe} label={t("tabs.sitePerformance")} />
       </div>
 
       <ReportFilters
@@ -90,6 +93,7 @@ function TabBtn({
 }
 
 function OverviewView({ from, to }: { from: string; to: string }) {
+  const t = useTranslations("dashboard.reports.analysis.overview");
   const { data, isLoading } = useQuery({
     queryKey: ["analysis", "overview", from, to],
     queryFn: async () => (await fetch(`/api/reports/analysis?type=overview&from=${from}&to=${to}`)).json(),
@@ -98,36 +102,37 @@ function OverviewView({ from, to }: { from: string; to: string }) {
 
   return (
     <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
-      <StatCard icon={CalendarDays} label="Prenotazioni totali" value={s?.totalBookings ?? "—"} loading={isLoading} />
-      <StatCard icon={Users} label="Ospiti totali" value={s?.totalGuests ?? "—"} loading={isLoading} />
-      <StatCard icon={CalendarDays} label="Notti vendute" value={s?.totalNights ?? "—"} loading={isLoading} />
-      <StatCard icon={Users} label="Guest-nights" value={s?.totalGuestNights ?? "—"} loading={isLoading} />
-      <StatCard icon={CalendarDays} label="Notti/booking" value={s ? `${s.avgNightsPerBooking}` : "—"} loading={isLoading} />
-      <StatCard icon={Users} label="Ospiti/booking" value={s ? `${s.avgGuestsPerBooking}` : "—"} loading={isLoading} />
-      <StatCard icon={Percent} label="% Occupato" value={s ? `${s.occupancyPct}%` : "—"} loading={isLoading} />
-      <StatCard icon={Euro} label="Revenue totale" value={s ? formatEuro(s.totalRevenue) : "—"} loading={isLoading} />
-      <StatCard icon={Euro} label="ADR (Average Daily Rate)" value={s ? formatEuro(s.adr) : "—"} loading={isLoading} hint="Revenue / notti vendute" />
-      <StatCard icon={Euro} label="RevPAR" value={s ? formatEuro(s.revPar) : "—"} loading={isLoading} hint="Revenue / notti disponibili" />
+      <StatCard icon={CalendarDays} label={t("totalBookings")} value={s?.totalBookings ?? "—"} loading={isLoading} />
+      <StatCard icon={Users} label={t("totalGuests")} value={s?.totalGuests ?? "—"} loading={isLoading} />
+      <StatCard icon={CalendarDays} label={t("totalNights")} value={s?.totalNights ?? "—"} loading={isLoading} />
+      <StatCard icon={Users} label={t("guestNights")} value={s?.totalGuestNights ?? "—"} loading={isLoading} />
+      <StatCard icon={CalendarDays} label={t("nightsPerBooking")} value={s ? `${s.avgNightsPerBooking}` : "—"} loading={isLoading} />
+      <StatCard icon={Users} label={t("guestsPerBooking")} value={s ? `${s.avgGuestsPerBooking}` : "—"} loading={isLoading} />
+      <StatCard icon={Percent} label={t("occupancyPct")} value={s ? `${s.occupancyPct}%` : "—"} loading={isLoading} />
+      <StatCard icon={Euro} label={t("totalRevenue")} value={s ? formatEuro(s.totalRevenue) : "—"} loading={isLoading} />
+      <StatCard icon={Euro} label={t("adr")} value={s ? formatEuro(s.adr) : "—"} loading={isLoading} hint={t("adrHint")} />
+      <StatCard icon={Euro} label={t("revPar")} value={s ? formatEuro(s.revPar) : "—"} loading={isLoading} hint={t("revParHint")} />
     </div>
   );
 }
 
 function DaysInAdvanceView({ from, to }: { from: string; to: string }) {
+  const t = useTranslations("dashboard.reports.analysis.daysInAdvance");
   const { data, isLoading } = useQuery({
     queryKey: ["analysis", "dia", from, to],
     queryFn: async () => (await fetch(`/api/reports/analysis?type=days-in-advance&from=${from}&to=${to}`)).json(),
   });
   const rows = data?.rows || [];
   const columns: ReportColumn<(typeof rows)[0]>[] = [
-    { key: "bucket", label: "Anticipo" },
-    { key: "bookings", label: "Prenotazioni", align: "center", numeric: true },
-    { key: "percentage", label: "Distribuzione", align: "center", numeric: true, render: (r) => `${r.percentage}%` },
-    { key: "revenue", label: "Revenue", align: "right", numeric: true, render: (r) => formatEuro(r.revenue) },
+    { key: "bucket", label: t("columns.bucket") },
+    { key: "bookings", label: t("columns.bookings"), align: "center", numeric: true },
+    { key: "percentage", label: t("columns.distribution"), align: "center", numeric: true, render: (r) => `${r.percentage}%` },
+    { key: "revenue", label: t("columns.revenue"), align: "right", numeric: true, render: (r) => formatEuro(r.revenue) },
   ];
   return (
     <ReportTable
-      title="Days in Advance"
-      subtitle="Quanti giorni prima del check-in prenotano gli ospiti"
+      title={t("tableTitle")}
+      subtitle={t("subtitle")}
       columns={columns}
       rows={rows}
       loading={isLoading}
@@ -137,22 +142,23 @@ function DaysInAdvanceView({ from, to }: { from: string; to: string }) {
 }
 
 function OccupancyView({ from, to }: { from: string; to: string }) {
+  const t = useTranslations("dashboard.reports.analysis.occupancy");
   const { data, isLoading } = useQuery({
     queryKey: ["analysis", "occupancy", from, to],
     queryFn: async () => (await fetch(`/api/reports/analysis?type=occupancy&from=${from}&to=${to}`)).json(),
   });
   const rows = data?.rows || [];
   const columns: ReportColumn<(typeof rows)[0]>[] = [
-    { key: "propertyName", label: "Proprieta'" },
-    { key: "nightsAvailable", label: "Notti disp.", align: "center", numeric: true },
-    { key: "nightsBooked", label: "Notti prenot.", align: "center", numeric: true },
-    { key: "occupancyPct", label: "% Occupato", align: "center", numeric: true, render: (r) => `${r.occupancyPct}%` },
-    { key: "guestsHosted", label: "Ospiti", align: "center", numeric: true },
-    { key: "guestNights", label: "Guest-nights", align: "center", numeric: true },
+    { key: "propertyName", label: t("columns.property") },
+    { key: "nightsAvailable", label: t("columns.available"), align: "center", numeric: true },
+    { key: "nightsBooked", label: t("columns.booked"), align: "center", numeric: true },
+    { key: "occupancyPct", label: t("columns.occupancyPct"), align: "center", numeric: true, render: (r) => `${r.occupancyPct}%` },
+    { key: "guestsHosted", label: t("columns.guests"), align: "center", numeric: true },
+    { key: "guestNights", label: t("columns.guestNights"), align: "center", numeric: true },
   ];
   return (
     <ReportTable
-      title="Occupancy per proprieta'"
+      title={t("tableTitle")}
       columns={columns}
       rows={rows}
       loading={isLoading}
@@ -162,22 +168,23 @@ function OccupancyView({ from, to }: { from: string; to: string }) {
 }
 
 function GapsView({ from, to }: { from: string; to: string }) {
+  const t = useTranslations("dashboard.reports.analysis.gaps");
   const { data, isLoading } = useQuery({
     queryKey: ["analysis", "gaps", from, to],
     queryFn: async () => (await fetch(`/api/reports/analysis?type=gaps&from=${from}&to=${to}`)).json(),
   });
   const rows = data?.rows || [];
   const columns: ReportColumn<(typeof rows)[0]>[] = [
-    { key: "propertyName", label: "Proprieta'" },
-    { key: "gapStart", label: "Dal" },
-    { key: "gapEnd", label: "Al" },
-    { key: "gapDays", label: "Giorni vuoti", align: "center", numeric: true },
-    { key: "potentialRevenue", label: "Revenue perso", align: "right", numeric: true, render: (r) => formatEuro(r.potentialRevenue) },
+    { key: "propertyName", label: t("columns.property") },
+    { key: "gapStart", label: t("columns.from") },
+    { key: "gapEnd", label: t("columns.to") },
+    { key: "gapDays", label: t("columns.emptyDays"), align: "center", numeric: true },
+    { key: "potentialRevenue", label: t("columns.lostRevenue"), align: "right", numeric: true, render: (r) => formatEuro(r.potentialRevenue) },
   ];
   return (
     <ReportTable
-      title="Availability Gaps"
-      subtitle="Notti vuote tra prenotazioni consecutive — opportunita' di last minute"
+      title={t("tableTitle")}
+      subtitle={t("subtitle")}
       columns={columns}
       rows={rows}
       loading={isLoading}
@@ -187,24 +194,25 @@ function GapsView({ from, to }: { from: string; to: string }) {
 }
 
 function RepeatGuestsView() {
+  const t = useTranslations("dashboard.reports.analysis.repeatGuests");
   const { data, isLoading } = useQuery({
     queryKey: ["analysis", "repeat"],
     queryFn: async () => (await fetch(`/api/reports/analysis?type=repeat-guests`)).json(),
   });
   const rows = data?.rows || [];
   const columns: ReportColumn<(typeof rows)[0]>[] = [
-    { key: "guestName", label: "Ospite" },
-    { key: "email", label: "Email" },
-    { key: "bookings", label: "Soggiorni", align: "center", numeric: true },
-    { key: "firstStay", label: "Primo" },
-    { key: "lastStay", label: "Ultimo" },
-    { key: "avgRate", label: "Tariffa media", align: "right", numeric: true, render: (r) => formatEuro(r.avgRate) },
-    { key: "totalSpent", label: "Totale", align: "right", numeric: true, render: (r) => formatEuro(r.totalSpent) },
+    { key: "guestName", label: t("columns.guest") },
+    { key: "email", label: t("columns.email") },
+    { key: "bookings", label: t("columns.stays"), align: "center", numeric: true },
+    { key: "firstStay", label: t("columns.first") },
+    { key: "lastStay", label: t("columns.last") },
+    { key: "avgRate", label: t("columns.avgRate"), align: "right", numeric: true, render: (r) => formatEuro(r.avgRate) },
+    { key: "totalSpent", label: t("columns.totalSpent"), align: "right", numeric: true, render: (r) => formatEuro(r.totalSpent) },
   ];
   return (
     <ReportTable
-      title="Repeat Guests"
-      subtitle="Ospiti con 2 o piu' soggiorni — sono i tuoi clienti piu' preziosi"
+      title={t("tableTitle")}
+      subtitle={t("subtitle")}
       columns={columns}
       rows={rows}
       loading={isLoading}
@@ -214,25 +222,26 @@ function RepeatGuestsView() {
 }
 
 function SitePerformanceView({ from, to }: { from: string; to: string }) {
+  const t = useTranslations("dashboard.reports.analysis.sitePerformance");
   const { data, isLoading } = useQuery({
     queryKey: ["analysis", "site-perf", from, to],
     queryFn: async () => (await fetch(`/api/reports/analysis?type=site-performance&from=${from}&to=${to}`)).json(),
   });
   const rows = data?.rows || [];
   const columns: ReportColumn<(typeof rows)[0]>[] = [
-    { key: "source", label: "Canale" },
-    { key: "bookings", label: "Prenotazioni", align: "center", numeric: true },
-    { key: "nights", label: "Notti", align: "center", numeric: true },
-    { key: "guests", label: "Ospiti", align: "center", numeric: true },
-    { key: "avgStay", label: "Soggiorno medio", align: "center", numeric: true, render: (r) => `${r.avgStay} notti` },
-    { key: "avgRate", label: "ADR", align: "right", numeric: true, render: (r) => formatEuro(r.avgRate) },
-    { key: "conversionValue", label: "Valore/booking", align: "right", numeric: true, render: (r) => formatEuro(r.conversionValue) },
-    { key: "revenue", label: "Revenue", align: "right", numeric: true, render: (r) => formatEuro(r.revenue) },
+    { key: "source", label: t("columns.channel") },
+    { key: "bookings", label: t("columns.bookings"), align: "center", numeric: true },
+    { key: "nights", label: t("columns.nights"), align: "center", numeric: true },
+    { key: "guests", label: t("columns.guests"), align: "center", numeric: true },
+    { key: "avgStay", label: t("columns.avgStay"), align: "center", numeric: true, render: (r) => t("columns.avgStayValue", { n: r.avgStay }) },
+    { key: "avgRate", label: t("columns.adr"), align: "right", numeric: true, render: (r) => formatEuro(r.avgRate) },
+    { key: "conversionValue", label: t("columns.valuePerBooking"), align: "right", numeric: true, render: (r) => formatEuro(r.conversionValue) },
+    { key: "revenue", label: t("columns.revenue"), align: "right", numeric: true, render: (r) => formatEuro(r.revenue) },
   ];
   return (
     <ReportTable
-      title="Listing Site Performance"
-      subtitle="Performance per canale"
+      title={t("tableTitle")}
+      subtitle={t("subtitle")}
       columns={columns}
       rows={rows}
       loading={isLoading}

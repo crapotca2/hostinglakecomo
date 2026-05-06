@@ -9,6 +9,7 @@ import {
   Euro,
   ArrowRight,
 } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 import { useDashboardStats } from "@/hooks/use-dashboard-stats";
 
 const STATUS_STYLES: Record<string, string> = {
@@ -18,38 +19,23 @@ const STATUS_STYLES: Record<string, string> = {
   cancelled: "bg-red-50 text-red-600",
 };
 
-const STATUS_LABELS: Record<string, string> = {
-  confirmed: "Confermata",
-  checked_in: "In corso",
-  pending: "In attesa",
-  cancelled: "Cancellata",
-};
-
-const SOURCE_LABELS: Record<string, string> = {
-  airbnb: "Airbnb",
-  booking: "Booking.com",
-  vrbo: "Vrbo",
-  direct: "Direct",
-  other: "Altro",
-};
-
 const QUICK_ACTIONS = [
-  { label: "Proprieta", href: "/dashboard/properties", icon: Home },
-  { label: "Prenotazioni", href: "/dashboard/bookings", icon: CalendarDays },
-  { label: "Calendario", href: "/dashboard/calendar", icon: CalendarDays },
-  { label: "Analytics", href: "/dashboard/analytics", icon: TrendingUp },
-];
+  { key: "properties", href: "/dashboard/properties", icon: Home },
+  { key: "bookings", href: "/dashboard/bookings", icon: CalendarDays },
+  { key: "calendar", href: "/dashboard/calendar", icon: CalendarDays },
+  { key: "analytics", href: "/dashboard/analytics", icon: TrendingUp },
+] as const;
 
-function formatEuro(amount: number): string {
-  return new Intl.NumberFormat("it-IT", {
+function formatEuro(amount: number, locale: string): string {
+  return new Intl.NumberFormat(locale === "en" ? "en-GB" : "it-IT", {
     style: "currency",
     currency: "EUR",
     maximumFractionDigits: 0,
   }).format(amount);
 }
 
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("it-IT", {
+function formatDate(iso: string, locale: string): string {
+  return new Date(iso).toLocaleDateString(locale === "en" ? "en-GB" : "it-IT", {
     day: "numeric",
     month: "short",
   });
@@ -57,6 +43,8 @@ function formatDate(iso: string): string {
 
 export default function DashboardPage() {
   const { data, isLoading } = useDashboardStats();
+  const t = useTranslations("dashboard.overview");
+  const locale = useLocale();
 
   return (
     <div className="p-6 space-y-6 animate-fade-in">
@@ -64,14 +52,14 @@ export default function DashboardPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-light">
-            Buongiorno, <span className="font-semibold">Andrei</span>
+            {t("greeting")} <span className="font-semibold">Andrei</span>
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
-            Ecco il riepilogo delle tue proprieta sul Lago di Como.
+            {t("subtitle")}
           </p>
         </div>
         <div className="text-xs text-muted-foreground hidden sm:block">
-          {new Date().toLocaleDateString("it-IT", {
+          {new Date().toLocaleDateString(locale === "en" ? "en-GB" : "it-IT", {
             weekday: "long",
             day: "numeric",
             month: "long",
@@ -84,25 +72,25 @@ export default function DashboardPage() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
           icon={Euro}
-          label="Revenue Mensile"
-          value={data ? formatEuro(data.monthRevenue) : "—"}
+          label={t("stats.monthRevenue")}
+          value={data ? formatEuro(data.monthRevenue, locale) : "—"}
           loading={isLoading}
         />
         <StatCard
           icon={CalendarDays}
-          label="Prenotazioni Attive"
+          label={t("stats.activeBookings")}
           value={data ? String(data.activeBookings) : "—"}
           loading={isLoading}
         />
         <StatCard
           icon={TrendingUp}
-          label="Tasso Occupazione"
+          label={t("stats.occupancyRate")}
           value={data ? `${data.occupancyRate}%` : "—"}
           loading={isLoading}
         />
         <StatCard
           icon={Home}
-          label="Proprieta Gestite"
+          label={t("stats.propertyCount")}
           value={data ? String(data.propertyCount) : "—"}
           loading={isLoading}
         />
@@ -112,12 +100,12 @@ export default function DashboardPage() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {QUICK_ACTIONS.map((action) => (
           <Link
-            key={action.label}
+            key={action.key}
             href={action.href}
             className="flex items-center gap-3 px-4 py-3 rounded-xl border border-border/50 bg-white hover:bg-muted/30 transition-colors group"
           >
             <action.icon className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium flex-1">{action.label}</span>
+            <span className="text-sm font-medium flex-1">{t(`quickActions.${action.key}`)}</span>
             <ArrowRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-foreground transition-colors" />
           </Link>
         ))}
@@ -126,33 +114,33 @@ export default function DashboardPage() {
       {/* Recent Bookings */}
       <div className="bg-white rounded-2xl border border-border/50">
         <div className="px-6 py-4 border-b border-border/40 flex items-center justify-between">
-          <h2 className="text-sm font-semibold">Prenotazioni Recenti</h2>
+          <h2 className="text-sm font-semibold">{t("recent.title")}</h2>
           <Link
             href="/dashboard/bookings"
             className="text-xs text-primary font-medium hover:underline"
           >
-            Vedi tutte
+            {t("recent.viewAll")}
           </Link>
         </div>
         {isLoading ? (
           <div className="p-12 text-center text-sm text-muted-foreground">
-            Caricamento...
+            {t("recent.loading")}
           </div>
         ) : !data || data.recentBookings.length === 0 ? (
           <div className="p-12 text-center text-sm text-muted-foreground">
-            Nessuna prenotazione recente
+            {t("recent.empty")}
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="border-b border-border/30">
-                  <th className="text-left text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-6 py-3">Ospite</th>
-                  <th className="text-left text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-4 py-3">Date</th>
-                  <th className="text-center text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-4 py-3">Notti</th>
-                  <th className="text-left text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-4 py-3">Fonte</th>
-                  <th className="text-right text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-4 py-3">Importo</th>
-                  <th className="text-center text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-6 py-3">Stato</th>
+                  <th className="text-left text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-6 py-3">{t("recent.headers.guest")}</th>
+                  <th className="text-left text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-4 py-3">{t("recent.headers.dates")}</th>
+                  <th className="text-center text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-4 py-3">{t("recent.headers.nights")}</th>
+                  <th className="text-left text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-4 py-3">{t("recent.headers.source")}</th>
+                  <th className="text-right text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-4 py-3">{t("recent.headers.amount")}</th>
+                  <th className="text-center text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-6 py-3">{t("recent.headers.status")}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border/30">
@@ -167,18 +155,18 @@ export default function DashboardPage() {
                       </div>
                     </td>
                     <td className="px-4 py-3.5 text-sm text-muted-foreground whitespace-nowrap">
-                      {formatDate(b.checkIn)} → {formatDate(b.checkOut)}
+                      {formatDate(b.checkIn, locale)} → {formatDate(b.checkOut, locale)}
                     </td>
                     <td className="px-4 py-3.5 text-sm text-center">{b.nights}</td>
                     <td className="px-4 py-3.5 text-sm text-muted-foreground">
-                      {SOURCE_LABELS[b.source] || b.source}
+                      {t(`source.${b.source}` as `source.${"airbnb" | "booking" | "vrbo" | "direct" | "other"}`)}
                     </td>
                     <td className="px-4 py-3.5 text-sm font-semibold text-right tabular-nums">
-                      {formatEuro(b.pricing.totalAmount)}
+                      {formatEuro(b.pricing.totalAmount, locale)}
                     </td>
                     <td className="px-6 py-3.5 text-center">
                       <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${STATUS_STYLES[b.status]}`}>
-                        {STATUS_LABELS[b.status]}
+                        {t(`status.${b.status}` as `status.${"confirmed" | "checked_in" | "pending" | "cancelled"}`)}
                       </span>
                     </td>
                   </tr>

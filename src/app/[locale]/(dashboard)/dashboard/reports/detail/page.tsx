@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Link } from "@/i18n/routing";
 import { useQuery } from "@tanstack/react-query";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowLeft, CalendarDays, Users, CreditCard, Receipt, Percent } from "lucide-react";
 import { ReportTable, type ReportColumn } from "@/components/reports/report-table";
 import { ReportFilters, presetToDateRange } from "@/components/reports/report-filters";
@@ -14,7 +15,13 @@ function formatEuro(amount: number): string {
   return new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(amount);
 }
 
+function localeTag(locale: string): string {
+  return locale === "en" ? "en-GB" : "it-IT";
+}
+
 export default function DetailReportsPage() {
+  const t = useTranslations("dashboard.reports.detail");
+  const tCommon = useTranslations("dashboard.reports.common");
   const [tab, setTab] = useState<Tab>("bookings");
   const [preset, setPreset] = useState("ytd");
   const [{ from, to }, setRange] = useState(() => presetToDateRange("ytd"));
@@ -27,21 +34,21 @@ export default function DetailReportsPage() {
   return (
     <div className="p-6 space-y-6 animate-fade-in">
       <Link href="/dashboard/reports" className="text-xs text-muted-foreground hover:text-foreground inline-flex items-center gap-1">
-        <ArrowLeft className="h-3 w-3" /> Tutti i report
+        <ArrowLeft className="h-3 w-3" /> {tCommon("backToReports")}
       </Link>
       <div>
         <h1 className="text-2xl font-light">
-          <span className="font-semibold">Detail Reports</span>
+          <span className="font-semibold">{t("titleStrong")}</span>
         </h1>
-        <p className="text-sm text-muted-foreground mt-1">Report dettagliati riga per riga</p>
+        <p className="text-sm text-muted-foreground mt-1">{t("subtitle")}</p>
       </div>
 
       <div className="flex items-center gap-1 bg-white rounded-xl p-1 border border-border/50 w-fit flex-wrap">
-        <TabBtn active={tab === "bookings"} onClick={() => setTab("bookings")} icon={CalendarDays} label="Bookings" />
-        <TabBtn active={tab === "guests"} onClick={() => setTab("guests")} icon={Users} label="Guest Directory" />
-        <TabBtn active={tab === "transactions"} onClick={() => setTab("transactions")} icon={CreditCard} label="Transactions" />
-        <TabBtn active={tab === "taxes"} onClick={() => setTab("taxes")} icon={Receipt} label="Taxes" />
-        <TabBtn active={tab === "listing-fees"} onClick={() => setTab("listing-fees")} icon={Percent} label="Listing Fees" />
+        <TabBtn active={tab === "bookings"} onClick={() => setTab("bookings")} icon={CalendarDays} label={t("tabs.bookings")} />
+        <TabBtn active={tab === "guests"} onClick={() => setTab("guests")} icon={Users} label={t("tabs.guests")} />
+        <TabBtn active={tab === "transactions"} onClick={() => setTab("transactions")} icon={CreditCard} label={t("tabs.transactions")} />
+        <TabBtn active={tab === "taxes"} onClick={() => setTab("taxes")} icon={Receipt} label={t("tabs.taxes")} />
+        <TabBtn active={tab === "listing-fees"} onClick={() => setTab("listing-fees")} icon={Percent} label={t("tabs.listingFees")} />
       </div>
 
       <ReportFilters
@@ -98,25 +105,26 @@ function useReport(type: string, from: string, to: string) {
 }
 
 function BookingsDetailView({ from, to }: { from: string; to: string }) {
+  const t = useTranslations("dashboard.reports.detail.bookings");
   const { data, isLoading } = useReport("bookings", from, to);
   const rows = data?.rows || [];
   const columns: ReportColumn<(typeof rows)[0]>[] = [
-    { key: "checkIn", label: "Check-in" },
-    { key: "checkOut", label: "Check-out" },
-    { key: "propertyName", label: "Proprieta'" },
-    { key: "guestName", label: "Ospite" },
-    { key: "guestEmail", label: "Email" },
-    { key: "guests", label: "Ospiti", align: "center", numeric: true },
-    { key: "nights", label: "Notti", align: "center", numeric: true },
-    { key: "source", label: "Fonte" },
-    { key: "status", label: "Stato" },
-    { key: "totalAmount", label: "Totale", align: "right", numeric: true, render: (r) => formatEuro(r.totalAmount) },
-    { key: "commission", label: "Commissione", align: "right", numeric: true, render: (r) => formatEuro(r.commission) },
-    { key: "ownerPayout", label: "Netto owner", align: "right", numeric: true, render: (r) => formatEuro(r.ownerPayout) },
+    { key: "checkIn", label: t("columns.checkIn") },
+    { key: "checkOut", label: t("columns.checkOut") },
+    { key: "propertyName", label: t("columns.property") },
+    { key: "guestName", label: t("columns.guest") },
+    { key: "guestEmail", label: t("columns.email") },
+    { key: "guests", label: t("columns.guests"), align: "center", numeric: true },
+    { key: "nights", label: t("columns.nights"), align: "center", numeric: true },
+    { key: "source", label: t("columns.source") },
+    { key: "status", label: t("columns.status") },
+    { key: "totalAmount", label: t("columns.total"), align: "right", numeric: true, render: (r) => formatEuro(r.totalAmount) },
+    { key: "commission", label: t("columns.commission"), align: "right", numeric: true, render: (r) => formatEuro(r.commission) },
+    { key: "ownerPayout", label: t("columns.ownerNet"), align: "right", numeric: true, render: (r) => formatEuro(r.ownerPayout) },
   ];
   return (
     <ReportTable
-      title={`Bookings detail (${rows.length})`}
+      title={t("tableTitle", { count: rows.length })}
       columns={columns}
       rows={rows}
       loading={isLoading}
@@ -126,6 +134,7 @@ function BookingsDetailView({ from, to }: { from: string; to: string }) {
 }
 
 function GuestsView() {
+  const t = useTranslations("dashboard.reports.detail.guests");
   const crosscheck = useQuery({
     queryKey: ["detail", "ncc"],
     queryFn: async () => (await fetch(`/api/reports/detail?type=name-crosscheck`)).json(),
@@ -138,26 +147,26 @@ function GuestsView() {
   const emailRows = emails.data?.rows || [];
 
   const nccCols: ReportColumn<(typeof nccRows)[0]>[] = [
-    { key: "guestName", label: "Nome" },
-    { key: "bookingCount", label: "Prenotazioni", align: "center", numeric: true },
-    { key: "emails", label: "Email", render: (r) => r.emails.join(", ") },
-    { key: "phones", label: "Telefoni", render: (r) => r.phones.join(", ") },
-    { key: "totalSpent", label: "Totale speso", align: "right", numeric: true, render: (r) => formatEuro(r.totalSpent) },
+    { key: "guestName", label: t("columns.name") },
+    { key: "bookingCount", label: t("columns.bookings"), align: "center", numeric: true },
+    { key: "emails", label: t("columns.emails"), render: (r) => r.emails.join(", ") },
+    { key: "phones", label: t("columns.phones"), render: (r) => r.phones.join(", ") },
+    { key: "totalSpent", label: t("columns.totalSpent"), align: "right", numeric: true, render: (r) => formatEuro(r.totalSpent) },
   ];
   const emailCols: ReportColumn<(typeof emailRows)[0]>[] = [
-    { key: "email", label: "Email" },
-    { key: "guestName", label: "Nome" },
-    { key: "country", label: "Paese", align: "center" },
-    { key: "lastBooking", label: "Ultima prenotaz." },
-    { key: "totalBookings", label: "Prenot.", align: "center", numeric: true },
-    { key: "totalSpent", label: "Totale", align: "right", numeric: true, render: (r) => formatEuro(r.totalSpent) },
+    { key: "email", label: t("columns.email") },
+    { key: "guestName", label: t("columns.name") },
+    { key: "country", label: t("columns.country"), align: "center" },
+    { key: "lastBooking", label: t("columns.lastBooking") },
+    { key: "totalBookings", label: t("columns.totalBookings"), align: "center", numeric: true },
+    { key: "totalSpent", label: t("columns.total"), align: "right", numeric: true, render: (r) => formatEuro(r.totalSpent) },
   ];
 
   return (
     <div className="space-y-4">
       <ReportTable
-        title="Name Crosscheck (duplicati)"
-        subtitle="Ospiti con piu' di una prenotazione per verifica identita'"
+        title={t("crosscheckTitle")}
+        subtitle={t("crosscheckSubtitle")}
         columns={nccCols}
         rows={nccRows}
         loading={crosscheck.isLoading}
@@ -172,11 +181,11 @@ function GuestsView() {
             }))
           )
         }
-        emptyMessage="Nessun ospite con prenotazioni multiple"
+        emptyMessage={t("crosscheckEmpty")}
       />
       <ReportTable
-        title="Email List"
-        subtitle={`${emailRows.length} indirizzi unici — export per marketing`}
+        title={t("emailListTitle")}
+        subtitle={t("emailListSubtitle", { count: emailRows.length })}
         columns={emailCols}
         rows={emailRows}
         loading={emails.isLoading}
@@ -187,6 +196,9 @@ function GuestsView() {
 }
 
 function TransactionsView({ from, to }: { from: string; to: string }) {
+  const t = useTranslations("dashboard.reports.detail.transactions");
+  const locale = useLocale();
+  const tag = localeTag(locale);
   const payments = useReport("payments", from, to);
   const cc = useReport("cc-history", from, to);
   const paymentRows = payments.data?.rows || [];
@@ -195,38 +207,38 @@ function TransactionsView({ from, to }: { from: string; to: string }) {
   const pCols: ReportColumn<(typeof paymentRows)[0]>[] = [
     {
       key: "createdAt",
-      label: "Data",
-      render: (r) => new Date(r.createdAt).toLocaleString("it-IT", { dateStyle: "short", timeStyle: "short" }),
+      label: t("columns.date"),
+      render: (r) => new Date(r.createdAt).toLocaleString(tag, { dateStyle: "short", timeStyle: "short" }),
     },
-    { key: "type", label: "Tipo" },
-    { key: "status", label: "Stato" },
-    { key: "stripePaymentIntentId", label: "Payment ID" },
-    { key: "amount", label: "Importo", align: "right", numeric: true, render: (r) => formatEuro(r.amount) },
+    { key: "type", label: t("columns.type") },
+    { key: "status", label: t("columns.status") },
+    { key: "stripePaymentIntentId", label: t("columns.paymentId") },
+    { key: "amount", label: t("columns.amount"), align: "right", numeric: true, render: (r) => formatEuro(r.amount) },
   ];
   const ccCols: ReportColumn<(typeof ccRows)[0]>[] = [
     {
       key: "createdAt",
-      label: "Data",
-      render: (r) => new Date(r.createdAt).toLocaleString("it-IT", { dateStyle: "short", timeStyle: "short" }),
+      label: t("columns.date"),
+      render: (r) => new Date(r.createdAt).toLocaleString(tag, { dateStyle: "short", timeStyle: "short" }),
     },
-    { key: "stripeIntent", label: "Stripe Intent" },
-    { key: "type", label: "Tipo" },
-    { key: "status", label: "Stato" },
-    { key: "amount", label: "Importo", align: "right", numeric: true, render: (r) => formatEuro(r.amount) },
+    { key: "stripeIntent", label: t("columns.stripeIntent") },
+    { key: "type", label: t("columns.type") },
+    { key: "status", label: t("columns.status") },
+    { key: "amount", label: t("columns.amount"), align: "right", numeric: true, render: (r) => formatEuro(r.amount) },
   ];
 
   return (
     <div className="space-y-4">
       <ReportTable
-        title="Payments Detail"
+        title={t("paymentsTitle")}
         columns={pCols}
         rows={paymentRows}
         loading={payments.isLoading}
         onExportCSV={() => downloadCSV("payments-detail.csv", paymentRows)}
       />
       <ReportTable
-        title="Credit Card Processing History"
-        subtitle="Solo transazioni Stripe con Payment Intent"
+        title={t("ccTitle")}
+        subtitle={t("ccSubtitle")}
         columns={ccCols}
         rows={ccRows}
         loading={cc.isLoading}
@@ -237,20 +249,21 @@ function TransactionsView({ from, to }: { from: string; to: string }) {
 }
 
 function TaxesDetailView({ from, to }: { from: string; to: string }) {
+  const t = useTranslations("dashboard.reports.detail.taxes");
   const { data, isLoading } = useReport("taxes", from, to);
   const rows = data?.rows || [];
   const columns: ReportColumn<(typeof rows)[0]>[] = [
-    { key: "checkIn", label: "Check-in" },
-    { key: "propertyName", label: "Proprieta'" },
-    { key: "guests", label: "Ospiti", align: "center", numeric: true },
-    { key: "nights", label: "Notti", align: "center", numeric: true },
-    { key: "revenue", label: "Revenue", align: "right", numeric: true, render: (r) => formatEuro(r.revenue) },
-    { key: "touristTax", label: "Tassa soggiorno", align: "right", numeric: true, render: (r) => formatEuro(r.touristTax) },
-    { key: "cedolareSecca", label: "Cedolare 21%", align: "right", numeric: true, render: (r) => formatEuro(r.cedolareSecca) },
+    { key: "checkIn", label: t("columns.checkIn") },
+    { key: "propertyName", label: t("columns.property") },
+    { key: "guests", label: t("columns.guests"), align: "center", numeric: true },
+    { key: "nights", label: t("columns.nights"), align: "center", numeric: true },
+    { key: "revenue", label: t("columns.revenue"), align: "right", numeric: true, render: (r) => formatEuro(r.revenue) },
+    { key: "touristTax", label: t("columns.tourist"), align: "right", numeric: true, render: (r) => formatEuro(r.touristTax) },
+    { key: "cedolareSecca", label: t("columns.cedolare"), align: "right", numeric: true, render: (r) => formatEuro(r.cedolareSecca) },
   ];
   return (
     <ReportTable
-      title="Taxes Detail"
+      title={t("tableTitle")}
       columns={columns}
       rows={rows}
       loading={isLoading}
@@ -260,20 +273,21 @@ function TaxesDetailView({ from, to }: { from: string; to: string }) {
 }
 
 function ListingFeesView({ from, to }: { from: string; to: string }) {
+  const t = useTranslations("dashboard.reports.detail.listingFees");
   const { data, isLoading } = useReport("listing-fees", from, to);
   const rows = data?.rows || [];
   const columns: ReportColumn<(typeof rows)[0]>[] = [
-    { key: "source", label: "Canale" },
-    { key: "bookings", label: "Prenotazioni", align: "center", numeric: true },
-    { key: "commissionRate", label: "Commissione %", align: "center", numeric: true, render: (r) => `${r.commissionRate}%` },
-    { key: "grossRevenue", label: "Lordo", align: "right", numeric: true, render: (r) => formatEuro(r.grossRevenue) },
-    { key: "totalFees", label: "Commissioni", align: "right", numeric: true, render: (r) => formatEuro(r.totalFees) },
-    { key: "netRevenue", label: "Netto", align: "right", numeric: true, render: (r) => formatEuro(r.netRevenue) },
+    { key: "source", label: t("columns.channel") },
+    { key: "bookings", label: t("columns.bookings"), align: "center", numeric: true },
+    { key: "commissionRate", label: t("columns.rate"), align: "center", numeric: true, render: (r) => `${r.commissionRate}%` },
+    { key: "grossRevenue", label: t("columns.gross"), align: "right", numeric: true, render: (r) => formatEuro(r.grossRevenue) },
+    { key: "totalFees", label: t("columns.fees"), align: "right", numeric: true, render: (r) => formatEuro(r.totalFees) },
+    { key: "netRevenue", label: t("columns.net"), align: "right", numeric: true, render: (r) => formatEuro(r.netRevenue) },
   ];
   return (
     <ReportTable
-      title="Listing Site Fees"
-      subtitle="Commissioni pagate per canale (Airbnb, Booking, Vrbo, Direct)"
+      title={t("tableTitle")}
+      subtitle={t("subtitle")}
       columns={columns}
       rows={rows}
       loading={isLoading}

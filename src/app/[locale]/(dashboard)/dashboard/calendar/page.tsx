@@ -5,18 +5,13 @@ import { MonthGrid } from "@/components/calendar/month-grid";
 import { useBookings } from "@/hooks/use-bookings";
 import { useHolidays } from "@/hooks/use-holidays";
 import { CalendarDays } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-const COUNTRY_OPTIONS = [
-  { code: "IT", label: "Italia" },
-  { code: "DE", label: "Germania" },
-  { code: "FR", label: "Francia" },
-  { code: "GB", label: "Regno Unito" },
-  { code: "NL", label: "Paesi Bassi" },
-  { code: "CH", label: "Svizzera" },
-  { code: "US", label: "Stati Uniti" },
-];
+const COUNTRY_CODES = ["IT", "DE", "FR", "GB", "NL", "CH", "US"] as const;
+type CountryCode = (typeof COUNTRY_CODES)[number];
 
 export default function CalendarPage() {
+  const t = useTranslations("dashboard.calendar");
   const [month, setMonth] = useState(new Date());
   const [countries, setCountries] = useState<string[]>(["IT"]);
   const year = month.getFullYear();
@@ -57,10 +52,10 @@ export default function CalendarPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-light">
-            <span className="font-semibold">Calendario</span>
+            <span className="font-semibold">{t("title")}</span>
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
-            Vista unificata delle prenotazioni con festivita&apos;
+            {t("subtitle")}
           </p>
         </div>
         <CalendarDays className="h-5 w-5 text-primary" />
@@ -68,20 +63,20 @@ export default function CalendarPage() {
 
       <div className="bg-white rounded-2xl border border-border/50 p-4">
         <div className="text-xs font-semibold text-muted-foreground mb-2 uppercase tracking-wider">
-          Festivita&apos; visualizzate
+          {t("holidaysTitle")}
         </div>
         <div className="flex flex-wrap gap-2">
-          {COUNTRY_OPTIONS.map((opt) => (
+          {COUNTRY_CODES.map((code) => (
             <button
-              key={opt.code}
-              onClick={() => toggleCountry(opt.code)}
+              key={code}
+              onClick={() => toggleCountry(code)}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors border ${
-                countries.includes(opt.code)
+                countries.includes(code)
                   ? "bg-primary text-white border-primary"
                   : "bg-white text-muted-foreground border-border hover:bg-muted/50"
               }`}
             >
-              {opt.code} {opt.label}
+              {code} {t(`countries.${code as CountryCode}`)}
             </button>
           ))}
         </div>
@@ -89,7 +84,7 @@ export default function CalendarPage() {
 
       {bookingsLoading ? (
         <div className="bg-white rounded-2xl border border-border/50 p-12 text-center text-sm text-muted-foreground">
-          Caricamento calendario...
+          {t("loadingCalendar")}
         </div>
       ) : (
         <MonthGrid
@@ -102,24 +97,24 @@ export default function CalendarPage() {
 
       <div className="bg-white rounded-2xl border border-border/50 p-4">
         <div className="text-xs font-semibold text-muted-foreground mb-3 uppercase tracking-wider">
-          Legenda
+          {t("legendTitle")}
         </div>
         <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
           <div className="flex items-center gap-2">
             <div className="h-3 w-3 rounded bg-[#FF5A5F]" />
-            Airbnb
+            {t("channels.airbnb")}
           </div>
           <div className="flex items-center gap-2">
             <div className="h-3 w-3 rounded bg-[#003580]" />
-            Booking.com
+            {t("channels.booking")}
           </div>
           <div className="flex items-center gap-2">
             <div className="h-3 w-3 rounded bg-[#3B5998]" />
-            Vrbo
+            {t("channels.vrbo")}
           </div>
           <div className="flex items-center gap-2">
             <div className="h-3 w-3 rounded bg-primary" />
-            Diretto
+            {t("channels.direct")}
           </div>
         </div>
       </div>

@@ -10,6 +10,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { Users, Search, ArrowUp, ArrowDown, ArrowUpDown } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 import { useBookings } from "@/hooks/use-bookings";
 import { useProperties } from "@/hooks/use-properties";
 
@@ -21,22 +22,6 @@ const STATUS_STYLES: Record<string, string> = {
   cancelled: "bg-red-50 text-red-600",
 };
 
-const STATUS_LABELS: Record<string, string> = {
-  confirmed: "Confermata",
-  checked_in: "In corso",
-  checked_out: "Completata",
-  pending: "In attesa",
-  cancelled: "Cancellata",
-};
-
-const SOURCE_LABELS: Record<string, string> = {
-  airbnb: "Airbnb",
-  booking: "Booking.com",
-  vrbo: "Vrbo",
-  direct: "Diretto",
-  other: "Altro",
-};
-
 const SOURCE_COLORS: Record<string, string> = {
   airbnb: "text-[#FF5A5F]",
   booking: "text-[#003580]",
@@ -45,16 +30,19 @@ const SOURCE_COLORS: Record<string, string> = {
   other: "text-muted-foreground",
 };
 
-function formatEuro(amount: number): string {
-  return new Intl.NumberFormat("it-IT", {
+type StatusKey = "confirmed" | "checked_in" | "checked_out" | "pending" | "cancelled";
+type SourceKey = "airbnb" | "booking" | "vrbo" | "direct" | "other";
+
+function formatEuro(amount: number, locale: string): string {
+  return new Intl.NumberFormat(locale === "en" ? "en-GB" : "it-IT", {
     style: "currency",
     currency: "EUR",
     maximumFractionDigits: 0,
   }).format(amount);
 }
 
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("it-IT", {
+function formatDate(iso: string, locale: string): string {
+  return new Date(iso).toLocaleDateString(locale === "en" ? "en-GB" : "it-IT", {
     day: "numeric",
     month: "short",
   });
@@ -74,6 +62,8 @@ type BookingRow = {
 };
 
 export default function BookingsPage() {
+  const t = useTranslations("dashboard.bookings");
+  const locale = useLocale();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("");
   const [sourceFilter, setSourceFilter] = useState<string>("");
@@ -123,7 +113,7 @@ export default function BookingsPage() {
     () => [
       {
         accessorKey: "guestName",
-        header: "Ospite",
+        header: t("headers.guest"),
         cell: ({ row }) => (
           <div className="flex items-center gap-3">
             <div className="h-8 w-8 rounded-full bg-primary/[0.08] flex items-center justify-center shrink-0">
@@ -135,7 +125,7 @@ export default function BookingsPage() {
       },
       {
         accessorKey: "propertyName",
-        header: "Proprieta",
+        header: t("headers.property"),
         cell: ({ row }) => (
           <span className="text-sm text-muted-foreground">
             {row.original.propertyName}
@@ -144,56 +134,70 @@ export default function BookingsPage() {
       },
       {
         accessorKey: "checkIn",
-        header: "Date",
+        header: t("headers.dates"),
         cell: ({ row }) => (
           <span className="text-sm whitespace-nowrap">
-            {formatDate(row.original.checkIn)} →{" "}
-            {formatDate(row.original.checkOut)}
+            {formatDate(row.original.checkIn, locale)} →{" "}
+            {formatDate(row.original.checkOut, locale)}
           </span>
         ),
         sortingFn: "datetime",
       },
       {
         accessorKey: "nights",
-        header: "Notti",
+        header: t("headers.nights"),
         cell: ({ row }) => (
           <span className="text-sm text-center block">{row.original.nights}</span>
         ),
       },
       {
         accessorKey: "source",
-        header: "Fonte",
-        cell: ({ row }) => (
-          <span
-            className={`text-sm font-medium ${SOURCE_COLORS[row.original.source]}`}
-          >
-            {SOURCE_LABELS[row.original.source] || row.original.source}
-          </span>
-        ),
+        header: t("headers.source"),
+        cell: ({ row }) => {
+          const sourceKey = (
+            ["airbnb", "booking", "vrbo", "direct", "other"].includes(row.original.source)
+              ? row.original.source
+              : "other"
+          ) as SourceKey;
+          return (
+            <span
+              className={`text-sm font-medium ${SOURCE_COLORS[row.original.source] || SOURCE_COLORS.other}`}
+            >
+              {t(`source.${sourceKey}`)}
+            </span>
+          );
+        },
       },
       {
         accessorKey: "amount",
-        header: "Importo",
+        header: t("headers.amount"),
         cell: ({ row }) => (
           <span className="text-sm font-semibold text-right tabular-nums block">
-            {formatEuro(row.original.amount)}
+            {formatEuro(row.original.amount, locale)}
           </span>
         ),
       },
       {
         accessorKey: "status",
-        header: "Stato",
-        cell: ({ row }) => (
-          <span
-            className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${STATUS_STYLES[row.original.status]}`}
-          >
-            {STATUS_LABELS[row.original.status]}
-          </span>
-        ),
+        header: t("headers.status"),
+        cell: ({ row }) => {
+          const statusKey = (
+            ["confirmed", "checked_in", "checked_out", "pending", "cancelled"].includes(row.original.status)
+              ? row.original.status
+              : "pending"
+          ) as StatusKey;
+          return (
+            <span
+              className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${STATUS_STYLES[row.original.status]}`}
+            >
+              {t(`status.${statusKey}`)}
+            </span>
+          );
+        },
         enableSorting: false,
       },
     ],
-    []
+    [t, locale]
   );
 
   const table = useReactTable({
@@ -209,10 +213,10 @@ export default function BookingsPage() {
     <div className="p-6 space-y-6 animate-fade-in">
       <div>
         <h1 className="text-2xl font-light">
-          <span className="font-semibold">Prenotazioni</span>
+          <span className="font-semibold">{t("title")}</span>
         </h1>
         <p className="text-sm text-muted-foreground mt-1">
-          {isLoading ? "Caricamento..." : `${rows.length} prenotazioni`}
+          {isLoading ? t("subtitleLoading") : t("subtitleCount", { count: rows.length })}
         </p>
       </div>
 
@@ -223,7 +227,7 @@ export default function BookingsPage() {
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Cerca ospite o proprieta..."
+            placeholder={t("searchPlaceholder")}
             className="text-sm bg-transparent border-none outline-none flex-1"
           />
         </div>
@@ -232,34 +236,34 @@ export default function BookingsPage() {
           onChange={(e) => setStatusFilter(e.target.value)}
           className="rounded-lg border border-border/50 px-3 py-2 text-sm bg-white"
         >
-          <option value="">Tutti gli stati</option>
-          <option value="confirmed">Confermata</option>
-          <option value="checked_in">In corso</option>
-          <option value="pending">In attesa</option>
-          <option value="checked_out">Completata</option>
-          <option value="cancelled">Cancellata</option>
+          <option value="">{t("filters.allStatuses")}</option>
+          <option value="confirmed">{t("status.confirmed")}</option>
+          <option value="checked_in">{t("status.checked_in")}</option>
+          <option value="pending">{t("status.pending")}</option>
+          <option value="checked_out">{t("status.checked_out")}</option>
+          <option value="cancelled">{t("status.cancelled")}</option>
         </select>
         <select
           value={sourceFilter}
           onChange={(e) => setSourceFilter(e.target.value)}
           className="rounded-lg border border-border/50 px-3 py-2 text-sm bg-white"
         >
-          <option value="">Tutte le fonti</option>
-          <option value="airbnb">Airbnb</option>
-          <option value="booking">Booking.com</option>
-          <option value="vrbo">Vrbo</option>
-          <option value="direct">Diretto</option>
+          <option value="">{t("filters.allSources")}</option>
+          <option value="airbnb">{t("source.airbnb")}</option>
+          <option value="booking">{t("source.booking")}</option>
+          <option value="vrbo">{t("source.vrbo")}</option>
+          <option value="direct">{t("source.direct")}</option>
         </select>
       </div>
 
       <div className="bg-white rounded-2xl border border-border/50 overflow-hidden">
         {isLoading ? (
           <div className="p-12 text-center text-sm text-muted-foreground">
-            Caricamento...
+            {t("loading")}
           </div>
         ) : rows.length === 0 ? (
           <div className="p-12 text-center text-sm text-muted-foreground">
-            Nessuna prenotazione trovata
+            {t("empty")}
           </div>
         ) : (
           <div className="overflow-x-auto">

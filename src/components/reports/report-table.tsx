@@ -1,6 +1,7 @@
 "use client";
 
 import { Download } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export interface ReportColumn<T> {
   key: string;
@@ -27,9 +28,11 @@ export function ReportTable<T>({
   columns,
   rows,
   loading = false,
-  emptyMessage = "Nessun dato disponibile",
+  emptyMessage,
   onExportCSV,
 }: ReportTableProps<T>) {
+  const t = useTranslations("dashboard.reports.common");
+  const resolvedEmpty = emptyMessage ?? t("noData");
   return (
     <div className="bg-white rounded-2xl border border-border/50 overflow-hidden">
       {(title || onExportCSV) && (
@@ -43,17 +46,18 @@ export function ReportTable<T>({
               onClick={onExportCSV}
               disabled={rows.length === 0}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border text-xs font-medium hover:bg-muted/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              aria-label={t("exportCSV")}
             >
               <Download className="h-3.5 w-3.5" />
-              CSV
+              {t("csv")}
             </button>
           )}
         </div>
       )}
       {loading ? (
-        <div className="p-12 text-center text-sm text-muted-foreground">Caricamento...</div>
+        <div className="p-12 text-center text-sm text-muted-foreground">{t("loading")}</div>
       ) : rows.length === 0 ? (
-        <div className="p-12 text-center text-sm text-muted-foreground">{emptyMessage}</div>
+        <div className="p-12 text-center text-sm text-muted-foreground">{resolvedEmpty}</div>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full">

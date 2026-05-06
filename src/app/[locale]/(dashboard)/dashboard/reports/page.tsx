@@ -1,6 +1,7 @@
 "use client";
 
 import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import {
   CalendarCheck,
   FileText,
@@ -10,66 +11,34 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-interface Category {
+interface CategoryDef {
   slug: string;
-  name: string;
-  desc: string;
   icon: React.ComponentType<{ className?: string }>;
   count: number;
 }
 
-const CATEGORIES: Category[] = [
-  {
-    slug: "stay",
-    name: "Stay Reports",
-    desc: "Daily checklist, date range, available nights, unita vuote.",
-    icon: CalendarCheck,
-    count: 4,
-  },
-  {
-    slug: "summary",
-    name: "Summary Reports",
-    desc: "Riepiloghi aggregati di prenotazioni, pagamenti e tasse.",
-    icon: FileText,
-    count: 3,
-  },
-  {
-    slug: "detail",
-    name: "Detail Reports",
-    desc: "Prenotazioni, name crosscheck, email list, listing site fees.",
-    icon: TableProperties,
-    count: 7,
-  },
-  {
-    slug: "analysis",
-    name: "Analysis & Statistics",
-    desc: "Occupazione, gap, days in advance, ospiti ripetuti, performance.",
-    icon: BarChart3,
-    count: 12,
-  },
-  {
-    slug: "property-management",
-    name: "Property Management",
-    desc: "Commissioni, owner remittance, statements per proprietario.",
-    icon: Wallet,
-    count: 5,
-  },
+const CATEGORY_DEFS: CategoryDef[] = [
+  { slug: "stay", icon: CalendarCheck, count: 4 },
+  { slug: "summary", icon: FileText, count: 3 },
+  { slug: "detail", icon: TableProperties, count: 7 },
+  { slug: "analysis", icon: BarChart3, count: 12 },
+  { slug: "property-management", icon: Wallet, count: 5 },
 ];
 
 export default function ReportsPage() {
+  const t = useTranslations("dashboard.reports.index");
+
   return (
     <div className="p-6 space-y-6 animate-fade-in">
       <div>
         <h1 className="text-2xl font-light">
-          <span className="font-semibold">Reports</span>
+          <span className="font-semibold">{t("titleStrong")}</span>
         </h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          31 report disponibili per analizzare ogni aspetto del tuo portfolio
-        </p>
+        <p className="text-sm text-muted-foreground mt-1">{t("subtitle")}</p>
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {CATEGORIES.map((c) => (
+        {CATEGORY_DEFS.map((c) => (
           <Link
             key={c.slug}
             href={`/dashboard/reports/${c.slug}`}
@@ -80,15 +49,15 @@ export default function ReportsPage() {
                 <c.icon className="h-5 w-5 text-primary" />
               </div>
               <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
-                {c.count} report
+                {t("reportCount", { count: c.count })}
               </span>
             </div>
-            <h3 className="text-base font-semibold mb-2">{c.name}</h3>
+            <h3 className="text-base font-semibold mb-2">{t(`categories.${c.slug}.name` as never)}</h3>
             <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-              {c.desc}
+              {t(`categories.${c.slug}.desc` as never)}
             </p>
             <div className="inline-flex items-center gap-1.5 text-xs font-medium text-primary">
-              Apri categoria
+              {t("openCategory")}
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
             </div>
           </Link>
@@ -97,11 +66,9 @@ export default function ReportsPage() {
 
       <div className="bg-muted/30 rounded-2xl p-5 border border-border/50">
         <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
-          Report in arrivo
+          {t("comingSoonTitle")}
         </div>
-        <p className="text-sm text-muted-foreground">
-          Line Items, Expense Detail, Insurance, Conversion Speed, Inquiries, Quotes — richiedono estensioni schema e arriveranno in versioni future.
-        </p>
+        <p className="text-sm text-muted-foreground">{t("comingSoonBody")}</p>
       </div>
     </div>
   );

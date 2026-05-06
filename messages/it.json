@@ -803,5 +803,752 @@
     "title": "This page is available in Italian only",
     "body": "The full legal text is published in Italian. You can switch language to view it.",
     "cta": "View Italian version"
+  },
+  "dashboard": {
+    "sidebar": {
+      "brand": "Hosting Lake Como",
+      "tagline": "Dashboard Proprietario",
+      "section": "Gestione",
+      "items": {
+        "overview": "Overview",
+        "properties": "Proprieta",
+        "bookings": "Prenotazioni",
+        "calendar": "Calendario",
+        "analytics": "Analytics",
+        "reports": "Reports",
+        "statements": "Rendiconti",
+        "payments": "Pagamenti",
+        "compliance": "Compliance",
+        "settings": "Impostazioni"
+      },
+      "backToSite": "Torna al Sito",
+      "logout": "Esci"
+    },
+    "overview": {
+      "greeting": "Buongiorno,",
+      "subtitle": "Ecco il riepilogo delle tue proprieta sul Lago di Como.",
+      "stats": {
+        "monthRevenue": "Revenue Mensile",
+        "activeBookings": "Prenotazioni Attive",
+        "occupancyRate": "Tasso Occupazione",
+        "propertyCount": "Proprieta Gestite"
+      },
+      "quickActions": {
+        "properties": "Proprieta",
+        "bookings": "Prenotazioni",
+        "calendar": "Calendario",
+        "analytics": "Analytics"
+      },
+      "recent": {
+        "title": "Prenotazioni Recenti",
+        "viewAll": "Vedi tutte",
+        "loading": "Caricamento...",
+        "empty": "Nessuna prenotazione recente",
+        "headers": {
+          "guest": "Ospite",
+          "dates": "Date",
+          "nights": "Notti",
+          "source": "Fonte",
+          "amount": "Importo",
+          "status": "Stato"
+        }
+      },
+      "status": {
+        "confirmed": "Confermata",
+        "checked_in": "In corso",
+        "pending": "In attesa",
+        "cancelled": "Cancellata"
+      },
+      "source": {
+        "airbnb": "Airbnb",
+        "booking": "Booking.com",
+        "vrbo": "Vrbo",
+        "direct": "Diretto",
+        "other": "Altro"
+      }
+    },
+    "properties": {
+      "title1": "Le Mie",
+      "title2": "Proprieta",
+      "subtitleLoading": "Caricamento...",
+      "subtitleCount": "{count} proprieta nel portfolio",
+      "addButton": "Aggiungi Proprieta",
+      "loadingList": "Caricamento proprieta...",
+      "emptyList": "Nessuna proprieta nel portfolio",
+      "noImage": "Nessuna immagine",
+      "perNight": "/ notte",
+      "view": "Vedi",
+      "edit": "Modifica",
+      "details": "{type} · {bedrooms} cam · {bathrooms} bagni · max {maxGuests} ospiti",
+      "status": {
+        "active": "Attiva",
+        "draft": "Bozza",
+        "inactive": "Disattivata"
+      },
+      "zones": {
+        "centro-como": "Centro Como",
+        "primo-bacino": "Primo Bacino",
+        "secondo-bacino": "Secondo Bacino",
+        "alto-lago": "Alto Lago",
+        "valle-intelvi": "Valle Intelvi",
+        "lecco": "Lecco",
+        "altro": "Altro"
+      }
+    },
+    "bookings": {
+      "title": "Prenotazioni",
+      "subtitleLoading": "Caricamento...",
+      "subtitleCount": "{count} prenotazioni",
+      "searchPlaceholder": "Cerca ospite o proprieta...",
+      "filters": {
+        "allStatuses": "Tutti gli stati",
+        "allSources": "Tutte le fonti"
+      },
+      "loading": "Caricamento...",
+      "empty": "Nessuna prenotazione trovata",
+      "headers": {
+        "guest": "Ospite",
+        "property": "Proprieta",
+        "dates": "Date",
+        "nights": "Notti",
+        "source": "Fonte",
+        "amount": "Importo",
+        "status": "Stato"
+      },
+      "status": {
+        "confirmed": "Confermata",
+        "checked_in": "In corso",
+        "checked_out": "Completata",
+        "pending": "In attesa",
+        "cancelled": "Cancellata"
+      },
+      "source": {
+        "airbnb": "Airbnb",
+        "booking": "Booking.com",
+        "vrbo": "Vrbo",
+        "direct": "Diretto",
+        "other": "Altro"
+      }
+    },
+    "calendar": {
+      "title": "Calendario",
+      "subtitle": "Vista unificata delle prenotazioni con festivita",
+      "holidaysTitle": "Festivita visualizzate",
+      "loadingCalendar": "Caricamento calendario...",
+      "legendTitle": "Legenda",
+      "channels": {
+        "airbnb": "Airbnb",
+        "booking": "Booking.com",
+        "vrbo": "Vrbo",
+        "direct": "Diretto"
+      },
+      "countries": {
+        "IT": "Italia",
+        "DE": "Germania",
+        "FR": "Francia",
+        "GB": "Regno Unito",
+        "NL": "Paesi Bassi",
+        "CH": "Svizzera",
+        "US": "Stati Uniti"
+      }
+    },
+    "payments": {
+      "title": "Pagamenti",
+      "subtitle": "Transazioni Stripe da prenotazioni dirette",
+      "kpis": {
+        "totalCollected": "Totale Incassato",
+        "transactions": "Transazioni",
+        "averagePerTransaction": "Media per Transazione"
+      },
+      "loading": "Caricamento...",
+      "empty": "Nessuna transazione. Le prenotazioni dirette pagate via Stripe appariranno qui.",
+      "headers": {
+        "date": "Data",
+        "type": "Tipo",
+        "paymentId": "Payment ID",
+        "amount": "Importo",
+        "status": "Stato"
+      },
+      "status": {
+        "succeeded": "Completato",
+        "pending": "In attesa",
+        "failed": "Fallito",
+        "refunded": "Rimborsato"
+      },
+      "type": {
+        "booking": "Prenotazione",
+        "deposit": "Caparra",
+        "service": "Servizio",
+        "refund": "Rimborso"
+      }
+    },
+    "statements": {
+      "title": "Rendiconti",
+      "subtitle": "Riepilogo mensile dei payout — Anno {year}",
+      "kpis": {
+        "ytdGross": "Revenue Lordo YTD",
+        "totalCommissions": "Commissioni Totali",
+        "commissionsHint": "OTA + Hosting Lake Como",
+        "operatingExpenses": "Spese Operative",
+        "expensesHint": "Pulizie + tassa soggiorno",
+        "netPayoutYtd": "Net Payout YTD",
+        "netPayoutHint": "Il tuo guadagno netto"
+      },
+      "loading": "Caricamento...",
+      "empty": "Nessun rendiconto disponibile",
+      "headers": {
+        "period": "Periodo",
+        "bookings": "Prenotaz.",
+        "gross": "Lordo",
+        "commissions": "Commissioni",
+        "expenses": "Spese",
+        "net": "Netto",
+        "status": "Stato"
+      },
+      "status": {
+        "paid": "Pagato",
+        "pending": "In elaborazione"
+      }
+    },
+    "compliance": {
+      "title": "Compliance",
+      "subtitle": "Adempimenti normativi italiani per affitti brevi",
+      "alloggiati": {
+        "title": "Alloggiati Web (Questura)",
+        "description": "Comunicazione dati ospiti alla Polizia di Stato entro 24h dall'arrivo. Esporta il file TXT formato fisso e caricalo manualmente sul portale.",
+        "from": "Dal",
+        "to": "Al",
+        "download": "Scarica TXT"
+      },
+      "istat": {
+        "title": "ISTAT (Regione Lombardia)",
+        "description": "Report mensile flussi turistici (arrivi, presenze, nazionalita) da inviare alla Regione Lombardia via portale turistico.",
+        "month": "Mese",
+        "year": "Anno",
+        "download": "Scarica CSV",
+        "months": ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"]
+      },
+      "tax": {
+        "title": "Tassa di soggiorno",
+        "description": "Calcolo trimestrale da versare al Comune. Le tariffe sono configurate per proprieta (tipicamente €2-4 per persona/notte, max 5 notti).",
+        "from": "Dal",
+        "to": "Al",
+        "calculate": "Calcola",
+        "loading": "Caricamento...",
+        "headers": {
+          "property": "Proprieta",
+          "bookings": "Prenotaz.",
+          "nights": "Notti",
+          "guests": "Ospiti",
+          "owed": "Dovuto"
+        },
+        "totalLabel": "Totale da versare al Comune",
+        "empty": "Nessuna prenotazione nel periodo selezionato"
+      }
+    },
+    "settings": {
+      "title": "Impostazioni",
+      "subtitle": "Gestisci il tuo profilo e le preferenze",
+      "profile": {
+        "title": "Profilo",
+        "firstName": "Nome",
+        "lastName": "Cognome",
+        "email": "Email",
+        "phone": "Telefono",
+        "phonePlaceholder": "+39 ___ ___ ____"
+      },
+      "notifications": {
+        "title": "Notifiche",
+        "items": [
+          { "label": "Nuova prenotazione", "desc": "Ricevi una notifica per ogni nuova prenotazione" },
+          { "label": "Check-in ospiti", "desc": "Notifica al check-in degli ospiti" },
+          { "label": "Report mensile", "desc": "Ricevi il rendiconto mensile via email" },
+          { "label": "Manutenzione urgente", "desc": "Alert per richieste di manutenzione urgente" }
+        ]
+      },
+      "security": {
+        "title": "Sicurezza",
+        "currentPassword": "Password attuale",
+        "newPassword": "Nuova password",
+        "confirmPassword": "Conferma password"
+      },
+      "savedMessage": "Impostazioni salvate!",
+      "saveButton": "Salva Modifiche"
+    },
+    "reports": {
+      "common": {
+        "backToReports": "Tutti i report",
+        "exportCSV": "Esporta CSV",
+        "csv": "CSV",
+        "loading": "Caricamento...",
+        "noData": "Nessun dato disponibile",
+        "from": "Dal",
+        "to": "Al",
+        "period": "Periodo",
+        "presets": {
+          "7d": "Ultimi 7 giorni",
+          "30d": "Ultimi 30 giorni",
+          "mtd": "Mese corrente",
+          "ytd": "Anno corrente",
+          "all": "Tutto"
+        }
+      },
+      "index": {
+        "titleStrong": "Reportistica",
+        "subtitle": "31 report a disposizione per analizzare ogni aspetto del tuo portfolio",
+        "openCategory": "Apri categoria",
+        "reportCount": "{count} report",
+        "categories": {
+          "stay": {
+            "name": "Soggiorni",
+            "desc": "Checklist giornaliera, intervallo date, notti disponibili, unita vuote."
+          },
+          "summary": {
+            "name": "Riepilogo",
+            "desc": "Riepiloghi aggregati di prenotazioni, pagamenti e tasse."
+          },
+          "detail": {
+            "name": "Dettaglio",
+            "desc": "Prenotazioni, controllo nominativi, lista email, commissioni piattaforme."
+          },
+          "analysis": {
+            "name": "Analisi e statistiche",
+            "desc": "Occupazione, gap, anticipo prenotazioni, ospiti ricorrenti, performance."
+          },
+          "property-management": {
+            "name": "Property management",
+            "desc": "Commissioni, rendiconto proprietario, prospetti per immobile."
+          }
+        },
+        "comingSoonTitle": "Report in arrivo",
+        "comingSoonBody": "Line Items, dettaglio spese, polizze assicurative, velocita di conversione, richieste, preventivi: richiedono estensioni dello schema dati e arriveranno nelle prossime versioni."
+      },
+      "summary": {
+        "titleStrong": "Riepilogo",
+        "subtitle": "Riepiloghi aggregati per periodo",
+        "tabs": {
+          "bookings": "Prenotazioni",
+          "payments": "Pagamenti",
+          "taxes": "Imposte"
+        },
+        "bookings": {
+          "tableTitle": "Prenotazioni per periodo",
+          "stats": {
+            "bookings": "Prenotazioni",
+            "nightsSold": "Notti vendute",
+            "totalRevenue": "Ricavi totali"
+          },
+          "columns": {
+            "period": "Periodo",
+            "bookings": "Prenotazioni",
+            "nights": "Notti",
+            "guests": "Ospiti",
+            "avgStay": "Soggiorno medio",
+            "avgStayValue": "{n} notti",
+            "adr": "ADR",
+            "revenue": "Ricavi"
+          }
+        },
+        "payments": {
+          "tableTitle": "Pagamenti per periodo",
+          "stats": {
+            "transactions": "Transazioni",
+            "successful": "Riuscite",
+            "gross": "Lordo",
+            "net": "Netto (post-commissioni)",
+            "netHint": "Stima 2,9% commissione Stripe"
+          },
+          "columns": {
+            "period": "Periodo",
+            "count": "Transazioni",
+            "succeeded": "Riuscite",
+            "failed": "Fallite",
+            "refunded": "Rimborsi",
+            "gross": "Lordo",
+            "net": "Netto"
+          }
+        },
+        "taxes": {
+          "tableTitle": "Imposte per immobile",
+          "stats": {
+            "tourist": "Tassa di soggiorno",
+            "cedolare": "Cedolare secca (stima)",
+            "cedolareHint": "21% sui ricavi",
+            "taxableRevenue": "Ricavi imponibili"
+          },
+          "columns": {
+            "property": "Immobile",
+            "bookings": "Prenotazioni",
+            "guestNights": "Notti per ospite",
+            "revenue": "Ricavi",
+            "tourist": "Tassa di soggiorno",
+            "cedolare": "Cedolare 21%"
+          }
+        }
+      },
+      "detail": {
+        "titleStrong": "Dettaglio",
+        "subtitle": "Report dettagliati riga per riga",
+        "tabs": {
+          "bookings": "Prenotazioni",
+          "guests": "Anagrafica ospiti",
+          "transactions": "Transazioni",
+          "taxes": "Imposte",
+          "listingFees": "Commissioni piattaforme"
+        },
+        "bookings": {
+          "tableTitle": "Dettaglio prenotazioni ({count})",
+          "columns": {
+            "checkIn": "Check-in",
+            "checkOut": "Check-out",
+            "property": "Immobile",
+            "guest": "Ospite",
+            "email": "Email",
+            "guests": "Ospiti",
+            "nights": "Notti",
+            "source": "Canale",
+            "status": "Stato",
+            "total": "Totale",
+            "commission": "Commissione",
+            "ownerNet": "Netto proprietario"
+          }
+        },
+        "guests": {
+          "crosscheckTitle": "Controllo nominativi (duplicati)",
+          "crosscheckSubtitle": "Ospiti con piu di una prenotazione, da verificare per identita",
+          "crosscheckEmpty": "Nessun ospite con prenotazioni multiple",
+          "emailListTitle": "Lista email",
+          "emailListSubtitle": "{count} indirizzi unici, esportabili per attivita di marketing",
+          "columns": {
+            "name": "Nome",
+            "bookings": "Prenotazioni",
+            "emails": "Email",
+            "phones": "Telefoni",
+            "totalSpent": "Totale speso",
+            "email": "Email",
+            "country": "Paese",
+            "lastBooking": "Ultima prenotazione",
+            "totalBookings": "Prenot.",
+            "total": "Totale"
+          }
+        },
+        "transactions": {
+          "paymentsTitle": "Dettaglio pagamenti",
+          "ccTitle": "Storico pagamenti con carta",
+          "ccSubtitle": "Solo transazioni Stripe con Payment Intent",
+          "columns": {
+            "date": "Data",
+            "type": "Tipo",
+            "status": "Stato",
+            "paymentId": "ID pagamento",
+            "amount": "Importo",
+            "stripeIntent": "Stripe Intent"
+          }
+        },
+        "taxes": {
+          "tableTitle": "Dettaglio imposte",
+          "columns": {
+            "checkIn": "Check-in",
+            "property": "Immobile",
+            "guests": "Ospiti",
+            "nights": "Notti",
+            "revenue": "Ricavi",
+            "tourist": "Tassa di soggiorno",
+            "cedolare": "Cedolare 21%"
+          }
+        },
+        "listingFees": {
+          "tableTitle": "Commissioni piattaforme",
+          "subtitle": "Commissioni pagate per canale (Airbnb, Booking, Vrbo, diretto)",
+          "columns": {
+            "channel": "Canale",
+            "bookings": "Prenotazioni",
+            "rate": "Commissione %",
+            "gross": "Lordo",
+            "fees": "Commissioni",
+            "net": "Netto"
+          }
+        }
+      },
+      "analysis": {
+        "titleStrong": "Analisi e statistiche",
+        "subtitle": "Metriche aggregate, distribuzioni e performance",
+        "tabs": {
+          "overview": "Panoramica",
+          "daysInAdvance": "Anticipo prenotazioni",
+          "occupancy": "Occupazione",
+          "gaps": "Finestre di disponibilita",
+          "repeatGuests": "Ospiti ricorrenti",
+          "sitePerformance": "Performance canali"
+        },
+        "overview": {
+          "totalBookings": "Prenotazioni totali",
+          "totalGuests": "Ospiti totali",
+          "totalNights": "Notti vendute",
+          "guestNights": "Notti per ospite",
+          "nightsPerBooking": "Notti per prenotazione",
+          "guestsPerBooking": "Ospiti per prenotazione",
+          "occupancyPct": "% occupato",
+          "totalRevenue": "Ricavi totali",
+          "adr": "ADR (tariffa media giornaliera)",
+          "adrHint": "Ricavi / notti vendute",
+          "revPar": "RevPAR",
+          "revParHint": "Ricavi / notti disponibili"
+        },
+        "daysInAdvance": {
+          "tableTitle": "Anticipo prenotazioni",
+          "subtitle": "Quanti giorni prima del check-in prenotano gli ospiti",
+          "columns": {
+            "bucket": "Anticipo",
+            "bookings": "Prenotazioni",
+            "distribution": "Distribuzione",
+            "revenue": "Ricavi"
+          }
+        },
+        "occupancy": {
+          "tableTitle": "Occupazione per immobile",
+          "columns": {
+            "property": "Immobile",
+            "available": "Notti disp.",
+            "booked": "Notti prenot.",
+            "occupancyPct": "% occupato",
+            "guests": "Ospiti",
+            "guestNights": "Notti per ospite"
+          }
+        },
+        "gaps": {
+          "tableTitle": "Finestre di disponibilita",
+          "subtitle": "Notti vuote tra prenotazioni consecutive: opportunita di last minute",
+          "columns": {
+            "property": "Immobile",
+            "from": "Dal",
+            "to": "Al",
+            "emptyDays": "Giorni vuoti",
+            "lostRevenue": "Ricavi persi"
+          }
+        },
+        "repeatGuests": {
+          "tableTitle": "Ospiti ricorrenti",
+          "subtitle": "Ospiti con due o piu soggiorni: i clienti piu preziosi",
+          "columns": {
+            "guest": "Ospite",
+            "email": "Email",
+            "stays": "Soggiorni",
+            "first": "Primo",
+            "last": "Ultimo",
+            "avgRate": "Tariffa media",
+            "totalSpent": "Totale"
+          }
+        },
+        "sitePerformance": {
+          "tableTitle": "Performance canali di vendita",
+          "subtitle": "Performance per canale",
+          "columns": {
+            "channel": "Canale",
+            "bookings": "Prenotazioni",
+            "nights": "Notti",
+            "guests": "Ospiti",
+            "avgStay": "Soggiorno medio",
+            "avgStayValue": "{n} notti",
+            "adr": "ADR",
+            "valuePerBooking": "Valore per prenotazione",
+            "revenue": "Ricavi"
+          }
+        }
+      },
+      "propertyManagement": {
+        "titleStrong": "Property management",
+        "subtitle": "Commissioni, rendiconti proprietario e prospetti dettagliati",
+        "tabs": {
+          "commissionSummary": "Riepilogo commissioni",
+          "commissionDetail": "Dettaglio commissioni",
+          "ownerSummary": "Rendiconto proprietario",
+          "ownerDetail": "Dettaglio proprietario",
+          "bookingRemittance": "Prospetto per prenotazione"
+        },
+        "commissionSummary": {
+          "tableTitle": "Riepilogo commissioni per canale",
+          "stats": {
+            "grossRevenue": "Ricavi lordi",
+            "otaCommissions": "Commissioni piattaforme",
+            "ownCommission": "Commissione Hosting Lake Como",
+            "ownerNetTotal": "Totale netto proprietario"
+          },
+          "columns": {
+            "channel": "Canale",
+            "bookings": "Prenotazioni",
+            "gross": "Lordo",
+            "otaCommission": "Comm. piattaforma",
+            "ownCommission": "Comm. Hosting Lake Como",
+            "totalCommission": "Totale commissioni",
+            "ownerNet": "Netto proprietario"
+          }
+        },
+        "commissionDetail": {
+          "tableTitle": "Dettaglio commissioni per prenotazione",
+          "columns": {
+            "checkIn": "Check-in",
+            "property": "Immobile",
+            "guest": "Ospite",
+            "source": "Canale",
+            "nights": "Notti",
+            "gross": "Lordo",
+            "otaRate": "Tasso piattaforma",
+            "otaCommission": "Comm. piattaforma",
+            "ownCommission": "Comm. HLC",
+            "ownerNet": "Netto proprietario"
+          }
+        },
+        "ownerSummary": {
+          "stats": {
+            "grossRevenueYear": "Ricavi lordi {year}",
+            "netPayoutYear": "Netto erogato {year}"
+          },
+          "tableTitle": "Riepilogo rendiconto proprietario {year}",
+          "subtitle": "Ripartizione mensile del netto erogato al proprietario",
+          "columns": {
+            "period": "Periodo",
+            "bookings": "Prenotazioni",
+            "gross": "Lordo",
+            "ota": "Piattaforme",
+            "ownCommission": "Hosting Lake Como",
+            "expenses": "Spese",
+            "tax": "Tassa",
+            "net": "Netto"
+          }
+        },
+        "ownerDetail": {
+          "tableTitle": "Dettaglio rendiconto proprietario",
+          "subtitle": "Ripartizione per immobile e periodo",
+          "columns": {
+            "period": "Periodo",
+            "property": "Immobile",
+            "bookings": "Prenotazioni",
+            "nights": "Notti",
+            "gross": "Lordo",
+            "ota": "Piattaforme",
+            "ownCommission": "Hosting Lake Como",
+            "expenses": "Spese",
+            "tax": "Tassa",
+            "net": "Netto"
+          }
+        },
+        "bookingRemittance": {
+          "tableTitle": "Prospetto rendiconti per prenotazione",
+          "subtitle": "Ogni prenotazione con il netto proprietario calcolato",
+          "columns": {
+            "checkIn": "Check-in",
+            "property": "Immobile",
+            "guest": "Ospite",
+            "source": "Canale",
+            "nights": "Notti",
+            "gross": "Lordo",
+            "ota": "Piattaforme",
+            "ownCommission": "HLC",
+            "expenses": "Spese",
+            "tax": "Tassa",
+            "net": "Netto"
+          }
+        }
+      },
+      "stay": {
+        "titleStrong": "Soggiorni",
+        "subtitle": "Check-in, check-out, disponibilita e unita vuote",
+        "tabs": {
+          "daily": "Checklist giornaliera",
+          "range": "Intervallo date",
+          "available": "Notti disponibili",
+          "empty": "Unita vuote"
+        },
+        "daily": {
+          "tableTitle": "Attivita del giorno",
+          "stats": {
+            "checkinsToday": "Check-in oggi",
+            "checkoutsToday": "Check-out oggi",
+            "guestsInHouse": "Ospiti in casa"
+          },
+          "columns": {
+            "type": "Tipo",
+            "property": "Immobile",
+            "guest": "Ospite",
+            "guests": "Ospiti",
+            "nights": "Notti",
+            "source": "Canale"
+          },
+          "badges": {
+            "checkin": "Check-in",
+            "checkout": "Check-out",
+            "inhouse": "In casa"
+          }
+        },
+        "range": {
+          "tableTitle": "Prenotazioni nell'intervallo",
+          "stats": {
+            "bookings": "Prenotazioni",
+            "totalNights": "Totale notti",
+            "revenue": "Ricavi"
+          },
+          "columns": {
+            "checkIn": "Check-in",
+            "property": "Immobile",
+            "guest": "Ospite",
+            "source": "Canale",
+            "nights": "Notti",
+            "status": "Stato",
+            "amount": "Importo"
+          }
+        },
+        "available": {
+          "tableTitle": "Notti disponibili",
+          "stats": {
+            "activeProperties": "Immobili attivi",
+            "totalAvailable": "Notti disponibili totali",
+            "avgOccupancy": "Occupazione media"
+          },
+          "columns": {
+            "property": "Immobile",
+            "total": "Totale",
+            "booked": "Prenotate",
+            "available": "Disponibili",
+            "occupancy": "Occupazione"
+          }
+        },
+        "empty": {
+          "tableTitle": "Unita attualmente vuote",
+          "emptyMessage": "Tutte le unita sono occupate",
+          "stats": {
+            "emptyUnits": "Unita vuote",
+            "lostRevenue": "Ricavi potenziali persi al giorno",
+            "lostRevenueHint": "Stima a piena occupazione al prezzo base"
+          },
+          "columns": {
+            "property": "Immobile",
+            "type": "Tipo",
+            "zone": "Zona",
+            "basePrice": "Tariffa base",
+            "daysEmpty": "Giorni vuota"
+          }
+        }
+      }
+    },
+    "analytics": {
+      "titleStrong": "Analytics",
+      "subtitle": "Performance del portfolio - Anno {year}",
+      "kpis": {
+        "annualRevenue": "Ricavi annuali",
+        "totalBookings": "Prenotazioni totali",
+        "avgOccupancy": "Occupazione media",
+        "avgRate": "Tariffa media"
+      },
+      "monthlyRevenue": "Ricavi mensili",
+      "propertyPerformance": "Performance per immobile",
+      "bookingSources": "Canali di prenotazione",
+      "noData": "Nessun dato",
+      "loading": "Caricamento...",
+      "occupancy": "Occupazione",
+      "bookings": "Prenotazioni",
+      "avgPerNight": "Media",
+      "perNightSuffix": "/notte"
+    }
   }
 }

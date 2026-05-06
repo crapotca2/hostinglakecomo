@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Link } from "@/i18n/routing";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 import { ArrowLeft, CalendarDays, CreditCard, Receipt } from "lucide-react";
 import { ReportTable, type ReportColumn } from "@/components/reports/report-table";
 import { ReportFilters, presetToDateRange } from "@/components/reports/report-filters";
@@ -16,6 +17,8 @@ function formatEuro(amount: number): string {
 }
 
 export default function SummaryReportsPage() {
+  const t = useTranslations("dashboard.reports.summary");
+  const tCommon = useTranslations("dashboard.reports.common");
   const [tab, setTab] = useState<Tab>("bookings");
   const [preset, setPreset] = useState("ytd");
   const [{ from, to }, setRange] = useState(() => presetToDateRange("ytd"));
@@ -38,20 +41,20 @@ export default function SummaryReportsPage() {
   return (
     <div className="p-6 space-y-6 animate-fade-in">
       <Link href="/dashboard/reports" className="text-xs text-muted-foreground hover:text-foreground inline-flex items-center gap-1">
-        <ArrowLeft className="h-3 w-3" /> Tutti i report
+        <ArrowLeft className="h-3 w-3" /> {tCommon("backToReports")}
       </Link>
 
       <div>
         <h1 className="text-2xl font-light">
-          <span className="font-semibold">Summary Reports</span>
+          <span className="font-semibold">{t("titleStrong")}</span>
         </h1>
-        <p className="text-sm text-muted-foreground mt-1">Riepiloghi aggregati per periodo</p>
+        <p className="text-sm text-muted-foreground mt-1">{t("subtitle")}</p>
       </div>
 
       <div className="flex items-center gap-1 bg-white rounded-xl p-1 border border-border/50 w-fit">
-        <TabButton active={tab === "bookings"} onClick={() => setTab("bookings")} icon={CalendarDays} label="Bookings" />
-        <TabButton active={tab === "payments"} onClick={() => setTab("payments")} icon={CreditCard} label="Payments" />
-        <TabButton active={tab === "taxes"} onClick={() => setTab("taxes")} icon={Receipt} label="Taxes" />
+        <TabButton active={tab === "bookings"} onClick={() => setTab("bookings")} icon={CalendarDays} label={t("tabs.bookings")} />
+        <TabButton active={tab === "payments"} onClick={() => setTab("payments")} icon={CreditCard} label={t("tabs.payments")} />
+        <TabButton active={tab === "taxes"} onClick={() => setTab("taxes")} icon={Receipt} label={t("tabs.taxes")} />
       </div>
 
       <ReportFilters
@@ -85,6 +88,7 @@ function TabButton({ active, onClick, icon: Icon, label }: { active: boolean; on
 }
 
 function BookingsView({ rows, loading }: { rows: any[]; loading: boolean }) {
+  const t = useTranslations("dashboard.reports.summary.bookings");
   const totals = rows.reduce((s, r) => ({
     bookings: s.bookings + r.bookings,
     nights: s.nights + r.nights,
@@ -92,28 +96,29 @@ function BookingsView({ rows, loading }: { rows: any[]; loading: boolean }) {
   }), { bookings: 0, nights: 0, revenue: 0 });
 
   const columns: ReportColumn<any>[] = [
-    { key: "period", label: "Periodo" },
-    { key: "bookings", label: "Prenotazioni", align: "center", numeric: true },
-    { key: "nights", label: "Notti", align: "center", numeric: true },
-    { key: "guests", label: "Ospiti", align: "center", numeric: true },
-    { key: "avgStay", label: "Soggiorno medio", align: "center", numeric: true, render: (r) => `${r.avgStay} notti` },
-    { key: "avgRate", label: "ADR", align: "right", numeric: true, render: (r) => formatEuro(r.avgRate) },
-    { key: "revenue", label: "Revenue", align: "right", numeric: true, render: (r) => formatEuro(r.revenue) },
+    { key: "period", label: t("columns.period") },
+    { key: "bookings", label: t("columns.bookings"), align: "center", numeric: true },
+    { key: "nights", label: t("columns.nights"), align: "center", numeric: true },
+    { key: "guests", label: t("columns.guests"), align: "center", numeric: true },
+    { key: "avgStay", label: t("columns.avgStay"), align: "center", numeric: true, render: (r) => t("columns.avgStayValue", { n: r.avgStay }) },
+    { key: "avgRate", label: t("columns.adr"), align: "right", numeric: true, render: (r) => formatEuro(r.avgRate) },
+    { key: "revenue", label: t("columns.revenue"), align: "right", numeric: true, render: (r) => formatEuro(r.revenue) },
   ];
 
   return (
     <>
       <div className="grid grid-cols-3 gap-4">
-        <StatCard label="Prenotazioni" value={totals.bookings} loading={loading} />
-        <StatCard label="Notti vendute" value={totals.nights} loading={loading} />
-        <StatCard label="Revenue totale" value={formatEuro(totals.revenue)} loading={loading} />
+        <StatCard label={t("stats.bookings")} value={totals.bookings} loading={loading} />
+        <StatCard label={t("stats.nightsSold")} value={totals.nights} loading={loading} />
+        <StatCard label={t("stats.totalRevenue")} value={formatEuro(totals.revenue)} loading={loading} />
       </div>
-      <ReportTable title="Bookings per periodo" columns={columns} rows={rows} loading={loading} onExportCSV={() => downloadCSV("bookings-summary.csv", rows)} />
+      <ReportTable title={t("tableTitle")} columns={columns} rows={rows} loading={loading} onExportCSV={() => downloadCSV("bookings-summary.csv", rows)} />
     </>
   );
 }
 
 function PaymentsView({ rows, loading }: { rows: any[]; loading: boolean }) {
+  const t = useTranslations("dashboard.reports.summary.payments");
   const totals = rows.reduce((s, r) => ({
     count: s.count + r.count,
     succeeded: s.succeeded + r.succeeded,
@@ -122,29 +127,30 @@ function PaymentsView({ rows, loading }: { rows: any[]; loading: boolean }) {
   }), { count: 0, succeeded: 0, amount: 0, net: 0 });
 
   const columns: ReportColumn<any>[] = [
-    { key: "period", label: "Periodo" },
-    { key: "count", label: "Transazioni", align: "center", numeric: true },
-    { key: "succeeded", label: "Successful", align: "center", numeric: true },
-    { key: "failed", label: "Failed", align: "center", numeric: true },
-    { key: "refunded", label: "Refunds", align: "center", numeric: true },
-    { key: "totalAmount", label: "Lordo", align: "right", numeric: true, render: (r) => formatEuro(r.totalAmount) },
-    { key: "netAmount", label: "Netto", align: "right", numeric: true, render: (r) => formatEuro(r.netAmount) },
+    { key: "period", label: t("columns.period") },
+    { key: "count", label: t("columns.count"), align: "center", numeric: true },
+    { key: "succeeded", label: t("columns.succeeded"), align: "center", numeric: true },
+    { key: "failed", label: t("columns.failed"), align: "center", numeric: true },
+    { key: "refunded", label: t("columns.refunded"), align: "center", numeric: true },
+    { key: "totalAmount", label: t("columns.gross"), align: "right", numeric: true, render: (r) => formatEuro(r.totalAmount) },
+    { key: "netAmount", label: t("columns.net"), align: "right", numeric: true, render: (r) => formatEuro(r.netAmount) },
   ];
 
   return (
     <>
       <div className="grid grid-cols-4 gap-4">
-        <StatCard label="Transazioni" value={totals.count} loading={loading} />
-        <StatCard label="Successful" value={totals.succeeded} loading={loading} />
-        <StatCard label="Lordo" value={formatEuro(totals.amount)} loading={loading} />
-        <StatCard label="Netto (post-fee)" value={formatEuro(totals.net)} loading={loading} hint="Stima 2.9% Stripe fee" />
+        <StatCard label={t("stats.transactions")} value={totals.count} loading={loading} />
+        <StatCard label={t("stats.successful")} value={totals.succeeded} loading={loading} />
+        <StatCard label={t("stats.gross")} value={formatEuro(totals.amount)} loading={loading} />
+        <StatCard label={t("stats.net")} value={formatEuro(totals.net)} loading={loading} hint={t("stats.netHint")} />
       </div>
-      <ReportTable title="Payments per periodo" columns={columns} rows={rows} loading={loading} onExportCSV={() => downloadCSV("payments-summary.csv", rows)} />
+      <ReportTable title={t("tableTitle")} columns={columns} rows={rows} loading={loading} onExportCSV={() => downloadCSV("payments-summary.csv", rows)} />
     </>
   );
 }
 
 function TaxesView({ rows, loading }: { rows: any[]; loading: boolean }) {
+  const t = useTranslations("dashboard.reports.summary.taxes");
   const totals = rows.reduce((s, r) => ({
     tourist: s.tourist + r.touristTax,
     cedolare: s.cedolare + r.cedolareSeccaEstimate,
@@ -152,22 +158,22 @@ function TaxesView({ rows, loading }: { rows: any[]; loading: boolean }) {
   }), { tourist: 0, cedolare: 0, revenue: 0 });
 
   const columns: ReportColumn<any>[] = [
-    { key: "propertyName", label: "Proprieta'" },
-    { key: "bookings", label: "Bookings", align: "center", numeric: true },
-    { key: "guestNights", label: "Guest-nights", align: "center", numeric: true },
-    { key: "grossRevenue", label: "Revenue", align: "right", numeric: true, render: (r) => formatEuro(r.grossRevenue) },
-    { key: "touristTax", label: "Tassa soggiorno", align: "right", numeric: true, render: (r) => formatEuro(r.touristTax) },
-    { key: "cedolareSeccaEstimate", label: "Cedolare 21%", align: "right", numeric: true, render: (r) => formatEuro(r.cedolareSeccaEstimate) },
+    { key: "propertyName", label: t("columns.property") },
+    { key: "bookings", label: t("columns.bookings"), align: "center", numeric: true },
+    { key: "guestNights", label: t("columns.guestNights"), align: "center", numeric: true },
+    { key: "grossRevenue", label: t("columns.revenue"), align: "right", numeric: true, render: (r) => formatEuro(r.grossRevenue) },
+    { key: "touristTax", label: t("columns.tourist"), align: "right", numeric: true, render: (r) => formatEuro(r.touristTax) },
+    { key: "cedolareSeccaEstimate", label: t("columns.cedolare"), align: "right", numeric: true, render: (r) => formatEuro(r.cedolareSeccaEstimate) },
   ];
 
   return (
     <>
       <div className="grid grid-cols-3 gap-4">
-        <StatCard label="Tassa di soggiorno" value={formatEuro(totals.tourist)} loading={loading} />
-        <StatCard label="Cedolare secca (stima)" value={formatEuro(totals.cedolare)} loading={loading} hint="21% su revenue" />
-        <StatCard label="Revenue tassabile" value={formatEuro(totals.revenue)} loading={loading} />
+        <StatCard label={t("stats.tourist")} value={formatEuro(totals.tourist)} loading={loading} />
+        <StatCard label={t("stats.cedolare")} value={formatEuro(totals.cedolare)} loading={loading} hint={t("stats.cedolareHint")} />
+        <StatCard label={t("stats.taxableRevenue")} value={formatEuro(totals.revenue)} loading={loading} />
       </div>
-      <ReportTable title="Taxes per proprieta'" columns={columns} rows={rows} loading={loading} onExportCSV={() => downloadCSV("taxes-summary.csv", rows)} />
+      <ReportTable title={t("tableTitle")} columns={columns} rows={rows} loading={loading} onExportCSV={() => downloadCSV("taxes-summary.csv", rows)} />
     </>
   );
 }
