@@ -8,14 +8,12 @@ import {
   Users,
   ArrowRight,
   MapPin,
-  Bed,
-  Bath,
   ChevronRight,
   CheckCircle2,
 } from "lucide-react";
-import { getPortfolio, getZoneLabel, getTypeLabel } from "@/lib/portfolio";
+import { getPortfolio } from "@/lib/portfolio";
 import { PartnersBanner } from "@/components/public/partners-banner";
-import { PicWebp } from "@/components/ui/pic-webp";
+import { PropertyCard } from "@/components/public/property-card";
 
 const FEATURED_PROPERTIES = (() => {
   const all = getPortfolio();
@@ -258,62 +256,7 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {FEATURED_PROPERTIES.map((p) => (
-              <Link
-                key={p.slug}
-                href={`/properties/${p.slug}`}
-                className="group bg-white rounded-2xl overflow-hidden border border-border/50 card-hover"
-              >
-                <div className="relative h-56 overflow-hidden bg-muted">
-                  {p.images[0]?.url ? (
-                    <PicWebp
-                      src={p.images[0].url}
-                      alt={p.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/[0.08] to-primary/[0.02]">
-                      <Home className="h-10 w-10 text-primary/40" />
-                    </div>
-                  )}
-                  {p.details.hasLakeView && (
-                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-primary/90 text-white text-[10px] font-semibold uppercase tracking-wider backdrop-blur-sm">
-                      Vista Lago
-                    </span>
-                  )}
-                  <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-white/90 text-foreground text-[10px] font-semibold uppercase tracking-wider backdrop-blur-sm">
-                    {getTypeLabel(p.type)}
-                  </span>
-                </div>
-                <div className="p-5">
-                  <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1.5">
-                    <MapPin className="h-3 w-3" />
-                    {p.address.city} — {getZoneLabel(p.zone)}
-                  </div>
-                  <h3 className="text-base font-semibold text-foreground mb-3">
-                    {p.name}
-                  </h3>
-                  <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
-                    <span className="flex items-center gap-1">
-                      <Bed className="h-3.5 w-3.5" /> {p.details.bedrooms}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Bath className="h-3.5 w-3.5" /> {p.details.bathrooms}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Users className="h-3.5 w-3.5" /> {p.details.maxGuests}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-primary inline-flex items-center gap-1">
-                      Scopri di piu
-                      <ArrowRight className="h-3 w-3" />
-                    </span>
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground bg-muted/60 px-2 py-0.5 rounded-full">
-                      Gestita
-                    </span>
-                  </div>
-                </div>
-              </Link>
+              <PropertyCard key={p.slug} property={p} />
             ))}
           </div>
         </div>

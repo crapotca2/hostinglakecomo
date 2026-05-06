@@ -1,0 +1,51 @@
+name: Refresh Airbnb listings
+
+# Scaffold per il refresh periodico dei dati Airbnb (rating, recensioni).
+# Per ora trigger manuale dalla UI di GitHub Actions ("Run workflow").
+# La cron sara abilitata quando il dominio definitivo sara configurato.
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: "0 6 * * 1"  # ogni lunedi 06:00 UTC
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright (script-only)
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+
+      - name: Refresh listings
+        run: node scripts/refresh-airbnb-listings.mjs
+        env:
+          NODE_OPTIONS: --no-warnings
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/properties.json
+          if git diff --staged --quiet; then
+            echo "Nessun cambiamento da committare."
+          else
+            git commit -m "data: refresh Airbnb listings (rating, recensioni)"
+            git push
+          fi
