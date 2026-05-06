@@ -789,7 +789,21 @@
       "mapOpen": "Apri in Google Maps",
       "ctaIntroPart1": "Questa è una delle proprietà che il team Hosting Lake Como gestisce oggi: lo stesso metodo — hospitality, operations e revenue management — lo applichiamo agli immobili dei nostri clienti. ",
       "ctaIntroLink": "Richiedi una consulenza",
-      "ctaIntroPart2": "."
+      "ctaIntroPart2": ".",
+      "airbnbReview": {
+        "lovedTitle": "Amato dagli ospiti",
+        "lovedBody": "Questa proprietà è una delle più amate dagli ospiti in base a valutazioni, recensioni e affidabilità.",
+        "categories": {
+          "cleanliness": "Pulizia",
+          "accuracy": "Precisione",
+          "communication": "Comunicazione",
+          "location": "Posizione",
+          "value": "Qualità/prezzo"
+        },
+        "ctaPrefix": "Leggi le",
+        "ctaSuffix": "recensioni reali su Airbnb",
+        "disclaimer": "Valutazioni e recensioni pubbliche raccolte dalla scheda originale Airbnb di questa proprietà."
+      }
     }
   },
   "login": {

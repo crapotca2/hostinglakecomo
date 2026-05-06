@@ -1,17 +1,15 @@
 "use client";
 
 import { ExternalLink } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-const CATEGORIES: {
-  key: keyof CategoryRatings;
-  label: string;
-}[] = [
-  { key: "cleanliness", label: "Pulizia" },
-  { key: "accuracy", label: "Precisione" },
-  { key: "communication", label: "Comunicazione" },
-  { key: "location", label: "Posizione" },
-  { key: "value", label: "Qualita/prezzo" },
-];
+const CATEGORY_KEYS = [
+  "cleanliness",
+  "accuracy",
+  "communication",
+  "location",
+  "value",
+] as const;
 
 export type CategoryRatings = {
   cleanliness?: number;
@@ -62,7 +60,8 @@ export function AirbnbReviewBlock({
   lovedByGuests?: boolean;
   airbnbUrl: string;
 }) {
-  const hasAnyCategory = CATEGORIES.some((c) => categories[c.key] != null);
+  const t = useTranslations("properties.detail.airbnbReview");
+  const hasAnyCategory = CATEGORY_KEYS.some((k) => categories[k] != null);
 
   return (
     <div className="bg-white rounded-2xl p-6 sm:p-10 border border-border/50">
@@ -76,26 +75,25 @@ export function AirbnbReviewBlock({
 
       {lovedByGuests && (
         <div className="text-center mb-2">
-          <h3 className="text-xl sm:text-2xl font-semibold">Amato dagli ospiti</h3>
+          <h3 className="text-xl sm:text-2xl font-semibold">{t("lovedTitle")}</h3>
           <p className="text-sm text-muted-foreground max-w-md mx-auto mt-2 leading-relaxed">
-            Questa proprieta e una delle piu amate dagli ospiti in base a
-            valutazioni, recensioni e affidabilita.
+            {t("lovedBody")}
           </p>
         </div>
       )}
 
       {hasAnyCategory && (
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-x-4 gap-y-6 mt-8 pt-8 border-t border-border/40">
-          {CATEGORIES.map((cat) => {
-            const v = categories[cat.key];
+          {CATEGORY_KEYS.map((key) => {
+            const v = categories[key];
             if (v == null) return null;
             return (
               <div
-                key={cat.key}
+                key={key}
                 className="flex flex-col items-center text-center gap-2"
               >
                 <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-                  {cat.label}
+                  {t(`categories.${key}`)}
                 </div>
                 <div className="text-2xl font-semibold tabular-nums">
                   <Score value={v} />
@@ -113,12 +111,11 @@ export function AirbnbReviewBlock({
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-border bg-white text-sm font-semibold hover:bg-muted/40 transition-colors"
         >
-          Leggi le {reviewCount} recensioni reali su Airbnb
+          {t("ctaPrefix")} {reviewCount} {t("ctaSuffix")}
           <ExternalLink className="h-3.5 w-3.5" />
         </a>
         <p className="text-[11px] text-muted-foreground mt-3">
-          Valutazioni e recensioni pubbliche raccolte dalla scheda originale
-          Airbnb di questa proprieta.
+          {t("disclaimer")}
         </p>
       </div>
     </div>

@@ -13,8 +13,9 @@ import {
   Star,
   Navigation,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { getPortfolioEntry } from "@/lib/portfolio";
+import { pickLocalized } from "@/lib/i18n-data";
 import { AirbnbReviewBlock } from "@/components/public/airbnb-review-block";
 import { GoogleMapEmbed } from "@/components/public/google-map-embed";
 import { PropertyGallery } from "@/components/public/property-gallery";
@@ -53,6 +54,7 @@ function MapEmbed({ lat, lng, name }: { lat: number; lng: number; name: string }
 export default function PropertyDetailPage() {
   const t = useTranslations("properties");
   const tDetail = useTranslations("properties.detail");
+  const locale = useLocale();
   const params = useParams<{ slug: string }>();
   const slug = params.slug;
   const property = getPortfolioEntry(slug);
@@ -77,7 +79,22 @@ export default function PropertyDetailPage() {
     );
   }
 
-  const sections = property.sections ?? {};
+  const sectionsRaw = (property.sections ?? {}) as Record<string, unknown>;
+  const sections = {
+    space: pickLocalized<string>(sectionsRaw, "space", locale),
+    neighborhood: pickLocalized<string>(sectionsRaw, "neighborhood", locale),
+  };
+  const description =
+    pickLocalized<string>(
+      property as unknown as Record<string, unknown>,
+      "description",
+      locale,
+    ) ?? property.description;
+  const descriptionLong = pickLocalized<string>(
+    property as unknown as Record<string, unknown>,
+    "descriptionLong",
+    locale,
+  );
   const geo = property.geo;
   const airbnbListing = property.airbnbListing;
 
@@ -86,7 +103,7 @@ export default function PropertyDetailPage() {
     "@context": "https://schema.org",
     "@type": "Accommodation",
     name: property.name,
-    description: property.descriptionLong || property.description,
+    description: descriptionLong || description,
     image: property.images
       .slice(0, 8)
       .map((img) => `${SITE_URL}${img.url}`),
@@ -188,9 +205,9 @@ export default function PropertyDetailPage() {
                 </span>
               )}
             </div>
-            {property.description && (
+            {description && (
               <p className="text-sm text-muted-foreground mt-4 leading-relaxed">
-                {property.description}
+                {description}
               </p>
             )}
 
@@ -240,7 +257,7 @@ export default function PropertyDetailPage() {
               />
             )}
 
-          {!sections.space && !sections.neighborhood && property.descriptionLong && (
+          {!sections.space && !sections.neighborhood && descriptionLong && (
             <div className="bg-white rounded-2xl p-5 sm:p-6 border border-border/50">
               <div className="flex items-center gap-2 mb-3">
                 <div className="h-8 w-8 rounded-lg bg-primary/[0.08] flex items-center justify-center">
@@ -249,7 +266,7 @@ export default function PropertyDetailPage() {
                 <h2 className="text-sm font-semibold">{tDetail("descriptionTitle")}</h2>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
-                {property.descriptionLong}
+                {descriptionLong}
               </p>
             </div>
           )}

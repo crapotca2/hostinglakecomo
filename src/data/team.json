@@ -4,58 +4,85 @@
       "id": "angelo",
       "name": "Angelo",
       "role": "Property Manager",
+      "role_en": "Property Manager",
       "shortRole": "Accoglienza",
       "yearsExperience": 9,
       "isSuperhost": true,
       "profilePicture": "/images/host/Angelo.jpeg",
       "airbnbProfileUrl": "https://www.airbnb.it/users/profile/1462513131563105498",
       "bio": "Gestore con anni di esperienza diretta sul Lago di Como. Superhost Airbnb dal 2017 con tasso di risposta del 100%. Cura l'esperienza ospite e la qualita complessiva del servizio.",
+      "bio_en": "Property Manager with years of hands-on experience on Lake Como. Airbnb Superhost since 2017 with a 100% response rate. Looks after the guest experience and the overall quality of the service.",
       "highlights": [
         "Superhost Airbnb dal 2017",
         "Tasso di risposta 100%",
         "Oltre 350 recensioni positive",
         "Anni di ospitalita diretta sul Lago",
         "Italiano e inglese fluenti"
+      ],
+      "highlights_en": [
+        "Airbnb Superhost since 2017",
+        "100% response rate",
+        "Over 350 positive reviews",
+        "Years of first-hand hospitality on the lake",
+        "Fluent Italian and English"
       ]
     },
     {
       "id": "operations",
       "name": null,
       "role": "Responsabile Operativita e Adempimenti",
+      "role_en": "Operations and Compliance Lead",
       "shortRole": "Operativita",
       "yearsExperience": null,
       "isSuperhost": false,
       "profilePicture": null,
       "airbnbProfileUrl": null,
       "bio": "Coordina pulizie professionali, manutenzioni programmate e ispezioni periodiche delle proprieta. Gestisce gli adempimenti normativi: CIN, comunicazione Questura via Alloggiati Web, ISTAT, tassa di soggiorno, archivio documentale.",
+      "bio_en": "Coordinates professional cleaning, scheduled maintenance and periodic property inspections. Handles regulatory compliance: CIN, police reporting via Alloggiati Web, ISTAT, tourist tax and document archiving.",
       "highlights": [
         "Network pulizie e manutenzione",
         "Adempimenti CIN/Questura/ISTAT",
         "Ispezioni e controllo qualita",
         "Reperibilita 24/7"
+      ],
+      "highlights_en": [
+        "Cleaning and maintenance network",
+        "CIN, police and ISTAT compliance",
+        "Inspections and quality control",
+        "24/7 on-call availability"
       ]
     },
     {
       "id": "revenue",
       "name": null,
       "role": "Responsabile Tariffe e Canali",
+      "role_en": "Pricing and Channels Lead",
       "shortRole": "Tariffe",
       "yearsExperience": null,
       "isSuperhost": false,
       "profilePicture": null,
       "airbnbProfileUrl": null,
       "bio": "Definisce la strategia di tariffe dinamiche e la distribuzione su piu canali. Monitora occupazione, tariffa media e ricavi per camera; ottimizza gli annunci su Airbnb, Booking, Expedia e gli altri principali portali del mercato; cura foto, descrizioni e indicizzazione delle inserzioni.",
+      "bio_en": "Defines the dynamic pricing strategy and the distribution across multiple channels. Monitors occupancy, average daily rate and revenue per room; optimises listings on Airbnb, Booking, Expedia and the other leading market portals; curates photography, copy and listing indexing.",
       "highlights": [
         "Tariffe dinamiche basate sui dati",
         "Distribuzione su 10+ canali",
         "Ottimizzazione annunci e indicizzazione",
         "Reportistica mensile per i proprietari"
+      ],
+      "highlights_en": [
+        "Data-driven dynamic pricing",
+        "Distribution across 10+ channels",
+        "Listing optimisation and indexing",
+        "Monthly reporting for owners"
       ]
     }
   ],
   "summary": {
     "headline": "Gestori specialisti sul Lago di Como",
+    "headline_en": "Specialist Property Managers on Lake Como",
     "subline": "Tre gestori specializzati nella gestione, pulizia e organizzazione di immobili per ospiti internazionali.",
+    "subline_en": "Three specialists managing, cleaning and organising properties for international guests.",
     "experience": {
       "yearsCombined": 9,
       "primarySuperhost": true,

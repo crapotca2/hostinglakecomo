@@ -6,8 +6,9 @@ import {
   LineChart,
   ShieldCheck,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import team from "@/data/team.json";
+import { pickLocalized } from "@/lib/i18n-data";
 
 const COMPETENCE_AREAS = [
   { key: "accoglienza", icon: Sparkles },
@@ -21,6 +22,7 @@ export default function AboutPage() {
   const tComp = useTranslations("about.competenceAreas");
   const tTeam = useTranslations("about.team");
   const tSpot = useTranslations("about.team.spotlight");
+  const locale = useLocale();
 
   return (
     <div className="pt-20">
@@ -104,6 +106,11 @@ export default function AboutPage() {
           {(() => {
             const angelo = team.members.find((m) => m.id === "angelo");
             if (!angelo) return null;
+            const role = pickLocalized<string>(angelo, "role", locale) ?? angelo.role;
+            const bio = pickLocalized<string>(angelo, "bio", locale) ?? angelo.bio;
+            const highlights =
+              pickLocalized<string[]>(angelo, "highlights", locale) ??
+              angelo.highlights;
             return (
               <div className="bg-white rounded-3xl border border-border/50 shadow-sm overflow-hidden grid md:grid-cols-[5fr_7fr] max-w-4xl mx-auto">
                 <div className="aspect-square md:aspect-auto bg-muted relative overflow-hidden">
@@ -111,7 +118,7 @@ export default function AboutPage() {
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={angelo.profilePicture}
-                      alt={`${angelo.name} — ${angelo.role}`}
+                      alt={`${angelo.name} — ${role}`}
                       className="w-full h-full object-cover"
                     />
                   )}
@@ -129,14 +136,10 @@ export default function AboutPage() {
                     {tSpot("eyebrow")}
                   </span>
                   <h3 className="text-2xl font-semibold mb-1">{angelo.name}</h3>
-                  <p className="text-sm text-muted-foreground mb-5">
-                    {angelo.role}
-                  </p>
-                  <p className="text-foreground leading-relaxed mb-5">
-                    {angelo.bio}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-5">{role}</p>
+                  <p className="text-foreground leading-relaxed mb-5">{bio}</p>
                   <ul className="space-y-2 mb-6">
-                    {angelo.highlights.map((h) => (
+                    {highlights.map((h) => (
                       <li
                         key={h}
                         className="flex items-start gap-2.5 text-sm"
