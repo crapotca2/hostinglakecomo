@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { TrendingUp, Euro, Calendar, Percent, Home } from "lucide-react";
+import { TrendingUp, Calendar, Home, Wallet, Landmark, Receipt, Coins, BadgeEuro } from "lucide-react";
 import { AirBibbyEstimateCard } from "@/components/strumenti/air-bibby-estimate-card";
 import { DisclaimerNote } from "@/components/strumenti/disclaimer-note";
 import { FullAnalysisCTA } from "@/components/strumenti/full-analysis-cta";
@@ -192,20 +192,43 @@ export default function InvestimentoPage() {
                   </div>
                 </div>
 
+                <div
+                  className={`rounded-2xl p-6 text-white shadow-lg ${
+                    result.annualCashFlow >= 0
+                      ? "bg-gradient-to-br from-primary to-primary/80"
+                      : "bg-gradient-to-br from-red-600 to-red-500"
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <div className="flex items-center gap-2 text-white/70 text-xs uppercase tracking-wider mb-2">
+                        <Wallet className="h-3.5 w-3.5" />
+                        Flusso di cassa annuo
+                      </div>
+                      <div className="text-4xl font-bold mb-1">
+                        {result.annualCashFlow >= 0 ? "+" : ""}
+                        {formatEuro(result.annualCashFlow)}
+                      </div>
+                      <div className="text-white/80 text-xs">
+                        Cassa netta annua dopo mutuo, costi operativi e spese.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="bg-muted/30 rounded-2xl border border-border/40">
                   <div className="px-6 py-4 border-b border-border/40">
                     <h3 className="text-sm font-semibold">Dettaglio economico annuale</h3>
                   </div>
                   <div className="divide-y divide-border/30">
                     <Row label="Investimento totale" value={formatEuro(result.totalInvestment)} icon={Home} />
-                    <Row label="Anticipo" value={formatEuro(result.downPayment)} icon={Euro} muted />
-                    <Row label="Mutuo" value={formatEuro(result.mortgageAmount)} icon={Euro} muted />
+                    <Row label="Anticipo" value={formatEuro(result.downPayment)} icon={Wallet} muted />
+                    <Row label="Mutuo" value={formatEuro(result.mortgageAmount)} icon={Landmark} muted />
                     <Row label="Rata mensile mutuo" value={formatEuro(result.monthlyPayment)} icon={Calendar} />
                     <Row label="Ricavi annui lordi" value={formatEuro(annualRevenue)} icon={TrendingUp} />
-                    <Row label="Costi operativi" value={`-${formatEuro(result.annualOperatingCosts)}`} icon={Euro} negative />
-                    <Row label="Reddito operativo netto" value={formatEuro(result.noi)} icon={Euro} bold />
-                    <Row label="Mutuo annuo" value={`-${formatEuro(result.annualMortgage)}`} icon={Euro} negative />
-                    <Row label="Flusso di cassa annuo" value={formatEuro(result.annualCashFlow)} icon={Percent} bold highlight={result.annualCashFlow >= 0} />
+                    <Row label="Costi operativi" value={`-${formatEuro(result.annualOperatingCosts)}`} icon={Receipt} negative />
+                    <Row label="Reddito operativo netto" value={formatEuro(result.noi)} icon={Coins} bold />
+                    <Row label="Mutuo annuo" value={`-${formatEuro(result.annualMortgage)}`} icon={BadgeEuro} negative />
                   </div>
                 </div>
               </div>
