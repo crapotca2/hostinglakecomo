@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { Cookie, X } from "lucide-react";
 
 const STORAGE_KEY = "hlc-cookie-consent";

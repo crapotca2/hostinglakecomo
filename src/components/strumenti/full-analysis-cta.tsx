@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
 
 export function FullAnalysisCTA({ slug }: { slug: string }) {
