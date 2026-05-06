@@ -31,7 +31,7 @@ export default function AboutPage() {
           className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
         />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid lg:grid-cols-[6fr_5fr] gap-10 lg:gap-14">
+          <div className="grid lg:grid-cols-[6fr_5fr] gap-10 lg:gap-14 items-center">
             <div className="space-y-5 leading-relaxed">
               <p className="text-lg">
                 Hosting Lake Como e una realta specializzata di tre gestori

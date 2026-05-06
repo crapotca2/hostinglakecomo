@@ -17,7 +17,6 @@ const INTEREST_OPTIONS: { value: string; label: string }[] = [
 function ContactForm() {
   const searchParams = useSearchParams();
   const requestedInterest = searchParams.get("interest") ?? "";
-  const from = searchParams.get("from") ?? "";
   const initialInterest = INTEREST_OPTIONS.some((o) => o.value === requestedInterest)
     ? requestedInterest
     : "gestione";
@@ -52,11 +51,6 @@ function ContactForm() {
       className="bg-white rounded-2xl p-8 border border-border/50 shadow-[0_25px_60px_-12px_rgba(29,58,98,0.45)] space-y-5"
     >
       <h2 className="text-xl font-semibold mb-2">Invia un Messaggio</h2>
-      {from && (
-        <div className="text-xs text-muted-foreground bg-primary/[0.04] border border-primary/10 rounded-lg px-3 py-2">
-          Richiesta proveniente da: <span className="font-semibold">{from}</span>
-        </div>
-      )}
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
           <label className="text-sm font-medium mb-1.5 block">Nome</label>
