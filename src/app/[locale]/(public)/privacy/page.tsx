@@ -6,7 +6,7 @@ const LAST_UPDATED = "5 maggio 2026";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Informativa sul trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR) per gli utenti del sito Host Como.",
+    "Informativa sul trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR) per gli utenti del sito Como Host.",
   robots: { index: false, follow: true },
 };
 

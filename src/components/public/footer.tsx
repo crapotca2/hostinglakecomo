@@ -1,10 +1,13 @@
 import { Link } from "@/i18n/routing";
 import { Phone, Mail } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { brandName } from "@/lib/seo";
 
 export function Footer() {
   const t = useTranslations("footer");
   const tn = useTranslations("nav");
+  const locale = useLocale();
+  const brand = brandName(locale);
 
   return (
     <footer className="relative overflow-hidden bg-[#1D3A62]">
@@ -20,10 +23,10 @@ export function Footer() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/logo/logo-white.png"
-                alt="Host Como"
+                alt={brand}
                 className="h-14 w-14 object-contain"
               />
-              <span className="text-xl font-semibold text-white">Host Como</span>
+              <span className="text-xl font-semibold text-white">{brand}</span>
             </div>
             <p className="text-base leading-relaxed text-white font-medium">
               {t("tagline")}

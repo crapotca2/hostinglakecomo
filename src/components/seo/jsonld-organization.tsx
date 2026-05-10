@@ -17,6 +17,7 @@ export function JsonLdOrganization() {
         "@type": "Organization",
         "@id": `${SITE_URL}/#organization`,
         name: BRAND_NAME,
+        alternateName: ["Como Host"],
         url: SITE_URL,
         logo: `${SITE_URL}/images/logo/logo-marble.png`,
         email: ORG_EMAIL,

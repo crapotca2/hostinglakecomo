@@ -14,10 +14,10 @@
     "ctaShort": "Consulenza",
     "openMenu": "Apri menu",
     "closeMenu": "Chiudi menu",
-    "homeAriaLabel": "Host Como — home"
+    "homeAriaLabel": "Como Host — home"
   },
   "footer": {
-    "tagline": "L'ospitalita non si improvvisa, affidati a un professionista.",
+    "tagline": "L'ospitalità non si improvvisa, affidati a un professionista.",
     "description": "Consultaci per valutare il potenziale di rendita del tuo immobile sul Lago di Como. Ti rispondiamo entro 48 ore con un'analisi personalizzata e senza impegno.",
     "navigateTitle": "Naviga",
     "legalTitle": "Legale",
@@ -75,21 +75,21 @@
       "location": "Lago di Como, Italia",
       "title1": "Il tuo immobile,",
       "title2": "il nostro mestiere.",
-      "subtitle": "Gestione professionale di immobili sul Lago di Como. Un team di property manager con anni di esperienza diretta sul Lago di Como. Gestiamo la tua proprieta su tutti i canali, in ogni stagione.",
+      "subtitle": "Gestione professionale di immobili sul Lago di Como. Un team di property manager con anni di esperienza diretta sul Lago di Como. Gestiamo la tua proprietà su tutti i canali, in ogni stagione.",
       "ctaPrimary": "Affidati a noi",
       "ctaSecondary": "Scopri i servizi"
     },
     "multiChannel": {
       "title1": "Una sola gestione,",
       "title2": "tutte le piattaforme",
-      "body": "Registriamo la tua proprieta sui principali canali del mercato e adattiamo la formula di affitto stagione per stagione. In alta stagione lavoriamo con i brevi soggiorni turistici, in bassa stagione passiamo a locazioni medio-lunghe quando piu convenienti. La tua casa resta in attivita 365 giorni l'anno, con un unico interlocutore.",
+      "body": "Registriamo la tua proprietà sui principali canali del mercato e adattiamo la formula di affitto stagione per stagione. In alta stagione lavoriamo con i brevi soggiorni turistici, in bassa stagione passiamo a locazioni medio-lunghe quando piu convenienti. La tua casa resta in attività 365 giorni l'anno, con un unico interlocutore.",
       "bullets": [
         "Distribuzione su Airbnb, Booking, Expedia e altri principali portali del mercato",
         "Tariffe dinamiche calibrate sulle dinamiche di mercato in tempo reale",
         "Affitti brevi nei picchi turistici, locazioni medio-lunghe in bassa stagione",
         "Calendario unificato e zero sovrapposizioni grazie alla sincronizzazione canali"
       ],
-      "imageAlt": "Host Como — calendario unificato e gestione multi-piattaforma",
+      "imageAlt": "Como Host — calendario unificato e gestione multi-piattaforma",
       "yearsBadgeYears": "9+",
       "yearsBadgeText": "anni di esperienza\nda property manager a tua disposizione"
     },
@@ -113,7 +113,7 @@
         },
         "hospitality": {
           "title": "Accoglienza 5 Stelle",
-          "desc": "Check-in professionale, pulizia certificata, biancheria di qualita. Ogni ospite vive un'esperienza premium."
+          "desc": "Check-in professionale, pulizia certificata, biancheria di qualità. Ogni ospite vive un'esperienza premium."
         },
         "promotion": {
           "title": "Promozione Multi-Canale",
@@ -126,14 +126,14 @@
       }
     },
     "featuredProperties": {
-      "title1": "La proprieta che",
+      "title1": "La proprietà che",
       "title2": "gestiamo oggi"
     },
     "simulators": {
       "title1": "Stima il",
       "title2": "potenziale",
       "title3": "del tuo immobile",
-      "subtitle": "Tre simulatori per farti un'idea concreta del valore della tua proprieta sul Lago di Como. Stime preliminari basate sul nostro database storico — il valore effettivo richiede un'analisi dedicata con i nostri dati interni e l'algoritmo di tariffazione proprietario.",
+      "subtitle": "Tre simulatori per farti un'idea concreta del valore della tua proprietà sul Lago di Como. Stime preliminari basate sul nostro database storico — il valore effettivo richiede un'analisi dedicata con i nostri dati interni e l'algoritmo di tariffazione proprietario.",
       "rendita": {
         "name": "Simulatore Rendita",
         "desc": "Stima preliminare del potenziale di reddito del tuo immobile sul Lago di Como in base a zona, tipologia e caratteristiche."
@@ -149,7 +149,7 @@
     },
     "ctaBanner": {
       "title": "Affidaci la tua casa sul Lago",
-      "subtitleLine1": "Vuoi sapere quanto puo rendere la tua proprieta?",
+      "subtitleLine1": "Vuoi sapere quanto puo rendere la tua proprietà?",
       "subtitleLine2": "Ti contatteremo entro 48 ore."
     }
   },
@@ -165,7 +165,7 @@
       "section1": {
         "title1": "Tool dedicati per",
         "title2": "risultati concreti",
-        "body": "Una suite di strumenti operativi pensata per chi affida la gestione del proprio immobile a Host Como. Risparmia tempo, alza la qualita dell'esperienza ospite e mantieni il controllo della tua proprieta.",
+        "body": "Una suite di strumenti operativi pensata per chi affida la gestione del proprio immobile a Como Host. Risparmia tempo, alza la qualità dell'esperienza ospite e mantieni il controllo della tua proprietà.",
         "bullets": [
           "Generatore di nomi creativi per la tua casa vacanza",
           "Welcome letter multilingua pronte all'uso",
@@ -202,7 +202,7 @@
           },
           "istruzioniArrivoVideo": {
             "name": "Istruzioni Arrivo con Video",
-            "desc": "Video-guida per raggiungere la proprieta nella lingua nativa dell'ospite: spiegazioni passo-passo con riprese reali del percorso."
+            "desc": "Video-guida per raggiungere la proprietà nella lingua nativa dell'ospite: spiegazioni passo-passo con riprese reali del percorso."
           },
           "listingOptimizer": {
             "name": "Listing Optimizer",
@@ -218,7 +218,7 @@
           },
           "logo": {
             "name": "Logo Creator",
-            "desc": "Genera un'identita visiva professionale per la tua casa vacanza in pochi passi."
+            "desc": "Genera un'identità visiva professionale per la tua casa vacanza in pochi passi."
           }
         }
       },
@@ -226,7 +226,7 @@
         "title1": "Vuoi accedere agli",
         "title2": "strumenti operativi",
         "title3": "?",
-        "subtitle": "La suite completa di strumenti — generatore nomi, welcome letter multilingua, percorsi Google Maps, dynamic pricing — riservata ai proprietari in gestione con Host Como.",
+        "subtitle": "La suite completa di strumenti — generatore nomi, welcome letter multilingua, percorsi Google Maps, dynamic pricing — riservata ai proprietari in gestione con Como Host.",
         "button": "Richiedi Consulenza"
       }
     },
@@ -234,10 +234,10 @@
       "title1": "Calcolatore",
       "title2": "Rendita",
       "subtitle": "Stima quanto puo guadagnare il tuo immobile sul Lago di Como",
-      "formTitle": "Dettagli proprieta",
+      "formTitle": "Dettagli proprietà",
       "fields": {
         "zone": "Zona",
-        "propertyType": "Tipo proprieta",
+        "propertyType": "Tipo proprietà",
         "surface": "Superficie",
         "bedrooms": "Camere da letto",
         "maxGuests": "Ospiti massimi",
@@ -272,7 +272,7 @@
         "propertyValueBreakdown": "{surface} m² × {price}/m² ({zone})",
         "grossYieldLabel": "Rendimento lordo",
         "grossYieldFootnote": "Ricavi / valore",
-        "comparisonTitle": "Gestione autonoma vs Host Como",
+        "comparisonTitle": "Gestione autonoma vs Como Host",
         "comparisonSubtitle": "Confronto indicativo sui margini netti annui",
         "selfTitle": "Gestione autonoma",
         "selfBullets": [
@@ -281,7 +281,7 @@
           "• Senza tariffazione dinamica",
           "• Tempo richiesto: alto"
         ],
-        "abTitle": "Con Host Como",
+        "abTitle": "Con Como Host",
         "abBullets": [
           "• Commissione tutto compreso",
           "• Tariffe e occupazione ottimizzate",
@@ -289,7 +289,7 @@
           "• Tempo richiesto: zero"
         ],
         "extraTitle": "Guadagno extra indicativo all'anno",
-        "extraSubtitle": "Differenza tra il margine netto con Host Como e quello in gestione autonoma."
+        "extraSubtitle": "Differenza tra il margine netto con Como Host e quello in gestione autonoma."
       }
     },
     "investimento": {
@@ -368,29 +368,29 @@
     },
     "lock": {
       "common": {
-        "areaBadge": "Area Clienti Host Como",
+        "areaBadge": "Area Clienti Como Host",
         "headline": "Riservato ai proprietari in gestione",
         "includesTitle": "Cosa include",
         "accessTitle": "Accedi all'area clienti",
-        "accessHint": "Disponibile per i proprietari in gestione con Host Como.",
+        "accessHint": "Disponibile per i proprietari in gestione con Como Host.",
         "loginButton": "Accedi",
         "manageButton": "Vuoi gestire con noi?"
       },
       "nomeProprieta": {
         "title": "Nome Proprieta",
         "tagline": "Generatore creativo per il naming della tua casa vacanza",
-        "description": "Il nostro team naming costruisce per ogni proprieta un'identita verbale coerente con la zona, il target di clientela e il posizionamento premium sul Lago di Como.",
+        "description": "Il nostro team naming costruisce per ogni proprietà un'identità verbale coerente con la zona, il target di clientela e il posizionamento premium sul Lago di Como.",
         "bullets": [
           "Analisi del posizionamento competitivo della zona",
           "Proposta di 6-10 nomi con rationale linguistico e culturale",
           "Verifica disponibilita dominio e handle social",
-          "Coerenza con identita visiva e tono di voce della gestione Host Como"
+          "Coerenza con identità visiva e tono di voce della gestione Como Host"
         ]
       },
       "welcomeLetter": {
         "title": "Welcome Letter",
         "tagline": "Lettera di benvenuto multilingua per i tuoi ospiti",
-        "description": "Per ogni proprieta in gestione predisponiamo una welcome letter firmata, tradotta in quattro lingue e calibrata sul profilo dell'ospite. E' parte del kit di accoglienza Host Como, non un template generico.",
+        "description": "Per ogni proprietà in gestione predisponiamo una welcome letter firmata, tradotta in quattro lingue e calibrata sul profilo dell'ospite. E' parte del kit di accoglienza Como Host, non un template generico.",
         "bullets": [
           "Tono di voce personalizzato per tipologia di ospite (coppie, famiglie, business)",
           "Istruzioni check-in/check-out, WiFi e regole casa integrate",
@@ -400,8 +400,8 @@
       },
       "percorsoMaps": {
         "title": "Percorso Google Maps",
-        "tagline": "Link ottimizzato per guidare gli ospiti alla tua proprieta",
-        "description": "Per ogni proprieta in gestione Host Como genera un link Google Maps curato: coordinate esatte, waypoint con riferimenti visivi e indicazioni dedicate ai parcheggi pubblici. Non un semplice pin automatico, ma un percorso verificato dal nostro team.",
+        "tagline": "Link ottimizzato per guidare gli ospiti alla tua proprietà",
+        "description": "Per ogni proprietà in gestione Como Host genera un link Google Maps curato: coordinate esatte, waypoint con riferimenti visivi e indicazioni dedicate ai parcheggi pubblici. Non un semplice pin automatico, ma un percorso verificato dal nostro team.",
         "bullets": [
           "Pin sulla posizione esatta dell'ingresso, non del civico catastale",
           "Waypoint per parcheggi pubblici e zone ZTL in prossimita",
@@ -416,19 +416,19 @@
       "title1": "Gestori",
       "title1Strong": "specialisti",
       "title2": "sul Lago di Como",
-      "subtitle": "Tre gestori specializzati nella gestione, pulizia e organizzazione di immobili per ospiti internazionali. Una sola realta dedicata, con esperienza certificata Superhost dal 2017."
+      "subtitle": "Tre gestori specializzati nella gestione, pulizia e organizzazione di immobili per ospiti internazionali. Una sola realtà dedicata, con esperienza certificata Superhost dal 2017."
     },
     "narrative": {
-      "p1Prefix": "Host Como e una realta specializzata di tre gestori dedicati alla ",
+      "p1Prefix": "Como Host è una realtà specializzata di tre gestori dedicati alla ",
       "p1Strong1": "gestione, alla pulizia e all'organizzazione",
-      "p1Mid": " degli immobili dei nostri clienti, con focus specifico sul ",
+      "p1Mid": " degli immobili dei nostri clienti — perlopiù proprietari internazionali con seconda casa sul Lago — con focus specifico sul ",
       "p1Strong2": "mercato internazionale",
       "p1Suffix": " che frequenta il Lago di Como ogni anno.",
       "p2Prefix": "Il nostro lavoro poggia su ",
-      "p2Strong1": "oltre nove anni di ospitalita diretta sul Lago",
+      "p2Strong1": "oltre nove anni di ospitalità diretta sul Lago",
       "p2Mid": " e sulla certificazione ",
       "p2Strong2": "Superhost di Airbnb dal 2017",
-      "p2Suffix": ". Le competenze sono distribuite su tre aree complementari, in modo che ogni proprieta riceva l'attenzione dello specialista giusto in ogni momento, mentre il proprietario mantiene un solo interlocutore.",
+      "p2Suffix": ". Le competenze sono distribuite su tre aree complementari, in modo che ogni proprietà riceva l'attenzione dello specialista giusto in ogni momento, mentre il proprietario mantiene un solo interlocutore.",
       "p3": "Lavoriamo esclusivamente sul Lago di Como: conosciamo le zone, i ristoranti, i battelli, i tempi del traghetto, le abitudini dei turisti che arrivano in primavera e di quelli che restano fino a fine ottobre."
     },
     "competenceAreas": {
@@ -436,7 +436,7 @@
         "title": "Accoglienza",
         "desc": "Esperienza ospite, comunicazione multilingua, gestione recensioni."
       },
-      "operativita": {
+      "operatività": {
         "title": "Operativita e adempimenti",
         "desc": "Pulizie alberghiere, manutenzione, adempimenti normativi completi."
       },
@@ -448,7 +448,7 @@
     "team": {
       "title1": "Dietro Hosting Lake",
       "title1Strong": "Como",
-      "subtitle": "Siamo una squadra di tre specialisti. L'esperienza diretta sul Lago la porta Angelo, Superhost di Airbnb dal 2017, che cura l'accoglienza e il rapporto con gli ospiti. Al suo fianco lavorano due figure dedicate all'operativita e agli adempimenti normativi e alla strategia di tariffe e canali.",
+      "subtitle": "Siamo una squadra di tre specialisti. L'esperienza diretta sul Lago la porta Angelo, Superhost di Airbnb dal 2017, che cura l'accoglienza e il rapporto con gli ospiti. Al suo fianco lavorano due figure dedicate all'operatività e agli adempimenti normativi e alla strategia di tariffe e canali.",
       "spotlight": {
         "superhostBadge": "Superhost dal 2017",
         "eyebrow": "Esperienza diretta sul Lago",
@@ -460,7 +460,7 @@
     "hero": {
       "title1": "Semplifichiamo la",
       "title1Strong": "gestione per te",
-      "bodyPrefix": "Tu mantieni la proprieta, noi ci occupiamo di tutto il resto: operazioni, adempimenti, ottimizzazione del valore e accoglienza. Il risultato lo vedi in tempo reale dalla tua ",
+      "bodyPrefix": "Tu mantieni la proprietà, noi ci occupiamo di tutto il resto: operazioni, adempimenti, ottimizzazione del valore e accoglienza. Il risultato lo vedi in tempo reale dalla tua ",
       "bodyStrong1": "dashboard personale",
       "bodyMid": " e ogni mese arriva un ",
       "bodyStrong2": "riepilogo dedicato",
@@ -478,7 +478,7 @@
       "groups": {
         "setup": {
           "title": "Avvio e configurazione",
-          "desc": "Il setup iniziale dell'immobile. Ogni servizio e una voce a se con costo dedicato, valutata insieme al proprietario prima di partire.",
+          "desc": "Il setup iniziale dell'immobile. Ogni servizio è una voce a sé con costo dedicato, valutata insieme al proprietario prima di partire.",
           "items": [
             {
               "title": "Analisi e consulenza",
@@ -492,7 +492,7 @@
             },
             {
               "title": "Allestimento casa",
-              "desc": "Interventi mirati di restyling per alzare tariffa media e qualita delle recensioni, calibrati sul budget.",
+              "desc": "Interventi mirati di restyling per alzare tariffa media e qualità delle recensioni, calibrati sul budget.",
               "cost": "Preventivo dedicato"
             },
             {
@@ -504,7 +504,7 @@
         },
         "operations": {
           "title": "Operazioni quotidiane",
-          "desc": "Il lavoro invisibile che fa la differenza fra una proprieta media e una a 5 stelle.",
+          "desc": "Il lavoro invisibile che fa la differenza fra una proprietà media e una a 5 stelle.",
           "items": [
             {
               "title": "Pulizia e biancheria",
@@ -566,7 +566,7 @@
             },
             {
               "title": "Manutenzione programmata",
-              "desc": "Piano preventivo stagionale: climatizzazione, caldaia, riparazioni e controllo quadrimestrale della proprieta.",
+              "desc": "Piano preventivo stagionale: climatizzazione, caldaia, riparazioni e controllo quadrimestrale della proprietà.",
               "cost": "A consuntivo"
             }
           ]
@@ -576,7 +576,7 @@
     "dashboard": {
       "title1": "Una",
       "title1Strong": "dashboard personale",
-      "title2": "per ogni proprieta",
+      "title2": "per ogni proprietà",
       "body": "Accedi quando vuoi, da qualsiasi dispositivo. Dati aggiornati ogni giorno, niente fogli Excel da incrociare, niente attese per i numeri di fine mese. Tutti i dati che ti possono servire in sei aree di controllo ben distinte.",
       "blocks": [
         {
@@ -585,7 +585,7 @@
         },
         {
           "title": "Soggiorni & calendario",
-          "desc": "Vista operativa su check-in/check-out, disponibilita futura per periodo, segnalazioni sulle proprieta vuote."
+          "desc": "Vista operativa su check-in/check-out, disponibilita futura per periodo, segnalazioni sulle proprietà vuote."
         },
         {
           "title": "Riepiloghi economici",
@@ -613,15 +613,15 @@
       "bullets": [
         "I 4 numeri chiave del mese, gia confrontati con il precedente",
         "Trend di occupazione e ricavi commentati dal team",
-        "La recensione del mese e le valutazioni piu rilevanti",
+        "La recensione del mese e le valutazioni più rilevanti",
         "Le ottimizzazioni effettuate dal team e i loro risultati"
       ]
     },
     "cta": {
       "title1": "Vuoi che gestiamo anche",
-      "title1Strong": "la tua proprieta",
+      "title1Strong": "la tua proprietà",
       "title2": "?",
-      "bodyLine1": "Una sola conversazione per capire se Host Como fa al caso tuo.",
+      "bodyLine1": "Una sola conversazione per capire se Como Host fa al caso tuo.",
       "bodyLine2": "Nessun impegno, ti rispondiamo entro 48 ore.",
       "button": "Richiedi una valutazione"
     }
@@ -630,7 +630,7 @@
     "eyebrow": "Contattaci",
     "title1": "Parliamo del tuo",
     "title1Strong": "immobile",
-    "body": "Richiedi un preventivo o contattaci per qualsiasi informazione. Ti rispondiamo entro 48 ore con una valutazione preliminare e i prossimi passi per affidarci la tua proprieta sul Lago di Como.",
+    "body": "Richiedi un preventivo o contattaci per qualsiasi informazione. Ti rispondiamo entro 48 ore con una valutazione preliminare e i prossimi passi per affidarci la tua proprietà sul Lago di Como.",
     "telefono": "Telefono",
     "email": "Email",
     "form": {
@@ -726,7 +726,7 @@
       },
       "review": {
         "label": "Recensione del mese:",
-        "quote": "Posizione perfetta, terrazza sognante. Il team e stato super reattivo.",
+        "quote": "Posizione perfetta, terrazza sognante. Il team è stato super reattivo.",
         "author": "Sophie M."
       },
       "ottimizzazioni": {
@@ -734,7 +734,7 @@
         "body": "Tariffe rialzate del 7% sui weekend di Pasqua: +€620 sul mensile. Listing aggiornato con due nuove foto della terrazza.",
         "cta": "Vedi rendiconto completo"
       },
-      "footer": "Host Como · Riepilogo mensile · puoi disattivarlo dalle preferenze"
+      "footer": "Como Host · Riepilogo mensile · puoi disattivarlo dalle preferenze"
     }
   },
   "properties": {
@@ -787,7 +787,7 @@
       "descriptionTitle": "Descrizione",
       "mapTitle": "Posizione",
       "mapOpen": "Apri in Google Maps",
-      "ctaIntroPart1": "Questa è una delle proprietà che il team Host Como gestisce oggi: lo stesso metodo — hospitality, operations e revenue management — lo applichiamo agli immobili dei nostri clienti. ",
+      "ctaIntroPart1": "Questa è una delle proprietà che il team Como Host gestisce oggi: lo stesso metodo — hospitality, operations e revenue management — lo applichiamo agli immobili dei nostri clienti. ",
       "ctaIntroLink": "Richiedi una consulenza",
       "ctaIntroPart2": ".",
       "airbnbReview": {
@@ -807,7 +807,7 @@
     }
   },
   "login": {
-    "brand": "Host Como",
+    "brand": "Como Host",
     "subtitle": "Area riservata proprietari",
     "passwordPlaceholder": "Password",
     "submit": "Accedi",
@@ -820,12 +820,12 @@
   },
   "dashboard": {
     "header": {
-      "searchPlaceholder": "Cerca proprieta, prenotazione...",
+      "searchPlaceholder": "Cerca proprietà, prenotazione...",
       "notifications": "Notifiche",
       "role": "Admin"
     },
     "sidebar": {
-      "brand": "Host Como",
+      "brand": "Como Host",
       "tagline": "Dashboard Proprietario",
       "section": "Gestione",
       "items": {
@@ -845,7 +845,7 @@
     },
     "overview": {
       "greeting": "Buongiorno,",
-      "subtitle": "Ecco il riepilogo delle tue proprieta sul Lago di Como.",
+      "subtitle": "Ecco il riepilogo delle tue proprietà sul Lago di Como.",
       "stats": {
         "monthRevenue": "Revenue Mensile",
         "activeBookings": "Prenotazioni Attive",
@@ -890,10 +890,10 @@
       "title1": "Le Mie",
       "title2": "Proprieta",
       "subtitleLoading": "Caricamento...",
-      "subtitleCount": "{count} proprieta nel portfolio",
+      "subtitleCount": "{count} proprietà nel portfolio",
       "addButton": "Aggiungi Proprieta",
-      "loadingList": "Caricamento proprieta...",
-      "emptyList": "Nessuna proprieta nel portfolio",
+      "loadingList": "Caricamento proprietà...",
+      "emptyList": "Nessuna proprietà nel portfolio",
       "noImage": "Nessuna immagine",
       "perNight": "/ notte",
       "view": "Vedi",
@@ -918,7 +918,7 @@
       "title": "Prenotazioni",
       "subtitleLoading": "Caricamento...",
       "subtitleCount": "{count} prenotazioni",
-      "searchPlaceholder": "Cerca ospite o proprieta...",
+      "searchPlaceholder": "Cerca ospite o proprietà...",
       "filters": {
         "allStatuses": "Tutti gli stati",
         "allSources": "Tutte le fonti"
@@ -1007,7 +1007,7 @@
       "kpis": {
         "ytdGross": "Revenue Lordo YTD",
         "totalCommissions": "Commissioni Totali",
-        "commissionsHint": "OTA + Host Como",
+        "commissionsHint": "OTA + Como Host",
         "operatingExpenses": "Spese Operative",
         "expensesHint": "Pulizie + tassa soggiorno",
         "netPayoutYtd": "Net Payout YTD",
@@ -1049,7 +1049,7 @@
       },
       "tax": {
         "title": "Tassa di soggiorno",
-        "description": "Calcolo trimestrale da versare al Comune. Le tariffe sono configurate per proprieta (tipicamente €2-4 per persona/notte, max 5 notti).",
+        "description": "Calcolo trimestrale da versare al Comune. Le tariffe sono configurate per proprietà (tipicamente €2-4 per persona/notte, max 5 notti).",
         "from": "Dal",
         "to": "Al",
         "calculate": "Calcola",
@@ -1140,7 +1140,7 @@
           }
         },
         "comingSoonTitle": "Report in arrivo",
-        "comingSoonBody": "Line Items, dettaglio spese, polizze assicurative, velocita di conversione, richieste, preventivi: richiedono estensioni dello schema dati e arriveranno nelle prossime versioni."
+        "comingSoonBody": "Line Items, dettaglio spese, polizze assicurative, velocità di conversione, richieste, preventivi: richiedono estensioni dello schema dati e arriveranno nelle prossime versioni."
       },
       "summary": {
         "titleStrong": "Riepilogo",
@@ -1234,10 +1234,10 @@
         },
         "guests": {
           "crosscheckTitle": "Controllo nominativi (duplicati)",
-          "crosscheckSubtitle": "Ospiti con piu di una prenotazione, da verificare per identita",
+          "crosscheckSubtitle": "Ospiti con piu di una prenotazione, da verificare per identità",
           "crosscheckEmpty": "Nessun ospite con prenotazioni multiple",
           "emailListTitle": "Lista email",
-          "emailListSubtitle": "{count} indirizzi unici, esportabili per attivita di marketing",
+          "emailListSubtitle": "{count} indirizzi unici, esportabili per attività di marketing",
           "columns": {
             "name": "Nome",
             "bookings": "Prenotazioni",
@@ -1390,7 +1390,7 @@
           "stats": {
             "grossRevenue": "Ricavi lordi",
             "otaCommissions": "Commissioni piattaforme",
-            "ownCommission": "Commissione Host Como",
+            "ownCommission": "Commissione Como Host",
             "ownerNetTotal": "Totale netto proprietario"
           },
           "columns": {
@@ -1398,7 +1398,7 @@
             "bookings": "Prenotazioni",
             "gross": "Lordo",
             "otaCommission": "Comm. piattaforma",
-            "ownCommission": "Comm. Host Como",
+            "ownCommission": "Comm. Como Host",
             "totalCommission": "Totale commissioni",
             "ownerNet": "Netto proprietario"
           }
@@ -1430,7 +1430,7 @@
             "bookings": "Prenotazioni",
             "gross": "Lordo",
             "ota": "Piattaforme",
-            "ownCommission": "Host Como",
+            "ownCommission": "Como Host",
             "expenses": "Spese",
             "tax": "Tassa",
             "net": "Netto"
@@ -1446,7 +1446,7 @@
             "nights": "Notti",
             "gross": "Lordo",
             "ota": "Piattaforme",
-            "ownCommission": "Host Como",
+            "ownCommission": "Como Host",
             "expenses": "Spese",
             "tax": "Tassa",
             "net": "Netto"
@@ -1472,7 +1472,7 @@
       },
       "stay": {
         "titleStrong": "Soggiorni",
-        "subtitle": "Check-in, check-out, disponibilita e unita vuote",
+        "subtitle": "Check-in, check-out, disponibilità e unità vuote",
         "tabs": {
           "daily": "Checklist giornaliera",
           "range": "Intervallo date",

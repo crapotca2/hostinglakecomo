@@ -6,7 +6,7 @@ const COPY = {
   it: {
     title: "Percorso Google Maps per Ospiti — Tool per Host",
     description:
-      "Genera un link Google Maps curato per gli ospiti: coordinate, waypoint visivi, indicazioni parcheggio. Riservato ai proprietari in gestione con Host Como.",
+      "Genera un link Google Maps curato per gli ospiti: coordinate, waypoint visivi, indicazioni parcheggio. Riservato ai proprietari in gestione con Como Host.",
   },
   en: {
     title: "Google Maps Route Builder for Guests — Host Tool",

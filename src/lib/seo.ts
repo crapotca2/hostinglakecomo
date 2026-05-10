@@ -4,7 +4,19 @@ import { routing, type Locale } from "@/i18n/routing";
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://hostcomo.com";
 
+// Canonical legal name (used in JSON-LD Organization @name + sameAs).
 export const BRAND_NAME = "Host Como";
+
+// Display name shown in UI/title varies by locale.
+// Italian visitors see "Como Host" (italian word order), English visitors see "Host Como".
+const BRAND_NAMES: Record<string, string> = {
+  it: "Como Host",
+  en: "Host Como",
+};
+
+export function brandName(locale: string): string {
+  return BRAND_NAMES[locale] ?? BRAND_NAME;
+}
 
 export const DEFAULT_OG_IMAGE = "/images/como-lake-boat-2048x1366.jpg";
 
@@ -59,7 +71,7 @@ export function buildMetadata({
     openGraph: {
       type: "website",
       url: canonical,
-      siteName: BRAND_NAME,
+      siteName: brandName(locale),
       title,
       description,
       locale: ogLocale,

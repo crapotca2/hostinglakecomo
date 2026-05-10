@@ -16,7 +16,7 @@ import type { Locale } from "@/i18n/routing";
 
 const HOME_COPY = {
   it: {
-    title: "Property Manager Lago di Como — Host Como",
+    title: "Property Manager Lago di Como — Como Host",
     description:
       "Affidaci la tua casa: gestione completa affitti brevi sul Lago di Como. 9 anni di esperienza, 350+ recensioni a 5 stelle.",
   },

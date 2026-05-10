@@ -4,9 +4,9 @@ import type { Locale } from "@/i18n/routing";
 
 const COPY = {
   it: {
-    title: "Accedi — Area Clienti Host Como",
+    title: "Accedi — Area Clienti Como Host",
     description:
-      "Accedi all'area clienti riservata ai proprietari in gestione con Host Como.",
+      "Accedi all'area clienti riservata ai proprietari in gestione con Como Host.",
   },
   en: {
     title: "Sign In — Host Como Client Area",

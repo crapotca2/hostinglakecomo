@@ -6,7 +6,7 @@ const COPY = {
   it: {
     title: "Welcome Letter Multilingua per Ospiti — Tool per Host",
     description:
-      "Genera una welcome letter firmata e tradotta in 4 lingue per i tuoi ospiti. Riservato ai proprietari in gestione con Host Como.",
+      "Genera una welcome letter firmata e tradotta in 4 lingue per i tuoi ospiti. Riservato ai proprietari in gestione con Como Host.",
   },
   en: {
     title: "Multilingual Welcome Letter Generator — Host Tool",

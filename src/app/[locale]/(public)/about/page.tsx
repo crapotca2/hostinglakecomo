@@ -18,7 +18,7 @@ const COPY = {
   it: {
     title: "Chi Siamo — Angelo Talarico, Superhost dal 2017",
     description:
-      "9 anni di esperienza diretta come host sul Lago di Como, oltre 350 recensioni positive a 5 stelle. La storia dietro Host Como.",
+      "9 anni di esperienza diretta come host sul Lago di Como, oltre 350 recensioni positive a 5 stelle. La storia dietro Como Host.",
   },
   en: {
     title: "About Us — Angelo Talarico, Superhost since 2017",

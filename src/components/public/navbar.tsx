@@ -3,13 +3,16 @@
 import { Link, usePathname } from "@/i18n/routing";
 import { useState, useEffect } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { LanguageToggle } from "@/components/public/language-toggle";
+import { brandName } from "@/lib/seo";
 
 export function Navbar() {
   const t = useTranslations("nav");
   const pathname = usePathname();
+  const locale = useLocale();
+  const brand = brandName(locale);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const isHome = pathname === "/";
@@ -88,7 +91,7 @@ export function Navbar() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/logo/logo-white.png"
-                alt="Host Como"
+                alt={brand}
                 className={cn(
                   "absolute inset-0 h-full w-full object-contain transition-opacity duration-300",
                   showSolid ? "opacity-0" : "opacity-100"
@@ -101,7 +104,7 @@ export function Navbar() {
                 showSolid ? "text-foreground" : "text-white"
               )}
             >
-              Host Como
+              {brand}
             </span>
           </Link>
 

@@ -4,7 +4,7 @@ import type { Locale } from "@/i18n/routing";
 
 const COPY = {
   it: {
-    title: "Proprietà in Gestione sul Lago di Como — Host Como",
+    title: "Proprietà in Gestione sul Lago di Como — Como Host",
     description:
       "Le case che gestiamo per i nostri proprietari: Como città, Primo Bacino, Alto Lago. Esempi di hosting professionale.",
   },

@@ -6,7 +6,7 @@ const LAST_UPDATED = "5 maggio 2026";
 export const metadata: Metadata = {
   title: "Termini di Servizio",
   description:
-    "Termini e condizioni di utilizzo del sito Host Como e dei servizi di property management offerti sul Lago di Como.",
+    "Termini e condizioni di utilizzo del sito Como Host e dei servizi di property management offerti sul Lago di Como.",
   robots: { index: false, follow: true },
 };
 

@@ -32,7 +32,9 @@ export async function generateMetadata({
   const city = address?.city ?? "Como";
 
   const titleSuffix = locale === "en" ? "Lake Como" : "Lago di Como";
-  const title = `${name} a ${city} — ${titleSuffix} | Host Como`;
+  const inWord = locale === "en" ? "in" : "a";
+  const brand = locale === "en" ? "Host Como" : "Como Host";
+  const title = `${name} ${inWord} ${city} — ${titleSuffix} | ${brand}`;
   const trimmedDesc =
     description.length > 155
       ? `${description.slice(0, 152)}...`

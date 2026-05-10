@@ -3,10 +3,13 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { brandName } from "@/lib/seo";
 
 export default function LoginPage() {
   const t = useTranslations("login");
+  const locale = useLocale();
+  const brand = brandName(locale);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -33,7 +36,7 @@ export default function LoginPage() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/logo/logo-marble.png"
-            alt="Host Como"
+            alt={brand}
             className="h-24 w-24 sm:h-28 sm:w-28 mx-auto object-contain"
           />
           <h1 className="text-2xl font-light text-foreground mt-4">

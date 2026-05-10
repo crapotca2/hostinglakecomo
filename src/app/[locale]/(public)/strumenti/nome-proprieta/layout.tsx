@@ -6,7 +6,7 @@ const COPY = {
   it: {
     title: "Generatore Nome Proprietà Airbnb — Tool per Host",
     description:
-      "Genera in pochi secondi un nome efficace per il tuo annuncio Airbnb sul Lago di Como. Strumento riservato ai proprietari in gestione con Host Como.",
+      "Genera in pochi secondi un nome efficace per il tuo annuncio Airbnb sul Lago di Como. Strumento riservato ai proprietari in gestione con Como Host.",
   },
   en: {
     title: "Airbnb Property Name Generator — Host Tool",

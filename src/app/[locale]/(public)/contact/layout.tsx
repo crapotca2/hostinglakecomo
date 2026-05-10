@@ -4,7 +4,7 @@ import type { Locale } from "@/i18n/routing";
 
 const COPY = {
   it: {
-    title: "Contattaci — Affida la tua casa a Host Como",
+    title: "Contattaci — Affida la tua casa a Como Host",
     description:
       "Richiedi una consulenza gratuita: valutiamo il potenziale di rendita della tua casa sul Lago di Como.",
   },
