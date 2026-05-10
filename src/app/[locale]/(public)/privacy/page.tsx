@@ -4,9 +4,10 @@ import { LegalLanguageDisclaimer } from "@/components/public/legal-language-disc
 const LAST_UPDATED = "5 maggio 2026";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Hosting Lake Como",
+  title: "Privacy Policy",
   description:
-    "Informativa sul trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR) per gli utenti del sito Hosting Lake Como.",
+    "Informativa sul trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR) per gli utenti del sito Host Como.",
+  robots: { index: false, follow: true },
 };
 
 export default function PrivacyPolicyPage() {

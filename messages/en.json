@@ -14,7 +14,7 @@
     "ctaShort": "Consultation",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "homeAriaLabel": "Hosting Lake Como — home"
+    "homeAriaLabel": "Host Como — home"
   },
   "footer": {
     "tagline": "Hospitality is not improvised — trust a professional.",
@@ -89,7 +89,7 @@
         "Short-stay rentals during peak season, longer lets in low season",
         "Unified calendar and zero overlaps thanks to channel synchronisation"
       ],
-      "imageAlt": "Hosting Lake Como — unified calendar and multi-platform management",
+      "imageAlt": "Host Como — unified calendar and multi-platform management",
       "yearsBadgeYears": "9+",
       "yearsBadgeText": "years of experience\nas property managers at your service"
     },
@@ -165,7 +165,7 @@
       "section1": {
         "title1": "Tools designed for",
         "title2": "tangible results",
-        "body": "A suite of operational tools built for owners who entrust their property to Hosting Lake Como. Save time, raise the quality of the guest experience and stay in control of your property.",
+        "body": "A suite of operational tools built for owners who entrust their property to Host Como. Save time, raise the quality of the guest experience and stay in control of your property.",
         "bullets": [
           "Creative name generator for your holiday home",
           "Multilingual welcome letters ready to use",
@@ -226,7 +226,7 @@
         "title1": "Want access to the",
         "title2": "operational tools",
         "title3": "?",
-        "subtitle": "The full toolkit — name generator, multilingual welcome letters, Google Maps routes, dynamic pricing — reserved for owners managed by Hosting Lake Como.",
+        "subtitle": "The full toolkit — name generator, multilingual welcome letters, Google Maps routes, dynamic pricing — reserved for owners managed by Host Como.",
         "button": "Request a Consultation"
       }
     },
@@ -272,7 +272,7 @@
         "propertyValueBreakdown": "{surface} m² × {price}/m² ({zone})",
         "grossYieldLabel": "Gross yield",
         "grossYieldFootnote": "Revenue / value",
-        "comparisonTitle": "Self-management vs Hosting Lake Como",
+        "comparisonTitle": "Self-management vs Host Como",
         "comparisonSubtitle": "Indicative comparison of annual net margins",
         "selfTitle": "Self-management",
         "selfBullets": [
@@ -281,7 +281,7 @@
           "• No dynamic pricing",
           "• Time required: high"
         ],
-        "abTitle": "With Hosting Lake Como",
+        "abTitle": "With Host Como",
         "abBullets": [
           "• All-inclusive management fee",
           "• Optimised rates and occupancy",
@@ -289,7 +289,7 @@
           "• Time required: zero"
         ],
         "extraTitle": "Indicative extra earnings per year",
-        "extraSubtitle": "Difference between the net margin with Hosting Lake Como and the one under self-management."
+        "extraSubtitle": "Difference between the net margin with Host Como and the one under self-management."
       }
     },
     "investimento": {
@@ -368,11 +368,11 @@
     },
     "lock": {
       "common": {
-        "areaBadge": "Hosting Lake Como Client Area",
+        "areaBadge": "Host Como Client Area",
         "headline": "Reserved for owners under management",
         "includesTitle": "What's included",
         "accessTitle": "Access the client area",
-        "accessHint": "Available to owners managed by Hosting Lake Como.",
+        "accessHint": "Available to owners managed by Host Como.",
         "loginButton": "Sign in",
         "manageButton": "Want us to manage your property?"
       },
@@ -384,13 +384,13 @@
           "Analysis of the area's competitive positioning",
           "6 to 10 names proposed with linguistic and cultural rationale",
           "Domain availability and social handle check",
-          "Consistency with the visual identity and tone of voice of Hosting Lake Como management"
+          "Consistency with the visual identity and tone of voice of Host Como management"
         ]
       },
       "welcomeLetter": {
         "title": "Welcome Letter",
         "tagline": "Multilingual welcome letter for your guests",
-        "description": "For every property under management we prepare a signed welcome letter, translated into four languages and calibrated on the guest profile. It is part of the Hosting Lake Como hospitality kit, not a generic template.",
+        "description": "For every property under management we prepare a signed welcome letter, translated into four languages and calibrated on the guest profile. It is part of the Host Como hospitality kit, not a generic template.",
         "bullets": [
           "Tone of voice tailored to the guest type (couples, families, business)",
           "Check-in/check-out, Wi-Fi and house rules built in",
@@ -401,7 +401,7 @@
       "percorsoMaps": {
         "title": "Google Maps Route",
         "tagline": "Optimised link to guide guests to your property",
-        "description": "For every property under management Hosting Lake Como generates a curated Google Maps link: precise coordinates, waypoints with visual landmarks and dedicated public parking guidance. Not a simple automatic pin, but a route verified by our team.",
+        "description": "For every property under management Host Como generates a curated Google Maps link: precise coordinates, waypoints with visual landmarks and dedicated public parking guidance. Not a simple automatic pin, but a route verified by our team.",
         "bullets": [
           "Pin on the exact entrance, not on the cadastral number",
           "Waypoints for public car parks and nearby restricted-traffic zones",
@@ -419,7 +419,7 @@
       "subtitle": "Three property managers specialised in managing, cleaning and organising properties for international guests. A single dedicated team, with certified Superhost experience since 2017."
     },
     "narrative": {
-      "p1Prefix": "Hosting Lake Como is a specialist team of three property managers focused on the ",
+      "p1Prefix": "Host Como is a specialist team of three property managers focused on the ",
       "p1Strong1": "management, cleaning and organisation",
       "p1Mid": " of our clients' properties, with a specific focus on the ",
       "p1Strong2": "international market",
@@ -621,7 +621,7 @@
       "title1": "Want us to manage",
       "title1Strong": "your property too",
       "title2": "?",
-      "bodyLine1": "A single conversation to see whether Hosting Lake Como is a good fit for you.",
+      "bodyLine1": "A single conversation to see whether Host Como is a good fit for you.",
       "bodyLine2": "No commitment, we reply within 48 hours.",
       "button": "Request an assessment"
     }
@@ -734,7 +734,7 @@
         "body": "Rates raised by 7% on Easter weekends: +EUR 620 on the month. Listing updated with two new photos of the terrace.",
         "cta": "View full statement"
       },
-      "footer": "Hosting Lake Como · Monthly recap · you can disable it from your preferences"
+      "footer": "Host Como · Monthly recap · you can disable it from your preferences"
     }
   },
   "properties": {
@@ -787,7 +787,7 @@
       "descriptionTitle": "Description",
       "mapTitle": "Location",
       "mapOpen": "Open in Google Maps",
-      "ctaIntroPart1": "This is one of the properties the Hosting Lake Como team manages today: the same method — hospitality, operations and revenue management — is what we apply to our clients' homes. ",
+      "ctaIntroPart1": "This is one of the properties the Host Como team manages today: the same method — hospitality, operations and revenue management — is what we apply to our clients' homes. ",
       "ctaIntroLink": "Request a consultation",
       "ctaIntroPart2": ".",
       "airbnbReview": {
@@ -807,7 +807,7 @@
     }
   },
   "login": {
-    "brand": "Hosting Lake Como",
+    "brand": "Host Como",
     "subtitle": "Owners' private area",
     "passwordPlaceholder": "Password",
     "submit": "Sign in",
@@ -825,7 +825,7 @@
       "role": "Admin"
     },
     "sidebar": {
-      "brand": "Hosting Lake Como",
+      "brand": "Host Como",
       "tagline": "Owner Dashboard",
       "section": "Management",
       "items": {
@@ -1007,7 +1007,7 @@
       "kpis": {
         "ytdGross": "Gross Revenue YTD",
         "totalCommissions": "Total Commissions",
-        "commissionsHint": "OTA + Hosting Lake Como",
+        "commissionsHint": "OTA + Host Como",
         "operatingExpenses": "Operating Expenses",
         "expensesHint": "Cleaning + tourist tax",
         "netPayoutYtd": "Net Payout YTD",
@@ -1390,7 +1390,7 @@
           "stats": {
             "grossRevenue": "Gross revenue",
             "otaCommissions": "OTA commissions",
-            "ownCommission": "Hosting Lake Como commission",
+            "ownCommission": "Host Como commission",
             "ownerNetTotal": "Owner net total"
           },
           "columns": {
@@ -1430,7 +1430,7 @@
             "bookings": "Bookings",
             "gross": "Gross",
             "ota": "OTA",
-            "ownCommission": "Hosting Lake Como",
+            "ownCommission": "Host Como",
             "expenses": "Expenses",
             "tax": "Tax",
             "net": "Net"
@@ -1446,7 +1446,7 @@
             "nights": "Nights",
             "gross": "Gross",
             "ota": "OTA",
-            "ownCommission": "Hosting Lake Como",
+            "ownCommission": "Host Como",
             "expenses": "Expenses",
             "tax": "Tax",
             "net": "Net"

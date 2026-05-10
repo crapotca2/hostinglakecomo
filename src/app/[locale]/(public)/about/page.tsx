@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   Star,
   ExternalLink,
@@ -9,6 +10,37 @@ import {
 import { useLocale, useTranslations } from "next-intl";
 import team from "@/data/team.json";
 import { pickLocalized } from "@/lib/i18n-data";
+import { buildMetadata } from "@/lib/seo";
+import { JsonLdAngelo } from "@/components/seo/jsonld-person";
+import type { Locale } from "@/i18n/routing";
+
+const COPY = {
+  it: {
+    title: "Chi Siamo — Angelo Talarico, Superhost dal 2017",
+    description:
+      "9 anni di esperienza diretta come host sul Lago di Como, oltre 350 recensioni positive a 5 stelle. La storia dietro Host Como.",
+  },
+  en: {
+    title: "About Us — Angelo Talarico, Superhost since 2017",
+    description:
+      "9 years of hands-on hosting experience on Lake Como, 350+ five-star reviews. The story behind Host Como.",
+  },
+} as const;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const copy = COPY[locale] ?? COPY.it;
+  return buildMetadata({
+    locale,
+    pathname: "/about",
+    title: copy.title,
+    description: copy.description,
+  });
+}
 
 const COMPETENCE_AREAS = [
   { key: "accoglienza", icon: Sparkles },
@@ -26,6 +58,7 @@ export default function AboutPage() {
 
   return (
     <div className="pt-20">
+      <JsonLdAngelo />
       <section className="py-20 border-b border-border/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl sm:text-5xl font-light mb-4">

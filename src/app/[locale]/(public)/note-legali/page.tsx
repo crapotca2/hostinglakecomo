@@ -4,9 +4,10 @@ import { LegalLanguageDisclaimer } from "@/components/public/legal-language-disc
 const LAST_UPDATED = "5 maggio 2026";
 
 export const metadata: Metadata = {
-  title: "Note Legali — Hosting Lake Como",
+  title: "Note Legali",
   description:
-    "Informazioni identificative del gestore del sito Hosting Lake Como ai sensi del D.Lgs. 70/2003 in materia di commercio elettronico.",
+    "Informazioni identificative del gestore del sito Host Como ai sensi del D.Lgs. 70/2003 in materia di commercio elettronico.",
+  robots: { index: false, follow: true },
 };
 
 export default function NoteLegaliPage() {
@@ -86,7 +87,7 @@ export default function NoteLegaliPage() {
           <section className="space-y-4">
             <h2 className="text-xl font-semibold">4. Diritti d&apos;autore e marchi</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
-              Il marchio &quot;Hosting Lake Como&quot;, il logo, il wordmark &quot;como&quot; e
+              Il marchio &quot;Host Como&quot;, il logo, il wordmark &quot;como&quot; e
               tutti i contenuti grafici e testuali pubblicati sul Sito sono
               protetti dalle norme italiane ed europee in materia di diritto
               d&apos;autore e proprieta industriale. Le fotografie delle

@@ -14,7 +14,7 @@
     "ctaShort": "Consulenza",
     "openMenu": "Apri menu",
     "closeMenu": "Chiudi menu",
-    "homeAriaLabel": "Hosting Lake Como — home"
+    "homeAriaLabel": "Host Como — home"
   },
   "footer": {
     "tagline": "L'ospitalita non si improvvisa, affidati a un professionista.",
@@ -89,7 +89,7 @@
         "Affitti brevi nei picchi turistici, locazioni medio-lunghe in bassa stagione",
         "Calendario unificato e zero sovrapposizioni grazie alla sincronizzazione canali"
       ],
-      "imageAlt": "Hosting Lake Como — calendario unificato e gestione multi-piattaforma",
+      "imageAlt": "Host Como — calendario unificato e gestione multi-piattaforma",
       "yearsBadgeYears": "9+",
       "yearsBadgeText": "anni di esperienza\nda property manager a tua disposizione"
     },
@@ -165,7 +165,7 @@
       "section1": {
         "title1": "Tool dedicati per",
         "title2": "risultati concreti",
-        "body": "Una suite di strumenti operativi pensata per chi affida la gestione del proprio immobile a Hosting Lake Como. Risparmia tempo, alza la qualita dell'esperienza ospite e mantieni il controllo della tua proprieta.",
+        "body": "Una suite di strumenti operativi pensata per chi affida la gestione del proprio immobile a Host Como. Risparmia tempo, alza la qualita dell'esperienza ospite e mantieni il controllo della tua proprieta.",
         "bullets": [
           "Generatore di nomi creativi per la tua casa vacanza",
           "Welcome letter multilingua pronte all'uso",
@@ -226,7 +226,7 @@
         "title1": "Vuoi accedere agli",
         "title2": "strumenti operativi",
         "title3": "?",
-        "subtitle": "La suite completa di strumenti — generatore nomi, welcome letter multilingua, percorsi Google Maps, dynamic pricing — riservata ai proprietari in gestione con Hosting Lake Como.",
+        "subtitle": "La suite completa di strumenti — generatore nomi, welcome letter multilingua, percorsi Google Maps, dynamic pricing — riservata ai proprietari in gestione con Host Como.",
         "button": "Richiedi Consulenza"
       }
     },
@@ -272,7 +272,7 @@
         "propertyValueBreakdown": "{surface} m² × {price}/m² ({zone})",
         "grossYieldLabel": "Rendimento lordo",
         "grossYieldFootnote": "Ricavi / valore",
-        "comparisonTitle": "Gestione autonoma vs Hosting Lake Como",
+        "comparisonTitle": "Gestione autonoma vs Host Como",
         "comparisonSubtitle": "Confronto indicativo sui margini netti annui",
         "selfTitle": "Gestione autonoma",
         "selfBullets": [
@@ -281,7 +281,7 @@
           "• Senza tariffazione dinamica",
           "• Tempo richiesto: alto"
         ],
-        "abTitle": "Con Hosting Lake Como",
+        "abTitle": "Con Host Como",
         "abBullets": [
           "• Commissione tutto compreso",
           "• Tariffe e occupazione ottimizzate",
@@ -289,7 +289,7 @@
           "• Tempo richiesto: zero"
         ],
         "extraTitle": "Guadagno extra indicativo all'anno",
-        "extraSubtitle": "Differenza tra il margine netto con Hosting Lake Como e quello in gestione autonoma."
+        "extraSubtitle": "Differenza tra il margine netto con Host Como e quello in gestione autonoma."
       }
     },
     "investimento": {
@@ -368,11 +368,11 @@
     },
     "lock": {
       "common": {
-        "areaBadge": "Area Clienti Hosting Lake Como",
+        "areaBadge": "Area Clienti Host Como",
         "headline": "Riservato ai proprietari in gestione",
         "includesTitle": "Cosa include",
         "accessTitle": "Accedi all'area clienti",
-        "accessHint": "Disponibile per i proprietari in gestione con Hosting Lake Como.",
+        "accessHint": "Disponibile per i proprietari in gestione con Host Como.",
         "loginButton": "Accedi",
         "manageButton": "Vuoi gestire con noi?"
       },
@@ -384,13 +384,13 @@
           "Analisi del posizionamento competitivo della zona",
           "Proposta di 6-10 nomi con rationale linguistico e culturale",
           "Verifica disponibilita dominio e handle social",
-          "Coerenza con identita visiva e tono di voce della gestione Hosting Lake Como"
+          "Coerenza con identita visiva e tono di voce della gestione Host Como"
         ]
       },
       "welcomeLetter": {
         "title": "Welcome Letter",
         "tagline": "Lettera di benvenuto multilingua per i tuoi ospiti",
-        "description": "Per ogni proprieta in gestione predisponiamo una welcome letter firmata, tradotta in quattro lingue e calibrata sul profilo dell'ospite. E' parte del kit di accoglienza Hosting Lake Como, non un template generico.",
+        "description": "Per ogni proprieta in gestione predisponiamo una welcome letter firmata, tradotta in quattro lingue e calibrata sul profilo dell'ospite. E' parte del kit di accoglienza Host Como, non un template generico.",
         "bullets": [
           "Tono di voce personalizzato per tipologia di ospite (coppie, famiglie, business)",
           "Istruzioni check-in/check-out, WiFi e regole casa integrate",
@@ -401,7 +401,7 @@
       "percorsoMaps": {
         "title": "Percorso Google Maps",
         "tagline": "Link ottimizzato per guidare gli ospiti alla tua proprieta",
-        "description": "Per ogni proprieta in gestione Hosting Lake Como genera un link Google Maps curato: coordinate esatte, waypoint con riferimenti visivi e indicazioni dedicate ai parcheggi pubblici. Non un semplice pin automatico, ma un percorso verificato dal nostro team.",
+        "description": "Per ogni proprieta in gestione Host Como genera un link Google Maps curato: coordinate esatte, waypoint con riferimenti visivi e indicazioni dedicate ai parcheggi pubblici. Non un semplice pin automatico, ma un percorso verificato dal nostro team.",
         "bullets": [
           "Pin sulla posizione esatta dell'ingresso, non del civico catastale",
           "Waypoint per parcheggi pubblici e zone ZTL in prossimita",
@@ -419,7 +419,7 @@
       "subtitle": "Tre gestori specializzati nella gestione, pulizia e organizzazione di immobili per ospiti internazionali. Una sola realta dedicata, con esperienza certificata Superhost dal 2017."
     },
     "narrative": {
-      "p1Prefix": "Hosting Lake Como e una realta specializzata di tre gestori dedicati alla ",
+      "p1Prefix": "Host Como e una realta specializzata di tre gestori dedicati alla ",
       "p1Strong1": "gestione, alla pulizia e all'organizzazione",
       "p1Mid": " degli immobili dei nostri clienti, con focus specifico sul ",
       "p1Strong2": "mercato internazionale",
@@ -621,7 +621,7 @@
       "title1": "Vuoi che gestiamo anche",
       "title1Strong": "la tua proprieta",
       "title2": "?",
-      "bodyLine1": "Una sola conversazione per capire se Hosting Lake Como fa al caso tuo.",
+      "bodyLine1": "Una sola conversazione per capire se Host Como fa al caso tuo.",
       "bodyLine2": "Nessun impegno, ti rispondiamo entro 48 ore.",
       "button": "Richiedi una valutazione"
     }
@@ -734,7 +734,7 @@
         "body": "Tariffe rialzate del 7% sui weekend di Pasqua: +€620 sul mensile. Listing aggiornato con due nuove foto della terrazza.",
         "cta": "Vedi rendiconto completo"
       },
-      "footer": "Hosting Lake Como · Riepilogo mensile · puoi disattivarlo dalle preferenze"
+      "footer": "Host Como · Riepilogo mensile · puoi disattivarlo dalle preferenze"
     }
   },
   "properties": {
@@ -787,7 +787,7 @@
       "descriptionTitle": "Descrizione",
       "mapTitle": "Posizione",
       "mapOpen": "Apri in Google Maps",
-      "ctaIntroPart1": "Questa è una delle proprietà che il team Hosting Lake Como gestisce oggi: lo stesso metodo — hospitality, operations e revenue management — lo applichiamo agli immobili dei nostri clienti. ",
+      "ctaIntroPart1": "Questa è una delle proprietà che il team Host Como gestisce oggi: lo stesso metodo — hospitality, operations e revenue management — lo applichiamo agli immobili dei nostri clienti. ",
       "ctaIntroLink": "Richiedi una consulenza",
       "ctaIntroPart2": ".",
       "airbnbReview": {
@@ -807,7 +807,7 @@
     }
   },
   "login": {
-    "brand": "Hosting Lake Como",
+    "brand": "Host Como",
     "subtitle": "Area riservata proprietari",
     "passwordPlaceholder": "Password",
     "submit": "Accedi",
@@ -825,7 +825,7 @@
       "role": "Admin"
     },
     "sidebar": {
-      "brand": "Hosting Lake Como",
+      "brand": "Host Como",
       "tagline": "Dashboard Proprietario",
       "section": "Gestione",
       "items": {
@@ -1007,7 +1007,7 @@
       "kpis": {
         "ytdGross": "Revenue Lordo YTD",
         "totalCommissions": "Commissioni Totali",
-        "commissionsHint": "OTA + Hosting Lake Como",
+        "commissionsHint": "OTA + Host Como",
         "operatingExpenses": "Spese Operative",
         "expensesHint": "Pulizie + tassa soggiorno",
         "netPayoutYtd": "Net Payout YTD",
@@ -1390,7 +1390,7 @@
           "stats": {
             "grossRevenue": "Ricavi lordi",
             "otaCommissions": "Commissioni piattaforme",
-            "ownCommission": "Commissione Hosting Lake Como",
+            "ownCommission": "Commissione Host Como",
             "ownerNetTotal": "Totale netto proprietario"
           },
           "columns": {
@@ -1398,7 +1398,7 @@
             "bookings": "Prenotazioni",
             "gross": "Lordo",
             "otaCommission": "Comm. piattaforma",
-            "ownCommission": "Comm. Hosting Lake Como",
+            "ownCommission": "Comm. Host Como",
             "totalCommission": "Totale commissioni",
             "ownerNet": "Netto proprietario"
           }
@@ -1430,7 +1430,7 @@
             "bookings": "Prenotazioni",
             "gross": "Lordo",
             "ota": "Piattaforme",
-            "ownCommission": "Hosting Lake Como",
+            "ownCommission": "Host Como",
             "expenses": "Spese",
             "tax": "Tassa",
             "net": "Netto"
@@ -1446,7 +1446,7 @@
             "nights": "Notti",
             "gross": "Lordo",
             "ota": "Piattaforme",
-            "ownCommission": "Hosting Lake Como",
+            "ownCommission": "Host Como",
             "expenses": "Spese",
             "tax": "Tassa",
             "net": "Netto"

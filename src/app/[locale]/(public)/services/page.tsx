@@ -1,9 +1,40 @@
+import type { Metadata } from "next";
 import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { DashboardMockup } from "@/components/public/dashboard-mockup";
 import { EmailRecapMockup } from "@/components/public/email-recap-mockup";
 import { ServicesCarousel } from "@/components/public/services-carousel";
+import { buildMetadata } from "@/lib/seo";
+import type { Locale } from "@/i18n/routing";
+
+const SERVICES_COPY = {
+  it: {
+    title: "Gestione Affitti Brevi Como — Servizi Property Manager",
+    description:
+      "Tariffe dinamiche, accoglienza ospiti, adempimenti CIN e cedolare, multi-canale Airbnb/Booking. Il property manager che gestisce tutto per te.",
+  },
+  en: {
+    title: "Lake Como Short-Term Rental Management Services",
+    description:
+      "Dynamic pricing, guest hospitality, CIN and tax compliance, Airbnb/Booking multi-channel. The property manager that handles everything for you.",
+  },
+} as const;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const copy = SERVICES_COPY[locale] ?? SERVICES_COPY.it;
+  return buildMetadata({
+    locale,
+    pathname: "/services",
+    title: copy.title,
+    description: copy.description,
+  });
+}
 
 export default function ServicesPage() {
   const tHero = useTranslations("services.hero");

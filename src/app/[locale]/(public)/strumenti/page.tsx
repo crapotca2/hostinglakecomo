@@ -1,5 +1,36 @@
+import type { Metadata } from "next";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
+import { buildMetadata } from "@/lib/seo";
+import type { Locale } from "@/i18n/routing";
+
+const STRUMENTI_COPY = {
+  it: {
+    title: "Strumenti per Proprietari — Calcola Rendita Airbnb Como",
+    description:
+      "Simulatori gratuiti: rendita, investimento, profitto netto. Capisci quanto può rendere la tua casa sul Lago di Como con Airbnb e affitti brevi.",
+  },
+  en: {
+    title: "Tools for Owners — Lake Como Airbnb Rental Calculator",
+    description:
+      "Free simulators: yield, investment, net profit. See how much your home on Lake Como can earn with Airbnb and short-term rentals.",
+  },
+} as const;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const copy = STRUMENTI_COPY[locale] ?? STRUMENTI_COPY.it;
+  return buildMetadata({
+    locale,
+    pathname: "/strumenti",
+    title: copy.title,
+    description: copy.description,
+  });
+}
 import {
   Sparkles,
   Wand2,

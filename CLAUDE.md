@@ -1,8 +1,9 @@
-# Hosting Lake Como
+# Host Como
 
-Piattaforma B2B per il co-hosting sul Lago di Como. Convince i proprietari di
-immobili ad affidarci la gestione, sfruttando l'esperienza di Angelo (host da
-9 anni sul Lago).
+Piattaforma B2B per property management sul Lago di Como (dominio:
+hostcomo.com). Convince i proprietari di immobili ad affidarci la gestione
+degli affitti brevi, sfruttando l'esperienza di Angelo (host da 9 anni sul
+Lago).
 
 ## Stack
 - Next.js 14 (App Router) + React 18 + TypeScript strict
@@ -15,11 +16,12 @@ immobili ad affidarci la gestione, sfruttando l'esperienza di Angelo (host da
 - Stile moderno minimal, sfondo bianco
 - Primario: teal #0C7489 -> #119DB0 (gradient)
 - Font: Inter
-- Logo: monogramma "HLC" su quadrato gradient
+- Logo: monogramma "HLC" su quadrato gradient (filename neutri, non rinominato)
 
 ## Repo
-- GitHub: crapotca2/hostinglakecomo
-- Vercel: hostinglakecomo
+- GitHub: crapotca2/hostinglakecomo (nome legacy, da rinominare via UI)
+- Vercel: hostinglakecomo (nome legacy, da rinominare via UI)
+- Dominio produzione: hostcomo.com
 
 ## Posizionamento
 - **Solo B2B**: convince proprietari ad affidarci gestione (no B2C ospiti).

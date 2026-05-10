@@ -108,7 +108,7 @@ export default function RenditaPage() {
     const selfTouristTax = nightsSold * Math.min(maxGuests, 4) * 3;
     const selfNet = grossAnnual - selfOtaCommission - selfExpenses - selfTouristTax;
 
-    // Scenario Hosting Lake Como: tariffazione dinamica +10% sul prezzo,
+    // Scenario Host Como: tariffe dinamiche +10% sul prezzo,
     // occupazione +6 punti grazie a multi-canale e ottimizzazione listing,
     // commissione gestione 12%, commissioni piattaforme 12% (mix piu' diretto),
     // costi operativi 10% (economie di scala).

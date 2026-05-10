@@ -259,7 +259,7 @@ async function main() {
 
   const description =
     data.ogDesc ||
-    (data.longDesc ? data.longDesc.slice(0, 400) : `Proprieta gestita da Hosting Lake Como sul Lago di Como.`);
+    (data.longDesc ? data.longDesc.slice(0, 400) : `Proprieta gestita da Host Como sul Lago di Como.`);
 
   const entry = {
     slug,

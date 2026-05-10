@@ -88,7 +88,7 @@ export function Navbar() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/logo/logo-white.png"
-                alt="Hosting Lake Como"
+                alt="Host Como"
                 className={cn(
                   "absolute inset-0 h-full w-full object-contain transition-opacity duration-300",
                   showSolid ? "opacity-0" : "opacity-100"
@@ -101,7 +101,7 @@ export function Navbar() {
                 showSolid ? "text-foreground" : "text-white"
               )}
             >
-              Hosting Lake Como
+              Host Como
             </span>
           </Link>
 

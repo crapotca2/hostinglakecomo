@@ -4,9 +4,10 @@ import { LegalLanguageDisclaimer } from "@/components/public/legal-language-disc
 const LAST_UPDATED = "5 maggio 2026";
 
 export const metadata: Metadata = {
-  title: "Termini di Servizio — Hosting Lake Como",
+  title: "Termini di Servizio",
   description:
-    "Termini e condizioni di utilizzo del sito Hosting Lake Como e dei servizi di co-hosting offerti sul Lago di Como.",
+    "Termini e condizioni di utilizzo del sito Host Como e dei servizi di property management offerti sul Lago di Como.",
+  robots: { index: false, follow: true },
 };
 
 export default function TermsPage() {

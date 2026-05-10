@@ -6,6 +6,8 @@ import { notFound } from "next/navigation";
 import "../globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { routing } from "@/i18n/routing";
+import { SITE_URL, BRAND_NAME } from "@/lib/seo";
+import { JsonLdOrganization } from "@/components/seo/jsonld-organization";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,16 +15,29 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Hosting Lake Como — Co-hosting professionale sul Lago di Como",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${BRAND_NAME} — Property Manager Lago di Como`,
+    template: `%s | ${BRAND_NAME}`,
+  },
   description:
-    "Affidaci la tua proprieta sul Lago di Como. Co-hosting con 9 anni di esperienza diretta: pricing, accoglienza, compliance, reportistica.",
+    "Property manager professionisti sul Lago di Como. Gestione completa affitti brevi: pricing, accoglienza, compliance, reportistica. 9 anni di esperienza.",
   keywords: [
-    "co-hosting lago di como",
+    "property manager lago di como",
     "gestione affitti brevi como",
-    "property management lago di como",
-    "hosting lago di como",
-    "airbnb cohost como",
+    "gestione airbnb como",
+    "co-host airbnb como",
+    "agenzia gestione airbnb como",
   ],
+  applicationName: BRAND_NAME,
+  authors: [{ name: "Angelo Talarico" }],
+  creator: BRAND_NAME,
+  publisher: BRAND_NAME,
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
 };
 
 export function generateStaticParams() {
@@ -50,6 +65,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider>{children}</ThemeProvider>
         </NextIntlClientProvider>
+        <JsonLdOrganization />
       </body>
     </html>
   );

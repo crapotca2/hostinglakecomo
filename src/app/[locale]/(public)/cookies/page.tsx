@@ -4,9 +4,10 @@ import { LegalLanguageDisclaimer } from "@/components/public/legal-language-disc
 const LAST_UPDATED = "5 maggio 2026";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy — Hosting Lake Como",
+  title: "Cookie Policy",
   description:
-    "Informativa sui cookie utilizzati sul sito Hosting Lake Como ai sensi delle linee guida del Garante Privacy del 10 giugno 2021.",
+    "Informativa sui cookie utilizzati sul sito Host Como ai sensi delle linee guida del Garante Privacy del 10 giugno 2021.",
+  robots: { index: false, follow: true },
 };
 
 export default function CookiePolicyPage() {

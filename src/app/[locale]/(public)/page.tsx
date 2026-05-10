@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Link } from "@/i18n/routing";
 import {
   Sparkles,
@@ -10,6 +11,36 @@ import { useTranslations } from "next-intl";
 import { getPortfolio } from "@/lib/portfolio";
 import { PartnersBanner } from "@/components/public/partners-banner";
 import { PropertyCard } from "@/components/public/property-card";
+import { buildMetadata } from "@/lib/seo";
+import type { Locale } from "@/i18n/routing";
+
+const HOME_COPY = {
+  it: {
+    title: "Property Manager Lago di Como — Host Como",
+    description:
+      "Affidaci la tua casa: gestione completa affitti brevi sul Lago di Como. 9 anni di esperienza, 350+ recensioni a 5 stelle.",
+  },
+  en: {
+    title: "Lake Como Property Management — Host Como",
+    description:
+      "Trust us with your home: full short-term rental management on Lake Como. 9 years of experience, 350+ five-star reviews.",
+  },
+} as const;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const copy = HOME_COPY[locale] ?? HOME_COPY.it;
+  return buildMetadata({
+    locale,
+    pathname: "/",
+    title: copy.title,
+    description: copy.description,
+  });
+}
 
 const FEATURED_PROPERTIES = (() => {
   const all = getPortfolio();

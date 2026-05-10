@@ -33,7 +33,7 @@ export default function LoginPage() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/logo/logo-marble.png"
-            alt="Hosting Lake Como"
+            alt="Host Como"
             className="h-24 w-24 sm:h-28 sm:w-28 mx-auto object-contain"
           />
           <h1 className="text-2xl font-light text-foreground mt-4">

@@ -98,7 +98,7 @@ export default function PropertyDetailPage() {
   const geo = property.geo;
   const airbnbListing = property.airbnbListing;
 
-  const SITE_URL = "https://hostinglakecomo.vercel.app";
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hostcomo.com";
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Accommodation",
