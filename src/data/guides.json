@@ -21,7 +21,7 @@
       {
         "h": "Come si ottiene il CIR in Lombardia",
         "p": [
-          "Il CIR si richiede online tramite il portale Turismo5 della Regione Lombardia. La procedura prevede l'autenticazione con SPID o CIE, l'inserimento dei dati dell'immobile (catastali, indirizzo, tipologia ricettiva) e l'invio della SCIA al Comune competente. In media il codice viene assegnato in 24-72 ore lavorative.",
+          "Il CIR si richiede online tramite il portale ROSS1000 (ex Turismo5) della Regione Lombardia. La procedura prevede l'autenticazione con SPID o CIE, l'inserimento dei dati dell'immobile (catastali, indirizzo, tipologia ricettiva) e la presentazione della SCIA al SUAP del Comune competente. Il rilascio del CIR richiede in media circa 30 giorni lavorativi a decorrere dalla presentazione della pratica comunale.",
           "Se l'immobile è gestito da terzi, il proprietario può delegare il property manager alla richiesta tramite procura semplice; il gestore opera sul portale con le proprie credenziali ma in nome e per conto del titolare dell'immobile."
         ]
       },
@@ -35,7 +35,7 @@
       {
         "h": "Sanzioni: quanto costa non averli",
         "p": [
-          "L'assenza del CIR sui portali è sanzionata dalla Regione Lombardia con multe che vanno da 500 a 5.000 EUR per singolo annuncio non conforme, in base alla durata e alla gravità della violazione.",
+          "La mancata indicazione o l'indicazione errata del CIR sugli annunci è sanzionata dalla Regione Lombardia con multe da 500 a 2.500 EUR per ogni attività pubblicizzata in modo non conforme (LR 7/2018 che modifica la LR 27/2015). In caso di violazioni reiterate le sanzioni vengono raddoppiate; il Comune può inoltre disporre la sospensione dell'attività fino a tre mesi o la cessazione.",
           "Sul fronte nazionale, l'art. 13-ter del DL 145/2023 distingue due fasce: la mancata richiesta del CIN è punita con multe da 800 a 8.000 EUR per immobile, mentre la mancata esposizione del codice sull'annuncio comporta sanzioni da 500 a 5.000 EUR per annuncio. In più, i portali sono obbligati a rimuovere gli annunci sprovvisti, quindi una proprietà non in regola esce di fatto dal mercato fino alla regolarizzazione."
         ]
       },
@@ -59,7 +59,7 @@
       {
         "h": "How to obtain the CIR in Lombardy",
         "p": [
-          "The CIR is requested online through the Lombardy Region's Turismo5 portal. The procedure requires authentication via SPID or CIE, entry of the property data (cadastral, address, accommodation type) and submission of the SCIA to the relevant Municipality. The code is typically assigned in 24-72 working hours.",
+          "The CIR is requested online through the Lombardy Region's ROSS1000 portal (formerly Turismo5). The procedure requires authentication via SPID or CIE, entry of the property data (cadastral, address, accommodation type) and submission of the SCIA to the SUAP of the relevant Municipality. Issuance typically takes around 30 working days from the filing of the municipal SCIA.",
           "If the property is managed by a third party, the owner can delegate the property manager to apply via a simple power of attorney; the manager operates on the portal with their own credentials but in the name and on behalf of the property owner."
         ]
       },
@@ -73,7 +73,7 @@
       {
         "h": "Penalties: the real cost of not having them",
         "p": [
-          "Missing CIR on portals is sanctioned by the Lombardy Region with fines ranging from EUR 500 to EUR 5,000 per non-compliant listing, depending on duration and severity of the breach.",
+          "Missing or incorrect display of the CIR on listings is sanctioned by the Lombardy Region with fines from EUR 500 to EUR 2,500 per non-compliant advertised activity (Regional Law 7/2018 amending Regional Law 27/2015). Repeated breaches double the fine; the Municipality may also suspend the activity for up to three months or order its closure.",
           "On the national side, art. 13-ter of Decree-Law 145/2023 splits sanctions into two bands: failure to apply for the CIN is fined EUR 800 to EUR 8,000 per property, while failure to display the code on the listing carries fines of EUR 500 to EUR 5,000 per listing. On top of that, portals are required to remove non-compliant listings, so a non-compliant property effectively exits the market until it's brought back into line."
         ]
       },
