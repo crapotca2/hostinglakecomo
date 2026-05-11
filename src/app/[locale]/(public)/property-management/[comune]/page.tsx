@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/routing";
-import { ArrowRight, MapPin, CheckCircle2 } from "lucide-react";
+import { ArrowRight, MapPin, CheckCircle2, Navigation } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { buildMetadata, brandName, SITE_URL } from "@/lib/seo";
 import comuni from "@/data/comuni.json";
 import { routing, type Locale } from "@/i18n/routing";
 import { JsonLdBreadcrumb } from "@/components/seo/jsonld-breadcrumb";
+import { GoogleMapEmbed } from "@/components/public/google-map-embed";
 
 type Comune = (typeof comuni)[number];
 
@@ -223,20 +224,49 @@ function ComuneLandingClient({
               ))}
             </ul>
           </div>
-          <aside className="bg-muted/20 border border-border/50 rounded-2xl p-6">
-            <h3 className="text-base font-semibold mb-3">{sectionApproach}</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-              {sectionApproachBody}
-            </p>
-            <div className="space-y-2 text-sm">
-              {pillars.map((p) => (
-                <div key={p} className="flex items-center gap-2 font-medium">
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                  {p}
+          <div className="space-y-6">
+            <div className="bg-white rounded-2xl border border-border/50 overflow-hidden">
+              <div className="p-4 flex items-center justify-between gap-3 border-b border-border/40">
+                <div className="flex items-center gap-2">
+                  <div className="h-8 w-8 rounded-lg bg-primary/[0.08] flex items-center justify-center">
+                    <Navigation className="h-4 w-4 text-primary" />
+                  </div>
+                  <h3 className="text-sm font-semibold">
+                    {locale === "en" ? "Where it is" : "Dove si trova"}
+                  </h3>
                 </div>
-              ))}
+                <a
+                  href={`https://www.google.com/maps?q=${comune.geo.lat},${comune.geo.lng}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-primary hover:underline"
+                >
+                  {locale === "en" ? "Open in Maps" : "Apri in Maps"}
+                </a>
+              </div>
+              <GoogleMapEmbed
+                query={`${comune.geo.lat},${comune.geo.lng}`}
+                title={`Mappa ${comune.name}`}
+                zoom={13}
+                className="h-64"
+              />
             </div>
-          </aside>
+
+            <aside className="bg-muted/20 border border-border/50 rounded-2xl p-6">
+              <h3 className="text-base font-semibold mb-3">{sectionApproach}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                {sectionApproachBody}
+              </p>
+              <div className="space-y-2 text-sm">
+                {pillars.map((p) => (
+                  <div key={p} className="flex items-center gap-2 font-medium">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    {p}
+                  </div>
+                ))}
+              </div>
+            </aside>
+          </div>
         </div>
       </section>
 
