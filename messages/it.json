@@ -895,6 +895,29 @@
     "body": "The full legal text is published in Italian. You can switch language to view it.",
     "cta": "View Italian version"
   },
+  "pmPublic": {
+    "hero": {
+      "eyebrow": "Le zone in cui operiamo",
+      "title1": "Property management sul Lago",
+      "title1Strong": "e in provincia di Como",
+      "subtitle": "Operiamo zona per zona, con un portfolio costruito sulla qualità della selezione. Ogni territorio ha dinamiche di domanda diverse — la strategia si calibra di conseguenza."
+    },
+    "map": {
+      "title": "Esplora il territorio sulla mappa",
+      "subtitle": "Una panoramica del Lago di Como e della provincia. Clicca un comune per leggere come ne calibriamo la gestione."
+    },
+    "province": {
+      "title": "Non solo lago: la provincia di Como",
+      "body": "Oltre alle località lacuali, gestiamo immobili nei comuni della provincia di Como che orbitano attorno al distretto del mobile (Cantù), al Triangolo Lariano (Erba) e al ramo lecchese. Su queste aree il mix di domanda cambia radicalmente: meno turismo di passaggio e più soggiorni medio-lunghi — professionisti in trasferta, consulenti, espositori fieristici, smart worker che cercano stabilità a 40-50 minuti di treno da Milano. È un mercato meno saturo, con minor competizione e un'occupazione più piatta lungo l'anno."
+    },
+    "areas": {
+      "title": "Tutti i comuni in cui pubblichiamo",
+      "subtitle": "Ogni pagina dedicata racconta dinamica di domanda, stagionalità e profilo dell'ospite tipico della zona.",
+      "discoverLabel": "Scopri la zona",
+      "lakeBadge": "Lago di Como",
+      "provinceBadge": "Provincia di Como"
+    }
+  },
   "dashboard": {
     "header": {
       "searchPlaceholder": "Cerca proprietà, prenotazione...",

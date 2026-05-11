@@ -103,5 +103,194 @@
       "Concierge services as a differentiator",
       "Among the highest ADR on the lake"
     ]
+  },
+  {
+    "slug": "cernobbio",
+    "name": "Cernobbio",
+    "geo": { "lat": 45.8454, "lng": 9.0738 },
+    "tagline_it": "Villa d'Este, sponda ovest del primo bacino",
+    "tagline_en": "Villa d'Este, west shore of the first basin",
+    "intro_it": "Cernobbio è la prima tappa risalendo la sponda ovest da Como ed è dominata dal nome di Villa d'Este, simbolo internazionale del lusso lariano. La zona attira un pubblico business di alto profilo per via dei convegni stagionali (Forum Ambrosetti) e una clientela leisure premium che cerca tranquillità a pochi minuti d'auto dal centro città. Per il proprietario significa ADR alti e una stagione più lunga della media del lago, sostenuta dal turismo svizzero a chilometro zero (frontiera Chiasso a 7 km).",
+    "intro_en": "Cernobbio is the first stop heading up Lake Como's western shore from Como city, and it is dominated by the name of Villa d'Este, an international symbol of Lake Como luxury. The area draws a high-end business audience thanks to seasonal events (Ambrosetti Forum) and a premium leisure clientele looking for quiet a few minutes' drive from the city. For owners this means high ADR and a longer-than-average lake season, supported by Swiss demand at the doorstep (Chiasso border 7 km away).",
+    "highlights_it": [
+      "Vicinanza Villa d'Este e Forum Ambrosetti",
+      "Frontiera svizzera a 7 km — domanda CH costante",
+      "Stagione che parte già a marzo per il business",
+      "ADR premium su appartamenti vista lago"
+    ],
+    "highlights_en": [
+      "Next to Villa d'Este and Ambrosetti Forum",
+      "Swiss border 7 km away — steady CH demand",
+      "Business season starts as early as March",
+      "Premium ADR on lakefront apartments"
+    ]
+  },
+  {
+    "slug": "brienno",
+    "name": "Brienno",
+    "geo": { "lat": 45.8786, "lng": 9.1077 },
+    "tagline_it": "Il borgo sospeso sull'acqua",
+    "tagline_en": "The hamlet hanging over the water",
+    "intro_it": "Brienno è uno dei borghi più suggestivi della sponda occidentale: poche case di pietra che scendono fino al pelo dell'acqua, niente lungolago carrabile, atmosfera fuori dal tempo. Il pubblico che cerca Brienno è quello dei soggiorni di nicchia, ospiti che hanno già visto Bellagio e Varenna e cercano un'esperienza più intima. Lo stock immobiliare è limitato, ma è proprio questa scarsità a sostenere prezzi a notte elevati su appartamenti curati nel restauro.",
+    "intro_en": "Brienno is one of the most evocative hamlets on the western shore: a handful of stone houses dropping all the way to the water's edge, no driveable lakefront road, a timeless atmosphere. The audience drawn to Brienno are those looking for niche stays, guests who have already seen Bellagio and Varenna and are after a more intimate experience. Property stock is limited, but this very scarcity sustains high nightly rates on apartments with thoughtful restorations.",
+    "highlights_it": [
+      "Borgo di nicchia, stock molto limitato",
+      "ADR elevato per chi cerca riservatezza",
+      "Posizione tra Como e Argegno (auto necessaria)",
+      "Strong storytelling per il copy degli annunci"
+    ],
+    "highlights_en": [
+      "Niche hamlet with very limited stock",
+      "High ADR for guests seeking privacy",
+      "Between Como and Argegno (car needed)",
+      "Strong storytelling angle for listings"
+    ]
+  },
+  {
+    "slug": "argegno",
+    "name": "Argegno",
+    "geo": { "lat": 45.9067, "lng": 9.1289 },
+    "tagline_it": "Porta della Val d'Intelvi",
+    "tagline_en": "Gateway to the Val d'Intelvi",
+    "intro_it": "Argegno è il punto in cui il lago si apre verso la Val d'Intelvi: funivia panoramica per Pigra, ristoranti tipici e una posizione comoda per chi vuole alternare giornate sul lago e gite verso la Svizzera o le montagne. La proprietà media è l'appartamento a uso turistico, spesso in ville d'epoca riconvertite, con balconi affacciati sull'acqua. Una zona meno satura di Bellagio o Varenna, con margine ancora interessante su prezzi e occupazione.",
+    "intro_en": "Argegno is where the lake opens out toward the Val d'Intelvi: a panoramic cable car up to Pigra, traditional restaurants, and a convenient base for guests who want to alternate lake days with trips to Switzerland or the mountains. The typical property here is a tourist apartment, often in repurposed period villas, with balconies over the water. Less saturated than Bellagio or Varenna, with healthy headroom on prices and occupancy.",
+    "highlights_it": [
+      "Funivia panoramica per Pigra",
+      "Crocevia auto verso Val d'Intelvi e Svizzera",
+      "Stock immobiliare ancora con margine",
+      "Pubblico misto outdoor + lago"
+    ],
+    "highlights_en": [
+      "Panoramic cable car to Pigra",
+      "Driveway hub to Val d'Intelvi and Switzerland",
+      "Property stock still with room to grow",
+      "Mixed outdoor + lake audience"
+    ]
+  },
+  {
+    "slug": "lenno",
+    "name": "Lenno",
+    "geo": { "lat": 45.9698, "lng": 9.2079 },
+    "tagline_it": "Villa del Balbianello e baia tranquilla",
+    "tagline_en": "Villa del Balbianello and quiet bay",
+    "intro_it": "Lenno è la baia da cartolina del centro lago, baciata dalla presenza di Villa del Balbianello — una delle ville più visitate d'Italia, set di scene iconiche di film internazionali. Posizione strategica vicino a Tremezzo, Mezzegra e Ossuccio, con una propria identità più raccolta. Le proprietà gestite qui beneficiano del traffico generato dalla villa FAI e dalle attività in lago (escursioni in barca da Lenno verso il Balbianello sono tra le più prenotate del Lario).",
+    "intro_en": "Lenno is the postcard bay of the central lake, graced by the presence of Villa del Balbianello — one of Italy's most-visited villas and the setting of iconic film scenes. A strategic spot near Tremezzo, Mezzegra and Ossuccio, with a quieter character of its own. Properties managed here benefit from the foot traffic generated by the FAI villa and from on-water activities (boat tours from Lenno to Balbianello are among the most-booked on Lake Como).",
+    "highlights_it": [
+      "Villa del Balbianello come trazione turistica",
+      "Baia tranquilla, ideale per famiglie",
+      "Tour in barca dal porto di Lenno",
+      "Buon ponte tra luxury (Tremezzo) e mainstream"
+    ],
+    "highlights_en": [
+      "Villa del Balbianello as a traffic driver",
+      "Quiet bay, family-friendly",
+      "Boat tours departing from Lenno harbour",
+      "Good bridge between luxury (Tremezzo) and mainstream"
+    ]
+  },
+  {
+    "slug": "lierna",
+    "name": "Lierna",
+    "geo": { "lat": 45.9608, "lng": 9.3015 },
+    "tagline_it": "Spiagge sabbiose sulla sponda est",
+    "tagline_en": "Sandy beaches on the east shore",
+    "intro_it": "Lierna è una delle poche località del Lago di Como con spiaggia di sabbia (Riva Bianca e La Mascherpa), una caratteristica che la rende unica per il pubblico family e per chi cerca soggiorni più rilassati e meno scenic-touristici. Il treno ferma in paese (linea Milano-Tirano), rendendo Lierna accessibile in poco più di un'ora dalla città. Ottima alternativa a Varenna per chi vuole stagionalità lunga e ADR sostenibile.",
+    "intro_en": "Lierna is one of the few spots on Lake Como with a true sandy beach (Riva Bianca and La Mascherpa), a feature that makes it unique for families and for guests seeking a more relaxed, less scenic-touristy stay. The Milan-Tirano train stops in the village, putting Lierna just over an hour from the city. A strong alternative to Varenna for those wanting a long season and a sustainable ADR.",
+    "highlights_it": [
+      "Rare spiagge sabbiose del Lario",
+      "Treno diretto Milano in paese",
+      "Forte appeal family + repeat guests",
+      "ADR mid-tier con occupazione elevata"
+    ],
+    "highlights_en": [
+      "Rare sandy beaches on Lake Como",
+      "Direct Milan train stops in the village",
+      "Strong family appeal + repeat guests",
+      "Mid-tier ADR with high occupancy"
+    ]
+  },
+  {
+    "slug": "domaso",
+    "name": "Domaso",
+    "geo": { "lat": 46.1429, "lng": 9.3315 },
+    "tagline_it": "Alto lago, kitesurf e windsurf",
+    "tagline_en": "Upper lake, kitesurfing and windsurfing",
+    "intro_it": "Domaso, sull'alto lago, è la capitale italiana del kitesurf e del windsurf grazie al vento Breva che soffia regolare da maggio a settembre. Pubblico molto specifico: appassionati di sport acquatici, surf camp internazionali, gruppi tedeschi e nord europei. Per i proprietari significa stagione concentrata su 5 mesi ma con occupazione altissima, prenotazioni anticipate e un mercato meno influenzato dalle dinamiche del centro lago.",
+    "intro_en": "Domaso, on the upper lake, is Italy's kitesurfing and windsurfing capital, thanks to the Breva wind that blows steadily from May through September. A very specific audience: water-sports enthusiasts, international surf camps, German and Northern European groups. For owners that means a season concentrated into 5 months but with very high occupancy, early bookings and a market less exposed to central-lake dynamics.",
+    "highlights_it": [
+      "Vento Breva = stagione vela 5 mesi",
+      "Surf camp internazionali + ricavo gruppi",
+      "Pubblico tedesco/nord-europeo dominante",
+      "Prenotazioni con anticipo elevato"
+    ],
+    "highlights_en": [
+      "Breva wind = 5-month sailing season",
+      "International surf camps + group revenue",
+      "Predominantly German/Northern European",
+      "Early booking lead times"
+    ]
+  },
+  {
+    "slug": "lecco",
+    "name": "Lecco",
+    "geo": { "lat": 45.857, "lng": 9.3973 },
+    "tagline_it": "Il ramo lecchese: lago, montagne, città",
+    "tagline_en": "The Lecco branch: lake, mountains, city",
+    "intro_it": "Lecco è il capoluogo del ramo orientale del Lario e gioca su un asset distintivo rispetto a Como: l'accesso immediato alle Grigne e ai sentieri alpini, mantenendo il lago a portata di lungolago. Stagionalità più piatta perché coniuga turismo lacuale estivo, trekking e arrampicata primaverile/autunnale, e una città capoluogo con un suo tessuto business. Treno per Milano in circa 50 minuti. Strategia ideale: multi-canale con peso significativo dei long-stay nei mesi freddi.",
+    "intro_en": "Lecco is the main town of Lake Como's eastern branch and plays a card Como city does not: instant access to the Grigne range and alpine trails, while keeping the lake on the doorstep. Flatter seasonality, blending summer lake tourism, spring/autumn hiking and climbing, and a county-town business fabric. Train to Milan in roughly 50 minutes. Ideal strategy: multi-channel with a meaningful long-stay share over the colder months.",
+    "highlights_it": [
+      "Accesso diretto alle Grigne e ai sentieri",
+      "Stagionalità più piatta del ramo lecchese",
+      "Treno per Milano in ~50 minuti",
+      "Mix turismo lago + trekking + business"
+    ],
+    "highlights_en": [
+      "Direct access to the Grigne range and trails",
+      "Flatter seasonality on the Lecco branch",
+      "Train to Milan in ~50 minutes",
+      "Mix of lake tourism + trekking + business"
+    ]
+  },
+  {
+    "slug": "cantu",
+    "name": "Cantù",
+    "geo": { "lat": 45.7378, "lng": 9.1311 },
+    "tagline_it": "Il distretto del mobile, in provincia di Como",
+    "tagline_en": "The furniture district, Como province",
+    "intro_it": "Cantù è il cuore del distretto del mobile e del design italiano, riconosciuto a livello internazionale. Il pubblico per gli affitti brevi qui non è turistico-lacuale ma professionale: clienti aziendali di design week, buyer internazionali, tecnici in trasferta, professionisti che lavorano nel circondario. Stagionalità completamente diversa dal lago — picchi su eventi fieristici milanesi (Salone del Mobile in primavera) e occupazione stabile durante l'anno per soggiorni medio-lunghi.",
+    "intro_en": "Cantù is the heart of Italy's furniture and design district, recognised worldwide. The short-rental audience here is not lake-tourist but professional: design-week corporate clients, international buyers, technicians on assignment, and professionals working in the area. Seasonality is completely different from the lake — peaks during Milanese trade fairs (Salone del Mobile in spring) and steady occupancy throughout the year for medium-to-long stays.",
+    "highlights_it": [
+      "Distretto mobile/design riconosciuto",
+      "Picco Salone del Mobile Milano (aprile)",
+      "Pubblico business + long-stay tecnici",
+      "Mercato meno saturo del lago"
+    ],
+    "highlights_en": [
+      "Recognised furniture/design district",
+      "Peak during Milan's Salone del Mobile (April)",
+      "Business audience + technical long-stays",
+      "Less saturated market than the lake"
+    ]
+  },
+  {
+    "slug": "erba",
+    "name": "Erba",
+    "geo": { "lat": 45.8095, "lng": 9.2235 },
+    "tagline_it": "Triangolo Lariano, tra Como e Lecco",
+    "tagline_en": "Triangolo Lariano, between Como and Lecco",
+    "intro_it": "Erba è una delle porte del Triangolo Lariano, in posizione baricentrica tra Como, Lecco e Bergamo. Polo fieristico (Lariofiere) e attività industriali leggere generano una domanda costante di soggiorni di breve e medio termine per espositori, fornitori, consulenti. Domanda turistica più contenuta ma legata alle escursioni sui monti Lariani e al lago di Pusiano. Per il proprietario significa occupazione tutto l'anno con un mix prevalente di business sopra il leisure.",
+    "intro_en": "Erba is one of the gateways to the Triangolo Lariano, sitting between Como, Lecco and Bergamo. The Lariofiere exhibition centre and a light-industrial base generate steady short- and mid-term demand from exhibitors, suppliers and consultants. Tourist demand is smaller but tied to hiking on the Lariani mountains and Lake Pusiano. For owners, that means year-round occupancy with a business-over-leisure mix.",
+    "highlights_it": [
+      "Lariofiere = domanda business costante",
+      "Posizione centrale Como/Lecco/Bergamo",
+      "Lago di Pusiano e monti Lariani vicini",
+      "Mercato a basso rischio di sfittanza"
+    ],
+    "highlights_en": [
+      "Lariofiere centre = steady business demand",
+      "Central between Como/Lecco/Bergamo",
+      "Lake Pusiano and Lariani mountains nearby",
+      "Low-vacancy-risk market"
+    ]
   }
 ]
