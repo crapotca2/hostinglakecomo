@@ -24,7 +24,23 @@
       "Twin stations: Como S. Giovanni and Como Lago, train from Milan in 40-60 min",
       "Como-Brunate funicular (715 m), Duomo (1396), Villa Olmo, Tempio Voltiano",
       "Concorso d'Eleganza Villa d'Este (15-17 May 2026), wedding season May-October"
-    ]
+    ],
+    "marketStats": {
+      "airbnbListings": "1.523-2.469",
+      "bookingProperties": "380-700",
+      "expediaPresence": "forte",
+      "adrRange": "200-240 EUR",
+      "adrRangeEn": "EUR 200-240",
+      "adrLuxuryRange": null,
+      "occupancyRange": "42-57%",
+      "topHotels": [
+        "Hilton Lake Como (5*)",
+        "VISTA Palazzo Lago di Como (5* SLH)",
+        "Sheraton Lake Como Hotel (4*)",
+        "Hotel Metropole Suisse (4*)",
+        "Albergo Terminus (4*)"
+      ]
+    }
   },
   {
     "slug": "cernobbio",
@@ -53,7 +69,24 @@
       "Concorso d'Eleganza Villa d'Este 2026: 15-17 May, organised by BMW Group Classic",
       "Villa Erba: 19th-century neo-Renaissance estate, the lake's premier wedding venue",
       "C10 ASF bus + direct ferries Como-Cernobbio in 10-15 min, Swiss border 7 km away"
-    ]
+    ],
+    "marketStats": {
+      "airbnbListings": "253-269",
+      "bookingProperties": "160-200",
+      "expediaPresence": "media",
+      "adrRange": "200-280 EUR",
+      "adrRangeEn": "EUR 200-280",
+      "adrLuxuryRange": "350-500 EUR (Villa d'Este oltre 1.500 EUR)",
+      "adrLuxuryRangeEn": "EUR 350-500 (Villa d'Este over EUR 1,500)",
+      "occupancyRange": "56-72%",
+      "topHotels": [
+        "Villa d'Este (5* Leading Hotels of the World)",
+        "Hotel Asnigo (4*)",
+        "Hotel Centrale (4*)",
+        "Regina Olga (4*)",
+        "Villa Erba (eventi/wedding)"
+      ]
+    }
   },
   {
     "slug": "moltrasio",
@@ -82,7 +115,22 @@
       "Villa Passalacqua: five-star since 2022, listed among The World's 50 Best Hotels 2023",
       "Grand Hotel Imperiale (1926), historic four-star on the lakefront",
       "Swiss border 6 km away: strong Swiss and Ticino resident presence"
-    ]
+    ],
+    "marketStats": {
+      "airbnbListings": "89",
+      "bookingProperties": "30-50",
+      "expediaPresence": "media",
+      "adrRange": "180-260 EUR",
+      "adrRangeEn": "EUR 180-260",
+      "adrLuxuryRange": "350-600 EUR (Passalacqua oltre 2.000 EUR)",
+      "adrLuxuryRangeEn": "EUR 350-600 (Passalacqua over EUR 2,000)",
+      "occupancyRange": "58-65%",
+      "topHotels": [
+        "Villa Passalacqua (5*, World's #1 Hotel 2023)",
+        "Grand Hotel Imperiale Resort & Spa (4*)",
+        "Hotel Posta Moltrasio"
+      ]
+    }
   },
   {
     "slug": "brienno",
@@ -111,7 +159,20 @@
       "La Turascia: Byzantine tower converted into a plague lazzaretto",
       "World War I Cadorna Line mining tunnels carved into the cliff above the village",
       "Christmas markets in lit alleys and cellars, the village's only recurring tourist event"
-    ]
+    ],
+    "marketStats": {
+      "airbnbListings": "64",
+      "bookingProperties": "15-25",
+      "expediaPresence": "scarsa",
+      "adrRange": "130-180 EUR",
+      "adrRangeEn": "EUR 130-180",
+      "adrLuxuryRange": "350-450 EUR (rare ville lakefront)",
+      "adrLuxuryRangeEn": "EUR 350-450 (rare lakefront villas)",
+      "occupancyRange": "40-50%",
+      "topHotels": [
+        "Nessun hotel classificato; offerta concentrata su appartamenti privati e B&B"
+      ]
+    }
   },
   {
     "slug": "argegno",
@@ -140,7 +201,21 @@
       "C10 ASF bus + fast ferries: Como 25 min, Bellagio 35 min",
       "Central stop on the Greenway del Lago di Como (11.5 km Colonno-Cadenabbia)",
       "Direct gateway to Val d'Intelvi: links Lake Como and Lake Lugano"
-    ]
+    ],
+    "marketStats": {
+      "airbnbListings": "196",
+      "bookingProperties": "40-60",
+      "expediaPresence": "scarsa",
+      "adrRange": "140-200 EUR",
+      "adrRangeEn": "EUR 140-200",
+      "adrLuxuryRange": "250-400 EUR (ville vista lago)",
+      "adrLuxuryRangeEn": "EUR 250-400 (lake-view villas)",
+      "occupancyRange": "50-58%",
+      "topHotels": [
+        "Hotel Argegno (3*)",
+        "Hotel Belvedere Argegno (3*)"
+      ]
+    }
   },
   {
     "slug": "nesso",
@@ -167,7 +242,20 @@
       "Roman-era Ponte della Civera, reached by 270 stone steps from the upper square",
       "15.03 km², 8 hamlets and 1,070 residents: a niche village with intact atmosphere",
       "18 km from Como via SS583 Lariana (30-40 min), ASF bus C30 Como-Bellagio"
-    ]
+    ],
+    "marketStats": {
+      "airbnbListings": "195",
+      "bookingProperties": "15-25",
+      "expediaPresence": "scarsa",
+      "adrRange": "180-260 EUR",
+      "adrRangeEn": "EUR 180-260",
+      "adrLuxuryRange": "350-600 EUR (poche ville top)",
+      "adrLuxuryRangeEn": "EUR 350-600 (few top villas)",
+      "occupancyRange": "52-60%",
+      "topHotels": [
+        "Nessun hotel classificato proprio: ospiti hotel-seekers ripiegano su Lezzeno o Bellagio"
+      ]
+    }
   },
   {
     "slug": "lezzeno",
@@ -194,7 +282,22 @@
       "Grotta dei Bulberi / Blue Grotto: boat-only access, fixed stop on Bellagio-Como tours",
       "Calvasino, Pescaù, Bagnana, Crotto hamlets: micro-beaches and private docks",
       "SS583 Lariana from Como 24 km (40-50 min), C30 ASF bus, Bagnana ferry stop"
-    ]
+    ],
+    "marketStats": {
+      "airbnbListings": "266",
+      "bookingProperties": "40-60",
+      "expediaPresence": "media",
+      "adrRange": "130-220 EUR",
+      "adrRangeEn": "EUR 130-220",
+      "adrLuxuryRange": "250-400 EUR (case con accesso lago)",
+      "adrLuxuryRangeEn": "EUR 250-400 (houses with lake access)",
+      "occupancyRange": "58-68%",
+      "topHotels": [
+        "Filario Hotel & Residences (boutique 4*)",
+        "Hotel Villa Aurora (3* superior)",
+        "Hotel Aurora Lezzeno"
+      ]
+    }
   },
   {
     "slug": "bellagio",
@@ -221,7 +324,24 @@
       "Golden-triangle hub: ferries to Menaggio and Varenna every 20-40 min",
       "No rail station: ferry from Varenna (15-20 min) or SP583 from Como",
       "Feast of San Giovanni (June), Festival di Bellagio (July-Aug), weddings May-October"
-    ]
+    ],
+    "marketStats": {
+      "airbnbListings": "716",
+      "bookingProperties": "~396",
+      "expediaPresence": "forte",
+      "adrRange": "260-380 EUR",
+      "adrRangeEn": "EUR 260-380",
+      "adrLuxuryRange": "400-700 EUR (Villa Serbelloni oltre 1.000 EUR)",
+      "adrLuxuryRangeEn": "EUR 400-700 (Villa Serbelloni over EUR 1,000)",
+      "occupancyRange": "58-67%",
+      "topHotels": [
+        "Grand Hotel Villa Serbelloni (5* Relais & Chateaux)",
+        "Hotel Du Lac & Spa (4*)",
+        "Hotel Florence (4*)",
+        "Hotel Belvedere Bellagio (4*)",
+        "Seta Hotel (boutique 4*)"
+      ]
+    }
   },
   {
     "slug": "tremezzo",
@@ -250,7 +370,23 @@
       "Sacro Monte di Ossuccio: UNESCO site on the Tremezzina hillside",
       "Greenway del Lago di Como (11.5 km Colonno-Cadenabbia) crosses the municipality",
       "No rail station: ferry from Bellagio (5.50 EUR) or SS340 Regina"
-    ]
+    ],
+    "marketStats": {
+      "airbnbListings": "352",
+      "bookingProperties": "100-150",
+      "expediaPresence": "forte",
+      "adrRange": "200-280 EUR",
+      "adrRangeEn": "EUR 200-280",
+      "adrLuxuryRange": "350-700 EUR (Grand Hotel Tremezzo 1.000-4.000 EUR)",
+      "adrLuxuryRangeEn": "EUR 350-700 (Grand Hotel Tremezzo EUR 1,000-4,000)",
+      "occupancyRange": "56-69%",
+      "topHotels": [
+        "Grand Hotel Tremezzo (5* Preferred Hotels / Michelin)",
+        "Albergo Lenno (4*)",
+        "Hotel Villa Edy (boutique)",
+        "Villa Sola Cabiati (gruppo Grand Hotel Tremezzo)"
+      ]
+    }
   },
   {
     "slug": "lenno",
@@ -279,7 +415,24 @@
       "Acquafredda Abbey (1142, Cistercian) at 300 m, today a Franciscan retreat",
       "Greenway del Lago di Como node + 20-minute ferry to Bellagio",
       "8-month operating season (mid-March to mid-November) aligned with FAI villa"
-    ]
+    ],
+    "marketStats": {
+      "airbnbListings": "80-150 (stima)",
+      "airbnbListingsEn": "80-150 (estimated)",
+      "bookingProperties": "40-70",
+      "expediaPresence": "media",
+      "adrRange": "180-260 EUR",
+      "adrRangeEn": "EUR 180-260",
+      "adrLuxuryRange": "350-700 EUR (ville e dimore storiche)",
+      "adrLuxuryRangeEn": "EUR 350-700 (villas and historic residences)",
+      "occupancyRange": "55-65%",
+      "topHotels": [
+        "Albergo Lenno (4*, 46 camere)",
+        "Hotel Lenno",
+        "San Giorgio Hotel (3-4*)"
+      ],
+      "dataNote": "AirDNA aggrega Lenno dentro Tremezzina: i listing Airbnb sono interpolati e meno precisi delle altre zone."
+    }
   },
   {
     "slug": "menaggio",
@@ -308,7 +461,26 @@
       "Golden-triangle hub: 15-minute direct ferries to Bellagio and Varenna",
       "Menaggio Guitar Festival since 2005 (July)",
       "Loveno and Croce hamlets: hillside villas with panoramic lake views"
-    ]
+    ],
+    "marketStats": {
+      "airbnbListings": "376-392",
+      "bookingProperties": "250-350",
+      "expediaPresence": "media-alta",
+      "expediaPresenceEn": "medium-high",
+      "adrRange": "200-310 EUR",
+      "adrRangeEn": "EUR 200-310",
+      "adrLuxuryRange": "400-700 EUR (ville Loveno e Croce)",
+      "adrLuxuryRangeEn": "EUR 400-700 (Loveno and Croce villas)",
+      "occupancyRange": "46-65%",
+      "topHotels": [
+        "Grand Hotel Menaggio (4*)",
+        "Hotel Bellavista (4*)",
+        "Hotel Royal Victoria (4*)",
+        "Hotel Loveno (3*)",
+        "Villa Adriatica"
+      ],
+      "dataNote": "Offerta Airbnb in crescita +49,7% YoY: il mercato si sta espandendo più rapidamente della domanda."
+    }
   },
   {
     "slug": "varenna",
@@ -335,6 +507,24 @@
       "Villa Monastero (11-12th c.), Castello di Vezio, Fiumelatte",
       "Golden-triangle hub: direct ferries to Bellagio and Menaggio in 15-20 min",
       "Medieval fishing village founded in 769 AD, 812 residents, limited stock"
-    ]
+    ],
+    "marketStats": {
+      "airbnbListings": "344-367",
+      "bookingProperties": "80-120",
+      "expediaPresence": "media",
+      "adrRange": "250-320 EUR",
+      "adrRangeEn": "EUR 250-320",
+      "adrLuxuryRange": "400-600 EUR (R Collection 4*)",
+      "adrLuxuryRangeEn": "EUR 400-600 (R Collection 4*)",
+      "occupancyRange": "52-68%",
+      "topHotels": [
+        "Hotel Villa Cipressi by R Collection (4*, 30 camere)",
+        "Hotel Royal Victoria by R Collection (4*, spa)",
+        "Hotel Olivedo (3* storico)",
+        "Albergo del Sole",
+        "Hotel Du Lac Varenna"
+      ],
+      "dataNote": "Offerta Airbnb in crescita +33,7% YoY: erosione possibile dell'occupazione nel medio termine."
+    }
   }
 ]
