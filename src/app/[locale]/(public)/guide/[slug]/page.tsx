@@ -119,24 +119,28 @@ function GuideContent({ guide, locale }: { guide: Guide; locale: Locale }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
 
-      <section className="py-16 border-b border-border/50 bg-gradient-to-b from-primary/[0.04] via-white to-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-[#1D3A62] text-white border-b border-white/10">
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center pointer-events-none"
+        />
+        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <nav
             aria-label="Breadcrumb"
-            className="flex items-center gap-1.5 text-xs text-muted-foreground mb-5"
+            className="flex items-center gap-1.5 text-xs text-white/70 mb-5"
           >
-            <Link href="/" className="hover:text-foreground transition-colors">
+            <Link href="/" className="hover:text-white transition-colors">
               {tNav("home")}
             </Link>
             <span className="opacity-60">/</span>
             <Link
               href="/guide"
-              className="hover:text-foreground transition-colors"
+              className="hover:text-white transition-colors"
             >
               {locale === "en" ? "Guides" : "Guide"}
             </Link>
           </nav>
-          <div className="flex items-center gap-3 text-xs text-muted-foreground mb-3">
+          <div className="flex items-center gap-3 text-xs text-white/75 mb-3">
             <span className="inline-flex items-center gap-1">
               <Tag className="h-3 w-3" />
               {category}
@@ -151,10 +155,10 @@ function GuideContent({ guide, locale }: { guide: Guide; locale: Locale }) {
               {updatedLabel} {guide.lastUpdated}
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light leading-tight mb-4">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light leading-tight mb-4 text-white">
             {title}
           </h1>
-          <p className="text-muted-foreground text-lg leading-relaxed">
+          <p className="text-white/85 text-lg leading-relaxed">
             {description}
           </p>
         </div>
@@ -180,22 +184,22 @@ function GuideContent({ guide, locale }: { guide: Guide; locale: Locale }) {
         </div>
       </article>
 
-      <section className="py-16 bg-[#1D3A62] text-white">
+      <section className="py-16 bg-white border-t border-border/50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-light mb-3">
+          <h2 className="text-2xl sm:text-3xl font-light mb-3 text-foreground">
             <span className="font-semibold">{ctaTitle}</span>
           </h2>
-          <p className="text-white/80 mb-7 leading-relaxed">{ctaBody}</p>
+          <p className="text-muted-foreground mb-7 leading-relaxed">{ctaBody}</p>
           <Link
             href={`/contact?interest=gestione&from=guide-${guide.slug}`}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-foreground text-sm font-semibold hover:bg-white/90 transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#1D3A62] text-white text-sm font-semibold hover:bg-[#1D3A62]/90 transition-colors"
           >
             {tCommon("requestConsultation")}
             <ArrowRight className="h-4 w-4" />
           </Link>
-        </div>
-        <div className="text-xs text-white/60 text-center mt-4 max-w-md mx-auto">
-          {brandName(locale)} · {locale === "en" ? "Lake Como" : "Lago di Como"}
+          <div className="text-xs text-muted-foreground/80 mt-6 max-w-md mx-auto">
+            {brandName(locale)} · {locale === "en" ? "Lake Como" : "Lago di Como"}
+          </div>
         </div>
       </section>
     </div>
