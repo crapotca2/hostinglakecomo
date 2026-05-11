@@ -19,15 +19,15 @@ type Props = {
   locale: Locale;
 };
 
-const LAKE_BOUNDS: LatLngBoundsLiteral = [
-  [45.78, 9.04],
-  [46.2, 9.46],
+const OPERATING_AREA_BOUNDS: LatLngBoundsLiteral = [
+  [45.79, 9.06],
+  [46.04, 9.31],
 ];
 
-function FitToLake() {
+function FitToOperatingArea() {
   const map = useMap();
   useEffect(() => {
-    map.fitBounds(LAKE_BOUNDS, { padding: [20, 20] });
+    map.fitBounds(OPERATING_AREA_BOUNDS, { padding: [10, 10] });
   }, [map]);
   return null;
 }
@@ -62,16 +62,16 @@ export function ComoLakeMapClient({ comuni, locale }: Props) {
           maxZoom={19}
           opacity={0.85}
         />
-        <FitToLake />
+        <FitToOperatingArea />
         {comuni.map((c) => (
           <CircleMarker
             key={c.slug}
             center={[c.geo.lat, c.geo.lng]}
             radius={8}
             pathOptions={{
-              color: "#0C7489",
+              color: "#0F172A",
               weight: 2.5,
-              fillColor: "#119DB0",
+              fillColor: "#0F172A",
               fillOpacity: 1,
             }}
             eventHandlers={{
@@ -79,10 +79,10 @@ export function ComoLakeMapClient({ comuni, locale }: Props) {
                 router.push(`/property-management/${c.slug}`);
               },
               mouseover: (e) => {
-                e.target.setStyle({ radius: 11, fillColor: "#0C7489" });
+                e.target.setStyle({ radius: 11, fillColor: "#1D3A62" });
               },
               mouseout: (e) => {
-                e.target.setStyle({ radius: 8, fillColor: "#119DB0" });
+                e.target.setStyle({ radius: 8, fillColor: "#0F172A" });
               },
             }}
           >

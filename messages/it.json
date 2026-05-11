@@ -897,17 +897,17 @@
   },
   "pmPublic": {
     "hero": {
-      "eyebrow": "Le zone in cui operiamo",
+      "eyebrow": "Il Lago di Como, zona per zona",
       "title1": "Property management",
       "title1Strong": "sul Lago di Como",
-      "subtitle": "Operiamo zona per zona, con un portfolio costruito sulla qualità della selezione. Ogni territorio ha dinamiche di domanda diverse — la strategia si calibra di conseguenza."
+      "subtitle": "Conosciamo il Lago di Como zona per zona: dinamiche di domanda, profilo dell'ospite, stagionalità e prodotto immobiliare prevalente. Per ogni territorio raccontiamo come calibriamo la strategia di gestione."
     },
     "map": {
       "title": "Esplora il lago sulla mappa",
-      "subtitle": "Una panoramica dei comuni in cui operiamo direttamente. Clicca un comune per leggere come ne calibriamo la gestione."
+      "subtitle": "Una panoramica del Lago di Como, zona per zona. Clicca un comune per leggere la nostra analisi dell'area."
     },
     "areas": {
-      "title": "Tutti i comuni in cui pubblichiamo",
+      "title": "Le zone che approfondiamo",
       "subtitle": "Ogni pagina dedicata racconta dinamica di domanda, stagionalità e profilo dell'ospite tipico della zona.",
       "discoverLabel": "Scopri la zona",
       "lakeBadge": "Lago di Como"

@@ -249,9 +249,9 @@ function ComuneLandingClient({
                 </a>
               </div>
               <GoogleMapEmbed
-                query={`${comune.geo.lat},${comune.geo.lng}`}
+                query={`${comune.name}, Lago di Como, Italia`}
                 title={`Mappa ${comune.name}`}
-                zoom={13}
+                zoom={14}
                 className="h-64"
               />
             </div>

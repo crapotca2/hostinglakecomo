@@ -897,17 +897,17 @@
   },
   "pmPublic": {
     "hero": {
-      "eyebrow": "Where we operate",
+      "eyebrow": "Lake Como, area by area",
       "title1": "Property management",
       "title1Strong": "on Lake Como",
-      "subtitle": "We work area by area, with a portfolio shaped by curated selection. Each territory has different demand dynamics — strategy is tuned accordingly."
+      "subtitle": "We know Lake Como area by area: demand dynamics, guest profile, seasonality and the prevailing property type. For each territory we describe how we tune the management strategy."
     },
     "map": {
       "title": "Explore the lake on the map",
-      "subtitle": "An overview of the towns where we operate directly. Click a town to read how we tune the management for that area."
+      "subtitle": "A walkthrough of Lake Como, area by area. Click a town to read our analysis of that area."
     },
     "areas": {
-      "title": "All the towns where we publish",
+      "title": "The areas we cover in depth",
       "subtitle": "Each dedicated page tells the demand dynamics, seasonality and typical guest profile of the area.",
       "discoverLabel": "Discover the area",
       "lakeBadge": "Lake Como"
