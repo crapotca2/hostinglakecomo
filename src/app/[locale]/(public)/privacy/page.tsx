@@ -87,7 +87,58 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold">3. Finalita del trattamento</h2>
+            <h2 className="text-xl font-semibold">3. Categorie di interessati</h2>
+            <p className="text-base leading-relaxed text-muted-foreground">
+              I dati trattati attraverso il Sito si riferiscono a tre distinte
+              categorie di interessati, con finalita e periodi di conservazione
+              propri di ciascuna categoria:
+            </p>
+            <ul className="space-y-3 text-base text-muted-foreground list-disc pl-6">
+              <li>
+                <strong className="text-foreground">Visitatori del Sito</strong>{" "}
+                — utenti che navigano le pagine pubbliche senza inviare moduli
+                ne autenticarsi. I dati trattati si limitano ai cookie tecnici
+                di sessione e di routing necessari al funzionamento del Sito,
+                descritti nella Cookie Policy.
+              </li>
+              <li>
+                <strong className="text-foreground">
+                  Proprietari potenziali (lead)
+                </strong>{" "}
+                — utenti che inviano una richiesta di consulenza tramite il
+                modulo di contatto. I dati trattati sono quelli forniti
+                volontariamente nel form (nome, email, telefono, indirizzo
+                dell&apos;immobile, eventuali link annunci esistenti) ed eventuale
+                messaggio scritto.
+              </li>
+              <li>
+                <strong className="text-foreground">
+                  Proprietari clienti (gestione in corso)
+                </strong>{" "}
+                — proprietari che hanno sottoscritto un contratto di
+                co-hosting e accedono all&apos;area clienti riservata. I dati
+                trattati comprendono i dati identificativi del proprietario,
+                le credenziali OAuth Google, i dati catastali e contrattuali
+                dell&apos;immobile gestito, i prospetti economici e i rendiconti
+                operativi.
+              </li>
+            </ul>
+            <p className="text-base leading-relaxed text-muted-foreground">
+              I dati degli <strong className="text-foreground">ospiti finali</strong>{" "}
+              che prenotano le proprieta gestite{" "}
+              <strong className="text-foreground">non</strong> vengono trattati
+              direttamente da Como Host attraverso il Sito: tali dati sono
+              raccolti e trattati dai canali di prenotazione (Airbnb,
+              Booking.com, Expedia e analoghi) sulla base delle rispettive
+              informative, e ci vengono comunicati nei limiti necessari alla
+              gestione operativa del soggiorno (check-in, comunicazioni
+              alloggiati, adempimenti normativi come Alloggiati Web e tassa di
+              soggiorno).
+            </p>
+          </section>
+
+          <section className="space-y-4">
+            <h2 className="text-xl font-semibold">4. Finalita del trattamento</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
               I dati raccolti vengono trattati per dare seguito alle richieste
               di consulenza inviate tramite il Sito, gestire l&apos;accesso alla
@@ -100,7 +151,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold">4. Base giuridica</h2>
+            <h2 className="text-xl font-semibold">5. Base giuridica</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
               Il trattamento dei dati di contatto raccolti tramite il modulo di
               richiesta consulenza si fonda sull&apos;art. 6.1.b GDPR, in quanto
@@ -120,7 +171,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold">5. Destinatari dei dati</h2>
+            <h2 className="text-xl font-semibold">6. Destinatari dei dati</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
               I dati raccolti possono essere comunicati a Vercel Inc., fornitore
               di hosting del Sito (datacenter in Unione Europea), e a Google LLC
@@ -133,7 +184,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold">6. Trasferimenti extra UE</h2>
+            <h2 className="text-xl font-semibold">7. Trasferimenti extra UE</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
               Nei limiti necessari all&apos;erogazione del servizio i dati possono
               essere trasferiti negli Stati Uniti d&apos;America presso le
@@ -146,7 +197,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold">7. Periodo di conservazione</h2>
+            <h2 className="text-xl font-semibold">8. Periodo di conservazione</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
               I dati raccolti tramite il modulo di contatto vengono conservati
               per ventiquattro mesi dall&apos;ultimo contatto utile, salvo richiesta
@@ -159,7 +210,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold">8. Diritti dell&apos;interessato</h2>
+            <h2 className="text-xl font-semibold">9. Diritti dell&apos;interessato</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
               In qualunque momento l&apos;interessato puo esercitare i diritti
               previsti dagli articoli da 15 a 22 del GDPR: diritto di accesso,
@@ -179,7 +230,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold">9. Reclamo all&apos;Autorita di controllo</h2>
+            <h2 className="text-xl font-semibold">10. Reclamo all&apos;Autorita di controllo</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
               L&apos;interessato che ritenga che il trattamento dei propri dati
               personali avvenga in violazione del GDPR ha diritto di proporre
@@ -198,7 +249,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold">10. Modifiche all&apos;informativa</h2>
+            <h2 className="text-xl font-semibold">11. Modifiche all&apos;informativa</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
               La presente informativa puo essere aggiornata in caso di modifiche
               normative o di nuove modalita di trattamento dei dati. La versione
