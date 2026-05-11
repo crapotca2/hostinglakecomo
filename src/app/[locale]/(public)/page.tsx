@@ -81,6 +81,7 @@ export default function HomePage() {
   const tSim = useTranslations("home.simulators");
   const tCta = useTranslations("home.ctaBanner");
   const tIns = useTranslations("home.insights");
+  const tPart = useTranslations("partners");
   const locale = useLocale();
 
   const whyUs = tMc.raw("bullets") as string[];
@@ -107,14 +108,9 @@ export default function HomePage() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="max-w-2xl animate-fade-in-up">
-            <div className="flex flex-wrap items-center gap-2 mb-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white/90 text-xs font-medium backdrop-blur-sm border border-white/20">
-                <MapPin className="h-3.5 w-3.5" />
-                {tHero("location")}
-              </div>
-              <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-white/10 text-white/90 text-xs font-medium backdrop-blur-sm border border-white/20">
-                {tHero("channelsPill")}
-              </div>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white/90 text-xs font-medium mb-6 backdrop-blur-sm border border-white/20">
+              <MapPin className="h-3.5 w-3.5" />
+              {tHero("location")}
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-white leading-[1.05] mb-6">
               {tHero("title1")}
@@ -202,6 +198,23 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="mt-16 lg:mt-20 pt-10 border-t border-border/40 text-center">
+            <span className="text-xs font-semibold uppercase tracking-widest text-primary">
+              {tPart("eyebrow")}
+            </span>
+            <p className="text-sm text-muted-foreground mt-2">
+              <span className="font-semibold text-foreground">
+                {tPart("primaryLabel")}
+              </span>{" "}
+              {tPart("primaryNames")}
+              <span className="mx-2 text-muted-foreground/60">·</span>
+              <span className="font-semibold text-foreground">
+                {tPart("longStayLabel")}
+              </span>{" "}
+              {tPart("longStayNames")}
+            </p>
           </div>
         </div>
       </section>

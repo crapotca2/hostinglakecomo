@@ -1,5 +1,3 @@
-import { useTranslations } from "next-intl";
-
 type Partner = {
   name: string;
   url: string;
@@ -47,27 +45,10 @@ const PARTNERS: Partner[] = [
 ];
 
 export function PartnersBanner() {
-  const t = useTranslations("partners");
   const loop = [...PARTNERS, ...PARTNERS];
 
   return (
     <section className="py-12 sm:py-14 bg-white border-y border-border/50">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 text-center">
-        <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-          {t("eyebrow")}
-        </span>
-        <p className="text-sm text-muted-foreground mt-1">
-          <span className="font-semibold text-foreground">
-            {t("primaryLabel")}
-          </span>{" "}
-          {t("primaryNames")}
-          <span className="mx-2 text-muted-foreground/60">·</span>
-          <span className="font-semibold text-foreground">
-            {t("longStayLabel")}
-          </span>{" "}
-          {t("longStayNames")}
-        </p>
-      </div>
       <div className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-24 bg-gradient-to-r from-white to-transparent z-10" />
         <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-24 bg-gradient-to-l from-white to-transparent z-10" />
