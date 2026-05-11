@@ -188,12 +188,12 @@
         "mockupWelcome": {
           "title": "Welcome Letter",
           "languages": "IT · EN · DE · FR",
-          "preview": "Benvenuti a Casa di Miriam"
+          "preview": "Benvenuti a Loft Belvedere"
         },
         "mockupName": {
           "title": "Nome Proprieta",
           "options": [
-            "Casa di Miriam",
+            "Loft Belvedere",
             "Loft del Lago",
             "Terrazza di Como",
             "Vista Cattedrale"
@@ -666,26 +666,6 @@
       "bodyLine2": "Nessun impegno, ti rispondiamo entro 48 ore.",
       "button": "Richiedi una valutazione"
     },
-    "multiChannel": {
-      "eyebrow": "Multi-canale per occupazione 365 giorni",
-      "title1": "Airbnb · Booking · Expedia,",
-      "title1Strong": "più canali long-stay quando servono",
-      "body": "Massimizzare l'occupazione non significa pubblicare ovunque. Pubblichiamo le proprietà sui tre canali primari che generano la quota più alta di prenotazioni turistiche sul Lago di Como — Airbnb, Booking ed Expedia — e affianchiamo canali secondari long-stay per intercettare professionisti, smart worker e soggiorni superiori al mese nei periodi di bassa stagione.",
-      "pillars": [
-        {
-          "title": "Canali primari",
-          "desc": "Airbnb, Booking ed Expedia. Pricing dinamico cross-OTA, calendario unificato, zero doppie prenotazioni. È qui che si concentra il grosso delle prenotazioni turistiche."
-        },
-        {
-          "title": "Canali long-stay",
-          "desc": "subito.it e portali specializzati per locazioni medio-lunghe. Intercettano professionisti, smart worker e transfer aziendali. Riempiono i mesi tradizionalmente bassi."
-        },
-        {
-          "title": "Un solo interlocutore",
-          "desc": "Tu parli con noi. Noi orchestriamo i canali, sincronizziamo le disponibilità e teniamo la tua casa in attività 365 giorni l'anno."
-        }
-      ]
-    },
     "faq": {
       "eyebrow": "Domande frequenti",
       "title1": "Le risposte che",
@@ -765,7 +745,7 @@
   "mockups": {
     "dashboard": {
       "propertyLabel": "Proprieta",
-      "propertyName": "Casa di Miriam",
+      "propertyName": "Loft Belvedere",
       "periodLabel": "Periodo",
       "periodValue": "Aprile 2026",
       "kpis": {
@@ -799,8 +779,8 @@
     },
     "email": {
       "period": "Riepilogo aprile 2026",
-      "propertyName": "Casa di Miriam",
-      "introPrefix": "Ciao Miriam, aprile ha chiuso ",
+      "propertyName": "Loft Belvedere",
+      "introPrefix": "Ciao Marco, aprile ha chiuso ",
       "introStrong": "sopra il target",
       "introSuffix": ": €8.420 di ricavi (+12% rispetto a marzo) e tre nuove recensioni a 5 stelle. Tutti gli indicatori in crescita.",
       "kpis": {
