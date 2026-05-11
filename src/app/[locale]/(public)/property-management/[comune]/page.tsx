@@ -33,11 +33,31 @@ type MarketStats = {
   adrRangeEn?: string;
   adrLuxuryRange?: string | null;
   adrLuxuryRangeEn?: string | null;
+  adrLuxuryNote?: string | null;
+  adrLuxuryNoteEn?: string | null;
   occupancyRange: string;
   topHotels: string[];
   dataNote?: string;
   dataNoteEn?: string;
 };
+
+type ParsedHotel = {
+  name: string;
+  rating?: string;
+  meta?: string;
+};
+
+function parseHotel(raw: string): ParsedHotel {
+  const parenMatch = raw.match(/^(.+?)\s*\(([^)]+)\)\s*$/);
+  if (!parenMatch) return { name: raw.trim() };
+  const name = parenMatch[1].trim();
+  const inside = parenMatch[2].trim();
+  const ratingMatch = inside.match(/(\d+\*)/);
+  if (!ratingMatch) return { name, meta: inside };
+  const rating = ratingMatch[1];
+  const meta = inside.replace(ratingMatch[1], "").replace(/^[,\s]+|[,\s]+$/g, "");
+  return { name, rating, meta: meta || undefined };
+}
 
 function getComune(slug: string): Comune | undefined {
   return (comuni as Comune[]).find((c) => c.slug === slug);
@@ -156,31 +176,27 @@ function ComuneLandingClient({
           eyebrow: "Market data",
           titlePrefix: "The short-term rental market in",
           subtitle:
-            "Aggregated public data from AirDNA, Booking.com and Expedia (trailing 12 months 2024-2025).",
+            "Public data aggregated from AirDNA, Booking.com and Expedia · trailing 12 months 2024-2025.",
           airbnb: "Airbnb listings",
-          booking: "Booking.com properties",
-          expedia: "Expedia presence",
-          adr: "ADR — apartments (peak season)",
-          adrLuxury: "ADR — villas / lakefront",
-          occupancy: "Occupancy (peak season)",
+          booking: "Booking.com",
+          expedia: "Expedia",
+          adr: "ADR apartments",
+          adrLuxury: "ADR villas",
+          occupancy: "Peak occupancy",
           topHotels: "Top hotels",
-          sources:
-            "Sources: AirDNA MarketMinder, Booking.com, Expedia. Trailing 12 months 2024-2025.",
         }
       : {
           eyebrow: "Statistiche di mercato",
           titlePrefix: "Il mercato affitti brevi a",
           subtitle:
-            "Dati pubblici aggregati da AirDNA, Booking.com ed Expedia (trailing 12 mesi 2024-2025).",
+            "Dati pubblici aggregati da AirDNA, Booking.com ed Expedia · trailing 12 mesi 2024-2025.",
           airbnb: "Annunci Airbnb",
-          booking: "Proprietà Booking.com",
-          expedia: "Presenza Expedia",
-          adr: "ADR — appartamenti (alta stagione)",
-          adrLuxury: "ADR — ville / lakefront",
-          occupancy: "Occupazione (alta stagione)",
+          booking: "Booking.com",
+          expedia: "Expedia",
+          adr: "ADR appartamenti",
+          adrLuxury: "ADR ville",
+          occupancy: "Occupazione picco",
           topHotels: "Hotel principali",
-          sources:
-            "Fonti: AirDNA MarketMinder, Booking.com, Expedia. Trailing 12 mesi 2024-2025.",
         };
 
   const breadcrumbs = [
@@ -352,9 +368,9 @@ function ComuneLandingClient({
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-3 gap-4 mb-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-3 sm:mb-4">
               <StatBlock
-                icon={<Home className="h-4 w-4" />}
+                icon={<Home className="h-3.5 w-3.5" />}
                 label={statsLabels.airbnb}
                 value={
                   locale === "en" && marketStats.airbnbListingsEn
@@ -363,12 +379,12 @@ function ComuneLandingClient({
                 }
               />
               <StatBlock
-                icon={<Building2 className="h-4 w-4" />}
+                icon={<Building2 className="h-3.5 w-3.5" />}
                 label={statsLabels.booking}
                 value={marketStats.bookingProperties}
               />
               <StatBlock
-                icon={<Globe2 className="h-4 w-4" />}
+                icon={<Globe2 className="h-3.5 w-3.5" />}
                 label={statsLabels.expedia}
                 value={
                   locale === "en" && marketStats.expediaPresenceEn
@@ -376,11 +392,8 @@ function ComuneLandingClient({
                     : capitalize(marketStats.expediaPresence)
                 }
               />
-            </div>
-
-            <div className="grid sm:grid-cols-3 gap-4 mb-4">
               <StatBlock
-                icon={<Euro className="h-4 w-4" />}
+                icon={<Euro className="h-3.5 w-3.5" />}
                 label={statsLabels.adr}
                 value={
                   locale === "en" && marketStats.adrRangeEn
@@ -389,7 +402,7 @@ function ComuneLandingClient({
                 }
               />
               <StatBlock
-                icon={<Euro className="h-4 w-4" />}
+                icon={<Euro className="h-3.5 w-3.5" />}
                 label={statsLabels.adrLuxury}
                 value={
                   marketStats.adrLuxuryRange
@@ -398,31 +411,57 @@ function ComuneLandingClient({
                       : marketStats.adrLuxuryRange
                     : "—"
                 }
+                hint={
+                  marketStats.adrLuxuryNote
+                    ? locale === "en" && marketStats.adrLuxuryNoteEn
+                      ? marketStats.adrLuxuryNoteEn
+                      : marketStats.adrLuxuryNote
+                    : undefined
+                }
               />
               <StatBlock
-                icon={<TrendingUp className="h-4 w-4" />}
+                icon={<TrendingUp className="h-3.5 w-3.5" />}
                 label={statsLabels.occupancy}
                 value={marketStats.occupancyRange}
               />
             </div>
 
             {marketStats.topHotels.length > 0 && (
-              <div className="bg-white border border-border/50 rounded-2xl p-6 mt-6">
+              <div className="bg-white border border-border/50 rounded-2xl p-5 sm:p-6 mt-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="h-8 w-8 rounded-lg bg-primary/[0.08] flex items-center justify-center">
-                    <Hotel className="h-4 w-4 text-primary" />
+                  <div className="h-7 w-7 rounded-lg bg-primary/[0.08] flex items-center justify-center">
+                    <Hotel className="h-3.5 w-3.5 text-primary" />
                   </div>
-                  <h3 className="text-sm font-semibold">
+                  <h3 className="text-xs uppercase tracking-wider font-semibold text-muted-foreground">
                     {statsLabels.topHotels}
                   </h3>
                 </div>
-                <ul className="text-sm text-muted-foreground space-y-1.5 leading-relaxed">
-                  {marketStats.topHotels.map((h) => (
-                    <li key={h} className="flex items-start gap-2">
-                      <span className="text-primary mt-1 shrink-0">·</span>
-                      <span>{h}</span>
-                    </li>
-                  ))}
+                <ul className="grid sm:grid-cols-2 gap-2">
+                  {marketStats.topHotels.map((raw) => {
+                    const h = parseHotel(raw);
+                    return (
+                      <li
+                        key={raw}
+                        className="flex items-start justify-between gap-3 px-3 py-2.5 rounded-lg bg-muted/30 border border-border/40"
+                      >
+                        <div className="min-w-0 flex-1">
+                          <div className="text-sm font-semibold text-foreground leading-snug">
+                            {h.name}
+                          </div>
+                          {h.meta && (
+                            <div className="text-xs text-muted-foreground mt-0.5 leading-snug">
+                              {h.meta}
+                            </div>
+                          )}
+                        </div>
+                        {h.rating && (
+                          <span className="shrink-0 inline-flex items-center px-2 py-0.5 rounded-md bg-primary/10 text-primary text-[11px] font-bold tracking-tight">
+                            {h.rating}
+                          </span>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             )}
@@ -437,10 +476,6 @@ function ComuneLandingClient({
                 </p>
               </div>
             )}
-
-            <p className="text-xs text-muted-foreground/70 text-center mt-6">
-              {statsLabels.sources}
-            </p>
           </div>
         </section>
       )}
@@ -475,20 +510,27 @@ function StatBlock({
   icon,
   label,
   value,
+  hint,
 }: {
   icon: React.ReactNode;
   label: string;
   value: string;
+  hint?: string;
 }) {
   return (
-    <div className="bg-white border border-border/50 rounded-2xl p-5">
-      <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
+    <div className="bg-white border border-border/50 rounded-xl p-4">
+      <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground mb-1.5">
         <span className="text-primary">{icon}</span>
         <span className="uppercase tracking-wider font-medium">{label}</span>
       </div>
-      <div className="text-2xl font-semibold tracking-tight text-foreground">
+      <div className="text-base sm:text-lg font-semibold tracking-tight text-foreground leading-tight">
         {value}
       </div>
+      {hint && (
+        <div className="text-[11px] text-muted-foreground mt-1 leading-snug">
+          {hint}
+        </div>
+      )}
     </div>
   );
 }
