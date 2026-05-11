@@ -71,15 +71,15 @@ export function ComoLakeMapClient({ comuni, locale }: Props) {
         style={{ width: "100%", height: "100%" }}
       >
         <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png"
+          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png"
           subdomains={["a", "b", "c", "d"]}
           maxZoom={19}
         />
         <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png"
+          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png"
           subdomains={["a", "b", "c", "d"]}
           maxZoom={19}
-          opacity={0.7}
+          opacity={0.85}
         />
         <FitToComuni comuni={comuni} />
         {comuni.map((c) => (
@@ -128,6 +128,22 @@ export function ComoLakeMapClient({ comuni, locale }: Props) {
       </MapContainer>
 
       <style jsx global>{`
+        .leaflet-pane,
+        .leaflet-top,
+        .leaflet-bottom,
+        .leaflet-control,
+        .leaflet-tile-pane,
+        .leaflet-marker-pane,
+        .leaflet-shadow-pane,
+        .leaflet-popup-pane,
+        .leaflet-tooltip-pane,
+        .leaflet-map-pane {
+          z-index: 0 !important;
+        }
+        .leaflet-container {
+          z-index: 0 !important;
+          background: #eaf2f7 !important;
+        }
         .como-lake-map-tooltip {
           background: white !important;
           border: 1px solid rgba(12, 116, 137, 0.2) !important;
@@ -138,9 +154,6 @@ export function ComoLakeMapClient({ comuni, locale }: Props) {
         }
         .como-lake-map-tooltip::before {
           display: none !important;
-        }
-        .leaflet-container {
-          background: #f7f9fb !important;
         }
         .leaflet-control-zoom a {
           background: white !important;

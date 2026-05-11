@@ -117,7 +117,7 @@ function ComuneLandingClient({
         ];
 
   const tagline = pickLocalized(comune, "tagline", locale);
-  const intro = pickLocalized(comune, "intro", locale);
+  const introParagraphs = pickLocalizedArray(comune, "intro", locale);
   const highlights = pickLocalizedArray(comune, "highlights", locale);
 
   const breadcrumbs = [
@@ -207,9 +207,13 @@ function ComuneLandingClient({
             <h2 className="text-2xl sm:text-3xl font-light mb-5">
               <span className="font-semibold">{sectionWhyHere}</span>
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-8">
-              {intro}
-            </p>
+            <div className="space-y-4 mb-8">
+              {introParagraphs.map((p, i) => (
+                <p key={i} className="text-muted-foreground leading-relaxed">
+                  {p}
+                </p>
+              ))}
+            </div>
             <ul className="space-y-3">
               {highlights.map((h) => (
                 <li key={h} className="flex items-start gap-3 text-sm">
