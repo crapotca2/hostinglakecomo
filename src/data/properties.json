@@ -159,8 +159,8 @@
     "sections": {
       "space": "Un bilocale con camera matrimoniale, soggiorno con divano e libreria a tutta parete, bagno con doccia e cucina open-space attrezzata. Aria condizionata, riscaldamento autonomo, WiFi veloce, lavatrice e Smart TV. Arredamento personale curato: cornici dorate, manifesti vintage, oggetti di design — la casa di un host, non un rental anonimo.",
       "space_en": "A one-bedroom flat with a double bedroom, living room with sofa and full-wall library, bathroom with shower and an equipped open-plan kitchen. Air conditioning, independent heating, fast Wi-Fi, washing machine and Smart TV. Curated personal furnishings: gilded frames, vintage posters, design objects — a host's home, not an anonymous rental.",
-      "neighborhood": "Piazzale Santa Teresa, fronte stazione Como S. Giovanni: posizione strategica per chi arriva in treno da Milano (regionale in 50 minuti, Lugano in 35). Lungolago e Piazza Cavour raggiungibili in 12 minuti a piedi. Ristoranti, botteghe e supermercato di fronte casa.",
-      "neighborhood_en": "Piazzale Santa Teresa, directly opposite Como S. Giovanni station: a strategic spot for guests arriving by train from Milan (50-min regional service, Lugano in 35). The lakefront and Piazza Cavour are a 12-minute walk away. Restaurants, shops and a supermarket right across the street.",
+      "neighborhood": "Centro storico di Como, a pochi passi dal lungolago e da Piazza Cavour. Cinque minuti a piedi dal Duomo, dieci dalla funicolare per Brunate. Ristoranti, enoteche e botteghe storiche a portata di mano. La stazione regionale Como S. Giovanni (treno per Milano in 50 minuti) e a circa 12 minuti a piedi.",
+      "neighborhood_en": "Como historic centre, a few steps from the lakefront and Piazza Cavour. A five-minute walk from the Duomo, ten from the Brunate funicular. Restaurants, wine bars and historic shops within easy reach. The regional Como S. Giovanni station (train to Milan in 50 minutes) is about a 12-minute walk away.",
       "guestAccess": "Self check-in con tastiera digitale a partire dalle 15:00. Codice di accesso inviato 24 ore prima dell'arrivo. Check-out entro le 11:00. Reperibilita telefonica 24/7 durante il soggiorno.",
       "services": "Pulizia profonda alla partenza inclusa. Biancheria di qualita fornita. Kit cortesia bagno, cialde caffe e te di benvenuto. Su richiesta: prenotazione tour del lago, consigli ristoranti riservati agli ospiti."
     },
@@ -168,12 +168,12 @@
     "facts": {
       "beds": "1 letto matrimoniale",
       "checkInHours": "Self check-in dalle 15:00, check-out entro le 11:00",
-      "floor": "Appartamento in Piazzale Santa Teresa, fronte stazione Como S.G.",
+      "floor": "Centro storico di Como, stesso edificio di Casa di Miriam (piano inferiore)",
       "parkingNote": "Parcheggio a pagamento nelle vicinanze (silos comunale o strada)",
       "touristTaxNote": "3 EUR per persona a notte, max 5 notti consecutive (regolamento Comune di Como)"
     },
     "address": {
-      "street": "Piazzale Santa Teresa",
+      "street": "",
       "city": "Como",
       "province": "CO",
       "zip": "22100"
@@ -270,9 +270,9 @@
     "touristTaxRate": 3,
     "maxTouristTaxNights": 5,
     "geo": {
-      "lat": 45.8083,
-      "lng": 9.0813,
-      "displayName": "Piazzale Santa Teresa, Como"
+      "lat": 45.81346843844753,
+      "lng": 9.067015832411423,
+      "displayName": "Como, Italia"
     },
     "source": {
       "origin": "airbnb.it",
