@@ -63,6 +63,16 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/guide" className="hover:text-white transition-colors">
+                  {tn("guide")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/property-management" className="hover:text-white transition-colors">
+                  {t("propertyManagement")}
+                </Link>
+              </li>
+              <li>
                 <Link href="/dashboard" className="hover:text-white transition-colors">
                   {t("ownerDashboard")}
                 </Link>

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import {
   Star,
   ExternalLink,
   CheckCircle2,
   Sparkles,
-  LineChart,
+  MapPinned,
   ShieldCheck,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
@@ -12,6 +13,8 @@ import team from "@/data/team.json";
 import { pickLocalized } from "@/lib/i18n-data";
 import { buildMetadata } from "@/lib/seo";
 import { JsonLdAngelo } from "@/components/seo/jsonld-person";
+import { FaqAccordion } from "@/components/public/faq-accordion";
+import { JsonLdFaq, type FaqItem } from "@/components/seo/jsonld-faq";
 import type { Locale } from "@/i18n/routing";
 
 const COPY = {
@@ -45,7 +48,7 @@ export async function generateMetadata({
 const COMPETENCE_AREAS = [
   { key: "accoglienza", icon: Sparkles },
   { key: "operativita", icon: ShieldCheck },
-  { key: "tariffe", icon: LineChart },
+  { key: "esperienze", icon: MapPinned },
 ] as const;
 
 export default function AboutPage() {
@@ -54,6 +57,8 @@ export default function AboutPage() {
   const tComp = useTranslations("about.competenceAreas");
   const tTeam = useTranslations("about.team");
   const tSpot = useTranslations("about.team.spotlight");
+  const tFaq = useTranslations("about.faq");
+  const faqItems = tFaq.raw("items") as FaqItem[];
   const locale = useLocale();
 
   return (
@@ -148,11 +153,12 @@ export default function AboutPage() {
               <div className="bg-white rounded-3xl border border-border/50 shadow-sm overflow-hidden grid md:grid-cols-[5fr_7fr] max-w-4xl mx-auto">
                 <div className="aspect-square md:aspect-auto bg-muted relative overflow-hidden">
                   {angelo.profilePicture && (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <Image
                       src={angelo.profilePicture}
                       alt={`${angelo.name} — ${role}`}
-                      className="w-full h-full object-cover"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 40vw"
+                      className="object-cover"
                     />
                   )}
                   {angelo.isSuperhost && (
@@ -200,6 +206,24 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section className="py-20 sm:py-24 bg-white">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <JsonLdFaq items={faqItems} />
+          <div className="text-center mb-10">
+            <span className="text-xs font-semibold uppercase tracking-widest text-primary">
+              {tFaq("eyebrow")}
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-light mt-3 mb-3">
+              {tFaq("title1")}{" "}
+              <span className="font-semibold">{tFaq("title1Strong")}</span>
+            </h2>
+            <p className="text-muted-foreground leading-relaxed">
+              {tFaq("subtitle")}
+            </p>
+          </div>
+          <FaqAccordion items={faqItems} />
+        </div>
+      </section>
     </div>
   );
 }

@@ -2,11 +2,18 @@ import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/seo";
 import propertiesData from "@/data/properties.json";
+import comuniData from "@/data/comuni.json";
+import guidesData from "@/data/guides.json";
+
+type PropertyImage = { url: string; alt?: string };
+type PropertyShape = { slug: string; images?: PropertyImage[] };
 
 const STATIC_PATHS: { path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] }[] = [
   { path: "/", priority: 1.0, changeFrequency: "weekly" },
   { path: "/services", priority: 0.95, changeFrequency: "monthly" },
   { path: "/properties", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/property-management", priority: 0.9, changeFrequency: "monthly" },
+  { path: "/guide", priority: 0.85, changeFrequency: "monthly" },
   { path: "/about", priority: 0.85, changeFrequency: "monthly" },
   { path: "/contact", priority: 0.85, changeFrequency: "yearly" },
   { path: "/strumenti", priority: 0.8, changeFrequency: "monthly" },
@@ -39,7 +46,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  for (const property of propertiesData) {
+  for (const comune of comuniData as { slug: string }[]) {
+    const path = `/property-management/${comune.slug}`;
+    for (const locale of routing.locales) {
+      entries.push({
+        url: localizedUrl(locale, path),
+        lastModified,
+        changeFrequency: "monthly",
+        priority: 0.8,
+      });
+    }
+  }
+
+  for (const guide of guidesData as { slug: string; lastUpdated: string }[]) {
+    const path = `/guide/${guide.slug}`;
+    const updated = new Date(guide.lastUpdated);
+    for (const locale of routing.locales) {
+      entries.push({
+        url: localizedUrl(locale, path),
+        lastModified: updated,
+        changeFrequency: "yearly",
+        priority: 0.75,
+      });
+    }
+  }
+
+  for (const property of propertiesData as PropertyShape[]) {
     const path = `/properties/${property.slug}`;
     for (const locale of routing.locales) {
       entries.push({

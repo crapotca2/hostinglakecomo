@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/routing";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Globe2, CalendarRange, Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { DashboardMockup } from "@/components/public/dashboard-mockup";
 import { EmailRecapMockup } from "@/components/public/email-recap-mockup";
 import { ServicesCarousel } from "@/components/public/services-carousel";
+import { FaqAccordion } from "@/components/public/faq-accordion";
+import { JsonLdFaq, type FaqItem } from "@/components/seo/jsonld-faq";
 import { buildMetadata } from "@/lib/seo";
 import type { Locale } from "@/i18n/routing";
 
@@ -42,12 +44,20 @@ export default function ServicesPage() {
   const tDash = useTranslations("services.dashboard");
   const tEmail = useTranslations("services.email");
   const tCta = useTranslations("services.cta");
+  const tMc = useTranslations("services.multiChannel");
+  const tFaq = useTranslations("services.faq");
 
   const dashboardBlocks = tDash.raw("blocks") as {
     title: string;
     desc: string;
   }[];
   const emailBullets = tEmail.raw("bullets") as string[];
+  const faqItems = tFaq.raw("items") as FaqItem[];
+  const mcPillars = tMc.raw("pillars") as {
+    title: string;
+    desc: string;
+  }[];
+  const mcIcons = [Globe2, CalendarRange, Sparkles];
 
   return (
     <div className="pt-20">
@@ -66,6 +76,43 @@ export default function ServicesPage() {
             <strong className="text-foreground">{tHero("bodyStrong2")}</strong>
             {tHero("bodySuffix")}
           </p>
+        </div>
+      </section>
+
+      {/* MULTI-CANALE */}
+      <section id="multi-canale" className="py-20 sm:py-24 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mb-12">
+            <span className="text-xs font-semibold uppercase tracking-widest text-primary">
+              {tMc("eyebrow")}
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-light mt-3 mb-4">
+              {tMc("title1")}{" "}
+              <span className="font-semibold">{tMc("title1Strong")}</span>
+            </h2>
+            <p className="text-muted-foreground leading-relaxed">
+              {tMc("body")}
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {mcPillars.map((p, idx) => {
+              const Icon = mcIcons[idx] ?? Sparkles;
+              return (
+                <div
+                  key={p.title}
+                  className="bg-muted/20 border border-border/50 rounded-2xl p-6"
+                >
+                  <div className="h-10 w-10 rounded-lg bg-primary/[0.08] flex items-center justify-center mb-4">
+                    <Icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <h3 className="text-base font-semibold mb-2">{p.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {p.desc}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -170,6 +217,26 @@ export default function ServicesPage() {
               </ul>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="py-20 sm:py-24 bg-muted/20 border-t border-border/50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <JsonLdFaq items={faqItems} />
+          <div className="text-center mb-10">
+            <span className="text-xs font-semibold uppercase tracking-widest text-primary">
+              {tFaq("eyebrow")}
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-light mt-3 mb-3">
+              {tFaq("title1")}{" "}
+              <span className="font-semibold">{tFaq("title1Strong")}</span>
+            </h2>
+            <p className="text-muted-foreground leading-relaxed">
+              {tFaq("subtitle")}
+            </p>
+          </div>
+          <FaqAccordion items={faqItems} />
         </div>
       </section>
 

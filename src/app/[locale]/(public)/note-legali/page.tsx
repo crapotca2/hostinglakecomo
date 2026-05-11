@@ -35,15 +35,15 @@ export default function NoteLegaliPage() {
               Le presenti Note Legali sono pubblicate ai sensi degli articoli 7
               e 8 del D.Lgs. 70/2003 in materia di commercio elettronico e
               forniscono le informazioni identificative del gestore del sito{" "}
-              <strong>hostinglakecomo.com</strong>.
+              <strong>hostcomo.com</strong>.
             </p>
           </section>
 
           <section className="space-y-4">
             <h2 className="text-xl font-semibold">1. Identificazione del gestore</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
-              Il sito hostinglakecomo.com e gestito da{" "}
-              <span className="text-foreground font-medium">[NOME COGNOME]</span>,
+              Il sito hostcomo.com e gestito da{" "}
+              <span className="text-foreground font-medium">Angelo Talarico</span>,
               persona fisica residente a Como (Italia), che opera in proprio
               nell&apos;ambito dell&apos;attivita di co-hosting e gestione di affitti
               brevi sul Lago di Como. Trattandosi di un&apos;attivita gestita da

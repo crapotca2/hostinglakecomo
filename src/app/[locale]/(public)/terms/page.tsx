@@ -34,7 +34,7 @@ export default function TermsPage() {
             <p className="text-base leading-relaxed text-foreground">
               I presenti Termini di Servizio (di seguito, i &quot;Termini&quot;) regolano
               l&apos;accesso e l&apos;utilizzo del sito{" "}
-              <strong>hostinglakecomo.com</strong> (di seguito, il &quot;Sito&quot;) e
+              <strong>hostcomo.com</strong> (di seguito, il &quot;Sito&quot;) e
               dei contenuti e simulatori in esso pubblicati. La navigazione del
               Sito e l&apos;invio di richieste di consulenza implicano
               l&apos;accettazione integrale dei presenti Termini, che possono
@@ -46,7 +46,7 @@ export default function TermsPage() {
             <h2 className="text-xl font-semibold">1. Definizioni</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
               Ai fini dei presenti Termini si intende per &quot;Sito&quot; la piattaforma
-              raggiungibile all&apos;indirizzo hostinglakecomo.com, per &quot;Utente&quot;
+              raggiungibile all&apos;indirizzo hostcomo.com, per &quot;Utente&quot;
               qualunque visitatore del Sito, per &quot;Cliente&quot; il proprietario
               immobiliare che richiede o ha sottoscritto un contratto di
               co-hosting, e per &quot;Servizi&quot; le prestazioni di gestione di affitti
@@ -108,7 +108,8 @@ export default function TermsPage() {
               massima</strong> basate su parametri medi del mercato del Lago di
               Como e su algoritmi semplificati. I valori restituiti dai
               simulatori non costituiscono in alcun modo una garanzia di
-              rendita reale, una proiezione vincolante o un&apos;offerta
+              rendita reale, una proiezione vincolante, una consulenza
+              finanziaria, fiscale o di investimento, ne un&apos;offerta
               contrattuale.
             </p>
             <p className="text-base leading-relaxed text-muted-foreground">
@@ -118,6 +119,13 @@ export default function TermsPage() {
               competitor diretti, il pricing dinamico stagionale e la qualita
               della gestione operativa. Per un&apos;analisi accurata e
               raccomandata la richiesta di una consulenza dedicata.
+            </p>
+            <p className="text-base leading-relaxed text-muted-foreground">
+              L&apos;Utente accetta espressamente, ai sensi e per gli effetti
+              degli articoli 1341 e 1342 del codice civile, le clausole della
+              presente sezione 5 (limitazione del valore probatorio delle
+              stime), della sezione 6 (limitazione di responsabilita) e della
+              sezione 8 (foro competente).
             </p>
           </section>
 

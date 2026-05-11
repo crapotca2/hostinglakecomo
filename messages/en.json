@@ -8,6 +8,7 @@
     "properties": "Properties",
     "services": "Services",
     "tools": "Tools",
+    "guide": "Guides",
     "about": "About",
     "contact": "Contact",
     "cta": "Request a Consultation",
@@ -23,6 +24,7 @@
     "legalTitle": "Legal",
     "contactsTitle": "Contact",
     "ownerDashboard": "Owner Dashboard",
+    "propertyManagement": "Property Management",
     "privacyPolicy": "Privacy Policy",
     "cookiePolicy": "Cookie Policy",
     "termsOfService": "Terms of Service",
@@ -70,9 +72,17 @@
     "discoverServices": "Discover all services",
     "requestConsultation": "Request a Consultation"
   },
+  "partners": {
+    "eyebrow": "Where we publish your property",
+    "primaryLabel": "Primary channels:",
+    "primaryNames": "Airbnb, Booking, Expedia.",
+    "longStayLabel": "Long-stay channels:",
+    "longStayNames": "subito.it and other specialised portals."
+  },
   "home": {
     "hero": {
       "location": "Lake Como, Italy",
+      "channelsPill": "Airbnb · Booking · Expedia + long-stay channels",
       "title1": "Your property,",
       "title2": "our craft.",
       "subtitle": "Professional management of properties on Lake Como. A team of property managers with years of direct experience on the lake. We handle your property across every channel, in every season.",
@@ -117,7 +127,7 @@
         },
         "promotion": {
           "title": "Multi-Channel Promotion",
-          "desc": "Your property on more than 10 platforms with professional photos, optimised descriptions and maximum visibility."
+          "desc": "Listing on the primary channels Airbnb, Booking and Expedia and on long-stay channels for medium-to-long stays. Professional photos, optimised descriptions, maximum visibility."
         },
         "dashboard": {
           "title": "Owner Dashboard",
@@ -146,6 +156,14 @@
         "name": "Direct vs Platforms Profit",
         "desc": "How much you can save on Airbnb, Booking and Expedia commissions with a balanced multi-channel strategy."
       }
+    },
+    "insights": {
+      "eyebrow": "Insights",
+      "title1": "What we explain to",
+      "title1Strong": "owners",
+      "seeAll": "See all guides",
+      "readMore": "Read the guide",
+      "minutes": "min read"
     },
     "ctaBanner": {
       "title": "Trust us with your home on the Lake",
@@ -437,23 +455,51 @@
         "desc": "Guest experience, multilingual communication, review management."
       },
       "operativita": {
-        "title": "Operations and compliance",
-        "desc": "Hotel-grade cleaning, maintenance, full regulatory compliance."
+        "title": "Admin, IT and distribution",
+        "desc": "Contracts, tax compliance, dynamic pricing, integration with primary and long-stay channels, CIN/police/ISTAT compliance."
       },
-      "tariffe": {
-        "title": "Pricing and channels",
-        "desc": "Dynamic pricing, multi-channel distribution, transparent reporting."
+      "esperienze": {
+        "title": "Experiences and local network",
+        "desc": "Curated restaurants, transfers and tours network. Stays that turn into five-star reviews."
       }
     },
     "team": {
-      "title1": "Behind Hosting Lake",
+      "title1": "Behind Host",
       "title1Strong": "Como",
-      "subtitle": "We are a team of three specialists. Direct experience on the Lake is brought by Angelo, an Airbnb Superhost since 2017, who looks after hospitality and the relationship with guests. Alongside him, two dedicated colleagues handle operations and regulatory compliance, and the pricing-and-channels strategy.",
+      "subtitle": "We are a team of three specialists with complementary skills. Direct experience on the Lake is brought by Angelo, an Airbnb Superhost since 2017, who looks after hospitality and the guest relationship. Alongside him, one partner handles admin, IT, dynamic pricing and channel integration, and a third partner lives in Como and curates the local network — restaurants, transfers, experiences that make the difference in reviews.",
       "spotlight": {
         "superhostBadge": "Superhost since 2017",
         "eyebrow": "Direct experience on the Lake",
         "viewProfile": "View Airbnb profile"
       }
+    },
+    "faq": {
+      "eyebrow": "Frequently asked questions",
+      "title1": "What owners",
+      "title1Strong": "ask us about us",
+      "subtitle": "Five clear answers about the team, the method and the reports. If you are looking for questions about the service itself, you'll find them on the Services page.",
+      "items": [
+        {
+          "q": "How long have you been active on the Lake Como market?",
+          "a": "We have been hosting on Lake Como since 2017. Angelo has been an Airbnb Superhost since then, with more than 350 five-star reviews. Host Como was founded to extend that method to a wider set of properties while keeping the same level of care."
+        },
+        {
+          "q": "What types of properties do you manage?",
+          "a": "We manage apartments, villas and houses on Lake Como. We work both on premium lakefront properties and on more compact homes in strategic positions. The deciding factor isn't the size but the location, the condition of the property and the owner's alignment on the quality level required."
+        },
+        {
+          "q": "How do you select the properties you take on?",
+          "a": "We start with a free on-site assessment to evaluate location, condition, amenities and earning potential. We benchmark the numbers against our local historical database. We only take on properties where we can guarantee a concrete result to the owner — if we don't see margin, we say so plainly."
+        },
+        {
+          "q": "How do you handle complaints and critical situations with guests?",
+          "a": "24/7 availability throughout the entire stay. Most issues are resolved in minutes: access codes, directions, amenities. For technical emergencies we have a network of plumbers, electricians and maintenance specialists on the Lake, ready to step in the same day. The owner always receives a post-event recap."
+        },
+        {
+          "q": "Do you send me periodic reports on how my property is performing?",
+          "a": "Yes. Every month you get a dedicated email summary with bookings, occupancy, average rate, net revenue and the compliance handled in the period. You also have 24/7 access to a personal dashboard with all the numbers in real time and tracked payouts."
+        }
+      ]
     }
   },
   "services": {
@@ -624,6 +670,66 @@
       "bodyLine1": "A single conversation to see whether Host Como is a good fit for you.",
       "bodyLine2": "No commitment, we reply within 48 hours.",
       "button": "Request an assessment"
+    },
+    "multiChannel": {
+      "eyebrow": "Multi-channel for 365-day occupancy",
+      "title1": "Airbnb · Booking · Expedia,",
+      "title1Strong": "plus long-stay channels when needed",
+      "body": "Maximising occupancy doesn't mean listing everywhere. We publish properties on the three primary channels that generate the bulk of tourist bookings on Lake Como — Airbnb, Booking and Expedia — and we add long-stay secondary channels to capture professionals, remote workers and stays longer than one month during the low season.",
+      "pillars": [
+        {
+          "title": "Primary channels",
+          "desc": "Airbnb, Booking and Expedia. Cross-OTA dynamic pricing, unified calendar, zero double bookings. This is where most tourist bookings come from."
+        },
+        {
+          "title": "Long-stay channels",
+          "desc": "subito.it and specialised portals for medium-to-long lets. They reach professionals, remote workers and corporate transfers. They fill the traditionally low months."
+        },
+        {
+          "title": "A single point of contact",
+          "desc": "You talk to us. We orchestrate the channels, sync availability and keep your home active 365 days a year."
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "Frequently asked questions",
+      "title1": "The answers",
+      "title1Strong": "owners ask us",
+      "subtitle": "Eight recurring questions about channels, costs, hospitality, compliance and team. If you don't find what you are looking for, write to us from the contact page.",
+      "items": [
+        {
+          "q": "On which platforms do you list properties?",
+          "a": "We publish properties on the primary channels Airbnb, Booking and Expedia — those that generate the highest volume of tourist bookings on Lake Como. We add long-stay secondary channels such as subito.it and other specialised portals to reach professionals, remote workers and stays longer than one month. The goal is to maximise occupancy throughout the year, not only during the summer peaks."
+        },
+        {
+          "q": "How much does your service cost?",
+          "a": "We work on a percentage commission on the revenue generated, with no fixed onboarding fee. The exact model is shared in a free preliminary consultation, once we have assessed the property and its potential numbers together."
+        },
+        {
+          "q": "Do you handle cleaning, check-in and linen?",
+          "a": "Yes. We coordinate professional cleaning crews between stays, manage self or assisted check-in with codes and multilingual video instructions, provide hotel-grade linen and restock courtesy amenities. The owner is never involved operationally."
+        },
+        {
+          "q": "Do you also handle regulatory compliance (CIR, CIN, flat-tax, tourist tax)?",
+          "a": "Yes — we manage end-to-end compliance for short-term rentals on Lake Como: Lombardy CIR and national CIN registration, police reporting via Alloggiati Web, ISTAT, flat-tax management, collection and remittance of the tourist tax to the municipality."
+        },
+        {
+          "q": "Who is on your team?",
+          "a": "We are a team of three with complementary skills. One of the founders has been an Airbnb Superhost since 2017 with more than 350 five-star reviews: he looks after guest hospitality, relationship management and quality standards in the home. A second partner handles admin, tax compliance, contracts, the technology behind dynamic pricing and the integration with OTAs. The third partner lives in Como and is an expert in the local restaurant scene and experiences: he curates the network of local partners — restaurants, private transfers, excursions, lake activities — to turn a stay into a memorable experience that drives five-star reviews."
+        },
+        {
+          "q": "In which languages do you communicate with guests?",
+          "a": "Thanks to our different backgrounds we communicate directly in Italian, English, Romanian, Russian and German. We also handle conversations in Spanish, although not at native level. This widens the pool of reachable guests and reduces friction in pre-booking conversations: replying quickly in the guest's language is statistically correlated with higher conversion."
+        },
+        {
+          "q": "What happens if my home stays vacant?",
+          "a": "The percentage-commission model aligns our incentives with yours: if we don't generate revenue for the owner, we don't generate revenue for ourselves. That's why we invest constantly in revenue management and diversify channels — primary tourist channels at peak, long-stay during low season — to avoid prolonged vacancy."
+        },
+        {
+          "q": "How quickly do you launch a new property?",
+          "a": "From signing the mandate to going live on the primary channels we average 10-15 days: professional photo shoot, multilingual copy, dynamic pricing setup, activation on Airbnb, Booking and Expedia and publication on long-stay secondary channels."
+        }
+      ]
     }
   },
   "contact": {

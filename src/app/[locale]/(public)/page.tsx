@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import {
   Sparkles,
@@ -7,11 +8,12 @@ import {
   ChevronRight,
   CheckCircle2,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { getPortfolio } from "@/lib/portfolio";
 import { PartnersBanner } from "@/components/public/partners-banner";
 import { PropertyCard } from "@/components/public/property-card";
 import { buildMetadata } from "@/lib/seo";
+import guides from "@/data/guides.json";
 import type { Locale } from "@/i18n/routing";
 
 const HOME_COPY = {
@@ -63,6 +65,13 @@ const SIMULATOR_HREFS: Record<(typeof SIMULATOR_SLUGS)[number], string> = {
   profitDiretto: "/strumenti/profit-diretto",
 };
 
+type GuideEntry = (typeof guides)[number];
+function pickGuideField(g: GuideEntry, field: string, locale: string): string {
+  const map = g as unknown as Record<string, string>;
+  if (locale === "en") return map[`${field}_en`] ?? map[`${field}_it`] ?? "";
+  return map[`${field}_it`] ?? map[`${field}_en`] ?? "";
+}
+
 export default function HomePage() {
   const tc = useTranslations("common");
   const tHero = useTranslations("home.hero");
@@ -71,8 +80,11 @@ export default function HomePage() {
   const tFp = useTranslations("home.featuredProperties");
   const tSim = useTranslations("home.simulators");
   const tCta = useTranslations("home.ctaBanner");
+  const tIns = useTranslations("home.insights");
+  const locale = useLocale();
 
   const whyUs = tMc.raw("bullets") as string[];
+  const insightGuides = (guides as GuideEntry[]).slice(0, 2);
 
   return (
     <>
@@ -83,8 +95,11 @@ export default function HomePage() {
           muted
           loop
           playsInline
+          preload="metadata"
+          poster="/images/listing/casa-di-miriam/02-vista-lago.webp"
           className="absolute inset-0 w-full h-full object-cover"
         >
+          <source src="/hero-video.webm" type="video/webm" />
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-[#1D3A62]/80 via-[#1D3A62]/45 to-[#1D3A62]/10" />
@@ -92,9 +107,14 @@ export default function HomePage() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="max-w-2xl animate-fade-in-up">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white/90 text-xs font-medium mb-6 backdrop-blur-sm border border-white/20">
-              <MapPin className="h-3.5 w-3.5" />
-              {tHero("location")}
+            <div className="flex flex-wrap items-center gap-2 mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white/90 text-xs font-medium backdrop-blur-sm border border-white/20">
+                <MapPin className="h-3.5 w-3.5" />
+                {tHero("location")}
+              </div>
+              <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-white/10 text-white/90 text-xs font-medium backdrop-blur-sm border border-white/20">
+                {tHero("channelsPill")}
+              </div>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-white leading-[1.05] mb-6">
               {tHero("title1")}
@@ -164,10 +184,13 @@ export default function HomePage() {
               </div>
             </div>
             <div className="relative">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/images/host.webp"
                 alt={tMc("imageAlt")}
+                width={1200}
+                height={900}
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                priority
                 className="w-full h-auto [mask-image:linear-gradient(to_right,black_82%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,black_82%,transparent_100%)]"
               />
               <div className="absolute -bottom-12 left-0 lg:left-4 bg-white rounded-2xl p-5 shadow-xl border border-border/50 hidden lg:block">
@@ -301,15 +324,68 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ═══ APPROFONDIMENTI ═══ */}
+      <section className="py-20 sm:py-24 bg-muted/20 border-y border-border/50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-end justify-between mb-10 flex-wrap gap-4">
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-widest text-primary">
+                {tIns("eyebrow")}
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-light mt-3">
+                {tIns("title1")}{" "}
+                <span className="font-semibold">{tIns("title1Strong")}</span>
+              </h2>
+            </div>
+            <Link
+              href="/guide"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-border text-sm font-medium hover:bg-white transition-colors"
+            >
+              {tIns("seeAll")}
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {insightGuides.map((g) => {
+              const title = pickGuideField(g, "title", locale);
+              const description = pickGuideField(g, "description", locale);
+              const category = pickGuideField(g, "category", locale);
+              return (
+                <Link
+                  key={g.slug}
+                  href={`/guide/${g.slug}`}
+                  className="group block bg-white rounded-2xl p-6 sm:p-7 border border-border/50 hover:border-primary/40 hover:shadow-md transition-all"
+                >
+                  <div className="text-xs font-medium text-primary mb-3">
+                    {category} · {g.readingMinutes} {tIns("minutes")}
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-semibold mb-3 leading-snug group-hover:text-primary transition-colors">
+                    {title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                    {description}
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+                    {tIns("readMore")}
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* ═══ CTA BANNER ═══ */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative rounded-3xl overflow-hidden shadow-xl">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/images/banners/more-info.jpg"
               alt=""
-              className="absolute inset-0 w-full h-full object-cover"
+              fill
+              sizes="(max-width: 1280px) 100vw, 1280px"
+              className="object-cover"
             />
             <div className="absolute inset-0 bg-[#1D3A62]/65" />
             <div className="relative px-6 py-12 md:px-12 md:py-16 text-center">

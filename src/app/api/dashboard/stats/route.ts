@@ -2,8 +2,11 @@ import { NextResponse } from "next/server";
 import { collections } from "@/lib/mongodb/collections";
 import { ensureSeeded } from "@/lib/seed/ensure-seeded";
 import type { BookingDoc } from "@/types/database";
+import { requireSession } from "@/lib/security/require-session";
 
 export async function GET() {
+  const auth = await requireSession();
+  if (!auth.ok) return auth.response;
   await ensureSeeded();
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();

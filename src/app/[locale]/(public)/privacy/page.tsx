@@ -34,7 +34,7 @@ export default function PrivacyPolicyPage() {
             <p className="text-base leading-relaxed text-foreground">
               La presente informativa descrive le modalita con cui vengono
               trattati i dati personali degli utenti che visitano il sito{" "}
-              <strong>hostinglakecomo.com</strong> (di seguito, il &quot;Sito&quot;) e che
+              <strong>hostcomo.com</strong> (di seguito, il &quot;Sito&quot;) e che
               richiedono i servizi di co-hosting e gestione di affitti brevi sul
               Lago di Como offerti tramite questa piattaforma. Il documento e
               redatto ai sensi degli articoli 13 e 14 del Regolamento UE 2016/679
@@ -47,7 +47,7 @@ export default function PrivacyPolicyPage() {
             <h2 className="text-xl font-semibold">1. Titolare del trattamento</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
               Il titolare del trattamento dei dati personali e{" "}
-              <span className="text-foreground font-medium">[NOME COGNOME]</span>,
+              <span className="text-foreground font-medium">Angelo Talarico</span>,
               persona fisica che gestisce il Sito a Como, Italia. Per qualsiasi
               richiesta in materia di protezione dei dati personali e possibile
               scrivere all&apos;indirizzo{" "}

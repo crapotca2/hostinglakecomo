@@ -1,0 +1,107 @@
+[
+  {
+    "slug": "bellagio",
+    "name": "Bellagio",
+    "geo": { "lat": 45.9858, "lng": 9.2606 },
+    "tagline_it": "La perla del Lago di Como",
+    "tagline_en": "The pearl of Lake Como",
+    "intro_it": "Bellagio è uno dei nomi più ricercati al mondo quando si parla di Lago di Como: ville storiche, giardini affacciati sul lago, ristoranti di livello e una posizione strategica al centro del lago. Una proprietà a Bellagio o nelle frazioni circostanti opera in una nicchia premium con domanda costante da aprile a ottobre, spesso oltre.",
+    "intro_en": "Bellagio is one of the most sought-after names worldwide when it comes to Lake Como: historic villas, lakeside gardens, top-tier restaurants and a strategic position at the centre of the lake. A property in Bellagio or its hamlets operates in a premium niche with steady demand from April to October, often beyond.",
+    "highlights_it": [
+      "ADR tra i più alti del lago",
+      "Stagione che parte presto e finisce tardi",
+      "Domanda internazionale (USA, UK, DACH)",
+      "Forte richiesta di ville e appartamenti vista lago"
+    ],
+    "highlights_en": [
+      "Among the highest ADR on the lake",
+      "Season starts early, ends late",
+      "International demand (USA, UK, DACH)",
+      "Strong demand for villas and lakefront apartments"
+    ]
+  },
+  {
+    "slug": "menaggio",
+    "name": "Menaggio",
+    "geo": { "lat": 46.022, "lng": 9.2415 },
+    "tagline_it": "Sponda ovest, vista privilegiata",
+    "tagline_en": "West shore, prime views",
+    "intro_it": "Menaggio è la base ideale per chi vuole esplorare il lago da una posizione centrale sulla sponda occidentale: traghetti per Bellagio e Varenna, percorsi di trekking, golf club, lungolago vivace. Gli immobili da gestire sono spesso appartamenti panoramici a uso turistico e qualche villa singola.",
+    "intro_en": "Menaggio is the ideal base to explore the lake from a central spot on the western shore: ferries to Bellagio and Varenna, hiking trails, golf club, lively lakefront promenade. Properties to manage here are typically panoramic apartments for tourist use and a handful of standalone villas.",
+    "highlights_it": [
+      "Hub traghetti centrale del lago",
+      "Mercato di seconde case stabile",
+      "Buon mix di appartamenti e ville medie",
+      "Pubblico mid-luxury europeo"
+    ],
+    "highlights_en": [
+      "Central ferry hub of the lake",
+      "Stable second-home market",
+      "Good mix of apartments and mid-size villas",
+      "Mid-luxury European audience"
+    ]
+  },
+  {
+    "slug": "varenna",
+    "name": "Varenna",
+    "geo": { "lat": 46.0107, "lng": 9.2842 },
+    "tagline_it": "Sponda est, il borgo più fotografato",
+    "tagline_en": "East shore, the most photographed village",
+    "intro_it": "Varenna è la cartolina che genera il maggior volume di ricerche turistiche per il Lago di Como: piccolo borgo medievale, stazione ferroviaria diretta da Milano, ristoranti iconici. Le proprietà disponibili sono limitate e questo tiene alti i prezzi medi a notte. Gestione mirata sulla rotazione veloce di brevi soggiorni in alta stagione.",
+    "intro_en": "Varenna is the postcard that drives the highest tourist search volume on Lake Como: small medieval village, direct rail link to Milan, iconic restaurants. Available properties are limited, which keeps average nightly rates high. Management focuses on rapid short-stay turnover in high season.",
+    "highlights_it": [
+      "ADR molto elevato in alta stagione",
+      "Treno diretto da Milano (1h)",
+      "Domanda fortissima da maggio a settembre",
+      "Stock limitato = prezzi sostenuti"
+    ],
+    "highlights_en": [
+      "Very high ADR in peak season",
+      "Direct train from Milan (1h)",
+      "Very strong demand May to September",
+      "Limited stock keeps prices firm"
+    ]
+  },
+  {
+    "slug": "como",
+    "name": "Como",
+    "geo": { "lat": 45.8081, "lng": 9.0852 },
+    "tagline_it": "La città, il centro storico, il lungolago",
+    "tagline_en": "The city, the historic centre, the lakefront",
+    "intro_it": "La città di Como combina turismo del lago, business e prossimità a Milano. Stagionalità più piatta rispetto ai borghi: gli affitti brevi turistici nei picchi convivono bene con soggiorni medio-lunghi di smart worker e professionisti durante il resto dell'anno. È il comune ideale per applicare una strategia multi-canale con primari turistici nei picchi e canali long-stay in bassa stagione.",
+    "intro_en": "The city of Como combines lake tourism, business and proximity to Milan. Seasonality is flatter than in the hamlets: short-stay tourist bookings during peaks coexist with medium-to-long stays from remote workers and professionals during the rest of the year. It is the ideal municipality to run a multi-channel strategy with primary tourist channels at peak and long-stay channels in low season.",
+    "highlights_it": [
+      "Stagionalità più piatta del lago",
+      "Mix tourist + business + long-stay",
+      "Treno per Milano in 40-60 minuti",
+      "Sweet spot per la strategia multi-canale"
+    ],
+    "highlights_en": [
+      "Flatter seasonality than the rest of the lake",
+      "Mix of tourist, business and long-stay",
+      "Train to Milan in 40-60 minutes",
+      "Sweet spot for a multi-channel strategy"
+    ]
+  },
+  {
+    "slug": "tremezzo",
+    "name": "Tremezzo",
+    "geo": { "lat": 45.9824, "lng": 9.2271 },
+    "tagline_it": "Villa Carlotta, luxury, vista cattedrale",
+    "tagline_en": "Villa Carlotta, luxury, postcard views",
+    "intro_it": "Tremezzina vive di luxury: Villa Carlotta, Grand Hotel storici, ville d'autore e clientela internazionale alto-spendente. Una proprietà gestita qui posiziona naturalmente la propria offerta nel segmento premium, con accoglienza curata, biancheria di alta gamma e servizi concierge che diventano differenziali decisivi.",
+    "intro_en": "Tremezzina lives on luxury: Villa Carlotta, historic Grand Hotels, signature villas and an international high-spend clientele. A property managed here naturally positions itself in the premium segment, where curated hospitality, high-end linen and concierge services become decisive differentiators.",
+    "highlights_it": [
+      "Segmento luxury per definizione",
+      "Domanda internazionale alto-spendente",
+      "Servizi concierge come differenziale",
+      "ADR fra i più alti del lago"
+    ],
+    "highlights_en": [
+      "Luxury segment by definition",
+      "International high-spend demand",
+      "Concierge services as a differentiator",
+      "Among the highest ADR on the lake"
+    ]
+  }
+]

@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Phone, Mail, Send } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -28,9 +28,21 @@ function ContactForm() {
   const [interest, setInterest] = useState(initialInterest);
   const [sent, setSent] = useState(false);
   const [onPlatform, setOnPlatform] = useState(false);
+  const mountedAt = useRef<number>(Date.now());
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    // anti-bot: hidden honeypot must stay empty
+    if (honeypotRef.current?.value) {
+      setSent(true);
+      return;
+    }
+    // anti-bot: form filled too quickly is almost certainly a bot
+    if (Date.now() - mountedAt.current < 2000) {
+      setSent(true);
+      return;
+    }
     setSent(true);
   }
 
@@ -162,6 +174,18 @@ function ContactForm() {
           required
           className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none"
         />
+      </div>
+      <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+        <label>
+          Website
+          <input
+            ref={honeypotRef}
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </label>
       </div>
       <button
         type="submit"

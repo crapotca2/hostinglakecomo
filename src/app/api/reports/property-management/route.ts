@@ -4,8 +4,11 @@ import {
   getCommissionSummary, getCommissionDetail,
   getOwnerRemittanceSummary, getOwnerRemittanceDetail, getOwnerStatementBookings,
 } from "@/lib/reports/property-management";
+import { requireSession } from "@/lib/security/require-session";
 
 export async function GET(req: NextRequest) {
+  const auth = await requireSession();
+  if (!auth.ok) return auth.response;
   await ensureSeeded();
   const { searchParams } = new URL(req.url);
   const type = searchParams.get("type") || "commission-summary";

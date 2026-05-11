@@ -1,0 +1,178 @@
+[
+  {
+    "slug": "cir-cin-lombardia",
+    "category_it": "Compliance",
+    "category_en": "Compliance",
+    "title_it": "CIR e CIN in Lombardia: cosa serve davvero per affittare casa sul Lago di Como nel 2026",
+    "title_en": "CIR and CIN in Lombardy: what you really need to rent out a property on Lake Como in 2026",
+    "description_it": "Il Codice Identificativo Regionale (CIR) della Lombardia e il Codice Identificativo Nazionale (CIN) sono due adempimenti diversi e cumulativi. Cosa sono, come ottenerli, scadenze e sanzioni.",
+    "description_en": "The Lombardy Regional Identification Code (CIR) and the National Identification Code (CIN) are two separate, cumulative requirements. What they are, how to obtain them, deadlines and penalties.",
+    "readingMinutes": 6,
+    "lastUpdated": "2026-05-10",
+    "body_it": [
+      {
+        "h": "Cosa sono CIR e CIN — e perché non sono la stessa cosa",
+        "p": [
+          "Il CIR (Codice Identificativo Regionale) è il codice che la Regione Lombardia assegna alle strutture ricettive non alberghiere e alle locazioni turistiche brevi. Esiste da anni come strumento regionale di censimento e di lotta all'abusivismo turistico.",
+          "Il CIN (Codice Identificativo Nazionale) è invece un codice introdotto a livello nazionale dal decreto Anchorage del 2023 e operativo a regime dal 2024: identifica univocamente ogni singola unità immobiliare ad uso turistico sul territorio italiano. È rilasciato dal Ministero del Turismo tramite la Banca Dati Strutture Ricettive (BDSR).",
+          "Da fine 2024 entrambi i codici sono obbligatori per chi affitta in modo turistico in Lombardia: il CIR rimane il riferimento regionale, il CIN si aggiunge come riferimento nazionale. Chiunque pubblichi un annuncio su Airbnb, Booking, Expedia o altri portali deve esporre il CIN nel titolo o nella descrizione del listing."
+        ]
+      },
+      {
+        "h": "Come si ottiene il CIR in Lombardia",
+        "p": [
+          "Il CIR si richiede online tramite il portale Turismo5 della Regione Lombardia. La procedura prevede l'autenticazione con SPID o CIE, l'inserimento dei dati dell'immobile (catastali, indirizzo, tipologia ricettiva) e l'invio della SCIA al Comune competente. In media il codice viene assegnato in 24-72 ore lavorative.",
+          "Se l'immobile è gestito da terzi, il proprietario può delegare il property manager alla richiesta tramite procura semplice; il gestore opera sul portale con le proprie credenziali ma in nome e per conto del titolare dell'immobile."
+        ]
+      },
+      {
+        "h": "Come si ottiene il CIN",
+        "p": [
+          "Il CIN si richiede tramite la Banca Dati Nazionale del Ministero del Turismo (BDSR), accessibile con SPID o CIE. Per la Lombardia il processo è semplificato: chi ha già un CIR può recuperare il CIN come integrazione, con un'unica procedura che importa i dati già censiti regionalmente.",
+          "Il CIN va esposto in modo visibile su tutti gli annunci online della struttura e, per gli edifici fisici, va apposto all'esterno del fabbricato come prevede la normativa antincendio applicabile."
+        ]
+      },
+      {
+        "h": "Sanzioni: quanto costa non averli",
+        "p": [
+          "L'assenza del CIR sui portali è sanzionata dalla Regione Lombardia con multe che vanno da 500 a 5.000 EUR per singolo annuncio non conforme, in base alla durata e alla gravità della violazione.",
+          "L'assenza del CIN è sanzionata a livello nazionale con multe da 800 a 8.000 EUR; in più, i portali sono obbligati a rimuovere gli annunci sprovvisti, quindi una proprietà non in regola esce di fatto dal mercato fino alla regolarizzazione."
+        ]
+      },
+      {
+        "h": "Cosa facciamo noi su CIR e CIN",
+        "p": [
+          "Per le proprietà che gestiamo, ci occupiamo end-to-end della richiesta e del mantenimento di entrambi i codici: raccolta documentale, presentazione della pratica, esposizione sui canali primari (Airbnb, Booking, Expedia) e secondari long-stay, monitoraggio delle scadenze normative e aggiornamento dei codici in caso di variazione catastale o di gestione.",
+          "Il proprietario riceve copia dei codici via email al rilascio, oltre alla documentazione completa archiviata nella dashboard."
+        ]
+      }
+    ],
+    "body_en": [
+      {
+        "h": "What CIR and CIN are — and why they're not the same",
+        "p": [
+          "The CIR (Regional Identification Code) is the code that the Lombardy Region assigns to non-hotel accommodation facilities and short-term tourist rentals. It has existed for years as a regional census and anti-illegal-tourism tool.",
+          "The CIN (National Identification Code) is a code introduced at national level by the 2023 Anchorage decree and fully operational since 2024: it uniquely identifies every single tourist accommodation unit on Italian territory. It is issued by the Ministry of Tourism through the National Accommodation Database (BDSR).",
+          "Since late 2024, both codes are mandatory for short-term tourist rentals in Lombardy: the CIR remains the regional reference, the CIN is added as the national one. Anyone publishing a listing on Airbnb, Booking, Expedia or any other portal must display the CIN in the title or description of the listing."
+        ]
+      },
+      {
+        "h": "How to obtain the CIR in Lombardy",
+        "p": [
+          "The CIR is requested online through the Lombardy Region's Turismo5 portal. The procedure requires authentication via SPID or CIE, entry of the property data (cadastral, address, accommodation type) and submission of the SCIA to the relevant Municipality. The code is typically assigned in 24-72 working hours.",
+          "If the property is managed by a third party, the owner can delegate the property manager to apply via a simple power of attorney; the manager operates on the portal with their own credentials but in the name and on behalf of the property owner."
+        ]
+      },
+      {
+        "h": "How to obtain the CIN",
+        "p": [
+          "The CIN is requested through the National Database of the Ministry of Tourism (BDSR), accessible with SPID or CIE. For Lombardy the process is streamlined: those who already have a CIR can pull the CIN as an integration, in a single procedure that imports the data already registered at regional level.",
+          "The CIN must be displayed visibly on every online listing of the property and, for physical buildings, posted on the outside of the building as required by applicable fire-safety regulations."
+        ]
+      },
+      {
+        "h": "Penalties: the real cost of not having them",
+        "p": [
+          "Missing CIR on portals is sanctioned by the Lombardy Region with fines ranging from EUR 500 to EUR 5,000 per non-compliant listing, depending on duration and severity of the breach.",
+          "Missing CIN is sanctioned at national level with fines from EUR 800 to EUR 8,000; on top of that, portals are required to remove non-compliant listings, so a non-compliant property effectively exits the market until it's brought back into line."
+        ]
+      },
+      {
+        "h": "What we do on CIR and CIN",
+        "p": [
+          "For the properties we manage, we handle end-to-end the application and maintenance of both codes: document collection, application filing, display on the primary channels (Airbnb, Booking, Expedia) and on long-stay secondary channels, monitoring of regulatory deadlines and updates to the codes in case of cadastral or management changes.",
+          "The owner receives a copy of the codes by email upon issuance, along with full documentation archived in the dashboard."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "quanto-rende-affitto-breve-como",
+    "category_it": "Rendimento",
+    "category_en": "Yield",
+    "title_it": "Quanto rende un affitto breve sul Lago di Como nel 2026",
+    "title_en": "How much does a short-term rental on Lake Como yield in 2026",
+    "description_it": "Numeri reali di rendita di un immobile sul Lago di Como, fattori che spostano l'ago della bilancia, errori frequenti dei proprietari e come confrontarsi con i benchmark di zona.",
+    "description_en": "Real revenue figures for a property on Lake Como, the factors that move the needle, common owner mistakes and how to benchmark against your area.",
+    "readingMinutes": 7,
+    "lastUpdated": "2026-05-10",
+    "body_it": [
+      {
+        "h": "ADR e tasso di occupazione: i due numeri che contano",
+        "p": [
+          "La rendita di un affitto breve si compone di due variabili: la tariffa media a notte (ADR, Average Daily Rate) e il tasso di occupazione (occupied nights / available nights). I lordi annuali si stimano moltiplicando ADR × notti occupate.",
+          "Sul Lago di Como un appartamento di buon livello, ben localizzato e ben gestito, può oscillare tra 120-180 EUR di ADR media annuale a notte (più alta nei mesi di picco, più bassa nei mesi di spalla) e un'occupazione tra 55% e 75%. Su una proprietà premium con vista lago a Bellagio o Varenna l'ADR sale facilmente sopra i 250 EUR, ma le notti utili si concentrano da metà aprile a fine settembre."
+        ]
+      },
+      {
+        "h": "Lordo vs netto: cosa toglie davvero",
+        "p": [
+          "Da un lordo realistico di 25.000-35.000 EUR annui per un appartamento medio in centro Como, vanno sottratti: commissioni delle piattaforme (15-20% in media combinato Airbnb + Booking + Expedia), commissione del property manager (tipicamente 15-25% del netto OTA), pulizie (50-80 EUR a turn-over), spese di manutenzione ordinaria, utenze e biancheria, tassa di soggiorno (incassata dal cliente e versata al Comune, neutra sul cash flow ma da tracciare), cedolare secca o IRPEF.",
+          "Il netto in mano al proprietario, dopo tutto, si attesta tipicamente tra il 50% e il 65% del lordo OTA. Su un lordo di 30.000 EUR significa 15.000-19.500 EUR netti annui."
+        ]
+      },
+      {
+        "h": "I fattori che spostano davvero il risultato",
+        "p": [
+          "Posizione: la vista lago vale tra il 25% e il 40% in più di ADR rispetto allo stesso immobile in zona equivalente senza vista. Distanza dai battelli e dal lungolago contano nella stessa direzione.",
+          "Qualità dell'allestimento: foto professionali, biancheria di livello hotel, smart TV, aria condizionata e WiFi veloce non sono optional, sono prerequisiti per stare nella fascia ADR competitiva.",
+          "Gestione attiva del pricing: chi lascia l'ADR fisso tutto l'anno perde tra il 15% e il 25% di ricavo rispetto a chi adotta un pricing dinamico che segue stagionalità, eventi locali e finestra di booking.",
+          "Strategia multi-canale: pubblicare solo su Airbnb significa lasciare a terra il 20-30% di prenotazioni potenzialmente intercettabili da Booking ed Expedia. Aggiungere canali long-stay come subito.it riduce i buchi nei mesi tradizionalmente bassi."
+        ]
+      },
+      {
+        "h": "Gli errori che vediamo più spesso",
+        "p": [
+          "Sopravvalutare la propria proprietà: ogni proprietario è convinto che la sua casa valga di più del benchmark di zona. I dati storici dicono altro. Per evitare delusioni, partire da una stima realistica e migliorarla con leve operative.",
+          "Sottovalutare il ruolo delle recensioni: una proprietà con 50 recensioni a 4,8 stelle vince contro la stessa proprietà con 5 recensioni a 5 stelle. Costruire un volume rapido di recensioni nei primi 6-12 mesi è prioritario.",
+          "Non avere un piano per la bassa stagione: novembre-marzo sul Lago di Como è duro per i soli affitti turistici. Senza canali long-stay attivi, l'occupazione crolla e la rendita annua si compresso."
+        ]
+      },
+      {
+        "h": "Come stimare in modo realistico la tua proprietà",
+        "p": [
+          "Il nostro Simulatore Rendita pubblico (nella sezione Strumenti) restituisce una stima preliminare basata su zona, tipologia e caratteristiche. Per un'analisi accurata serve il nostro database interno storico — la consulenza preliminare è gratuita e include benchmark di zona, stima ADR/occupancy e proiezione netta dopo costi e commissioni."
+        ]
+      }
+    ],
+    "body_en": [
+      {
+        "h": "ADR and occupancy: the two numbers that matter",
+        "p": [
+          "Short-term rental revenue is the product of two variables: average daily rate (ADR) and occupancy rate (occupied nights / available nights). Annual gross is estimated by multiplying ADR × occupied nights.",
+          "On Lake Como a well-positioned, well-managed mid-range apartment typically ranges between EUR 120-180 in average annual ADR (higher in peak months, lower in shoulder months) and an occupancy between 55% and 75%. A premium lakefront property in Bellagio or Varenna can easily push ADR above EUR 250, but usable nights concentrate from mid-April to late September."
+        ]
+      },
+      {
+        "h": "Gross vs net: what really comes off the top",
+        "p": [
+          "From a realistic gross of EUR 25,000-35,000 per year for a mid-range apartment in central Como, you need to subtract: platform commissions (15-20% blended across Airbnb + Booking + Expedia), property manager commission (typically 15-25% of OTA net), cleaning fees (EUR 50-80 per turnover), ordinary maintenance, utilities and linen, tourist tax (collected from the guest and remitted to the Municipality — cash-flow neutral but to be tracked), flat-tax or IRPEF.",
+          "Net to the owner, after everything, typically falls between 50% and 65% of OTA gross. On a EUR 30,000 gross that's EUR 15,000-19,500 net per year."
+        ]
+      },
+      {
+        "h": "What really moves the result",
+        "p": [
+          "Location: lake view drives 25-40% higher ADR vs the same property in an equivalent area with no view. Distance from ferries and the lakefront has a similar pull.",
+          "Setup quality: professional photos, hotel-grade linen, smart TV, air conditioning and fast Wi-Fi are not optional — they are prerequisites to compete on ADR.",
+          "Active pricing management: leaving ADR static all year loses 15-25% of revenue compared to dynamic pricing that follows seasonality, local events and booking-window patterns.",
+          "Multi-channel strategy: listing only on Airbnb means leaving on the table 20-30% of bookings that Booking and Expedia could intercept. Adding long-stay channels like subito.it reduces the gaps in traditionally low months."
+        ]
+      },
+      {
+        "h": "The mistakes we see most often",
+        "p": [
+          "Overestimating your property: every owner is convinced their home is worth more than the area benchmark. Historical data says otherwise. Start from a realistic estimate and improve it with operational levers.",
+          "Underestimating reviews: a property with 50 reviews at 4.8 stars beats the same property with 5 reviews at 5 stars. Building a fast review base in the first 6-12 months is a top priority.",
+          "No low-season plan: November-March on Lake Como is hard for tourist-only rentals. Without active long-stay channels, occupancy collapses and annual revenue compresses."
+        ]
+      },
+      {
+        "h": "How to realistically estimate your property",
+        "p": [
+          "Our public Revenue Simulator (in the Tools section) returns a preliminary estimate based on area, type and features. For an accurate analysis you need our internal historical database — the preliminary consultation is free and includes area benchmarks, ADR/occupancy estimate and net projection after costs and commissions."
+        ]
+      }
+    ]
+  }
+]

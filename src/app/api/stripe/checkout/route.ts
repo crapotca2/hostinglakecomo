@@ -4,8 +4,11 @@ import { collections } from "@/lib/mongodb/collections";
 import { computeQuote } from "@/lib/stripe/pricing";
 import { ensureSeeded } from "@/lib/seed/ensure-seeded";
 import type { PropertyDoc } from "@/types/database";
+import { requireSession } from "@/lib/security/require-session";
 
 export async function POST(req: NextRequest) {
+  const auth = await requireSession();
+  if (!auth.ok) return auth.response;
   await ensureSeeded();
   if (!stripeEnabled) {
     return NextResponse.json(
@@ -14,7 +17,10 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const body = await req.json();
+  const body = await req.json().catch(() => null);
+  if (!body || typeof body !== "object") {
+    return NextResponse.json({ error: "invalid_body" }, { status: 400 });
+  }
   const { slug, checkIn, checkOut, guests, guestEmail, guestName, guestPhone } = body;
 
   if (!slug || !checkIn || !checkOut || !guests || !guestEmail || !guestName) {

@@ -34,7 +34,7 @@ export default function CookiePolicyPage() {
             <p className="text-base leading-relaxed text-foreground">
               La presente Cookie Policy descrive le tipologie di cookie e di
               tecnologie analoghe utilizzate sul sito{" "}
-              <strong>hostinglakecomo.com</strong> e le finalita per cui vengono
+              <strong>hostcomo.com</strong> e le finalita per cui vengono
               impiegate. Il documento integra l&apos;
               <a href="/privacy" className="text-primary hover:underline">
                 informativa privacy

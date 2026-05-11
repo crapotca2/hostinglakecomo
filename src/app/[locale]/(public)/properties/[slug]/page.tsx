@@ -12,6 +12,7 @@ import {
   ArrowLeft,
   Star,
   Navigation,
+  ChevronRight,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { getPortfolioEntry } from "@/lib/portfolio";
@@ -19,6 +20,8 @@ import { pickLocalized } from "@/lib/i18n-data";
 import { AirbnbReviewBlock } from "@/components/public/airbnb-review-block";
 import { GoogleMapEmbed } from "@/components/public/google-map-embed";
 import { PropertyGallery } from "@/components/public/property-gallery";
+import { JsonLdLodging } from "@/components/seo/jsonld-lodging";
+import { JsonLdBreadcrumb } from "@/components/seo/jsonld-breadcrumb";
 
 function MapEmbed({ lat, lng, name }: { lat: number; lng: number; name: string }) {
   const t = useTranslations("properties.detail");
@@ -54,6 +57,7 @@ function MapEmbed({ lat, lng, name }: { lat: number; lng: number; name: string }
 export default function PropertyDetailPage() {
   const t = useTranslations("properties");
   const tDetail = useTranslations("properties.detail");
+  const tNav = useTranslations("nav");
   const locale = useLocale();
   const params = useParams<{ slug: string }>();
   const slug = params.slug;
@@ -97,63 +101,45 @@ export default function PropertyDetailPage() {
   );
   const geo = property.geo;
   const airbnbListing = property.airbnbListing;
+  const seoDescription = (descriptionLong || description || "").slice(0, 600);
 
-  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hostcomo.com";
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Accommodation",
-    name: property.name,
-    description: descriptionLong || description,
-    image: property.images
-      .slice(0, 8)
-      .map((img) => `${SITE_URL}${img.url}`),
-    numberOfRooms: property.details.bedrooms,
-    occupancy: {
-      "@type": "QuantitativeValue",
-      maxValue: property.details.maxGuests,
-    },
-    amenityFeature: property.amenities.map((name) => ({
-      "@type": "LocationFeatureSpecification",
-      name,
-    })),
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: property.address.street || undefined,
-      addressLocality: property.address.city,
-      addressRegion: "Lombardia",
-      postalCode: property.address.zip,
-      addressCountry: "IT",
-    },
-    ...(geo && {
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: geo.lat,
-        longitude: geo.lng,
-      },
-    }),
-    ...(airbnbListing?.rating && airbnbListing?.reviewCount
-      ? {
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: airbnbListing.rating,
-            reviewCount: airbnbListing.reviewCount,
-            bestRating: 5,
-          },
-        }
-      : {}),
-    ...(airbnbListing?.url && { sameAs: [airbnbListing.url] }),
-  };
+  const breadcrumbs = [
+    { name: tNav("home"), path: "/" },
+    { name: tNav("properties"), path: "/properties" },
+    { name: property.name, path: `/properties/${slug}` },
+  ];
 
   const bedroomsKey = property.details.bedrooms === 1 ? "bedroomsOne" : "bedroomsOther";
   const bathroomsKey = property.details.bathrooms === 1 ? "bathroomsOne" : "bathroomsOther";
 
   return (
     <div className="pt-24 pb-20 bg-muted/20 min-h-screen">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      <JsonLdLodging
+        property={property}
+        locale={locale}
+        description={seoDescription}
       />
+      <JsonLdBreadcrumb items={breadcrumbs} locale={locale} />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav
+          aria-label="Breadcrumb"
+          className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4 flex-wrap"
+        >
+          <Link href="/" className="hover:text-foreground transition-colors">
+            {tNav("home")}
+          </Link>
+          <ChevronRight className="h-3 w-3 opacity-60" aria-hidden />
+          <Link
+            href="/properties"
+            className="hover:text-foreground transition-colors"
+          >
+            {tNav("properties")}
+          </Link>
+          <ChevronRight className="h-3 w-3 opacity-60" aria-hidden />
+          <span className="text-foreground font-medium" aria-current="page">
+            {property.name}
+          </span>
+        </nav>
         <Link
           href="/properties"
           className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground mb-4"

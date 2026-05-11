@@ -22,6 +22,7 @@ export function Navbar() {
     { href: "/properties", label: t("properties") },
     { href: "/services", label: t("services") },
     { href: "/strumenti", label: t("tools") },
+    { href: "/guide", label: t("guide") },
     { href: "/about", label: t("about") },
     { href: "/contact", label: t("contact") },
   ];

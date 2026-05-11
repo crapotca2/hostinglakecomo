@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
+import { requireSession } from "@/lib/security/require-session";
 
 export async function GET(_req: Request, { params }: { params: { id: string } }) {
+  const auth = await requireSession();
+  if (!auth.ok) return auth.response;
   const col = await collections.properties();
   const doc = await col.findOne({ _id: new ObjectId(params.id) });
   if (!doc) return NextResponse.json({ error: "Not found" }, { status: 404 });
@@ -10,7 +13,12 @@ export async function GET(_req: Request, { params }: { params: { id: string } })
 }
 
 export async function PUT(req: Request, { params }: { params: { id: string } }) {
-  const body = await req.json();
+  const auth = await requireSession();
+  if (!auth.ok) return auth.response;
+  const body = await req.json().catch(() => null);
+  if (!body || typeof body !== "object") {
+    return NextResponse.json({ error: "invalid_body" }, { status: 400 });
+  }
   const col = await collections.properties();
   const { _id, ...update } = body;
   await col.updateOne(
@@ -21,6 +29,8 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 }
 
 export async function DELETE(_req: Request, { params }: { params: { id: string } }) {
+  const auth = await requireSession();
+  if (!auth.ok) return auth.response;
   const col = await collections.properties();
   await col.deleteOne({ _id: new ObjectId(params.id) });
   return NextResponse.json({ ok: true });

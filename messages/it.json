@@ -8,6 +8,7 @@
     "properties": "Proprieta",
     "services": "Servizi",
     "tools": "Strumenti",
+    "guide": "Guide",
     "about": "Chi Siamo",
     "contact": "Contatti",
     "cta": "Richiedi Consulenza",
@@ -23,6 +24,7 @@
     "legalTitle": "Legale",
     "contactsTitle": "Contatti",
     "ownerDashboard": "Dashboard Proprietari",
+    "propertyManagement": "Property Management",
     "privacyPolicy": "Privacy Policy",
     "cookiePolicy": "Cookie Policy",
     "termsOfService": "Termini di Servizio",
@@ -70,9 +72,17 @@
     "discoverServices": "Scopri tutti i servizi",
     "requestConsultation": "Richiedi Consulenza"
   },
+  "partners": {
+    "eyebrow": "Dove pubblichiamo le proprietà",
+    "primaryLabel": "Canali primari:",
+    "primaryNames": "Airbnb, Booking, Expedia.",
+    "longStayLabel": "Canali long-stay:",
+    "longStayNames": "subito.it e altri portali specializzati."
+  },
   "home": {
     "hero": {
       "location": "Lago di Como, Italia",
+      "channelsPill": "Airbnb · Booking · Expedia + canali long-stay",
       "title1": "Il tuo immobile,",
       "title2": "il nostro mestiere.",
       "subtitle": "Gestione professionale di immobili sul Lago di Como. Un team di property manager con anni di esperienza diretta sul Lago di Como. Gestiamo la tua proprietà su tutti i canali, in ogni stagione.",
@@ -117,7 +127,7 @@
         },
         "promotion": {
           "title": "Promozione Multi-Canale",
-          "desc": "Il tuo immobile su oltre 10 piattaforme con foto professionali, descrizioni ottimizzate e visibilita massima."
+          "desc": "Pubblicazione sui canali primari Airbnb, Booking ed Expedia e sui canali long-stay per i soggiorni medio-lunghi. Foto professionali, descrizioni ottimizzate, visibilita massima."
         },
         "dashboard": {
           "title": "Dashboard Proprietario",
@@ -146,6 +156,14 @@
         "name": "Profit Diretto vs Piattaforme",
         "desc": "Quanto puoi risparmiare sulle commissioni Airbnb, Booking ed Expedia con una strategia multi-canale equilibrata."
       }
+    },
+    "insights": {
+      "eyebrow": "Approfondimenti",
+      "title1": "Quello che spieghiamo",
+      "title1Strong": "ai proprietari",
+      "seeAll": "Vedi tutte le guide",
+      "readMore": "Leggi la guida",
+      "minutes": "min di lettura"
     },
     "ctaBanner": {
       "title": "Affidaci la tua casa sul Lago",
@@ -436,24 +454,52 @@
         "title": "Accoglienza",
         "desc": "Esperienza ospite, comunicazione multilingua, gestione recensioni."
       },
-      "operatività": {
-        "title": "Operativita e adempimenti",
-        "desc": "Pulizie alberghiere, manutenzione, adempimenti normativi completi."
+      "operativita": {
+        "title": "Amministrazione, IT e distribuzione",
+        "desc": "Contratti, compliance fiscale, pricing dinamico, integrazione canali primari e long-stay, adempimenti CIN/Questura/ISTAT."
       },
-      "tariffe": {
-        "title": "Tariffe e canali",
-        "desc": "Tariffe dinamiche, distribuzione su piu canali, reportistica trasparente."
+      "esperienze": {
+        "title": "Esperienze e territorio",
+        "desc": "Rete locale di ristoranti, transfer e tour. Soggiorni curati che diventano recensioni a 5 stelle."
       }
     },
     "team": {
-      "title1": "Dietro Hosting Lake",
-      "title1Strong": "Como",
-      "subtitle": "Siamo una squadra di tre specialisti. L'esperienza diretta sul Lago la porta Angelo, Superhost di Airbnb dal 2017, che cura l'accoglienza e il rapporto con gli ospiti. Al suo fianco lavorano due figure dedicate all'operatività e agli adempimenti normativi e alla strategia di tariffe e canali.",
+      "title1": "Dietro Como",
+      "title1Strong": "Host",
+      "subtitle": "Siamo una squadra di tre specialisti con competenze complementari. L'esperienza diretta sul Lago la porta Angelo, Superhost di Airbnb dal 2017, che cura l'accoglienza e il rapporto con gli ospiti. Al suo fianco lavora chi si occupa di amministrazione, parte IT, pricing e integrazione canali, e chi vive a Como e cura la rete di partner locali — ristoranti, transfer ed esperienze che fanno la differenza nelle recensioni.",
       "spotlight": {
         "superhostBadge": "Superhost dal 2017",
         "eyebrow": "Esperienza diretta sul Lago",
         "viewProfile": "Vedi profilo Airbnb"
       }
+    },
+    "faq": {
+      "eyebrow": "Domande frequenti",
+      "title1": "Quello che i proprietari",
+      "title1Strong": "ci chiedono di noi",
+      "subtitle": "Cinque risposte chiare sul team, sul metodo e sui report. Se cerchi domande sul servizio, le trovi nella pagina Servizi.",
+      "items": [
+        {
+          "q": "Da quanto tempo siete attivi sul mercato del Lago di Como?",
+          "a": "Lavoriamo sul Lago di Como come host dal 2017. Angelo è Superhost di Airbnb da quell'anno con oltre 350 recensioni a cinque stelle. Como Host nasce per estendere quel metodo a un numero più ampio di proprietà, mantenendo lo stesso livello di cura."
+        },
+        {
+          "q": "Che tipo di proprietà gestite?",
+          "a": "Gestiamo appartamenti, ville e case sul Lago di Como. Lavoriamo sia su immobili premium con vista lago sia su soluzioni più contenute in posizioni strategiche. Il fattore decisivo non è la metratura ma la posizione, lo stato dell'immobile e l'allineamento del proprietario sul livello di qualità richiesto."
+        },
+        {
+          "q": "Come selezionate le proprietà da prendere in gestione?",
+          "a": "Facciamo prima un sopralluogo gratuito per valutare zona, stato, dotazioni e potenziale. Confrontiamo i numeri con il nostro database storico locale. Accettiamo solo proprietà su cui possiamo garantire un risultato concreto al proprietario: se non vediamo margine, lo diciamo chiaramente."
+        },
+        {
+          "q": "Come gestite reclami e situazioni critiche con gli ospiti?",
+          "a": "Reperibilità 24/7 durante l'intero soggiorno. La maggior parte dei problemi si risolve in minuti: codice di accesso, indicazioni, dotazioni. Per emergenze tecniche abbiamo una rete di idraulici, elettricisti e manutentori sul Lago, pronti a intervenire in giornata. Il proprietario riceve sempre un riassunto post-evento."
+        },
+        {
+          "q": "Mi mandate dei report periodici sull'andamento della mia proprietà?",
+          "a": "Sì. Ogni mese ricevi un riepilogo dedicato via email con prenotazioni, occupazione, tariffa media, ricavi netti e adempimenti del periodo. In più hai accesso 24/7 alla dashboard personale con tutti i numeri in tempo reale e i pagamenti tracciati."
+        }
+      ]
     }
   },
   "services": {
@@ -624,6 +670,66 @@
       "bodyLine1": "Una sola conversazione per capire se Como Host fa al caso tuo.",
       "bodyLine2": "Nessun impegno, ti rispondiamo entro 48 ore.",
       "button": "Richiedi una valutazione"
+    },
+    "multiChannel": {
+      "eyebrow": "Multi-canale per occupazione 365 giorni",
+      "title1": "Airbnb · Booking · Expedia,",
+      "title1Strong": "più canali long-stay quando servono",
+      "body": "Massimizzare l'occupazione non significa pubblicare ovunque. Pubblichiamo le proprietà sui tre canali primari che generano la quota più alta di prenotazioni turistiche sul Lago di Como — Airbnb, Booking ed Expedia — e affianchiamo canali secondari long-stay per intercettare professionisti, smart worker e soggiorni superiori al mese nei periodi di bassa stagione.",
+      "pillars": [
+        {
+          "title": "Canali primari",
+          "desc": "Airbnb, Booking ed Expedia. Pricing dinamico cross-OTA, calendario unificato, zero doppie prenotazioni. È qui che si concentra il grosso delle prenotazioni turistiche."
+        },
+        {
+          "title": "Canali long-stay",
+          "desc": "subito.it e portali specializzati per locazioni medio-lunghe. Intercettano professionisti, smart worker e transfer aziendali. Riempiono i mesi tradizionalmente bassi."
+        },
+        {
+          "title": "Un solo interlocutore",
+          "desc": "Tu parli con noi. Noi orchestriamo i canali, sincronizziamo le disponibilità e teniamo la tua casa in attività 365 giorni l'anno."
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "Domande frequenti",
+      "title1": "Le risposte che",
+      "title1Strong": "i proprietari ci chiedono",
+      "subtitle": "Otto domande ricorrenti su canali, costi, accoglienza, adempimenti e team. Se non trovi quello che cerchi, scrivici dalla pagina contatti.",
+      "items": [
+        {
+          "q": "Su quali piattaforme pubblicate gli annunci?",
+          "a": "Pubblichiamo le proprietà sui canali primari Airbnb, Booking ed Expedia — sono quelli che generano il volume più alto di prenotazioni turistiche sul Lago di Como. Affianchiamo canali secondari long-stay come subito.it e altri portali specializzati per intercettare professionisti, smart worker e soggiorni superiori al mese. L'obiettivo è massimizzare l'occupazione lungo tutto l'anno, non solo nei picchi estivi."
+        },
+        {
+          "q": "Quanto costa il vostro servizio?",
+          "a": "Lavoriamo a commissione percentuale sui ricavi generati, senza fee fisse di onboarding. Il modello esatto viene condiviso in una consulenza preliminare gratuita, dopo aver valutato insieme la proprietà e i suoi numeri potenziali."
+        },
+        {
+          "q": "Vi occupate di pulizie, check-in e biancheria?",
+          "a": "Sì. Coordiniamo direttamente squadre di pulizia professionali tra un soggiorno e l'altro, gestiamo check-in self o assistito con codice e video-istruzioni multilingua, forniamo biancheria di livello hotel e ci occupiamo del rifornimento delle dotazioni di cortesia. Il proprietario non interviene operativamente."
+        },
+        {
+          "q": "Vi occupate anche degli adempimenti normativi (CIR, CIN, cedolare, tassa di soggiorno)?",
+          "a": "Sì, gestiamo end-to-end gli adempimenti per affitti brevi sul Lago di Como: richiesta CIR Lombardia e CIN nazionale, comunicazioni alloggiati alla Questura via Alloggiati Web, ISTAT, gestione cedolare secca, riscossione e versamento della tassa di soggiorno al Comune."
+        },
+        {
+          "q": "Chi compone il vostro team?",
+          "a": "Siamo un team di tre persone con competenze complementari. Uno dei fondatori è Superhost di Airbnb dal 2017 con oltre 350 recensioni a cinque stelle: si occupa dell'accoglienza ospiti, della cura della relazione e degli standard di qualità in casa. Un secondo socio gestisce l'area amministrativa, la compliance fiscale, i contratti, la parte tecnologica del sistema di pricing dinamico e l'integrazione con i portali. Il terzo socio vive a Como ed è esperto del settore della ristorazione e delle esperienze locali: cura la rete di partner sul territorio — ristoranti, transfer privati, escursioni, attività sul lago — per costruire soggiorni memorabili che generano recensioni a cinque stelle."
+        },
+        {
+          "q": "In quali lingue comunicate con gli ospiti?",
+          "a": "Grazie ai background diversi del team comunichiamo direttamente in italiano, inglese, rumeno, russo e tedesco. Gestiamo anche conversazioni in spagnolo, pur senza un livello madrelingua. Questo amplia il bacino di ospiti raggiungibili e riduce gli attriti nelle conversazioni di pre-booking: rispondere rapidamente nella lingua dell'ospite è statisticamente correlato a tassi di conversione più alti."
+        },
+        {
+          "q": "Cosa succede se la mia casa resta sfitta?",
+          "a": "Il modello a commissione percentuale ci responsabilizza direttamente: se non generiamo ricavo per il proprietario, non generiamo ricavo per noi. Per questo investiamo costantemente in revenue management e diversifichiamo i canali — primari turistici nei picchi, long-stay nei periodi bassi — proprio per evitare periodi di sfittanza prolungati."
+        },
+        {
+          "q": "Quanto velocemente partite con una nuova proprietà?",
+          "a": "Dalla firma del mandato all'attivazione degli annunci sui canali primari servono in media 10-15 giorni: shooting fotografico professionale, scrittura copy multilingua, setup del pricing dinamico, attivazione su Airbnb, Booking ed Expedia e pubblicazione sui canali long-stay secondari."
+        }
+      ]
     }
   },
   "contact": {
