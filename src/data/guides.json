@@ -15,14 +15,14 @@
         "p": [
           "Il CIR (Codice Identificativo Regionale) è il codice che la Regione Lombardia assegna alle strutture ricettive non alberghiere e alle locazioni turistiche brevi. Esiste da anni come strumento regionale di censimento e di lotta all'abusivismo turistico.",
           "Il CIN (Codice Identificativo Nazionale) è invece un codice introdotto a livello nazionale dall'art. 13-ter del DL 145/2023 (cosiddetto decreto Anticipi), convertito in L. 191/2023, e diventato pienamente obbligatorio dal 1° gennaio 2025: identifica univocamente ogni singola unità immobiliare ad uso turistico sul territorio italiano. È rilasciato dal Ministero del Turismo tramite la Banca Dati Strutture Ricettive (BDSR).",
-          "Dal 1° gennaio 2025 entrambi i codici sono obbligatori per chi affitta in modo turistico in Lombardia: il CIR rimane il riferimento regionale, il CIN si aggiunge come riferimento nazionale. Chiunque pubblichi un annuncio su Airbnb, Booking, Expedia o altri portali deve esporre il CIN nel titolo o nella descrizione del listing."
+          "Dal 1° gennaio 2025 entrambi i codici sono obbligatori per chi affitta in modo turistico in Lombardia: il CIR rimane il riferimento regionale, il CIN si aggiunge come riferimento nazionale. Chiunque pubblichi un annuncio su Airbnb, Booking, Expedia o altri portali deve esporre il CIN nel titolo o nella descrizione dell'annuncio."
         ]
       },
       {
         "h": "Come si ottiene il CIR in Lombardia",
         "p": [
           "Il CIR si richiede online tramite il portale ROSS1000 (ex Turismo5) della Regione Lombardia. La procedura prevede l'autenticazione con SPID o CIE, l'inserimento dei dati dell'immobile (catastali, indirizzo, tipologia ricettiva) e la presentazione della SCIA al SUAP del Comune competente. Il rilascio del CIR richiede in media circa 30 giorni lavorativi a decorrere dalla presentazione della pratica comunale.",
-          "Se l'immobile è gestito da terzi, il proprietario può delegare il property manager alla richiesta tramite procura semplice; il gestore opera sul portale con le proprie credenziali ma in nome e per conto del titolare dell'immobile."
+          "Se l'immobile è gestito da terzi, il proprietario può delegare il gestore alla richiesta tramite procura semplice; quest'ultimo opera sul portale con le proprie credenziali ma in nome e per conto del titolare dell'immobile."
         ]
       },
       {
@@ -42,7 +42,7 @@
       {
         "h": "Cosa facciamo noi su CIR e CIN",
         "p": [
-          "Per le proprietà che gestiamo, ci occupiamo end-to-end della richiesta e del mantenimento di entrambi i codici: raccolta documentale, presentazione della pratica, esposizione sui canali primari (Airbnb, Booking, Expedia) e secondari long-stay, monitoraggio delle scadenze normative e aggiornamento dei codici in caso di variazione catastale o di gestione.",
+          "Per le proprietà che gestiamo seguiamo l'intero ciclo di richiesta e di mantenimento di entrambi i codici: raccolta documentale, presentazione della pratica, esposizione sui canali primari (Airbnb, Booking, Expedia) e sui canali per soggiorni medio-lunghi, monitoraggio delle scadenze normative e aggiornamento dei codici in caso di variazione catastale o di gestione.",
           "Il proprietario riceve copia dei codici via email al rilascio, oltre alla documentazione completa archiviata nella dashboard."
         ]
       }
@@ -100,39 +100,44 @@
       {
         "h": "ADR e tasso di occupazione: i due numeri che contano",
         "p": [
-          "La rendita di un affitto breve si compone di due variabili: la tariffa media a notte (ADR, Average Daily Rate) e il tasso di occupazione (occupied nights / available nights). I lordi annuali si stimano moltiplicando ADR × notti occupate.",
+          "La rendita di un affitto breve si compone di due variabili: la tariffa media a notte (ADR, tariffa giornaliera media) e il tasso di occupazione (rapporto fra notti effettivamente prenotate e notti disponibili). I ricavi lordi annuali si stimano moltiplicando l'ADR per le notti occupate.",
           "Sul Lago di Como un appartamento di buon livello, ben localizzato e ben gestito, può oscillare tra 120-180 EUR di ADR media annuale a notte (più alta nei mesi di picco, più bassa nei mesi di spalla) e un'occupazione tra 55% e 75%. Su una proprietà premium con vista lago a Bellagio o Varenna l'ADR sale facilmente sopra i 250 EUR, ma le notti utili si concentrano da metà aprile a fine settembre."
         ]
       },
       {
         "h": "Lordo vs netto: cosa toglie davvero",
         "p": [
-          "Da un lordo realistico di 25.000-35.000 EUR annui per un appartamento medio in centro Como, vanno sottratti: commissioni delle piattaforme (15-20% in media combinato Airbnb + Booking + Expedia), commissione del property manager (tipicamente 15-25% del netto OTA), pulizie (50-80 EUR a turn-over), spese di manutenzione ordinaria, utenze e biancheria, tassa di soggiorno (incassata dal cliente e versata al Comune, neutra sul cash flow ma da tracciare), cedolare secca o IRPEF.",
-          "Il netto in mano al proprietario, dopo tutto, si attesta tipicamente tra il 50% e il 65% del lordo OTA. Su un lordo di 30.000 EUR significa 15.000-19.500 EUR netti annui."
+          "Da un lordo realistico di 25.000-35.000 EUR annui per un appartamento medio in centro Como vanno sottratti: commissioni delle piattaforme di prenotazione (15-20% in media sul mix Airbnb + Booking + Expedia), commissione del gestore della proprietà (tipicamente 15-25% del netto incassato dai portali), pulizie e cambio biancheria fra un soggiorno e l'altro (50-80 EUR ad intervento), spese di manutenzione ordinaria, utenze, tassa di soggiorno (incassata dal cliente e versata al Comune, neutra sul flusso di cassa ma da tracciare), cedolare secca o IRPEF.",
+          "Il netto effettivamente trattenuto dal proprietario si attesta tipicamente tra il 50% e il 65% del lordo dei portali. Su un lordo di 30.000 EUR significa 15.000-19.500 EUR netti annui."
         ]
       },
       {
         "h": "I fattori che spostano davvero il risultato",
         "p": [
           "Posizione: la vista lago vale tra il 25% e il 40% in più di ADR rispetto allo stesso immobile in zona equivalente senza vista. Distanza dai battelli e dal lungolago contano nella stessa direzione.",
-          "Qualità dell'allestimento: foto professionali, biancheria di livello hotel, smart TV, aria condizionata e WiFi veloce non sono optional, sono prerequisiti per stare nella fascia ADR competitiva.",
-          "Gestione attiva del pricing: chi lascia l'ADR fisso tutto l'anno perde tra il 15% e il 25% di ricavo rispetto a chi adotta un pricing dinamico che segue stagionalità, eventi locali e finestra di booking.",
-          "Strategia multi-canale: pubblicare solo su Airbnb significa lasciare a terra il 20-30% di prenotazioni potenzialmente intercettabili da Booking ed Expedia. Aggiungere canali long-stay come subito.it riduce i buchi nei mesi tradizionalmente bassi."
+          "Qualità dell'allestimento: foto professionali, biancheria di alta gamma, smart TV, aria condizionata e WiFi veloce non sono accessori facoltativi, sono prerequisiti per restare in una fascia di tariffa competitiva.",
+          "Gestione attiva della tariffazione: chi lascia l'ADR fisso tutto l'anno perde tra il 15% e il 25% di ricavo rispetto a chi adotta una tariffazione dinamica che segue stagionalità, eventi locali e finestra di prenotazione.",
+          "Strategia multi-canale: pubblicare solo su Airbnb significa rinunciare al 20-30% di prenotazioni intercettabili da Booking ed Expedia. Affiancare canali per soggiorni medio-lunghi come subito.it riduce i periodi di sfittanza nei mesi tradizionalmente bassi."
         ]
       },
       {
         "h": "Gli errori che vediamo più spesso",
         "p": [
-          "Sopravvalutare la propria proprietà: ogni proprietario è convinto che la sua casa valga di più del benchmark di zona. I dati storici dicono altro. Per evitare delusioni, partire da una stima realistica e migliorarla con leve operative.",
+          "Sopravvalutare la propria proprietà: ogni proprietario è convinto che la sua casa valga più della media di zona. I dati storici dicono altro. Per evitare delusioni conviene partire da una stima realistica e migliorarla con leve operative.",
           "Sottovalutare il ruolo delle recensioni: una proprietà con 50 recensioni a 4,8 stelle vince contro la stessa proprietà con 5 recensioni a 5 stelle. Costruire un volume rapido di recensioni nei primi 6-12 mesi è prioritario.",
-          "Non avere un piano per la bassa stagione: novembre-marzo sul Lago di Como è duro per i soli affitti turistici. Senza canali long-stay attivi, l'occupazione crolla e la rendita annua si compresso."
+          "Non avere un piano per la bassa stagione: novembre-marzo sul Lago di Como è duro per i soli affitti turistici. Senza canali per soggiorni medio-lunghi attivi, l'occupazione crolla e la rendita annua si comprime."
         ]
       },
       {
         "h": "Come stimare in modo realistico la tua proprietà",
         "p": [
-          "Il nostro Simulatore Rendita pubblico (nella sezione Strumenti) restituisce una stima preliminare basata su zona, tipologia e caratteristiche. Per un'analisi accurata serve il nostro database interno storico — la consulenza preliminare è gratuita e include benchmark di zona, stima ADR/occupancy e proiezione netta dopo costi e commissioni."
-        ]
+          "Il nostro Simulatore Rendita pubblico restituisce una stima preliminare basata su zona, tipologia e caratteristiche dell'immobile. È accessibile gratuitamente e dà una prima fotografia in pochi minuti.",
+          "Per un'analisi accurata serve il nostro database storico interno: la consulenza preliminare è gratuita e include riferimenti di zona, stima di tariffa media e occupazione attesa, proiezione netta dopo costi e commissioni."
+        ],
+        "cta": {
+          "label": "Apri il Simulatore Rendita",
+          "href": "/strumenti/rendita"
+        }
       }
     ],
     "body_en": [
@@ -170,8 +175,13 @@
       {
         "h": "How to realistically estimate your property",
         "p": [
-          "Our public Revenue Simulator (in the Tools section) returns a preliminary estimate based on area, type and features. For an accurate analysis you need our internal historical database — the preliminary consultation is free and includes area benchmarks, ADR/occupancy estimate and net projection after costs and commissions."
-        ]
+          "Our public Revenue Simulator returns a preliminary estimate based on the area, the property type and its features. It is freely available and gives a first read in a few minutes.",
+          "For an accurate analysis you need our internal historical database: the preliminary consultation is free and includes area benchmarks, an ADR/occupancy estimate and a net projection after costs and commissions."
+        ],
+        "cta": {
+          "label": "Open the Revenue Simulator",
+          "href": "/strumenti/rendita"
+        }
       }
     ]
   }

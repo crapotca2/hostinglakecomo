@@ -9,7 +9,11 @@ import { routing, type Locale } from "@/i18n/routing";
 import { JsonLdBreadcrumb } from "@/components/seo/jsonld-breadcrumb";
 
 type Guide = (typeof guides)[number];
-type Section = { h: string; p: string[] };
+type Section = {
+  h: string;
+  p: string[];
+  cta?: { label: string; href: string };
+};
 
 function getGuide(slug: string): Guide | undefined {
   return (guides as Guide[]).find((g) => g.slug === slug);
@@ -179,6 +183,17 @@ function GuideContent({ guide, locale }: { guide: Guide; locale: Locale }) {
                   {para}
                 </p>
               ))}
+              {section.cta && (
+                <div className="pt-2">
+                  <Link
+                    href={section.cta.href}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#1D3A62] text-white text-sm font-semibold hover:bg-[#1D3A62]/90 transition-colors"
+                  >
+                    {section.cta.label}
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              )}
             </section>
           ))}
         </div>
