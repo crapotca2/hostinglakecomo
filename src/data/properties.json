@@ -146,5 +146,146 @@
         "value": 4.9
       }
     }
+  },
+  {
+    "slug": "casa-dell-angelo",
+    "name": "Casa Dell'Angelo",
+    "type": "apartment",
+    "zone": "centro-como",
+    "description": "Appartamento di carattere nel centro storico di Como: soggiorno con libreria a tutta parete, manifesti d'epoca del cinema italiano e cucina moderna con frigo Smeg blu. Una casa che racconta una storia, a pochi passi dal lungolago.",
+    "description_en": "A character apartment in Como's historic centre: a living room with a full-wall library, vintage Italian cinema posters and a modern kitchen with a blue Smeg fridge. A home that tells a story, just steps from the lakefront.",
+    "descriptionLong": "Casa Dell'Angelo e un bilocale ristrutturato con cura nel cuore di Como, pensato per chi cerca un soggiorno cittadino con un'identita visiva forte. La parete-libreria del soggiorno, i manifesti originali del cinema italiano e il frigorifero Smeg blu sono i tre tratti distintivi che fanno di questa casa una scelta diversa dal solito appartamento neutro. La gestione e curata nei minimi dettagli: targhetta di benvenuto in ottone, guide turistiche selezionate sul tavolino, accoglienza professionale.",
+    "descriptionLong_en": "Casa Dell'Angelo is a carefully renovated one-bedroom flat in the heart of Como, designed for guests looking for a city stay with a strong visual identity. The full-wall library, original Italian cinema posters and blue Smeg fridge are the three signature touches that set this home apart from the usual neutral rental. Management is detail-driven: brass welcome plate, curated travel guides on the coffee table, professional hospitality throughout.",
+    "sections": {
+      "space": "Un bilocale con camera matrimoniale, soggiorno con divano e libreria a tutta parete, bagno con doccia e cucina open-space attrezzata. Aria condizionata, riscaldamento autonomo, WiFi veloce, lavatrice e Smart TV. Arredamento personale curato: cornici dorate, manifesti vintage, oggetti di design — la casa di un host, non un rental anonimo.",
+      "space_en": "A one-bedroom flat with a double bedroom, living room with sofa and full-wall library, bathroom with shower and an equipped open-plan kitchen. Air conditioning, independent heating, fast Wi-Fi, washing machine and Smart TV. Curated personal furnishings: gilded frames, vintage posters, design objects — a host's home, not an anonymous rental.",
+      "neighborhood": "Piazzale Santa Teresa, fronte stazione Como S. Giovanni: posizione strategica per chi arriva in treno da Milano (regionale in 50 minuti, Lugano in 35). Lungolago e Piazza Cavour raggiungibili in 12 minuti a piedi. Ristoranti, botteghe e supermercato di fronte casa.",
+      "neighborhood_en": "Piazzale Santa Teresa, directly opposite Como S. Giovanni station: a strategic spot for guests arriving by train from Milan (50-min regional service, Lugano in 35). The lakefront and Piazza Cavour are a 12-minute walk away. Restaurants, shops and a supermarket right across the street.",
+      "guestAccess": "Self check-in con tastiera digitale a partire dalle 15:00. Codice di accesso inviato 24 ore prima dell'arrivo. Check-out entro le 11:00. Reperibilita telefonica 24/7 durante il soggiorno.",
+      "services": "Pulizia profonda alla partenza inclusa. Biancheria di qualita fornita. Kit cortesia bagno, cialde caffe e te di benvenuto. Su richiesta: prenotazione tour del lago, consigli ristoranti riservati agli ospiti."
+    },
+    "extras": [],
+    "facts": {
+      "beds": "1 letto matrimoniale",
+      "checkInHours": "Self check-in dalle 15:00, check-out entro le 11:00",
+      "floor": "Appartamento in Piazzale Santa Teresa, fronte stazione Como S.G.",
+      "parkingNote": "Parcheggio a pagamento nelle vicinanze (silos comunale o strada)",
+      "touristTaxNote": "3 EUR per persona a notte, max 5 notti consecutive (regolamento Comune di Como)"
+    },
+    "address": {
+      "street": "Piazzale Santa Teresa",
+      "city": "Como",
+      "province": "CO",
+      "zip": "22100"
+    },
+    "details": {
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "maxGuests": 2,
+      "hasLakeView": false,
+      "hasWifi": true,
+      "hasAC": true,
+      "hasParking": false,
+      "hasGarden": false,
+      "hasPool": false
+    },
+    "amenities": [
+      "WiFi",
+      "Aria condizionata",
+      "Riscaldamento",
+      "Lavatrice",
+      "Cucina attrezzata",
+      "Smart TV",
+      "Self check-in",
+      "Ferro da stiro",
+      "Libreria"
+    ],
+    "images": [
+      {
+        "url": "/images/listing/casa-dell-angelo/01-hero-divano-grande-poster.jpeg",
+        "alt": "Casa Dell'Angelo — soggiorno con divano grande e parete di manifesti del cinema italiano (Bogart, Casablanca, La Via del Rhum)",
+        "room": "Soggiorno",
+        "order": 0
+      },
+      {
+        "url": "/images/listing/casa-dell-angelo/02-soggiorno-libreria-finestra.jpeg",
+        "alt": "Casa Dell'Angelo — soggiorno con libreria a tutta parete e grande finestra",
+        "room": "Soggiorno",
+        "order": 1
+      },
+      {
+        "url": "/images/listing/casa-dell-angelo/03-cucina-tavolo-lampada-kartell.jpeg",
+        "alt": "Casa Dell'Angelo — cucina con tavolo da pranzo e lampada Kartell",
+        "room": "Cucina",
+        "order": 2
+      },
+      {
+        "url": "/images/listing/casa-dell-angelo/04-cucina-frigo-smeg-blu.jpeg",
+        "alt": "Casa Dell'Angelo — cucina open-space con frigorifero Smeg blu",
+        "room": "Cucina",
+        "order": 3
+      },
+      {
+        "url": "/images/listing/casa-dell-angelo/05-cucina-libreria-transizione.jpeg",
+        "alt": "Casa Dell'Angelo — vista tra libreria a tutta parete e cucina open",
+        "room": "Open space",
+        "order": 4
+      },
+      {
+        "url": "/images/listing/casa-dell-angelo/06-cucina-porta-tavolo.jpeg",
+        "alt": "Casa Dell'Angelo — cucina vista alternativa con tavolo bianco e parete in pietra",
+        "room": "Cucina",
+        "order": 5
+      },
+      {
+        "url": "/images/listing/casa-dell-angelo/07-camera-biancheria-salvia.jpeg",
+        "alt": "Casa Dell'Angelo — camera matrimoniale con biancheria salvia e foto in bianco e nero",
+        "room": "Camera matrimoniale",
+        "order": 6
+      },
+      {
+        "url": "/images/listing/casa-dell-angelo/08-camera-specchio-dorato.jpeg",
+        "alt": "Casa Dell'Angelo — camera matrimoniale con specchio dorato",
+        "room": "Camera matrimoniale",
+        "order": 7
+      },
+      {
+        "url": "/images/listing/casa-dell-angelo/09-bagno-vetrocemento-blu.jpeg",
+        "alt": "Casa Dell'Angelo — bagno con parete in vetrocemento blu e doccia",
+        "room": "Bagno",
+        "order": 8
+      },
+      {
+        "url": "/images/listing/casa-dell-angelo/10-targhetta-welcome.jpeg",
+        "alt": "Casa Dell'Angelo — targhetta in ottone all'ingresso",
+        "room": "Ingresso",
+        "order": 9
+      }
+    ],
+    "pricing": {
+      "basePrice": 120,
+      "cleaningFee": 40,
+      "weekendMultiplier": 1.2
+    },
+    "touristTaxRate": 3,
+    "maxTouristTaxNights": 5,
+    "geo": {
+      "lat": 45.8083,
+      "lng": 9.0813,
+      "displayName": "Piazzale Santa Teresa, Como"
+    },
+    "source": {
+      "origin": "airbnb.it",
+      "url": "https://www.airbnb.it/rooms/18220724",
+      "listingId": "18220724",
+      "scrapedAt": "2026-05-11T00:00:00.000Z"
+    },
+    "airbnbListing": {
+      "id": "18220724",
+      "url": "https://www.airbnb.it/rooms/18220724",
+      "rating": 4.85,
+      "reviewCount": null,
+      "lovedByGuests": true
+    }
   }
 ]
