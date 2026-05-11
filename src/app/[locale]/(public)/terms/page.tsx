@@ -180,10 +180,10 @@ export default function TermsPage() {
               Per qualunque richiesta relativa ai presenti Termini di Servizio
               e possibile scrivere a{" "}
               <a
-                href="mailto:angelo.talarico@gmail.com"
+                href="mailto:info@hostcomo.com"
                 className="text-primary hover:underline"
               >
-                angelo.talarico@gmail.com
+                info@hostcomo.com
               </a>
               .
             </p>

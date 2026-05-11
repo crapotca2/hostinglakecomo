@@ -183,10 +183,10 @@ export default function CookiePolicyPage() {
               Per qualunque richiesta relativa alla presente Cookie Policy e
               possibile scrivere a{" "}
               <a
-                href="mailto:angelo.talarico@gmail.com"
+                href="mailto:info@hostcomo.com"
                 className="text-primary hover:underline"
               >
-                angelo.talarico@gmail.com
+                info@hostcomo.com
               </a>
               . La presente informativa puo essere aggiornata in qualunque
               momento; la versione vigente e sempre disponibile su questa

@@ -61,10 +61,10 @@ export default function NoteLegaliPage() {
               e ai Servizi e possibile utilizzare i seguenti recapiti:
               indirizzo email{" "}
               <a
-                href="mailto:angelo.talarico@gmail.com"
+                href="mailto:info@hostcomo.com"
                 className="text-primary hover:underline"
               >
-                angelo.talarico@gmail.com
+                info@hostcomo.com
               </a>
               , telefono <strong>+39 351 718 0435</strong>, indirizzo postale{" "}
               <strong>Via Maurizio Monti 46, 22100 Como, Italia</strong>.

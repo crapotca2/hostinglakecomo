@@ -241,7 +241,7 @@ export default function ContactPage() {
                   </div>
                 </a>
                 <a
-                  href="mailto:angelo.talarico@gmail.com"
+                  href="mailto:info@hostcomo.com"
                   className="flex items-center gap-4 group"
                 >
                   <div className="h-11 w-11 rounded-xl bg-primary/[0.08] border border-primary/20 flex items-center justify-center shrink-0 group-hover:bg-primary/[0.12] transition-colors">
@@ -252,7 +252,7 @@ export default function ContactPage() {
                       {t("email")}
                     </div>
                     <div className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
-                      angelo.talarico@gmail.com
+                      info@hostcomo.com
                     </div>
                   </div>
                 </a>

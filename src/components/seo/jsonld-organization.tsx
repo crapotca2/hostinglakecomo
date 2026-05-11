@@ -1,7 +1,7 @@
 import { SITE_URL, BRAND_NAME } from "@/lib/seo";
 
 const ORG_PHONE = "+393517180435";
-const ORG_EMAIL = "angelo.talarico@gmail.com";
+const ORG_EMAIL = "info@hostcomo.com";
 const ORG_LOCALITY = "Como";
 const ORG_REGION = "Lombardia";
 const ORG_COUNTRY = "IT";
