@@ -156,14 +156,6 @@
         "desc": "Quanto puoi risparmiare sulle commissioni Airbnb, Booking ed Expedia con una strategia multi-canale equilibrata."
       }
     },
-    "insights": {
-      "eyebrow": "Approfondimenti",
-      "title1": "Quello che spieghiamo",
-      "title1Strong": "ai proprietari",
-      "seeAll": "Vedi tutte le guide",
-      "readMore": "Leggi la guida",
-      "minutes": "min di lettura"
-    },
     "ctaBanner": {
       "title": "Affidaci la tua casa sul Lago",
       "subtitleLine1": "Vuoi sapere quanto puo rendere la tua proprietà?",
@@ -497,6 +489,10 @@
         {
           "q": "Mi mandate dei report periodici sull'andamento della mia proprietà?",
           "a": "Sì. Ogni mese ricevi un riepilogo dedicato via email con prenotazioni, occupazione, tariffa media, ricavi netti e adempimenti del periodo. In più hai accesso 24/7 alla dashboard personale con tutti i numeri in tempo reale e i pagamenti tracciati."
+        },
+        {
+          "q": "Dove pubblicate le proprietà che gestite?",
+          "a": "I canali primari di pubblicazione sono Airbnb, Booking ed Expedia, dove si concentra la quota più alta delle prenotazioni turistiche sul Lago di Como. Affianchiamo poi canali long-stay come subito.it e altri portali specializzati per intercettare soggiorni medio-lunghi e ridurre i periodi di sfittanza in bassa stagione."
         }
       ]
     }

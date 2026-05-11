@@ -156,14 +156,6 @@
         "desc": "How much you can save on Airbnb, Booking and Expedia commissions with a balanced multi-channel strategy."
       }
     },
-    "insights": {
-      "eyebrow": "Insights",
-      "title1": "What we explain to",
-      "title1Strong": "owners",
-      "seeAll": "See all guides",
-      "readMore": "Read the guide",
-      "minutes": "min read"
-    },
     "ctaBanner": {
       "title": "Trust us with your home on the Lake",
       "subtitleLine1": "Want to know how much your property can earn?",
@@ -497,6 +489,10 @@
         {
           "q": "Do you send me periodic reports on how my property is performing?",
           "a": "Yes. Every month you get a dedicated email summary with bookings, occupancy, average rate, net revenue and the compliance handled in the period. You also have 24/7 access to a personal dashboard with all the numbers in real time and tracked payouts."
+        },
+        {
+          "q": "Where do you publish the properties you manage?",
+          "a": "Our primary publishing channels are Airbnb, Booking and Expedia, which generate the bulk of tourist bookings on Lake Como. We also use long-stay channels such as subito.it and other specialised portals to capture medium-to-long stays and reduce vacancy gaps in low season."
         }
       ]
     }

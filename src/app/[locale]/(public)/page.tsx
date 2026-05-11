@@ -8,12 +8,11 @@ import {
   ChevronRight,
   CheckCircle2,
 } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { getPortfolio } from "@/lib/portfolio";
 import { PartnersBanner } from "@/components/public/partners-banner";
 import { PropertyCard } from "@/components/public/property-card";
 import { buildMetadata } from "@/lib/seo";
-import guides from "@/data/guides.json";
 import type { Locale } from "@/i18n/routing";
 
 const HOME_COPY = {
@@ -65,13 +64,6 @@ const SIMULATOR_HREFS: Record<(typeof SIMULATOR_SLUGS)[number], string> = {
   profitDiretto: "/strumenti/profit-diretto",
 };
 
-type GuideEntry = (typeof guides)[number];
-function pickGuideField(g: GuideEntry, field: string, locale: string): string {
-  const map = g as unknown as Record<string, string>;
-  if (locale === "en") return map[`${field}_en`] ?? map[`${field}_it`] ?? "";
-  return map[`${field}_it`] ?? map[`${field}_en`] ?? "";
-}
-
 export default function HomePage() {
   const tc = useTranslations("common");
   const tHero = useTranslations("home.hero");
@@ -80,12 +72,8 @@ export default function HomePage() {
   const tFp = useTranslations("home.featuredProperties");
   const tSim = useTranslations("home.simulators");
   const tCta = useTranslations("home.ctaBanner");
-  const tIns = useTranslations("home.insights");
-  const tPart = useTranslations("partners");
-  const locale = useLocale();
 
   const whyUs = tMc.raw("bullets") as string[];
-  const insightGuides = (guides as GuideEntry[]).slice(0, 2);
 
   return (
     <>
@@ -198,23 +186,6 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="mt-16 lg:mt-20 pt-10 border-t border-border/40 text-center">
-            <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-              {tPart("eyebrow")}
-            </span>
-            <p className="text-sm text-muted-foreground mt-2">
-              <span className="font-semibold text-foreground">
-                {tPart("primaryLabel")}
-              </span>{" "}
-              {tPart("primaryNames")}
-              <span className="mx-2 text-muted-foreground/60">·</span>
-              <span className="font-semibold text-foreground">
-                {tPart("longStayLabel")}
-              </span>{" "}
-              {tPart("longStayNames")}
-            </p>
           </div>
         </div>
       </section>
@@ -333,58 +304,6 @@ export default function HomePage() {
                 </div>
               </Link>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ APPROFONDIMENTI ═══ */}
-      <section className="py-20 sm:py-24 bg-muted/20 border-y border-border/50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between mb-10 flex-wrap gap-4">
-            <div>
-              <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-                {tIns("eyebrow")}
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-light mt-3">
-                {tIns("title1")}{" "}
-                <span className="font-semibold">{tIns("title1Strong")}</span>
-              </h2>
-            </div>
-            <Link
-              href="/guide"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-border text-sm font-medium hover:bg-white transition-colors"
-            >
-              {tIns("seeAll")}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <div className="grid md:grid-cols-2 gap-6">
-            {insightGuides.map((g) => {
-              const title = pickGuideField(g, "title", locale);
-              const description = pickGuideField(g, "description", locale);
-              const category = pickGuideField(g, "category", locale);
-              return (
-                <Link
-                  key={g.slug}
-                  href={`/guide/${g.slug}`}
-                  className="group block bg-white rounded-2xl p-6 sm:p-7 border border-border/50 hover:border-primary/40 hover:shadow-md transition-all"
-                >
-                  <div className="text-xs font-medium text-primary mb-3">
-                    {category} · {g.readingMinutes} {tIns("minutes")}
-                  </div>
-                  <h3 className="text-lg sm:text-xl font-semibold mb-3 leading-snug group-hover:text-primary transition-colors">
-                    {title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                    {description}
-                  </p>
-                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
-                    {tIns("readMore")}
-                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                  </span>
-                </Link>
-              );
-            })}
           </div>
         </div>
       </section>
