@@ -101,8 +101,20 @@ function ComuneLandingClient({
   locale: Locale;
 }) {
   const tNav = useTranslations("nav");
-  const tMc = useTranslations("services.multiChannel");
   const tCommon = useTranslations("common");
+
+  const pillars =
+    locale === "en"
+      ? [
+          "Primary channels Airbnb · Booking · Expedia",
+          "Long-stay channels for low season",
+          "Dynamic pricing area by area",
+        ]
+      : [
+          "Canali primari Airbnb · Booking · Expedia",
+          "Canali long-stay per la bassa stagione",
+          "Pricing dinamico zona per zona",
+        ];
 
   const tagline = pickLocalized(comune, "tagline", locale);
   const intro = pickLocalized(comune, "intro", locale);
@@ -213,18 +225,12 @@ function ComuneLandingClient({
               {sectionApproachBody}
             </p>
             <div className="space-y-2 text-sm">
-              <div className="flex items-center gap-2 font-medium">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                {tMc("pillars.0.title")}
-              </div>
-              <div className="flex items-center gap-2 font-medium">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                {tMc("pillars.1.title")}
-              </div>
-              <div className="flex items-center gap-2 font-medium">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                {tMc("pillars.2.title")}
-              </div>
+              {pillars.map((p) => (
+                <div key={p} className="flex items-center gap-2 font-medium">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  {p}
+                </div>
+              ))}
             </div>
           </aside>
         </div>
