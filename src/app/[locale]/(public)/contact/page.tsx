@@ -10,7 +10,6 @@ const INTEREST_KEYS = [
   { value: "home-staging", labelKey: "homeStaging" },
   { value: "gestione", labelKey: "gestione" },
   { value: "valutazione", labelKey: "valutazione" },
-  { value: "prenotazione", labelKey: "prenotazione" },
   { value: "partnership", labelKey: "partnership" },
   { value: "altro", labelKey: "altro" },
 ] as const;

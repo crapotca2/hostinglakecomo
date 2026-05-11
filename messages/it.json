@@ -729,11 +729,10 @@
       "successBody": "Ti risponderemo entro 24 ore. Grazie per averci contattato."
     },
     "interestOptions": {
-      "consulenza": "Consulenza Personalizzata",
-      "homeStaging": "Home Staging",
+      "consulenza": "Consulenza personalizzata",
+      "homeStaging": "Home staging",
       "gestione": "Gestione del mio immobile",
-      "valutazione": "Valutazione redditivita",
-      "prenotazione": "Prenotare un soggiorno",
+      "valutazione": "Valutazione redditività",
       "partnership": "Partnership",
       "altro": "Altro"
     }

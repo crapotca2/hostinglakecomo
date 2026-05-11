@@ -33,6 +33,12 @@
       "adrRangeEn": "EUR 200-240",
       "adrLuxuryRange": null,
       "occupancyRange": "42-57%",
+      "typologyMix": [
+        { "label": "1 camera", "labelEn": "1BR", "pct": 69 },
+        { "label": "2 camere", "labelEn": "2BR", "pct": 23 },
+        { "label": "3 camere", "labelEn": "3BR", "pct": 6 },
+        { "label": "4+ camere", "labelEn": "4BR+", "pct": 2 }
+      ],
       "topHotels": [
         "Hilton Lake Como (5*)",
         "VISTA Palazzo Lago di Como (5* SLH)",
@@ -81,6 +87,12 @@
       "adrLuxuryNote": "Villa d'Este: oltre 1.500 EUR",
       "adrLuxuryNoteEn": "Villa d'Este: over EUR 1,500",
       "occupancyRange": "56-72%",
+      "typologyMix": [
+        { "label": "1 camera", "labelEn": "1BR", "pct": 56 },
+        { "label": "2 camere", "labelEn": "2BR", "pct": 28 },
+        { "label": "3 camere", "labelEn": "3BR", "pct": 9 },
+        { "label": "Ville (4+)", "labelEn": "Villas (4+)", "pct": 7 }
+      ],
       "topHotels": [
         "Villa d'Este (5* Leading Hotels of the World)",
         "Hotel Asnigo (4*)",
@@ -129,6 +141,11 @@
       "adrLuxuryNote": "Passalacqua: oltre 2.000 EUR",
       "adrLuxuryNoteEn": "Passalacqua: over EUR 2,000",
       "occupancyRange": "58-65%",
+      "typologyMix": [
+        { "label": "1 camera", "labelEn": "1BR", "pct": 54 },
+        { "label": "2 camere", "labelEn": "2BR", "pct": 29 },
+        { "label": "Ville (3+)", "labelEn": "Villas (3+)", "pct": 17 }
+      ],
       "topHotels": [
         "Villa Passalacqua (5*, World's #1 Hotel 2023)",
         "Grand Hotel Imperiale Resort & Spa (4*)",
@@ -175,6 +192,10 @@
       "adrLuxuryNote": "Solo rare ville lakefront",
       "adrLuxuryNoteEn": "Only a few lakefront villas",
       "occupancyRange": "40-50%",
+      "typologyMix": [
+        { "label": "Case intere", "labelEn": "Whole homes", "pct": 98 },
+        { "label": "Camere private", "labelEn": "Private rooms", "pct": 2 }
+      ],
       "topHotels": [
         "Nessun hotel classificato; offerta concentrata su appartamenti privati e B&B"
       ]
@@ -219,6 +240,12 @@
       "adrLuxuryNote": "Ville con vista lago",
       "adrLuxuryNoteEn": "Lake-view villas",
       "occupancyRange": "50-58%",
+      "typologyMix": [
+        { "label": "2 camere", "labelEn": "2BR", "pct": 38 },
+        { "label": "1 camera", "labelEn": "1BR", "pct": 31 },
+        { "label": "3 camere", "labelEn": "3BR", "pct": 21 },
+        { "label": "Ville (4+)", "labelEn": "Villas (4+)", "pct": 10 }
+      ],
       "topHotels": [
         "Hotel Argegno (3*)",
         "Hotel Belvedere Argegno (3*)"
@@ -262,6 +289,12 @@
       "adrLuxuryNote": "Poche ville top",
       "adrLuxuryNoteEn": "A handful of top villas",
       "occupancyRange": "52-60%",
+      "typologyMix": [
+        { "label": "1 camera", "labelEn": "1BR", "pct": 46 },
+        { "label": "2 camere", "labelEn": "2BR", "pct": 36 },
+        { "label": "3 camere", "labelEn": "3BR", "pct": 15 },
+        { "label": "Ville (4+)", "labelEn": "Villas (4+)", "pct": 3 }
+      ],
       "topHotels": [
         "Nessun hotel classificato proprio: ospiti hotel-seekers ripiegano su Lezzeno o Bellagio"
       ]
@@ -304,6 +337,11 @@
       "adrLuxuryNote": "Case con accesso al lago",
       "adrLuxuryNoteEn": "Houses with lake access",
       "occupancyRange": "58-68%",
+      "typologyMix": [
+        { "label": "1 camera", "labelEn": "1BR", "pct": 42 },
+        { "label": "2 camere", "labelEn": "2BR", "pct": 39 },
+        { "label": "3+ camere", "labelEn": "3BR+", "pct": 19 }
+      ],
       "topHotels": [
         "Filario Hotel & Residences (boutique 4*)",
         "Hotel Villa Aurora (3* superior)",
@@ -348,6 +386,12 @@
       "adrLuxuryNote": "Villa Serbelloni: oltre 1.000 EUR",
       "adrLuxuryNoteEn": "Villa Serbelloni: over EUR 1,000",
       "occupancyRange": "58-67%",
+      "typologyMix": [
+        { "label": "1 camera", "labelEn": "1BR", "pct": 56 },
+        { "label": "2 camere", "labelEn": "2BR", "pct": 30 },
+        { "label": "3 camere", "labelEn": "3BR", "pct": 7 },
+        { "label": "Ville (4+)", "labelEn": "Villas (4+)", "pct": 7 }
+      ],
       "topHotels": [
         "Grand Hotel Villa Serbelloni (5* Relais & Chateaux)",
         "Hotel Du Lac & Spa (4*)",
@@ -396,6 +440,12 @@
       "adrLuxuryNote": "Grand Hotel Tremezzo: 1.000-4.000 EUR",
       "adrLuxuryNoteEn": "Grand Hotel Tremezzo: EUR 1,000-4,000",
       "occupancyRange": "56-69%",
+      "typologyMix": [
+        { "label": "2 camere", "labelEn": "2BR", "pct": 39 },
+        { "label": "1 camera", "labelEn": "1BR", "pct": 30 },
+        { "label": "3 camere", "labelEn": "3BR", "pct": 21 },
+        { "label": "Ville (4+)", "labelEn": "Villas (4+)", "pct": 10 }
+      ],
       "topHotels": [
         "Grand Hotel Tremezzo (5* Preferred Hotels / Michelin)",
         "Albergo Lenno (4*)",
@@ -444,6 +494,12 @@
       "adrLuxuryNote": "Ville e dimore storiche",
       "adrLuxuryNoteEn": "Villas and historic residences",
       "occupancyRange": "55-65%",
+      "typologyMix": [
+        { "label": "2 camere", "labelEn": "2BR", "pct": 39 },
+        { "label": "1 camera", "labelEn": "1BR", "pct": 30 },
+        { "label": "3 camere", "labelEn": "3BR", "pct": 21 },
+        { "label": "Ville (4+)", "labelEn": "Villas (4+)", "pct": 10 }
+      ],
       "topHotels": [
         "Albergo Lenno (4*, 46 camere)",
         "Hotel Lenno",
@@ -492,6 +548,12 @@
       "adrLuxuryNote": "Ville a Loveno e Croce",
       "adrLuxuryNoteEn": "Loveno and Croce villas",
       "occupancyRange": "46-65%",
+      "typologyMix": [
+        { "label": "1 camera", "labelEn": "1BR", "pct": 38 },
+        { "label": "2 camere", "labelEn": "2BR", "pct": 36 },
+        { "label": "3 camere", "labelEn": "3BR", "pct": 13 },
+        { "label": "Ville (4+)", "labelEn": "Villas (4+)", "pct": 13 }
+      ],
       "topHotels": [
         "Grand Hotel Menaggio (4*)",
         "Hotel Bellavista (4*)",
@@ -539,6 +601,11 @@
       "adrLuxuryNote": "R Collection 4* boutique",
       "adrLuxuryNoteEn": "R Collection 4* boutique",
       "occupancyRange": "52-68%",
+      "typologyMix": [
+        { "label": "1 camera", "labelEn": "1BR", "pct": 60 },
+        { "label": "2 camere", "labelEn": "2BR", "pct": 29 },
+        { "label": "3+ camere", "labelEn": "3BR+", "pct": 11 }
+      ],
       "topHotels": [
         "Hotel Villa Cipressi by R Collection (4*, 30 camere)",
         "Hotel Royal Victoria by R Collection (4*, spa)",

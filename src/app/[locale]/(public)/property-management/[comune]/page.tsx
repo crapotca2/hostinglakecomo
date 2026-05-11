@@ -23,6 +23,12 @@ import { GoogleMapEmbed } from "@/components/public/google-map-embed";
 
 type Comune = (typeof comuni)[number];
 
+type TypologySegment = {
+  label: string;
+  labelEn?: string;
+  pct: number;
+};
+
 type MarketStats = {
   airbnbListings: string;
   airbnbListingsEn?: string;
@@ -36,10 +42,13 @@ type MarketStats = {
   adrLuxuryNote?: string | null;
   adrLuxuryNoteEn?: string | null;
   occupancyRange: string;
+  typologyMix?: TypologySegment[];
   topHotels: string[];
   dataNote?: string;
   dataNoteEn?: string;
 };
+
+const TYPOLOGY_COLORS = ["#1D3A62", "#0C7489", "#119DB0", "#7EC8D3", "#C8E5EA"];
 
 type ParsedHotel = {
   name: string;
@@ -177,26 +186,28 @@ function ComuneLandingClient({
           titlePrefix: "The short-term rental market in",
           subtitle:
             "Public data aggregated from AirDNA, Booking.com and Expedia · trailing 12 months 2024-2025.",
-          airbnb: "Airbnb listings",
-          booking: "Booking.com",
-          expedia: "Expedia",
-          adr: "ADR apartments",
-          adrLuxury: "ADR villas",
+          listings: "Active listings",
+          properties: "Properties",
+          adrApt: "Apartment ADR",
+          adrVilla: "Villa ADR",
           occupancy: "Peak occupancy",
-          topHotels: "Top hotels",
+          topHotels: "Main classified hotels",
+          expediaInventory: "Inventory mostly mirrored from Booking.com",
+          typologyMix: "Listing mix by type",
         }
       : {
           eyebrow: "Statistiche di mercato",
           titlePrefix: "Il mercato affitti brevi a",
           subtitle:
             "Dati pubblici aggregati da AirDNA, Booking.com ed Expedia · trailing 12 mesi 2024-2025.",
-          airbnb: "Annunci Airbnb",
-          booking: "Booking.com",
-          expedia: "Expedia",
-          adr: "ADR appartamenti",
-          adrLuxury: "ADR ville",
+          listings: "Annunci attivi",
+          properties: "Proprietà",
+          adrApt: "ADR appartamenti",
+          adrVilla: "ADR ville",
           occupancy: "Occupazione picco",
-          topHotels: "Hotel principali",
+          topHotels: "Hotel classificati",
+          expediaInventory: "Inventory in larga parte sovrapposto a Booking.com",
+          typologyMix: "Mix per tipologia",
         };
 
   const breadcrumbs = [
@@ -368,103 +379,141 @@ function ComuneLandingClient({
               </p>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-3 sm:mb-4">
-              <StatBlock
-                icon={<Home className="h-3.5 w-3.5" />}
-                label={statsLabels.airbnb}
-                value={
-                  locale === "en" && marketStats.airbnbListingsEn
-                    ? marketStats.airbnbListingsEn
-                    : marketStats.airbnbListings
-                }
-              />
-              <StatBlock
-                icon={<Building2 className="h-3.5 w-3.5" />}
-                label={statsLabels.booking}
-                value={marketStats.bookingProperties}
-              />
-              <StatBlock
-                icon={<Globe2 className="h-3.5 w-3.5" />}
-                label={statsLabels.expedia}
-                value={
-                  locale === "en" && marketStats.expediaPresenceEn
-                    ? capitalize(marketStats.expediaPresenceEn)
-                    : capitalize(marketStats.expediaPresence)
-                }
-              />
-              <StatBlock
-                icon={<Euro className="h-3.5 w-3.5" />}
-                label={statsLabels.adr}
-                value={
-                  locale === "en" && marketStats.adrRangeEn
-                    ? marketStats.adrRangeEn
-                    : marketStats.adrRange
-                }
-              />
-              <StatBlock
-                icon={<Euro className="h-3.5 w-3.5" />}
-                label={statsLabels.adrLuxury}
-                value={
-                  marketStats.adrLuxuryRange
-                    ? locale === "en" && marketStats.adrLuxuryRangeEn
-                      ? marketStats.adrLuxuryRangeEn
-                      : marketStats.adrLuxuryRange
-                    : "—"
-                }
-                hint={
-                  marketStats.adrLuxuryNote
-                    ? locale === "en" && marketStats.adrLuxuryNoteEn
-                      ? marketStats.adrLuxuryNoteEn
-                      : marketStats.adrLuxuryNote
-                    : undefined
-                }
-              />
-              <StatBlock
-                icon={<TrendingUp className="h-3.5 w-3.5" />}
-                label={statsLabels.occupancy}
-                value={marketStats.occupancyRange}
-              />
+            <div className="grid md:grid-cols-3 gap-4 mb-4">
+              <PlatformCard
+                title="Airbnb"
+                iconBg="bg-[#FF5A5F]/10"
+                iconColor="text-[#FF5A5F]"
+                icon={<Home className="h-4 w-4" />}
+              >
+                <PlatformStat
+                  label={statsLabels.listings}
+                  value={
+                    locale === "en" && marketStats.airbnbListingsEn
+                      ? marketStats.airbnbListingsEn
+                      : marketStats.airbnbListings
+                  }
+                />
+                <PlatformStat
+                  label={statsLabels.adrApt}
+                  value={
+                    locale === "en" && marketStats.adrRangeEn
+                      ? marketStats.adrRangeEn
+                      : marketStats.adrRange
+                  }
+                />
+                {marketStats.adrLuxuryRange && (
+                  <PlatformStat
+                    label={statsLabels.adrVilla}
+                    value={
+                      locale === "en" && marketStats.adrLuxuryRangeEn
+                        ? marketStats.adrLuxuryRangeEn
+                        : marketStats.adrLuxuryRange
+                    }
+                    hint={
+                      marketStats.adrLuxuryNote
+                        ? locale === "en" && marketStats.adrLuxuryNoteEn
+                          ? marketStats.adrLuxuryNoteEn
+                          : marketStats.adrLuxuryNote
+                        : undefined
+                    }
+                  />
+                )}
+                {marketStats.typologyMix && marketStats.typologyMix.length > 0 && (
+                  <TypologyBar
+                    label={statsLabels.typologyMix}
+                    segments={marketStats.typologyMix}
+                    locale={locale}
+                  />
+                )}
+              </PlatformCard>
+
+              <PlatformCard
+                title="Booking.com"
+                iconBg="bg-[#003580]/10"
+                iconColor="text-[#003580]"
+                icon={<Building2 className="h-4 w-4" />}
+              >
+                <PlatformStat
+                  label={statsLabels.properties}
+                  value={marketStats.bookingProperties}
+                />
+                {marketStats.topHotels.length > 0 && (
+                  <div>
+                    <div className="text-[10px] uppercase tracking-wider font-medium text-muted-foreground mb-1.5">
+                      {statsLabels.topHotels}
+                    </div>
+                    <ul className="space-y-1.5">
+                      {marketStats.topHotels.slice(0, 5).map((raw) => {
+                        const h = parseHotel(raw);
+                        return (
+                          <li
+                            key={raw}
+                            className="flex items-start justify-between gap-2"
+                          >
+                            <div className="min-w-0 flex-1">
+                              <div className="text-[13px] font-medium text-foreground leading-snug">
+                                {h.name}
+                              </div>
+                              {h.meta && (
+                                <div className="text-[11px] text-muted-foreground leading-snug">
+                                  {h.meta}
+                                </div>
+                              )}
+                            </div>
+                            {h.rating && (
+                              <span className="shrink-0 inline-flex items-center px-1.5 py-0.5 rounded bg-[#003580]/10 text-[#003580] text-[10px] font-bold">
+                                {h.rating}
+                              </span>
+                            )}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                )}
+              </PlatformCard>
+
+              <PlatformCard
+                title="Expedia"
+                iconBg="bg-[#FFC72C]/15"
+                iconColor="text-[#B58A00]"
+                icon={<Globe2 className="h-4 w-4" />}
+              >
+                <PlatformStat
+                  label={locale === "en" ? "Presence" : "Presenza"}
+                  value={
+                    locale === "en" && marketStats.expediaPresenceEn
+                      ? capitalize(marketStats.expediaPresenceEn)
+                      : capitalize(marketStats.expediaPresence)
+                  }
+                />
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {statsLabels.expediaInventory}
+                </p>
+              </PlatformCard>
             </div>
 
-            {marketStats.topHotels.length > 0 && (
-              <div className="bg-white border border-border/50 rounded-2xl p-5 sm:p-6 mt-6">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="h-7 w-7 rounded-lg bg-primary/[0.08] flex items-center justify-center">
-                    <Hotel className="h-3.5 w-3.5 text-primary" />
-                  </div>
-                  <h3 className="text-xs uppercase tracking-wider font-semibold text-muted-foreground">
-                    {statsLabels.topHotels}
-                  </h3>
+            <div className="bg-white border border-border/50 rounded-xl p-4 flex items-center justify-between gap-4">
+              <div className="flex items-center gap-2.5">
+                <div className="h-9 w-9 rounded-lg bg-primary/[0.08] flex items-center justify-center">
+                  <TrendingUp className="h-4 w-4 text-primary" />
                 </div>
-                <ul className="grid sm:grid-cols-2 gap-2">
-                  {marketStats.topHotels.map((raw) => {
-                    const h = parseHotel(raw);
-                    return (
-                      <li
-                        key={raw}
-                        className="flex items-start justify-between gap-3 px-3 py-2.5 rounded-lg bg-muted/30 border border-border/40"
-                      >
-                        <div className="min-w-0 flex-1">
-                          <div className="text-sm font-semibold text-foreground leading-snug">
-                            {h.name}
-                          </div>
-                          {h.meta && (
-                            <div className="text-xs text-muted-foreground mt-0.5 leading-snug">
-                              {h.meta}
-                            </div>
-                          )}
-                        </div>
-                        {h.rating && (
-                          <span className="shrink-0 inline-flex items-center px-2 py-0.5 rounded-md bg-primary/10 text-primary text-[11px] font-bold tracking-tight">
-                            {h.rating}
-                          </span>
-                        )}
-                      </li>
-                    );
-                  })}
-                </ul>
+                <div>
+                  <div className="text-[11px] uppercase tracking-wider font-medium text-muted-foreground">
+                    {statsLabels.occupancy}
+                  </div>
+                  <div className="text-xs text-muted-foreground/70">
+                    {locale === "en"
+                      ? "Across all platforms"
+                      : "Sull'insieme delle piattaforme"}
+                  </div>
+                </div>
               </div>
-            )}
+              <div className="text-lg sm:text-xl font-semibold tracking-tight text-foreground">
+                {marketStats.occupancyRange}
+              </div>
+            </div>
 
             {(marketStats.dataNote || marketStats.dataNoteEn) && (
               <div className="flex items-start gap-2.5 mt-6 p-4 rounded-xl bg-amber-50 border border-amber-200/60">
@@ -506,28 +555,100 @@ function ComuneLandingClient({
   );
 }
 
-function StatBlock({
+function PlatformCard({
+  title,
   icon,
+  iconBg,
+  iconColor,
+  children,
+}: {
+  title: string;
+  icon: React.ReactNode;
+  iconBg: string;
+  iconColor: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="bg-white border border-border/50 rounded-xl p-5 flex flex-col gap-4">
+      <div className="flex items-center gap-2.5 pb-3 border-b border-border/40">
+        <div
+          className={`h-9 w-9 rounded-lg ${iconBg} flex items-center justify-center`}
+        >
+          <span className={iconColor}>{icon}</span>
+        </div>
+        <h3 className="text-base font-semibold text-foreground">{title}</h3>
+      </div>
+      <div className="flex flex-col gap-3.5">{children}</div>
+    </div>
+  );
+}
+
+function TypologyBar({
+  label,
+  segments,
+  locale,
+}: {
+  label: string;
+  segments: TypologySegment[];
+  locale: string;
+}) {
+  return (
+    <div>
+      <div className="text-[10px] uppercase tracking-wider font-medium text-muted-foreground mb-1.5">
+        {label}
+      </div>
+      <div className="flex h-2.5 w-full rounded-full overflow-hidden bg-muted/40 mb-2">
+        {segments.map((s, i) => (
+          <div
+            key={s.label}
+            style={{
+              width: `${s.pct}%`,
+              backgroundColor: TYPOLOGY_COLORS[i % TYPOLOGY_COLORS.length],
+            }}
+            title={`${locale === "en" ? s.labelEn ?? s.label : s.label}: ${s.pct}%`}
+          />
+        ))}
+      </div>
+      <ul className="flex flex-wrap gap-x-3 gap-y-1 text-[11px]">
+        {segments.map((s, i) => (
+          <li key={s.label} className="flex items-center gap-1.5">
+            <span
+              className="inline-block h-2 w-2 rounded-sm shrink-0"
+              style={{
+                backgroundColor:
+                  TYPOLOGY_COLORS[i % TYPOLOGY_COLORS.length],
+              }}
+            />
+            <span className="text-foreground font-medium">
+              {locale === "en" ? s.labelEn ?? s.label : s.label}
+            </span>
+            <span className="text-muted-foreground">{s.pct}%</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function PlatformStat({
   label,
   value,
   hint,
 }: {
-  icon: React.ReactNode;
   label: string;
   value: string;
   hint?: string;
 }) {
   return (
-    <div className="bg-white border border-border/50 rounded-xl p-4">
-      <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground mb-1.5">
-        <span className="text-primary">{icon}</span>
-        <span className="uppercase tracking-wider font-medium">{label}</span>
+    <div>
+      <div className="text-[10px] uppercase tracking-wider font-medium text-muted-foreground mb-0.5">
+        {label}
       </div>
       <div className="text-base sm:text-lg font-semibold tracking-tight text-foreground leading-tight">
         {value}
       </div>
       {hint && (
-        <div className="text-[11px] text-muted-foreground mt-1 leading-snug">
+        <div className="text-[11px] text-muted-foreground mt-0.5 leading-snug">
           {hint}
         </div>
       )}

@@ -66,8 +66,8 @@ export default function NoteLegaliPage() {
               >
                 info@hostcomo.com
               </a>
-              , telefono <strong>+39 351 718 0435</strong>, indirizzo postale{" "}
-              <strong>Via Maurizio Monti 46, 22100 Como, Italia</strong>.
+              , telefono <strong>+39 351 718 0435</strong>, sede operativa{" "}
+              <strong>Como, Italia</strong>.
             </p>
           </section>
 

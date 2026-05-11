@@ -729,11 +729,10 @@
       "successBody": "We will reply within 24 hours. Thank you for getting in touch."
     },
     "interestOptions": {
-      "consulenza": "Personalised Consultation",
-      "homeStaging": "Home Staging",
+      "consulenza": "Personalised consultation",
+      "homeStaging": "Home staging",
       "gestione": "Manage my property",
       "valutazione": "Revenue assessment",
-      "prenotazione": "Book a stay",
       "partnership": "Partnership",
       "altro": "Other"
     }
