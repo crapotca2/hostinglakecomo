@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { Link } from "@/i18n/routing";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { TrendingUp, Calendar, Home, Wallet, Landmark, Receipt, Coins, BadgeEuro } from "lucide-react";
 import { AirBibbyEstimateCard } from "@/components/strumenti/air-bibby-estimate-card";
 import { DisclaimerNote } from "@/components/strumenti/disclaimer-note";
@@ -16,6 +16,9 @@ export default function InvestimentoPage() {
   const tFields = useTranslations("strumenti.investimento.fields");
   const tRes = useTranslations("strumenti.investimento.results");
   const tRows = useTranslations("strumenti.investimento.results.rows");
+  const locale = useLocale() as "it" | "en";
+  const fmt = (n: number, decimals = 0) => formatEuro(n, decimals, locale);
+  const fmtInt = (n: number) => formatInteger(n, locale);
 
   const [purchasePrice, setPurchasePrice] = useState(400000);
   const [renovation, setRenovation] = useState(30000);
@@ -195,7 +198,7 @@ export default function InvestimentoPage() {
                   <div className="bg-muted/30 rounded-2xl p-5 border border-border/40">
                     <div className="text-muted-foreground text-xs uppercase tracking-wider mb-1">{tRes("monthlyCashFlow")}</div>
                     <div className={`text-3xl font-bold mb-1 ${result.monthlyCashFlow >= 0 ? "text-emerald-600" : "text-red-500"}`}>
-                      {result.monthlyCashFlow >= 0 ? "+" : ""}{formatEuro(result.monthlyCashFlow)}
+                      {result.monthlyCashFlow >= 0 ? "+" : ""}{fmt(result.monthlyCashFlow)}
                     </div>
                     <div className="text-xs text-muted-foreground">{tRes("monthlyCashFlowHint")}</div>
                   </div>
@@ -206,14 +209,14 @@ export default function InvestimentoPage() {
                     <h3 className="text-sm font-semibold">{tRes("detailTitle")}</h3>
                   </div>
                   <div className="divide-y divide-border/30">
-                    <Row label={tRows("totalInvestment")} value={formatEuro(result.totalInvestment)} icon={Home} />
-                    <Row label={tRows("downPayment")} value={formatEuro(result.downPayment)} icon={Wallet} muted />
-                    <Row label={tRows("mortgage")} value={formatEuro(result.mortgageAmount)} icon={Landmark} muted />
-                    <Row label={tRows("monthlyMortgage")} value={formatEuro(result.monthlyPayment)} icon={Calendar} />
-                    <Row label={tRows("annualRevenue")} value={formatEuro(annualRevenue)} icon={TrendingUp} />
-                    <Row label={tRows("operatingCosts")} value={`-${formatEuro(result.annualOperatingCosts)}`} icon={Receipt} negative />
-                    <Row label={tRows("noi")} value={formatEuro(result.noi)} icon={Coins} bold />
-                    <Row label={tRows("annualMortgage")} value={`-${formatEuro(result.annualMortgage)}`} icon={BadgeEuro} negative />
+                    <Row label={tRows("totalInvestment")} value={fmt(result.totalInvestment)} icon={Home} />
+                    <Row label={tRows("downPayment")} value={fmt(result.downPayment)} icon={Wallet} muted />
+                    <Row label={tRows("mortgage")} value={fmt(result.mortgageAmount)} icon={Landmark} muted />
+                    <Row label={tRows("monthlyMortgage")} value={fmt(result.monthlyPayment)} icon={Calendar} />
+                    <Row label={tRows("annualRevenue")} value={fmt(annualRevenue)} icon={TrendingUp} />
+                    <Row label={tRows("operatingCosts")} value={`-${fmt(result.annualOperatingCosts)}`} icon={Receipt} negative />
+                    <Row label={tRows("noi")} value={fmt(result.noi)} icon={Coins} bold />
+                    <Row label={tRows("annualMortgage")} value={`-${fmt(result.annualMortgage)}`} icon={BadgeEuro} negative />
                   </div>
                 </div>
 
@@ -230,7 +233,7 @@ export default function InvestimentoPage() {
                   </div>
                   <div className="text-4xl font-bold mb-1">
                     {result.annualCashFlow >= 0 ? "+" : ""}
-                    {formatEuro(result.annualCashFlow)}
+                    {fmt(result.annualCashFlow)}
                   </div>
                   <div className="text-white/80 text-xs">
                     {tRes("cashFlowHint")}
@@ -261,6 +264,7 @@ function InputField({
   step?: number;
   suffix?: string;
 }) {
+  const locale = useLocale() as "it" | "en";
   return (
     <div>
       <label className="text-xs font-medium mb-1.5 block text-muted-foreground">{label}</label>
@@ -268,7 +272,7 @@ function InputField({
         <input
           type="text"
           inputMode="numeric"
-          value={formatInteger(value)}
+          value={formatInteger(value, locale)}
           onChange={(e) => {
             const raw = e.target.value.replace(/[^\d]/g, "");
             onChange(raw === "" ? 0 : parseInt(raw, 10));

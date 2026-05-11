@@ -24,7 +24,8 @@ const LeafletMap = dynamic(
         className="w-full bg-muted/30 rounded-2xl flex items-center justify-center text-sm text-muted-foreground"
         style={{ aspectRatio: "4 / 3" }}
       >
-        Caricamento mappa…
+        <span className="sr-only">Loading map…</span>
+        <span aria-hidden>…</span>
       </div>
     ),
   },

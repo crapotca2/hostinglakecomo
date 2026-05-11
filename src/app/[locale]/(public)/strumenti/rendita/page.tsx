@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import { Link } from "@/i18n/routing";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -56,6 +56,8 @@ const OCCUPANCY: Record<Zone, number> = {
 
 export default function RenditaPage() {
   const t = useTranslations("strumenti.rendita");
+  const locale = useLocale() as "it" | "en";
+  const fmt = (n: number, decimals = 0) => formatEuro(n, decimals, locale);
   const tStr = useTranslations("strumenti");
   const tZones = useTranslations("strumenti.rendita.zones");
   const tZonesShort = useTranslations("strumenti.rendita.zonesShort");
@@ -265,10 +267,10 @@ export default function RenditaPage() {
               <div className="space-y-4">
                 <div className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-6 text-white shadow-lg">
                   <div className="text-white/70 text-xs uppercase tracking-wider mb-2">{tRes("grossAnnualLabel")}</div>
-                  <div className="text-4xl font-bold mb-2">{formatEuro(result.grossAnnual)}</div>
+                  <div className="text-4xl font-bold mb-2">{fmt(result.grossAnnual)}</div>
                   <div className="text-white/80 text-sm">
                     {tRes("grossAnnualBreakdown", {
-                      rate: formatEuro(result.nightlyRate),
+                      rate: fmt(result.nightlyRate),
                       nights: result.nightsSold,
                       occupancy: result.occupancy,
                     })}
@@ -280,7 +282,7 @@ export default function RenditaPage() {
                     <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
                       <Euro className="h-3 w-3" /> {tRes("nightlyRate")}
                     </div>
-                    <div className="text-xl font-bold">{formatEuro(result.nightlyRate)}</div>
+                    <div className="text-xl font-bold">{fmt(result.nightlyRate)}</div>
                   </div>
                   <div className="bg-muted/30 rounded-xl p-4 border border-border/40">
                     <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
@@ -301,11 +303,11 @@ export default function RenditaPage() {
                     <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
                       <Home className="h-3 w-3" /> {tRes("propertyValue")}
                     </div>
-                    <div className="text-2xl font-bold">{formatEuro(result.propertyValue)}</div>
+                    <div className="text-2xl font-bold">{fmt(result.propertyValue)}</div>
                     <div className="text-[11px] text-muted-foreground mt-1">
                       {tRes("propertyValueBreakdown", {
                         surface,
-                        price: formatEuro(PRICE_PER_SQM[zone]),
+                        price: fmt(PRICE_PER_SQM[zone]),
                         zone: tZonesShort(zone),
                       })}
                     </div>
@@ -331,7 +333,7 @@ export default function RenditaPage() {
                   <div className="grid grid-cols-2 divide-x divide-border/40">
                     <div className="p-5">
                       <div className="text-xs text-muted-foreground mb-1">{tRes("selfTitle")}</div>
-                      <div className="text-2xl font-bold text-foreground mb-3">{formatEuro(result.selfNet)}</div>
+                      <div className="text-2xl font-bold text-foreground mb-3">{fmt(result.selfNet)}</div>
                       <div className="text-[11px] text-muted-foreground space-y-1">
                         {selfBullets.map((b) => (
                           <div key={b}>{b}</div>
@@ -345,7 +347,7 @@ export default function RenditaPage() {
                           +{result.deltaPercent}%
                         </span>
                       </div>
-                      <div className="text-2xl font-bold text-primary mb-3">{formatEuro(result.abNet)}</div>
+                      <div className="text-2xl font-bold text-primary mb-3">{fmt(result.abNet)}</div>
                       <div className="text-[11px] text-muted-foreground space-y-1">
                         {abBullets.map((b) => (
                           <div key={b}>{b}</div>
@@ -359,7 +361,7 @@ export default function RenditaPage() {
                   <div className="text-white/70 text-xs uppercase tracking-wider mb-2">
                     {tRes("extraTitle")}
                   </div>
-                  <div className="text-4xl font-bold mb-1">+{formatEuro(result.delta)}</div>
+                  <div className="text-4xl font-bold mb-1">+{fmt(result.delta)}</div>
                   <div className="text-white/80 text-xs">
                     {tRes("extraSubtitle")}
                   </div>

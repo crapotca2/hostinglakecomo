@@ -1,8 +1,18 @@
 // Helper di formattazione numerica condivisi.
-// Usano sempre il separatore delle migliaia (it-IT: punto) per leggibilita.
+// Locale-aware: in IT separatore migliaia è il punto, in EN la virgola.
 
-export function formatEuro(amount: number, decimals = 0): string {
-  return new Intl.NumberFormat("it-IT", {
+type Locale = "it" | "en";
+
+function resolveLocale(locale?: Locale): string {
+  return locale === "en" ? "en-GB" : "it-IT";
+}
+
+export function formatEuro(
+  amount: number,
+  decimals = 0,
+  locale?: Locale,
+): string {
+  return new Intl.NumberFormat(resolveLocale(locale), {
     style: "currency",
     currency: "EUR",
     minimumFractionDigits: decimals,
@@ -11,8 +21,8 @@ export function formatEuro(amount: number, decimals = 0): string {
   }).format(amount);
 }
 
-export function formatInteger(value: number): string {
-  return new Intl.NumberFormat("it-IT", {
+export function formatInteger(value: number, locale?: Locale): string {
+  return new Intl.NumberFormat(resolveLocale(locale), {
     maximumFractionDigits: 0,
     useGrouping: "always",
   }).format(value);

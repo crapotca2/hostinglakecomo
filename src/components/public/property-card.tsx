@@ -52,19 +52,22 @@ export function PropertyCard({ property }: { property: PortfolioEntry }) {
           {cityZone}
         </div>
         <h3 className="text-base font-semibold mb-3">{property.name}</h3>
-        <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4 flex-wrap gap-y-1">
+        <div className="flex items-center gap-3 text-xs text-muted-foreground mb-4 flex-wrap gap-y-1">
           <span className="flex items-center gap-1">
-            <Bed className="h-3.5 w-3.5" /> {property.details.bedrooms}
+            <Bed className="h-3.5 w-3.5 shrink-0" />
+            {property.details.bedrooms}&nbsp;{t("card.bedsLabel")}
           </span>
           <span className="flex items-center gap-1">
-            <Bath className="h-3.5 w-3.5" /> {property.details.bathrooms}
+            <Bath className="h-3.5 w-3.5 shrink-0" />
+            {property.details.bathrooms}&nbsp;{t("card.bathsLabel")}
           </span>
           <span className="flex items-center gap-1">
-            <Users className="h-3.5 w-3.5" /> {property.details.maxGuests}
+            <Users className="h-3.5 w-3.5 shrink-0" />
+            {property.details.maxGuests}&nbsp;{t("card.guestsLabel")}
           </span>
           {rating != null && rating > 0 && (
             <span className="flex items-center gap-1 text-foreground font-medium">
-              <Star className="h-3.5 w-3.5 fill-foreground text-foreground" />
+              <Star className="h-3.5 w-3.5 fill-foreground text-foreground shrink-0" />
               {rating.toFixed(2)}
             </span>
           )}

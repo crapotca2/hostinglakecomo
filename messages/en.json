@@ -845,7 +845,10 @@
     "card": {
       "lakeView": "Lake view",
       "discover": "Discover",
-      "managed": "Managed by us"
+      "managed": "Managed by us",
+      "bedsLabel": "beds",
+      "bathsLabel": "baths",
+      "guestsLabel": "guests"
     },
     "detail": {
       "back": "← All properties",

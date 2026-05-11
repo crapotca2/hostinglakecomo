@@ -845,7 +845,10 @@
     "card": {
       "lakeView": "Vista Lago",
       "discover": "Scopri",
-      "managed": "Gestita da noi"
+      "managed": "Gestita da noi",
+      "bedsLabel": "camere",
+      "bathsLabel": "bagni",
+      "guestsLabel": "ospiti"
     },
     "detail": {
       "back": "← Tutte le proprietà",
