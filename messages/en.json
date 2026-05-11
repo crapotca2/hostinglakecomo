@@ -898,24 +898,19 @@
   "pmPublic": {
     "hero": {
       "eyebrow": "Where we operate",
-      "title1": "Property management on Lake Como",
-      "title1Strong": "and across Como province",
+      "title1": "Property management",
+      "title1Strong": "on Lake Como",
       "subtitle": "We work area by area, with a portfolio shaped by curated selection. Each territory has different demand dynamics — strategy is tuned accordingly."
     },
     "map": {
-      "title": "Explore the area on the map",
-      "subtitle": "An overview of Lake Como and Como province. Click a town to read how we tune the management for that area."
-    },
-    "province": {
-      "title": "Beyond the lake: Como province",
-      "body": "Alongside the lakeside towns, we manage properties in the municipalities of Como province that orbit the furniture district (Cantù), the Triangolo Lariano (Erba) and the Lecco branch. Here the demand mix changes radically: less passing tourism and more medium-to-long stays — professionals on assignment, consultants, trade-fair exhibitors, remote workers looking for stability 40-50 minutes by train from Milan. It is a less saturated market, with less competition and flatter occupancy across the year."
+      "title": "Explore the lake on the map",
+      "subtitle": "An overview of the towns where we operate directly. Click a town to read how we tune the management for that area."
     },
     "areas": {
       "title": "All the towns where we publish",
       "subtitle": "Each dedicated page tells the demand dynamics, seasonality and typical guest profile of the area.",
       "discoverLabel": "Discover the area",
-      "lakeBadge": "Lake Como",
-      "provinceBadge": "Como province"
+      "lakeBadge": "Lake Como"
     }
   },
   "dashboard": {

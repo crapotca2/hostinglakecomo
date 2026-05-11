@@ -4,12 +4,10 @@ import { ArrowRight, MapPin } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { buildMetadata } from "@/lib/seo";
 import comuni from "@/data/comuni.json";
-import { ComoAreaMap } from "@/components/public/como-area-map";
+import { ComoLakeMap } from "@/components/public/como-lake-map";
 import type { Locale } from "@/i18n/routing";
 
 type Comune = (typeof comuni)[number];
-
-const NON_LAKE_SLUGS = new Set(["cantu", "erba"]);
 
 function pickStr(c: Comune, field: string, locale: string): string {
   const map = c as unknown as Record<string, string>;
@@ -19,14 +17,14 @@ function pickStr(c: Comune, field: string, locale: string): string {
 
 const INDEX_COPY = {
   it: {
-    title: "Property Management Lago di Como e Provincia — Comuni e Zone",
+    title: "Property Management Lago di Como — Comuni e Zone",
     description:
-      "Property management e gestione affitti brevi sul Lago di Como e in provincia di Como. Bellagio, Menaggio, Varenna, Tremezzo, Cernobbio, Lecco, Cantù, Erba e altri comuni. Strategia multi-canale calibrata zona per zona.",
+      "Property management e gestione affitti brevi sul Lago di Como: Bellagio, Menaggio, Varenna, Como, Tremezzo, Cernobbio, Lecco e altri comuni. Strategia multi-canale calibrata zona per zona.",
   },
   en: {
-    title: "Lake Como & Como Province Property Management — Towns and Areas",
+    title: "Lake Como Property Management — Towns and Areas",
     description:
-      "Property management and short-term rental management on Lake Como and across Como province. Bellagio, Menaggio, Varenna, Tremezzo, Cernobbio, Lecco, Cantù, Erba and more. Multi-channel strategy tuned area by area.",
+      "Property management and short-term rental management across Lake Como: Bellagio, Menaggio, Varenna, Como, Tremezzo, Cernobbio, Lecco and more. Multi-channel strategy tuned area by area.",
   },
 } as const;
 
@@ -57,8 +55,6 @@ export default async function PropertyManagementIndexPage({
 function PropertyManagementIndexContent({ locale }: { locale: Locale }) {
   const t = useTranslations("pmPublic");
   const items = comuni as Comune[];
-  const lakeItems = items.filter((c) => !NON_LAKE_SLUGS.has(c.slug));
-  const provinceItems = items.filter((c) => NON_LAKE_SLUGS.has(c.slug));
 
   return (
     <div className="pt-20">
@@ -87,31 +83,19 @@ function PropertyManagementIndexContent({ locale }: { locale: Locale }) {
               {t("map.subtitle")}
             </p>
           </div>
-          <ComoAreaMap
+          <ComoLakeMap
             comuni={items.map((c) => ({
               slug: c.slug,
               name: c.name,
               geo: c.geo,
+              tagline: pickStr(c, "tagline", locale),
             }))}
             locale={locale}
           />
         </div>
       </section>
 
-      <section className="py-16 sm:py-20 bg-[#1D3A62] text-white relative overflow-hidden">
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
-        />
-        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-light mb-4">
-            <span className="font-semibold">{t("province.title")}</span>
-          </h2>
-          <p className="text-white/85 leading-relaxed">{t("province.body")}</p>
-        </div>
-      </section>
-
-      <section className="py-16 sm:py-20">
+      <section className="py-16 sm:py-20 bg-muted/20 border-y border-border/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-light mb-3">
@@ -122,11 +106,8 @@ function PropertyManagementIndexContent({ locale }: { locale: Locale }) {
             </p>
           </div>
 
-          <h3 className="text-xs font-semibold uppercase tracking-widest text-primary mb-4">
-            {t("areas.lakeBadge")}
-          </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {lakeItems.map((c) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {items.map((c) => (
               <ComuneCard
                 key={c.slug}
                 comune={c}
@@ -136,25 +117,6 @@ function PropertyManagementIndexContent({ locale }: { locale: Locale }) {
               />
             ))}
           </div>
-
-          {provinceItems.length > 0 && (
-            <>
-              <h3 className="text-xs font-semibold uppercase tracking-widest text-primary mb-4">
-                {t("areas.provinceBadge")}
-              </h3>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {provinceItems.map((c) => (
-                  <ComuneCard
-                    key={c.slug}
-                    comune={c}
-                    locale={locale}
-                    badge={t("areas.provinceBadge")}
-                    discoverLabel={t("areas.discoverLabel")}
-                  />
-                ))}
-              </div>
-            </>
-          )}
         </div>
       </section>
     </div>
@@ -182,9 +144,9 @@ function ComuneCard({
         <MapPin className="h-3.5 w-3.5" />
         {badge}
       </div>
-      <h4 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+      <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
         {comune.name}
-      </h4>
+      </h3>
       <p className="text-sm text-muted-foreground leading-relaxed mb-5">
         {tagline}.
       </p>
