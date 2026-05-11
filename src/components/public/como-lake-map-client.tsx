@@ -71,7 +71,7 @@ export function ComoLakeMapClient({ comuni, locale }: Props) {
             pathOptions={{
               color: "#0F172A",
               weight: 2.5,
-              fillColor: "#0F172A",
+              fillColor: "#1D3A62",
               fillOpacity: 1,
             }}
             eventHandlers={{
@@ -79,10 +79,10 @@ export function ComoLakeMapClient({ comuni, locale }: Props) {
                 router.push(`/property-management/${c.slug}`);
               },
               mouseover: (e) => {
-                e.target.setStyle({ radius: 11, fillColor: "#1D3A62" });
+                e.target.setStyle({ radius: 11, fillColor: "#119DB0" });
               },
               mouseout: (e) => {
-                e.target.setStyle({ radius: 8, fillColor: "#0F172A" });
+                e.target.setStyle({ radius: 8, fillColor: "#1D3A62" });
               },
             }}
           >
