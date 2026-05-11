@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { MapContainer, TileLayer, CircleMarker, Tooltip, useMap } from "react-leaflet";
 import { useRouter } from "@/i18n/routing";
 import type { LatLngExpression, LatLngBoundsLiteral } from "leaflet";
@@ -19,52 +19,33 @@ type Props = {
   locale: Locale;
 };
 
-function FitToComuni({ comuni }: { comuni: Comune[] }) {
+const LAKE_BOUNDS: LatLngBoundsLiteral = [
+  [45.78, 9.04],
+  [46.2, 9.46],
+];
+
+function FitToLake() {
   const map = useMap();
   useEffect(() => {
-    if (comuni.length === 0) return;
-    const bounds: LatLngBoundsLiteral = comuni.reduce<LatLngBoundsLiteral>(
-      (acc, c) => {
-        const lat = c.geo.lat;
-        const lng = c.geo.lng;
-        if (acc.length === 0) {
-          return [
-            [lat, lng],
-            [lat, lng],
-          ];
-        }
-        const [[minLat, minLng], [maxLat, maxLng]] = acc;
-        return [
-          [Math.min(minLat, lat), Math.min(minLng, lng)],
-          [Math.max(maxLat, lat), Math.max(maxLng, lng)],
-        ];
-      },
-      [],
-    );
-    map.fitBounds(bounds, { padding: [40, 40] });
-  }, [comuni, map]);
+    map.fitBounds(LAKE_BOUNDS, { padding: [20, 20] });
+  }, [map]);
   return null;
 }
 
 export function ComoLakeMapClient({ comuni, locale }: Props) {
   const router = useRouter();
-  const center: LatLngExpression = useMemo(() => {
-    if (comuni.length === 0) return [45.95, 9.2];
-    const avgLat =
-      comuni.reduce((s, c) => s + c.geo.lat, 0) / comuni.length;
-    const avgLng =
-      comuni.reduce((s, c) => s + c.geo.lng, 0) / comuni.length;
-    return [avgLat, avgLng];
-  }, [comuni]);
+  const center: LatLngExpression = [45.97, 9.25];
 
   return (
     <div
       className="w-full rounded-2xl overflow-hidden border border-border/50 shadow-sm bg-white"
-      style={{ aspectRatio: "5 / 6" }}
+      style={{ aspectRatio: "4 / 3" }}
     >
       <MapContainer
         center={center}
         zoom={10}
+        minZoom={9}
+        maxZoom={12}
         scrollWheelZoom={false}
         attributionControl={false}
         zoomControl={true}
@@ -81,7 +62,7 @@ export function ComoLakeMapClient({ comuni, locale }: Props) {
           maxZoom={19}
           opacity={0.85}
         />
-        <FitToComuni comuni={comuni} />
+        <FitToLake />
         {comuni.map((c) => (
           <CircleMarker
             key={c.slug}

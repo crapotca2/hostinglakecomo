@@ -173,27 +173,31 @@ function ComuneLandingClient({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
       />
 
-      <section className="py-16 sm:py-20 border-b border-border/50 bg-gradient-to-b from-primary/[0.04] via-white to-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-medium mb-5">
+      <section className="relative overflow-hidden bg-[#1D3A62] text-white border-b border-white/10">
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center pointer-events-none"
+        />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white text-xs font-medium mb-5 border border-white/15">
             <MapPin className="h-3.5 w-3.5" />
             {comune.name}, {locale === "en" ? "Lake Como" : "Lago di Como"}
           </div>
-          <h1 className="text-4xl sm:text-5xl font-light mb-4 leading-tight">
+          <h1 className="text-4xl sm:text-5xl font-light mb-4 leading-tight text-white">
             {titlePrefix}{" "}
             <span className="font-semibold">{comune.name}</span>
             <br />
-            <span className="text-muted-foreground text-2xl sm:text-3xl">
+            <span className="text-white/70 text-2xl sm:text-3xl">
               {subtitleSuffix}
             </span>
           </h1>
-          <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl">
+          <p className="text-white/85 text-lg leading-relaxed max-w-2xl">
             {tagline}.
           </p>
           <div className="mt-8">
             <Link
               href={`/contact?interest=gestione&from=local-${comune.slug}`}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-colors shadow-lg"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-foreground text-sm font-semibold hover:bg-white/90 transition-colors shadow-lg"
             >
               {ctaLabel}
               <ArrowRight className="h-4 w-4" />
@@ -270,22 +274,22 @@ function ComuneLandingClient({
         </div>
       </section>
 
-      <section className="py-16 bg-[#1D3A62] text-white">
+      <section className="py-16 bg-white border-t border-border/50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-light mb-3">
+          <h2 className="text-2xl sm:text-3xl font-light mb-3 text-foreground">
             {locale === "en"
               ? "Want us to manage your property in"
               : "Vuoi che gestiamo la tua proprietà a"}{" "}
             <span className="font-semibold">{comune.name}</span>?
           </h2>
-          <p className="text-white/80 mb-7 leading-relaxed">
+          <p className="text-muted-foreground mb-7 leading-relaxed">
             {locale === "en"
               ? "A single conversation to see whether we're a good fit. No commitment, we reply within 48 hours."
               : "Una sola conversazione per capire se siamo l'interlocutore giusto. Nessun impegno, ti rispondiamo entro 48 ore."}
           </p>
           <Link
             href={`/contact?interest=gestione&from=local-${comune.slug}`}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-foreground text-sm font-semibold hover:bg-white/90 transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#1D3A62] text-white text-sm font-semibold hover:bg-[#1D3A62]/90 transition-colors"
           >
             {tCommon("requestConsultation")}
             <ArrowRight className="h-4 w-4" />

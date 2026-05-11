@@ -74,7 +74,7 @@ function PropertyManagementIndexContent({ locale }: { locale: Locale }) {
       </section>
 
       <section className="py-16 sm:py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-light mb-3">
               <span className="font-semibold">{t("map.title")}</span>
@@ -83,15 +83,17 @@ function PropertyManagementIndexContent({ locale }: { locale: Locale }) {
               {t("map.subtitle")}
             </p>
           </div>
-          <ComoLakeMap
-            comuni={items.map((c) => ({
-              slug: c.slug,
-              name: c.name,
-              geo: c.geo,
-              tagline: pickStr(c, "tagline", locale),
-            }))}
-            locale={locale}
-          />
+          <div className="max-w-2xl mx-auto">
+            <ComoLakeMap
+              comuni={items.map((c) => ({
+                slug: c.slug,
+                name: c.name,
+                geo: c.geo,
+                tagline: pickStr(c, "tagline", locale),
+              }))}
+              locale={locale}
+            />
+          </div>
         </div>
       </section>
 
