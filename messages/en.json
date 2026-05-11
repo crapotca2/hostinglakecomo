@@ -425,20 +425,20 @@
       "title1": "Specialist",
       "title1Strong": "property managers",
       "title2": "on Lake Como",
-      "subtitle": "Three property managers specialised in managing, cleaning and organising properties for international guests. A single dedicated team, with certified Superhost experience since 2017."
+      "subtitle": "Three property managers specialised in managing, cleaning and organising properties in the Como area. A single dedicated team, with certified Superhost experience since 2017."
     },
     "narrative": {
       "p1Prefix": "Host Como is a specialist team of three property managers focused on the ",
       "p1Strong1": "management, cleaning and organisation",
-      "p1Mid": " of our clients' properties — mostly international owners with a second home on the Lake — with a specific focus on the ",
-      "p1Strong2": "international market",
-      "p1Suffix": " that visits Lake Como every year.",
+      "p1Mid": " of our clients' properties, mostly owners with a second home in the Como area. Our guests are ",
+      "p1Strong2": "an international clientele",
+      "p1Suffix": " that chooses Lake Como every year as their stay destination.",
       "p2Prefix": "Our work is built on ",
       "p2Strong1": "more than nine years of direct hospitality on the Lake",
       "p2Mid": " and on the ",
       "p2Strong2": "Airbnb Superhost certification since 2017",
       "p2Suffix": ". Skills are split across three complementary areas, so that every property gets the right specialist's attention at every moment, while the owner keeps a single point of contact.",
-      "p3": "We work exclusively on Lake Como: we know the areas, the restaurants, the boats, the ferry timetable, and the habits of the tourists who arrive in spring and those who stay until the end of October."
+      "p3": "We work across the Como area, with a particular focus on Lake Como: we know the areas, the restaurants, the boats, the ferry timetable, and the habits of the tourists who arrive in spring and those who stay until the end of October."
     },
     "competenceAreas": {
       "accoglienza": {
@@ -468,7 +468,7 @@
       "eyebrow": "Frequently asked questions",
       "title1": "What owners",
       "title1Strong": "ask us about us",
-      "subtitle": "Five clear answers about the team, the method and the reports. If you are looking for questions about the service itself, you'll find them on the Services page.",
+      "subtitle": "Five clear answers about who we are, our method and the team. If you are looking for operational questions about the service, you'll find them on the Services page.",
       "items": [
         {
           "q": "How long have you been active on the Lake Como market?",
@@ -476,23 +476,19 @@
         },
         {
           "q": "What types of properties do you manage?",
-          "a": "We manage apartments, villas and houses on Lake Como. We work both on premium lakefront properties and on more compact homes in strategic positions. The deciding factor isn't the size but the location, the condition of the property and the owner's alignment on the quality level required."
+          "a": "We manage apartments, villas and houses across the Como area, with a particular focus on Lake Como. We work both on premium lakefront properties and on more compact homes in strategic positions, on the lake shore as well as in central Como and in the surrounding municipalities. The deciding factor isn't the size but the location, the condition of the property and the owner's alignment on the quality level required."
         },
         {
           "q": "How do you select the properties you take on?",
           "a": "We start with a free on-site assessment to evaluate location, condition, amenities and earning potential. We benchmark the numbers against our local historical database. We only take on properties where we can guarantee a concrete result to the owner — if we don't see margin, we say so plainly."
         },
         {
-          "q": "How do you handle complaints and critical situations with guests?",
-          "a": "24/7 availability throughout the entire stay. Most issues are resolved in minutes: access codes, directions, amenities. For technical emergencies we have a network of plumbers, electricians and maintenance specialists on the Lake, ready to step in the same day. The owner always receives a post-event recap."
+          "q": "Who is on your team?",
+          "a": "We are a team of three with complementary skills. One of the founders has been an Airbnb Superhost since 2017 with more than 350 five-star reviews: he looks after guest hospitality, relationship management and quality standards in the home. A second partner handles admin, tax compliance, contracts, the technology behind dynamic pricing and the integration with OTAs. The third partner lives in Como and is an expert in the local restaurant scene and experiences: he curates the network of local partners — restaurants, private transfers, excursions, lake activities — to turn a stay into a memorable experience that drives five-star reviews."
         },
         {
-          "q": "Do you send me periodic reports on how my property is performing?",
-          "a": "Yes. Every month you get a dedicated email summary with bookings, occupancy, average rate, net revenue and the compliance handled in the period. You also have 24/7 access to a personal dashboard with all the numbers in real time and tracked payouts."
-        },
-        {
-          "q": "Where do you publish the properties you manage?",
-          "a": "Our primary publishing channels are Airbnb, Booking and Expedia, which generate the bulk of tourist bookings on Lake Como. We also use long-stay channels such as subito.it and other specialised portals to capture medium-to-long stays and reduce vacancy gaps in low season."
+          "q": "In which languages do you communicate with guests?",
+          "a": "Thanks to our different backgrounds we communicate directly in Italian, English, Romanian, Russian and German. We also handle conversations in Spanish, although not at native level. This widens the pool of reachable guests and reduces friction in pre-booking conversations: replying quickly in the guest's language is statistically correlated with higher conversion."
         }
       ]
     }
@@ -670,15 +666,15 @@
       "eyebrow": "Frequently asked questions",
       "title1": "The answers",
       "title1Strong": "owners ask us",
-      "subtitle": "Eight recurring questions about channels, costs, hospitality, compliance and team. If you don't find what you are looking for, write to us from the contact page.",
+      "subtitle": "Eight operational questions on costs, channels, hospitality, compliance, reports and timing. For questions about who we are and the team, see the About page.",
       "items": [
-        {
-          "q": "On which platforms do you list properties?",
-          "a": "We publish properties on the primary channels Airbnb, Booking and Expedia — those that generate the highest volume of tourist bookings on Lake Como. We add long-stay secondary channels such as subito.it and other specialised portals to reach professionals, remote workers and stays longer than one month. The goal is to maximise occupancy throughout the year, not only during the summer peaks."
-        },
         {
           "q": "How much does your service cost?",
           "a": "We work on a percentage commission on the revenue generated, with no fixed onboarding fee. The exact model is shared in a free preliminary consultation, once we have assessed the property and its potential numbers together."
+        },
+        {
+          "q": "On which platforms do you list properties?",
+          "a": "We publish properties on the primary channels Airbnb, Booking and Expedia — those that generate the highest volume of tourist bookings on Lake Como. We add long-stay secondary channels such as subito.it and other specialised portals to reach professionals, remote workers and stays longer than one month. The goal is to maximise occupancy throughout the year, not only during the summer peaks."
         },
         {
           "q": "Do you handle cleaning, check-in and linen?",
@@ -689,12 +685,12 @@
           "a": "Yes — we manage end-to-end compliance for short-term rentals on Lake Como: Lombardy CIR and national CIN registration, police reporting via Alloggiati Web, ISTAT, flat-tax management, collection and remittance of the tourist tax to the municipality."
         },
         {
-          "q": "Who is on your team?",
-          "a": "We are a team of three with complementary skills. One of the founders has been an Airbnb Superhost since 2017 with more than 350 five-star reviews: he looks after guest hospitality, relationship management and quality standards in the home. A second partner handles admin, tax compliance, contracts, the technology behind dynamic pricing and the integration with OTAs. The third partner lives in Como and is an expert in the local restaurant scene and experiences: he curates the network of local partners — restaurants, private transfers, excursions, lake activities — to turn a stay into a memorable experience that drives five-star reviews."
+          "q": "Do you send me periodic reports on how my property is performing?",
+          "a": "Yes. Every month you get a dedicated email summary with bookings, occupancy, average rate, net revenue and the compliance handled in the period. You also have 24/7 access to a personal dashboard with all the numbers in real time and tracked payouts."
         },
         {
-          "q": "In which languages do you communicate with guests?",
-          "a": "Thanks to our different backgrounds we communicate directly in Italian, English, Romanian, Russian and German. We also handle conversations in Spanish, although not at native level. This widens the pool of reachable guests and reduces friction in pre-booking conversations: replying quickly in the guest's language is statistically correlated with higher conversion."
+          "q": "How do you handle complaints and critical situations with guests?",
+          "a": "24/7 availability throughout the entire stay. Most issues are resolved in minutes: access codes, directions, amenities. For technical emergencies we have a network of plumbers, electricians and maintenance specialists on the Lake, ready to step in the same day. The owner always receives a post-event recap."
         },
         {
           "q": "What happens if my home stays vacant?",

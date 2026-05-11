@@ -425,20 +425,20 @@
       "title1": "Gestori",
       "title1Strong": "specialisti",
       "title2": "sul Lago di Como",
-      "subtitle": "Tre gestori specializzati nella gestione, pulizia e organizzazione di immobili per ospiti internazionali. Una sola realtà dedicata, con esperienza certificata Superhost dal 2017."
+      "subtitle": "Tre gestori specializzati nella gestione, pulizia e organizzazione di immobili nell'area comasca. Una sola realtà dedicata, con esperienza certificata Superhost dal 2017."
     },
     "narrative": {
       "p1Prefix": "Como Host è una realtà specializzata di tre gestori dedicati alla ",
       "p1Strong1": "gestione, alla pulizia e all'organizzazione",
-      "p1Mid": " degli immobili dei nostri clienti — perlopiù proprietari internazionali con seconda casa sul Lago — con focus specifico sul ",
-      "p1Strong2": "mercato internazionale",
-      "p1Suffix": " che frequenta il Lago di Como ogni anno.",
+      "p1Mid": " degli immobili dei nostri clienti, perlopiù proprietari con seconda casa nell'area comasca. I nostri ospiti sono ",
+      "p1Strong2": "una clientela internazionale",
+      "p1Suffix": " che ogni anno sceglie il Lago di Como come destinazione di soggiorno.",
       "p2Prefix": "Il nostro lavoro poggia su ",
       "p2Strong1": "oltre nove anni di ospitalità diretta sul Lago",
       "p2Mid": " e sulla certificazione ",
       "p2Strong2": "Superhost di Airbnb dal 2017",
       "p2Suffix": ". Le competenze sono distribuite su tre aree complementari, in modo che ogni proprietà riceva l'attenzione dello specialista giusto in ogni momento, mentre il proprietario mantiene un solo interlocutore.",
-      "p3": "Lavoriamo esclusivamente sul Lago di Como: conosciamo le zone, i ristoranti, i battelli, i tempi del traghetto, le abitudini dei turisti che arrivano in primavera e di quelli che restano fino a fine ottobre."
+      "p3": "Lavoriamo nell'area comasca, con un focus particolare sul Lago di Como: conosciamo le zone, i ristoranti, i battelli, i tempi del traghetto, le abitudini dei turisti che arrivano in primavera e di quelli che restano fino a fine ottobre."
     },
     "competenceAreas": {
       "accoglienza": {
@@ -468,7 +468,7 @@
       "eyebrow": "Domande frequenti",
       "title1": "Quello che i proprietari",
       "title1Strong": "ci chiedono di noi",
-      "subtitle": "Cinque risposte chiare sul team, sul metodo e sui report. Se cerchi domande sul servizio, le trovi nella pagina Servizi.",
+      "subtitle": "Cinque risposte chiare su chi siamo, sul metodo e sul team. Se cerchi domande sul servizio operativo, le trovi nella pagina Servizi.",
       "items": [
         {
           "q": "Da quanto tempo siete attivi sul mercato del Lago di Como?",
@@ -476,23 +476,19 @@
         },
         {
           "q": "Che tipo di proprietà gestite?",
-          "a": "Gestiamo appartamenti, ville e case sul Lago di Como. Lavoriamo sia su immobili premium con vista lago sia su soluzioni più contenute in posizioni strategiche. Il fattore decisivo non è la metratura ma la posizione, lo stato dell'immobile e l'allineamento del proprietario sul livello di qualità richiesto."
+          "a": "Gestiamo appartamenti, ville e case nell'area comasca, con un focus particolare sul Lago di Como. Lavoriamo sia su immobili premium con vista lago sia su soluzioni più contenute in posizioni strategiche, tanto sul lungolago quanto nel centro di Como e nei comuni limitrofi. Il fattore decisivo non è la metratura ma la posizione, lo stato dell'immobile e l'allineamento del proprietario sul livello di qualità richiesto."
         },
         {
           "q": "Come selezionate le proprietà da prendere in gestione?",
           "a": "Facciamo prima un sopralluogo gratuito per valutare zona, stato, dotazioni e potenziale. Confrontiamo i numeri con il nostro database storico locale. Accettiamo solo proprietà su cui possiamo garantire un risultato concreto al proprietario: se non vediamo margine, lo diciamo chiaramente."
         },
         {
-          "q": "Come gestite reclami e situazioni critiche con gli ospiti?",
-          "a": "Reperibilità 24/7 durante l'intero soggiorno. La maggior parte dei problemi si risolve in minuti: codice di accesso, indicazioni, dotazioni. Per emergenze tecniche abbiamo una rete di idraulici, elettricisti e manutentori sul Lago, pronti a intervenire in giornata. Il proprietario riceve sempre un riassunto post-evento."
+          "q": "Chi compone il vostro team?",
+          "a": "Siamo un team di tre persone con competenze complementari. Uno dei fondatori è Superhost di Airbnb dal 2017 con oltre 350 recensioni a cinque stelle: si occupa dell'accoglienza ospiti, della cura della relazione e degli standard di qualità in casa. Un secondo socio gestisce l'area amministrativa, la compliance fiscale, i contratti, la parte tecnologica del sistema di pricing dinamico e l'integrazione con i portali. Il terzo socio vive a Como ed è esperto del settore della ristorazione e delle esperienze locali: cura la rete di partner sul territorio — ristoranti, transfer privati, escursioni, attività sul lago — per costruire soggiorni memorabili che generano recensioni a cinque stelle."
         },
         {
-          "q": "Mi mandate dei report periodici sull'andamento della mia proprietà?",
-          "a": "Sì. Ogni mese ricevi un riepilogo dedicato via email con prenotazioni, occupazione, tariffa media, ricavi netti e adempimenti del periodo. In più hai accesso 24/7 alla dashboard personale con tutti i numeri in tempo reale e i pagamenti tracciati."
-        },
-        {
-          "q": "Dove pubblicate le proprietà che gestite?",
-          "a": "I canali primari di pubblicazione sono Airbnb, Booking ed Expedia, dove si concentra la quota più alta delle prenotazioni turistiche sul Lago di Como. Affianchiamo poi canali long-stay come subito.it e altri portali specializzati per intercettare soggiorni medio-lunghi e ridurre i periodi di sfittanza in bassa stagione."
+          "q": "In quali lingue comunicate con gli ospiti?",
+          "a": "Grazie ai background diversi del team comunichiamo direttamente in italiano, inglese, rumeno, russo e tedesco. Gestiamo anche conversazioni in spagnolo, pur senza un livello madrelingua. Questo amplia il bacino di ospiti raggiungibili e riduce gli attriti nelle conversazioni di pre-booking: rispondere rapidamente nella lingua dell'ospite è statisticamente correlato a tassi di conversione più alti."
         }
       ]
     }
@@ -670,15 +666,15 @@
       "eyebrow": "Domande frequenti",
       "title1": "Le risposte che",
       "title1Strong": "i proprietari ci chiedono",
-      "subtitle": "Otto domande ricorrenti su canali, costi, accoglienza, adempimenti e team. Se non trovi quello che cerchi, scrivici dalla pagina contatti.",
+      "subtitle": "Otto domande operative su costi, canali, accoglienza, adempimenti, report e tempistiche. Per le domande su chi siamo e sul team trovi le risposte nella pagina Chi Siamo.",
       "items": [
-        {
-          "q": "Su quali piattaforme pubblicate gli annunci?",
-          "a": "Pubblichiamo le proprietà sui canali primari Airbnb, Booking ed Expedia — sono quelli che generano il volume più alto di prenotazioni turistiche sul Lago di Como. Affianchiamo canali secondari long-stay come subito.it e altri portali specializzati per intercettare professionisti, smart worker e soggiorni superiori al mese. L'obiettivo è massimizzare l'occupazione lungo tutto l'anno, non solo nei picchi estivi."
-        },
         {
           "q": "Quanto costa il vostro servizio?",
           "a": "Lavoriamo a commissione percentuale sui ricavi generati, senza fee fisse di onboarding. Il modello esatto viene condiviso in una consulenza preliminare gratuita, dopo aver valutato insieme la proprietà e i suoi numeri potenziali."
+        },
+        {
+          "q": "Su quali piattaforme pubblicate gli annunci?",
+          "a": "Pubblichiamo le proprietà sui canali primari Airbnb, Booking ed Expedia — sono quelli che generano il volume più alto di prenotazioni turistiche sul Lago di Como. Affianchiamo canali secondari long-stay come subito.it e altri portali specializzati per intercettare professionisti, smart worker e soggiorni superiori al mese. L'obiettivo è massimizzare l'occupazione lungo tutto l'anno, non solo nei picchi estivi."
         },
         {
           "q": "Vi occupate di pulizie, check-in e biancheria?",
@@ -689,12 +685,12 @@
           "a": "Sì, gestiamo end-to-end gli adempimenti per affitti brevi sul Lago di Como: richiesta CIR Lombardia e CIN nazionale, comunicazioni alloggiati alla Questura via Alloggiati Web, ISTAT, gestione cedolare secca, riscossione e versamento della tassa di soggiorno al Comune."
         },
         {
-          "q": "Chi compone il vostro team?",
-          "a": "Siamo un team di tre persone con competenze complementari. Uno dei fondatori è Superhost di Airbnb dal 2017 con oltre 350 recensioni a cinque stelle: si occupa dell'accoglienza ospiti, della cura della relazione e degli standard di qualità in casa. Un secondo socio gestisce l'area amministrativa, la compliance fiscale, i contratti, la parte tecnologica del sistema di pricing dinamico e l'integrazione con i portali. Il terzo socio vive a Como ed è esperto del settore della ristorazione e delle esperienze locali: cura la rete di partner sul territorio — ristoranti, transfer privati, escursioni, attività sul lago — per costruire soggiorni memorabili che generano recensioni a cinque stelle."
+          "q": "Mi mandate dei report periodici sull'andamento della mia proprietà?",
+          "a": "Sì. Ogni mese ricevi un riepilogo dedicato via email con prenotazioni, occupazione, tariffa media, ricavi netti e adempimenti del periodo. In più hai accesso 24/7 alla dashboard personale con tutti i numeri in tempo reale e i pagamenti tracciati."
         },
         {
-          "q": "In quali lingue comunicate con gli ospiti?",
-          "a": "Grazie ai background diversi del team comunichiamo direttamente in italiano, inglese, rumeno, russo e tedesco. Gestiamo anche conversazioni in spagnolo, pur senza un livello madrelingua. Questo amplia il bacino di ospiti raggiungibili e riduce gli attriti nelle conversazioni di pre-booking: rispondere rapidamente nella lingua dell'ospite è statisticamente correlato a tassi di conversione più alti."
+          "q": "Come gestite reclami e situazioni critiche con gli ospiti?",
+          "a": "Reperibilità 24/7 durante l'intero soggiorno. La maggior parte dei problemi si risolve in minuti: codice di accesso, indicazioni, dotazioni. Per emergenze tecniche abbiamo una rete di idraulici, elettricisti e manutentori sul Lago, pronti a intervenire in giornata. Il proprietario riceve sempre un riassunto post-evento."
         },
         {
           "q": "Cosa succede se la mia casa resta sfitta?",
