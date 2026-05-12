@@ -26,7 +26,7 @@ export function Footer() {
                 alt={brand}
                 className="h-14 w-14 object-contain"
               />
-              <span className="font-bungee uppercase text-2xl tracking-wide text-white">
+              <span className="font-bungee uppercase text-3xl leading-none tracking-wide text-white">
                 {brand}
               </span>
             </div>

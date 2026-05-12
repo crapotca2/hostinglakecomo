@@ -100,7 +100,7 @@ export function Navbar() {
             </span>
             <span
               className={cn(
-                "font-bungee uppercase text-base sm:text-lg lg:text-xl tracking-wide transition-colors truncate",
+                "font-bungee uppercase text-lg sm:text-xl lg:text-2xl leading-none tracking-wide transition-colors truncate",
                 showSolid ? "text-foreground" : "text-white"
               )}
             >
