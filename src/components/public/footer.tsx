@@ -20,7 +20,7 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-3 lg:-mt-2">
             {/* Logo lockup (mark + wordmark) */}
-            <div className="flex items-center gap-3.5">
+            <div className="flex items-center gap-2">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/logo/logo-white.png"
