@@ -19,14 +19,15 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-10 lg:gap-12 lg:items-center">
           {/* Brand */}
           <div className="space-y-3 lg:-mt-2">
-            <div className="flex items-center gap-3">
+            {/* Logo lockup (mark + wordmark) */}
+            <div className="flex items-center gap-3.5">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/logo/logo-white.png"
                 alt={brand}
-                className="h-14 w-14 object-contain"
+                className="h-20 w-20 object-contain shrink-0"
               />
-              <span className="font-bungee uppercase text-3xl leading-none tracking-wide text-white">
+              <span className="font-bungee uppercase text-3xl sm:text-4xl leading-none tracking-wide text-white">
                 {brand}
               </span>
             </div>

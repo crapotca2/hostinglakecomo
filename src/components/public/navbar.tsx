@@ -71,41 +71,43 @@ export function Navbar() {
       )}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-4 h-16 lg:h-20">
-          {/* Logo */}
+          {/* Logo lockup (mark + wordmark) */}
           <Link
             href="/"
-            className="flex items-center gap-2 sm:gap-2.5 shrink-0 min-w-0"
+            className="shrink-0 min-w-0"
             aria-label={t("homeAriaLabel")}
           >
-            <span className="relative h-9 w-9 sm:h-11 sm:w-11 lg:h-12 lg:w-12 shrink-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/logo/logo-marble.png"
-                alt=""
-                aria-hidden="true"
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <span className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 shrink-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/logo/logo-marble.png"
+                  alt=""
+                  aria-hidden="true"
+                  className={cn(
+                    "absolute inset-0 h-full w-full object-contain transition-opacity duration-300",
+                    showSolid ? "opacity-100" : "opacity-0"
+                  )}
+                />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/logo/logo-white.png"
+                  alt={brand}
+                  className={cn(
+                    "absolute inset-0 h-full w-full object-contain transition-opacity duration-300",
+                    showSolid ? "opacity-0" : "opacity-100"
+                  )}
+                />
+              </span>
+              <span
                 className={cn(
-                  "absolute inset-0 h-full w-full object-contain transition-opacity duration-300",
-                  showSolid ? "opacity-100" : "opacity-0"
+                  "font-bungee uppercase text-xl sm:text-2xl lg:text-3xl leading-none tracking-wide transition-colors truncate",
+                  showSolid ? "text-[#1D3A62]" : "text-white"
                 )}
-              />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/logo/logo-white.png"
-                alt={brand}
-                className={cn(
-                  "absolute inset-0 h-full w-full object-contain transition-opacity duration-300",
-                  showSolid ? "opacity-0" : "opacity-100"
-                )}
-              />
-            </span>
-            <span
-              className={cn(
-                "font-bungee uppercase text-lg sm:text-xl lg:text-2xl leading-none tracking-wide transition-colors truncate",
-                showSolid ? "text-foreground" : "text-white"
-              )}
-            >
-              {brand}
-            </span>
+              >
+                {brand}
+              </span>
+            </div>
           </Link>
 
           {/* Desktop nav (lg+) */}
