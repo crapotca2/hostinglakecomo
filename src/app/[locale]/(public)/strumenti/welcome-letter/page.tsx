@@ -1,19 +1,11 @@
-"use client";
+import { redirect } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
 
-import { FileText } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { LockedToolPreview } from "@/components/strumenti/locked-tool-preview";
-
-export default function WelcomeLetterPage() {
-  const t = useTranslations("strumenti.lock.welcomeLetter");
-  const bullets = t.raw("bullets") as string[];
-  return (
-    <LockedToolPreview
-      icon={FileText}
-      title={t("title")}
-      tagline={t("tagline")}
-      description={t("description")}
-      bullets={bullets}
-    />
-  );
+export default async function WelcomeLetterRedirect({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+  redirect({ href: "/strumenti", locale });
 }

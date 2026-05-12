@@ -19,9 +19,6 @@ const STATIC_PATHS: { path: string; priority: number; changeFrequency: MetadataR
   { path: "/strumenti/rendita", priority: 0.75, changeFrequency: "monthly" },
   { path: "/strumenti/investimento", priority: 0.75, changeFrequency: "monthly" },
   { path: "/strumenti/profit-diretto", priority: 0.75, changeFrequency: "monthly" },
-  { path: "/strumenti/nome-proprieta", priority: 0.6, changeFrequency: "yearly" },
-  { path: "/strumenti/percorso-maps", priority: 0.6, changeFrequency: "yearly" },
-  { path: "/strumenti/welcome-letter", priority: 0.6, changeFrequency: "yearly" },
 ];
 
 function localizedUrl(locale: string, path: string): string {

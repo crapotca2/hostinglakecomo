@@ -1,19 +1,11 @@
-"use client";
+import { redirect } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
 
-import { Sparkles } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { LockedToolPreview } from "@/components/strumenti/locked-tool-preview";
-
-export default function NomeProprietaPage() {
-  const t = useTranslations("strumenti.lock.nomeProprieta");
-  const bullets = t.raw("bullets") as string[];
-  return (
-    <LockedToolPreview
-      icon={Sparkles}
-      title={t("title")}
-      tagline={t("tagline")}
-      description={t("description")}
-      bullets={bullets}
-    />
-  );
+export default async function NomeProprietaRedirect({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+  redirect({ href: "/strumenti", locale });
 }
