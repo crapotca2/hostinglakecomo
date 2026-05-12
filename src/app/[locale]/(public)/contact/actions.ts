@@ -79,7 +79,7 @@ export async function submitContact(formData: FormData): Promise<SubmitResult> {
   try {
     const resend = new Resend(apiKey);
     const result = await resend.emails.send({
-      from: "Host Como Form <noreply@hostcomo.com>",
+      from: "Host Como <noreply@hostcomo.com>",
       to: "info@hostcomo.com",
       replyTo: data.email,
       subject,
