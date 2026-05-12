@@ -173,14 +173,45 @@ export default function PrivacyPolicyPage() {
           <section className="space-y-4">
             <h2 className="text-xl font-semibold">6. Destinatari dei dati</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
-              I dati raccolti possono essere comunicati a Vercel Inc., fornitore
-              di hosting del Sito (datacenter in Unione Europea), e a Google LLC
-              limitatamente all&apos;autenticazione degli utenti dell&apos;area clienti
-              tramite OAuth. Entrambi i fornitori operano in qualità di
-              responsabili del trattamento ai sensi dell&apos;art. 28 GDPR e con essi
-              sono in essere accordi di trattamento conformi alla normativa
-              europea.
+              I dati raccolti possono essere comunicati ai seguenti fornitori,
+              tutti operanti in qualità di responsabili del trattamento ai sensi
+              dell&apos;art. 28 GDPR, con accordi di trattamento conformi alla
+              normativa europea:
             </p>
+            <ul className="space-y-3 text-base text-muted-foreground list-disc pl-6">
+              <li>
+                <strong className="text-foreground">Vercel Inc.</strong> —
+                fornitore di hosting del Sito, con datacenter primari in Unione
+                Europea (Francoforte).
+              </li>
+              <li>
+                <strong className="text-foreground">Google LLC</strong> —
+                limitatamente all&apos;autenticazione degli utenti dell&apos;area
+                clienti tramite OAuth.
+              </li>
+              <li>
+                <strong className="text-foreground">Resend Inc.</strong> —
+                fornitore del servizio di invio email transazionali utilizzato
+                per recapitare al titolare i messaggi inviati tramite il modulo
+                di contatto. Resend è basato su infrastruttura Amazon Web
+                Services nella region UE (Irlanda), è certificato SOC 2 Type II
+                e non legge il contenuto delle email se non per gli aspetti
+                tecnici di consegna (firma DKIM, gestione dei bounce, log dei
+                metadati di invio).
+              </li>
+              <li>
+                <strong className="text-foreground">IONOS SE</strong> — fornitore
+                del servizio email del dominio hostcomo.com (datacenter in
+                Germania), gestisce l&apos;inoltro dei messaggi indirizzati a{" "}
+                <a
+                  href="mailto:info@hostcomo.com"
+                  className="text-primary hover:underline"
+                >
+                  info@hostcomo.com
+                </a>{" "}
+                verso le caselle dei gestori del Sito.
+              </li>
+            </ul>
           </section>
 
           <section className="space-y-4">
@@ -188,11 +219,12 @@ export default function PrivacyPolicyPage() {
             <p className="text-base leading-relaxed text-muted-foreground">
               Nei limiti necessari all&apos;erogazione del servizio i dati possono
               essere trasferiti negli Stati Uniti d&apos;America presso le
-              infrastrutture di Vercel e di Google. Tali trasferimenti sono
-              regolati dalle Standard Contractual Clauses approvate dalla
+              infrastrutture di Vercel, Google e Resend. Tali trasferimenti
+              sono regolati dalle Standard Contractual Clauses approvate dalla
               Commissione Europea e dalla certificazione Data Privacy Framework
               (DPF), che garantiscono un livello di protezione adeguato ai sensi
-              dell&apos;art. 45 GDPR.
+              dell&apos;art. 45 GDPR. I dati gestiti da IONOS restano invece sul
+              territorio dell&apos;Unione Europea.
             </p>
           </section>
 
