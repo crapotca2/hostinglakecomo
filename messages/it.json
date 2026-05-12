@@ -727,7 +727,7 @@
       "invia": "Invia Messaggio",
       "submitting": "Invio in corso…",
       "successTitle": "Messaggio Inviato!",
-      "successBody": "Ti risponderemo entro 24 ore. Grazie per averci contattato.",
+      "successBody": "Ti risponderemo entro 48 ore. Grazie per averci contattato.",
       "errorTitle": "Errore tecnico nell'invio",
       "errorBody": "Riprova tra qualche istante oppure scrivici direttamente a info@hostcomo.com."
     },
