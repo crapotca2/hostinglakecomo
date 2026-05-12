@@ -1,9 +1,10 @@
 "use client";
 
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useRef, useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
-import { Phone, Mail, Send } from "lucide-react";
+import { Phone, Mail, Send, AlertCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { submitContact, type SubmitResult } from "./actions";
 
 const INTEREST_KEYS = [
   { value: "consulenza", labelKey: "consulenza" },
@@ -25,27 +26,22 @@ function ContactForm() {
     ? requestedInterest
     : "gestione";
   const [interest, setInterest] = useState(initialInterest);
-  const [sent, setSent] = useState(false);
+  const [result, setResult] = useState<SubmitResult | null>(null);
   const [onPlatform, setOnPlatform] = useState(false);
   const mountedAt = useRef<number>(Date.now());
-  const honeypotRef = useRef<HTMLInputElement>(null);
+  const [isPending, startTransition] = useTransition();
 
-  function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // anti-bot: hidden honeypot must stay empty
-    if (honeypotRef.current?.value) {
-      setSent(true);
-      return;
-    }
-    // anti-bot: form filled too quickly is almost certainly a bot
-    if (Date.now() - mountedAt.current < 2000) {
-      setSent(true);
-      return;
-    }
-    setSent(true);
+    const formData = new FormData(e.currentTarget);
+    formData.set("mountedAt", String(mountedAt.current));
+    startTransition(async () => {
+      const r = await submitContact(formData);
+      setResult(r);
+    });
   }
 
-  if (sent) {
+  if (result?.ok) {
     return (
       <div className="bg-emerald-50 rounded-2xl p-10 text-center border border-emerald-200">
         <div className="h-14 w-14 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
@@ -65,6 +61,19 @@ function ContactForm() {
       className="bg-white rounded-2xl p-8 border border-border/50 shadow-[0_25px_60px_-12px_rgba(29,58,98,0.45)] space-y-5"
     >
       <h2 className="text-xl font-semibold mb-2">{tForm("title")}</h2>
+      {result && !result.ok && (
+        <div className="flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-3.5 text-sm">
+          <AlertCircle className="h-4 w-4 text-red-600 mt-0.5 shrink-0" />
+          <div>
+            <div className="font-medium text-red-800">
+              {tForm("errorTitle")}
+            </div>
+            <div className="text-red-700 text-xs mt-0.5">
+              {tForm("errorBody")}
+            </div>
+          </div>
+        </div>
+      )}
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
           <label className="text-sm font-medium mb-1.5 block">
@@ -72,8 +81,11 @@ function ContactForm() {
           </label>
           <input
             type="text"
+            name="nome"
             required
-            className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+            maxLength={100}
+            disabled={isPending}
+            className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:bg-muted/30"
           />
         </div>
         <div>
@@ -82,8 +94,11 @@ function ContactForm() {
           </label>
           <input
             type="text"
+            name="cognome"
             required
-            className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+            maxLength={100}
+            disabled={isPending}
+            className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:bg-muted/30"
           />
         </div>
       </div>
@@ -94,8 +109,11 @@ function ContactForm() {
           </label>
           <input
             type="email"
+            name="email"
             required
-            className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+            maxLength={150}
+            disabled={isPending}
+            className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:bg-muted/30"
           />
         </div>
         <div>
@@ -104,7 +122,10 @@ function ContactForm() {
           </label>
           <input
             type="tel"
-            className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+            name="telefono"
+            maxLength={30}
+            disabled={isPending}
+            className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:bg-muted/30"
           />
         </div>
       </div>
@@ -114,9 +135,11 @@ function ContactForm() {
             {tForm("interesse")}
           </label>
           <select
+            name="interesse"
             value={interest}
             onChange={(e) => setInterest(e.target.value)}
-            className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 bg-white"
+            disabled={isPending}
+            className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 bg-white disabled:bg-muted/30"
           >
             {INTEREST_KEYS.map((o) => (
               <option key={o.value} value={o.value}>
@@ -131,8 +154,11 @@ function ContactForm() {
           </label>
           <input
             type="text"
+            name="indirizzo"
+            maxLength={200}
             placeholder={tForm("indirizzoPlaceholder")}
-            className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+            disabled={isPending}
+            className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:bg-muted/30"
           />
         </div>
       </div>
@@ -140,8 +166,10 @@ function ContactForm() {
         <label className="flex items-start gap-3 cursor-pointer">
           <input
             type="checkbox"
+            name="onPlatform"
             checked={onPlatform}
             onChange={(e) => setOnPlatform(e.target.checked)}
+            disabled={isPending}
             className="mt-0.5 h-4 w-4 rounded border-border text-primary focus:ring-primary/30"
           />
           <span className="text-sm">
@@ -158,8 +186,11 @@ function ContactForm() {
             </label>
             <input
               type="url"
+              name="linkAnnuncio"
+              maxLength={500}
               placeholder={tForm("linkAnnuncioPlaceholder")}
-              className="w-full rounded-lg border border-border px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 bg-white"
+              disabled={isPending}
+              className="w-full rounded-lg border border-border px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 bg-white disabled:bg-muted/30"
             />
           </div>
         )}
@@ -169,16 +200,22 @@ function ContactForm() {
           {tForm("messaggio")}
         </label>
         <textarea
+          name="messaggio"
           rows={3}
           required
-          className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none"
+          minLength={10}
+          maxLength={2000}
+          disabled={isPending}
+          className="w-full rounded-lg border border-border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none disabled:bg-muted/30"
         />
       </div>
-      <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+      >
         <label>
           Website
           <input
-            ref={honeypotRef}
             type="text"
             name="website"
             tabIndex={-1}
@@ -188,10 +225,11 @@ function ContactForm() {
       </div>
       <button
         type="submit"
-        className="w-full sm:w-auto px-6 py-3 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-colors flex items-center justify-center gap-2"
+        disabled={isPending}
+        className="w-full sm:w-auto px-6 py-3 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
       >
         <Send className="h-4 w-4" />
-        {tForm("invia")}
+        {isPending ? tForm("submitting") : tForm("invia")}
       </button>
     </form>
   );
@@ -267,7 +305,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-
     </div>
   );
 }

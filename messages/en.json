@@ -725,8 +725,11 @@
       "linkAnnuncioPlaceholder": "https://www.airbnb.com/rooms/...",
       "messaggio": "Message",
       "invia": "Send Message",
+      "submitting": "Sending…",
       "successTitle": "Message Sent!",
-      "successBody": "We will reply within 24 hours. Thank you for getting in touch."
+      "successBody": "We will reply within 24 hours. Thank you for getting in touch.",
+      "errorTitle": "Technical error",
+      "errorBody": "Please try again in a moment or write directly to info@hostcomo.com."
     },
     "interestOptions": {
       "consulenza": "Personalised consultation",
