@@ -52,7 +52,7 @@ const TYPOLOGY_COLORS = ["#1D3A62", "#0C7489", "#119DB0", "#7EC8D3", "#C8E5EA"];
 
 type ParsedHotel = {
   name: string;
-  rating?: string;
+  stars?: number;
   meta?: string;
 };
 
@@ -61,11 +61,11 @@ function parseHotel(raw: string): ParsedHotel {
   if (!parenMatch) return { name: raw.trim() };
   const name = parenMatch[1].trim();
   const inside = parenMatch[2].trim();
-  const ratingMatch = inside.match(/(\d+\*)/);
+  const ratingMatch = inside.match(/(\d+)\*/);
   if (!ratingMatch) return { name, meta: inside };
-  const rating = ratingMatch[1];
-  const meta = inside.replace(ratingMatch[1], "").replace(/^[,\s]+|[,\s]+$/g, "");
-  return { name, rating, meta: meta || undefined };
+  const stars = parseInt(ratingMatch[1], 10);
+  const meta = inside.replace(/\d+\*/, "").replace(/^[,\s]+|[,\s]+$/g, "");
+  return { name, stars, meta: meta || undefined };
 }
 
 function getComune(slug: string): Comune | undefined {
@@ -461,9 +461,24 @@ function ComuneLandingClient({
                                 </div>
                               )}
                             </div>
-                            {h.rating && (
-                              <span className="shrink-0 inline-flex items-center px-1.5 py-0.5 rounded bg-[#003580]/10 text-[#003580] text-[10px] font-bold">
-                                {h.rating}
+                            {h.stars && (
+                              <span
+                                className="shrink-0 inline-flex items-center gap-px text-[#1D3A62] leading-none"
+                                aria-label={
+                                  locale === "en"
+                                    ? `${h.stars} stars`
+                                    : `${h.stars} stelle`
+                                }
+                              >
+                                {Array.from({ length: h.stars }).map((_, i) => (
+                                  <span
+                                    key={i}
+                                    aria-hidden
+                                    className="text-[13px]"
+                                  >
+                                    ★
+                                  </span>
+                                ))}
                               </span>
                             )}
                           </li>

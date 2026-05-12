@@ -26,7 +26,9 @@ export function Footer() {
                 alt={brand}
                 className="h-14 w-14 object-contain"
               />
-              <span className="text-xl font-semibold text-white">{brand}</span>
+              <span className="font-bungee uppercase text-2xl tracking-wide text-white">
+                {brand}
+              </span>
             </div>
             <p className="text-base leading-relaxed text-white font-medium">
               {t("tagline")}
@@ -60,11 +62,6 @@ export function Footer() {
               <li>
                 <Link href="/properties" className="hover:text-white transition-colors">
                   {tn("properties")}
-                </Link>
-              </li>
-              <li>
-                <Link href="/guide" className="hover:text-white transition-colors">
-                  {tn("guide")}
                 </Link>
               </li>
               <li>

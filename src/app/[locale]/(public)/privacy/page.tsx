@@ -32,11 +32,11 @@ export default function PrivacyPolicyPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <section className="space-y-4">
             <p className="text-base leading-relaxed text-foreground">
-              La presente informativa descrive le modalita con cui vengono
+              La presente informativa descrive le modalità con cui vengono
               trattati i dati personali degli utenti che visitano il sito{" "}
               <strong>hostcomo.com</strong> (di seguito, il &quot;Sito&quot;) e che
               richiedono i servizi di co-hosting e gestione di affitti brevi sul
-              Lago di Como offerti tramite questa piattaforma. Il documento e
+              Lago di Como offerti tramite questa piattaforma. Il documento è
               redatto ai sensi degli articoli 13 e 14 del Regolamento UE 2016/679
               (di seguito, il &quot;GDPR&quot;) e del D.Lgs. 196/2003 come modificato dal
               D.Lgs. 101/2018.
@@ -46,10 +46,10 @@ export default function PrivacyPolicyPage() {
           <section className="space-y-4">
             <h2 className="text-xl font-semibold">1. Titolare del trattamento</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
-              Il titolare del trattamento dei dati personali e{" "}
+              Il titolare del trattamento dei dati personali è{" "}
               <span className="text-foreground font-medium">Angelo Talarico</span>,
               persona fisica che gestisce il Sito a Como, Italia. Per qualsiasi
-              richiesta in materia di protezione dei dati personali e possibile
+              richiesta in materia di protezione dei dati personali è possibile
               scrivere all&apos;indirizzo{" "}
               <a
                 href="mailto:info@hostcomo.com"
@@ -57,9 +57,9 @@ export default function PrivacyPolicyPage() {
               >
                 info@hostcomo.com
               </a>
-              . Non e nominato un Responsabile della Protezione dei Dati (DPO)
+              . Non è nominato un Responsabile della Protezione dei Dati (DPO)
               ai sensi dell&apos;art. 37 GDPR in quanto non ricorrono i presupposti
-              di obbligatorieta previsti dalla norma.
+              di obbligatorietà previsti dalla norma.
             </p>
           </section>
 
@@ -71,7 +71,7 @@ export default function PrivacyPolicyPage() {
               l&apos;eventuale messaggio scritto dall&apos;utente. Per gli utenti che
               accedono all&apos;area clienti riservata ai proprietari in gestione
               vengono trattati anche i dati dell&apos;account autenticato tramite
-              NextAuth e provider di identita Google OAuth (nome, email,
+              NextAuth e provider di identità Google OAuth (nome, email,
               identificativo univoco).
             </p>
             <p className="text-base leading-relaxed text-muted-foreground">
@@ -90,14 +90,14 @@ export default function PrivacyPolicyPage() {
             <h2 className="text-xl font-semibold">3. Categorie di interessati</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
               I dati trattati attraverso il Sito si riferiscono a tre distinte
-              categorie di interessati, con finalita e periodi di conservazione
+              categorie di interessati, con finalità e periodi di conservazione
               propri di ciascuna categoria:
             </p>
             <ul className="space-y-3 text-base text-muted-foreground list-disc pl-6">
               <li>
                 <strong className="text-foreground">Visitatori del Sito</strong>{" "}
                 — utenti che navigano le pagine pubbliche senza inviare moduli
-                ne autenticarsi. I dati trattati si limitano ai cookie tecnici
+                né autenticarsi. I dati trattati si limitano ai cookie tecnici
                 di sessione e di routing necessari al funzionamento del Sito,
                 descritti nella Cookie Policy.
               </li>
@@ -125,7 +125,7 @@ export default function PrivacyPolicyPage() {
             </ul>
             <p className="text-base leading-relaxed text-muted-foreground">
               I dati degli <strong className="text-foreground">ospiti finali</strong>{" "}
-              che prenotano le proprieta gestite{" "}
+              che prenotano le proprietà gestite{" "}
               <strong className="text-foreground">non</strong> vengono trattati
               direttamente da Como Host attraverso il Sito: tali dati sono
               raccolti e trattati dai canali di prenotazione (Airbnb,
@@ -138,7 +138,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold">4. Finalita del trattamento</h2>
+            <h2 className="text-xl font-semibold">4. Finalità del trattamento</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
               I dati raccolti vengono trattati per dare seguito alle richieste
               di consulenza inviate tramite il Sito, gestire l&apos;accesso alla
@@ -176,7 +176,7 @@ export default function PrivacyPolicyPage() {
               I dati raccolti possono essere comunicati a Vercel Inc., fornitore
               di hosting del Sito (datacenter in Unione Europea), e a Google LLC
               limitatamente all&apos;autenticazione degli utenti dell&apos;area clienti
-              tramite OAuth. Entrambi i fornitori operano in qualita di
+              tramite OAuth. Entrambi i fornitori operano in qualità di
               responsabili del trattamento ai sensi dell&apos;art. 28 GDPR e con essi
               sono in essere accordi di trattamento conformi alla normativa
               europea.
@@ -205,16 +205,16 @@ export default function PrivacyPolicyPage() {
               account dei proprietari in gestione vengono conservati per tutta
               la durata del rapporto contrattuale e fino a un anno successivo
               alla sua cessazione, salvo obblighi di legge che impongano periodi
-              di conservazione piu lunghi.
+              di conservazione più lunghi.
             </p>
           </section>
 
           <section className="space-y-4">
             <h2 className="text-xl font-semibold">9. Diritti dell&apos;interessato</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
-              In qualunque momento l&apos;interessato puo esercitare i diritti
+              In qualunque momento l&apos;interessato può esercitare i diritti
               previsti dagli articoli da 15 a 22 del GDPR: diritto di accesso,
-              rettifica, cancellazione, limitazione del trattamento, portabilita
+              rettifica, cancellazione, limitazione del trattamento, portabilità
               dei dati, opposizione al trattamento e diritto di non essere
               sottoposto a decisioni automatizzate. Le richieste possono essere
               inviate all&apos;indirizzo{" "}
@@ -230,7 +230,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl font-semibold">10. Reclamo all&apos;Autorita di controllo</h2>
+            <h2 className="text-xl font-semibold">10. Reclamo all&apos;Autorità di controllo</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
               L&apos;interessato che ritenga che il trattamento dei propri dati
               personali avvenga in violazione del GDPR ha diritto di proporre
@@ -251,9 +251,9 @@ export default function PrivacyPolicyPage() {
           <section className="space-y-4">
             <h2 className="text-xl font-semibold">11. Modifiche all&apos;informativa</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
-              La presente informativa puo essere aggiornata in caso di modifiche
-              normative o di nuove modalita di trattamento dei dati. La versione
-              piu recente sara sempre disponibile su questa pagina con
+              La presente informativa può essere aggiornata in caso di modifiche
+              normative o di nuove modalità di trattamento dei dati. La versione
+              più recente sarà sempre disponibile su questa pagina con
               indicazione della data di ultimo aggiornamento riportata in testa
               al documento.
             </p>

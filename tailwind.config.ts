@@ -56,6 +56,9 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontFamily: {
+        bungee: ["var(--font-bungee)", "system-ui", "sans-serif"],
+      },
       keyframes: {
         marquee: {
           "0%": { transform: "translateX(0)" },

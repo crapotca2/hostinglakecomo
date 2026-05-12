@@ -87,7 +87,10 @@ function GuideContent({ guide, locale }: { guide: Guide; locale: Locale }) {
 
   const breadcrumbs = [
     { name: tNav("home"), path: "/" },
-    { name: locale === "en" ? "Guides" : "Guide", path: "/guide" },
+    {
+      name: locale === "en" ? "Property management" : "Property Management",
+      path: "/property-management",
+    },
     { name: title, path: `/guide/${guide.slug}` },
   ];
 
@@ -138,10 +141,10 @@ function GuideContent({ guide, locale }: { guide: Guide; locale: Locale }) {
             </Link>
             <span className="opacity-60">/</span>
             <Link
-              href="/guide"
+              href="/property-management"
               className="hover:text-white transition-colors"
             >
-              {locale === "en" ? "Guides" : "Guide"}
+              {locale === "en" ? "Property management" : "Property Management"}
             </Link>
           </nav>
           <div className="flex items-center gap-3 text-xs text-white/75 mb-3">

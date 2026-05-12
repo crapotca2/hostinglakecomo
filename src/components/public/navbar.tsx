@@ -22,7 +22,6 @@ export function Navbar() {
     { href: "/properties", label: t("properties") },
     { href: "/services", label: t("services") },
     { href: "/strumenti", label: t("tools") },
-    { href: "/guide", label: t("guide") },
     { href: "/about", label: t("about") },
     { href: "/contact", label: t("contact") },
   ];
@@ -101,7 +100,7 @@ export function Navbar() {
             </span>
             <span
               className={cn(
-                "text-base sm:text-lg font-semibold tracking-tight transition-colors truncate",
+                "font-bungee uppercase text-base sm:text-lg lg:text-xl tracking-wide transition-colors truncate",
                 showSolid ? "text-foreground" : "text-white"
               )}
             >

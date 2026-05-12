@@ -34,12 +34,12 @@ export default function CookiePolicyPage() {
             <p className="text-base leading-relaxed text-foreground">
               La presente Cookie Policy descrive le tipologie di cookie e di
               tecnologie analoghe utilizzate sul sito{" "}
-              <strong>hostcomo.com</strong> e le finalita per cui vengono
+              <strong>hostcomo.com</strong> e le finalità per cui vengono
               impiegate. Il documento integra l&apos;
               <a href="/privacy" className="text-primary hover:underline">
                 informativa privacy
               </a>{" "}
-              ed e redatto in conformita alle linee guida del Garante per la
+              ed è redatto in conformità alle linee guida del Garante per la
               protezione dei dati personali del 10 giugno 2021 e all&apos;art. 122
               del D.Lgs. 196/2003.
             </p>
@@ -66,14 +66,14 @@ export default function CookiePolicyPage() {
               pagine, mantenere lo stato di autenticazione degli utenti
               dell&apos;area clienti e gestire il bilanciamento del traffico verso
               i datacenter del fornitore di hosting Vercel. Questi cookie non
-              tracciano l&apos;attivita dell&apos;utente al di fuori del Sito e non sono
-              utilizzati per finalita di profilazione.
+              tracciano l&apos;attività dell&apos;utente al di fuori del Sito e non sono
+              utilizzati per finalità di profilazione.
             </p>
             <p className="text-base leading-relaxed text-muted-foreground">
               Nello specifico vengono impostati cookie di sessione di NextAuth
               per gli utenti che accedono all&apos;area riservata, cookie di
               preferenza tema (light/dark) salvati localmente e cookie di
-              routing tecnici di Vercel. La durata di tali cookie e limitata
+              routing tecnici di Vercel. La durata di tali cookie è limitata
               alla sessione di navigazione o al massimo a trenta giorni per le
               preferenze persistenti.
             </p>
@@ -85,7 +85,7 @@ export default function CookiePolicyPage() {
               Al momento il Sito non utilizza cookie analitici, di profilazione
               o di marketing di alcun tipo. Non sono attivi strumenti come
               Google Analytics, Vercel Analytics, Meta Pixel o simili. In caso
-              di adozione futura di tali strumenti la presente informativa sara
+              di adozione futura di tali strumenti la presente informativa sarà
               aggiornata e verra richiesto il consenso preventivo
               dell&apos;utente tramite il banner cookie presente sul Sito.
             </p>
@@ -97,7 +97,7 @@ export default function CookiePolicyPage() {
               L&apos;unica eccezione riguarda l&apos;autenticazione degli utenti
               dell&apos;area clienti tramite Google OAuth: il flusso di login
               comporta una redirezione temporanea verso i server Google, durante
-              la quale Google puo impostare propri cookie tecnici. Tali cookie
+              la quale Google può impostare propri cookie tecnici. Tali cookie
               sono regolati dalla{" "}
               <a
                 href="https://policies.google.com/privacy"
@@ -115,12 +115,12 @@ export default function CookiePolicyPage() {
           <section className="space-y-4">
             <h2 className="text-xl font-semibold">5. Come gestire o disabilitare i cookie</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
-              L&apos;utente puo gestire le preferenze sui cookie tramite il banner
+              L&apos;utente può gestire le preferenze sui cookie tramite il banner
               di consenso presente sul Sito alla prima visita o cliccando sul
-              link &quot;Gestisci cookie&quot; nel piede di pagina. In aggiunta e sempre
+              link &quot;Gestisci cookie&quot; nel piede di pagina. In aggiunta è sempre
               possibile disabilitare i cookie direttamente dalle impostazioni
               del proprio browser; va tuttavia ricordato che la disattivazione
-              dei cookie tecnici puo compromettere il corretto funzionamento del
+              dei cookie tecnici può compromettere il corretto funzionamento del
               Sito, in particolare l&apos;accesso all&apos;area clienti.
             </p>
             <p className="text-base leading-relaxed text-muted-foreground">
@@ -168,7 +168,7 @@ export default function CookiePolicyPage() {
           <section className="space-y-4">
             <h2 className="text-xl font-semibold">6. Riferimenti normativi</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
-              La presente policy e redatta in conformita al Regolamento UE
+              La presente policy è redatta in conformità al Regolamento UE
               2016/679 (GDPR), al D.Lgs. 196/2003 modificato dal D.Lgs.
               101/2018 e alle linee guida del Garante per la protezione dei
               dati personali del 10 giugno 2021 in materia di cookie e altri
@@ -180,7 +180,7 @@ export default function CookiePolicyPage() {
           <section className="space-y-4">
             <h2 className="text-xl font-semibold">7. Contatti e modifiche</h2>
             <p className="text-base leading-relaxed text-muted-foreground">
-              Per qualunque richiesta relativa alla presente Cookie Policy e
+              Per qualunque richiesta relativa alla presente Cookie Policy è
               possibile scrivere a{" "}
               <a
                 href="mailto:info@hostcomo.com"
@@ -188,8 +188,8 @@ export default function CookiePolicyPage() {
               >
                 info@hostcomo.com
               </a>
-              . La presente informativa puo essere aggiornata in qualunque
-              momento; la versione vigente e sempre disponibile su questa
+              . La presente informativa può essere aggiornata in qualunque
+              momento; la versione vigente è sempre disponibile su questa
               pagina con indicazione della data di ultimo aggiornamento.
             </p>
           </section>

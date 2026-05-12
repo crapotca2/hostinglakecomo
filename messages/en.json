@@ -66,7 +66,7 @@
     "en": "EN"
   },
   "common": {
-    "discoverMore": "Discover",
+    "discoverMore": "Discover more",
     "viewAll": "View all",
     "tryTheTool": "Try the tool",
     "discoverServices": "Discover all services",
@@ -94,7 +94,7 @@
       "body": "We list your property on the main market channels and adapt the rental formula season by season. In high season we focus on short-stay tourism, in low season we shift to medium-to-long-term lets when more profitable. Your home stays active 365 days a year, with a single point of contact.",
       "bullets": [
         "Distribution on Airbnb, Booking, Expedia and other leading platforms",
-        "Dynamic pricing calibrated on real-time market dynamics",
+        "Dynamic pricing calibrated to real-time market dynamics",
         "Short-stay rentals during peak season, longer lets in low season",
         "Unified calendar and zero overlaps thanks to channel synchronisation"
       ],
@@ -698,7 +698,7 @@
         },
         {
           "q": "How quickly do you launch a new property?",
-          "a": "It depends on the starting point. If the listing already exists on Airbnb, Booking or other channels and we need to boost its visibility, from signing the mandate to launch it takes about 15 days: professional photo shoot, multilingual copy rewrite, dynamic pricing setup, channel synchronisation and listing optimisation.\n\nIf the property is not yet on the market and has to be set up from scratch, on top of our operational work we have to factor in the regulatory timelines: SCIA / SUAP filing with the Como municipality and the Lombardy CIR + national CIN application. These filings depend on public-administration response times and in the worst case can take up to 2 months. In this scenario we typically go live with publication 6-8 weeks from signing."
+          "a": "It depends on the starting point. If the listing already exists on Airbnb, Booking or other channels and we need to boost its visibility, from signing the mandate to launch it takes about 15 days: professional photo shoot, multilingual copy rewrite, dynamic pricing setup, channel synchronisation and listing optimisation.\n\nIf the property is not yet on the market and has to be set up from scratch, on top of our operational work we have to factor in the regulatory timelines: SCIA / SUAP filing with the Como municipality and the Lombardy CIR + national CIN application. These filings depend on public-administration response times and in the worst case can take up to 2 months. In this scenario we typically go live within 6-8 weeks from signing."
         }
       ]
     }

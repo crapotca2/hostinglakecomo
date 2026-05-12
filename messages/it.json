@@ -5,7 +5,7 @@
   },
   "nav": {
     "home": "Home",
-    "properties": "Proprieta",
+    "properties": "Proprietà",
     "services": "Servizi",
     "tools": "Strumenti",
     "guide": "Guide",
@@ -50,13 +50,13 @@
     "analytics": {
       "title": "Cookie analitici",
       "status": "Non utilizzati al momento",
-      "description": "Permettono di raccogliere statistiche aggregate sull'utilizzo del sito (pagine visitate, durata sessione). Predisposizione attiva per future integrazioni; al momento nessuno strumento analitico e in uso.",
+      "description": "Permettono di raccogliere statistiche aggregate sull'utilizzo del sito (pagine visitate, durata sessione). Predisposizione attiva per future integrazioni; al momento nessuno strumento analitico è in uso.",
       "ariaLabel": "Cookie analitici"
     },
     "marketing": {
       "title": "Cookie di marketing",
       "status": "Non utilizzati al momento",
-      "description": "Servono per profilare l'utente e mostrargli annunci personalizzati su altre piattaforme. Predisposizione attiva per eventuali campagne future; al momento nessuno strumento di marketing e in uso.",
+      "description": "Servono per profilare l'utente e mostrargli annunci personalizzati su altre piattaforme. Predisposizione attiva per eventuali campagne future; al momento nessuno strumento di marketing è in uso.",
       "ariaLabel": "Cookie di marketing"
     }
   },
@@ -66,7 +66,7 @@
     "en": "EN"
   },
   "common": {
-    "discoverMore": "Scopri di piu",
+    "discoverMore": "Scopri di più",
     "viewAll": "Vedi tutte",
     "tryTheTool": "Prova il simulatore",
     "discoverServices": "Scopri tutti i servizi",
@@ -91,7 +91,7 @@
     "multiChannel": {
       "title1": "Una sola gestione,",
       "title2": "tutte le piattaforme",
-      "body": "Registriamo la tua proprietà sui principali canali del mercato e adattiamo la formula di affitto stagione per stagione. In alta stagione lavoriamo con i brevi soggiorni turistici, in bassa stagione passiamo a locazioni medio-lunghe quando piu convenienti. La tua casa resta in attività 365 giorni l'anno, con un unico interlocutore.",
+      "body": "Registriamo la tua proprietà sui principali canali del mercato e adattiamo la formula di affitto stagione per stagione. In alta stagione lavoriamo con i brevi soggiorni turistici, in bassa stagione passiamo a locazioni medio-lunghe quando più convenienti. La tua casa resta in attività 365 giorni l'anno, con un unico interlocutore.",
       "bullets": [
         "Distribuzione su Airbnb, Booking, Expedia e altri principali portali del mercato",
         "Tariffe dinamiche calibrate sulle dinamiche di mercato in tempo reale",
@@ -110,7 +110,7 @@
       "items": {
         "dynamicPricing": {
           "title": "Tariffe Dinamiche",
-          "desc": "Algoritmo di tariffazione che ottimizza i prezzi in base a stagionalita, domanda e concorrenza per massimizzare i tuoi ricavi."
+          "desc": "Algoritmo di tariffazione che ottimizza i prezzi in base a stagionalità, domanda e concorrenza per massimizzare i tuoi ricavi."
         },
         "bookings": {
           "title": "Gestione Prenotazioni",
@@ -126,7 +126,7 @@
         },
         "promotion": {
           "title": "Promozione Multi-Canale",
-          "desc": "Pubblicazione sui canali primari Airbnb, Booking ed Expedia e sui canali long-stay per i soggiorni medio-lunghi. Foto professionali, descrizioni ottimizzate, visibilita massima."
+          "desc": "Pubblicazione sui canali primari Airbnb, Booking ed Expedia e sui canali long-stay per i soggiorni medio-lunghi. Foto professionali, descrizioni ottimizzate, visibilità massima."
         },
         "dashboard": {
           "title": "Dashboard Proprietario",
@@ -158,7 +158,7 @@
     },
     "ctaBanner": {
       "title": "Affidaci la tua casa sul Lago",
-      "subtitleLine1": "Vuoi sapere quanto puo rendere la tua proprietà?",
+      "subtitleLine1": "Vuoi sapere quanto può rendere la tua proprietà?",
       "subtitleLine2": "Ti contatteremo entro 48 ore."
     }
   },
@@ -191,7 +191,7 @@
           "preview": "Benvenuti a Loft Belvedere"
         },
         "mockupName": {
-          "title": "Nome Proprieta",
+          "title": "Nome Proprietà",
           "options": [
             "Loft Belvedere",
             "Loft del Lago",
@@ -202,12 +202,12 @@
       },
       "roadmap": {
         "title": "Roadmap",
-        "subtitle": "Funzionalita gia disponibili nell'area clienti e in sviluppo per migliorare ulteriormente il nostro servizio.",
+        "subtitle": "Funzionalità già disponibili nell'area clienti e in sviluppo per migliorare ulteriormente il nostro servizio.",
         "inProgress": "In sviluppo",
         "tools": {
           "dynamicPricing": {
             "name": "Dynamic Pricing",
-            "desc": "Algoritmo proprietario di tariffazione dinamica su domanda, competitor e stagionalita Lago di Como."
+            "desc": "Algoritmo proprietario di tariffazione dinamica su domanda, competitor e stagionalità Lago di Como."
           },
           "istruzioniArrivoVideo": {
             "name": "Istruzioni Arrivo con Video",
@@ -242,7 +242,7 @@
     "rendita": {
       "title1": "Calcolatore",
       "title2": "Rendita",
-      "subtitle": "Stima quanto puo guadagnare il tuo immobile sul Lago di Como",
+      "subtitle": "Stima quanto può guadagnare il tuo immobile sul Lago di Como",
       "formTitle": "Dettagli proprietà",
       "fields": {
         "zone": "Zona",
@@ -371,7 +371,7 @@
         "scenariosSubtitle": "Scenario modellato sui nostri dati storici di conversione",
         "currentMix": "Distribuzione attuale",
         "feesLine": "Commissioni: {fees}",
-        "withMoreDirect": "Con piu' dirette",
+        "withMoreDirect": "Con più dirette",
         "perYearSaving": "+{amount}/anno"
       }
     },
@@ -385,21 +385,21 @@
         "loginButton": "Accedi",
         "manageButton": "Vuoi gestire con noi?"
       },
-      "nomeProprieta": {
-        "title": "Nome Proprieta",
+      "nomeProprietà": {
+        "title": "Nome Proprietà",
         "tagline": "Generatore creativo per il naming della tua casa vacanza",
         "description": "Il nostro team naming costruisce per ogni proprietà un'identità verbale coerente con la zona, il target di clientela e il posizionamento premium sul Lago di Como.",
         "bullets": [
           "Analisi del posizionamento competitivo della zona",
           "Proposta di 6-10 nomi con rationale linguistico e culturale",
-          "Verifica disponibilita dominio e handle social",
+          "Verifica disponibilità dominio e handle social",
           "Coerenza con identità visiva e tono di voce della gestione Como Host"
         ]
       },
       "welcomeLetter": {
         "title": "Welcome Letter",
         "tagline": "Lettera di benvenuto multilingua per i tuoi ospiti",
-        "description": "Per ogni proprietà in gestione predisponiamo una welcome letter firmata, tradotta in quattro lingue e calibrata sul profilo dell'ospite. E' parte del kit di accoglienza Como Host, non un template generico.",
+        "description": "Per ogni proprietà in gestione predisponiamo una welcome letter firmata, tradotta in quattro lingue e calibrata sul profilo dell'ospite. È parte del kit di accoglienza Como Host, non un template generico.",
         "bullets": [
           "Tono di voce personalizzato per tipologia di ospite (coppie, famiglie, business)",
           "Istruzioni check-in/check-out, WiFi e regole casa integrate",
@@ -413,7 +413,7 @@
         "description": "Per ogni proprietà in gestione Como Host genera un link Google Maps curato: coordinate esatte, waypoint con riferimenti visivi e indicazioni dedicate ai parcheggi pubblici. Non un semplice pin automatico, ma un percorso verificato dal nostro team.",
         "bullets": [
           "Pin sulla posizione esatta dell'ingresso, non del civico catastale",
-          "Waypoint per parcheggi pubblici e zone ZTL in prossimita",
+          "Waypoint per parcheggi pubblici e zone ZTL in prossimità",
           "Accessi alternativi in caso di chiusure o traffico stagionale",
           "Link pronto da incollare in messaggi pre-arrivo su tutte le OTA"
         ]
@@ -534,7 +534,7 @@
             },
             {
               "title": "Avviamento tecnico",
-              "desc": "Inventario, lista controlli di conformita e configurazione completa per la prima pubblicazione.",
+              "desc": "Inventario, lista controlli di conformità e configurazione completa per la prima pubblicazione.",
               "cost": "Una tantum"
             }
           ]
@@ -557,7 +557,7 @@
             },
             {
               "title": "Emergenze 24/7",
-              "desc": "Reperibilita continua e rete di professionisti per interventi idraulici, elettrici e manutenzione urgente."
+              "desc": "Reperibilità continua e rete di professionisti per interventi idraulici, elettrici e manutenzione urgente."
             }
           ]
         },
@@ -571,7 +571,7 @@
             },
             {
               "title": "Tariffazione dinamica",
-              "desc": "Algoritmo proprietario di prezzi dinamici basato su concorrenza, eventi locali e stagionalita del Lago di Como."
+              "desc": "Algoritmo proprietario di prezzi dinamici basato su concorrenza, eventi locali e stagionalità del Lago di Como."
             },
             {
               "title": "Recensioni e reputazione",
@@ -579,7 +579,7 @@
             },
             {
               "title": "Biancheria e accoglienza premium",
-              "desc": "Kit cortesia firmato, prodotti bagno selezionati, cialde caffe e benvenuto con eccellenze locali.",
+              "desc": "Kit cortesia firmato, prodotti bagno selezionati, cialde caffè e benvenuto con eccellenze locali.",
               "cost": "Costo extra"
             }
           ]
@@ -622,7 +622,7 @@
         },
         {
           "title": "Soggiorni & calendario",
-          "desc": "Vista operativa su check-in/check-out, disponibilita futura per periodo, segnalazioni sulle proprietà vuote."
+          "desc": "Vista operativa su check-in/check-out, disponibilità futura per periodo, segnalazioni sulle proprietà vuote."
         },
         {
           "title": "Riepiloghi economici",
@@ -648,7 +648,7 @@
       "title2": "che puoi leggere in due minuti",
       "body": "Il primo del mese ricevi nella tua casella un riassunto curato: numeri chiave, recensione del mese, segnalazioni operative su cosa sta per succedere. Niente file da scaricare, niente login obbligatorio — basta aprire la mail.",
       "bullets": [
-        "I 4 numeri chiave del mese, gia confrontati con il precedente",
+        "I 4 numeri chiave del mese, già confrontati con il precedente",
         "Trend di occupazione e ricavi commentati dal team",
         "La recensione del mese e le valutazioni più rilevanti",
         "Le ottimizzazioni effettuate dal team e i loro risultati"
@@ -718,8 +718,8 @@
       "telefono": "Telefono",
       "interesse": "Interesse",
       "indirizzo": "Indirizzo dell'immobile",
-      "indirizzoPlaceholder": "Via, citta, provincia",
-      "piattaformaCheckbox": "L'immobile e gia su una piattaforma di affitto",
+      "indirizzoPlaceholder": "Via, città, provincia",
+      "piattaformaCheckbox": "L'immobile è già su una piattaforma di affitto",
       "piattaformaHint": "Es. Airbnb, Booking, Expedia",
       "linkAnnuncio": "Link dell'annuncio",
       "linkAnnuncioPlaceholder": "https://www.airbnb.com/rooms/...",
@@ -739,7 +739,7 @@
   },
   "mockups": {
     "dashboard": {
-      "propertyLabel": "Proprieta",
+      "propertyLabel": "Proprietà",
       "propertyName": "Loft Belvedere",
       "periodLabel": "Periodo",
       "periodValue": "Aprile 2026",
@@ -927,7 +927,7 @@
       "section": "Gestione",
       "items": {
         "overview": "Overview",
-        "properties": "Proprieta",
+        "properties": "Proprietà",
         "bookings": "Prenotazioni",
         "calendar": "Calendario",
         "analytics": "Analytics",
@@ -947,10 +947,10 @@
         "monthRevenue": "Revenue Mensile",
         "activeBookings": "Prenotazioni Attive",
         "occupancyRate": "Tasso Occupazione",
-        "propertyCount": "Proprieta Gestite"
+        "propertyCount": "Proprietà Gestite"
       },
       "quickActions": {
-        "properties": "Proprieta",
+        "properties": "Proprietà",
         "bookings": "Prenotazioni",
         "calendar": "Calendario",
         "analytics": "Analytics"
@@ -985,10 +985,10 @@
     },
     "properties": {
       "title1": "Le Mie",
-      "title2": "Proprieta",
+      "title2": "Proprietà",
       "subtitleLoading": "Caricamento...",
       "subtitleCount": "{count} proprietà nel portfolio",
-      "addButton": "Aggiungi Proprieta",
+      "addButton": "Aggiungi Proprietà",
       "loadingList": "Caricamento proprietà...",
       "emptyList": "Nessuna proprietà nel portfolio",
       "noImage": "Nessuna immagine",
@@ -1024,7 +1024,7 @@
       "empty": "Nessuna prenotazione trovata",
       "headers": {
         "guest": "Ospite",
-        "property": "Proprieta",
+        "property": "Proprietà",
         "dates": "Date",
         "nights": "Notti",
         "source": "Fonte",
@@ -1048,8 +1048,8 @@
     },
     "calendar": {
       "title": "Calendario",
-      "subtitle": "Vista unificata delle prenotazioni con festivita",
-      "holidaysTitle": "Festivita visualizzate",
+      "subtitle": "Vista unificata delle prenotazioni con festività",
+      "holidaysTitle": "Festività visualizzate",
       "loadingCalendar": "Caricamento calendario...",
       "legendTitle": "Legenda",
       "channels": {
@@ -1138,7 +1138,7 @@
       },
       "istat": {
         "title": "ISTAT (Regione Lombardia)",
-        "description": "Report mensile flussi turistici (arrivi, presenze, nazionalita) da inviare alla Regione Lombardia via portale turistico.",
+        "description": "Report mensile flussi turistici (arrivi, presenze, nazionalità) da inviare alla Regione Lombardia via portale turistico.",
         "month": "Mese",
         "year": "Anno",
         "download": "Scarica CSV",
@@ -1152,7 +1152,7 @@
         "calculate": "Calcola",
         "loading": "Caricamento...",
         "headers": {
-          "property": "Proprieta",
+          "property": "Proprietà",
           "bookings": "Prenotaz.",
           "nights": "Notti",
           "guests": "Ospiti",
@@ -1217,7 +1217,7 @@
         "categories": {
           "stay": {
             "name": "Soggiorni",
-            "desc": "Checklist giornaliera, intervallo date, notti disponibili, unita vuote."
+            "desc": "Checklist giornaliera, intervallo date, notti disponibili, unità vuote."
           },
           "summary": {
             "name": "Riepilogo",
@@ -1331,7 +1331,7 @@
         },
         "guests": {
           "crosscheckTitle": "Controllo nominativi (duplicati)",
-          "crosscheckSubtitle": "Ospiti con piu di una prenotazione, da verificare per identità",
+          "crosscheckSubtitle": "Ospiti con più di una prenotazione, da verificare per identità",
           "crosscheckEmpty": "Nessun ospite con prenotazioni multiple",
           "emailListTitle": "Lista email",
           "emailListSubtitle": "{count} indirizzi unici, esportabili per attività di marketing",
@@ -1393,7 +1393,7 @@
           "overview": "Panoramica",
           "daysInAdvance": "Anticipo prenotazioni",
           "occupancy": "Occupazione",
-          "gaps": "Finestre di disponibilita",
+          "gaps": "Finestre di disponibilità",
           "repeatGuests": "Ospiti ricorrenti",
           "sitePerformance": "Performance canali"
         },
@@ -1433,8 +1433,8 @@
           }
         },
         "gaps": {
-          "tableTitle": "Finestre di disponibilita",
-          "subtitle": "Notti vuote tra prenotazioni consecutive: opportunita di last minute",
+          "tableTitle": "Finestre di disponibilità",
+          "subtitle": "Notti vuote tra prenotazioni consecutive: opportunità di last minute",
           "columns": {
             "property": "Immobile",
             "from": "Dal",
@@ -1445,7 +1445,7 @@
         },
         "repeatGuests": {
           "tableTitle": "Ospiti ricorrenti",
-          "subtitle": "Ospiti con due o piu soggiorni: i clienti piu preziosi",
+          "subtitle": "Ospiti con due o più soggiorni: i clienti più preziosi",
           "columns": {
             "guest": "Ospite",
             "email": "Email",
@@ -1574,10 +1574,10 @@
           "daily": "Checklist giornaliera",
           "range": "Intervallo date",
           "available": "Notti disponibili",
-          "empty": "Unita vuote"
+          "empty": "Unità vuote"
         },
         "daily": {
-          "tableTitle": "Attivita del giorno",
+          "tableTitle": "Attività del giorno",
           "stats": {
             "checkinsToday": "Check-in oggi",
             "checkoutsToday": "Check-out oggi",
@@ -1630,10 +1630,10 @@
           }
         },
         "empty": {
-          "tableTitle": "Unita attualmente vuote",
-          "emptyMessage": "Tutte le unita sono occupate",
+          "tableTitle": "Unità attualmente vuote",
+          "emptyMessage": "Tutte le unità sono occupate",
           "stats": {
-            "emptyUnits": "Unita vuote",
+            "emptyUnits": "Unità vuote",
             "lostRevenue": "Ricavi potenziali persi al giorno",
             "lostRevenueHint": "Stima a piena occupazione al prezzo base"
           },

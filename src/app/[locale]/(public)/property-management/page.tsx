@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/routing";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, MapPin, Clock, Tag } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { buildMetadata } from "@/lib/seo";
 import comuni from "@/data/comuni.json";
+import guides from "@/data/guides.json";
 import { ComoLakeMap } from "@/components/public/como-lake-map";
 import type { Locale } from "@/i18n/routing";
 
 type Comune = (typeof comuni)[number];
+type Guide = (typeof guides)[number];
 
-function pickStr(c: Comune, field: string, locale: string): string {
+function pickStr(c: Comune | Guide, field: string, locale: string): string {
   const map = c as unknown as Record<string, string>;
   if (locale === "en") return map[`${field}_en`] ?? map[`${field}_it`] ?? "";
   return map[`${field}_it`] ?? map[`${field}_en`] ?? "";
@@ -115,7 +117,79 @@ function PropertyManagementIndexContent({ locale }: { locale: Locale }) {
           </div>
         </div>
       </section>
+
+      <GuidesSection locale={locale} />
     </div>
+  );
+}
+
+function GuidesSection({ locale }: { locale: string }) {
+  const items = guides as Guide[];
+  const eyebrow =
+    locale === "en" ? "Guides for owners" : "Guide per proprietari";
+  const title =
+    locale === "en"
+      ? "What we explain before signing"
+      : "Quello che spieghiamo prima di firmare";
+  const subtitle =
+    locale === "en"
+      ? "Compliance, yield, channels — the topics that matter most before entrusting a property."
+      : "Compliance, rendimento, canali — i temi che contano di più prima di affidarci una proprietà.";
+  const readingLabel = locale === "en" ? "min read" : "min di lettura";
+  const readMoreLabel = locale === "en" ? "Read the guide" : "Leggi la guida";
+
+  return (
+    <section className="py-16 sm:py-20 bg-white border-t border-border/50">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10">
+          <span className="text-xs font-semibold uppercase tracking-widest text-primary">
+            {eyebrow}
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-light mt-3 mb-3">
+            <span className="font-semibold">{title}</span>
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            {subtitle}
+          </p>
+        </div>
+        <div className="grid md:grid-cols-2 gap-6">
+          {items.map((g) => {
+            const guideTitle = pickStr(g, "title", locale);
+            const description = pickStr(g, "description", locale);
+            const category = pickStr(g, "category", locale);
+            return (
+              <Link
+                key={g.slug}
+                href={`/guide/${g.slug}`}
+                className="group block bg-white rounded-2xl p-6 sm:p-7 border border-border/50 hover:border-primary/40 hover:shadow-md transition-all"
+              >
+                <div className="flex items-center gap-3 text-xs text-muted-foreground mb-3">
+                  <span className="inline-flex items-center gap-1">
+                    <Tag className="h-3 w-3" />
+                    {category}
+                  </span>
+                  <span className="opacity-60">·</span>
+                  <span className="inline-flex items-center gap-1">
+                    <Clock className="h-3 w-3" />
+                    {g.readingMinutes} {readingLabel}
+                  </span>
+                </div>
+                <h3 className="text-lg sm:text-xl font-semibold mb-3 leading-snug group-hover:text-primary transition-colors">
+                  {guideTitle}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-5">
+                  {description}
+                </p>
+                <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+                  {readMoreLabel}
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 }
 
