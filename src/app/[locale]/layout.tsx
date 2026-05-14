@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Bungee } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
@@ -35,6 +35,10 @@ const ROOT_COPY = {
   },
 } as const;
 
+export const viewport: Viewport = {
+  themeColor: "#1D3A62",
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -65,6 +69,11 @@ export async function generateMetadata({
       email: false,
       address: false,
       telephone: false,
+    },
+    appleWebApp: {
+      capable: true,
+      title: "Host Como",
+      statusBarStyle: "default",
     },
   };
 }
