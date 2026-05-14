@@ -15,7 +15,7 @@ Lago).
 ## Design
 - Stile moderno minimal, sfondo bianco
 - Primario: teal #0C7489 -> #119DB0 (gradient)
-- Font: Inter
+- Font: Outfit (body) + Bungee (wordmark)
 - Logo: monogramma "HLC" su quadrato gradient (filename neutri, non rinominato)
 
 ## Repo

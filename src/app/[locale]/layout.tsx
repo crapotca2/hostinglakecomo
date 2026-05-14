@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Bungee } from "next/font/google";
+import { Outfit, Bungee } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -10,7 +10,7 @@ import { SITE_URL, BRAND_NAME, brandName } from "@/lib/seo";
 import { JsonLdOrganization } from "@/components/seo/jsonld-organization";
 import type { Locale } from "@/i18n/routing";
 
-const inter = Inter({
+const outfit = Outfit({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
 });
@@ -99,7 +99,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${inter.className} ${bungee.variable}`}>
+      <body className={`${outfit.className} ${bungee.variable}`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider>{children}</ThemeProvider>
         </NextIntlClientProvider>

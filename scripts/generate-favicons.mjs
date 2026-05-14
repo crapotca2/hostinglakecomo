@@ -29,7 +29,8 @@ const APPLE_TSX_OUT = resolve(ROOT, "src/app/apple-icon.tsx");
 const ICO_SIZES = [16, 32, 48];
 
 // Padding around the logo as fraction of canvas (logo is then sized to 1 - 2*pad).
-const LOGO_PAD = 0.14;
+// Smaller = bigger logo. 0.07 → logo covers 86% of canvas, maximising visibility at 16px.
+const LOGO_PAD = 0.07;
 
 async function buildLogoOnNavy(canvasSize) {
   const logoSize = Math.round(canvasSize * (1 - 2 * LOGO_PAD));
