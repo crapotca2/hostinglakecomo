@@ -57,7 +57,15 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        bungee: ["var(--font-bungee)", "system-ui", "sans-serif"],
+        // Per-glyph fallback chain: Bungee for Latin, Russo One for Cyrillic
+        // (Bungee has no Cyrillic subset). Browsers resolve fonts character by
+        // character, so RU wordmarks pick up Russo One automatically.
+        bungee: [
+          "var(--font-bungee)",
+          "var(--font-bungee-cyrillic)",
+          "system-ui",
+          "sans-serif",
+        ],
       },
       keyframes: {
         marquee: {

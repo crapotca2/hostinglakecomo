@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Outfit, Bungee } from "next/font/google";
+import { Outfit, Bungee, Russo_One } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -11,14 +11,24 @@ import { JsonLdOrganization } from "@/components/seo/jsonld-organization";
 import type { Locale } from "@/i18n/routing";
 
 const outfit = Outfit({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext", "cyrillic"],
   weight: ["300", "400", "500", "600", "700"],
 });
 
 const bungee = Bungee({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   weight: ["400"],
   variable: "--font-bungee",
+  display: "swap",
+});
+
+// Bungee has no Cyrillic — Russo One is the closest Cyrillic-capable display
+// match (single 400 weight, condensed block sans). Used as per-glyph fallback
+// in the .font-bungee chain so "Хост Комо" wordmark renders coherently.
+const russoOne = Russo_One({
+  subsets: ["latin", "cyrillic"],
+  weight: ["400"],
+  variable: "--font-bungee-cyrillic",
   display: "swap",
 });
 
@@ -104,7 +114,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${outfit.className} ${bungee.variable}`}>
+      <body className={`${outfit.className} ${bungee.variable} ${russoOne.variable}`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider>{children}</ThemeProvider>
         </NextIntlClientProvider>

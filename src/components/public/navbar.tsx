@@ -131,7 +131,7 @@ export function Navbar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "px-2.5 xl:px-3.5 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap",
+                  "px-2.5 xl:px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap",
                   pathname === item.href
                     ? showSolid
                       ? "text-primary bg-primary/[0.08]"
@@ -154,7 +154,7 @@ export function Navbar() {
             <Link
               href="/contact?interest=consulenza"
               className={cn(
-                "hidden md:inline-flex items-center gap-2 px-3 lg:px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap",
+                "hidden md:inline-flex items-center gap-2 px-3 lg:px-4 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap",
                 showSolid
                   ? "bg-primary text-white hover:bg-primary/90"
                   : "bg-white text-primary hover:bg-white/90"
@@ -201,7 +201,7 @@ export function Navbar() {
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
                   className={cn(
-                    "block px-4 py-3 rounded-lg text-sm font-medium transition-colors",
+                    "block px-4 py-3 rounded-lg text-sm font-semibold transition-colors",
                     pathname === item.href
                       ? "text-primary bg-primary/[0.08]"
                       : "text-foreground hover:bg-muted/50"
