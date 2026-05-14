@@ -80,7 +80,8 @@
         "Hotel Metropole Suisse (4*)",
         "Albergo Terminus (4*)"
       ],
-      "adrRangeRu": "200-240 EUR"
+      "adrRangeRu": "200-240 EUR",
+      "expediaPresenceRu": "сильное"
     }
   },
   {
@@ -172,7 +173,8 @@
       ],
       "adrRangeRu": "200-280 EUR",
       "adrLuxuryRangeRu": "350-500 EUR",
-      "adrLuxuryNoteRu": "Villa d'Este: более 1.500 EUR"
+      "adrLuxuryNoteRu": "Villa d'Este: более 1.500 EUR",
+      "expediaPresenceRu": "среднее"
     }
   },
   {
@@ -256,7 +258,8 @@
       ],
       "adrRangeRu": "180-260 EUR",
       "adrLuxuryRangeRu": "350-600 EUR",
-      "adrLuxuryNoteRu": "Passalacqua: более 2.000 EUR"
+      "adrLuxuryNoteRu": "Passalacqua: более 2.000 EUR",
+      "expediaPresenceRu": "среднее"
     }
   },
   {
@@ -332,7 +335,8 @@
       ],
       "adrRangeRu": "130-180 EUR",
       "adrLuxuryRangeRu": "350-450 EUR",
-      "adrLuxuryNoteRu": "Только редкие виллы на берегу"
+      "adrLuxuryNoteRu": "Только редкие виллы на берегу",
+      "expediaPresenceRu": "слабое"
     }
   },
   {
@@ -421,7 +425,8 @@
       ],
       "adrRangeRu": "140-200 EUR",
       "adrLuxuryRangeRu": "250-400 EUR",
-      "adrLuxuryNoteRu": "Виллы с видом на озеро"
+      "adrLuxuryNoteRu": "Виллы с видом на озеро",
+      "expediaPresenceRu": "слабое"
     }
   },
   {
@@ -495,7 +500,8 @@
       ],
       "adrRangeRu": "180-260 EUR",
       "adrLuxuryRangeRu": "350-600 EUR",
-      "adrLuxuryNoteRu": "Несколько топ-вилл"
+      "adrLuxuryNoteRu": "Несколько топ-вилл",
+      "expediaPresenceRu": "слабое"
     },
     "tagline_ru": "Деревня Orrido, где водопад срывается в озеро",
     "intro_ru": [
@@ -576,7 +582,8 @@
       ],
       "adrRangeRu": "130-220 EUR",
       "adrLuxuryRangeRu": "250-400 EUR",
-      "adrLuxuryNoteRu": "Дома с доступом к озеру"
+      "adrLuxuryNoteRu": "Дома с доступом к озеру",
+      "expediaPresenceRu": "среднее"
     },
     "tagline_ru": "Самый длинный муниципалитет Ларио, между гротами и Белладжо",
     "intro_ru": [
@@ -665,7 +672,8 @@
       ],
       "adrRangeRu": "260-380 EUR",
       "adrLuxuryRangeRu": "400-700 EUR",
-      "adrLuxuryNoteRu": "Villa Serbelloni: более 1.000 EUR"
+      "adrLuxuryNoteRu": "Villa Serbelloni: более 1.000 EUR",
+      "expediaPresenceRu": "сильное"
     },
     "tagline_ru": "Жемчужина озера, где встречаются два рукава",
     "intro_ru": [
@@ -755,7 +763,8 @@
       ],
       "adrRangeRu": "200-280 EUR",
       "adrLuxuryRangeRu": "350-700 EUR",
-      "adrLuxuryNoteRu": "Grand Hotel Tremezzo: 1.000-4.000 EUR"
+      "adrLuxuryNoteRu": "Grand Hotel Tremezzo: 1.000-4.000 EUR",
+      "expediaPresenceRu": "сильное"
     },
     "tagline_ru": "Ривьера вилл, кинематографическая декорация Ларио",
     "intro_ru": [
@@ -848,7 +857,9 @@
       "adrRangeRu": "180-260 EUR",
       "adrLuxuryRangeRu": "350-700 EUR",
       "adrLuxuryNoteRu": "Виллы и исторические резиденции",
-      "airbnbListingsRu": "80-150 (оценка)"
+      "airbnbListingsRu": "80-150 (оценка)",
+      "expediaPresenceRu": "среднее",
+      "dataNoteRu": "AirDNA агрегирует Lenno внутри Tremezzina: листинги Airbnb интерполированы и менее точны, чем по другим зонам."
     },
     "tagline_ru": "Бухта Villa del Balbianello, сердце Тремеццины",
     "intro_ru": [
@@ -943,7 +954,8 @@
       "adrRangeRu": "200-310 EUR",
       "adrLuxuryRangeRu": "400-700 EUR",
       "adrLuxuryNoteRu": "Виллы в Loveno и Croce",
-      "expediaPresenceRu": "средне-высокое"
+      "expediaPresenceRu": "средне-высокое",
+      "dataNoteRu": "Предложение Airbnb растёт +49,7% YoY: рынок расширяется быстрее, чем спрос."
     },
     "tagline_ru": "Швейцарские ворота Ларио, западная вершина золотого треугольника",
     "intro_ru": [
@@ -1028,7 +1040,9 @@
       "dataNote": "Offerta Airbnb in crescita +33,7% YoY: erosione possibile dell'occupazione nel medio termine.",
       "adrRangeRu": "250-320 EUR",
       "adrLuxuryRangeRu": "400-600 EUR",
-      "adrLuxuryNoteRu": "R Collection 4* boutique"
+      "adrLuxuryNoteRu": "R Collection 4* boutique",
+      "expediaPresenceRu": "среднее",
+      "dataNoteRu": "Предложение Airbnb растёт +33,7% YoY: возможна эрозия заполняемости в среднесрочной перспективе."
     },
     "tagline_ru": "Рыбацкая деревня на восточном берегу, ж/д ворота озера",
     "intro_ru": [

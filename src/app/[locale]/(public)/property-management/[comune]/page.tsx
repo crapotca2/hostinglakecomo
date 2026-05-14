@@ -77,6 +77,15 @@ type ParsedHotel = {
   meta?: string;
 };
 
+// Russian plural forms for "star": 1 звезда, 2-4 звезды, 5+ звёзд.
+function pluralStarsRu(n: number): string {
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return "звезда";
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return "звезды";
+  return "звёзд";
+}
+
 function parseHotel(raw: string): ParsedHotel {
   const parenMatch = raw.match(/^(.+?)\s*\(([^)]+)\)\s*$/);
   if (!parenMatch) return { name: raw.trim() };
@@ -273,11 +282,11 @@ function ComuneLandingClient({
         "Публичные данные, агрегированные из AirDNA, Booking.com и Expedia · скользящие 12 месяцев 2024-2025.",
       listings: "Активные объявления",
       properties: "Объекты",
-      adrApt: "ADR апартаменты",
-      adrVilla: "ADR виллы",
+      adrApt: "ADR апартаментов",
+      adrVilla: "ADR вилл",
       occupancy: "Пиковая заполняемость",
       topHotels: "Основные классифицированные отели",
-      expediaInventory: "Инвентарь в основном дублируется с Booking.com",
+      expediaInventory: "Инвентарь в основном повторяет Booking.com",
       typologyMix: "Распределение объявлений по типу",
     },
   };
@@ -593,7 +602,7 @@ function ComuneLandingClient({
                                   locale === "en"
                                     ? `${h.stars} stars`
                                     : locale === "ru"
-                                    ? `${h.stars} звёзд`
+                                    ? `${h.stars} ${pluralStarsRu(h.stars)}`
                                     : `${h.stars} stelle`
                                 }
                               >
