@@ -18,14 +18,14 @@ import type { Locale } from "@/i18n/routing";
 
 const HOME_COPY = {
   it: {
-    title: "Property Manager Lago di Como — Como Host",
+    title: "Property Manager Lago di Como · 9 anni · 350+ recensioni 5★",
     description:
-      "Affidaci la tua casa: gestione completa affitti brevi sul Lago di Como. 9 anni di esperienza, 350+ recensioni a 5 stelle.",
+      "Gestiamo i tuoi affitti brevi sul Lago di Como: pricing dinamico, accoglienza, compliance, report mensili. 9 anni di esperienza · 350+ recensioni 5★. Consulenza gratuita.",
   },
   en: {
-    title: "Lake Como Property Management — Host Como",
+    title: "Lake Como Property Management · 9 yrs · 350+ 5★ reviews",
     description:
-      "Trust us with your home: full short-term rental management on Lake Como. 9 years of experience, 350+ five-star reviews.",
+      "We manage your short-term rentals on Lake Como: dynamic pricing, hospitality, compliance, monthly reports. 9 years · 350+ 5★ reviews. Free consult.",
   },
 } as const;
 
