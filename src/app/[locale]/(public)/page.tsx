@@ -202,8 +202,49 @@ export default function HomePage() {
       {/* ═══ PARTNERS & CHANNELS ═══ */}
       <PartnersBanner />
 
-      {/* ═══ ESPERIENZE — Lake Como Charter ═══ */}
-      <ExperiencesSection />
+      {/* ═══ CTA BANNER ═══ */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative rounded-3xl overflow-hidden shadow-xl">
+            <Image
+              src="/images/banners/more-info.jpg"
+              alt=""
+              fill
+              sizes="(max-width: 1280px) 100vw, 1280px"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-[#1D3A62]/65" />
+            <div className="relative px-6 py-12 md:px-12 md:py-16 text-center">
+              <picture>
+                <source srcSet="/images/logo/logo-white.webp" type="image/webp" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/logo/logo-white.png"
+                  alt=""
+                  width={112}
+                  height={112}
+                  className="h-24 w-24 md:h-28 md:w-28 mx-auto mb-5 object-contain [filter:drop-shadow(0_8px_24px_rgba(0,0,0,0.55))]"
+                />
+              </picture>
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white mb-4 [text-shadow:0_10px_36px_rgba(0,0,0,0.7)]">
+                {tCta("title")}
+              </h2>
+              <p className="text-white text-sm md:text-base max-w-2xl mx-auto mb-7 uppercase tracking-wide font-medium leading-relaxed">
+                {tCta("subtitleLine1")}
+                <br />
+                {tCta("subtitleLine2")}
+              </p>
+              <Link
+                href="/contact?interest=consulenza&from=cta-home"
+                className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-white hover:bg-white/90 text-foreground font-semibold text-sm tracking-wide transition-colors shadow-lg"
+              >
+                {tc("requestConsultation")}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ═══ SERVIZI PER PROPRIETARI ═══ */}
       <section className="py-24 relative bg-[url('/images/textures/services-bg.webp')] bg-cover bg-center">
@@ -320,49 +361,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ CTA BANNER ═══ */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative rounded-3xl overflow-hidden shadow-xl">
-            <Image
-              src="/images/banners/more-info.jpg"
-              alt=""
-              fill
-              sizes="(max-width: 1280px) 100vw, 1280px"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-[#1D3A62]/65" />
-            <div className="relative px-6 py-12 md:px-12 md:py-16 text-center">
-              <picture>
-                <source srcSet="/images/logo/logo-white.webp" type="image/webp" />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/logo/logo-white.png"
-                  alt=""
-                  width={112}
-                  height={112}
-                  className="h-24 w-24 md:h-28 md:w-28 mx-auto mb-5 object-contain [filter:drop-shadow(0_8px_24px_rgba(0,0,0,0.55))]"
-                />
-              </picture>
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white mb-4 [text-shadow:0_10px_36px_rgba(0,0,0,0.7)]">
-                {tCta("title")}
-              </h2>
-              <p className="text-white text-sm md:text-base max-w-2xl mx-auto mb-7 uppercase tracking-wide font-medium leading-relaxed">
-                {tCta("subtitleLine1")}
-                <br />
-                {tCta("subtitleLine2")}
-              </p>
-              <Link
-                href="/contact?interest=consulenza&from=cta-home"
-                className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-white hover:bg-white/90 text-foreground font-semibold text-sm tracking-wide transition-colors shadow-lg"
-              >
-                {tc("requestConsultation")}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ═══ ESPERIENZE — Lake Como Charter ═══ */}
+      <ExperiencesSection />
     </>
   );
 }
