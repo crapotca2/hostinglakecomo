@@ -33,5 +33,8 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
+  // Excludes: api routes, Next internals, Vercel internals, anything with a dot
+  // (favicon.ico, *.svg, *.png, manifest.webmanifest...) and the apple-icon
+  // metadata route which Next.js serves without a file extension.
+  matcher: ["/((?!api|_next|_vercel|apple-icon|.*\\..*).*)"],
 };
