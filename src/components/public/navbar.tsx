@@ -74,7 +74,7 @@ export function Navbar() {
           {/* Logo lockup (mark + wordmark) */}
           <Link
             href="/"
-            className="shrink-0 min-w-0"
+            className="shrink-0"
             aria-label={t("homeAriaLabel")}
           >
             <div className="flex items-center gap-2.5 sm:gap-3">
