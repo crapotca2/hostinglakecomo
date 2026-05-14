@@ -19,7 +19,12 @@ export async function generateMetadata({
     return buildMetadata({
       locale,
       pathname: `/properties/${slug}`,
-      title: locale === "en" ? "Property not found" : "Proprietà non trovata",
+      title:
+        locale === "en"
+          ? "Property not found"
+          : locale === "ru"
+          ? "Объект не найден"
+          : "Proprietà non trovata",
       description: "",
       noIndex: true,
     });
@@ -31,9 +36,20 @@ export async function generateMetadata({
   const address = property.address as { city?: string } | undefined;
   const city = address?.city ?? "Como";
 
-  const titleSuffix = locale === "en" ? "Lake Como" : "Lago di Como";
-  const inWord = locale === "en" ? "in" : "a";
-  const brand = locale === "en" ? "Host Como" : "Como Host";
+  const titleSuffix =
+    locale === "en"
+      ? "Lake Como"
+      : locale === "ru"
+      ? "озеро Комо"
+      : "Lago di Como";
+  const inWord =
+    locale === "en" ? "in" : locale === "ru" ? "в" : "a";
+  const brand =
+    locale === "en"
+      ? "Host Como"
+      : locale === "ru"
+      ? "Хост Комо"
+      : "Como Host";
   const title = `${name} ${inWord} ${city} — ${titleSuffix} | ${brand}`;
   const trimmedDesc =
     description.length > 155

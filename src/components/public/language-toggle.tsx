@@ -3,6 +3,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import { useTransition } from "react";
 import { useRouter, usePathname, type Locale } from "@/i18n/routing";
+import { routing } from "@/i18n/routing";
 import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 
@@ -50,22 +51,17 @@ export function LanguageToggle({ variant = "light" }: LanguageToggleProps) {
         isPending && "opacity-60",
       )}
     >
-      <button
-        type="button"
-        onClick={() => switchTo("it")}
-        aria-pressed={locale === "it"}
-        className={cn(baseBtn, locale === "it" ? active : inactive)}
-      >
-        {t("it")}
-      </button>
-      <button
-        type="button"
-        onClick={() => switchTo("en")}
-        aria-pressed={locale === "en"}
-        className={cn(baseBtn, locale === "en" ? active : inactive)}
-      >
-        {t("en")}
-      </button>
+      {routing.locales.map((l) => (
+        <button
+          key={l}
+          type="button"
+          onClick={() => switchTo(l)}
+          aria-pressed={locale === l}
+          className={cn(baseBtn, locale === l ? active : inactive)}
+        >
+          {t(l)}
+        </button>
+      ))}
     </div>
   );
 }

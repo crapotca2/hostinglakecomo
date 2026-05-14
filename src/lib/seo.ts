@@ -12,6 +12,7 @@ export const BRAND_NAME = "Host Como";
 const BRAND_NAMES: Record<string, string> = {
   it: "Como Host",
   en: "Host Como",
+  ru: "Хост Комо",
 };
 
 export function brandName(locale: string): string {
@@ -56,10 +57,15 @@ export function buildMetadata({
   }
   languages["x-default"] = absoluteUrl(routing.defaultLocale, pathname);
 
-  const ogLocale = locale === "it" ? "it_IT" : "en_US";
+  const OG_LOCALES: Record<string, string> = {
+    it: "it_IT",
+    en: "en_US",
+    ru: "ru_RU",
+  };
+  const ogLocale = OG_LOCALES[locale] ?? "en_US";
   const alternateLocales = routing.locales
     .filter((l) => l !== locale)
-    .map((l) => (l === "it" ? "it_IT" : "en_US"));
+    .map((l) => OG_LOCALES[l] ?? "en_US");
 
   return {
     title: { absolute: title },

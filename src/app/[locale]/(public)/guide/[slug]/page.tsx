@@ -21,14 +21,14 @@ function getGuide(slug: string): Guide | undefined {
 
 function pickStr(g: Guide, field: string, locale: string): string {
   const map = g as unknown as Record<string, string>;
-  if (locale === "en") return map[`${field}_en`] ?? map[`${field}_it`] ?? "";
-  return map[`${field}_it`] ?? map[`${field}_en`] ?? "";
+  if (locale === "it") return map[`${field}_it`] ?? map[`${field}_en`] ?? "";
+  return map[`${field}_${locale}`] ?? map[`${field}_en`] ?? map[`${field}_it`] ?? "";
 }
 
 function pickBody(g: Guide, locale: string): Section[] {
   const map = g as unknown as Record<string, Section[]>;
-  if (locale === "en") return map.body_en ?? map.body_it ?? [];
-  return map.body_it ?? map.body_en ?? [];
+  if (locale === "it") return map.body_it ?? map.body_en ?? [];
+  return map[`body_${locale}`] ?? map.body_en ?? map.body_it ?? [];
 }
 
 export function generateStaticParams() {
@@ -52,7 +52,12 @@ export async function generateMetadata({
     return buildMetadata({
       locale,
       pathname: `/guide/${slug}`,
-      title: locale === "en" ? "Not found" : "Non trovato",
+      title:
+        locale === "en"
+          ? "Not found"
+          : locale === "ru"
+          ? "Не найдено"
+          : "Non trovato",
       description: "",
       noIndex: true,
     });
@@ -88,7 +93,7 @@ function GuideContent({ guide, locale }: { guide: Guide; locale: Locale }) {
   const breadcrumbs = [
     { name: tNav("home"), path: "/" },
     {
-      name: locale === "en" ? "Property management" : "Property Management",
+      name: locale === "en" ? "Property management" : locale === "ru" ? "Управление недвижимостью" : "Property Management",
       path: "/property-management",
     },
     { name: title, path: `/guide/${guide.slug}` },
@@ -99,7 +104,8 @@ function GuideContent({ guide, locale }: { guide: Guide; locale: Locale }) {
     "@type": "Article",
     headline: title,
     description,
-    inLanguage: locale === "en" ? "en-US" : "it-IT",
+    inLanguage:
+      locale === "en" ? "en-US" : locale === "ru" ? "ru-RU" : "it-IT",
     datePublished: guide.lastUpdated,
     dateModified: guide.lastUpdated,
     author: { "@id": `${SITE_URL}/#organization` },
@@ -107,15 +113,21 @@ function GuideContent({ guide, locale }: { guide: Guide; locale: Locale }) {
     mainEntityOfPage: `${SITE_URL}${locale === "it" ? "" : `/${locale}`}/guide/${guide.slug}`,
   };
 
-  const readingLabel = locale === "en" ? "min read" : "min di lettura";
-  const updatedLabel = locale === "en" ? "Updated" : "Aggiornato il";
+  const readingLabel =
+    locale === "en" ? "min read" : locale === "ru" ? "мин чтения" : "min di lettura";
+  const updatedLabel =
+    locale === "en" ? "Updated" : locale === "ru" ? "Обновлено" : "Aggiornato il";
   const ctaTitle =
     locale === "en"
       ? "Want this handled for you?"
+      : locale === "ru"
+      ? "Хотите, чтобы мы взяли это на себя?"
       : "Vuoi che ce ne occupiamo noi?";
   const ctaBody =
     locale === "en"
       ? "We handle compliance, channels and pricing end-to-end. A single conversation to see if it's a fit. No commitment."
+      : locale === "ru"
+      ? "Мы ведём end-to-end соответствие требованиям, каналы и ценообразование. Один разговор, чтобы понять, подходим ли мы вам. Без обязательств."
       : "Ci occupiamo end-to-end di compliance, canali e pricing. Una conversazione per capire se siamo l'interlocutore giusto. Nessun impegno.";
 
   return (
@@ -144,7 +156,7 @@ function GuideContent({ guide, locale }: { guide: Guide; locale: Locale }) {
               href="/property-management"
               className="hover:text-white transition-colors"
             >
-              {locale === "en" ? "Property management" : "Property Management"}
+              {locale === "en" ? "Property management" : locale === "ru" ? "Управление недвижимостью" : "Property Management"}
             </Link>
           </nav>
           <div className="flex items-center gap-3 text-xs text-white/75 mb-3">
@@ -216,7 +228,12 @@ function GuideContent({ guide, locale }: { guide: Guide; locale: Locale }) {
             <ArrowRight className="h-4 w-4" />
           </Link>
           <div className="text-xs text-muted-foreground/80 mt-6 max-w-md mx-auto">
-            {brandName(locale)} · {locale === "en" ? "Lake Como" : "Lago di Como"}
+            {brandName(locale)} ·{" "}
+            {locale === "en"
+              ? "Lake Como"
+              : locale === "ru"
+              ? "озеро Комо"
+              : "Lago di Como"}
           </div>
         </div>
       </section>

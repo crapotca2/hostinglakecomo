@@ -63,7 +63,8 @@
   "languageToggle": {
     "label": "Switch language",
     "it": "IT",
-    "en": "EN"
+    "en": "EN",
+    "ru": "RU"
   },
   "common": {
     "discoverMore": "Discover more",

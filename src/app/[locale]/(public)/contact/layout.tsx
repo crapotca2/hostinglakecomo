@@ -13,6 +13,11 @@ const COPY = {
     description:
       "Request a free consultation: we'll assess the rental potential of your home on Lake Como.",
   },
+  ru: {
+    title: "Свяжитесь с нами — доверьте свой дом Хост Комо",
+    description:
+      "Запросите бесплатную консультацию: мы оценим арендный потенциал вашего дома на озере Комо.",
+  },
 } as const;
 
 export async function generateMetadata({

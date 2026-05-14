@@ -2,9 +2,13 @@
   {
     "slug": "como",
     "name": "Como",
-    "geo": { "lat": 45.8081, "lng": 9.0852 },
+    "geo": {
+      "lat": 45.8081,
+      "lng": 9.0852
+    },
     "tagline_it": "Città capitale del lago, porta sud verso Milano e Svizzera",
     "tagline_en": "Capital city of the lake, southern gateway to Milan and Switzerland",
+    "tagline_ru": "Главный город озера, южные ворота к Милану и Швейцарии",
     "intro_it": [
       "Como è la città capoluogo all'estremità sud-occidentale del Lago, 83.700 abitanti e 40 km da Milano, collegata a Lugano e a Zurigo dagli EuroCity in transito sulla doppia stazione San Giovanni / Como Lago. Il centro storico ruota intorno al Duomo gotico-rinascimentale, al Tempio Voltiano, alla neoclassica Villa Olmo e alla funicolare per Brunate.",
       "È l'unico vero mercato urbano e lacustre del Lario: stagionalità più piatta rispetto ai borghi grazie al business travel infrasettimanale e ai weekenders milanesi. Il Concorso d'Eleganza di Villa d'Este a Cernobbio (15-17 maggio 2026) e la stagione wedding spingono picchi di occupazione e di tariffa nei weekend di alta stagione."
@@ -12,6 +16,10 @@
     "intro_en": [
       "Como is the provincial capital at the south-western tip of Lake Como, 83,700 residents and 40 km from Milan, linked to Lugano and Zurich by direct EuroCity trains using the twin San Giovanni / Como Lago stations. The historic centre revolves around the Gothic-Renaissance Duomo, the Tempio Voltiano, the neoclassical Villa Olmo and the Brunate funicular.",
       "It is the Lario's only truly urban-and-lake market: flatter seasonality than the smaller hamlets, sustained by midweek business travel and Milanese weekenders. The Concorso d'Eleganza Villa d'Este at Cernobbio (15-17 May 2026) and the wedding season drive occupancy and rate peaks on high-season weekends."
+    ],
+    "intro_ru": [
+      "Комо — столица провинции на юго-западной оконечности озера, 83.700 жителей и 40 км от Милана, связана с Лугано и Цюрихом прямыми поездами EuroCity через двойные станции San Giovanni / Como Lago. Исторический центр сосредоточен вокруг готико-ренессансного Дуомо, Tempio Voltiano, неоклассической Villa Olmo и фуникулёра на Брунате.",
+      "Это единственный по-настоящему городской и одновременно прибрежный рынок Лариo: более ровная сезонность по сравнению с малыми деревнями за счёт делового туризма в будни и миланских weekenders. Concorso d'Eleganza Villa d'Este в Черноббио (15-17 мая 2026) и свадебный сезон создают пики заполняемости и тарифов в выходные высокого сезона."
     ],
     "highlights_it": [
       "83.700 abitanti, capoluogo di provincia: l'unica vera città del lago",
@@ -25,6 +33,12 @@
       "Como-Brunate funicular (715 m), Duomo (1396), Villa Olmo, Tempio Voltiano",
       "Concorso d'Eleganza Villa d'Este (15-17 May 2026), wedding season May-October"
     ],
+    "highlights_ru": [
+      "83.700 жителей, столица провинции: единственный настоящий город на озере",
+      "Двойные станции: Como S. Giovanni и Como Lago, поезд из Милана за 40-60 мин",
+      "Фуникулёр Комо-Брунате (715 м), Дуомо (1396), Villa Olmo, Tempio Voltiano",
+      "Concorso d'Eleganza Villa d'Este (15-17 мая 2026), свадебный сезон май-октябрь"
+    ],
     "marketStats": {
       "airbnbListings": "1.523-2.469",
       "bookingProperties": "380-700",
@@ -34,10 +48,30 @@
       "adrLuxuryRange": null,
       "occupancyRange": "42-57%",
       "typologyMix": [
-        { "label": "1 camera", "labelEn": "1BR", "pct": 69 },
-        { "label": "2 camere", "labelEn": "2BR", "pct": 23 },
-        { "label": "3 camere", "labelEn": "3BR", "pct": 6 },
-        { "label": "4+ camere", "labelEn": "4BR+", "pct": 2 }
+        {
+          "label": "1 camera",
+          "labelEn": "1BR",
+          "pct": 69,
+          "labelRu": "1 спальня"
+        },
+        {
+          "label": "2 camere",
+          "labelEn": "2BR",
+          "pct": 23,
+          "labelRu": "2 спальни"
+        },
+        {
+          "label": "3 camere",
+          "labelEn": "3BR",
+          "pct": 6,
+          "labelRu": "3 спальни"
+        },
+        {
+          "label": "4+ camere",
+          "labelEn": "4BR+",
+          "pct": 2,
+          "labelRu": "4+ спален"
+        }
       ],
       "topHotels": [
         "Hilton Lake Como (5*)",
@@ -45,15 +79,20 @@
         "Sheraton Lake Como Hotel (4*)",
         "Hotel Metropole Suisse (4*)",
         "Albergo Terminus (4*)"
-      ]
+      ],
+      "adrRangeRu": "200-240 EUR"
     }
   },
   {
     "slug": "cernobbio",
     "name": "Cernobbio",
-    "geo": { "lat": 45.8454, "lng": 9.0738 },
+    "geo": {
+      "lat": 45.8454,
+      "lng": 9.0738
+    },
     "tagline_it": "Eleganza storica, capitale del lusso lacustre",
     "tagline_en": "Historic elegance, Lake Como's luxury capital",
+    "tagline_ru": "Историческая элегантность, столица роскоши озера Комо",
     "intro_it": [
       "Cernobbio è la prima tappa risalendo la sponda ovest da Como città, distante appena 2 km dal centro e 40 da Milano, con 7.000 abitanti dominati dal Monte Bisbino. Insignita del titolo di città nel 2005, da oltre due secoli rappresenta il segmento ultra-luxury del Lario.",
       "Il polo gravitazionale è Villa d'Este, dimora cinquecentesca trasformata in hotel nel 1873 e regolarmente classificata da Forbes tra i migliori hotel al mondo, con la celebre piscina galleggiante sul lago. A poche centinaia di metri sorge Villa Erba, complesso ottocentesco neorinascimentale con parco botanico, principale location matrimoniale del lago. Ogni settembre il Forum Ambrosetti (dal 1975) riunisce capi di stato e CEO; in maggio il Concorso d'Eleganza Villa d'Este espone circa 50 vetture storiche (edizione 2026: 15-17 maggio)."
@@ -61,6 +100,10 @@
     "intro_en": [
       "Cernobbio is the first stop heading up the western shore from Como city, just 2 km from the centre and 40 km from Milan, with 7,000 residents under Monte Bisbino. Granted city status in 2005, for over two centuries it has represented the Lario's ultra-luxury segment.",
       "The gravitational core is Villa d'Este, a 16th-century residence converted into a hotel in 1873 and regularly ranked by Forbes among the world's top hotels, with its iconic floating pool. A short distance away stands Villa Erba, a 19th-century neo-Renaissance estate with a botanical park, the lake's premier wedding venue. Every September the Ambrosetti Forum (since 1975) gathers heads of state and CEOs; in May the Concorso d'Eleganza Villa d'Este showcases around 50 historic cars (2026 edition: 15-17 May)."
+    ],
+    "intro_ru": [
+      "Черноббио — первая остановка при движении вверх по западному берегу от города Комо, всего в 2 км от центра и 40 км от Милана, с 7.000 жителями у подножия Монте Бисбино. Получивший статус города в 2005 году, на протяжении более двух столетий он представляет ультра-luxury сегмент Ларио.",
+      "Гравитационный центр — Villa d'Este, резиденция XVI века, превращённая в отель в 1873 году и регулярно входящая в рейтинги Forbes лучших отелей мира со знаменитым плавающим бассейном на озере. В нескольких сотнях метров находится Villa Erba, неоренессансный комплекс XIX века с ботаническим парком, главная свадебная локация озера. Каждый сентябрь Forum Ambrosetti (с 1975 г.) собирает глав государств и CEO; в мае Concorso d'Eleganza Villa d'Este выставляет около 50 исторических автомобилей (издание 2026: 15-17 мая)."
     ],
     "highlights_it": [
       "Villa d'Este, hotel cinque stelle dal 1873, riconosciuto Forbes come migliore hotel al mondo (2009)",
@@ -76,6 +119,13 @@
       "Villa Erba: 19th-century neo-Renaissance estate, the lake's premier wedding venue",
       "C10 ASF bus + direct ferries Como-Cernobbio in 10-15 min, Swiss border 7 km away"
     ],
+    "highlights_ru": [
+      "Villa d'Este, пятизвёздочный отель с 1873 года, признанный Forbes лучшим отелем мира (2009)",
+      "Forum Ambrosetti (с 1975): главы государств, нобелевские лауреаты и топ-менеджеры каждый сентябрь",
+      "Concorso d'Eleganza Villa d'Este 2026: 15-17 мая, организован BMW Group Classic",
+      "Villa Erba: неоренессансная резиденция XIX века, главная свадебная локация озера",
+      "Автобус C10 ASF + прямые паромы Комо-Черноббио за 10-15 мин, швейцарская граница в 7 км"
+    ],
     "marketStats": {
       "airbnbListings": "253-269",
       "bookingProperties": "160-200",
@@ -88,10 +138,30 @@
       "adrLuxuryNoteEn": "Villa d'Este: over EUR 1,500",
       "occupancyRange": "56-72%",
       "typologyMix": [
-        { "label": "1 camera", "labelEn": "1BR", "pct": 56 },
-        { "label": "2 camere", "labelEn": "2BR", "pct": 28 },
-        { "label": "3 camere", "labelEn": "3BR", "pct": 9 },
-        { "label": "Ville (4+)", "labelEn": "Villas (4+)", "pct": 7 }
+        {
+          "label": "1 camera",
+          "labelEn": "1BR",
+          "pct": 56,
+          "labelRu": "1 спальня"
+        },
+        {
+          "label": "2 camere",
+          "labelEn": "2BR",
+          "pct": 28,
+          "labelRu": "2 спальни"
+        },
+        {
+          "label": "3 camere",
+          "labelEn": "3BR",
+          "pct": 9,
+          "labelRu": "3 спальни"
+        },
+        {
+          "label": "Ville (4+)",
+          "labelEn": "Villas (4+)",
+          "pct": 7,
+          "labelRu": "Виллы (4+)"
+        }
       ],
       "topHotels": [
         "Villa d'Este (5* Leading Hotels of the World)",
@@ -99,15 +169,22 @@
         "Hotel Centrale (4*)",
         "Regina Olga (4*)",
         "Villa Erba (eventi/wedding)"
-      ]
+      ],
+      "adrRangeRu": "200-280 EUR",
+      "adrLuxuryRangeRu": "350-500 EUR",
+      "adrLuxuryNoteRu": "Villa d'Este: более 1.500 EUR"
     }
   },
   {
     "slug": "moltrasio",
     "name": "Moltrasio",
-    "geo": { "lat": 45.8636, "lng": 9.0750 },
+    "geo": {
+      "lat": 45.8636,
+      "lng": 9.075
+    },
     "tagline_it": "La sponda Bellini, quattro chilometri sopra Como",
     "tagline_en": "The Bellini shore, four kilometres north of Como",
+    "tagline_ru": "Берег Беллини, четыре километра севернее Комо",
     "intro_it": [
       "Moltrasio è il primo borgo sulla sponda ovest dopo Cernobbio, a 4 km da Como città e 6 km dalla frontiera svizzera, con 1.700 abitanti distribuiti su 6,5 km² ai piedi del Monte Bisbino. Il paese è attraversato dal torrente Pizzallo e dall'antica Via Regina, e gode di un microclima mite favorito dall'esposizione a est.",
       "L'identità culturale ruota attorno a Vincenzo Bellini, che compose qui parte di Norma e La Sonnambula tra il 1831 e il 1833 nella Villa Salterio (oggi Villa Passalacqua, 5 stelle dal 2022 e premiata The World's 50 Best Hotels). Il Grand Hotel Imperiale e Villa Erba sono solo due delle dimore storiche; Pierre Cardin ebbe Villa La Cassinella a Lenno mentre l'asse Carate Urio-Moltrasio è da decenni residenza estiva di famiglie milanesi e imprenditori del nord."
@@ -115,6 +192,10 @@
     "intro_en": [
       "Moltrasio is the first village on the western shore after Cernobbio, 4 km from Como city and 6 km from the Swiss border, with 1,700 residents spread over 6.5 km² at the foot of Monte Bisbino. The village is crossed by the Pizzallo torrent and the ancient Via Regina, and enjoys a mild microclimate favoured by its east-facing exposure.",
       "Cultural identity revolves around Vincenzo Bellini, who composed parts of Norma and La Sonnambula here between 1831 and 1833 at Villa Salterio (now Villa Passalacqua, five-star since 2022 and listed among The World's 50 Best Hotels). The Grand Hotel Imperiale and Villa Erba are just two of the historic estates; Pierre Cardin owned Villa La Cassinella in nearby Lenno, while the Carate Urio-Moltrasio axis has been a summer residence for Milanese families and northern entrepreneurs for decades."
+    ],
+    "intro_ru": [
+      "Мольтразио — первая деревня на западном берегу после Черноббио, в 4 км от города Комо и 6 км от швейцарской границы, с 1.700 жителями на территории 6,5 км² у подножия Монте Бисбино. Деревню пересекают поток Pizzallo и древняя Via Regina, она пользуется мягким микроклиматом благодаря восточной экспозиции.",
+      "Культурная идентичность связана с Винченцо Беллини, который сочинил здесь части Нормы и Сомнамбулы между 1831 и 1833 годами в Villa Salterio (сегодня Villa Passalacqua, пять звёзд с 2022 года и в рейтинге The World's 50 Best Hotels). Grand Hotel Imperiale и Villa Erba — лишь две из исторических резиденций; Пьер Карден владел Villa La Cassinella в Ленно, а ось Carate Urio-Moltrasio десятилетиями была летней резиденцией миланских семей и северных предпринимателей."
     ],
     "highlights_it": [
       "4 km da Como città via SS340 Regina, bus C10 ASF ogni 20-30 min in alta stagione",
@@ -130,6 +211,13 @@
       "Grand Hotel Imperiale (1926), historic four-star on the lakefront",
       "Swiss border 6 km away: strong Swiss and Ticino resident presence"
     ],
+    "highlights_ru": [
+      "4 км от Комо по SS340 Regina, автобус C10 ASF каждые 20-30 мин в высокий сезон",
+      "Винченцо Беллини сочинил Норму и Сомнамбулу здесь в 1831-1833 (Villa Salterio)",
+      "Villa Passalacqua: пять звёзд с 2022, в рейтинге The World's 50 Best Hotels 2023",
+      "Grand Hotel Imperiale (1926), исторический четырёхзвёздочный на набережной",
+      "Швейцарская граница в 6 км: сильное присутствие швейцарских и тичинских резидентов"
+    ],
     "marketStats": {
       "airbnbListings": "89",
       "bookingProperties": "30-50",
@@ -142,23 +230,45 @@
       "adrLuxuryNoteEn": "Passalacqua: over EUR 2,000",
       "occupancyRange": "58-65%",
       "typologyMix": [
-        { "label": "1 camera", "labelEn": "1BR", "pct": 54 },
-        { "label": "2 camere", "labelEn": "2BR", "pct": 29 },
-        { "label": "Ville (3+)", "labelEn": "Villas (3+)", "pct": 17 }
+        {
+          "label": "1 camera",
+          "labelEn": "1BR",
+          "pct": 54,
+          "labelRu": "1 спальня"
+        },
+        {
+          "label": "2 camere",
+          "labelEn": "2BR",
+          "pct": 29,
+          "labelRu": "2 спальни"
+        },
+        {
+          "label": "Ville (3+)",
+          "labelEn": "Villas (3+)",
+          "pct": 17,
+          "labelRu": "Виллы (3+)"
+        }
       ],
       "topHotels": [
         "Villa Passalacqua (5*, World's #1 Hotel 2023)",
         "Grand Hotel Imperiale Resort & Spa (4*)",
         "Hotel Posta Moltrasio"
-      ]
+      ],
+      "adrRangeRu": "180-260 EUR",
+      "adrLuxuryRangeRu": "350-600 EUR",
+      "adrLuxuryNoteRu": "Passalacqua: более 2.000 EUR"
     }
   },
   {
     "slug": "brienno",
     "name": "Brienno",
-    "geo": { "lat": 45.8786, "lng": 9.1077 },
+    "geo": {
+      "lat": 45.8786,
+      "lng": 9.1077
+    },
     "tagline_it": "Borgo medievale silenzioso aggrappato alla riva ovest",
     "tagline_en": "Silent medieval hamlet clinging to the western shore",
+    "tagline_ru": "Тихая средневековая деревня, цепляющаяся за западный берег",
     "intro_it": [
       "Brienno è un borgo di poco più di 330 abitanti su 9,1 km², 16-17 km a nord di Como lungo la SS340 Regina, fra Carate Urio e Argegno. Il paese conserva intatta la trama medievale: case in pietra a strapiombo sull'acqua, vicoli voltati e gradinate che scendono dalla strada al lago.",
       "Il monumento di riferimento è la parrocchiale dei Santi Nazaro e Celso (XI secolo) con vetrate cinquecentesche, mentre la piccola Sant'Anna sulla Via Regina ha un campanile dell'XI secolo fra i più antichi del Lario. Restano La Turascia, torre bizantina convertita in lazzaretto seicentesco citato da Manzoni, e le gallerie di mina della Linea Cadorna scavate nella roccia durante la Prima Guerra Mondiale."
@@ -166,6 +276,10 @@
     "intro_en": [
       "Brienno is a hamlet of just over 330 residents on 9.1 km², 16-17 km north of Como along the SS340 Regina, between Carate Urio and Argegno. The village preserves its medieval fabric intact: stone houses falling sheer to the water, vaulted alleys and stairways dropping from the road to the lake.",
       "The reference monument is the 11th-century parish church of Saints Nazaro and Celso with 16th-century stained glass, while the small lakeside Sant'Anna on the Via Regina has an 11th-century bell tower among the oldest on the Lario. Historic evidence includes La Turascia, a Byzantine tower converted into a 17th-century plague lazzaretto referenced by Manzoni, and the World War I Cadorna Line mining tunnels carved into the cliff."
+    ],
+    "intro_ru": [
+      "Бриенно — деревня чуть более 330 жителей на 9,1 км², 16-17 км к северу от Комо вдоль SS340 Regina, между Carate Urio и Argegno. Деревня сохраняет нетронутой средневековую структуру: каменные дома, отвесно спускающиеся к воде, сводчатые переулки и лестницы, ведущие от дороги к озеру.",
+      "Главный памятник — приходская церковь Святых Назария и Цельса (XI век) с витражами XVI века, а маленькая Sant'Anna на Via Regina имеет колокольню XI века, одну из старейших на Ларио. Сохранились La Turascia, византийская башня, переоборудованная в лазарет XVII века, упоминаемый Мандзони, и шахты Линии Кадорна, вырубленные в скале во время Первой мировой войны."
     ],
     "highlights_it": [
       "337 abitanti su 9,1 km²: una delle densità più basse del Lario (37 ab./km²)",
@@ -181,6 +295,13 @@
       "World War I Cadorna Line mining tunnels carved into the cliff above the village",
       "Christmas markets in lit alleys and cellars, the village's only recurring tourist event"
     ],
+    "highlights_ru": [
+      "337 жителей на 9,1 км²: одна из самых низких плотностей Ларио (37 чел/км²)",
+      "Церковь Sant'Anna с колокольней XI века, одна из старейших на озере",
+      "La Turascia: византийская башня, переоборудованная в чумной лазарет XVII века",
+      "Шахты Линии Кадорна (Первая мировая война), вырубленные в скале над деревней",
+      "Рождественские ярмарки в подсвеченных переулках и подвалах — единственное регулярное туристическое событие"
+    ],
     "marketStats": {
       "airbnbListings": "64",
       "bookingProperties": "15-25",
@@ -193,20 +314,37 @@
       "adrLuxuryNoteEn": "Only a few lakefront villas",
       "occupancyRange": "40-50%",
       "typologyMix": [
-        { "label": "Case intere", "labelEn": "Whole homes", "pct": 98 },
-        { "label": "Camere private", "labelEn": "Private rooms", "pct": 2 }
+        {
+          "label": "Case intere",
+          "labelEn": "Whole homes",
+          "pct": 98,
+          "labelRu": "Целые дома"
+        },
+        {
+          "label": "Camere private",
+          "labelEn": "Private rooms",
+          "pct": 2,
+          "labelRu": "Частные комнаты"
+        }
       ],
       "topHotels": [
         "Nessun hotel classificato; offerta concentrata su appartamenti privati e B&B"
-      ]
+      ],
+      "adrRangeRu": "130-180 EUR",
+      "adrLuxuryRangeRu": "350-450 EUR",
+      "adrLuxuryNoteRu": "Только редкие виллы на берегу"
     }
   },
   {
     "slug": "argegno",
     "name": "Argegno",
-    "geo": { "lat": 45.9067, "lng": 9.1289 },
+    "geo": {
+      "lat": 45.9067,
+      "lng": 9.1289
+    },
     "tagline_it": "Porto fluviale, funivia e porta della Val d'Intelvi",
     "tagline_en": "River harbour, cable car and gateway to Val d'Intelvi",
+    "tagline_ru": "Речная гавань, канатная дорога и ворота в Валь д'Интельви",
     "intro_it": [
       "Argegno è un comune di 679 abitanti su 4,3 km², 15 km a nord di Como e 50 km da Milano, dove il torrente Telo sbocca nel ramo occidentale del lago all'imbocco della Val d'Intelvi. Di origine romana, il paese deve il nome al console Publio Cesio Archigene.",
       "Conserva un ponte ad arco romanico-medievale del XIII-XIV secolo sul Telo, una gola e i resti di una fucina settecentesca; il santuario seicentesco di Sant'Anna chiude scenograficamente il porto. L'asset distintivo è la Funivia Argegno-Pigra, inaugurata nel 1971: bifune che supera 653 metri di dislivello in 4 minuti con pendenza media del 71% (la più ripida d'Italia), biglietto andata-ritorno 5,50 EUR."
@@ -214,6 +352,10 @@
     "intro_en": [
       "Argegno is a small municipality of 679 residents on 4.3 km², 15 km north of Como and 50 km from Milan, where the Telo torrent meets the western branch of the lake at the mouth of Val d'Intelvi. Roman in origin, the village takes its name from the consul Publio Cesio Archigene.",
       "It retains a 13th-14th-century Romanesque-medieval arched bridge over the Telo, a gorge and the remains of an 18th-century forge; the 17th-century Sanctuary of Sant'Anna closes the harbour scenically. The signature asset is the Funivia Argegno-Pigra cable car, opened in 1971: a twin-cable system climbing 653 metres of vertical in 4 minutes at an average 71% gradient (steepest in Italy), 5.50 EUR return ticket."
+    ],
+    "intro_ru": [
+      "Аргеньо — небольшой муниципалитет в 679 жителей на 4,3 км², 15 км к северу от Комо и 50 км от Милана, где поток Telo впадает в западный рукав озера у входа в Валь д'Интельви. Имея римское происхождение, деревня получила название от консула Публия Цезия Архигена.",
+      "Сохраняет арочный романско-средневековый мост XIII-XIV веков через Telo, ущелье и остатки кузницы XVIII века; святилище Sant'Anna XVII века живописно замыкает гавань. Отличительный актив — фуникулёр Argegno-Pigra, открытый в 1971: двухканатная система, преодолевающая 653 метра вертикали за 4 минуты со средним уклоном 71% (самый крутой в Италии), билет туда-обратно 5,50 EUR."
     ],
     "highlights_it": [
       "Funivia Argegno-Pigra: 653 m in 4 minuti, pendenza 71%, la più ripida d'Italia",
@@ -229,6 +371,13 @@
       "Central stop on the Greenway del Lago di Como (11.5 km Colonno-Cadenabbia)",
       "Direct gateway to Val d'Intelvi: links Lake Como and Lake Lugano"
     ],
+    "highlights_ru": [
+      "Фуникулёр Argegno-Pigra: 653 м за 4 минуты, уклон 71%, самый крутой в Италии",
+      "Романско-средневековый мост XIII-XIV веков через поток Telo",
+      "Линия C10 ASF + скоростные паромы: Комо 25 мин, Белладжо 35 мин",
+      "Центральная остановка на Greenway озера Комо (11,5 км Colonno-Cadenabbia)",
+      "Прямой выход в Валь д'Интельви: связывает озеро Комо и Лугано"
+    ],
     "marketStats": {
       "airbnbListings": "196",
       "bookingProperties": "40-60",
@@ -241,21 +390,47 @@
       "adrLuxuryNoteEn": "Lake-view villas",
       "occupancyRange": "50-58%",
       "typologyMix": [
-        { "label": "2 camere", "labelEn": "2BR", "pct": 38 },
-        { "label": "1 camera", "labelEn": "1BR", "pct": 31 },
-        { "label": "3 camere", "labelEn": "3BR", "pct": 21 },
-        { "label": "Ville (4+)", "labelEn": "Villas (4+)", "pct": 10 }
+        {
+          "label": "2 camere",
+          "labelEn": "2BR",
+          "pct": 38,
+          "labelRu": "2 спальни"
+        },
+        {
+          "label": "1 camera",
+          "labelEn": "1BR",
+          "pct": 31,
+          "labelRu": "1 спальня"
+        },
+        {
+          "label": "3 camere",
+          "labelEn": "3BR",
+          "pct": 21,
+          "labelRu": "3 спальни"
+        },
+        {
+          "label": "Ville (4+)",
+          "labelEn": "Villas (4+)",
+          "pct": 10,
+          "labelRu": "Виллы (4+)"
+        }
       ],
       "topHotels": [
         "Hotel Argegno (3*)",
         "Hotel Belvedere Argegno (3*)"
-      ]
+      ],
+      "adrRangeRu": "140-200 EUR",
+      "adrLuxuryRangeRu": "250-400 EUR",
+      "adrLuxuryNoteRu": "Виллы с видом на озеро"
     }
   },
   {
     "slug": "nesso",
     "name": "Nesso",
-    "geo": { "lat": 45.8728, "lng": 9.1466 },
+    "geo": {
+      "lat": 45.8728,
+      "lng": 9.1466
+    },
     "tagline_it": "Il borgo dell'Orrido, dove la cascata cade nel lago",
     "tagline_en": "The village of the Orrido, where the waterfall plunges into the lake",
     "intro_it": [
@@ -290,20 +465,57 @@
       "adrLuxuryNoteEn": "A handful of top villas",
       "occupancyRange": "52-60%",
       "typologyMix": [
-        { "label": "1 camera", "labelEn": "1BR", "pct": 46 },
-        { "label": "2 camere", "labelEn": "2BR", "pct": 36 },
-        { "label": "3 camere", "labelEn": "3BR", "pct": 15 },
-        { "label": "Ville (4+)", "labelEn": "Villas (4+)", "pct": 3 }
+        {
+          "label": "1 camera",
+          "labelEn": "1BR",
+          "pct": 46,
+          "labelRu": "1 спальня"
+        },
+        {
+          "label": "2 camere",
+          "labelEn": "2BR",
+          "pct": 36,
+          "labelRu": "2 спальни"
+        },
+        {
+          "label": "3 camere",
+          "labelEn": "3BR",
+          "pct": 15,
+          "labelRu": "3 спальни"
+        },
+        {
+          "label": "Ville (4+)",
+          "labelEn": "Villas (4+)",
+          "pct": 3,
+          "labelRu": "Виллы (4+)"
+        }
       ],
       "topHotels": [
         "Nessun hotel classificato proprio: ospiti hotel-seekers ripiegano su Lezzeno o Bellagio"
-      ]
-    }
+      ],
+      "adrRangeRu": "180-260 EUR",
+      "adrLuxuryRangeRu": "350-600 EUR",
+      "adrLuxuryNoteRu": "Несколько топ-вилл"
+    },
+    "tagline_ru": "Деревня Orrido, где водопад срывается в озеро",
+    "intro_ru": [
+      "Нессо находится на восточном берегу первого бассейна Ларио, на полпути между городом Комо и Белладжо, на территории 15,03 км² с высотами от 199 до 1.417 метров и населением 1.070 жителей, распределённых по восьми хуторам. Кельтское название означает «место швартовки», и первое упоминание деревни относится к 951 году.",
+      "Идентификационный знак — Orrido di Nesso, ущелье, прорытое потоками Tuf и Nosée с вертикальным перепадом около 200 метров и финальным водопадом, падающим прямо в озеро, доступное через площадь Castello и 270 каменных ступеней до моста Civera римского происхождения. Уже Леонардо да Винчи в Codex Atlanticus отмечал: «Нессо, где река падает с большой силой»."
+    ],
+    "highlights_ru": [
+      "Orrido di Nesso: ущелье 200 м с водопадом, заканчивающимся в озере, упомянутое Леонардо",
+      "Мост Civera римского происхождения, достижимый по 270 каменным ступеням",
+      "15,03 км², 8 хуторов и 1.070 жителей: нишевая деревня с нетронутой атмосферой",
+      "Комо 18 км по SS583 Lariana (30-40 мин), автобус C30 ASF Комо-Белладжо"
+    ]
   },
   {
     "slug": "lezzeno",
     "name": "Lezzeno",
-    "geo": { "lat": 45.9416, "lng": 9.2161 },
+    "geo": {
+      "lat": 45.9416,
+      "lng": 9.2161
+    },
     "tagline_it": "Il comune più lungo del Lario, fra grotte e Bellagio",
     "tagline_en": "Lake Como's longest municipality, between hidden caves and Bellagio",
     "intro_it": [
@@ -338,21 +550,53 @@
       "adrLuxuryNoteEn": "Houses with lake access",
       "occupancyRange": "58-68%",
       "typologyMix": [
-        { "label": "1 camera", "labelEn": "1BR", "pct": 42 },
-        { "label": "2 camere", "labelEn": "2BR", "pct": 39 },
-        { "label": "3+ camere", "labelEn": "3BR+", "pct": 19 }
+        {
+          "label": "1 camera",
+          "labelEn": "1BR",
+          "pct": 42,
+          "labelRu": "1 спальня"
+        },
+        {
+          "label": "2 camere",
+          "labelEn": "2BR",
+          "pct": 39,
+          "labelRu": "2 спальни"
+        },
+        {
+          "label": "3+ camere",
+          "labelEn": "3BR+",
+          "pct": 19,
+          "labelRu": "3+ спален"
+        }
       ],
       "topHotels": [
         "Filario Hotel & Residences (boutique 4*)",
         "Hotel Villa Aurora (3* superior)",
         "Hotel Aurora Lezzeno"
-      ]
-    }
+      ],
+      "adrRangeRu": "130-220 EUR",
+      "adrLuxuryRangeRu": "250-400 EUR",
+      "adrLuxuryNoteRu": "Дома с доступом к озеру"
+    },
+    "tagline_ru": "Самый длинный муниципалитет Ларио, между гротами и Белладжо",
+    "intro_ru": [
+      "Леццено — первый муниципалитет, который встречается, покидая Белладжо в направлении Комо по восточному берегу, с 1.848 жителями и территорией 20,7 км², растягивающейся на 7 км вдоль берега: это самый длинный муниципалитет озера. Семнадцать хуторов — среди них Calvasino, Cavagnola, Pescaù, Rozzo, Bagnana — усеивают побережье и склоны Монте ди Леццено.",
+      "Главный аттрактор — Grotta dei Bulberi (или Grotta Azzurra), встроенный в скалу Sassi Grosgalli и доступный только с лодки: игра синего света в центральные часы дня превратила его в обязательную остановку kayak-туров и лодочных туров между Белладжо и Комо. Мост Дьявола (1911-1917) соединяет Леццено с Белладжо, а легенда о bulberi питает фольклорную нарративу из ведьм, шабашей и магов."
+    ],
+    "highlights_ru": [
+      "7 км побережья и 17 хуторов: самый длинный муниципалитет озера Комо",
+      "Grotta dei Bulberi / Azzurra: только с лодки, обязательная остановка туров Белладжо-Комо",
+      "Хутора Calvasino, Pescaù, Bagnana, Crotto: микропляжи и частные причалы",
+      "SS583 Lariana от Комо 24 км (40-50 мин), автобус C30 ASF, паром в Bagnana"
+    ]
   },
   {
     "slug": "bellagio",
     "name": "Bellagio",
-    "geo": { "lat": 45.9858, "lng": 9.2606 },
+    "geo": {
+      "lat": 45.9858,
+      "lng": 9.2606
+    },
     "tagline_it": "La Perla del Lago, dove i due rami si incontrano",
     "tagline_en": "The Pearl of Lake Como, where the two branches meet",
     "intro_it": [
@@ -387,10 +631,30 @@
       "adrLuxuryNoteEn": "Villa Serbelloni: over EUR 1,000",
       "occupancyRange": "58-67%",
       "typologyMix": [
-        { "label": "1 camera", "labelEn": "1BR", "pct": 56 },
-        { "label": "2 camere", "labelEn": "2BR", "pct": 30 },
-        { "label": "3 camere", "labelEn": "3BR", "pct": 7 },
-        { "label": "Ville (4+)", "labelEn": "Villas (4+)", "pct": 7 }
+        {
+          "label": "1 camera",
+          "labelEn": "1BR",
+          "pct": 56,
+          "labelRu": "1 спальня"
+        },
+        {
+          "label": "2 camere",
+          "labelEn": "2BR",
+          "pct": 30,
+          "labelRu": "2 спальни"
+        },
+        {
+          "label": "3 camere",
+          "labelEn": "3BR",
+          "pct": 7,
+          "labelRu": "3 спальни"
+        },
+        {
+          "label": "Ville (4+)",
+          "labelEn": "Villas (4+)",
+          "pct": 7,
+          "labelRu": "Виллы (4+)"
+        }
       ],
       "topHotels": [
         "Grand Hotel Villa Serbelloni (5* Relais & Chateaux)",
@@ -398,13 +662,30 @@
         "Hotel Florence (4*)",
         "Hotel Belvedere Bellagio (4*)",
         "Seta Hotel (boutique 4*)"
-      ]
-    }
+      ],
+      "adrRangeRu": "260-380 EUR",
+      "adrLuxuryRangeRu": "400-700 EUR",
+      "adrLuxuryNoteRu": "Villa Serbelloni: более 1.000 EUR"
+    },
+    "tagline_ru": "Жемчужина озера, где встречаются два рукава",
+    "intro_ru": [
+      "Белладжо расположен на оконечности полуострова Triangolo Lariano, ровно в той точке, где озеро Комо разделяется на рукава Комо и Лекко, с экспозицией почти 270 градусов на воду, что делает каждый объект с видом на озеро премиальным активом. Муниципалитет (3.820 жителей после слияния с Civenna в 2014 году) во всём мире известен как «Жемчужина озера Комо».",
+      "Здесь находятся две из самых посещаемых вилл Ларио: Villa Serbelloni (XV в.) и Villa Melzi d'Eril (1808-1815) с английскими садами, открытыми для публики. Средневековая деревня с характерными каменными лестницами (Salita Serbelloni, Salita Mella) и романско-ломбардской базиликой Сан-Джакомо (1075-1125) создаёт высокое время пребывания. События-драйверы сезона: праздник Сан-Джованни в июне, фестиваль Белладжо июль-август, свадебный сезон май-октябрь."
+    ],
+    "highlights_ru": [
+      "Villa Serbelloni (XV в.) и Villa Melzi (1808): английские сады открыты",
+      "Узел золотого треугольника: паромы в Менаджо и Варенну каждые 20-40 мин",
+      "Нет ж/д станции: паром из Варенны (15-20 мин) или SP583 из Комо",
+      "Праздник Сан-Джованни (июнь), фестиваль Белладжо (июль-август), свадьбы май-октябрь"
+    ]
   },
   {
     "slug": "tremezzo",
     "name": "Tremezzo",
-    "geo": { "lat": 45.9824, "lng": 9.2271 },
+    "geo": {
+      "lat": 45.9824,
+      "lng": 9.2271
+    },
     "tagline_it": "La riviera delle ville, set cinematografico del Lario",
     "tagline_en": "The villa riviera, Lake Como's film set shoreline",
     "intro_it": [
@@ -441,23 +722,61 @@
       "adrLuxuryNoteEn": "Grand Hotel Tremezzo: EUR 1,000-4,000",
       "occupancyRange": "56-69%",
       "typologyMix": [
-        { "label": "2 camere", "labelEn": "2BR", "pct": 39 },
-        { "label": "1 camera", "labelEn": "1BR", "pct": 30 },
-        { "label": "3 camere", "labelEn": "3BR", "pct": 21 },
-        { "label": "Ville (4+)", "labelEn": "Villas (4+)", "pct": 10 }
+        {
+          "label": "2 camere",
+          "labelEn": "2BR",
+          "pct": 39,
+          "labelRu": "2 спальни"
+        },
+        {
+          "label": "1 camera",
+          "labelEn": "1BR",
+          "pct": 30,
+          "labelRu": "1 спальня"
+        },
+        {
+          "label": "3 camere",
+          "labelEn": "3BR",
+          "pct": 21,
+          "labelRu": "3 спальни"
+        },
+        {
+          "label": "Ville (4+)",
+          "labelEn": "Villas (4+)",
+          "pct": 10,
+          "labelRu": "Виллы (4+)"
+        }
       ],
       "topHotels": [
         "Grand Hotel Tremezzo (5* Preferred Hotels / Michelin)",
         "Albergo Lenno (4*)",
         "Hotel Villa Edy (boutique)",
         "Villa Sola Cabiati (gruppo Grand Hotel Tremezzo)"
-      ]
-    }
+      ],
+      "adrRangeRu": "200-280 EUR",
+      "adrLuxuryRangeRu": "350-700 EUR",
+      "adrLuxuryNoteRu": "Grand Hotel Tremezzo: 1.000-4.000 EUR"
+    },
+    "tagline_ru": "Ривьера вилл, кинематографическая декорация Ларио",
+    "intro_ru": [
+      "Тремеццина — муниципалитет, созданный 25 мая 2014 года путём слияния Tremezzo, Lenno, Mezzegra и Ossuccio: 4.170 жителей и 28,38 км² на западном берегу прямо напротив Белладжо. Географически это «ривьера вилл».",
+      "Здесь находится Villa Carlotta в Тремеццо (резиденция XVII века с художественной коллекцией и ботаническим парком 70.000 м², более 150 видов рододендронов и азалий), Sacro Monte di Ossuccio (наследие UNESCO) и Greenway озера Комо (11,5 км Colonno-Cadenabbia), пересекающая всю муниципальную территорию и поддерживающая slow-tourism весной и осенью. Grand Hotel Tremezzo, культовый пятизвёздочный отель, является эталоном luxury."
+    ],
+    "highlights_ru": [
+      "Муниципалитет, созданный 25 мая 2014 года (Tremezzo, Lenno, Mezzegra, Ossuccio): 4.170 ж.",
+      "Villa Carlotta: парк 70.000 м², 150+ видов рододендронов и азалий",
+      "Sacro Monte di Ossuccio: наследие UNESCO на холме Тремеццины",
+      "Greenway озера Комо (11,5 км Colonno-Cadenabbia) пересекает муниципалитет",
+      "Нет ж/д станции: паром из Белладжо (5,50 EUR) или SS340 Regina"
+    ]
   },
   {
     "slug": "lenno",
     "name": "Lenno",
-    "geo": { "lat": 45.9698, "lng": 9.2079 },
+    "geo": {
+      "lat": 45.9698,
+      "lng": 9.2079
+    },
     "tagline_it": "Baia di Villa del Balbianello, cuore della Tremezzina",
     "tagline_en": "Villa del Balbianello bay, the heart of Tremezzina",
     "intro_it": [
@@ -495,23 +814,62 @@
       "adrLuxuryNoteEn": "Villas and historic residences",
       "occupancyRange": "55-65%",
       "typologyMix": [
-        { "label": "2 camere", "labelEn": "2BR", "pct": 39 },
-        { "label": "1 camera", "labelEn": "1BR", "pct": 30 },
-        { "label": "3 camere", "labelEn": "3BR", "pct": 21 },
-        { "label": "Ville (4+)", "labelEn": "Villas (4+)", "pct": 10 }
+        {
+          "label": "2 camere",
+          "labelEn": "2BR",
+          "pct": 39,
+          "labelRu": "2 спальни"
+        },
+        {
+          "label": "1 camera",
+          "labelEn": "1BR",
+          "pct": 30,
+          "labelRu": "1 спальня"
+        },
+        {
+          "label": "3 camere",
+          "labelEn": "3BR",
+          "pct": 21,
+          "labelRu": "3 спальни"
+        },
+        {
+          "label": "Ville (4+)",
+          "labelEn": "Villas (4+)",
+          "pct": 10,
+          "labelRu": "Виллы (4+)"
+        }
       ],
       "topHotels": [
         "Albergo Lenno (4*, 46 camere)",
         "Hotel Lenno",
         "San Giorgio Hotel (3-4*)"
       ],
-      "dataNote": "AirDNA aggrega Lenno dentro Tremezzina: i listing Airbnb sono interpolati e meno precisi delle altre zone."
-    }
+      "dataNote": "AirDNA aggrega Lenno dentro Tremezzina: i listing Airbnb sono interpolati e meno precisi delle altre zone.",
+      "adrRangeRu": "180-260 EUR",
+      "adrLuxuryRangeRu": "350-700 EUR",
+      "adrLuxuryNoteRu": "Виллы и исторические резиденции",
+      "airbnbListingsRu": "80-150 (оценка)"
+    },
+    "tagline_ru": "Бухта Villa del Balbianello, сердце Тремеццины",
+    "intro_ru": [
+      "Ленно — одна из четырёх исторических фракций муниципалитета Тремеццина (слияние мая 2014), но сохраняет сильную автономную туристическую идентичность благодаря природной бухте Dosso di Lavedo. 1.800 жителей и 9,6 км², в 20 км от Комо и 60 от Милана, занимает защищённую бухту, выходящую на центрально-западный берег.",
+      "Главный актив — Villa del Balbianello, построенная в 1787 году кардиналом Анджело Мария Дурини на руинах францисканского монастыря и сегодня собственность FAI: с 2019 года это самая посещаемая вилла среди 52 объектов FAI в Италии с более чем 135.000 годовых посещений, около 70% — иностранцы. Здесь снимались ключевые сцены Звёздных войн Эпизод II, Казино Рояль и Месяц у озера. Аббатство Acquafredda (1142, цистерцианское) на высоте 300 м завершает религиозную картину."
+    ],
+    "highlights_ru": [
+      "Villa del Balbianello: топ FAI национально, 135.000+ годовых посещений (2019), 70% иностранцев",
+      "Декорация Звёздных войн Эпизод II, Казино Рояль, Месяца у озера: глобальный кинобренд",
+      "Аббатство Acquafredda (1142, цистерцианское) на 300 м, сегодня францисканская обитель",
+      "Узел Greenway озера Комо + паром в Белладжо за 20 мин",
+      "Операционный сезон 8 месяцев (середина марта - середина ноября), синхронизированный с виллой FAI"
+    ]
   },
   {
     "slug": "menaggio",
     "name": "Menaggio",
-    "geo": { "lat": 46.022, "lng": 9.2415 },
+    "geo": {
+      "lat": 46.022,
+      "lng": 9.2415
+    },
     "tagline_it": "Porta svizzera del Lario, vertice del triangolo d'oro",
     "tagline_en": "Swiss gateway to the Lario, western tip of the golden triangle",
     "intro_it": [
@@ -549,10 +907,30 @@
       "adrLuxuryNoteEn": "Loveno and Croce villas",
       "occupancyRange": "46-65%",
       "typologyMix": [
-        { "label": "1 camera", "labelEn": "1BR", "pct": 38 },
-        { "label": "2 camere", "labelEn": "2BR", "pct": 36 },
-        { "label": "3 camere", "labelEn": "3BR", "pct": 13 },
-        { "label": "Ville (4+)", "labelEn": "Villas (4+)", "pct": 13 }
+        {
+          "label": "1 camera",
+          "labelEn": "1BR",
+          "pct": 38,
+          "labelRu": "1 спальня"
+        },
+        {
+          "label": "2 camere",
+          "labelEn": "2BR",
+          "pct": 36,
+          "labelRu": "2 спальни"
+        },
+        {
+          "label": "3 camere",
+          "labelEn": "3BR",
+          "pct": 13,
+          "labelRu": "3 спальни"
+        },
+        {
+          "label": "Ville (4+)",
+          "labelEn": "Villas (4+)",
+          "pct": 13,
+          "labelRu": "Виллы (4+)"
+        }
       ],
       "topHotels": [
         "Grand Hotel Menaggio (4*)",
@@ -561,13 +939,32 @@
         "Hotel Loveno (3*)",
         "Villa Adriatica"
       ],
-      "dataNote": "Offerta Airbnb in crescita +49,7% YoY: il mercato si sta espandendo più rapidamente della domanda."
-    }
+      "dataNote": "Offerta Airbnb in crescita +49,7% YoY: il mercato si sta espandendo più rapidamente della domanda.",
+      "adrRangeRu": "200-310 EUR",
+      "adrLuxuryRangeRu": "400-700 EUR",
+      "adrLuxuryNoteRu": "Виллы в Loveno и Croce",
+      "expediaPresenceRu": "средне-высокое"
+    },
+    "tagline_ru": "Швейцарские ворота Ларио, западная вершина золотого треугольника",
+    "intro_ru": [
+      "Менаджо находится на западном берегу озера, в устье реки Senagra, и является западной вершиной золотого треугольника, соединяющего его с Белладжо и Варенной прямыми 15-минутными паромами. Муниципалитет (3.270 жителей, 13 км²) исторически является базой для туристического потока из Швейцарии.",
+      "Автобусная линия C12 соединяет Лугано (27 км) с Менаджо чуть более чем за час, обеспечивая швейцарскую и центральноевропейскую клиентуру с высокой покупательной способностью даже вне сезона. Menaggio & Cadenabbia Golf Club, основанный в 1907 году английским джентльменом, является одним из старейших в Италии; экскурсии на Монте Грона и Via dei Monti Lariani поддерживают межсезонье апрель-май и сентябрь-октябрь. Menaggio Guitar Festival (с 2005) концентрирует нишевый спрос в июле."
+    ],
+    "highlights_ru": [
+      "Автобус C12 Лугано-Менаджо (27 км, ~1ч): большая доля швейцарских/немецких гостей",
+      "Menaggio & Cadenabbia Golf Club (1907): один из старейших в Италии",
+      "Узел золотого треугольника: прямые паромы в Белладжо и Варенну за 15 мин",
+      "Menaggio Guitar Festival с 2005 (июль)",
+      "Хутора Loveno и Croce: холмовые виллы с панорамным видом на озеро"
+    ]
   },
   {
     "slug": "varenna",
     "name": "Varenna",
-    "geo": { "lat": 46.0107, "lng": 9.2842 },
+    "geo": {
+      "lat": 46.0107,
+      "lng": 9.2842
+    },
     "tagline_it": "Borgo di pescatori sulla sponda lecchese, snodo ferroviario del lago",
     "tagline_en": "Fishing village on the eastern shore, the lake's rail gateway",
     "intro_it": [
@@ -602,9 +999,24 @@
       "adrLuxuryNoteEn": "R Collection 4* boutique",
       "occupancyRange": "52-68%",
       "typologyMix": [
-        { "label": "1 camera", "labelEn": "1BR", "pct": 60 },
-        { "label": "2 camere", "labelEn": "2BR", "pct": 29 },
-        { "label": "3+ camere", "labelEn": "3BR+", "pct": 11 }
+        {
+          "label": "1 camera",
+          "labelEn": "1BR",
+          "pct": 60,
+          "labelRu": "1 спальня"
+        },
+        {
+          "label": "2 camere",
+          "labelEn": "2BR",
+          "pct": 29,
+          "labelRu": "2 спальни"
+        },
+        {
+          "label": "3+ camere",
+          "labelEn": "3BR+",
+          "pct": 11,
+          "labelRu": "3+ спален"
+        }
       ],
       "topHotels": [
         "Hotel Villa Cipressi by R Collection (4*, 30 camere)",
@@ -613,7 +1025,21 @@
         "Albergo del Sole",
         "Hotel Du Lac Varenna"
       ],
-      "dataNote": "Offerta Airbnb in crescita +33,7% YoY: erosione possibile dell'occupazione nel medio termine."
-    }
+      "dataNote": "Offerta Airbnb in crescita +33,7% YoY: erosione possibile dell'occupazione nel medio termine.",
+      "adrRangeRu": "250-320 EUR",
+      "adrLuxuryRangeRu": "400-600 EUR",
+      "adrLuxuryNoteRu": "R Collection 4* boutique"
+    },
+    "tagline_ru": "Рыбацкая деревня на восточном берегу, ж/д ворота озера",
+    "intro_ru": [
+      "Варенна расположена на восточном берегу, в провинции Лекко, в 60 км к северу от Милана и 20 км от Лекко. Деревня (812 жителей, 11,2 км²) географически мала, но стратегически решающа: станция Varenna-Esino-Perledo на линии Тирано-Лекко-Милан — единственный прямой железнодорожный узел в сердце Ларио.",
+      "По преданию основана в 769 г. н.э. рыбаками, приняла беженцев с Isola Comacina после 1169 года. Среди главных достопримечательностей: Villa Monastero (бывший цистерцианский монастырь XI-XII в.) сегодня музей и конгресс-центр, Villa Cipressi с её террасами, замок Vezio с панорамным видом и шоу соколиной охоты, и геологический феномен сезонного потока Fiumelatte."
+    ],
+    "highlights_ru": [
+      "Единственная прямая ж/д станция центра озера (Милан-Лекко-Тирано, ~1ч от Милана)",
+      "Villa Monastero (XI-XII в.), замок Vezio, Fiumelatte",
+      "Узел золотого треугольника: прямые паромы в Белладжо и Менаджо за 15-20 мин",
+      "Средневековая деревня, основанная в 769 г. н.э. рыбаками, 812 жителей, ограниченный фонд"
+    ]
   }
 ]

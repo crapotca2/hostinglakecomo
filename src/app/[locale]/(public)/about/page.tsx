@@ -28,6 +28,11 @@ const COPY = {
     description:
       "9 years of hands-on hosting experience on Lake Como, 350+ five-star reviews. The story behind Host Como.",
   },
+  ru: {
+    title: "О нас — Анджело Таларико, Суперхост с 2017 года",
+    description:
+      "9 лет прямого опыта хостинга на озере Комо, более 350 пятизвёздочных отзывов. История за Хост Комо.",
+  },
 } as const;
 
 export async function generateMetadata({

@@ -13,6 +13,11 @@ const COPY = {
     description:
       "Generate a signed welcome letter translated into 4 languages for your guests. Reserved for owners managed by Host Como.",
   },
+  ru: {
+    title: "Генератор многоязычных приветственных писем — инструмент для хостов",
+    description:
+      "Создайте подписанное приветственное письмо, переведённое на 4 языка, для ваших гостей. Доступно собственникам в управлении с Хост Комо.",
+  },
 } as const;
 
 export async function generateMetadata({

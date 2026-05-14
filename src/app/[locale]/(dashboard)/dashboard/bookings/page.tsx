@@ -34,7 +34,7 @@ type StatusKey = "confirmed" | "checked_in" | "checked_out" | "pending" | "cance
 type SourceKey = "airbnb" | "booking" | "vrbo" | "direct" | "other";
 
 function formatEuro(amount: number, locale: string): string {
-  return new Intl.NumberFormat(locale === "en" ? "en-GB" : "it-IT", {
+  return new Intl.NumberFormat(locale === "en" ? "en-GB" : locale === "ru" ? "ru-RU" : "it-IT", {
     style: "currency",
     currency: "EUR",
     maximumFractionDigits: 0,
@@ -42,7 +42,7 @@ function formatEuro(amount: number, locale: string): string {
 }
 
 function formatDate(iso: string, locale: string): string {
-  return new Date(iso).toLocaleDateString(locale === "en" ? "en-GB" : "it-IT", {
+  return new Date(iso).toLocaleDateString(locale === "en" ? "en-GB" : locale === "ru" ? "ru-RU" : "it-IT", {
     day: "numeric",
     month: "short",
   });

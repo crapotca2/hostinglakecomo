@@ -13,6 +13,11 @@ const COPY = {
     description:
       "The homes we manage for our owners: Como city, First Basin, Upper Lake. Examples of professional hosting.",
   },
+  ru: {
+    title: "Объекты в управлении на озере Комо — Хост Комо",
+    description:
+      "Дома, которыми мы управляем для наших собственников: город Комо, Первый бассейн, Верхнее озеро. Примеры профессионального хостинга.",
+  },
 } as const;
 
 export async function generateMetadata({

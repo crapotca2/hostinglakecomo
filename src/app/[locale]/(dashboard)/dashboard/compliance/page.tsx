@@ -180,7 +180,7 @@ function TaxSection({
   }
 
   const fmt = (n: number) =>
-    new Intl.NumberFormat(locale === "en" ? "en-GB" : "it-IT", {
+    new Intl.NumberFormat(locale === "en" ? "en-GB" : locale === "ru" ? "ru-RU" : "it-IT", {
       style: "currency",
       currency: "EUR",
     }).format(n);

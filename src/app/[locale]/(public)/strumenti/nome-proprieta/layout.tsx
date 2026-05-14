@@ -13,6 +13,11 @@ const COPY = {
     description:
       "Generate an effective listing name for your Lake Como Airbnb in seconds. Reserved for owners managed by Host Como.",
   },
+  ru: {
+    title: "Генератор названий объектов Airbnb — инструмент для хостов",
+    description:
+      "Создайте эффективное название объявления для вашего Airbnb на озере Комо за секунды. Доступно собственникам в управлении с Хост Комо.",
+  },
 } as const;
 
 export async function generateMetadata({

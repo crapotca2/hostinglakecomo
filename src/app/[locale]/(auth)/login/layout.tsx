@@ -13,6 +13,11 @@ const COPY = {
     description:
       "Sign in to the client area reserved for owners managed by Host Como.",
   },
+  ru: {
+    title: "Вход — Личный кабинет Хост Комо",
+    description:
+      "Войдите в закрытую зону для собственников, передавших управление Хост Комо.",
+  },
 } as const;
 
 export async function generateMetadata({

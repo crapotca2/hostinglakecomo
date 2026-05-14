@@ -16,7 +16,7 @@ export default function InvestimentoPage() {
   const tFields = useTranslations("strumenti.investimento.fields");
   const tRes = useTranslations("strumenti.investimento.results");
   const tRows = useTranslations("strumenti.investimento.results.rows");
-  const locale = useLocale() as "it" | "en";
+  const locale = useLocale() as "it" | "en" | "ru";
   const fmt = (n: number, decimals = 0) => formatEuro(n, decimals, locale);
   const fmtInt = (n: number) => formatInteger(n, locale);
 
@@ -264,7 +264,7 @@ function InputField({
   step?: number;
   suffix?: string;
 }) {
-  const locale = useLocale() as "it" | "en";
+  const locale = useLocale() as "it" | "en" | "ru";
   return (
     <div>
       <label className="text-xs font-medium mb-1.5 block text-muted-foreground">{label}</label>

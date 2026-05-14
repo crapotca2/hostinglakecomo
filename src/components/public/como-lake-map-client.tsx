@@ -101,7 +101,11 @@ export function ComoLakeMapClient({ comuni, locale }: Props) {
                 </div>
               )}
               <div className="text-[10px] text-[#0C7489] mt-1 uppercase tracking-wider font-semibold">
-                {locale === "en" ? "Click to open" : "Clicca per aprire"}
+                {locale === "en"
+                  ? "Click to open"
+                  : locale === "ru"
+                  ? "Нажмите, чтобы открыть"
+                  : "Clicca per aprire"}
               </div>
             </Tooltip>
           </CircleMarker>

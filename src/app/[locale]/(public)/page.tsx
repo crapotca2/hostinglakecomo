@@ -27,6 +27,11 @@ const HOME_COPY = {
     description:
       "We manage your short-term rentals on Lake Como: dynamic pricing, hospitality, compliance, monthly reports. 9 years · 350+ 5★ reviews. Free consult.",
   },
+  ru: {
+    title: "Управление недвижимостью на озере Комо · 9 лет · 350+ отзывов 5★",
+    description:
+      "Мы управляем вашей краткосрочной арендой на озере Комо: динамическое ценообразование, приём гостей, compliance, ежемесячные отчёты. 9 лет · 350+ отзывов 5★. Бесплатная консультация.",
+  },
 } as const;
 
 export async function generateMetadata({

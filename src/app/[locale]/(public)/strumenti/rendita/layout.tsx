@@ -13,6 +13,11 @@ const COPY = {
     description:
       "Calculate in 30 seconds how much your home on Lake Como can earn on Airbnb. Annual revenue estimate by zone, sqm, guests.",
   },
+  ru: {
+    title: "Калькулятор доходности Airbnb Комо — бесплатный инструмент",
+    description:
+      "Рассчитайте за 30 секунд, сколько может приносить ваш дом на озере Комо на Airbnb. Оценка годовой выручки по зоне, площади, гостям.",
+  },
 } as const;
 
 export async function generateMetadata({

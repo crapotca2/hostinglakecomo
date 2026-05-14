@@ -17,7 +17,7 @@ function formatEuro(amount: number): string {
 }
 
 function localeTag(locale: string): string {
-  return locale === "en" ? "en-GB" : "it-IT";
+  return locale === "en" ? "en-GB" : locale === "ru" ? "ru-RU" : "it-IT";
 }
 
 export default function StayReportsPage() {

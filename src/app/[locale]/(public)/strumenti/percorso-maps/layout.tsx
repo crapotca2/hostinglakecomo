@@ -13,6 +13,11 @@ const COPY = {
     description:
       "Generate a curated Google Maps link for guests: coordinates, visual waypoints, parking guidance. Reserved for owners managed by Host Como.",
   },
+  ru: {
+    title: "Конструктор маршрутов Google Maps для гостей — инструмент для хостов",
+    description:
+      "Создайте курируемую ссылку Google Maps для гостей: координаты, визуальные путевые точки, указания по парковке. Доступно собственникам в управлении с Хост Комо.",
+  },
 } as const;
 
 export async function generateMetadata({

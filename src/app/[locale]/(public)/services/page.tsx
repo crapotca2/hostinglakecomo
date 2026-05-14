@@ -21,6 +21,11 @@ const SERVICES_COPY = {
     description:
       "Dynamic pricing, guest hospitality, CIN and tax compliance, Airbnb/Booking multi-channel. The property manager that handles everything for you.",
   },
+  ru: {
+    title: "Услуги управления краткосрочной арендой на озере Комо",
+    description:
+      "Динамическое ценообразование, приём гостей, соответствие CIN и cedolare, мультиканальность Airbnb/Booking. Управляющий, который занимается всем за вас.",
+  },
 } as const;
 
 export async function generateMetadata({

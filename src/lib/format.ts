@@ -1,11 +1,15 @@
 // Helper di formattazione numerica condivisi.
-// Locale-aware: in IT separatore migliaia è il punto, in EN la virgola.
+// Locale-aware: in IT separatore migliaia è il punto, in EN la virgola, in RU lo spazio.
 
-type Locale = "it" | "en";
+type Locale = "it" | "en" | "ru";
 
-function resolveLocale(locale?: Locale): string {
-  return locale === "en" ? "en-GB" : "it-IT";
+export function intlLocale(locale?: string): string {
+  if (locale === "en") return "en-GB";
+  if (locale === "ru") return "ru-RU";
+  return "it-IT";
 }
+
+const resolveLocale = intlLocale;
 
 export function formatEuro(
   amount: number,

@@ -18,7 +18,7 @@ const PARTNER_HOMEPAGE_EN = "https://lakecomocharter.com/en/";
 type Props = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  locale: "it" | "en";
+  locale: "it" | "en" | "ru";
 };
 
 const COPY = {
@@ -36,14 +36,23 @@ const COPY = {
     externalCta: "Discover Lake Como Charter",
     loading: "Loading experiences…",
   },
+  ru: {
+    title: "Забронируйте впечатление на озере",
+    subtitle:
+      "В сотрудничестве с Lake Como Charter — официальным партнёром по водным впечатлениям на озере Комо.",
+    externalCta: "Узнать о Lake Como Charter",
+    loading: "Загрузка впечатлений…",
+  },
 } as const;
 
 export function CharterExperienceDialog({ open, onOpenChange, locale }: Props) {
   const c = COPY[locale];
   const partnerUrl = locale === "en" ? PARTNER_HOMEPAGE_EN : PARTNER_HOMEPAGE_IT;
+  // Holidoit widget supports it/en only — fall back to EN for RU users.
+  const widgetLang = locale === "ru" ? "en" : locale;
   const iframeSrc = `https://cdn.holidoit.com/widgets/widget-experience-grid.html?embedId=${HOLIDOIT_EMBED_ID}&experienceId=${encodeURIComponent(
     HOLIDOIT_EXPERIENCE_IDS,
-  )}&lang=${locale}&resellerUuid=${HOLIDOIT_RESELLER_UUID}`;
+  )}&lang=${widgetLang}&resellerUuid=${HOLIDOIT_RESELLER_UUID}`;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

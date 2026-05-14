@@ -27,7 +27,7 @@ type Props = {
 
 export function ExperiencesSection({ compact = false }: Props) {
   const t = useTranslations("home.experiences");
-  const locale = useLocale() as "it" | "en";
+  const locale = useLocale() as "it" | "en" | "ru";
   const [open, setOpen] = useState(false);
 
   if (compact) {

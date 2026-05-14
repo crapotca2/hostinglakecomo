@@ -5,6 +5,7 @@
       "name": "Angelo",
       "role": "Property Manager",
       "role_en": "Property Manager",
+      "role_ru": "Управляющий недвижимостью",
       "shortRole": "Accoglienza",
       "yearsExperience": 9,
       "isSuperhost": true,
@@ -12,6 +13,7 @@
       "airbnbProfileUrl": "https://www.airbnb.it/users/profile/1462513131563105498",
       "bio": "Gestore con anni di esperienza diretta sul Lago di Como. Superhost Airbnb dal 2017 con tasso di risposta del 100%. Cura l'esperienza ospite e la qualità complessiva del servizio.",
       "bio_en": "Property Manager with years of hands-on experience on Lake Como. Airbnb Superhost since 2017 with a 100% response rate. Looks after the guest experience and the overall quality of the service.",
+      "bio_ru": "Управляющий с многолетним прямым опытом работы на озере Комо. Суперхост Airbnb с 2017 года со 100% уровнем ответа. Заботится о гостевом опыте и общем качестве сервиса.",
       "highlights": [
         "Superhost Airbnb dal 2017",
         "Tasso di risposta 100%",
@@ -25,6 +27,13 @@
         "Over 350 positive reviews",
         "Years of first-hand hospitality on the lake",
         "Fluent Italian and English"
+      ],
+      "highlights_ru": [
+        "Суперхост Airbnb с 2017 года",
+        "100% уровень ответа",
+        "Более 350 положительных отзывов",
+        "Годы прямого гостеприимства на озере",
+        "Свободный итальянский и английский"
       ]
     },
     {
@@ -32,6 +41,7 @@
       "name": null,
       "role": "Amministrazione, IT e Distribuzione",
       "role_en": "Admin, IT and Distribution",
+      "role_ru": "Администрация, IT и дистрибуция",
       "shortRole": "Operatività",
       "yearsExperience": null,
       "isSuperhost": false,
@@ -39,6 +49,7 @@
       "airbnbProfileUrl": null,
       "bio": "Cura la parte amministrativa, la compliance fiscale, i contratti e la tecnologia che fa girare l'operazione. Imposta il pricing dinamico, integra gli annunci sui canali primari (Airbnb, Booking, Expedia) e sui canali secondari long-stay, gestisce gli adempimenti CIN, comunicazione Questura, ISTAT, cedolare e tassa di soggiorno.",
       "bio_en": "Looks after admin, tax compliance, contracts and the technology that runs the operation. Sets up dynamic pricing, integrates listings on the primary channels (Airbnb, Booking, Expedia) and on long-stay secondary channels, and handles CIN, police reporting, ISTAT, flat-tax and tourist-tax compliance.",
+      "bio_ru": "Занимается административной частью, налоговым соответствием, контрактами и технологиями, на которых строится работа. Настраивает динамическое ценообразование, интегрирует объявления на основных каналах (Airbnb, Booking, Expedia) и на вторичных long-stay каналах, ведёт обязательства CIN, сообщения в Квестуру, ISTAT, cedolare secca и туристический налог.",
       "highlights": [
         "Amministrazione, contratti, compliance fiscale",
         "Pricing dinamico data-driven",
@@ -50,6 +61,12 @@
         "Data-driven dynamic pricing",
         "Multi-channel: Airbnb, Booking, Expedia + long-stay",
         "CIN, police, ISTAT, flat-tax compliance"
+      ],
+      "highlights_ru": [
+        "Администрация, контракты, налоговое соответствие",
+        "Динамическое ценообразование на основе данных",
+        "Мультиканальность: Airbnb, Booking, Expedia + long-stay",
+        "Обязательства CIN, Квестура, ISTAT, cedolare"
       ]
     },
     {
@@ -57,6 +74,7 @@
       "name": null,
       "role": "Esperienze e Territorio",
       "role_en": "Experiences and Local Network",
+      "role_ru": "Впечатления и местная сеть",
       "shortRole": "Esperienze",
       "yearsExperience": null,
       "isSuperhost": false,
@@ -64,6 +82,7 @@
       "airbnbProfileUrl": null,
       "bio": "Vive a Como ed è radicato nel territorio. Costruisce e mantiene la rete di partner locali: ristoranti selezionati, transfer privati, tour del lago, escursioni e attività per ospiti internazionali. Il suo lavoro trasforma un soggiorno in un'esperienza memorabile e fa la differenza nelle recensioni a cinque stelle.",
       "bio_en": "Lives in Como and is deeply rooted in the area. Builds and maintains the local partner network: selected restaurants, private transfers, lake tours, excursions and activities for international guests. His work turns a stay into a memorable experience and drives five-star reviews.",
+      "bio_ru": "Живёт в Комо и глубоко укоренён в местной среде. Создаёт и поддерживает сеть местных партнёров: отобранные рестораны, частные трансферы, туры по озеру, экскурсии и активности для международных гостей. Его работа превращает проживание в запоминающийся опыт и приносит пятизвёздочные отзывы.",
       "highlights": [
         "Residente a Como",
         "Rete ristoranti, transfer e tour selezionati",
@@ -75,14 +94,22 @@
         "Curated restaurants, transfers and tours network",
         "Experiences and activities on the lake",
         "Guest experience that drives five-star reviews"
+      ],
+      "highlights_ru": [
+        "Житель Комо",
+        "Сеть отобранных ресторанов, трансферов и туров",
+        "Впечатления и активности на озере",
+        "Гостевой опыт, приносящий пятизвёздочные отзывы"
       ]
     }
   ],
   "summary": {
     "headline": "Gestori specialisti sul Lago di Como",
     "headline_en": "Specialist Property Managers on Lake Como",
+    "headline_ru": "Управляющие-специалисты на озере Комо",
     "subline": "Tre gestori specializzati nella gestione, pulizia e organizzazione di immobili per ospiti internazionali.",
     "subline_en": "Three specialists managing, cleaning and organising properties for international guests.",
+    "subline_ru": "Три специалиста, занимающихся управлением, уборкой и организацией недвижимости для международных гостей.",
     "experience": {
       "yearsCombined": 9,
       "primarySuperhost": true,

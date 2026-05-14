@@ -15,7 +15,7 @@ type StatusKey = "succeeded" | "pending" | "failed" | "refunded";
 type TypeKey = "booking" | "deposit" | "service" | "refund";
 
 function formatEuro(amount: number, locale: string): string {
-  return new Intl.NumberFormat(locale === "en" ? "en-GB" : "it-IT", {
+  return new Intl.NumberFormat(locale === "en" ? "en-GB" : locale === "ru" ? "ru-RU" : "it-IT", {
     style: "currency",
     currency: "EUR",
     maximumFractionDigits: 2,
@@ -23,7 +23,7 @@ function formatEuro(amount: number, locale: string): string {
 }
 
 function formatDateTime(iso: string, locale: string): string {
-  return new Date(iso).toLocaleString(locale === "en" ? "en-GB" : "it-IT", {
+  return new Date(iso).toLocaleString(locale === "en" ? "en-GB" : locale === "ru" ? "ru-RU" : "it-IT", {
     day: "numeric",
     month: "short",
     year: "numeric",

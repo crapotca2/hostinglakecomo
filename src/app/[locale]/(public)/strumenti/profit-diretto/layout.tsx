@@ -13,6 +13,11 @@ const COPY = {
     description:
       "How much you keep after OTA fees, cleaning, taxes and management. Transparent calculator for owners on Lake Como.",
   },
+  ru: {
+    title: "Калькулятор чистой прибыли Airbnb — расходы и маржа",
+    description:
+      "Сколько остаётся после комиссий OTA, уборки, налогов и управления. Прозрачный калькулятор для собственников на озере Комо.",
+  },
 } as const;
 
 export async function generateMetadata({

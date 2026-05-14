@@ -13,7 +13,14 @@ type Guide = (typeof guides)[number];
 
 function pickStr(c: Comune | Guide, field: string, locale: string): string {
   const map = c as unknown as Record<string, string>;
-  if (locale === "en") return map[`${field}_en`] ?? map[`${field}_it`] ?? "";
+  if (locale !== "it") {
+    return (
+      map[`${field}_${locale}`] ??
+      map[`${field}_en`] ??
+      map[`${field}_it`] ??
+      ""
+    );
+  }
   return map[`${field}_it`] ?? map[`${field}_en`] ?? "";
 }
 
@@ -27,6 +34,11 @@ const INDEX_COPY = {
     title: "Lake Como Property Management — Towns and Areas",
     description:
       "Property management and short-term rental management across Lake Como: Bellagio, Menaggio, Varenna, Como, Tremezzo, Cernobbio, Lecco and more. Multi-channel strategy tuned area by area.",
+  },
+  ru: {
+    title: "Управление недвижимостью на озере Комо — Города и зоны",
+    description:
+      "Управление недвижимостью и краткосрочной арендой на озере Комо: Белладжо, Менаджо, Варенна, Комо, Тремеццо, Черноббио, Лекко и другие коммуны. Мультиканальная стратегия, откалиброванная зона за зоной.",
   },
 } as const;
 
@@ -125,18 +137,40 @@ function PropertyManagementIndexContent({ locale }: { locale: Locale }) {
 
 function GuidesSection({ locale }: { locale: string }) {
   const items = guides as Guide[];
-  const eyebrow =
-    locale === "en" ? "Guides for owners" : "Guide per proprietari";
-  const title =
-    locale === "en"
-      ? "What we explain before signing"
-      : "Quello che spieghiamo prima di firmare";
-  const subtitle =
-    locale === "en"
-      ? "Compliance, yield, channels — the topics that matter most before entrusting a property."
-      : "Compliance, rendimento, canali — i temi che contano di più prima di affidarci una proprietà.";
-  const readingLabel = locale === "en" ? "min read" : "min di lettura";
-  const readMoreLabel = locale === "en" ? "Read the guide" : "Leggi la guida";
+  const GUIDE_COPY: Record<string, {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    readingLabel: string;
+    readMoreLabel: string;
+  }> = {
+    it: {
+      eyebrow: "Guide per proprietari",
+      title: "Quello che spieghiamo prima di firmare",
+      subtitle:
+        "Compliance, rendimento, canali — i temi che contano di più prima di affidarci una proprietà.",
+      readingLabel: "min di lettura",
+      readMoreLabel: "Leggi la guida",
+    },
+    en: {
+      eyebrow: "Guides for owners",
+      title: "What we explain before signing",
+      subtitle:
+        "Compliance, yield, channels — the topics that matter most before entrusting a property.",
+      readingLabel: "min read",
+      readMoreLabel: "Read the guide",
+    },
+    ru: {
+      eyebrow: "Гайды для собственников",
+      title: "Что мы объясняем до подписания",
+      subtitle:
+        "Compliance, доходность, каналы — темы, которые имеют наибольшее значение, прежде чем доверить нам объект.",
+      readingLabel: "мин чтения",
+      readMoreLabel: "Читать гайд",
+    },
+  };
+  const copy = GUIDE_COPY[locale] ?? GUIDE_COPY.it;
+  const { eyebrow, title, subtitle, readingLabel, readMoreLabel } = copy;
 
   return (
     <section className="py-16 sm:py-20 bg-white border-t border-border/50">

@@ -1,18 +1,18 @@
 /**
  * Helpers to read locale-aware fields from data files (team.json, properties.json).
  *
- * Convention: alongside an Italian field `foo`, an English variant lives at
- * `foo_en`. For locales other than `en` we always return the base field.
- * For `en` we prefer `foo_en` and fall back to `foo` if the EN variant is
- * missing or empty.
+ * Convention: alongside an Italian field `foo`, locale variants live at
+ * `foo_<locale>` (e.g. `foo_en`, `foo_ru`). For `it` we always return the
+ * base field. For other locales we prefer the suffixed variant and fall back
+ * to the base field if the variant is missing or empty.
  */
 
-export type SupportedLocale = "it" | "en";
+export type SupportedLocale = "it" | "en" | "ru";
 
 /**
- * Picks the localised value of `field` from `obj`. For `en` locale, looks for
- * `${field}_en`; otherwise returns `obj[field]`. Falls back to the base field
- * if the EN variant is missing or an empty string/array.
+ * Picks the localised value of `field` from `obj`. For non-IT locales looks
+ * for `${field}_${locale}`; otherwise returns `obj[field]`. Falls back to the
+ * base field if the localised variant is missing or empty.
  */
 export function pickLocalized<T = unknown>(
   obj: Record<string, unknown> | null | undefined,
@@ -21,10 +21,10 @@ export function pickLocalized<T = unknown>(
 ): T | undefined {
   if (!obj) return undefined;
   const base = obj[field] as T | undefined;
-  if (locale !== "en") return base;
-  const en = obj[`${field}_en`] as T | undefined;
-  if (en === undefined || en === null) return base;
-  if (typeof en === "string" && en.trim() === "") return base;
-  if (Array.isArray(en) && en.length === 0) return base;
-  return en;
+  if (locale === "it") return base;
+  const localized = obj[`${field}_${locale}`] as T | undefined;
+  if (localized === undefined || localized === null) return base;
+  if (typeof localized === "string" && localized.trim() === "") return base;
+  if (Array.isArray(localized) && localized.length === 0) return base;
+  return localized;
 }

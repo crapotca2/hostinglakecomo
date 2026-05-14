@@ -12,6 +12,13 @@ Lago).
 - NextAuth.js (password-based, area clienti)
 - Deploy: Vercel via push a master
 
+## i18n
+- Locales supportati: `it` (default), `en`, `ru`
+- Routing: next-intl con `localePrefix: "as-needed"` — IT è default, EN/RU hanno prefisso `/en/...` o `/ru/...`
+- Messaggi UI: `messages/{it,en,ru}.json` (~1700 chiavi ciascuno, devono restare in struttura mirror)
+- Data files locale-aware (`team.json`, `properties.json`, `guides.json`, `comuni.json`): convenzione `field`, `field_en`, `field_ru` letta da `pickLocalized` in `src/lib/i18n-data.ts`
+- Pagine legali (`privacy`, `terms`, `cookies`, `note-legali`): COPY object con chiavi `it`/`en`/`ru`
+
 ## Design
 - Stile moderno minimal, sfondo bianco
 - Primario: teal #0C7489 -> #119DB0 (gradient)

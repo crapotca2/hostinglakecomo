@@ -13,6 +13,11 @@ const COPY = {
     description:
       "Estimate cap rate, cash-on-cash return and payback period for a short-term rental property on Lake Como.",
   },
+  ru: {
+    title: "Калькулятор инвестиций в недвижимость Комо — Cap Rate",
+    description:
+      "Оцените cap rate, cash-on-cash return и срок окупаемости объекта краткосрочной аренды на озере Комо.",
+  },
 } as const;
 
 export async function generateMetadata({

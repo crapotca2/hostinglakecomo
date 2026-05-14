@@ -27,7 +27,7 @@ const QUICK_ACTIONS = [
 ] as const;
 
 function formatEuro(amount: number, locale: string): string {
-  return new Intl.NumberFormat(locale === "en" ? "en-GB" : "it-IT", {
+  return new Intl.NumberFormat(locale === "en" ? "en-GB" : locale === "ru" ? "ru-RU" : "it-IT", {
     style: "currency",
     currency: "EUR",
     maximumFractionDigits: 0,
@@ -35,7 +35,7 @@ function formatEuro(amount: number, locale: string): string {
 }
 
 function formatDate(iso: string, locale: string): string {
-  return new Date(iso).toLocaleDateString(locale === "en" ? "en-GB" : "it-IT", {
+  return new Date(iso).toLocaleDateString(locale === "en" ? "en-GB" : locale === "ru" ? "ru-RU" : "it-IT", {
     day: "numeric",
     month: "short",
   });
@@ -59,7 +59,7 @@ export default function DashboardPage() {
           </p>
         </div>
         <div className="text-xs text-muted-foreground hidden sm:block">
-          {new Date().toLocaleDateString(locale === "en" ? "en-GB" : "it-IT", {
+          {new Date().toLocaleDateString(locale === "en" ? "en-GB" : locale === "ru" ? "ru-RU" : "it-IT", {
             weekday: "long",
             day: "numeric",
             month: "long",

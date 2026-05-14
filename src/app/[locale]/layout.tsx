@@ -33,6 +33,11 @@ const ROOT_COPY = {
     description:
       "Professional property managers on Lake Como. Full short-term rental management: pricing, hospitality, compliance, reporting. 9 years of experience.",
   },
+  ru: {
+    defaultTitle: "Хост Комо — Управление недвижимостью на озере Комо",
+    description:
+      "Профессиональные управляющие недвижимостью на озере Комо. Полное управление краткосрочной арендой: ценообразование, приём гостей, юридическое соответствие, отчётность. 9 лет опыта.",
+  },
 } as const;
 
 export const viewport: Viewport = {

@@ -12,7 +12,7 @@ const STATUS_STYLES: Record<string, string> = {
 type StatusKey = "paid" | "pending";
 
 function formatEuro(amount: number, locale: string): string {
-  return new Intl.NumberFormat(locale === "en" ? "en-GB" : "it-IT", {
+  return new Intl.NumberFormat(locale === "en" ? "en-GB" : locale === "ru" ? "ru-RU" : "it-IT", {
     style: "currency",
     currency: "EUR",
     maximumFractionDigits: 0,

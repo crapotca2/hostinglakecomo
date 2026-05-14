@@ -26,27 +26,48 @@ type Comune = (typeof comuni)[number];
 type TypologySegment = {
   label: string;
   labelEn?: string;
+  labelRu?: string;
   pct: number;
 };
 
 type MarketStats = {
   airbnbListings: string;
   airbnbListingsEn?: string;
+  airbnbListingsRu?: string;
   bookingProperties: string;
   expediaPresence: string;
   expediaPresenceEn?: string;
+  expediaPresenceRu?: string;
   adrRange: string;
   adrRangeEn?: string;
+  adrRangeRu?: string;
   adrLuxuryRange?: string | null;
   adrLuxuryRangeEn?: string | null;
+  adrLuxuryRangeRu?: string | null;
   adrLuxuryNote?: string | null;
   adrLuxuryNoteEn?: string | null;
+  adrLuxuryNoteRu?: string | null;
   occupancyRange: string;
   typologyMix?: TypologySegment[];
   topHotels: string[];
   dataNote?: string;
   dataNoteEn?: string;
+  dataNoteRu?: string;
 };
+
+// Picks the locale-specific suffix variant of a stats field (e.g. `adrRange`,
+// `adrRangeEn`, `adrRangeRu`), falling back to EN then IT base.
+function pickStat(
+  stats: Record<string, unknown>,
+  base: string,
+  locale: string,
+): string | undefined {
+  if (locale === "it") return stats[base] as string | undefined;
+  const suffix = locale === "en" ? "En" : locale === "ru" ? "Ru" : "";
+  return (stats[`${base}${suffix}`] ??
+    stats[`${base}En`] ??
+    stats[base]) as string | undefined;
+}
 
 const TYPOLOGY_COLORS = ["#1D3A62", "#0C7489", "#119DB0", "#7EC8D3", "#C8E5EA"];
 
@@ -77,12 +98,16 @@ function pickLocalized<K extends string>(
   field: K,
   locale: string,
 ): string {
-  const enKey = `${field}_en` as keyof Comune;
-  const itKey = `${field}_it` as keyof Comune;
-  if (locale === "en") {
-    return ((c[enKey] as string) ?? (c[itKey] as string)) || "";
+  const map = c as unknown as Record<string, string>;
+  if (locale !== "it") {
+    return (
+      map[`${field}_${locale}`] ??
+      map[`${field}_en`] ??
+      map[`${field}_it`] ??
+      ""
+    );
   }
-  return ((c[itKey] as string) ?? (c[enKey] as string)) || "";
+  return map[`${field}_it`] ?? map[`${field}_en`] ?? "";
 }
 
 function pickLocalizedArray(
@@ -90,10 +115,16 @@ function pickLocalizedArray(
   field: string,
   locale: string,
 ): string[] {
-  const en = (c as unknown as Record<string, string[]>)[`${field}_en`];
-  const it = (c as unknown as Record<string, string[]>)[`${field}_it`];
-  if (locale === "en") return en ?? it ?? [];
-  return it ?? en ?? [];
+  const map = c as unknown as Record<string, string[]>;
+  if (locale !== "it") {
+    return (
+      map[`${field}_${locale}`] ??
+      map[`${field}_en`] ??
+      map[`${field}_it`] ??
+      []
+    );
+  }
+  return map[`${field}_it`] ?? map[`${field}_en`] ?? [];
 }
 
 export function generateStaticParams() {
@@ -114,23 +145,32 @@ export async function generateMetadata({
   const { locale, comune: slug } = await params;
   const c = getComune(slug);
   if (!c) {
+    const notFoundTitle: Record<string, string> = {
+      it: "Non trovato",
+      en: "Not found",
+      ru: "Не найдено",
+    };
     return buildMetadata({
       locale,
       pathname: `/property-management/${slug}`,
-      title: locale === "en" ? "Not found" : "Non trovato",
+      title: notFoundTitle[locale] ?? notFoundTitle.it,
       description: "",
       noIndex: true,
     });
   }
   const brand = brandName(locale);
-  const title =
-    locale === "en"
-      ? `${c.name} Property Management — Lake Como Short-Term Rentals | ${brand}`
-      : `Property Management ${c.name} — Gestione Affitti Brevi Lago di Como | ${brand}`;
-  const description =
-    locale === "en"
-      ? `Property management and short-term rental management in ${c.name} on Lake Como. Airbnb, Booking, Expedia plus long-stay channels. 9 years of direct experience.`
-      : `Property management e gestione affitti brevi a ${c.name} sul Lago di Como. Airbnb, Booking, Expedia e canali long-stay. 9 anni di esperienza diretta sul lago.`;
+  const metaTitle: Record<string, string> = {
+    it: `Property Management ${c.name} — Gestione Affitti Brevi Lago di Como | ${brand}`,
+    en: `${c.name} Property Management — Lake Como Short-Term Rentals | ${brand}`,
+    ru: `Управление недвижимостью ${c.name} — краткосрочная аренда на озере Комо | ${brand}`,
+  };
+  const metaDescription: Record<string, string> = {
+    it: `Property management e gestione affitti brevi a ${c.name} sul Lago di Como. Airbnb, Booking, Expedia e canali long-stay. 9 anni di esperienza diretta sul lago.`,
+    en: `Property management and short-term rental management in ${c.name} on Lake Como. Airbnb, Booking, Expedia plus long-stay channels. 9 years of direct experience.`,
+    ru: `Управление недвижимостью и краткосрочной арендой в ${c.name} на озере Комо. Airbnb, Booking, Expedia и каналы long-stay. 9 лет прямого опыта на озере.`,
+  };
+  const title = metaTitle[locale] ?? metaTitle.it;
+  const description = metaDescription[locale] ?? metaDescription.it;
   return buildMetadata({
     locale,
     pathname: `/property-management/${slug}`,
@@ -161,80 +201,144 @@ function ComuneLandingClient({
   const tNav = useTranslations("nav");
   const tCommon = useTranslations("common");
 
-  const pillars =
-    locale === "en"
-      ? [
-          "Primary channels Airbnb · Booking · Expedia",
-          "Long-stay channels for low season",
-          "Dynamic pricing area by area",
-        ]
-      : [
-          "Canali primari Airbnb · Booking · Expedia",
-          "Canali long-stay per la bassa stagione",
-          "Pricing dinamico zona per zona",
-        ];
+  const PILLARS: Record<string, string[]> = {
+    it: [
+      "Canali primari Airbnb · Booking · Expedia",
+      "Canali long-stay per la bassa stagione",
+      "Pricing dinamico zona per zona",
+    ],
+    en: [
+      "Primary channels Airbnb · Booking · Expedia",
+      "Long-stay channels for low season",
+      "Dynamic pricing area by area",
+    ],
+    ru: [
+      "Основные каналы Airbnb · Booking · Expedia",
+      "Каналы long-stay для низкого сезона",
+      "Динамическое ценообразование зона за зоной",
+    ],
+  };
+  const pillars = PILLARS[locale] ?? PILLARS.it;
 
   const tagline = pickLocalized(comune, "tagline", locale);
   const introParagraphs = pickLocalizedArray(comune, "intro", locale);
   const highlights = pickLocalizedArray(comune, "highlights", locale);
   const marketStats = (comune as unknown as { marketStats?: MarketStats })
     .marketStats;
-  const statsLabels =
-    locale === "en"
-      ? {
-          eyebrow: "Market data",
-          titlePrefix: "The short-term rental market in",
-          subtitle:
-            "Public data aggregated from AirDNA, Booking.com and Expedia · trailing 12 months 2024-2025.",
-          listings: "Active listings",
-          properties: "Properties",
-          adrApt: "Apartment ADR",
-          adrVilla: "Villa ADR",
-          occupancy: "Peak occupancy",
-          topHotels: "Main classified hotels",
-          expediaInventory: "Inventory mostly mirrored from Booking.com",
-          typologyMix: "Listing mix by type",
-        }
-      : {
-          eyebrow: "Statistiche di mercato",
-          titlePrefix: "Il mercato affitti brevi a",
-          subtitle:
-            "Dati pubblici aggregati da AirDNA, Booking.com ed Expedia · trailing 12 mesi 2024-2025.",
-          listings: "Annunci attivi",
-          properties: "Proprietà",
-          adrApt: "ADR appartamenti",
-          adrVilla: "ADR ville",
-          occupancy: "Occupazione picco",
-          topHotels: "Hotel classificati",
-          expediaInventory: "Inventory in larga parte sovrapposto a Booking.com",
-          typologyMix: "Mix per tipologia",
-        };
+  const STATS_LABELS: Record<string, {
+    eyebrow: string;
+    titlePrefix: string;
+    subtitle: string;
+    listings: string;
+    properties: string;
+    adrApt: string;
+    adrVilla: string;
+    occupancy: string;
+    topHotels: string;
+    expediaInventory: string;
+    typologyMix: string;
+  }> = {
+    it: {
+      eyebrow: "Statistiche di mercato",
+      titlePrefix: "Il mercato affitti brevi a",
+      subtitle:
+        "Dati pubblici aggregati da AirDNA, Booking.com ed Expedia · trailing 12 mesi 2024-2025.",
+      listings: "Annunci attivi",
+      properties: "Proprietà",
+      adrApt: "ADR appartamenti",
+      adrVilla: "ADR ville",
+      occupancy: "Occupazione picco",
+      topHotels: "Hotel classificati",
+      expediaInventory: "Inventory in larga parte sovrapposto a Booking.com",
+      typologyMix: "Mix per tipologia",
+    },
+    en: {
+      eyebrow: "Market data",
+      titlePrefix: "The short-term rental market in",
+      subtitle:
+        "Public data aggregated from AirDNA, Booking.com and Expedia · trailing 12 months 2024-2025.",
+      listings: "Active listings",
+      properties: "Properties",
+      adrApt: "Apartment ADR",
+      adrVilla: "Villa ADR",
+      occupancy: "Peak occupancy",
+      topHotels: "Main classified hotels",
+      expediaInventory: "Inventory mostly mirrored from Booking.com",
+      typologyMix: "Listing mix by type",
+    },
+    ru: {
+      eyebrow: "Рыночные данные",
+      titlePrefix: "Рынок краткосрочной аренды в",
+      subtitle:
+        "Публичные данные, агрегированные из AirDNA, Booking.com и Expedia · скользящие 12 месяцев 2024-2025.",
+      listings: "Активные объявления",
+      properties: "Объекты",
+      adrApt: "ADR апартаменты",
+      adrVilla: "ADR виллы",
+      occupancy: "Пиковая заполняемость",
+      topHotels: "Основные классифицированные отели",
+      expediaInventory: "Инвентарь в основном дублируется с Booking.com",
+      typologyMix: "Распределение объявлений по типу",
+    },
+  };
+  const statsLabels = STATS_LABELS[locale] ?? STATS_LABELS.it;
 
+  const PM_BREADCRUMB: Record<string, string> = {
+    it: "Property Management",
+    en: "Property management",
+    ru: "Управление недвижимостью",
+  };
   const breadcrumbs = [
     { name: tNav("home"), path: "/" },
     {
-      name: locale === "en" ? "Property management" : "Property Management",
+      name: PM_BREADCRUMB[locale] ?? PM_BREADCRUMB.it,
       path: "/property-management",
     },
     { name: comune.name, path: `/property-management/${comune.slug}` },
   ];
 
-  const titlePrefix =
-    locale === "en" ? "Property management in" : "Property management a";
-  const subtitleSuffix =
-    locale === "en"
-      ? "on Lake Como, end-to-end."
-      : "sul Lago di Como, chiavi in mano.";
-  const ctaLabel =
-    locale === "en" ? "Request a consultation" : "Richiedi una consulenza";
-  const sectionWhyHere =
-    locale === "en" ? "Why this area" : "Perché questa zona";
-  const sectionApproach =
-    locale === "en" ? "Our approach here" : "Il nostro approccio";
-  const sectionApproachBody =
-    locale === "en"
-      ? `Multi-channel distribution on Airbnb, Booking and Expedia for tourist bookings, plus long-stay channels for medium-term lets — a 365-day strategy calibrated on the specifics of ${comune.name}.`
-      : `Distribuzione multi-canale su Airbnb, Booking ed Expedia per le prenotazioni turistiche, e canali long-stay per le locazioni medio-lunghe — una strategia 365 giorni calibrata sulle specificità di ${comune.name}.`;
+  const HERO_LABELS: Record<string, {
+    titlePrefix: string;
+    subtitleSuffix: string;
+    ctaLabel: string;
+    sectionWhyHere: string;
+    sectionApproach: string;
+    sectionApproachBody: string;
+  }> = {
+    it: {
+      titlePrefix: "Property management a",
+      subtitleSuffix: "sul Lago di Como, chiavi in mano.",
+      ctaLabel: "Richiedi una consulenza",
+      sectionWhyHere: "Perché questa zona",
+      sectionApproach: "Il nostro approccio",
+      sectionApproachBody: `Distribuzione multi-canale su Airbnb, Booking ed Expedia per le prenotazioni turistiche, e canali long-stay per le locazioni medio-lunghe — una strategia 365 giorni calibrata sulle specificità di ${comune.name}.`,
+    },
+    en: {
+      titlePrefix: "Property management in",
+      subtitleSuffix: "on Lake Como, end-to-end.",
+      ctaLabel: "Request a consultation",
+      sectionWhyHere: "Why this area",
+      sectionApproach: "Our approach here",
+      sectionApproachBody: `Multi-channel distribution on Airbnb, Booking and Expedia for tourist bookings, plus long-stay channels for medium-term lets — a 365-day strategy calibrated on the specifics of ${comune.name}.`,
+    },
+    ru: {
+      titlePrefix: "Управление недвижимостью в",
+      subtitleSuffix: "на озере Комо, под ключ.",
+      ctaLabel: "Заказать консультацию",
+      sectionWhyHere: "Почему эта зона",
+      sectionApproach: "Наш подход здесь",
+      sectionApproachBody: `Мультиканальная дистрибуция на Airbnb, Booking и Expedia для туристических бронирований, плюс каналы long-stay для среднесрочной аренды — 365-дневная стратегия, откалиброванная на специфику ${comune.name}.`,
+    },
+  };
+  const heroLabels = HERO_LABELS[locale] ?? HERO_LABELS.it;
+  const {
+    titlePrefix,
+    subtitleSuffix,
+    ctaLabel,
+    sectionWhyHere,
+    sectionApproach,
+    sectionApproachBody,
+  } = heroLabels;
 
   const localBusinessSchema = {
     "@context": "https://schema.org",
@@ -270,7 +374,12 @@ function ComuneLandingClient({
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white text-xs font-medium mb-5 border border-white/15">
             <MapPin className="h-3.5 w-3.5" />
-            {comune.name}, {locale === "en" ? "Lake Como" : "Lago di Como"}
+            {comune.name},{" "}
+            {locale === "en"
+              ? "Lake Como"
+              : locale === "ru"
+              ? "Озеро Комо"
+              : "Lago di Como"}
           </div>
           <h1 className="text-4xl sm:text-5xl font-light mb-4 leading-tight text-white">
             {titlePrefix}{" "}
@@ -325,7 +434,11 @@ function ComuneLandingClient({
                     <Navigation className="h-4 w-4 text-primary" />
                   </div>
                   <h3 className="text-sm font-semibold">
-                    {locale === "en" ? "Where it is" : "Dove si trova"}
+                    {locale === "en"
+                      ? "Where it is"
+                      : locale === "ru"
+                      ? "Где находится"
+                      : "Dove si trova"}
                   </h3>
                 </div>
                 <a
@@ -334,7 +447,11 @@ function ComuneLandingClient({
                   rel="noopener noreferrer"
                   className="text-xs text-primary hover:underline"
                 >
-                  {locale === "en" ? "Open in Maps" : "Apri in Maps"}
+                  {locale === "en"
+                    ? "Open in Maps"
+                    : locale === "ru"
+                    ? "Открыть в Maps"
+                    : "Apri in Maps"}
                 </a>
               </div>
               <GoogleMapEmbed
@@ -389,32 +506,40 @@ function ComuneLandingClient({
                 <PlatformStat
                   label={statsLabels.listings}
                   value={
-                    locale === "en" && marketStats.airbnbListingsEn
-                      ? marketStats.airbnbListingsEn
-                      : marketStats.airbnbListings
+                    pickStat(
+                      marketStats as unknown as Record<string, unknown>,
+                      "airbnbListings",
+                      locale,
+                    ) ?? marketStats.airbnbListings
                   }
                 />
                 <PlatformStat
                   label={statsLabels.adrApt}
                   value={
-                    locale === "en" && marketStats.adrRangeEn
-                      ? marketStats.adrRangeEn
-                      : marketStats.adrRange
+                    pickStat(
+                      marketStats as unknown as Record<string, unknown>,
+                      "adrRange",
+                      locale,
+                    ) ?? marketStats.adrRange
                   }
                 />
                 {marketStats.adrLuxuryRange && (
                   <PlatformStat
                     label={statsLabels.adrVilla}
                     value={
-                      locale === "en" && marketStats.adrLuxuryRangeEn
-                        ? marketStats.adrLuxuryRangeEn
-                        : marketStats.adrLuxuryRange
+                      pickStat(
+                        marketStats as unknown as Record<string, unknown>,
+                        "adrLuxuryRange",
+                        locale,
+                      ) ?? marketStats.adrLuxuryRange
                     }
                     hint={
                       marketStats.adrLuxuryNote
-                        ? locale === "en" && marketStats.adrLuxuryNoteEn
-                          ? marketStats.adrLuxuryNoteEn
-                          : marketStats.adrLuxuryNote
+                        ? pickStat(
+                            marketStats as unknown as Record<string, unknown>,
+                            "adrLuxuryNote",
+                            locale,
+                          ) ?? marketStats.adrLuxuryNote
                         : undefined
                     }
                   />
@@ -467,6 +592,8 @@ function ComuneLandingClient({
                                 aria-label={
                                   locale === "en"
                                     ? `${h.stars} stars`
+                                    : locale === "ru"
+                                    ? `${h.stars} звёзд`
                                     : `${h.stars} stelle`
                                 }
                               >
@@ -496,12 +623,20 @@ function ComuneLandingClient({
                 icon={<Globe2 className="h-4 w-4" />}
               >
                 <PlatformStat
-                  label={locale === "en" ? "Presence" : "Presenza"}
-                  value={
-                    locale === "en" && marketStats.expediaPresenceEn
-                      ? capitalize(marketStats.expediaPresenceEn)
-                      : capitalize(marketStats.expediaPresence)
+                  label={
+                    locale === "en"
+                      ? "Presence"
+                      : locale === "ru"
+                      ? "Присутствие"
+                      : "Presenza"
                   }
+                  value={capitalize(
+                    pickStat(
+                      marketStats as unknown as Record<string, unknown>,
+                      "expediaPresence",
+                      locale,
+                    ) ?? marketStats.expediaPresence,
+                  )}
                 />
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   {statsLabels.expediaInventory}
@@ -521,6 +656,8 @@ function ComuneLandingClient({
                   <div className="text-xs text-muted-foreground/70">
                     {locale === "en"
                       ? "Across all platforms"
+                      : locale === "ru"
+                      ? "По всем платформам"
                       : "Sull'insieme delle piattaforme"}
                   </div>
                 </div>
@@ -530,13 +667,15 @@ function ComuneLandingClient({
               </div>
             </div>
 
-            {(marketStats.dataNote || marketStats.dataNoteEn) && (
+            {(marketStats.dataNote || marketStats.dataNoteEn || marketStats.dataNoteRu) && (
               <div className="flex items-start gap-2.5 mt-6 p-4 rounded-xl bg-amber-50 border border-amber-200/60">
                 <Info className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
                 <p className="text-xs text-amber-800 leading-relaxed">
-                  {locale === "en" && marketStats.dataNoteEn
-                    ? marketStats.dataNoteEn
-                    : marketStats.dataNote}
+                  {pickStat(
+                    marketStats as unknown as Record<string, unknown>,
+                    "dataNote",
+                    locale,
+                  ) ?? marketStats.dataNote}
                 </p>
               </div>
             )}
@@ -549,12 +688,16 @@ function ComuneLandingClient({
           <h2 className="text-2xl sm:text-3xl font-light mb-3 text-foreground">
             {locale === "en"
               ? "Want us to manage your property in"
+              : locale === "ru"
+              ? "Хотите, чтобы мы управляли вашим объектом в"
               : "Vuoi che gestiamo la tua proprietà a"}{" "}
             <span className="font-semibold">{comune.name}</span>?
           </h2>
           <p className="text-muted-foreground mb-7 leading-relaxed">
             {locale === "en"
               ? "A single conversation to see whether we're a good fit. No commitment, we reply within 48 hours."
+              : locale === "ru"
+              ? "Один разговор, чтобы понять, подходим ли мы вам. Без обязательств, отвечаем в течение 48 часов."
               : "Una sola conversazione per capire se siamo l'interlocutore giusto. Nessun impegno, ti rispondiamo entro 48 ore."}
           </p>
           <Link
@@ -620,7 +763,11 @@ function TypologyBar({
               width: `${s.pct}%`,
               backgroundColor: TYPOLOGY_COLORS[i % TYPOLOGY_COLORS.length],
             }}
-            title={`${locale === "en" ? s.labelEn ?? s.label : s.label}: ${s.pct}%`}
+            title={`${locale === "en"
+                ? s.labelEn ?? s.label
+                : locale === "ru"
+                ? s.labelRu ?? s.labelEn ?? s.label
+                : s.label}: ${s.pct}%`}
           />
         ))}
       </div>
@@ -635,7 +782,11 @@ function TypologyBar({
               }}
             />
             <span className="text-foreground font-medium">
-              {locale === "en" ? s.labelEn ?? s.label : s.label}
+              {locale === "en"
+                ? s.labelEn ?? s.label
+                : locale === "ru"
+                ? s.labelRu ?? s.labelEn ?? s.label
+                : s.label}
             </span>
             <span className="text-muted-foreground">{s.pct}%</span>
           </li>

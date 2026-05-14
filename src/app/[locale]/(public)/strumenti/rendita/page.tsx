@@ -56,7 +56,7 @@ const OCCUPANCY: Record<Zone, number> = {
 
 export default function RenditaPage() {
   const t = useTranslations("strumenti.rendita");
-  const locale = useLocale() as "it" | "en";
+  const locale = useLocale() as "it" | "en" | "ru";
   const fmt = (n: number, decimals = 0) => formatEuro(n, decimals, locale);
   const tStr = useTranslations("strumenti");
   const tZones = useTranslations("strumenti.rendita.zones");

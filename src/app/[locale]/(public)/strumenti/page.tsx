@@ -15,6 +15,11 @@ const STRUMENTI_COPY = {
     description:
       "Free simulators: yield, investment, net profit. See how much your home on Lake Como can earn with Airbnb and short-term rentals.",
   },
+  ru: {
+    title: "Инструменты для собственников — калькулятор доходности Airbnb Комо",
+    description:
+      "Бесплатные калькуляторы: доходность, инвестиции, чистая прибыль. Узнайте, сколько может приносить ваш дом на озере Комо с Airbnb и краткосрочной арендой.",
+  },
 } as const;
 
 export async function generateMetadata({
