@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { ArrowRight, ExternalLink, Anchor } from "lucide-react";
+import { ArrowRight, Anchor } from "lucide-react";
 import { CharterExperienceDialog } from "./charter-experience-dialog";
 
 const CATEGORIES = [
@@ -20,9 +20,6 @@ const CATEGORIES = [
   },
 ] as const;
 
-const PARTNER_HOMEPAGE_IT = "https://lakecomocharter.com/it/";
-const PARTNER_HOMEPAGE_EN = "https://lakecomocharter.com/en/";
-
 type Props = {
   /** Layout compatto per property detail page (banner orizzontale, no grid card) */
   compact?: boolean;
@@ -32,7 +29,6 @@ export function ExperiencesSection({ compact = false }: Props) {
   const t = useTranslations("home.experiences");
   const locale = useLocale() as "it" | "en";
   const [open, setOpen] = useState(false);
-  const partnerUrl = locale === "en" ? PARTNER_HOMEPAGE_EN : PARTNER_HOMEPAGE_IT;
 
   if (compact) {
     return (
@@ -93,10 +89,6 @@ export function ExperiencesSection({ compact = false }: Props) {
     <section className="py-16 sm:py-20 bg-gradient-to-br from-primary/[0.04] to-primary/[0.01] border-y border-border/50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-primary mb-3">
-            <Anchor className="h-3.5 w-3.5" />
-            {t("eyebrow")}
-          </div>
           <h2 className="text-3xl sm:text-4xl font-light text-foreground mb-4">
             {t("title1")}{" "}
             <span className="font-semibold">{t("title2")}</span>
@@ -148,17 +140,6 @@ export function ExperiencesSection({ compact = false }: Props) {
           ))}
         </div>
 
-        <div className="text-center mt-10">
-          <a
-            href={partnerUrl}
-            target="_blank"
-            rel="noopener noreferrer external"
-            className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-primary transition-colors"
-          >
-            {t("externalLinkCta")}
-            <ExternalLink className="h-3 w-3" />
-          </a>
-        </div>
       </div>
 
       <CharterExperienceDialog
