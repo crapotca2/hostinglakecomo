@@ -13,7 +13,7 @@ export function Footer() {
     <footer className="relative overflow-hidden bg-[#1D3A62]">
       <div
         aria-hidden
-        className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center pointer-events-none"
+        className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.webp')] bg-cover bg-center pointer-events-none"
       />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-10 lg:gap-12 lg:items-center">
@@ -21,12 +21,17 @@ export function Footer() {
           <div className="space-y-3 lg:-mt-2">
             {/* Logo lockup (mark + wordmark) */}
             <div className="flex items-center gap-2">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/logo/logo-white.png"
-                alt={brand}
-                className="h-20 w-20 object-contain shrink-0"
-              />
+              <picture className="shrink-0">
+                <source srcSet="/images/logo/logo-white.webp" type="image/webp" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/logo/logo-white.png"
+                  alt={brand}
+                  width={80}
+                  height={80}
+                  className="h-20 w-20 object-contain"
+                />
+              </picture>
               <span className="font-bungee uppercase text-3xl sm:text-4xl leading-none tracking-wide text-white">
                 {brand}
               </span>

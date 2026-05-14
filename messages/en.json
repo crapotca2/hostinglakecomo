@@ -102,6 +102,35 @@
       "yearsBadgeYears": "9+",
       "yearsBadgeText": "years of experience\nas property managers at your service"
     },
+    "experiences": {
+      "eyebrow": "Live the Lake",
+      "title1": "Experiences",
+      "title2": "on the Lake",
+      "subtitle": "For your guests, and for you. In partnership with Lake Como Charter, official partner for water experiences on Lake Como.",
+      "subtitle_short": "With Lake Como Charter — water experiences on the Lake.",
+      "cards": {
+        "barca-legno": {
+          "title": "Classic wooden boat",
+          "tagline": "Vintage elegance for panoramic sunset cruises",
+          "tagline_short": "Vintage sunset cruises"
+        },
+        "speed-boat": {
+          "title": "Speed boat",
+          "tagline": "Adrenaline and speed with a view on the Lake villas",
+          "tagline_short": "High-speed lake tours"
+        },
+        "taxi-boat": {
+          "title": "Taxi boat",
+          "tagline": "Private transfers between Bellagio, Varenna and Tremezzo",
+          "tagline_short": "Private lake transfers"
+        }
+      },
+      "cardCta": "Book",
+      "externalLinkCta": "Discover Lake Como Charter",
+      "compactTitle": "Complete your stay",
+      "compactSubtitle": "Book a boat experience with our partner Lake Como Charter.",
+      "compactCta": "View experiences"
+    },
     "ownerServices": {
       "eyebrow": "Our services",
       "title1": "Everything you need for",

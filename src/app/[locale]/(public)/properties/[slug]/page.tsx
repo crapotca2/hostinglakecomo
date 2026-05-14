@@ -20,6 +20,7 @@ import { pickLocalized } from "@/lib/i18n-data";
 import { AirbnbReviewBlock } from "@/components/public/airbnb-review-block";
 import { GoogleMapEmbed } from "@/components/public/google-map-embed";
 import { PropertyGallery } from "@/components/public/property-gallery";
+import { ExperiencesSection } from "@/components/public/experiences-section";
 import { JsonLdLodging } from "@/components/seo/jsonld-lodging";
 import { JsonLdBreadcrumb } from "@/components/seo/jsonld-breadcrumb";
 
@@ -153,6 +154,10 @@ export default function PropertyDetailPage() {
           propertyName={property.name}
           hasLakeView={property.details.hasLakeView}
         />
+
+        <div className="mt-8 -mx-4 sm:mx-0 sm:rounded-2xl sm:overflow-hidden">
+          <ExperiencesSection compact />
+        </div>
 
         <div className="space-y-6">
           <div className="bg-white rounded-2xl p-5 sm:p-6 border border-border/50">

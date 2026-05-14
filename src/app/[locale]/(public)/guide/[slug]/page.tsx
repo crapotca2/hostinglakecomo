@@ -129,7 +129,7 @@ function GuideContent({ guide, locale }: { guide: Guide; locale: Locale }) {
       <section className="relative overflow-hidden bg-[#1D3A62] text-white border-b border-white/10">
         <div
           aria-hidden
-          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center pointer-events-none"
+          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.webp')] bg-cover bg-center pointer-events-none"
         />
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <nav

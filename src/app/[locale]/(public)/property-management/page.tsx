@@ -212,7 +212,7 @@ function ComuneCard({
     >
       <div
         aria-hidden
-        className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center pointer-events-none"
+        className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.webp')] bg-cover bg-center pointer-events-none"
       />
       <div className="relative">
         <div className="inline-flex items-center gap-1.5 text-xs font-medium text-white/70 mb-3">

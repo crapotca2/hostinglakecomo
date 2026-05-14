@@ -102,6 +102,35 @@
       "yearsBadgeYears": "9+",
       "yearsBadgeText": "anni di esperienza\nda property manager a tua disposizione"
     },
+    "experiences": {
+      "eyebrow": "Vivi il Lago",
+      "title1": "Esperienze",
+      "title2": "sul Lago",
+      "subtitle": "Per i tuoi ospiti e per te. In collaborazione con Lake Como Charter, partner ufficiale per le esperienze nautiche sul Lago di Como.",
+      "subtitle_short": "Con Lake Como Charter, esperienze nautiche sul Lago.",
+      "cards": {
+        "barca-legno": {
+          "title": "Barca in legno classica",
+          "tagline": "Eleganza vintage per crociere panoramiche al tramonto",
+          "tagline_short": "Crociere vintage al tramonto"
+        },
+        "speed-boat": {
+          "title": "Speed boat",
+          "tagline": "Adrenalina e velocità con vista sulle ville del Lago",
+          "tagline_short": "Speed tour ad alta velocità"
+        },
+        "taxi-boat": {
+          "title": "Taxi boat",
+          "tagline": "Trasferimenti privati tra Bellagio, Varenna, Tremezzo",
+          "tagline_short": "Trasferimenti privati sul lago"
+        }
+      },
+      "cardCta": "Prenota",
+      "externalLinkCta": "Scopri Lake Como Charter",
+      "compactTitle": "Completa la tua vacanza",
+      "compactSubtitle": "Prenota un'esperienza in barca con il nostro partner Lake Como Charter.",
+      "compactCta": "Vedi esperienze"
+    },
     "ownerServices": {
       "eyebrow": "I nostri servizi",
       "title1": "Tutto cio che serve per",

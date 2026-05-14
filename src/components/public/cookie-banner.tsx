@@ -89,7 +89,7 @@ export function CookieBanner() {
         <div className="relative overflow-hidden bg-[#1D3A62] text-white rounded-2xl shadow-2xl border border-white/10 p-5 sm:p-6">
           <div
             aria-hidden
-            className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center pointer-events-none"
+            className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.webp')] bg-cover bg-center pointer-events-none"
           />
           <div className="relative flex items-start gap-3 mb-3">
             <div className="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center shrink-0">

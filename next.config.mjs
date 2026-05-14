@@ -21,7 +21,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' data: https://fonts.gstatic.com",
       "connect-src 'self' https://api.stripe.com https://*.vercel.live wss://*.vercel.live",
-      "frame-src 'self' https://*.google.com https://challenges.cloudflare.com https://js.stripe.com https://hooks.stripe.com",
+      "frame-src 'self' https://*.google.com https://challenges.cloudflare.com https://js.stripe.com https://hooks.stripe.com https://cdn.holidoit.com",
       "frame-ancestors 'none'",
       "base-uri 'self'",
       "form-action 'self'",

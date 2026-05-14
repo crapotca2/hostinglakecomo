@@ -58,7 +58,7 @@ export function EmailRecapMockup() {
         <div className="relative rounded-xl bg-[#1D3A62] text-white p-4 overflow-hidden">
           <div
             aria-hidden
-            className="absolute inset-0 opacity-[0.1] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center pointer-events-none"
+            className="absolute inset-0 opacity-[0.1] bg-[url('/images/textures/como-trama.webp')] bg-cover bg-center pointer-events-none"
           />
           <div className="relative text-[10px] uppercase tracking-wider opacity-80 font-semibold mb-1">
             {t("ottimizzazioni.label")}

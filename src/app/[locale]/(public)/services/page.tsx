@@ -57,7 +57,7 @@ export default function ServicesPage() {
     <div className="pt-20">
       {/* HERO */}
       <section className="relative py-24 sm:py-28 overflow-hidden bg-gradient-to-b from-primary/[0.04] via-white to-white border-b border-border/50">
-        <div className="absolute inset-0 -z-10 opacity-[0.03] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center" />
+        <div className="absolute inset-0 -z-10 opacity-[0.03] bg-[url('/images/textures/como-trama.webp')] bg-cover bg-center" />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light mb-5 tracking-tight">
             {tHero("title1")}{" "}
@@ -80,7 +80,7 @@ export default function ServicesPage() {
       >
         <div
           aria-hidden
-          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
+          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.webp')] bg-cover bg-center"
         />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center mb-14">
@@ -148,7 +148,7 @@ export default function ServicesPage() {
       >
         <div
           aria-hidden
-          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center"
+          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.webp')] bg-cover bg-center"
         />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid lg:grid-cols-[6fr_5fr] gap-10 lg:gap-14 items-center">

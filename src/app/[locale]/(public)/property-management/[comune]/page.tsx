@@ -265,7 +265,7 @@ function ComuneLandingClient({
       <section className="relative overflow-hidden bg-[#1D3A62] text-white border-b border-white/10">
         <div
           aria-hidden
-          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center pointer-events-none"
+          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.webp')] bg-cover bg-center pointer-events-none"
         />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white text-xs font-medium mb-5 border border-white/15">

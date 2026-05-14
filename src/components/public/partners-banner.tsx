@@ -3,6 +3,8 @@ type Partner = {
   url: string;
   logo: string;
   heightClass: string;
+  width: number;
+  height: number;
 };
 
 const PARTNERS: Partner[] = [
@@ -11,36 +13,48 @@ const PARTNERS: Partner[] = [
     url: "https://www.booking.com",
     logo: "/images/partners/booking.svg",
     heightClass: "h-7 sm:h-8",
+    width: 120,
+    height: 32,
   },
   {
     name: "Expedia",
     url: "https://www.expedia.com",
     logo: "/images/partners/expedia.svg",
     heightClass: "h-6 sm:h-7",
+    width: 120,
+    height: 28,
   },
   {
     name: "Airbnb",
     url: "https://www.airbnb.com",
     logo: "/images/partners/airbnb.svg",
     heightClass: "h-8 sm:h-9",
+    width: 110,
+    height: 36,
   },
   {
     name: "Tripadvisor",
     url: "https://www.tripadvisor.com",
     logo: "/images/partners/tripadvisor.svg",
     heightClass: "h-7 sm:h-8",
+    width: 140,
+    height: 32,
   },
   {
     name: "Como 1907",
     url: "https://www.como1907.com",
     logo: "/images/partners/como-1907.svg",
     heightClass: "h-14 sm:h-16",
+    width: 64,
+    height: 64,
   },
   {
     name: "Lake Como Tourism",
     url: "https://lakecomotourism.it",
-    logo: "/images/partners/lake-como-tourism.png",
+    logo: "/images/partners/lake-como-tourism.webp",
     heightClass: "h-14 sm:h-16",
+    width: 94,
+    height: 64,
   },
 ];
 
@@ -67,6 +81,8 @@ export function PartnersBanner() {
               <img
                 src={p.logo}
                 alt={p.name}
+                width={p.width}
+                height={p.height}
                 className={`${p.heightClass} w-auto object-contain`}
                 loading="lazy"
               />

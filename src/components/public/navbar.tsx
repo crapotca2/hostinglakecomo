@@ -66,7 +66,7 @@ export function Navbar() {
       {!showSolid && !isHome && (
         <div
           aria-hidden
-          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.jpg')] bg-cover bg-center pointer-events-none"
+          className="absolute inset-0 opacity-[0.08] bg-[url('/images/textures/como-trama.webp')] bg-cover bg-center pointer-events-none"
         />
       )}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,25 +79,39 @@ export function Navbar() {
           >
             <div className="flex items-center gap-2.5 sm:gap-3">
               <span className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 shrink-0">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/logo/logo-marble.png"
-                  alt=""
-                  aria-hidden="true"
+                <picture
                   className={cn(
-                    "absolute inset-0 h-full w-full object-contain transition-opacity duration-300",
+                    "absolute inset-0 h-full w-full transition-opacity duration-300",
                     showSolid ? "opacity-100" : "opacity-0"
                   )}
-                />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/logo/logo-white.png"
-                  alt={brand}
+                  aria-hidden="true"
+                >
+                  <source srcSet="/images/logo/logo-marble.webp" type="image/webp" />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/logo/logo-marble.png"
+                    alt=""
+                    width={56}
+                    height={56}
+                    className="h-full w-full object-contain"
+                  />
+                </picture>
+                <picture
                   className={cn(
-                    "absolute inset-0 h-full w-full object-contain transition-opacity duration-300",
+                    "absolute inset-0 h-full w-full transition-opacity duration-300",
                     showSolid ? "opacity-0" : "opacity-100"
                   )}
-                />
+                >
+                  <source srcSet="/images/logo/logo-white.webp" type="image/webp" />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/logo/logo-white.png"
+                    alt={brand}
+                    width={56}
+                    height={56}
+                    className="h-full w-full object-contain"
+                  />
+                </picture>
               </span>
               <span
                 className={cn(
