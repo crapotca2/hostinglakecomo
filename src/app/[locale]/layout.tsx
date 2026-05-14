@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Outfit, Bungee, Russo_One } from "next/font/google";
+import { Outfit, Bungee, Manrope, Russo_One } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -10,9 +10,21 @@ import { SITE_URL, BRAND_NAME, brandName } from "@/lib/seo";
 import { JsonLdOrganization } from "@/components/seo/jsonld-organization";
 import type { Locale } from "@/i18n/routing";
 
+// Outfit has no Cyrillic subset on Google Fonts — we load it as the primary
+// body font for Latin/IT/EN and chain Manrope (visually nearest grotesk with
+// full Cyrillic support) as per-glyph fallback for RU.
 const outfit = Outfit({
-  subsets: ["latin", "latin-ext", "cyrillic"],
+  subsets: ["latin", "latin-ext"],
   weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-outfit",
+  display: "swap",
+});
+
+const manrope = Manrope({
+  subsets: ["latin", "cyrillic"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-outfit-cyrillic",
+  display: "swap",
 });
 
 const bungee = Bungee({
@@ -114,7 +126,9 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${outfit.className} ${bungee.variable} ${russoOne.variable}`}>
+      <body
+        className={`${outfit.variable} ${manrope.variable} ${bungee.variable} ${russoOne.variable} font-sans`}
+      >
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider>{children}</ThemeProvider>
         </NextIntlClientProvider>

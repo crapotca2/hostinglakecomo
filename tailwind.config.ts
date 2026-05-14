@@ -57,9 +57,17 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        // Per-glyph fallback chain: Bungee for Latin, Russo One for Cyrillic
-        // (Bungee has no Cyrillic subset). Browsers resolve fonts character by
-        // character, so RU wordmarks pick up Russo One automatically.
+        // Body font chain: Outfit (Latin-only on Google Fonts) → Manrope
+        // (Cyrillic). Browsers resolve fonts character by character, so
+        // Russian text automatically falls back to Manrope while Latin text
+        // stays in Outfit.
+        sans: [
+          "var(--font-outfit)",
+          "var(--font-outfit-cyrillic)",
+          "system-ui",
+          "sans-serif",
+        ],
+        // Wordmark chain: Bungee for Latin, Russo One for Cyrillic.
         bungee: [
           "var(--font-bungee)",
           "var(--font-bungee-cyrillic)",
