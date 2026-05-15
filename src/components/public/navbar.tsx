@@ -148,9 +148,8 @@ export function Navbar() {
 
           {/* Language toggle + CTA + mobile menu */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            <div className="hidden md:block">
-              <LanguageToggle variant={showSolid ? "light" : "dark"} />
-            </div>
+            {/* Always visible: 3-button group on md+, compact dropdown on <md */}
+            <LanguageToggle variant={showSolid ? "light" : "dark"} />
             <Link
               href="/contact?interest=consulenza"
               className={cn(
@@ -210,12 +209,11 @@ export function Navbar() {
                   {item.label}
                 </Link>
               ))}
-              <div className="pt-2 mt-2 border-t border-border/40 flex items-center justify-between gap-3">
-                <LanguageToggle variant="light" />
+              <div className="pt-2 mt-2 border-t border-border/40">
                 <Link
                   href="/contact?interest=consulenza"
                   onClick={() => setMobileOpen(false)}
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-white text-sm font-semibold"
+                  className="flex w-full items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-white text-sm font-semibold"
                 >
                   {t("cta")}
                   <ArrowRight className="h-4 w-4" />
