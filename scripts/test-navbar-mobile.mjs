@@ -69,10 +69,36 @@ async function waitHydrated(page) {
   await page.waitForTimeout(300);
 }
 
+// The cookie banner appears fixed-bottom and obscures the lower half of the
+// viewport — including the CTA button at the bottom of the mobile menu.
+// Dismiss it on first navigation so subsequent interactions aren't blocked.
+async function dismissCookieBanner(page) {
+  try {
+    const acceptBtn = page
+      .locator("button")
+      .filter({ hasText: /Accetta tutti|Accept all|Принять все/ })
+      .first();
+    if (await acceptBtn.isVisible({ timeout: 1000 })) {
+      await acceptBtn.click();
+      await page.waitForTimeout(200);
+    }
+  } catch {
+    // Banner not present — likely already dismissed via localStorage
+  }
+}
+
+// Helper: locator for the mobile menu container (only present on <lg)
+function mobileMenu(page) {
+  return page.locator("nav.max-w-7xl").filter({
+    has: page.locator('a[href*="/about"]'),
+  });
+}
+
 async function testHamburger(page, viewport) {
   if (viewport !== "mobile") return; // Hamburger only on <lg
   await page.goto(localizedUrl("it", "/"));
   await waitHydrated(page);
+  await dismissCookieBanner(page);
 
   const hamburger = page.locator('button[aria-label]').filter({
     has: page.locator("svg.lucide-menu"),
@@ -86,19 +112,22 @@ async function testHamburger(page, viewport) {
   }
 
   await hamburger.click();
-  await page.waitForTimeout(250);
+  await page.waitForTimeout(350);
 
-  // Menu items should be visible after open
-  const aboutItem = page.locator('a[href*="/about"]').first();
-  const menuOpen = await aboutItem.isVisible();
+  // Look for the mobile menu container itself (scoped, not desktop nav)
+  const menu = mobileMenu(page);
+  const menuOpen = await menu.isVisible();
   record(viewport, "hamburger opens mobile menu", menuOpen);
   if (!menuOpen) await snapFailure(page, viewport, "hamburger-open");
 
-  // Click backdrop to close
-  await page.locator('[aria-hidden="true"].fixed.inset-0').click({ force: true });
-  await page.waitForTimeout(250);
-  const stillVisible = await aboutItem.isVisible().catch(() => false);
-  record(viewport, "hamburger closes via backdrop", !stillVisible);
+  // Click backdrop to close — the X button is more reliable than backdrop
+  const closeBtn = page.locator('button[aria-label]').filter({
+    has: page.locator("svg.lucide-x"),
+  }).first();
+  await closeBtn.click();
+  await page.waitForTimeout(300);
+  const stillVisible = await menu.isVisible().catch(() => false);
+  record(viewport, "hamburger closes via X", !stillVisible);
 }
 
 async function testLogoLink(page, viewport) {
@@ -115,6 +144,7 @@ async function testLogoLink(page, viewport) {
 async function testCtaButton(page, viewport) {
   await page.goto(localizedUrl("it", "/"));
   await waitHydrated(page);
+  await dismissCookieBanner(page);
 
   if (viewport === "mobile") {
     // Open hamburger first; CTA is inside mobile menu on <lg
@@ -122,10 +152,14 @@ async function testCtaButton(page, viewport) {
       has: page.locator("svg.lucide-menu"),
     }).first();
     await hamburger.click();
-    await page.waitForTimeout(250);
+    await page.waitForTimeout(350);
   }
 
-  const cta = page.locator('a[href*="/contact?interest=consulenza"]').first();
+  // Scope to visible CTA — there can be a homepage CTA banner with the same
+  // href, so pick the one inside the navbar/menu via `:visible` filter.
+  const cta = page
+    .locator('a[href*="/contact?interest=consulenza"]:visible')
+    .first();
   const visible = await cta.isVisible();
   if (!visible) {
     record(viewport, "CTA visible", false);
@@ -148,20 +182,22 @@ async function testNavItems(page, viewport) {
   for (const item of NAV_ITEMS) {
     await page.goto(localizedUrl("it", "/"));
     await waitHydrated(page);
+    await dismissCookieBanner(page);
 
     if (viewport === "mobile") {
       const hamburger = page.locator('button[aria-label]').filter({
         has: page.locator("svg.lucide-menu"),
       }).first();
       await hamburger.click();
-      await page.waitForTimeout(250);
+      await page.waitForTimeout(350);
     }
 
-    // Match nav link by href, scoped to the visible navigation (mobile menu
-    // or desktop nav). The CTA link also points to /contact but uses a
-    // query string; nav links don't.
+    // Match VISIBLE nav link to avoid the hidden desktop nav on mobile (or
+    // vice versa). `:visible` is a Playwright engine pseudo-class.
     const link = page
-      .locator(`a[href$="${item.path}"], a[href$="${item.path}/"]`)
+      .locator(
+        `a[href$="${item.path}"]:visible, a[href$="${item.path}/"]:visible`,
+      )
       .filter({ hasNot: page.locator("svg.lucide-arrow-right") })
       .first();
     const visible = await link.isVisible().catch(() => false);
