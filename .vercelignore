@@ -1,0 +1,22 @@
+# Local tooling not part of the Next.js app build.
+# Keeping these out of the Vercel bundle: they are scripts/research
+# helpers run locally, not source for the production site.
+
+host-como-tools/
+research/
+tmp/
+mockups/
+UsersAndreiAppDataLocalTempabout-it.html
+.mcp.json
+.mcp.json.example
+
+# One-off scripts checked into the repo via git but not needed at build time.
+scripts/airbnb-listing-urls.mjs
+scripts/dump-airbnb-images-pw.mjs
+scripts/dump-airbnb-images.mjs
+scripts/gemini-logo-overlap.mjs
+scripts/generate-logo-variants.mjs
+scripts/generate-overlap-experiments.mjs
+scripts/generate-overlap-styles.mjs
+scripts/generate-stickers.mjs
+scripts/scrape-airbnb-meta.mjs
