@@ -13,7 +13,7 @@ export function JsonLdAngelo() {
     worksFor: { "@id": `${SITE_URL}/#organization` },
     sameAs: [ANGELO_AIRBNB],
     description:
-      "Property manager con 9 anni di esperienza diretta come host sul Lago di Como, oltre 350 recensioni positive a 5 stelle, status Superhost.",
+      "Property manager con 10 anni di esperienza diretta come host sul Lago di Como, oltre 350 recensioni positive a 5 stelle, status Superhost.",
     url: `${SITE_URL}/about`,
     nationality: { "@type": "Country", name: "IT" },
     homeLocation: {

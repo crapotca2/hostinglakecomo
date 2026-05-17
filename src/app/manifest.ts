@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Host Como — Property Manager Lago di Como",
     short_name: "Host Como",
     description:
-      "Gestione completa affitti brevi sul Lago di Como. 9 anni di esperienza, 350+ recensioni a 5 stelle.",
+      "Gestione completa affitti brevi sul Lago di Como. 10 anni di esperienza, 350+ recensioni a 5 stelle.",
     start_url: "/",
     display: "standalone",
     background_color: "#1D3A62",

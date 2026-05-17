@@ -18,19 +18,19 @@ import type { Locale } from "@/i18n/routing";
 
 const HOME_COPY = {
   it: {
-    title: "Property Manager Lago di Como · 9 anni · 350+ recensioni 5★",
+    title: "Property Manager Lago di Como · 10 anni · 350+ recensioni 5★",
     description:
-      "Gestiamo i tuoi affitti brevi sul Lago di Como: pricing dinamico, accoglienza, compliance, report mensili. 9 anni di esperienza · 350+ recensioni 5★. Consulenza gratuita.",
+      "Gestiamo i tuoi affitti brevi sul Lago di Como: pricing dinamico, accoglienza, compliance, report mensili. 10 anni di esperienza · 350+ recensioni 5★. Consulenza gratuita.",
   },
   en: {
-    title: "Lake Como Property Management · 9 yrs · 350+ 5★ reviews",
+    title: "Lake Como Property Management · 10 yrs · 350+ 5★ reviews",
     description:
-      "We manage your short-term rentals on Lake Como: dynamic pricing, hospitality, compliance, monthly reports. 9 years · 350+ 5★ reviews. Free consult.",
+      "We manage your short-term rentals on Lake Como: dynamic pricing, hospitality, compliance, monthly reports. 10 years · 350+ 5★ reviews. Free consult.",
   },
   ru: {
-    title: "Управление недвижимостью на озере Комо · 9 лет · 350+ отзывов 5★",
+    title: "Управление недвижимостью на озере Комо · 10 лет · 350+ отзывов 5★",
     description:
-      "Мы управляем вашей краткосрочной арендой на озере Комо: динамическое ценообразование, приём гостей, compliance, ежемесячные отчёты. 9 лет · 350+ отзывов 5★. Бесплатная консультация.",
+      "Мы управляем вашей краткосрочной арендой на озере Комо: динамическое ценообразование, приём гостей, compliance, ежемесячные отчёты. 10 лет · 350+ отзывов 5★. Бесплатная консультация.",
   },
 } as const;
 

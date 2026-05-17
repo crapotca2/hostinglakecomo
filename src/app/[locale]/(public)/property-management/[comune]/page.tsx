@@ -174,9 +174,9 @@ export async function generateMetadata({
     ru: `Управление недвижимостью ${c.name} — краткосрочная аренда на озере Комо | ${brand}`,
   };
   const metaDescription: Record<string, string> = {
-    it: `Property management e gestione affitti brevi a ${c.name} sul Lago di Como. Airbnb, Booking, Expedia e canali long-stay. 9 anni di esperienza diretta sul lago.`,
-    en: `Property management and short-term rental management in ${c.name} on Lake Como. Airbnb, Booking, Expedia plus long-stay channels. 9 years of direct experience.`,
-    ru: `Управление недвижимостью и краткосрочной арендой в ${c.name} на озере Комо. Airbnb, Booking, Expedia и каналы long-stay. 9 лет прямого опыта на озере.`,
+    it: `Property management e gestione affitti brevi a ${c.name} sul Lago di Como. Airbnb, Booking, Expedia e canali long-stay. 10 anni di esperienza diretta sul lago.`,
+    en: `Property management and short-term rental management in ${c.name} on Lake Como. Airbnb, Booking, Expedia plus long-stay channels. 10 years of direct experience.`,
+    ru: `Управление недвижимостью и краткосрочной арендой в ${c.name} на озере Комо. Airbnb, Booking, Expedia и каналы long-stay. 10 лет прямого опыта на озере.`,
   };
   const title = metaTitle[locale] ?? metaTitle.it;
   const description = metaDescription[locale] ?? metaDescription.it;

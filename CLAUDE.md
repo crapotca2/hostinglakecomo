@@ -2,7 +2,7 @@
 
 Piattaforma B2B per property management sul Lago di Como (dominio:
 hostcomo.com). Convince i proprietari di immobili ad affidarci la gestione
-degli affitti brevi, sfruttando l'esperienza di Angelo (host da 9 anni sul
+degli affitti brevi, sfruttando l'esperienza di Angelo (host da 10 anni sul
 Lago).
 
 ## Stack
@@ -34,7 +34,7 @@ Lago).
 - **Solo B2B**: convince proprietari ad affidarci gestione (no B2C ospiti).
 - **No booking sul sito**: showcase + lead-gen only. Le prenotazioni reali
   delle proprieta in gestione passano da Airbnb/altre piattaforme, non da qui.
-- **Storia di Angelo**: 9 anni di hosting documentati. La pagina /about e
+- **Storia di Angelo**: 10 anni di hosting documentati. La pagina /about e
   un upsell speech basato sul suo profilo Airbnb 1462513131563105498.
 
 ## Portfolio iniziale

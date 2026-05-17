@@ -48,17 +48,17 @@ const ROOT_COPY = {
   it: {
     defaultTitle: "Como Host — Property Manager Lago di Como",
     description:
-      "Property manager professionisti sul Lago di Como. Gestione completa affitti brevi: pricing, accoglienza, compliance, reportistica. 9 anni di esperienza.",
+      "Property manager professionisti sul Lago di Como. Gestione completa affitti brevi: pricing, accoglienza, compliance, reportistica. 10 anni di esperienza.",
   },
   en: {
     defaultTitle: "Host Como — Lake Como Property Management",
     description:
-      "Professional property managers on Lake Como. Full short-term rental management: pricing, hospitality, compliance, reporting. 9 years of experience.",
+      "Professional property managers on Lake Como. Full short-term rental management: pricing, hospitality, compliance, reporting. 10 years of experience.",
   },
   ru: {
     defaultTitle: "Хост Комо — Управление недвижимостью на озере Комо",
     description:
-      "Профессиональные управляющие недвижимостью на озере Комо. Полное управление краткосрочной арендой: ценообразование, приём гостей, юридическое соответствие, отчётность. 9 лет опыта.",
+      "Профессиональные управляющие недвижимостью на озере Комо. Полное управление краткосрочной арендой: ценообразование, приём гостей, юридическое соответствие, отчётность. 10 лет опыта.",
   },
 } as const;
 
