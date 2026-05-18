@@ -19,17 +19,17 @@ import type { Locale } from "@/i18n/routing";
 
 const COPY = {
   it: {
-    title: "Chi Siamo — Angelo Talarico, Superhost dal 2017",
+    title: "Chi Siamo — Angelo Talarico, Superhost dal 2016",
     description:
       "10 anni di esperienza diretta come host sul Lago di Como, oltre 350 recensioni positive a 5 stelle. La storia dietro Como Host.",
   },
   en: {
-    title: "About Us — Angelo Talarico, Superhost since 2017",
+    title: "About Us — Angelo Talarico, Superhost since 2016",
     description:
       "10 years of hands-on hosting experience on Lake Como, 350+ five-star reviews. The story behind Host Como.",
   },
   ru: {
-    title: "О нас — Анджело Таларико, Суперхост с 2017 года",
+    title: "О нас — Анджело Таларико, Суперхост с 2016 года",
     description:
       "10 лет прямого опыта хостинга на озере Комо, более 350 пятизвёздочных отзывов. История за Хост Комо.",
   },
