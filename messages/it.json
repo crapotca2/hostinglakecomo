@@ -521,6 +521,29 @@
           "a": "Grazie ai background diversi del team comunichiamo direttamente in italiano, inglese, rumeno, russo e tedesco. Gestiamo anche conversazioni in spagnolo, pur senza un livello madrelingua. Questo amplia il bacino di ospiti raggiungibili e riduce gli attriti nelle conversazioni di pre-booking: rispondere rapidamente nella lingua dell'ospite è statisticamente correlato a tassi di conversione più alti."
         }
       ]
+    },
+    "legal": {
+      "eyebrow": "Trasparenza",
+      "title": "Dati professionali",
+      "subtitle": "Operiamo come professionisti regolari, con partita IVA e codici ATECO conformi all'attività svolta.",
+      "vatLabel": "P.IVA",
+      "atecoLabel": "Codice ATECO",
+      "members": [
+        {
+          "name": "Angelo Talarico",
+          "role": "Property Manager — Lago di Como",
+          "vat": "04157560139",
+          "ateco": "68.32.00",
+          "atecoDesc": "Gestione di immobili per conto terzi"
+        },
+        {
+          "name": "Crapotca Andrei",
+          "role": "Consulenza imprenditoriale e gestionale",
+          "vat": "04236480135",
+          "ateco": "70.20.09",
+          "atecoDesc": "Consulenza imprenditoriale e altre attività di consulenza gestionale"
+        }
+      ]
     }
   },
   "services": {

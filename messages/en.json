@@ -521,6 +521,29 @@
           "a": "Thanks to our different backgrounds we communicate directly in Italian, English, Romanian, Russian and German. We also handle conversations in Spanish, although not at native level. This widens the pool of reachable guests and reduces friction in pre-booking conversations: replying quickly in the guest's language is statistically correlated with higher conversion."
         }
       ]
+    },
+    "legal": {
+      "eyebrow": "Transparency",
+      "title": "Professional details",
+      "subtitle": "We operate as registered professionals, with Italian VAT numbers and ATECO codes matching our activity.",
+      "vatLabel": "Italian VAT",
+      "atecoLabel": "ATECO code",
+      "members": [
+        {
+          "name": "Angelo Talarico",
+          "role": "Property Manager — Lake Como",
+          "vat": "04157560139",
+          "ateco": "68.32.00",
+          "atecoDesc": "Real estate management on a fee/contract basis"
+        },
+        {
+          "name": "Crapotca Andrei",
+          "role": "Business and management consulting",
+          "vat": "04236480135",
+          "ateco": "70.20.09",
+          "atecoDesc": "Business consulting and other management consulting activities"
+        }
+      ]
     }
   },
   "services": {

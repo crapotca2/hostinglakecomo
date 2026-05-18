@@ -56,6 +56,14 @@ const COMPETENCE_AREAS = [
   { key: "esperienze", icon: MapPinned },
 ] as const;
 
+type LegalMember = {
+  name: string;
+  role: string;
+  vat: string;
+  ateco: string;
+  atecoDesc: string;
+};
+
 export default function AboutPage() {
   const tHero = useTranslations("about.hero");
   const tNarr = useTranslations("about.narrative");
@@ -63,7 +71,9 @@ export default function AboutPage() {
   const tTeam = useTranslations("about.team");
   const tSpot = useTranslations("about.team.spotlight");
   const tFaq = useTranslations("about.faq");
+  const tLegal = useTranslations("about.legal");
   const faqItems = tFaq.raw("items") as FaqItem[];
+  const legalMembers = tLegal.raw("members") as LegalMember[];
   const locale = useLocale();
 
   return (
@@ -227,6 +237,61 @@ export default function AboutPage() {
             </p>
           </div>
           <FaqAccordion items={faqItems} />
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-20 border-t border-border/50 bg-muted/30">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="text-xs font-semibold uppercase tracking-widest text-primary">
+              {tLegal("eyebrow")}
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-light mt-3 mb-3">
+              {tLegal("title")}
+            </h2>
+            <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+              {tLegal("subtitle")}
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+            {legalMembers.map((m) => (
+              <div
+                key={m.vat}
+                className="bg-white rounded-2xl border border-border/50 p-6 shadow-sm"
+              >
+                <div className="flex items-center gap-2 mb-1.5">
+                  <ShieldCheck className="h-4 w-4 text-primary shrink-0" />
+                  <span className="text-sm font-semibold text-foreground">
+                    {m.name}
+                  </span>
+                </div>
+                <p className="text-xs text-muted-foreground mb-5 leading-relaxed">
+                  {m.role}
+                </p>
+                <dl className="space-y-2.5 text-sm">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <dt className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">
+                      {tLegal("vatLabel")}
+                    </dt>
+                    <dd className="font-mono font-semibold tabular-nums text-foreground">
+                      {m.vat}
+                    </dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-3 pt-2 border-t border-border/40">
+                    <dt className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">
+                      {tLegal("atecoLabel")}
+                    </dt>
+                    <dd className="font-mono font-semibold text-foreground">
+                      {m.ateco}
+                    </dd>
+                  </div>
+                  <p className="text-[11px] text-muted-foreground/80 italic leading-snug pt-0.5">
+                    {m.atecoDesc}
+                  </p>
+                </dl>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>
