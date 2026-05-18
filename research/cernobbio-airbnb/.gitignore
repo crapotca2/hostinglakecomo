@@ -1,0 +1,9 @@
+# Scrape outputs — recreatable by re-running scrape.py + analyze.py.
+# We don't commit them because (a) they bloat the repo and (b)
+# redistributing Airbnb listing data violates their ToS. Keep the
+# tools in git, regenerate the data locally when needed.
+listings.json
+comp_set.xlsx
+summary.txt
+price_histogram.png
+.run.log
