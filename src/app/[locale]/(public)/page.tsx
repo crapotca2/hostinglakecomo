@@ -18,7 +18,7 @@ import type { Locale } from "@/i18n/routing";
 
 const HOME_COPY = {
   it: {
-    title: "Property Manager Lago di Como · 10 anni · 350+ recensioni 5★",
+    title: "Property Manager Lago di Como · 10 anni · 350+ ★★★★★",
     description:
       "Gestiamo i tuoi affitti brevi sul Lago di Como: pricing dinamico, accoglienza, compliance, report mensili. 10 anni di esperienza · 350+ recensioni 5★. Consulenza gratuita.",
   },
@@ -28,7 +28,7 @@ const HOME_COPY = {
       "We manage your short-term rentals on Lake Como: dynamic pricing, hospitality, compliance, monthly reports. 10 years · 350+ 5★ reviews. Free consult.",
   },
   ru: {
-    title: "Управление недвижимостью на озере Комо · 10 лет · 350+ отзывов 5★",
+    title: "Управление недвижимостью Комо · 10 лет · 350+ ★★★★★",
     description:
       "Мы управляем вашей краткосрочной арендой на озере Комо: динамическое ценообразование, приём гостей, compliance, ежемесячные отчёты. 10 лет · 350+ отзывов 5★. Бесплатная консультация.",
   },
@@ -89,8 +89,7 @@ export default function HomePage() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/listing/casa-di-miriam/02-vista-lago.webp"
-          alt=""
-          aria-hidden="true"
+          alt={`${tHero("title1")} ${tHero("title2")}`}
           className="md:hidden absolute inset-0 w-full h-full object-cover"
         />
         {/* Desktop+: video autoplay */}
@@ -213,7 +212,7 @@ export default function HomePage() {
           <div className="relative rounded-3xl overflow-hidden shadow-xl">
             <Image
               src="/images/banners/more-info.jpg"
-              alt=""
+              alt={tCta("title")}
               fill
               sizes="(max-width: 1280px) 100vw, 1280px"
               className="object-cover"
@@ -225,7 +224,7 @@ export default function HomePage() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/images/logo/logo-white.png"
-                  alt=""
+                  alt="Host Como"
                   width={112}
                   height={112}
                   className="h-24 w-24 md:h-28 md:w-28 mx-auto mb-5 object-contain [filter:drop-shadow(0_8px_24px_rgba(0,0,0,0.55))]"

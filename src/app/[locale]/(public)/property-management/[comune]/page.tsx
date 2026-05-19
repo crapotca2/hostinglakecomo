@@ -167,11 +167,10 @@ export async function generateMetadata({
       noIndex: true,
     });
   }
-  const brand = brandName(locale);
   const metaTitle: Record<string, string> = {
-    it: `Property Management ${c.name} — Gestione Affitti Brevi Lago di Como | ${brand}`,
-    en: `${c.name} Property Management — Lake Como Short-Term Rentals | ${brand}`,
-    ru: `Управление недвижимостью ${c.name} — краткосрочная аренда на озере Комо | ${brand}`,
+    it: `${c.name} — Property Management Affitti Brevi`,
+    en: `${c.name} — Lake Como Property Management`,
+    ru: `${c.name} — управление арендой на Комо`,
   };
   const metaDescription: Record<string, string> = {
     it: `Property management e gestione affitti brevi a ${c.name} sul Lago di Como. Airbnb, Booking, Expedia e canali long-stay. 10 anni di esperienza diretta sul lago.`,

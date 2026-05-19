@@ -46,7 +46,7 @@ export function ExperiencesSection({ compact = false }: Props) {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={`${c.image}.jpg`}
-                      alt=""
+                      alt={t(`cards.${c.key}.title`)}
                       className="absolute inset-0 w-full h-full object-cover"
                       loading="lazy"
                     />

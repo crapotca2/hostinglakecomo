@@ -90,7 +90,7 @@ export function Navbar() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/images/logo/logo-marble.png"
-                    alt=""
+                    alt={brand}
                     width={56}
                     height={56}
                     className="h-full w-full object-contain"

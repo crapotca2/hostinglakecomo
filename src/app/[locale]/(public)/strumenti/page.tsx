@@ -16,7 +16,7 @@ const STRUMENTI_COPY = {
       "Free simulators: yield, investment, net profit. See how much your home on Lake Como can earn with Airbnb and short-term rentals.",
   },
   ru: {
-    title: "Инструменты для собственников — калькулятор доходности Airbnb Комо",
+    title: "Инструменты — калькулятор доходности Airbnb Комо",
     description:
       "Бесплатные калькуляторы: доходность, инвестиции, чистая прибыль. Узнайте, сколько может приносить ваш дом на озере Комо с Airbnb и краткосрочной арендой.",
   },
@@ -96,10 +96,10 @@ export default function StrumentiPage() {
           <div className="grid lg:grid-cols-[5fr_6fr] gap-12 lg:gap-16 items-center">
             {/* TEXT */}
             <div>
-              <h2 className="text-3xl sm:text-4xl font-light text-foreground mb-4">
+              <h1 className="text-3xl sm:text-4xl font-light text-foreground mb-4">
                 {tSection("title1")}{" "}
                 <span className="font-semibold">{tSection("title2")}</span>
-              </h2>
+              </h1>
               <p className="text-muted-foreground leading-relaxed mb-6">
                 {tSection("body")}
               </p>

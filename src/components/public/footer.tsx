@@ -152,7 +152,7 @@ export function Footer() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/logo/como-typo-white.svg"
-          alt=""
+          alt={`${brand} — Como`}
           aria-hidden="true"
           draggable={false}
           className="w-full aspect-[9/1] object-cover object-bottom block opacity-90 select-none pointer-events-none"
