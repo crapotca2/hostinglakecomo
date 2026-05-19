@@ -52,7 +52,7 @@ from openpyxl.styles import (
 from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.table import Table, TableStyleInfo
 from openpyxl.chart import BarChart, LineChart, Reference
-from openpyxl.worksheet.formula import ArrayFormula
+from openpyxl.formatting.rule import ColorScaleRule, DataBarRule
 
 
 # ── Paths ─────────────────────────────────────────────────────────────────
@@ -449,6 +449,65 @@ def add_excel_table(ws, ref: str, name: str, style="TableStyleMedium2"):
     ws.add_table(tbl)
 
 
+def autosize_columns(ws, header_row: int = 1, data_rows=None,
+                     min_width: int = 8, max_width: int = 50,
+                     padding: int = 3):
+    """
+    Sizes each column so the header and visible body text don't get clipped.
+    We measure characters because pixel-accurate fit would need font metrics.
+    `data_rows` defaults to the full used range below the header.
+    """
+    last_col = ws.max_column
+    if data_rows is None:
+        data_rows = range(header_row + 1, ws.max_row + 1)
+    sample_rows = list(data_rows)[:200]  # cap so very large tables stay fast
+
+    for col_idx in range(1, last_col + 1):
+        letter = get_column_letter(col_idx)
+        widest = 0
+        # Header
+        h = ws.cell(row=header_row, column=col_idx).value
+        if h is not None:
+            widest = max(widest, len(str(h)))
+        # Sample of body
+        for r in sample_rows:
+            v = ws.cell(row=r, column=col_idx).value
+            if v is None:
+                continue
+            if isinstance(v, str) and v.startswith("="):
+                # We can't measure a formula's rendered width without
+                # opening the file. Assume 12 chars (typical € #,##0).
+                widest = max(widest, 12)
+            else:
+                widest = max(widest, len(str(v)))
+        width = min(max(widest + padding, min_width), max_width)
+        # Don't shrink if the caller already set something wider
+        existing = ws.column_dimensions[letter].width or 0
+        if width > existing:
+            ws.column_dimensions[letter].width = width
+
+
+# 8 levels of Unicode block-element characters for an inline "sparkline"
+# style indicator. Drawn into a single cell using a monospace font so
+# blocks align. Static — recomputed each build, not live in Excel.
+_BLOCKS = "▁▂▃▄▅▆▇█"
+
+
+def unicode_sparkline(values: list[float | None]) -> str:
+    nums = [v for v in values if isinstance(v, (int, float)) and v > 0]
+    if not nums:
+        return ""
+    lo, hi = min(nums), max(nums)
+    if hi == lo:
+        return _BLOCKS[4] * len(values)
+    span = hi - lo
+    return "".join(
+        _BLOCKS[min(int((v - lo) / span * (len(_BLOCKS) - 1)), len(_BLOCKS) - 1)]
+        if isinstance(v, (int, float)) and v > 0 else " "
+        for v in values
+    )
+
+
 # ─────────────────────────────────────────────────────────────────────────
 #  Chart helpers
 # ─────────────────────────────────────────────────────────────────────────
@@ -477,14 +536,9 @@ LISTING_COLS = [
     "Scenario",
 ]
 
-# These two indices are hardcoded in the SORT formula on the Scen. 1/2/3 sheets
-# (the {15,10} array argument). If anyone reorders LISTING_COLS without
-# updating the SORT, the scenario sheets will silently sort by the wrong
-# columns. The asserts here make the breakage explode at build time.
-assert LISTING_COLS.index("Affinità tipica") + 1 == 15, \
-    "SORT column index mismatch — update Scen sheet SORT formula"
-assert LISTING_COLS.index("Prezzo mediano €/n") + 1 == 10, \
-    "SORT column index mismatch — update Scen sheet SORT formula"
+# (Scen. 1/2/3 sheets are now built as real Excel Tables sorted Python-side
+# instead of a fragile SORT(FILTER(...)) spill, so the old column-index
+# assertions are no longer needed.)
 
 
 def write_dati_listing(wb: Workbook, rows: list[dict]):
@@ -518,23 +572,13 @@ def write_dati_listing(wb: Workbook, rows: list[dict]):
     ref = f"A{header_row}:{get_column_letter(len(LISTING_COLS))}{last_row}"
     add_excel_table(ws, ref, "TblListing")
 
-    # Column widths
-    widths = {
-        "A": 10, "B": 14, "C": 38, "D": 18, "E": 16,
-        "F": 8, "G": 8, "H": 8, "I": 8,
-        "J": 16, "K": 16, "L": 12,
-        "M": 8, "N": 12,
-        "O": 14, "P": 32, "Q": 36,
-        "R": 12,
-    }
-    for col, w in widths.items():
-        ws.column_dimensions[col].width = w
-
     # Number format for price cols (J, K) — applica direttamente alle celle
     for r in range(header_row + 1, last_row + 1):
         for col_letter in ("J", "K"):
             ws[f"{col_letter}{r}"].number_format = '€ #,##0'
 
+    autosize_columns(ws, header_row=header_row,
+                     data_rows=range(header_row + 1, last_row + 1))
     return ws
 
 
@@ -550,13 +594,20 @@ def write_dati_daily(wb: Workbook, sheet_name: str, table_name: str,
     style_sheet(ws)
     ws.sheet_properties.tabColor = TEAL_LIGHT
 
-    cols = DAILY_BASE_COLS + day_labels
+    # Insert a synthetic "Andamento" column right after the dimension cols.
+    # It carries an 8-level Unicode block-element sparkline showing the
+    # listing's price trajectory across the month.
+    cols = DAILY_BASE_COLS + ["Andamento"] + day_labels
     n_cols = len(cols)
+    spark_col_idx = len(DAILY_BASE_COLS) + 1   # 1-based
+    first_date_col_idx = spark_col_idx + 1     # date columns start here
 
     ws.cell(row=1, column=1, value=f"Dati giornaliero — {month_label} 2026").style = "TitleHC"
     ws.merge_cells(start_row=1, end_row=1, start_column=1, end_column=min(n_cols, 12))
     ws.cell(row=2, column=1,
-            value=f"{len(rows)} listing · 30 sliding 2-night windows. Prezzo €/notte.").style = "SubtitleHC"
+            value=(f"{len(rows)} listing · 30 sliding 2-night windows. "
+                   f"Heatmap rosso=alto/verde=basso. Andamento = sparkline mensile."
+                   )).style = "SubtitleHC"
     ws.merge_cells(start_row=2, end_row=2, start_column=1, end_column=min(n_cols, 12))
 
     header_row = 3
@@ -565,10 +616,21 @@ def write_dati_daily(wb: Workbook, sheet_name: str, table_name: str,
         c.style = "HeaderHC"
     ws.row_dimensions[header_row].height = 26
 
+    # Body
+    monospace_font = Font(name="Consolas", size=10, color=INK)
     for i, r in enumerate(rows, start=header_row + 1):
-        for j, col in enumerate(cols, start=1):
-            v = r.get(col)
-            ws.cell(row=i, column=j, value=v)
+        # Dimension cols
+        for j, col in enumerate(DAILY_BASE_COLS, start=1):
+            ws.cell(row=i, column=j, value=r.get(col))
+        # Sparkline (unicode block elements over the 30 daily prices)
+        daily_values = [r.get(d) for d in day_labels]
+        spark_cell = ws.cell(row=i, column=spark_col_idx,
+                             value=unicode_sparkline(daily_values))
+        spark_cell.font = monospace_font
+        spark_cell.alignment = Alignment(horizontal="left", vertical="center")
+        # Daily price cells
+        for j, d in enumerate(day_labels, start=first_date_col_idx):
+            ws.cell(row=i, column=j, value=r.get(d))
 
     last_row = header_row + len(rows)
     if len(rows) == 0:
@@ -577,19 +639,33 @@ def write_dati_daily(wb: Workbook, sheet_name: str, table_name: str,
     ref = f"A{header_row}:{get_column_letter(n_cols)}{last_row}"
     add_excel_table(ws, ref, table_name)
 
+    # Format date cells as €
+    for r in range(header_row + 1, last_row + 1):
+        for idx in range(first_date_col_idx, n_cols + 1):
+            ws.cell(row=r, column=idx).number_format = '€ #,##0'
+
+    # Heatmap on the price-grid (red = expensive, green = cheap, blank = neutral).
+    if len(rows) > 0:
+        first_letter = get_column_letter(first_date_col_idx)
+        last_letter  = get_column_letter(n_cols)
+        heat_range = f"{first_letter}{header_row + 1}:{last_letter}{last_row}"
+        rule = ColorScaleRule(
+            start_type='percentile', start_value=5,  start_color='C6E6CB',
+            mid_type='percentile',   mid_value=50,    mid_color='FFFFFF',
+            end_type='percentile',   end_value=95,    end_color='F4C7C3',
+        )
+        ws.conditional_formatting.add(heat_range, rule)
+
     # Column widths
     base_widths = {"A": 12, "B": 36, "C": 18, "D": 14,
                    "E": 8, "F": 8, "G": 14}
     for col, w in base_widths.items():
         ws.column_dimensions[col].width = w
-    # Date columns: 11 chars
-    for idx in range(len(DAILY_BASE_COLS) + 1, n_cols + 1):
-        ws.column_dimensions[get_column_letter(idx)].width = 12
-
-    # Format date cells as €
-    for r in range(header_row + 1, last_row + 1):
-        for idx in range(len(DAILY_BASE_COLS) + 1, n_cols + 1):
-            ws.cell(row=r, column=idx).number_format = '€ #,##0'
+    # Sparkline column wide enough for 30 block characters
+    ws.column_dimensions[get_column_letter(spark_col_idx)].width = 34
+    # Date columns: compact (€ #,##0 fits in ~9 chars)
+    for idx in range(first_date_col_idx, n_cols + 1):
+        ws.column_dimensions[get_column_letter(idx)].width = 11
 
     return ws
 
@@ -655,42 +731,27 @@ def write_brief(wb: Workbook):
         # B: mese
         ws.cell(row=r, column=2, value=mese.capitalize()).font = Font(name="Kanit", size=10, color=INK)
 
+        # Build the FILTER expression once and reuse — cleaner formulas that
+        # work natively in Excel 365 without array-formula wrappers.
+        # FILTER returns a dynamic-array spill that MEDIAN/AVERAGE/PERCENTILE.INC
+        # accept directly. No IF(boolean_array, values) acrobatics needed.
+        filter_expr = (
+            f'FILTER(TblListing[Prezzo mediano €/n],'
+            f' (TblListing[Mese]="{mese}")*(TblListing[Scenario]="{scen}"))'
+        )
+
         # C: N comp
         ws.cell(row=r, column=3, value=(
             f'=SUMPRODUCT((TblListing[Mese]="{mese}")*(TblListing[Scenario]="{scen}")*1)'
         ))
-        # D: Mediana (array formula — CSE for Excel < 365 compatibility)
-        d_cell = ws.cell(row=r, column=4)
-        d_cell.value = ArrayFormula(
-            d_cell.coordinate,
-            f'=MEDIAN(IF((TblListing[Mese]="{mese}")*(TblListing[Scenario]="{scen}"),'
-            f' TblListing[Prezzo mediano €/n]))',
-        )
-        d_cell.number_format = '€ #,##0'
-        # E: Media (array formula)
-        e_cell = ws.cell(row=r, column=5)
-        e_cell.value = ArrayFormula(
-            e_cell.coordinate,
-            f'=AVERAGE(IF((TblListing[Mese]="{mese}")*(TblListing[Scenario]="{scen}"),'
-            f' TblListing[Prezzo mediano €/n]))',
-        )
-        e_cell.number_format = '€ #,##0'
-        # F: p25 (array formula)
-        f_cell = ws.cell(row=r, column=6)
-        f_cell.value = ArrayFormula(
-            f_cell.coordinate,
-            f'=PERCENTILE.INC(IF((TblListing[Mese]="{mese}")*(TblListing[Scenario]="{scen}"),'
-            f' TblListing[Prezzo mediano €/n]), 0.25)',
-        )
-        f_cell.number_format = '€ #,##0'
-        # G: p75 (array formula)
-        g_cell = ws.cell(row=r, column=7)
-        g_cell.value = ArrayFormula(
-            g_cell.coordinate,
-            f'=PERCENTILE.INC(IF((TblListing[Mese]="{mese}")*(TblListing[Scenario]="{scen}"),'
-            f' TblListing[Prezzo mediano €/n]), 0.75)',
-        )
-        g_cell.number_format = '€ #,##0'
+        # D: Mediana
+        ws.cell(row=r, column=4, value=f'=MEDIAN({filter_expr})').number_format = '€ #,##0'
+        # E: Media
+        ws.cell(row=r, column=5, value=f'=AVERAGE({filter_expr})').number_format = '€ #,##0'
+        # F: p25
+        ws.cell(row=r, column=6, value=f'=PERCENTILE.INC({filter_expr}, 0.25)').number_format = '€ #,##0'
+        # G: p75
+        ws.cell(row=r, column=7, value=f'=PERCENTILE.INC({filter_expr}, 0.75)').number_format = '€ #,##0'
         # H: Min
         ws.cell(row=r, column=8, value=(
             f'=MINIFS(TblListing[Prezzo mediano €/n], TblListing[Mese], "{mese}",'
@@ -764,7 +825,15 @@ SCEN_SHEETS = [
 ]
 
 
-def write_scenario_sheet(wb: Workbook, conf: dict):
+def write_scenario_sheet(wb: Workbook, conf: dict, all_rows: list[dict]):
+    """
+    Pre-filter the listings Python-side (using the same Scenario tag we
+    already wrote to TblListing) and emit a real Excel Table — much more
+    reliable than a SORT+FILTER spill which openpyxl can't mark as a
+    dynamic-array formula. Owner still gets autofilter, banded rows,
+    structured-reference access, and the table is sorted by Affinità
+    tipica DESC then Prezzo mediano ASC.
+    """
     ws = wb.create_sheet(conf["name"])
     style_sheet(ws)
     ws.sheet_properties.tabColor = TEAL
@@ -775,7 +844,7 @@ def write_scenario_sheet(wb: Workbook, conf: dict):
     ws.cell(row=2, column=1, value=conf["subtitle"]).style = "SubtitleHC"
     ws.merge_cells("A2:R2")
 
-    # Row 4-5: KPI strip
+    # Row 4-5: KPI strip — formula refs to Brief (live update)
     kpi_labels = ["N. Giu", "Mediana Giu €/n", "N. Lug", "Mediana Lug €/n", "Δ %"]
     for j, lab in enumerate(kpi_labels, start=1):
         c = ws.cell(row=4, column=j, value=lab)
@@ -795,32 +864,47 @@ def write_scenario_sheet(wb: Workbook, conf: dict):
 
     ws.row_dimensions[5].height = 36
 
-    # Row 7: Header strip styled like a table header, columns matching TblListing
+    # Filter + sort Python-side
+    matches = [r for r in all_rows if r.get("Scenario") == conf["tag"]]
+    matches.sort(
+        key=lambda r: (
+            -(r.get("Affinità tipica") or 0),     # affinity desc
+            r.get("Prezzo mediano €/n") or 1e9,   # price asc, None last
+        )
+    )
+
+    # Row 7: header (Excel Table will own this row)
     for j, col in enumerate(LISTING_COLS, start=1):
         c = ws.cell(row=7, column=j, value=col)
         c.style = "HeaderHC"
     ws.row_dimensions[7].height = 26
 
-    # Row 8: FILTER+SORT spill formula
-    # Sort by Affinità tipica DESC (col 15), then Prezzo mediano €/n ASC (col 10)
-    formula = (
-        f'=SORT(FILTER(TblListing, TblListing[Scenario]="{conf["tag"]}"),'
-        f' {{15,10}}, {{-1,1}})'
-    )
-    ws.cell(row=8, column=1, value=formula)
+    # Rows 8..N: body
+    last_row = 7
+    for i, r in enumerate(matches, start=8):
+        for j, col in enumerate(LISTING_COLS, start=1):
+            v = r.get(col)
+            cell = ws.cell(row=i, column=j, value=v)
+            # Price/rating/affinità number formats
+            if col in ("Prezzo mediano €/n", "Prezzo medio €/n"):
+                cell.number_format = '€ #,##0'
+            elif col == "Rating":
+                cell.number_format = '0.00'
+            elif col in ("Camere", "Letti", "Bagni", "Ospiti", "Recensioni",
+                         "N. settimane", "Affinità tipica"):
+                cell.number_format = '0'
+        last_row = i
 
-    # Column widths (match Dati listing style)
-    widths = {
-        "A": 10, "B": 14, "C": 38, "D": 18, "E": 16,
-        "F": 8, "G": 8, "H": 8, "I": 8,
-        "J": 16, "K": 16, "L": 12,
-        "M": 8, "N": 12,
-        "O": 14, "P": 32, "Q": 36,
-        "R": 12,
-    }
-    for col, w in widths.items():
-        ws.column_dimensions[col].width = w
+    # Wrap as an Excel Table — only if we have at least one body row.
+    if last_row > 7:
+        tbl_name = f"TblScen{conf['tag'][1:]}"
+        ref = f"A7:{get_column_letter(len(LISTING_COLS))}{last_row}"
+        add_excel_table(ws, ref, tbl_name)
+    else:
+        # Edge case: zero matches. Leave a friendly note instead of a table.
+        ws.cell(row=8, column=1, value="Nessun listing comparabile trovato in questa fascia.").style = "BodyHC"
 
+    autosize_columns(ws, header_row=7, data_rows=range(8, last_row + 1))
     return ws
 
 
@@ -998,6 +1082,11 @@ def write_trend(wb: Workbook, jun_days: list[str], jul_days: list[str]):
 
     DAILY_MAX_ROW = 2000  # very safe upper bound (current data is ~335 + ~305)
 
+    # AGGREGATE function 16 = PERCENTILE.INC, mode 6 = ignore errors.
+    # We avoid IFERROR(PERCENTILE.INC(...), NA()) because Excel 365 adds an
+    # implicit-intersection `@` to that pattern on file open, which collapses
+    # the range to a single cell and returns #N/D.
+
     # Giugno rows 6-35 (day 1 → row 6, day 30 → row 35)
     for day_idx in range(1, 31):
         r = 5 + day_idx  # row 6 for day 1
@@ -1009,13 +1098,13 @@ def write_trend(wb: Workbook, jun_days: list[str], jul_days: list[str]):
         ws.cell(row=r, column=2).number_format = "yyyy-mm-dd"
         ws.cell(row=r, column=3, value=f'=TEXT(B{r},"ddd")').style = "BodyHC"
         ws.cell(row=r, column=4, value=f"=COUNT({rng})").style = "BodyHC"
-        ws.cell(row=r, column=5, value=f"=IFERROR(MEDIAN({rng}),NA())")
+        ws.cell(row=r, column=5, value=f"=MEDIAN({rng})")
         ws.cell(row=r, column=5).number_format = '€ #,##0'
-        ws.cell(row=r, column=6, value=f"=IFERROR(AVERAGE({rng}),NA())")
+        ws.cell(row=r, column=6, value=f"=AVERAGE({rng})")
         ws.cell(row=r, column=6).number_format = '€ #,##0'
-        ws.cell(row=r, column=7, value=f"=IFERROR(PERCENTILE.INC({rng},0.25),NA())")
+        ws.cell(row=r, column=7, value=f"=AGGREGATE(16,6,{rng},0.25)")
         ws.cell(row=r, column=7).number_format = '€ #,##0'
-        ws.cell(row=r, column=8, value=f"=IFERROR(PERCENTILE.INC({rng},0.75),NA())")
+        ws.cell(row=r, column=8, value=f"=AGGREGATE(16,6,{rng},0.75)")
         ws.cell(row=r, column=8).number_format = '€ #,##0'
         # Solo Giu / Solo Lug
         ws.cell(row=r, column=9, value=f'=IF(A{r}="Giugno",E{r},NA())')
@@ -1034,13 +1123,13 @@ def write_trend(wb: Workbook, jun_days: list[str], jul_days: list[str]):
         ws.cell(row=r, column=2).number_format = "yyyy-mm-dd"
         ws.cell(row=r, column=3, value=f'=TEXT(B{r},"ddd")').style = "BodyHC"
         ws.cell(row=r, column=4, value=f"=COUNT({rng})").style = "BodyHC"
-        ws.cell(row=r, column=5, value=f"=IFERROR(MEDIAN({rng}),NA())")
+        ws.cell(row=r, column=5, value=f"=MEDIAN({rng})")
         ws.cell(row=r, column=5).number_format = '€ #,##0'
-        ws.cell(row=r, column=6, value=f"=IFERROR(AVERAGE({rng}),NA())")
+        ws.cell(row=r, column=6, value=f"=AVERAGE({rng})")
         ws.cell(row=r, column=6).number_format = '€ #,##0'
-        ws.cell(row=r, column=7, value=f"=IFERROR(PERCENTILE.INC({rng},0.25),NA())")
+        ws.cell(row=r, column=7, value=f"=AGGREGATE(16,6,{rng},0.25)")
         ws.cell(row=r, column=7).number_format = '€ #,##0'
-        ws.cell(row=r, column=8, value=f"=IFERROR(PERCENTILE.INC({rng},0.75),NA())")
+        ws.cell(row=r, column=8, value=f"=AGGREGATE(16,6,{rng},0.75)")
         ws.cell(row=r, column=8).number_format = '€ #,##0'
         ws.cell(row=r, column=9, value=f'=IF(A{r}="Giugno",E{r},NA())')
         ws.cell(row=r, column=9).number_format = '€ #,##0'
@@ -1268,10 +1357,8 @@ def write_hotels(wb: Workbook):
     add_excel_table(ws, ref, "TblHotels")
 
     # Column widths
-    widths = {"A": 36, "B": 16, "C": 9, "D": 11, "E": 14,
-              "F": 50, "G": 40, "H": 18, "I": 32, "J": 32, "K": 32}
-    for col, w in widths.items():
-        ws.column_dimensions[col].width = w
+    # Wider Hotel cells need slightly bigger min on the URL / address cols
+    autosize_columns(ws, header_row=3, max_width=60)
 
     return ws
 
@@ -1369,9 +1456,10 @@ def main() -> int:
     # ── Sheets in target order ────────────────────────────────────────────
     # 1. Brief
     write_brief(wb)
-    # 2-4. Scenarios
+    # 2-4. Scenarios — pre-filtered from the comp universe and emitted as
+    # real Excel Tables.
     for conf in SCEN_SHEETS:
-        write_scenario_sheet(wb, conf)
+        write_scenario_sheet(wb, conf, listing_rows)
     # 5. Distribuzione mercato
     write_distribuzione(wb)
     # 6. Trend giornaliero
