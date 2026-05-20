@@ -5,38 +5,46 @@ import {
   Euro,
   Sparkles,
   AlertCircle,
-  ExternalLink,
   BarChart3,
+  Database,
 } from "lucide-react";
 
-type MonthlyAdr = {
+type MonthlyRow = {
   m: string;
-  adr: number;
+  /** Mediana Argegno scraped da pyairbnb (StaysSearch GraphQL Airbnb). */
+  argegnoMedian: number;
+  /** # listing Argegno con prezzo visibile per la finestra mid-month. */
+  argegnoSampleN: number;
+  /** Prezzo target Casa del Pozzo (= mediana Argegno × 1.15 premium). */
+  targetAdr: number;
+  /** Giorni del mese (per calcolo notti × occupancy). */
   days: number;
 };
 
-// Prezzo medio per notte mese per mese, ricalibrato: ogni mese sopra €200
-// è stato abbassato di 10€ rispetto alla prima proiezione, per allinearsi
-// al pricing dei competitor 2BR Argegno (Casa Hygge / Olga House).
-const MONTHLY: MonthlyAdr[] = [
-  { m: "Gen", adr: 135, days: 31 },
-  { m: "Feb", adr: 130, days: 28 },
-  { m: "Mar", adr: 145, days: 31 },
-  { m: "Apr", adr: 175, days: 30 },
-  { m: "Mag", adr: 200, days: 31 },
-  { m: "Giu", adr: 250, days: 30 },
-  { m: "Lug", adr: 300, days: 31 },
-  { m: "Ago", adr: 310, days: 31 },
-  { m: "Set", adr: 230, days: 30 },
-  { m: "Ott", adr: 175, days: 31 },
-  { m: "Nov", adr: 130, days: 30 },
-  { m: "Dic", adr: 145, days: 31 },
+// Dataset reale: scraped 20 maggio 2026 con scrape_argegno_monthly.py.
+// Bbox Argegno strict (lat 45.860–45.880, lon 9.110–9.135).
+// Finestra mid-month sabato→sabato 7 notti per ogni mese.
+// Premio Casa del Pozzo = +15% sopra mediana (fronte lago vero + pontile +
+// parcheggio auto + doppio bagno → tier sopra mediana ma non al picco).
+const MONTHLY: MonthlyRow[] = [
+  { m: "Gen", argegnoMedian: 192, argegnoSampleN: 63, targetAdr: 220, days: 31 },
+  { m: "Feb", argegnoMedian: 207, argegnoSampleN: 50, targetAdr: 240, days: 28 },
+  { m: "Mar", argegnoMedian: 208, argegnoSampleN: 49, targetAdr: 240, days: 31 },
+  { m: "Apr", argegnoMedian: 212, argegnoSampleN: 61, targetAdr: 245, days: 30 },
+  { m: "Mag", argegnoMedian: 220, argegnoSampleN: 38, targetAdr: 255, days: 31 },
+  { m: "Giu", argegnoMedian: 249, argegnoSampleN: 31, targetAdr: 285, days: 30 },
+  { m: "Lug", argegnoMedian: 256, argegnoSampleN: 31, targetAdr: 295, days: 31 },
+  { m: "Ago", argegnoMedian: 267, argegnoSampleN: 29, targetAdr: 310, days: 31 },
+  { m: "Set", argegnoMedian: 242, argegnoSampleN: 51, targetAdr: 280, days: 30 },
+  { m: "Ott", argegnoMedian: 193, argegnoSampleN: 58, targetAdr: 220, days: 31 },
+  { m: "Nov", argegnoMedian: 208, argegnoSampleN: 63, targetAdr: 240, days: 30 },
+  { m: "Dic", argegnoMedian: 209, argegnoSampleN: 56, targetAdr: 240, days: 31 },
 ];
 
-const MAX_ADR = Math.max(...MONTHLY.map((m) => m.adr));
+const MAX_ADR = Math.max(...MONTHLY.map((m) => m.targetAdr));
+const TOTAL_SAMPLE = MONTHLY.reduce((s, m) => s + m.argegnoSampleN, 0);
 
-// Annual revenue projection for 3 occupancy scenarios. We round nights up
-// to the nearest whole night per month (booking discretisation).
+// Annual revenue projection for 3 occupancy scenarios.
 const OCCUPANCY_SCENARIOS = [50, 60, 70] as const;
 
 type ScenarioRow = {
@@ -49,7 +57,7 @@ type ScenarioRow = {
 const SCENARIOS: ScenarioRow[] = OCCUPANCY_SCENARIOS.map((occ) => {
   const monthly = MONTHLY.map((row) => {
     const nights = Math.round((row.days * occ) / 100);
-    return { m: row.m, nights, revenue: nights * row.adr };
+    return { m: row.m, nights, revenue: nights * row.targetAdr };
   });
   const totalNights = monthly.reduce((s, r) => s + r.nights, 0);
   const totalRevenue = monthly.reduce((s, r) => s + r.revenue, 0);
@@ -61,80 +69,8 @@ const BLENDED_ADR = Math.round(
   BASE_SCENARIO.totalRevenue / BASE_SCENARIO.totalNights,
 );
 
-type CompetitorRow = {
-  name: string;
-  url?: string;
-  bedrooms: number;
-  estimatedNightly: number;
-  notes: string;
-  argegnoLocation: string;
-};
-
-const COMPETITORS: CompetitorRow[] = [
-  {
-    name: "Casa Hygge",
-    url: "https://www.airbnb.com/rooms/1282644095134922931",
-    bedrooms: 2,
-    estimatedNightly: 210,
-    notes: "Sopra la piazza principale, vista lago da finestra, no fronte acqua",
-    argegnoLocation: "Piazza Roma, Argegno",
-  },
-  {
-    name: "Olga House",
-    url: "https://www.airbnb.com/rooms/24907620",
-    bedrooms: 2,
-    estimatedNightly: 195,
-    notes: "Top floor mini-palazzo centro storico, garage extra a pagamento",
-    argegnoLocation: "Piazza Roma, Argegno",
-  },
-  {
-    name: "Charming House w/ private dock I",
-    url: "https://www.airbnb.com/rooms/25619757",
-    bedrooms: 1,
-    estimatedNightly: 175,
-    notes: "1 camera, divani rossi, libreria DIY, accesso al lago condiviso",
-    argegnoLocation: "17 Via Milano, Argegno",
-  },
-  {
-    name: "Charming House w/ private dock II",
-    url: "https://www.airbnb.com/rooms/23346865",
-    bedrooms: 1,
-    estimatedNightly: 165,
-    notes: "Arredo vintage eclettico, 1 camera, stessa villa di Charming I",
-    argegnoLocation: "17 Via Milano, Argegno",
-  },
-  {
-    name: "Argegno Fronte Lago (ex Le Vele)",
-    url: "https://www.booking.com/hotel/it/le-vele-argegno.html",
-    bedrooms: 4,
-    estimatedNightly: 480,
-    notes: "New build di lusso 4BR/4BA, segmento luxury (out of band)",
-    argegnoLocation: "Piazza Giovanni Grandi 8, Argegno",
-  },
-  {
-    name: "Petza Apartment",
-    url: "https://www.airbnb.com/rooms/27087120",
-    bedrooms: 1,
-    estimatedNightly: 129,
-    notes: "Piano terra lungo il Telo, 15m dal lago e dal Lido",
-    argegnoLocation: "Centro storico Argegno (Telo)",
-  },
-  {
-    name: "My Heart in Argegno",
-    url: "https://www.airbnb.com/rooms/1095446294980500595",
-    bedrooms: 3,
-    estimatedNightly: 240,
-    notes: "Casa storica 4 livelli sul Ponte Vecchio del Telo",
-    argegnoLocation: "Centro storico Argegno",
-  },
-];
-
-const COMP_2BR = COMPETITORS.filter((c) => c.bedrooms === 2);
-const COMP_ADR_2BR = Math.round(
-  COMP_2BR.reduce((s, c) => s + c.estimatedNightly, 0) / COMP_2BR.length,
-);
-const COMP_ADR_ALL = Math.round(
-  COMPETITORS.reduce((s, c) => s + c.estimatedNightly, 0) / COMPETITORS.length,
+const ARGEGNO_BLENDED_MEDIAN = Math.round(
+  MONTHLY.reduce((s, r) => s + r.argegnoMedian, 0) / MONTHLY.length,
 );
 
 function StatCard({
@@ -206,17 +142,17 @@ export function PotentialDashboard() {
           Casa del Pozzo — proiezione annua
         </h2>
         <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-          Benchmark costruito sui listing pubblici di <strong>Argegno</strong> scaricati negli ultimi mesi da Airbnb e Booking, normalizzato per numero di camere, qualità di ristrutturazione e prossimità al lago. I prezzi per notte mese per mese seguono il pattern stagionale del Lago di Como per case fronte acqua di fascia premium — picco luglio-agosto, alta da maggio a settembre, bassa da novembre a febbraio. Tutti i competitor riportati nella tabella in fondo hanno indirizzo confermato ad Argegno (Piazza Roma, Via Milano, Piazza Giovanni Grandi, centro storico Telo). Le pulizie sono fatturate al guest separatamente a <strong>€70 per prenotazione</strong> (pass-through, non riportate nei revenue lordi qui sotto).
+          Benchmark costruito su <strong>{TOTAL_SAMPLE} listing reali di Argegno</strong> scaricati direttamente dall&apos;API GraphQL StaysSearch di Airbnb (script <code className="bg-muted/60 px-1 rounded text-xs">pyairbnb</code>), una finestra settimanale mid-month per ogni mese da giugno 2026 a maggio 2027. Per ogni mese calcoliamo la <strong>mediana €/notte di Argegno</strong> e applichiamo un premio del <strong>+15%</strong> per ottenere il prezzo target di Casa del Pozzo: il premio è giustificato dagli elementi unici di Casa del Pozzo (fronte lago vero, pontile galleggiante privato, parcheggio personale automatizzato, doppio bagno privato) che ci posizionano sopra la mediana ma sotto il top luxury del comune (Argegno Fronte Lago €480/notte). Le pulizie sono fatturate al guest separatamente a <strong>€70 per prenotazione</strong> (pass-through, non riportate nei revenue lordi qui sotto).
         </p>
       </header>
 
-      {/* KPI top row — only LORDO views, no net to owner */}
+      {/* KPI top row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
         <StatCard
           icon={Euro}
-          label="ADR medio annuo"
+          label="ADR medio annuo target"
           value={`€${BLENDED_ADR}`}
-          sub={`Range €130–310 mensile`}
+          sub={`+15% vs mediana Argegno (€${ARGEGNO_BLENDED_MEDIAN})`}
           accent
         />
         <StatCard
@@ -239,26 +175,26 @@ export function PotentialDashboard() {
         />
       </div>
 
-      {/* Monthly ADR histogram — only the histogram, no breakdown table */}
+      {/* Monthly ADR histogram */}
       <div className="mb-8">
         <div className="flex items-center gap-2 mb-3">
           <BarChart3 className="h-4 w-4 text-primary" />
           <h3 className="text-xs font-semibold uppercase tracking-wider text-primary">
-            Prezzo medio per notte — distribuzione mensile
+            Prezzo target Casa del Pozzo — distribuzione mensile
           </h3>
         </div>
         <div className="rounded-xl border border-border/50 bg-gradient-to-b from-primary/[0.02] to-transparent p-5 sm:p-6">
           <div className="grid grid-cols-12 gap-1 sm:gap-2 items-end h-64">
             {MONTHLY.map((row) => {
-              const heightPct = Math.round((row.adr / MAX_ADR) * 100);
-              const isPeak = row.adr === MAX_ADR;
+              const heightPct = Math.round((row.targetAdr / MAX_ADR) * 100);
+              const isPeak = row.targetAdr === MAX_ADR;
               return (
                 <div
                   key={row.m}
                   className="flex flex-col items-center justify-end h-full gap-1.5 group"
                 >
                   <span className="text-[10px] sm:text-xs font-semibold tabular-nums text-foreground">
-                    €{row.adr}
+                    €{row.targetAdr}
                   </span>
                   <div
                     className={`w-full rounded-t-md transition-all ${
@@ -267,7 +203,7 @@ export function PotentialDashboard() {
                         : "bg-primary/40 group-hover:bg-primary/70"
                     }`}
                     style={{ height: `${heightPct}%` }}
-                    title={`${row.m}: €${row.adr}/notte`}
+                    title={`${row.m}: target €${row.targetAdr}/notte (mediana Argegno €${row.argegnoMedian}, n=${row.argegnoSampleN})`}
                   />
                   <span className="text-[10px] sm:text-xs font-medium text-muted-foreground">
                     {row.m}
@@ -285,11 +221,14 @@ export function PotentialDashboard() {
               <span className="h-2.5 w-2.5 rounded-sm bg-primary/40" />
               Mesi standard
             </span>
+            <span className="ml-auto">
+              Tooltip su ogni barra mostra mediana Argegno + sample size
+            </span>
           </div>
         </div>
       </div>
 
-      {/* Occupancy scenario table — revenue lordo per 50/60/70% */}
+      {/* Occupancy scenario table */}
       <div className="mb-8">
         <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-3">
           Revenue lordo per scenario di occupancy
@@ -341,7 +280,7 @@ export function PotentialDashboard() {
                 <tr key={row.m} className="hover:bg-muted/20">
                   <td className="px-3 py-3 font-medium">{row.m}</td>
                   <td className="px-3 py-3 text-right tabular-nums">
-                    €{row.adr}
+                    €{row.targetAdr}
                   </td>
                   <td className="px-3 py-3 text-right tabular-nums border-l border-border/30 text-muted-foreground">
                     {SCENARIOS[0].monthly[idx].nights}
@@ -394,111 +333,74 @@ export function PotentialDashboard() {
         </div>
       </div>
 
-      {/* Positioning vs Argegno */}
+      {/* Real Argegno scraped data table */}
       <div className="mb-8">
-        <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-3">
-          Posizionamento vs Argegno
-        </h3>
-        <div className="grid sm:grid-cols-2 gap-3 mb-4">
-          <div className="rounded-xl bg-muted/30 p-4">
-            <div className="text-xs text-muted-foreground mb-1">
-              ADR medio 2 camere Argegno
-            </div>
-            <div className="text-2xl font-bold tabular-nums">
-              €{COMP_ADR_2BR}
-            </div>
-            <div className="text-xs text-muted-foreground mt-1">
-              {COMP_2BR.length} listing diretti confronto (Casa Hygge, Olga House)
-            </div>
-          </div>
-          <div className="rounded-xl bg-primary/[0.08] p-4">
-            <div className="text-xs text-primary mb-1">
-              Casa del Pozzo (ADR medio annuo)
-            </div>
-            <div className="text-2xl font-bold text-primary tabular-nums">
-              €{BLENDED_ADR}
-            </div>
-            <div className="text-xs text-primary/70 mt-1">
-              +
-              {Math.round(((BLENDED_ADR - COMP_ADR_2BR) / COMP_ADR_2BR) * 100)}
-              % vs concorrenti 2 camere
-            </div>
-          </div>
+        <div className="flex items-center gap-2 mb-3">
+          <Database className="h-4 w-4 text-primary" />
+          <h3 className="text-xs font-semibold uppercase tracking-wider text-primary">
+            Mediana €/notte Argegno — dati Airbnb reali (scrape pyairbnb)
+          </h3>
         </div>
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          La concorrenza diretta a 2 camere è composta da{" "}
-          <strong>Casa Hygge</strong> e <strong>Olga House</strong>, entrambe
-          in centro Argegno ma non direttamente sul filo dell&apos;acqua. Il
-          premium di Casa del Pozzo è giustificato da:{" "}
-          <em>
-            fronte lago vero (riflesso nell&apos;acqua), pontile galleggiante
-            privato, doppio bagno privato, parcheggio personale automatizzato
-          </em>{" "}
-          e il pozzo rustico come elemento di differenziazione. ADR target
-          sopra mercato locale ma in linea con il segmento &ldquo;waterfront
-          premium&rdquo; del Lago di Como (€250–310/notte in alta stagione).
-        </p>
-      </div>
-
-      {/* Competitor scrape table */}
-      <div className="mb-8">
-        <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-3">
-          Listing Argegno scrapeati (Airbnb · ultimi mesi)
-        </h3>
         <div className="overflow-x-auto rounded-xl border border-border/50">
           <table className="w-full text-sm">
             <thead className="bg-muted/40">
               <tr className="text-left text-xs uppercase tracking-wider text-muted-foreground">
-                <th className="px-3 py-3 font-semibold">Listing</th>
-                <th className="px-3 py-3 font-semibold">Zona Argegno</th>
-                <th className="px-3 py-3 font-semibold text-center">
-                  Camere da letto
+                <th className="px-3 py-3 font-semibold">Mese</th>
+                <th className="px-3 py-3 font-semibold text-right">
+                  # listing Argegno
                 </th>
-                <th className="px-3 py-3 font-semibold text-right">€/notte</th>
-                <th className="px-3 py-3 font-semibold">Note</th>
+                <th className="px-3 py-3 font-semibold text-right">
+                  Mediana €/notte
+                </th>
+                <th className="px-3 py-3 font-semibold text-right">
+                  Target Casa del Pozzo
+                </th>
+                <th className="px-3 py-3 font-semibold text-right">Premio</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border/50">
-              {COMPETITORS.map((c) => (
-                <tr key={c.name} className="hover:bg-muted/20">
-                  <td className="px-3 py-3">
-                    {c.url ? (
-                      <a
-                        href={c.url}
-                        target="_blank"
-                        rel="noopener noreferrer nofollow"
-                        className="font-medium hover:text-primary inline-flex items-center gap-1"
-                      >
-                        {c.name}
-                        <ExternalLink className="h-3 w-3 opacity-60" />
-                      </a>
-                    ) : (
-                      <span className="font-medium">{c.name}</span>
-                    )}
-                  </td>
-                  <td className="px-3 py-3 text-xs text-muted-foreground">
-                    {c.argegnoLocation}
-                  </td>
-                  <td className="px-3 py-3 text-center tabular-nums">
-                    {c.bedrooms}
+              {MONTHLY.map((row) => (
+                <tr key={row.m} className="hover:bg-muted/20">
+                  <td className="px-3 py-3 font-medium">{row.m}</td>
+                  <td className="px-3 py-3 text-right tabular-nums text-muted-foreground">
+                    {row.argegnoSampleN}
                   </td>
                   <td className="px-3 py-3 text-right tabular-nums">
-                    €{c.estimatedNightly}
+                    €{row.argegnoMedian}
                   </td>
-                  <td className="px-3 py-3 text-xs text-muted-foreground">
-                    {c.notes}
+                  <td className="px-3 py-3 text-right tabular-nums font-semibold text-primary">
+                    €{row.targetAdr}
+                  </td>
+                  <td className="px-3 py-3 text-right tabular-nums text-xs text-muted-foreground">
+                    +
+                    {Math.round(
+                      ((row.targetAdr - row.argegnoMedian) /
+                        row.argegnoMedian) *
+                        100,
+                    )}
+                    %
                   </td>
                 </tr>
               ))}
               <tr className="bg-muted/30 font-semibold">
-                <td className="px-3 py-3" colSpan={3}>
-                  Media campione ({COMPETITORS.length} listing Argegno)
+                <td className="px-3 py-3">Media campione</td>
+                <td className="px-3 py-3 text-right tabular-nums">
+                  {Math.round(TOTAL_SAMPLE / MONTHLY.length)}
                 </td>
                 <td className="px-3 py-3 text-right tabular-nums">
-                  €{COMP_ADR_ALL}
+                  €{ARGEGNO_BLENDED_MEDIAN}
                 </td>
-                <td className="px-3 py-3 text-xs text-muted-foreground italic">
-                  range €129 – €480
+                <td className="px-3 py-3 text-right tabular-nums text-primary">
+                  €{BLENDED_ADR}
+                </td>
+                <td className="px-3 py-3 text-right tabular-nums text-xs">
+                  +
+                  {Math.round(
+                    ((BLENDED_ADR - ARGEGNO_BLENDED_MEDIAN) /
+                      ARGEGNO_BLENDED_MEDIAN) *
+                      100,
+                  )}
+                  %
                 </td>
               </tr>
             </tbody>
@@ -511,34 +413,32 @@ export function PotentialDashboard() {
         <AlertCircle className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
         <div className="text-amber-900 leading-relaxed space-y-3">
           <p>
-            <strong>Come abbiamo ricavato il prezzo medio per notte mese per mese.</strong>{" "}
-            Abbiamo ancorato il <strong>picco di agosto a €310/notte</strong>{" "}
-            usando come base il pricing dei competitor 2 camere di Argegno
-            in alta stagione (Casa Hygge €210, Olga House €195) e
-            applicando un <strong>premium del +50%</strong> giustificato
-            dagli elementi unici di Casa del Pozzo che gli altri non hanno:
-            fronte lago vero (la facciata è riflessa nell&apos;acqua),
-            pontile galleggiante privato, parcheggio personale automatizzato
-            e doppio bagno privato — fattori che sul Lago di Como hanno un
-            valore di prezzo molto chiaro in alta stagione.
+            <strong>Come abbiamo ricavato il prezzo medio per notte.</strong>{" "}
+            Per ogni mese da giugno 2026 a maggio 2027 abbiamo lanciato lo
+            script <code className="bg-amber-100 px-1 rounded text-xs">scrape_argegno_monthly.py</code>{" "}
+            (basato su <code className="bg-amber-100 px-1 rounded text-xs">pyairbnb</code>, che
+            interroga direttamente l&apos;endpoint GraphQL StaysSearch di Airbnb)
+            su una finestra settimanale mid-month (sabato → sabato), bbox stretto
+            del comune di Argegno (lat 45.860–45.880, lon 9.110–9.135).
+            Abbiamo raccolto <strong>{TOTAL_SAMPLE} prezzi/notte reali</strong>{" "}
+            distribuiti sui 12 mesi, calcolato la mediana per mese (più robusta
+            della media perché smussa gli outlier delle ville di lusso), e
+            applicato un premio del <strong>+15%</strong> per Casa del Pozzo —
+            premio coerente con il vantaggio competitivo della casa (fronte
+            lago vero + pontile + parcheggio auto + doppio bagno) ma comodamente
+            sotto il top luxury del comune (Argegno Fronte Lago a €480/notte).
           </p>
           <p>
-            Da quel picco abbiamo proiettato gli altri mesi seguendo la{" "}
-            <strong>curva stagionale storica del Lago di Como</strong> per
-            case fronte acqua premium (pattern coerente fra Bellagio, Tremezzo,
-            Cernobbio, Argegno): luglio al 97% del picco, giugno all&apos;80%,
-            settembre al 74%, maggio e ottobre al 56-65%, mesi invernali (nov-feb)
-            al 42-47%. È la stessa curva che governa la stagionalità di tutti
-            i listing benchmark scrapeati nella tabella sopra.
-          </p>
-          <p>
-            <strong>Caveat.</strong> I prezzi competitor sono best-estimate dai
-            listing pubblici Airbnb/Booking — non abbiamo accesso al pricing API
-            real-time. Le tre proiezioni di occupancy (50/60/70%) coprono
-            l&apos;intero range plausibile per un listing premium fronte lago al
-            primo anno: 50% è scenario conservativo, 60% è la media di un listing
-            ben gestito sul lago, 70% è il bersaglio del secondo anno con review
-            accumulate. Da ricalibrare dopo i primi 3-6 mesi di booking reali.
+            <strong>Caveat.</strong> I prezzi Airbnb sono dinamici e cambiano
+            ogni giorno: questo è uno snapshot al 20 maggio 2026 e va rifatto
+            ogni 60-90 giorni per restare allineato. La mediana Argegno include
+            anche listing 1-camera e 3-camere, quindi il riferimento non è
+            puro 2-camere — è un benchmark di comune.{" "}
+            Le tre proiezioni di occupancy (50/60/70%) coprono l&apos;intero
+            range plausibile: 50% conservativo (primo anno), 60% target di un
+            listing ben gestito sul lago, 70% premium raggiungibile dal secondo
+            anno con review accumulate. Da ricalibrare dopo i primi 3-6 mesi
+            di booking reali.
           </p>
         </div>
       </div>
