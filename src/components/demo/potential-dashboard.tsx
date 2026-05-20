@@ -391,38 +391,39 @@ export function PotentialDashboard() {
         </div>
       </div>
 
-      {/* Methodology note */}
+      {/* Informational note for owners — non-technical, plain Italian */}
       <div className="rounded-xl bg-amber-50 border border-amber-200 p-4 flex items-start gap-3 text-sm">
         <AlertCircle className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
         <div className="text-amber-900 leading-relaxed space-y-3">
           <p>
             <strong>Come abbiamo ricavato il prezzo medio per notte.</strong>{" "}
-            Per ogni mese da giugno 2026 a maggio 2027 abbiamo lanciato lo
-            script <code className="bg-amber-100 px-1 rounded text-xs">scrape_argegno_monthly.py</code>{" "}
-            (basato su <code className="bg-amber-100 px-1 rounded text-xs">pyairbnb</code>, che
-            interroga direttamente l&apos;endpoint GraphQL StaysSearch di Airbnb)
-            su una finestra settimanale mid-month (sabato → sabato), bbox stretto
-            del comune di Argegno (lat 45.860–45.880, lon 9.110–9.135).
-            Abbiamo raccolto <strong>{TOTAL_SAMPLE} prezzi/notte reali</strong>{" "}
-            distribuiti sui 12 mesi, calcolato la mediana per mese (più robusta
-            della media perché smussa gli outlier delle ville di lusso), e
-            l&apos;abbiamo usata direttamente come prezzo target per Casa del
-            Pozzo. Nessun premium sopra mercato: la scelta è di entrare al primo
-            anno in linea col mercato standard di Argegno per spingere il
-            volume di booking e accumulare review (fattore #1 per la rank
-            Airbnb nei mesi successivi).
+            Per stimare quanto può rendere Casa del Pozzo siamo partiti dai
+            prezzi che gli altri proprietari di Argegno stanno applicando in
+            questo momento per le loro case in affitto breve su Airbnb. Per
+            ogni mese abbiamo raccolto le quotazioni reali di decine di
+            appartamenti del paese — dalla bassa stagione al picco di agosto —
+            e abbiamo preso il prezzo mediano: cioè il valore centrale che
+            rappresenta il mercato senza farsi influenzare dagli estremi (le
+            ville di lusso in alto, gli affitti più economici in basso). Quel
+            valore è il prezzo che proponiamo per Casa del Pozzo, in linea col
+            mercato standard di Argegno e pensato per il primo anno di
+            operatività dove l&apos;obiettivo è guadagnare booking e accumulare
+            recensioni positive.
           </p>
           <p>
-            <strong>Caveat.</strong> I prezzi Airbnb sono dinamici e cambiano
-            ogni giorno: questo è uno snapshot al 20 maggio 2026 e va rifatto
-            ogni 60-90 giorni per restare allineato. La mediana Argegno include
-            anche listing 1-camera e 3-camere, quindi il riferimento non è
-            puro 2-camere — è un benchmark di comune.{" "}
-            Le tre proiezioni di occupancy (50/60/70%) coprono l&apos;intero
-            range plausibile: 50% conservativo (primo anno), 60% target di un
-            listing ben gestito sul lago, 70% premium raggiungibile dal secondo
-            anno con review accumulate. Da ricalibrare dopo i primi 3-6 mesi
-            di booking reali.
+            <strong>Una stima onesta, non una promessa.</strong> I numeri che
+            vedi qui sopra sono una proiezione costruita sui dati reali del
+            mercato Argegno di oggi: ogni euro che proponiamo è ancorato a
+            quello che gli host della tua zona stanno effettivamente facendo
+            sulla piattaforma. Detto questo vogliamo essere trasparenti:
+            nessuno può promettere con certezza quanto renderà una casa
+            l&apos;anno prossimo. I prezzi cambiano ogni giorno, e l&apos;occupazione
+            dipende anche da qualità delle foto, tempistica di pubblicazione,
+            prime recensioni ed eventi sul lago. Per questo abbiamo presentato
+            tre scenari (50%, 60%, 70% di occupazione media) che coprono
+            l&apos;intero range plausibile, dal più prudente al più ottimistico.
+            Dopo i primi 3-6 mesi di booking reali ricaliberemo insieme i
+            numeri sui dati che entreranno davvero.
           </p>
         </div>
       </div>
