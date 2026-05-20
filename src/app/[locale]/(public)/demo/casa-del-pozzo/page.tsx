@@ -20,9 +20,10 @@ import { GoogleMapEmbed } from "@/components/public/google-map-embed";
 import { PropertyGallery } from "@/components/public/property-gallery";
 import { PotentialDashboard } from "@/components/demo/potential-dashboard";
 
-function MapEmbed({ lat, lng, name }: { lat: number; lng: number; name: string }) {
+function MapEmbed({ address, name }: { address: string; name: string }) {
   const t = useTranslations("properties.detail");
-  const link = `https://www.google.com/maps?q=${lat},${lng}`;
+  const encoded = encodeURIComponent(address);
+  const link = `https://www.google.com/maps?q=${encoded}`;
   return (
     <div className="bg-white rounded-2xl border border-border/50 overflow-hidden">
       <div className="p-5 flex items-center justify-between gap-3 border-b border-border/40">
@@ -41,10 +42,13 @@ function MapEmbed({ lat, lng, name }: { lat: number; lng: number; name: string }
           {t("mapOpen")}
         </a>
       </div>
+      <div className="px-5 py-2 text-xs text-muted-foreground border-b border-border/40">
+        {address}
+      </div>
       <GoogleMapEmbed
-        query={`${lat},${lng}`}
+        query={address}
         title={`Map ${name}`}
-        zoom={16}
+        zoom={17}
         className="h-72 sm:h-80"
       />
     </div>
@@ -243,7 +247,15 @@ export default function CasaDelPozzoDemoPage() {
             )}
           </div>
 
-          {geo && <MapEmbed lat={geo.lat} lng={geo.lng} name={property.name} />}
+          {geo && (
+            <MapEmbed
+              address={
+                geo.displayName ||
+                `${property.address.street}, ${property.address.city} (${property.address.province}), ${property.address.zip}`
+              }
+              name={property.name}
+            />
+          )}
 
           {/* Potential dashboard */}
           <PotentialDashboard />

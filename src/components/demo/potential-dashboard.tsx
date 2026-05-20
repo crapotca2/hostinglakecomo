@@ -506,20 +506,40 @@ export function PotentialDashboard() {
         </div>
       </div>
 
-      {/* Disclaimer */}
+      {/* Methodology note */}
       <div className="rounded-xl bg-amber-50 border border-amber-200 p-4 flex items-start gap-3 text-sm">
         <AlertCircle className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
-        <div className="text-amber-900 leading-relaxed">
-          <strong>Note metodologiche.</strong> I prezzi competitor sono stimati
-          dai listing pubblici Airbnb/Booking — non abbiamo accesso al pricing
-          API real-time, quindi le stime per notte sono best-estimate basate
-          su descrizione, foto, posizionamento e fascia. Le tre proiezioni
-          (50%, 60%, 70% occupancy) coprono l&apos;intero range plausibile
-          per un listing premium fronte lago: 50% è uno scenario conservativo
-          tipico del primo anno operativo, 60% è la media di un listing ben
-          gestito sul Lago di Como, 70% è il bersaglio raggiungibile dal
-          secondo anno con review accumulate. Le proiezioni vanno ricalibrate
-          dopo i primi 3-6 mesi di booking reali.
+        <div className="text-amber-900 leading-relaxed space-y-3">
+          <p>
+            <strong>Come abbiamo ricavato il prezzo medio per notte mese per mese.</strong>{" "}
+            Abbiamo ancorato il <strong>picco di agosto a €310/notte</strong>{" "}
+            usando come base il pricing dei competitor 2 camere di Argegno
+            in alta stagione (Casa Hygge €210, Olga House €195) e
+            applicando un <strong>premium del +50%</strong> giustificato
+            dagli elementi unici di Casa del Pozzo che gli altri non hanno:
+            fronte lago vero (la facciata è riflessa nell&apos;acqua),
+            pontile galleggiante privato, parcheggio personale automatizzato
+            e doppio bagno privato — fattori che sul Lago di Como hanno un
+            valore di prezzo molto chiaro in alta stagione.
+          </p>
+          <p>
+            Da quel picco abbiamo proiettato gli altri mesi seguendo la{" "}
+            <strong>curva stagionale storica del Lago di Como</strong> per
+            case fronte acqua premium (pattern coerente fra Bellagio, Tremezzo,
+            Cernobbio, Argegno): luglio al 97% del picco, giugno all&apos;80%,
+            settembre al 74%, maggio e ottobre al 56-65%, mesi invernali (nov-feb)
+            al 42-47%. È la stessa curva che governa la stagionalità di tutti
+            i listing benchmark scrapeati nella tabella sopra.
+          </p>
+          <p>
+            <strong>Caveat.</strong> I prezzi competitor sono best-estimate dai
+            listing pubblici Airbnb/Booking — non abbiamo accesso al pricing API
+            real-time. Le tre proiezioni di occupancy (50/60/70%) coprono
+            l&apos;intero range plausibile per un listing premium fronte lago al
+            primo anno: 50% è scenario conservativo, 60% è la media di un listing
+            ben gestito sul lago, 70% è il bersaglio del secondo anno con review
+            accumulate. Da ricalibrare dopo i primi 3-6 mesi di booking reali.
+          </p>
         </div>
       </div>
     </section>
