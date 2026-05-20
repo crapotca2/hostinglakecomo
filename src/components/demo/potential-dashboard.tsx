@@ -144,7 +144,7 @@ export function PotentialDashboard() {
           Casa del Pozzo — proiezione annua
         </h2>
         <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-          Benchmark costruito su <strong>{TOTAL_SAMPLE} listing reali di Argegno</strong> scaricati direttamente dall&apos;API GraphQL StaysSearch di Airbnb (script <code className="bg-muted/60 px-1 rounded text-xs">pyairbnb</code>), una finestra settimanale mid-month per ogni mese da giugno 2026 a maggio 2027. Per ogni mese calcoliamo la <strong>mediana €/notte di Argegno</strong> e la usiamo come prezzo target per Casa del Pozzo: l&apos;obiettivo è restare <strong>in linea col mercato standard del comune</strong>, non posizionarsi come premium tier — coerente con un primo anno di operatività dove serve volume di booking per accumulare review e reputazione su Airbnb e Booking. Le pulizie sono fatturate al guest separatamente a <strong>€70 per prenotazione</strong> (pass-through, non riportate nei revenue lordi qui sotto).
+          Benchmark costruito su <strong>{TOTAL_SAMPLE} prezzi reali</strong> raccolti dai listing degli altri proprietari di Argegno attivi su Airbnb, una settimana di riferimento per ogni mese da giugno 2026 a maggio 2027. Per ogni mese prendiamo la <strong>mediana €/notte di Argegno</strong> e la usiamo come prezzo target per Casa del Pozzo: l&apos;obiettivo è restare <strong>in linea col mercato standard del comune</strong>, coerente con un primo anno di operatività dove serve volume di booking per accumulare recensioni e reputazione. Le pulizie sono fatturate al guest separatamente a <strong>€70 per prenotazione</strong> (pass-through, non riportate nei revenue lordi qui sotto).
         </p>
       </header>
 
@@ -340,7 +340,7 @@ export function PotentialDashboard() {
         <div className="flex items-center gap-2 mb-3">
           <Database className="h-4 w-4 text-primary" />
           <h3 className="text-xs font-semibold uppercase tracking-wider text-primary">
-            Mediana €/notte Argegno — dati Airbnb reali (scrape pyairbnb)
+            Mediana €/notte Argegno — dati dai listing Airbnb del paese
           </h3>
         </div>
         <div className="overflow-x-auto rounded-xl border border-border/50">
