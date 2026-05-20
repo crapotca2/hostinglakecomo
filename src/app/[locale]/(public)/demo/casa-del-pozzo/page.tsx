@@ -20,6 +20,71 @@ import { GoogleMapEmbed } from "@/components/public/google-map-embed";
 import { PropertyGallery } from "@/components/public/property-gallery";
 import { PotentialDashboard } from "@/components/demo/potential-dashboard";
 
+type DemoLocale = "it" | "en" | "ru";
+const DEMO_COPY: Record<DemoLocale, {
+  badge: string;
+  breadcrumbDemo: string;
+  locationBadge: string;
+  guestAccessTitle: string;
+  servicesTitle: string;
+  internalCta: React.ReactNode;
+}> = {
+  it: {
+    badge: "Pagina demo · non indicizzata · accesso interno Host Como",
+    breadcrumbDemo: "demo",
+    locationBadge: "Argegno · Lago di Como",
+    guestAccessTitle: "Accesso per gli ospiti",
+    servicesTitle: "Servizi inclusi",
+    internalCta: (
+      <>
+        Pagina demo per onboarding interno. Una volta firmato il mandato di
+        gestione con il proprietario, spostare l&apos;entry in{" "}
+        <code className="mx-1 px-1.5 py-0.5 rounded bg-muted/60 text-xs">
+          /properties/casa-del-pozzo
+        </code>{" "}
+        rimuovendo questa pagina demo, e attivare la pubblicazione su Airbnb /
+        Booking con i pricing definiti nella dashboard sopra.
+      </>
+    ),
+  },
+  en: {
+    badge: "Demo page · not indexed · Host Como internal use",
+    breadcrumbDemo: "demo",
+    locationBadge: "Argegno · Lake Como",
+    guestAccessTitle: "Guest access",
+    servicesTitle: "Included services",
+    internalCta: (
+      <>
+        Internal onboarding demo page. Once the management mandate is signed
+        with the owner, move the entry to{" "}
+        <code className="mx-1 px-1.5 py-0.5 rounded bg-muted/60 text-xs">
+          /properties/casa-del-pozzo
+        </code>{" "}
+        removing this demo page, and activate publication on Airbnb / Booking
+        with the pricing defined in the dashboard above.
+      </>
+    ),
+  },
+  ru: {
+    badge: "Демо-страница · не индексируется · внутренний доступ Host Como",
+    breadcrumbDemo: "демо",
+    locationBadge: "Ардженьо · Озеро Комо",
+    guestAccessTitle: "Заселение и доступ гостей",
+    servicesTitle: "Включённые услуги",
+    internalCta: (
+      <>
+        Внутренняя демо-страница для онбординга. После подписания договора
+        управления с владельцем перенесите запись в{" "}
+        <code className="mx-1 px-1.5 py-0.5 rounded bg-muted/60 text-xs">
+          /properties/casa-del-pozzo
+        </code>{" "}
+        удалив эту демо-страницу, и активируйте публикацию на Airbnb / Booking
+        с ценами, определёнными на дашборде выше.
+      </>
+    ),
+  },
+};
+
 function MapEmbed({ address, name }: { address: string; name: string }) {
   const t = useTranslations("properties.detail");
   const encoded = encodeURIComponent(address);
@@ -95,13 +160,16 @@ export default function CasaDelPozzoDemoPage() {
   const bedroomsKey = property.details.bedrooms === 1 ? "bedroomsOne" : "bedroomsOther";
   const bathroomsKey = property.details.bathrooms === 1 ? "bathroomsOne" : "bathroomsOther";
 
+  const demoCopy =
+    DEMO_COPY[(locale as DemoLocale) ?? "it"] ?? DEMO_COPY.it;
+
   return (
     <div className="pt-24 pb-20 bg-muted/20 min-h-screen">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Demo badge */}
         <div className="mb-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-100 text-amber-900 text-xs font-semibold">
           <Lock className="h-3.5 w-3.5" />
-          Pagina demo · non indicizzata · accesso interno Host Como
+          {demoCopy.badge}
         </div>
 
         <nav
@@ -120,7 +188,7 @@ export default function CasaDelPozzoDemoPage() {
           </Link>
           <ChevronRight className="h-3 w-3 opacity-60" aria-hidden />
           <span className="text-muted-foreground/70" aria-hidden>
-            demo
+            {demoCopy.breadcrumbDemo}
           </span>
           <ChevronRight className="h-3 w-3 opacity-60" aria-hidden />
           <span className="text-foreground font-medium" aria-current="page">
@@ -150,7 +218,7 @@ export default function CasaDelPozzoDemoPage() {
               </span>
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/[0.08] text-primary text-xs font-medium">
                 <MapPin className="h-3 w-3" />
-                Argegno · Lago di Como
+                {demoCopy.locationBadge}
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-semibold mb-3">
@@ -222,7 +290,7 @@ export default function CasaDelPozzoDemoPage() {
                     <div className="flex items-center gap-2 mb-2">
                       <Users className="h-3.5 w-3.5 text-primary" />
                       <h3 className="text-xs font-semibold uppercase tracking-wider text-primary">
-                        Accesso per gli ospiti
+                        {demoCopy.guestAccessTitle}
                       </h3>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
@@ -235,7 +303,7 @@ export default function CasaDelPozzoDemoPage() {
                     <div className="flex items-center gap-2 mb-2">
                       <Info className="h-3.5 w-3.5 text-primary" />
                       <h3 className="text-xs font-semibold uppercase tracking-wider text-primary">
-                        Servizi inclusi
+                        {demoCopy.servicesTitle}
                       </h3>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
@@ -263,13 +331,7 @@ export default function CasaDelPozzoDemoPage() {
           {/* Internal CTA */}
           <div className="bg-primary/[0.04] border border-primary/10 rounded-2xl p-5 flex items-start gap-3 text-sm text-muted-foreground">
             <Info className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-            <p>
-              Pagina demo per onboarding interno. Una volta firmato il mandato
-              di gestione con il proprietario, spostare l'entry in
-              <code className="mx-1 px-1.5 py-0.5 rounded bg-muted/60 text-xs">/properties/casa-del-pozzo</code>
-              rimuovendo questa pagina demo, e attivare la pubblicazione su
-              Airbnb / Booking con i pricing definiti nella dashboard sopra.
-            </p>
+            <p>{demoCopy.internalCta}</p>
           </div>
         </div>
       </div>
