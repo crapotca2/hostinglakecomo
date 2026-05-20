@@ -135,6 +135,19 @@ export default function PropertiesPage() {
               ))}
             </div>
           )}
+
+          {/* Internal demo link — visible to anyone with URL, not indexed.
+              Used to preview properties under onboarding before going live. */}
+          <div className="mt-10 pt-8 border-t border-dashed border-border/60">
+            <Link
+              href="/demo/casa-del-pozzo"
+              className="inline-flex items-center gap-2 text-xs text-muted-foreground/70 hover:text-primary transition-colors"
+              rel="nofollow"
+            >
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-amber-500" />
+              Demo interna: Casa del Pozzo (Argegno) — in valutazione onboarding
+            </Link>
+          </div>
         </div>
       </section>
     </div>
