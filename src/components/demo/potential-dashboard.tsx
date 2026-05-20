@@ -24,21 +24,23 @@ type MonthlyRow = {
 // Dataset reale: scraped 20 maggio 2026 con scrape_argegno_monthly.py.
 // Bbox Argegno strict (lat 45.860–45.880, lon 9.110–9.135).
 // Finestra mid-month sabato→sabato 7 notti per ogni mese.
-// Premio Casa del Pozzo = +15% sopra mediana (fronte lago vero + pontile +
-// parcheggio auto + doppio bagno → tier sopra mediana ma non al picco).
+// Casa del Pozzo target = mediana Argegno per mese (no premium): l'obiettivo
+// è restare in linea col mercato standard del comune, non posizionarsi
+// come premium tier. Coerente con un primo anno di operatività dove
+// serve volume di booking per accumulare review.
 const MONTHLY: MonthlyRow[] = [
-  { m: "Gen", argegnoMedian: 192, argegnoSampleN: 63, targetAdr: 220, days: 31 },
-  { m: "Feb", argegnoMedian: 207, argegnoSampleN: 50, targetAdr: 240, days: 28 },
-  { m: "Mar", argegnoMedian: 208, argegnoSampleN: 49, targetAdr: 240, days: 31 },
-  { m: "Apr", argegnoMedian: 212, argegnoSampleN: 61, targetAdr: 245, days: 30 },
-  { m: "Mag", argegnoMedian: 220, argegnoSampleN: 38, targetAdr: 255, days: 31 },
-  { m: "Giu", argegnoMedian: 249, argegnoSampleN: 31, targetAdr: 285, days: 30 },
-  { m: "Lug", argegnoMedian: 256, argegnoSampleN: 31, targetAdr: 295, days: 31 },
-  { m: "Ago", argegnoMedian: 267, argegnoSampleN: 29, targetAdr: 310, days: 31 },
-  { m: "Set", argegnoMedian: 242, argegnoSampleN: 51, targetAdr: 280, days: 30 },
-  { m: "Ott", argegnoMedian: 193, argegnoSampleN: 58, targetAdr: 220, days: 31 },
-  { m: "Nov", argegnoMedian: 208, argegnoSampleN: 63, targetAdr: 240, days: 30 },
-  { m: "Dic", argegnoMedian: 209, argegnoSampleN: 56, targetAdr: 240, days: 31 },
+  { m: "Gen", argegnoMedian: 192, argegnoSampleN: 63, targetAdr: 192, days: 31 },
+  { m: "Feb", argegnoMedian: 207, argegnoSampleN: 50, targetAdr: 207, days: 28 },
+  { m: "Mar", argegnoMedian: 208, argegnoSampleN: 49, targetAdr: 208, days: 31 },
+  { m: "Apr", argegnoMedian: 212, argegnoSampleN: 61, targetAdr: 212, days: 30 },
+  { m: "Mag", argegnoMedian: 220, argegnoSampleN: 38, targetAdr: 220, days: 31 },
+  { m: "Giu", argegnoMedian: 249, argegnoSampleN: 31, targetAdr: 249, days: 30 },
+  { m: "Lug", argegnoMedian: 256, argegnoSampleN: 31, targetAdr: 256, days: 31 },
+  { m: "Ago", argegnoMedian: 267, argegnoSampleN: 29, targetAdr: 267, days: 31 },
+  { m: "Set", argegnoMedian: 242, argegnoSampleN: 51, targetAdr: 242, days: 30 },
+  { m: "Ott", argegnoMedian: 193, argegnoSampleN: 58, targetAdr: 193, days: 31 },
+  { m: "Nov", argegnoMedian: 208, argegnoSampleN: 63, targetAdr: 208, days: 30 },
+  { m: "Dic", argegnoMedian: 209, argegnoSampleN: 56, targetAdr: 209, days: 31 },
 ];
 
 const MAX_ADR = Math.max(...MONTHLY.map((m) => m.targetAdr));
@@ -142,7 +144,7 @@ export function PotentialDashboard() {
           Casa del Pozzo — proiezione annua
         </h2>
         <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-          Benchmark costruito su <strong>{TOTAL_SAMPLE} listing reali di Argegno</strong> scaricati direttamente dall&apos;API GraphQL StaysSearch di Airbnb (script <code className="bg-muted/60 px-1 rounded text-xs">pyairbnb</code>), una finestra settimanale mid-month per ogni mese da giugno 2026 a maggio 2027. Per ogni mese calcoliamo la <strong>mediana €/notte di Argegno</strong> e applichiamo un premio del <strong>+15%</strong> per ottenere il prezzo target di Casa del Pozzo: il premio è giustificato dagli elementi unici di Casa del Pozzo (fronte lago vero, pontile galleggiante privato, parcheggio personale automatizzato, doppio bagno privato) che ci posizionano sopra la mediana ma sotto il top luxury del comune (Argegno Fronte Lago €480/notte). Le pulizie sono fatturate al guest separatamente a <strong>€70 per prenotazione</strong> (pass-through, non riportate nei revenue lordi qui sotto).
+          Benchmark costruito su <strong>{TOTAL_SAMPLE} listing reali di Argegno</strong> scaricati direttamente dall&apos;API GraphQL StaysSearch di Airbnb (script <code className="bg-muted/60 px-1 rounded text-xs">pyairbnb</code>), una finestra settimanale mid-month per ogni mese da giugno 2026 a maggio 2027. Per ogni mese calcoliamo la <strong>mediana €/notte di Argegno</strong> e la usiamo come prezzo target per Casa del Pozzo: l&apos;obiettivo è restare <strong>in linea col mercato standard del comune</strong>, non posizionarsi come premium tier — coerente con un primo anno di operatività dove serve volume di booking per accumulare review e reputazione su Airbnb e Booking. Le pulizie sono fatturate al guest separatamente a <strong>€70 per prenotazione</strong> (pass-through, non riportate nei revenue lordi qui sotto).
         </p>
       </header>
 
@@ -152,7 +154,7 @@ export function PotentialDashboard() {
           icon={Euro}
           label="ADR medio annuo target"
           value={`€${BLENDED_ADR}`}
-          sub={`+15% vs mediana Argegno (€${ARGEGNO_BLENDED_MEDIAN})`}
+          sub={`In linea con mediana mercato Argegno`}
           accent
         />
         <StatCard
@@ -350,12 +352,11 @@ export function PotentialDashboard() {
                   # listing Argegno
                 </th>
                 <th className="px-3 py-3 font-semibold text-right">
-                  Mediana €/notte
+                  Mediana €/notte Argegno
                 </th>
                 <th className="px-3 py-3 font-semibold text-right">
                   Target Casa del Pozzo
                 </th>
-                <th className="px-3 py-3 font-semibold text-right">Premio</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border/50">
@@ -371,15 +372,6 @@ export function PotentialDashboard() {
                   <td className="px-3 py-3 text-right tabular-nums font-semibold text-primary">
                     €{row.targetAdr}
                   </td>
-                  <td className="px-3 py-3 text-right tabular-nums text-xs text-muted-foreground">
-                    +
-                    {Math.round(
-                      ((row.targetAdr - row.argegnoMedian) /
-                        row.argegnoMedian) *
-                        100,
-                    )}
-                    %
-                  </td>
                 </tr>
               ))}
               <tr className="bg-muted/30 font-semibold">
@@ -392,15 +384,6 @@ export function PotentialDashboard() {
                 </td>
                 <td className="px-3 py-3 text-right tabular-nums text-primary">
                   €{BLENDED_ADR}
-                </td>
-                <td className="px-3 py-3 text-right tabular-nums text-xs">
-                  +
-                  {Math.round(
-                    ((BLENDED_ADR - ARGEGNO_BLENDED_MEDIAN) /
-                      ARGEGNO_BLENDED_MEDIAN) *
-                      100,
-                  )}
-                  %
                 </td>
               </tr>
             </tbody>
@@ -423,10 +406,11 @@ export function PotentialDashboard() {
             Abbiamo raccolto <strong>{TOTAL_SAMPLE} prezzi/notte reali</strong>{" "}
             distribuiti sui 12 mesi, calcolato la mediana per mese (più robusta
             della media perché smussa gli outlier delle ville di lusso), e
-            applicato un premio del <strong>+15%</strong> per Casa del Pozzo —
-            premio coerente con il vantaggio competitivo della casa (fronte
-            lago vero + pontile + parcheggio auto + doppio bagno) ma comodamente
-            sotto il top luxury del comune (Argegno Fronte Lago a €480/notte).
+            l&apos;abbiamo usata direttamente come prezzo target per Casa del
+            Pozzo. Nessun premium sopra mercato: la scelta è di entrare al primo
+            anno in linea col mercato standard di Argegno per spingere il
+            volume di booking e accumulare review (fattore #1 per la rank
+            Airbnb nei mesi successivi).
           </p>
           <p>
             <strong>Caveat.</strong> I prezzi Airbnb sono dinamici e cambiano
