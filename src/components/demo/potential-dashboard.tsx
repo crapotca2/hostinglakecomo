@@ -3,41 +3,63 @@
 import {
   TrendingUp,
   Euro,
-  Calendar,
   Sparkles,
   AlertCircle,
-  PiggyBank,
   ExternalLink,
   BarChart3,
 } from "lucide-react";
 
-type MonthlyRow = {
+type MonthlyAdr = {
   m: string;
   adr: number;
-  occupancy: number;
-  nights: number;
+  days: number;
 };
 
-const MONTHLY: MonthlyRow[] = [
-  { m: "Gen", adr: 135, occupancy: 25, nights: 8 },
-  { m: "Feb", adr: 130, occupancy: 25, nights: 7 },
-  { m: "Mar", adr: 145, occupancy: 30, nights: 9 },
-  { m: "Apr", adr: 175, occupancy: 50, nights: 15 },
-  { m: "Mag", adr: 210, occupancy: 65, nights: 20 },
-  { m: "Giu", adr: 260, occupancy: 75, nights: 22 },
-  { m: "Lug", adr: 310, occupancy: 90, nights: 28 },
-  { m: "Ago", adr: 320, occupancy: 90, nights: 28 },
-  { m: "Set", adr: 240, occupancy: 75, nights: 22 },
-  { m: "Ott", adr: 175, occupancy: 50, nights: 15 },
-  { m: "Nov", adr: 130, occupancy: 25, nights: 7 },
-  { m: "Dic", adr: 145, occupancy: 30, nights: 9 },
+// Prezzo medio per notte mese per mese, ricalibrato: ogni mese sopra €200
+// è stato abbassato di 10€ rispetto alla prima proiezione, per allinearsi
+// al pricing dei competitor 2BR Argegno (Casa Hygge / Olga House).
+const MONTHLY: MonthlyAdr[] = [
+  { m: "Gen", adr: 135, days: 31 },
+  { m: "Feb", adr: 130, days: 28 },
+  { m: "Mar", adr: 145, days: 31 },
+  { m: "Apr", adr: 175, days: 30 },
+  { m: "Mag", adr: 200, days: 31 },
+  { m: "Giu", adr: 250, days: 30 },
+  { m: "Lug", adr: 300, days: 31 },
+  { m: "Ago", adr: 310, days: 31 },
+  { m: "Set", adr: 230, days: 30 },
+  { m: "Ott", adr: 175, days: 31 },
+  { m: "Nov", adr: 130, days: 30 },
+  { m: "Dic", adr: 145, days: 31 },
 ];
 
 const MAX_ADR = Math.max(...MONTHLY.map((m) => m.adr));
-const TOTAL_NIGHTS = MONTHLY.reduce((s, m) => s + m.nights, 0);
-const TOTAL_REVENUE = MONTHLY.reduce((s, m) => s + m.adr * m.nights, 0);
-const TOTAL_OCCUPANCY = Math.round((TOTAL_NIGHTS / 365) * 100);
-const BLENDED_ADR = Math.round(TOTAL_REVENUE / TOTAL_NIGHTS);
+
+// Annual revenue projection for 3 occupancy scenarios. We round nights up
+// to the nearest whole night per month (booking discretisation).
+const OCCUPANCY_SCENARIOS = [50, 60, 70] as const;
+
+type ScenarioRow = {
+  occupancy: (typeof OCCUPANCY_SCENARIOS)[number];
+  monthly: { m: string; nights: number; revenue: number }[];
+  totalNights: number;
+  totalRevenue: number;
+};
+
+const SCENARIOS: ScenarioRow[] = OCCUPANCY_SCENARIOS.map((occ) => {
+  const monthly = MONTHLY.map((row) => {
+    const nights = Math.round((row.days * occ) / 100);
+    return { m: row.m, nights, revenue: nights * row.adr };
+  });
+  const totalNights = monthly.reduce((s, r) => s + r.nights, 0);
+  const totalRevenue = monthly.reduce((s, r) => s + r.revenue, 0);
+  return { occupancy: occ, monthly, totalNights, totalRevenue };
+});
+
+const BASE_SCENARIO = SCENARIOS.find((s) => s.occupancy === 60)!;
+const BLENDED_ADR = Math.round(
+  BASE_SCENARIO.totalRevenue / BASE_SCENARIO.totalNights,
+);
 
 type CompetitorRow = {
   name: string;
@@ -45,12 +67,9 @@ type CompetitorRow = {
   bedrooms: number;
   estimatedNightly: number;
   notes: string;
-  /** Indirizzo / zona ad Argegno confermata (controllo distintivo). */
   argegnoLocation: string;
 };
 
-// Competitor Airbnb scrapeati nei mesi recenti, ognuno con la locazione
-// Argegno verificata leggendo description.txt + foto del listing.
 const COMPETITORS: CompetitorRow[] = [
   {
     name: "Casa Hygge",
@@ -117,27 +136,6 @@ const COMP_ADR_2BR = Math.round(
 const COMP_ADR_ALL = Math.round(
   COMPETITORS.reduce((s, c) => s + c.estimatedNightly, 0) / COMPETITORS.length,
 );
-
-const COSTS = {
-  cleanings: {
-    count: Math.round(TOTAL_NIGHTS / 4.5),
-    fee: 80,
-  },
-  management: { rate: 0.2 },
-  otaCommission: { rate: 0.08 },
-  maintenance: { rate: 0.05 },
-  utilities: { fixed: 1800 },
-};
-
-const COSTS_TOTAL =
-  COSTS.cleanings.count * COSTS.cleanings.fee +
-  Math.round(TOTAL_REVENUE * COSTS.management.rate) +
-  Math.round(TOTAL_REVENUE * COSTS.otaCommission.rate) +
-  Math.round(TOTAL_REVENUE * COSTS.maintenance.rate) +
-  COSTS.utilities.fixed;
-
-const NET_OWNER = TOTAL_REVENUE - COSTS_TOTAL;
-const NET_YIELD_PCT = ((NET_OWNER / TOTAL_REVENUE) * 100).toFixed(0);
 
 function StatCard({
   icon: Icon,
@@ -208,40 +206,40 @@ export function PotentialDashboard() {
           Casa del Pozzo — proiezione annua
         </h2>
         <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-          Benchmark costruito sui listing pubblici di <strong>Argegno</strong> scaricati negli ultimi mesi da Airbnb e Booking, normalizzato per numero di camere, qualità di ristrutturazione e prossimità al lago. Le stime di occupancy e i prezzi mensili seguono il pattern stagionale del Lago di Como per case fronte acqua di fascia premium — picco luglio-agosto, alta da maggio a settembre, bassa da novembre a febbraio. Tutti i competitor riportati nella tabella sotto hanno indirizzo confermato ad Argegno (Piazza Roma, Via Milano, Piazza Giovanni Grandi, centro storico Telo).
+          Benchmark costruito sui listing pubblici di <strong>Argegno</strong> scaricati negli ultimi mesi da Airbnb e Booking, normalizzato per numero di camere, qualità di ristrutturazione e prossimità al lago. I prezzi per notte mese per mese seguono il pattern stagionale del Lago di Como per case fronte acqua di fascia premium — picco luglio-agosto, alta da maggio a settembre, bassa da novembre a febbraio. Tutti i competitor riportati nella tabella in fondo hanno indirizzo confermato ad Argegno (Piazza Roma, Via Milano, Piazza Giovanni Grandi, centro storico Telo). Le pulizie sono fatturate al guest separatamente a <strong>€70 per prenotazione</strong> (pass-through, non riportate nei revenue lordi qui sotto).
         </p>
       </header>
 
-      {/* KPI top row */}
+      {/* KPI top row — only LORDO views, no net to owner */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
         <StatCard
           icon={Euro}
           label="ADR medio annuo"
           value={`€${BLENDED_ADR}`}
-          sub={`Range €130–320 mensile`}
+          sub={`Range €130–310 mensile`}
           accent
         />
         <StatCard
-          icon={Calendar}
-          label="Notti prenotate stimate"
-          value={`${TOTAL_NIGHTS}`}
-          sub={`Occupancy media ~${TOTAL_OCCUPANCY}%`}
+          icon={TrendingUp}
+          label="Revenue lordo @ 50%"
+          value={`€${SCENARIOS[0].totalRevenue.toLocaleString("it-IT")}`}
+          sub={`${SCENARIOS[0].totalNights} notti · scenario conservativo`}
         />
         <StatCard
           icon={TrendingUp}
-          label="Revenue lordo annuo"
-          value={`€${TOTAL_REVENUE.toLocaleString("it-IT")}`}
-          sub="Somma su 12 mesi"
+          label="Revenue lordo @ 60%"
+          value={`€${SCENARIOS[1].totalRevenue.toLocaleString("it-IT")}`}
+          sub={`${SCENARIOS[1].totalNights} notti · scenario base`}
         />
         <StatCard
-          icon={PiggyBank}
-          label="Netto stimato al proprietario"
-          value={`€${NET_OWNER.toLocaleString("it-IT")}`}
-          sub={`${NET_YIELD_PCT}% del lordo`}
+          icon={TrendingUp}
+          label="Revenue lordo @ 70%"
+          value={`€${SCENARIOS[2].totalRevenue.toLocaleString("it-IT")}`}
+          sub={`${SCENARIOS[2].totalNights} notti · scenario premium`}
         />
       </div>
 
-      {/* Monthly histogram — ADR per notte mese per mese */}
+      {/* Monthly ADR histogram — only the histogram, no breakdown table */}
       <div className="mb-8">
         <div className="flex items-center gap-2 mb-3">
           <BarChart3 className="h-4 w-4 text-primary" />
@@ -250,7 +248,7 @@ export function PotentialDashboard() {
           </h3>
         </div>
         <div className="rounded-xl border border-border/50 bg-gradient-to-b from-primary/[0.02] to-transparent p-5 sm:p-6">
-          <div className="grid grid-cols-12 gap-1 sm:gap-2 items-end h-56">
+          <div className="grid grid-cols-12 gap-1 sm:gap-2 items-end h-64">
             {MONTHLY.map((row) => {
               const heightPct = Math.round((row.adr / MAX_ADR) * 100);
               const isPeak = row.adr === MAX_ADR;
@@ -259,7 +257,7 @@ export function PotentialDashboard() {
                   key={row.m}
                   className="flex flex-col items-center justify-end h-full gap-1.5 group"
                 >
-                  <span className="text-[10px] sm:text-xs font-semibold tabular-nums text-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="text-[10px] sm:text-xs font-semibold tabular-nums text-foreground">
                     €{row.adr}
                   </span>
                   <div
@@ -269,7 +267,7 @@ export function PotentialDashboard() {
                         : "bg-primary/40 group-hover:bg-primary/70"
                     }`}
                     style={{ height: `${heightPct}%` }}
-                    title={`${row.m}: €${row.adr}/notte · ${row.occupancy}% occupancy · ${row.nights} notti stimate`}
+                    title={`${row.m}: €${row.adr}/notte`}
                   />
                   <span className="text-[10px] sm:text-xs font-medium text-muted-foreground">
                     {row.m}
@@ -278,26 +276,23 @@ export function PotentialDashboard() {
               );
             })}
           </div>
-          <div className="mt-4 pt-4 border-t border-border/40 flex items-center justify-between flex-wrap gap-3 text-xs text-muted-foreground">
-            <div className="flex items-center gap-4">
-              <span className="flex items-center gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-sm bg-primary" />
-                Picco stagionale (€{MAX_ADR}/notte · luglio-agosto)
-              </span>
-              <span className="flex items-center gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-sm bg-primary/40" />
-                Mesi standard
-              </span>
-            </div>
-            <span>Hover sulle barre per dettagli mensili</span>
+          <div className="mt-4 pt-4 border-t border-border/40 flex items-center gap-4 flex-wrap text-xs text-muted-foreground">
+            <span className="flex items-center gap-1.5">
+              <span className="h-2.5 w-2.5 rounded-sm bg-primary" />
+              Picco stagionale (€{MAX_ADR}/notte · agosto)
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="h-2.5 w-2.5 rounded-sm bg-primary/40" />
+              Mesi standard
+            </span>
           </div>
         </div>
       </div>
 
-      {/* Monthly table (revenue per month) */}
+      {/* Occupancy scenario table — revenue lordo per 50/60/70% */}
       <div className="mb-8">
         <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-3">
-          Breakdown mensile — notti, occupancy, revenue
+          Revenue lordo per scenario di occupancy
         </h3>
         <div className="overflow-x-auto rounded-xl border border-border/50">
           <table className="w-full text-sm">
@@ -305,38 +300,93 @@ export function PotentialDashboard() {
               <tr className="text-left text-xs uppercase tracking-wider text-muted-foreground">
                 <th className="px-3 py-3 font-semibold">Mese</th>
                 <th className="px-3 py-3 font-semibold text-right">€/notte</th>
-                <th className="px-3 py-3 font-semibold text-right">Occupancy</th>
-                <th className="px-3 py-3 font-semibold text-right">Notti</th>
-                <th className="px-3 py-3 font-semibold text-right">Revenue</th>
+                <th
+                  className="px-3 py-3 font-semibold text-right border-l border-border/30"
+                  colSpan={2}
+                >
+                  Scenario 50%
+                </th>
+                <th
+                  className="px-3 py-3 font-semibold text-right border-l border-border/30"
+                  colSpan={2}
+                >
+                  Scenario 60%
+                </th>
+                <th
+                  className="px-3 py-3 font-semibold text-right border-l border-border/30"
+                  colSpan={2}
+                >
+                  Scenario 70%
+                </th>
+              </tr>
+              <tr className="text-[10px] uppercase tracking-wider text-muted-foreground/70 border-t border-border/30">
+                <th />
+                <th />
+                <th className="px-3 py-2 text-right border-l border-border/30">
+                  Notti
+                </th>
+                <th className="px-3 py-2 text-right">Revenue</th>
+                <th className="px-3 py-2 text-right border-l border-border/30">
+                  Notti
+                </th>
+                <th className="px-3 py-2 text-right">Revenue</th>
+                <th className="px-3 py-2 text-right border-l border-border/30">
+                  Notti
+                </th>
+                <th className="px-3 py-2 text-right">Revenue</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border/50">
-              {MONTHLY.map((row) => (
+              {MONTHLY.map((row, idx) => (
                 <tr key={row.m} className="hover:bg-muted/20">
                   <td className="px-3 py-3 font-medium">{row.m}</td>
                   <td className="px-3 py-3 text-right tabular-nums">
                     €{row.adr}
                   </td>
-                  <td className="px-3 py-3 text-right tabular-nums">
-                    {row.occupancy}%
+                  <td className="px-3 py-3 text-right tabular-nums border-l border-border/30 text-muted-foreground">
+                    {SCENARIOS[0].monthly[idx].nights}
                   </td>
                   <td className="px-3 py-3 text-right tabular-nums">
-                    {row.nights}
+                    €
+                    {SCENARIOS[0].monthly[idx].revenue.toLocaleString("it-IT")}
                   </td>
-                  <td className="px-3 py-3 text-right tabular-nums font-semibold">
-                    €{(row.adr * row.nights).toLocaleString("it-IT")}
+                  <td className="px-3 py-3 text-right tabular-nums border-l border-border/30 text-muted-foreground">
+                    {SCENARIOS[1].monthly[idx].nights}
+                  </td>
+                  <td className="px-3 py-3 text-right tabular-nums">
+                    €
+                    {SCENARIOS[1].monthly[idx].revenue.toLocaleString("it-IT")}
+                  </td>
+                  <td className="px-3 py-3 text-right tabular-nums border-l border-border/30 text-muted-foreground">
+                    {SCENARIOS[2].monthly[idx].nights}
+                  </td>
+                  <td className="px-3 py-3 text-right tabular-nums">
+                    €
+                    {SCENARIOS[2].monthly[idx].revenue.toLocaleString("it-IT")}
                   </td>
                 </tr>
               ))}
               <tr className="bg-primary/[0.04] font-semibold">
-                <td className="px-3 py-3" colSpan={3}>
+                <td className="px-3 py-3" colSpan={2}>
                   Totale annuo
                 </td>
+                <td className="px-3 py-3 text-right tabular-nums border-l border-border/30">
+                  {SCENARIOS[0].totalNights}
+                </td>
                 <td className="px-3 py-3 text-right tabular-nums">
-                  {TOTAL_NIGHTS}
+                  €{SCENARIOS[0].totalRevenue.toLocaleString("it-IT")}
+                </td>
+                <td className="px-3 py-3 text-right tabular-nums border-l border-border/30">
+                  {SCENARIOS[1].totalNights}
                 </td>
                 <td className="px-3 py-3 text-right tabular-nums text-primary">
-                  €{TOTAL_REVENUE.toLocaleString("it-IT")}
+                  €{SCENARIOS[1].totalRevenue.toLocaleString("it-IT")}
+                </td>
+                <td className="px-3 py-3 text-right tabular-nums border-l border-border/30">
+                  {SCENARIOS[2].totalNights}
+                </td>
+                <td className="px-3 py-3 text-right tabular-nums text-primary">
+                  €{SCENARIOS[2].totalRevenue.toLocaleString("it-IT")}
                 </td>
               </tr>
             </tbody>
@@ -344,146 +394,50 @@ export function PotentialDashboard() {
         </div>
       </div>
 
-      {/* Cost breakdown + competitor positioning side by side on lg */}
-      <div className="grid lg:grid-cols-2 gap-6 mb-8">
-        <div>
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-3">
-            Spese annue stimate
-          </h3>
-          <div className="rounded-xl border border-border/50 overflow-hidden">
-            <table className="w-full text-sm">
-              <tbody className="divide-y divide-border/50">
-                <tr>
-                  <td className="px-4 py-3">
-                    <div className="font-medium">Pulizie</div>
-                    <div className="text-xs text-muted-foreground">
-                      {COSTS.cleanings.count} check-out × €{COSTS.cleanings.fee}{" "}
-                      (pass-through al guest)
-                    </div>
-                  </td>
-                  <td className="px-4 py-3 text-right tabular-nums font-semibold">
-                    €
-                    {(COSTS.cleanings.count * COSTS.cleanings.fee).toLocaleString(
-                      "it-IT",
-                    )}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-3">
-                    <div className="font-medium">Gestione Host Como</div>
-                    <div className="text-xs text-muted-foreground">
-                      20% del lordo (full-service property management)
-                    </div>
-                  </td>
-                  <td className="px-4 py-3 text-right tabular-nums font-semibold">
-                    €
-                    {Math.round(
-                      TOTAL_REVENUE * COSTS.management.rate,
-                    ).toLocaleString("it-IT")}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-3">
-                    <div className="font-medium">Commissioni piattaforme</div>
-                    <div className="text-xs text-muted-foreground">
-                      ~8% media (Airbnb 3% + Booking 15% mix)
-                    </div>
-                  </td>
-                  <td className="px-4 py-3 text-right tabular-nums font-semibold">
-                    €
-                    {Math.round(
-                      TOTAL_REVENUE * COSTS.otaCommission.rate,
-                    ).toLocaleString("it-IT")}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-3">
-                    <div className="font-medium">Manutenzione + amenities</div>
-                    <div className="text-xs text-muted-foreground">
-                      5% del lordo (riparazioni, biancheria, kit cortesia)
-                    </div>
-                  </td>
-                  <td className="px-4 py-3 text-right tabular-nums font-semibold">
-                    €
-                    {Math.round(
-                      TOTAL_REVENUE * COSTS.maintenance.rate,
-                    ).toLocaleString("it-IT")}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-3">
-                    <div className="font-medium">
-                      Utenze (luce, gas, WiFi, TARI)
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      Stima fissa annua
-                    </div>
-                  </td>
-                  <td className="px-4 py-3 text-right tabular-nums font-semibold">
-                    €{COSTS.utilities.fixed.toLocaleString("it-IT")}
-                  </td>
-                </tr>
-                <tr className="bg-muted/30 font-semibold">
-                  <td className="px-4 py-3">Totale spese annue</td>
-                  <td className="px-4 py-3 text-right tabular-nums">
-                    €{COSTS_TOTAL.toLocaleString("it-IT")}
-                  </td>
-                </tr>
-                <tr className="bg-primary/[0.06] font-bold">
-                  <td className="px-4 py-3 text-primary">
-                    Netto stimato al proprietario
-                  </td>
-                  <td className="px-4 py-3 text-right tabular-nums text-primary">
-                    €{NET_OWNER.toLocaleString("it-IT")}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div>
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-3">
-            Posizionamento vs Argegno
-          </h3>
-          <div className="grid grid-cols-2 gap-3 mb-3">
-            <div className="rounded-xl bg-muted/30 p-4">
-              <div className="text-xs text-muted-foreground mb-1">
-                ADR medio 2BR Argegno
-              </div>
-              <div className="text-2xl font-bold tabular-nums">
-                €{COMP_ADR_2BR}
-              </div>
-              <div className="text-xs text-muted-foreground mt-1">
-                {COMP_2BR.length} listing diretti confronto
-              </div>
+      {/* Positioning vs Argegno */}
+      <div className="mb-8">
+        <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-3">
+          Posizionamento vs Argegno
+        </h3>
+        <div className="grid sm:grid-cols-2 gap-3 mb-4">
+          <div className="rounded-xl bg-muted/30 p-4">
+            <div className="text-xs text-muted-foreground mb-1">
+              ADR medio 2 camere Argegno
             </div>
-            <div className="rounded-xl bg-primary/[0.08] p-4">
-              <div className="text-xs text-primary mb-1">Casa del Pozzo</div>
-              <div className="text-2xl font-bold text-primary tabular-nums">
-                €{BLENDED_ADR}
-              </div>
-              <div className="text-xs text-primary/70 mt-1">
-                +
-                {Math.round(((BLENDED_ADR - COMP_ADR_2BR) / COMP_ADR_2BR) * 100)}
-                % vs concorrenti 2BR
-              </div>
+            <div className="text-2xl font-bold tabular-nums">
+              €{COMP_ADR_2BR}
+            </div>
+            <div className="text-xs text-muted-foreground mt-1">
+              {COMP_2BR.length} listing diretti confronto (Casa Hygge, Olga House)
             </div>
           </div>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            La concorrenza diretta 2BR è composta da{" "}
-            <strong>Casa Hygge</strong> e <strong>Olga House</strong>, entrambe
-            in centro Argegno ma non direttamente sul filo dell&apos;acqua. Il
-            premium di Casa del Pozzo è giustificato da:{" "}
-            <em>
-              fronte lago vero (riflesso nell&apos;acqua), pontile galleggiante
-              privato, doppio bagno privato, parcheggio personale automatizzato
-            </em>{" "}
-            e il pozzo rustico come elemento di differenziazione. ADR target
-            sopra mercato locale ma in linea con il segmento &ldquo;waterfront
-            premium&rdquo; del Lago di Como (€250–320/notte in alta stagione).
-          </p>
+          <div className="rounded-xl bg-primary/[0.08] p-4">
+            <div className="text-xs text-primary mb-1">
+              Casa del Pozzo (ADR medio annuo)
+            </div>
+            <div className="text-2xl font-bold text-primary tabular-nums">
+              €{BLENDED_ADR}
+            </div>
+            <div className="text-xs text-primary/70 mt-1">
+              +
+              {Math.round(((BLENDED_ADR - COMP_ADR_2BR) / COMP_ADR_2BR) * 100)}
+              % vs concorrenti 2 camere
+            </div>
+          </div>
         </div>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          La concorrenza diretta a 2 camere è composta da{" "}
+          <strong>Casa Hygge</strong> e <strong>Olga House</strong>, entrambe
+          in centro Argegno ma non direttamente sul filo dell&apos;acqua. Il
+          premium di Casa del Pozzo è giustificato da:{" "}
+          <em>
+            fronte lago vero (riflesso nell&apos;acqua), pontile galleggiante
+            privato, doppio bagno privato, parcheggio personale automatizzato
+          </em>{" "}
+          e il pozzo rustico come elemento di differenziazione. ADR target
+          sopra mercato locale ma in linea con il segmento &ldquo;waterfront
+          premium&rdquo; del Lago di Como (€250–310/notte in alta stagione).
+        </p>
       </div>
 
       {/* Competitor scrape table */}
@@ -497,7 +451,9 @@ export function PotentialDashboard() {
               <tr className="text-left text-xs uppercase tracking-wider text-muted-foreground">
                 <th className="px-3 py-3 font-semibold">Listing</th>
                 <th className="px-3 py-3 font-semibold">Zona Argegno</th>
-                <th className="px-3 py-3 font-semibold text-center">BR</th>
+                <th className="px-3 py-3 font-semibold text-center">
+                  Camere da letto
+                </th>
                 <th className="px-3 py-3 font-semibold text-right">€/notte</th>
                 <th className="px-3 py-3 font-semibold">Note</th>
               </tr>
@@ -557,12 +513,13 @@ export function PotentialDashboard() {
           <strong>Note metodologiche.</strong> I prezzi competitor sono stimati
           dai listing pubblici Airbnb/Booking — non abbiamo accesso al pricing
           API real-time, quindi le stime per notte sono best-estimate basate
-          su descrizione, foto, posizionamento e fascia. Occupancy proiettata
-          su pattern stagionale tipico di Argegno fronte lago (estate ad alta
-          intensità, inverno basso). Il totale di {TOTAL_NIGHTS} notti annue
-          è coerente con un listing premium fronte lago al primo anno di
-          operatività. Le proiezioni vanno ricalibrate dopo i primi 3-6 mesi
-          di booking reali, quando avremo dati di pricing dinamico effettivi.
+          su descrizione, foto, posizionamento e fascia. Le tre proiezioni
+          (50%, 60%, 70% occupancy) coprono l&apos;intero range plausibile
+          per un listing premium fronte lago: 50% è uno scenario conservativo
+          tipico del primo anno operativo, 60% è la media di un listing ben
+          gestito sul Lago di Como, 70% è il bersaglio raggiungibile dal
+          secondo anno con review accumulate. Le proiezioni vanno ricalibrate
+          dopo i primi 3-6 mesi di booking reali.
         </div>
       </div>
     </section>

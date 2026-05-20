@@ -437,14 +437,14 @@
     ],
     "pricing": {
       "basePrice": 240,
-      "cleaningFee": 80,
+      "cleaningFee": 70,
       "weekendMultiplier": 1.3
     },
     "touristTaxRate": 3,
     "maxTouristTaxNights": 14,
     "geo": {
-      "lat": 45.82961,
-      "lng": 9.12146,
+      "lat": 45.86635,
+      "lng": 9.12330,
       "displayName": "Via Spluga 44, Argegno (CO)"
     }
   }
