@@ -20,8 +20,15 @@ export function JsonLdOrganization() {
         alternateName: ["Como Host"],
         url: SITE_URL,
         logo: `${SITE_URL}/images/logo/logo-marble.png`,
+        image: `${SITE_URL}/images/host.webp`,
         email: ORG_EMAIL,
         telephone: ORG_PHONE,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: ORG_LOCALITY,
+          addressRegion: ORG_REGION,
+          addressCountry: ORG_COUNTRY,
+        },
         sameAs: [ANGELO_AIRBNB],
         founder: {
           "@type": "Person",
