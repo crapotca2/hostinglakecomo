@@ -7,7 +7,8 @@ export const maxDuration = 60;
 
 /**
  * Cron pull periodico. Backstop nel caso un webhook si perda.
- * Schedule in vercel.json: ogni ora.
+ * Schedule in vercel.json: giornaliero alle 3am (limite Vercel Hobby tier).
+ * Real-time coverage rimane via webhook /api/webhooks/beds24.
  * Auth: Vercel iniestta `Authorization: Bearer $CRON_SECRET` automaticamente
  * quando `CRON_SECRET` è settato in env.
  */
@@ -21,7 +22,8 @@ export async function GET(req: NextRequest) {
   }
 
   const since = new Date();
-  since.setHours(since.getHours() - 2);
+  // Daily cron → look back 26h to overlap and catch anything missed
+  since.setHours(since.getHours() - 26);
 
   try {
     const bookings = await syncBookings({ since, event: "polling" });
