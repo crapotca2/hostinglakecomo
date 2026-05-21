@@ -219,13 +219,96 @@ export interface PayoutDoc extends BaseDoc {
 // ── BEDS24 SYNC LOG ──
 
 export interface Beds24SyncLogDoc extends BaseDoc {
-  event: "webhook" | "polling";
-  type: string;
+  event: "webhook" | "polling" | "bootstrap" | "manual";
+  type: "property" | "booking" | "calendar" | "auth" | string;
   beds24Id: string;
   localId?: ObjectId;
   status: "success" | "failed";
   payload: Record<string, unknown>;
   error?: string;
+  durationMs?: number;
+}
+
+// ── CALENDAR (inventario per giorno/room) ──
+
+export interface CalendarDayDoc extends BaseDoc {
+  propertyId: ObjectId;
+  beds24PropertyId: string;
+  beds24RoomId: string;
+  date: Date;
+  price?: number;
+  available: number;
+  minStay?: number;
+  maxStay?: number;
+  syncedAt: Date;
+}
+
+// ── COMPETITOR INTEL (Airbnb scrape, market benchmarking) ──
+
+export type CompetitorZone =
+  | "argegno"
+  | "cernobbio"
+  | "bellagio"
+  | "varenna"
+  | "menaggio"
+  | "tremezzo"
+  | "como-centro"
+  | "altro";
+
+export interface CompetitorListingDoc extends BaseDoc {
+  airbnbRoomId: string;
+  zone: CompetitorZone;
+  name: string;
+  url: string;
+  lat?: number;
+  lng?: number;
+  bedrooms?: number;
+  bathrooms?: number;
+  maxGuests?: number;
+  amenities?: string[];
+  isSuperhost?: boolean;
+  firstSeenAt: Date;
+  lastSeenAt: Date;
+  isActive: boolean;
+}
+
+export interface CompetitorCalendarSnapshotDoc extends BaseDoc {
+  competitorListingId: ObjectId;
+  airbnbRoomId: string;
+  date: Date;
+  available: boolean;
+  minNights?: number;
+  maxNights?: number;
+  scrapedAt: Date;
+}
+
+export interface CompetitorMonthlyStatsDoc extends BaseDoc {
+  competitorListingId: ObjectId;
+  airbnbRoomId: string;
+  zone: CompetitorZone;
+  monthKey: string;
+  daysSeen: number;
+  unavailableDays: number;
+  occupancyRaw: number;
+  occupancyCorrected: number;
+  correctionFactor: number;
+  computedAt: Date;
+}
+
+export interface CompetitorZoneStatsDoc extends BaseDoc {
+  zone: CompetitorZone;
+  monthKey: string;
+  monthLabel: string;
+  nCompetitorsCalendar: number;
+  nListingsPriceSample?: number;
+  occupancyMedian: number;
+  occupancyP25: number;
+  occupancyP75: number;
+  occupancyRawMedian: number;
+  adrMedian?: number;
+  adrMeanClipped?: number;
+  revpanMedian?: number;
+  computedAt: Date;
 }
 
 // ── COMPLIANCE RECORDS ──

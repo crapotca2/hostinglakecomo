@@ -65,3 +65,63 @@ export interface BookingFilters {
   status?: Beds24Booking["status"];
   modifiedSince?: string;
 }
+
+export interface Beds24PropertyText {
+  language: string;
+  description?: string;
+  shortDescription?: string;
+  location?: string;
+}
+
+export interface Beds24PropertyDetail extends Beds24Property {
+  postcode?: string;
+  latitude?: number;
+  longitude?: number;
+  currency?: string;
+  checkInStart?: string;
+  checkInEnd?: string;
+  checkOutEnd?: string;
+  texts?: Beds24PropertyText[];
+  roomsList?: Beds24Room[];
+}
+
+export interface Beds24Image {
+  id: string;
+  propertyId: string;
+  roomId?: string;
+  url: string;
+  largeUrl?: string;
+  caption?: string;
+  order: number;
+}
+
+export interface Beds24RatePlan {
+  id: string;
+  propertyId: string;
+  roomId: string;
+  name: string;
+  basePrice: number;
+  weekendMultiplier?: number;
+  seasonal?: {
+    name: string;
+    from: string;
+    to: string;
+    multiplier: number;
+  }[];
+}
+
+export type Beds24WebhookType =
+  | "bookingCreated"
+  | "bookingModified"
+  | "bookingCancelled"
+  | "messageReceived"
+  | "calendarChanged";
+
+export interface Beds24WebhookEvent {
+  type: Beds24WebhookType;
+  timestamp: string;
+  bookingId?: string;
+  propertyId?: string;
+  roomId?: string;
+  payload?: Record<string, unknown>;
+}

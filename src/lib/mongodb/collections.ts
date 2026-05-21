@@ -8,7 +8,12 @@ import type {
   PaymentDoc,
   PayoutDoc,
   Beds24SyncLogDoc,
+  CalendarDayDoc,
   ComplianceRecordDoc,
+  CompetitorListingDoc,
+  CompetitorCalendarSnapshotDoc,
+  CompetitorMonthlyStatsDoc,
+  CompetitorZoneStatsDoc,
 } from "@/types/database";
 
 const USE_MEMORY =
@@ -41,6 +46,15 @@ export const collections = {
   payments: () => getCollection<PaymentDoc>("payments"),
   payouts: () => getCollection<PayoutDoc>("payouts"),
   beds24SyncLog: () => getCollection<Beds24SyncLogDoc>("beds24_sync_log"),
+  calendar: () => getCollection<CalendarDayDoc>("calendar"),
   complianceRecords: () =>
     getCollection<ComplianceRecordDoc>("compliance_records"),
+  competitorListings: () =>
+    getCollection<CompetitorListingDoc>("competitor_listings"),
+  competitorCalendar: () =>
+    getCollection<CompetitorCalendarSnapshotDoc>("competitor_calendar"),
+  competitorMonthlyStats: () =>
+    getCollection<CompetitorMonthlyStatsDoc>("competitor_monthly_stats"),
+  competitorZoneStats: () =>
+    getCollection<CompetitorZoneStatsDoc>("competitor_zone_stats"),
 };

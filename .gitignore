@@ -16,6 +16,9 @@ dist/
 .env.local
 .env.*.local
 
+# mcp config with secrets
+.mcp.json
+
 # debug
 npm-debug.log*
 yarn-debug.log*

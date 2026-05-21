@@ -1,0 +1,29 @@
+{
+  "name": "@host-como/ops",
+  "version": "0.0.1",
+  "description": "Beds24 operations: CLI + MCP server for Host Como",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "host-como-ops": "./dist/cli/index.js"
+  },
+  "main": "./dist/core/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev:cli": "tsx src/cli/index.ts",
+    "dev:mcp": "tsx src/mcp/index.ts",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@lionlai/beds24-v2-sdk": "*",
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "commander": "^12.0.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "tsx": "^4.0.0",
+    "typescript": "^5",
+    "vitest": "^2.0.0"
+  }
+}

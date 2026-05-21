@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "host-como-ops": {
+      "command": "node",
+      "args": ["./host-como-tools/ops/dist/mcp/index.js"],
+      "env": {
+        "BEDS24_API_TOKEN": "REPLACE_ME"
+      }
+    },
+    "browsermcp": {
+      "command": "npx",
+      "args": ["@browsermcp/mcp@latest"]
+    },
+    "repull": {
+      "command": "npx",
+      "args": ["-y", "@repull/mcp"],
+      "env": {
+        "REPULL_API_KEY": "REPLACE_ME"
+      }
+    }
+  }
+}

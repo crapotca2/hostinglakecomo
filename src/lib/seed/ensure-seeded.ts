@@ -1,23 +1,21 @@
 import { collections } from "@/lib/mongodb/collections";
+import { seedOwner } from "./seed-owner";
 import { seedFixtures } from "./seed-fixtures";
+import { bootstrapBeds24 } from "@/lib/beds24/sync";
 
 let seedingPromise: Promise<void> | null = null;
 
+const USE_MOCK =
+  process.env.USE_BEDS24_MOCK === "true" ||
+  (!process.env.BEDS24_REFRESH_TOKEN && !process.env.BEDS24_LONG_LIFE_TOKEN);
+
 /**
- * Ensures the in-memory store is populated with test fixtures.
- * On Vercel serverless, each function instance starts with an empty
- * memory store — this function auto-seeds on first access so demo
- * data is always available without needing MongoDB Atlas.
- *
- * Idempotent: checks if properties exist before seeding. Also guards
- * against concurrent calls during a single cold start with a shared
- * promise.
+ * Bootstrap idempotente al primo cold start:
+ *  - sempre: admin user + holidays
+ *  - se ci sono credenziali Beds24 e DB vuoto: pull reale via bootstrapBeds24()
+ *  - altrimenti (dev mock): usa seedFixtures legacy per popolare con dati finti
  */
 export async function ensureSeeded(): Promise<void> {
-  const propsCol = await collections.properties();
-  const count = await propsCol.countDocuments({});
-  if (count > 0) return;
-
   if (seedingPromise) {
     await seedingPromise;
     return;
@@ -25,7 +23,17 @@ export async function ensureSeeded(): Promise<void> {
 
   seedingPromise = (async () => {
     try {
-      await seedFixtures();
+      await seedOwner();
+
+      const propsCol = await collections.properties();
+      const propCount = await propsCol.countDocuments({});
+      if (propCount > 0) return;
+
+      if (USE_MOCK) {
+        await seedFixtures();
+      } else {
+        await bootstrapBeds24();
+      }
     } finally {
       seedingPromise = null;
     }

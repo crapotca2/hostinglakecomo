@@ -13,8 +13,8 @@ import {
 } from "./fixtures";
 
 const USE_MOCK =
-  !process.env.BEDS24_REFRESH_TOKEN ||
-  process.env.USE_BEDS24_MOCK === "true";
+  process.env.USE_BEDS24_MOCK === "true" ||
+  (!process.env.BEDS24_REFRESH_TOKEN && !process.env.BEDS24_LONG_LIFE_TOKEN);
 
 export class Beds24Client {
   private readonly baseUrl: string;
@@ -31,8 +31,16 @@ export class Beds24Client {
   }
 
   private async getAccessToken(): Promise<string> {
+    // Long-life token: nessun refresh, lo usiamo direttamente
+    if (this.longLifeToken) return this.longLifeToken;
+
     if (this.accessToken && Date.now() < this.accessTokenExpiry) {
       return this.accessToken;
+    }
+    if (!this.refreshToken) {
+      throw new Error(
+        "Beds24 auth: né BEDS24_LONG_LIFE_TOKEN né BEDS24_REFRESH_TOKEN sono settati",
+      );
     }
     const res = await fetch(`${this.baseUrl}/authentication/token`, {
       method: "GET",

@@ -121,3 +121,129 @@ benchmark accademico standard (€20–40/mese per Como), questo scraper è il
 backup gratuito e custom. Non costruirei Host Como con solo lo scraper come
 unica fonte — il **dual-feed** AirDNA + pyairbnb riduce il rischio di single
 point of failure quando Airbnb cambia GraphQL schema.
+
+---
+
+## Modulo Calendar / Occupancy (aggiunto 2026-05-21)
+
+Lo scrape monthly cattura il **prezzo** (snapshot di una settimana sample
+per ciascuno dei 12 mesi). Per calcolare l'**occupancy rate** dei competitor
+serve un secondo dato: la disponibilità giorno-per-giorno. Il modulo qui
+sotto risolve quel gap.
+
+### Pipeline a 4 step
+
+```
+scrape_argegno_monthly.py        ─→ argegno_monthly.json          (prezzi)
+       │
+       ▼
+analyze_argegno.py               ─→ argegno_monthly_summary.json  (ADR per mese)
+       │
+       ▼
+scrape_argegno_calendar.py       ─→ argegno_calendar.json         (disponibilità day-by-day)
+       │
+       ▼
+analyze_calendar_occupancy.py    ─→ argegno_intel_combined.json   (ADR + occupancy + RevPAN)
+       │
+       ▼
+load_calendar_to_mongo.py        ─→ Mongo (dashboard ready)
+```
+
+### Quickstart pipeline calendar
+
+```bash
+pip install pyairbnb pymongo python-dotenv
+
+# 1) Scrape monthly (~5 min) — necessario per scoprire i competitor
+python scrape_argegno_monthly.py
+
+# 2) Analyze prezzi (istantaneo) — produce argegno_monthly_summary.json
+python analyze_argegno.py
+
+# 3) Scrape calendar dei competitor selezionati (~2-3 min × N listing)
+python scrape_argegno_calendar.py
+
+# 4) Calcola occupancy + RevPAN
+python analyze_calendar_occupancy.py
+
+# 5) Carica tutto su MongoDB (richiede MONGODB_URI in .env.local)
+python load_calendar_to_mongo.py
+```
+
+### Cosa fa ciascun pezzo nuovo
+
+**`scrape_argegno_calendar.py`**
+
+Per ogni competitor selezionato dal monthly dump (filtrato per profilo
+Casa del Pozzo: 1-3 camere, 2-6 ospiti, in poligono Argegno paese),
+chiama `pyairbnb.get_calendar(room_id)` e ottiene ~365 giorni
+forward-looking di availability + minStay/maxStay. Throttle 3 sec fra
+listing, max 30 listing per esecuzione. Output: `argegno_calendar.json`.
+
+Limite noto di `get_calendar`: non torna i prezzi. Servono i monthly
+search dump per quello — i due si fondono nello step successivo.
+
+**`analyze_calendar_occupancy.py`**
+
+Per ciascun competitor calcola occupancy mensile come
+`unavailable_days / days_in_month` (raw), poi applica la correzione
+industry-standard `× 0.85` (perché "non disponibile" include host
+blocks + restrizioni, non solo bookings — vedi AirDNA methodology).
+Aggrega per zona con median + P25 + P75. Fonde con i prezzi dal
+monthly summary per calcolare RevPAN = ADR × occupancy. Output:
+`argegno_intel_combined.json`.
+
+**`load_calendar_to_mongo.py`**
+
+Upsert idempotente nelle 4 collection Mongo:
+
+| Collection | Chiave naturale | Cosa contiene |
+|---|---|---|
+| `competitor_listings` | `airbnbRoomId` | Anagrafica listing (name, coords, capacity, ultima volta visto) |
+| `competitor_calendar` | `(airbnbRoomId, date)` | Calendar day raw (available bool, minNights) |
+| `competitor_monthly_stats` | `(airbnbRoomId, monthKey)` | Occupancy per listing/mese |
+| `competitor_zone_stats` | `(zone, monthKey)` | Aggregato zona: median occupancy + ADR + RevPAN |
+
+Idempotente: `lastSeenAt` aggiornato a ogni run, `firstSeenAt` solo a
+insert. Re-running lo stesso script non duplica nulla.
+
+### Lettura dalla dashboard
+
+API route Next.js:
+
+```
+GET /api/intel/competitors?zone=argegno
+```
+
+Ritorna `{ listings, monthlyZoneStats, dataAsOf }`. Pronto per essere
+consumato da TanStack Query nella pagina `/dashboard/analytics`.
+
+### Bug noti / da sistemare
+
+1. **Stale `KNOWN_COMPETITORS_BY_ID`** (analyze_argegno.py):
+   `Casa Hygge` / `Olga House` / etc. hanno room_id hardcoded da una
+   ricerca precedente che non matchano più nel dump corrente
+   (verificato 2026-05-21: 0 match su 1229 listing). Lo script ora
+   logga un warning se non trova match, ma la lista va re-sourced
+   manualmente — aprire il listing su airbnb.com, copiare il room_id
+   nuovo dall'URL, aggiornare il dict.
+
+2. **Outlier €6067/notte** nel mean: ora clippato a P5-P95 prima di
+   calcolare mean/min/max. Il median era già robusto e non è stato
+   toccato.
+
+3. **`load_calendar_to_mongo.py` richiede pymongo**: non è nelle deps
+   del progetto Next.js. Va installato in un venv Python locale
+   separato (`pip install pymongo python-dotenv`).
+
+### Caveat metodologici (importante per la dashboard)
+
+- L'occupancy è **stimata, non misurata**. ~15-20% di overestimation
+  rispetto a quella reale è atteso. La correzione 0.85 mitiga ma non
+  elimina. Marcare il dato come "stimato" nella UI.
+- I dati sono **snapshot del momento dello scrape**. Per usi seri
+  serve refresh settimanale (cron / scheduled job).
+- ~70% dei "no" sono booking veri, il resto sono blocchi/restrizioni.
+  Per il pricing decisionale (es. "alza i prezzi se occupancy zona >
+  70%") usare `occupancyMedian` (corretto), non `occupancyRawMedian`.
+
