@@ -9,7 +9,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { getPortfolio } from "@/lib/portfolio";
+import { getPublicPortfolio } from "@/lib/portfolio";
 import { PartnersBanner } from "@/components/public/partners-banner";
 import { ExperiencesSection } from "@/components/public/experiences-section";
 import { PropertyCard } from "@/components/public/property-card";
@@ -50,7 +50,7 @@ export async function generateMetadata({
 }
 
 const FEATURED_PROPERTIES = (() => {
-  const all = getPortfolio();
+  const all = getPublicPortfolio();
   return all.filter((p) => p.images.length > 0).slice(0, 3);
 })();
 

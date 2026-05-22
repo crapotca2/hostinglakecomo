@@ -4,11 +4,11 @@ import { Search, Info, ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
-import { getPortfolio } from "@/lib/portfolio";
+import { getPublicPortfolio } from "@/lib/portfolio";
 import type { PropertyZone, PropertyType } from "@/types/database";
 import { PropertyCard } from "@/components/public/property-card";
 
-const PORTFOLIO = getPortfolio();
+const PORTFOLIO = getPublicPortfolio();
 const SHOW_FILTERS = PORTFOLIO.length > 3;
 
 const ZONE_KEYS: PropertyZone[] = [
@@ -136,18 +136,6 @@ export default function PropertiesPage() {
             </div>
           )}
 
-          {/* Internal demo link — visible to anyone with URL, not indexed.
-              Used to preview properties under onboarding before going live. */}
-          <div className="mt-10 pt-8 border-t border-dashed border-border/60">
-            <Link
-              href="/demo/casa-del-pozzo"
-              className="inline-flex items-center gap-2 text-xs text-muted-foreground/70 hover:text-primary transition-colors"
-              rel="nofollow"
-            >
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-amber-500" />
-              Demo interna: Casa del Pozzo (Argegno) — in valutazione onboarding
-            </Link>
-          </div>
         </div>
       </section>
     </div>

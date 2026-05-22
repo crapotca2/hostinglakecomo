@@ -118,6 +118,13 @@ export interface PortfolioEntry {
   name: string;
   type: PropertyType;
   zone: PropertyZone;
+  /**
+   * When true, the entry is treated as an internal/preview-only listing:
+   * hidden from public homepage, /properties list, /properties/[slug],
+   * /api/public/properties and sitemap. The dedicated /demo/<slug> page
+   * still renders for internal sharing with the owner during onboarding.
+   */
+  demo?: boolean;
   description: string;
   descriptionLong?: string;
   sections?: PortfolioSections;
@@ -184,6 +191,16 @@ const TYPE_LABELS: Record<PropertyType, string> = {
 
 export function getPortfolio(): PortfolioEntry[] {
   return PORTFOLIO;
+}
+
+/**
+ * Public-facing portfolio: excludes entries flagged `demo: true`.
+ * Use this for the homepage, /properties list, public API and sitemap.
+ * Use `getPortfolio()` only for internal flows (seed, demo page, beds24
+ * fixtures) where every entry — including drafts — must be visible.
+ */
+export function getPublicPortfolio(): PortfolioEntry[] {
+  return PORTFOLIO.filter((p) => !p.demo);
 }
 
 export function getPortfolioEntry(slug: string): PortfolioEntry | undefined {

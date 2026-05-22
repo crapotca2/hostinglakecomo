@@ -301,6 +301,7 @@
     "name": "Casa del Pozzo",
     "type": "apartment",
     "zone": "primo-bacino",
+    "demo": true,
     "description": "Appartamento storico fronte lago ad Argegno, con un pozzo rustico in pietra a vista nel soggiorno, due camere matrimoniali ognuna con bagno privato, terrazza panoramica e accesso diretto al lago tramite giardino condominiale. A pochi metri dal Lido di Argegno.",
     "description_en": "Historic lakefront apartment in Argegno with a rustic stone well exposed in the living room, two double bedrooms each with private bathroom, a panoramic terrace and direct lake access via a shared garden. Steps from the Argegno Lido.",
     "description_ru": "Исторические апартаменты на берегу озера в Ардженьо: рустикальный каменный колодец в гостиной, две двуспальные спальни — каждая со своей ванной комнатой, панорамная терраса и прямой выход к озеру через общий сад. В нескольких шагах от пляжа Lido di Argegno.",

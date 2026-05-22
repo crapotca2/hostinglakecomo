@@ -15,7 +15,9 @@ export async function generateMetadata({
     (p) => p.slug === slug,
   );
 
-  if (!property) {
+  // Treat demo/preview-only listings the same as "not found" from a metadata
+  // perspective — noIndex + generic title — so they don't surface in search.
+  if (!property || property.demo === true) {
     return buildMetadata({
       locale,
       pathname: `/properties/${slug}`,

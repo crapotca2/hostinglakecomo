@@ -6,7 +6,7 @@ import comuniData from "@/data/comuni.json";
 import guidesData from "@/data/guides.json";
 
 type PropertyImage = { url: string; alt?: string };
-type PropertyShape = { slug: string; images?: PropertyImage[] };
+type PropertyShape = { slug: string; images?: PropertyImage[]; demo?: boolean };
 
 const STATIC_PATHS: { path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] }[] = [
   { path: "/", priority: 1.0, changeFrequency: "weekly" },
@@ -68,6 +68,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }
 
   for (const property of propertiesData as PropertyShape[]) {
+    // Skip demo/preview-only listings — they should not be indexed
+    if (property.demo) continue;
     const path = `/properties/${property.slug}`;
     for (const locale of routing.locales) {
       entries.push({

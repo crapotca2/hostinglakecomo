@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getPortfolio } from "@/lib/portfolio";
+import { getPublicPortfolio } from "@/lib/portfolio";
 
 // Public, no-auth endpoint consumed by easycomo.com (the sibling tourism site)
 // to surface Host Como managed properties in its "Stay" funnel.
@@ -10,7 +10,7 @@ import { getPortfolio } from "@/lib/portfolio";
 export const revalidate = 3600;
 
 export async function GET() {
-  const portfolio = getPortfolio();
+  const portfolio = getPublicPortfolio();
   const projection = portfolio.map((p) => ({
     slug: p.slug,
     name: p.name,

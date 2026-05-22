@@ -62,7 +62,11 @@ export default function PropertyDetailPage() {
   const locale = useLocale();
   const params = useParams<{ slug: string }>();
   const slug = params.slug;
-  const property = getPortfolioEntry(slug);
+  const propertyRaw = getPortfolioEntry(slug);
+  // Hide demo/preview-only listings from the public detail surface as well.
+  // The dedicated /demo/<slug> page remains accessible by direct URL for
+  // internal onboarding sharing.
+  const property = propertyRaw && !propertyRaw.demo ? propertyRaw : undefined;
 
   if (!property) {
     return (
