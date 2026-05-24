@@ -14,10 +14,6 @@ import type {
   CompetitorCalendarSnapshotDoc,
   CompetitorMonthlyStatsDoc,
   CompetitorZoneStatsDoc,
-  EventDoc,
-  WeatherForecastDoc,
-  PricingRuleDoc,
-  PricingDecisionDoc,
 } from "@/types/database";
 
 const USE_MEMORY =
@@ -61,9 +57,4 @@ export const collections = {
     getCollection<CompetitorMonthlyStatsDoc>("competitor_monthly_stats"),
   competitorZoneStats: () =>
     getCollection<CompetitorZoneStatsDoc>("competitor_zone_stats"),
-  events: () => getCollection<EventDoc>("events"),
-  weatherForecast: () => getCollection<WeatherForecastDoc>("weather_forecast"),
-  pricingRules: () => getCollection<PricingRuleDoc>("pricing_rules"),
-  pricingDecisions: () =>
-    getCollection<PricingDecisionDoc>("pricing_decisions"),
 };
