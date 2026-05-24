@@ -298,13 +298,12 @@
   },
   {
     "slug": "casa-del-pozzo",
-    "name": "Casa del Pozzo",
+    "name": "Aqua Vista di Splendore",
     "type": "apartment",
     "zone": "primo-bacino",
-    "demo": true,
-    "description": "Appartamento storico fronte lago ad Argegno, con un pozzo rustico in pietra a vista nel soggiorno, due camere matrimoniali ognuna con bagno privato, terrazza panoramica e accesso diretto al lago tramite giardino condominiale. A pochi metri dal Lido di Argegno.",
-    "description_en": "Historic lakefront apartment in Argegno with a rustic stone well exposed in the living room, two double bedrooms each with private bathroom, a panoramic terrace and direct lake access via a shared garden. Steps from the Argegno Lido.",
-    "description_ru": "Исторические апартаменты на берегу озера в Ардженьо: рустикальный каменный колодец в гостиной, две двуспальные спальни — каждая со своей ванной комнатой, панорамная терраса и прямой выход к озеру через общий сад. В нескольких шагах от пляжа Lido di Argegno.",
+    "description": "Appartamento storico fronte lago ad Argegno, con un pozzo rustico in pietra a vista nel soggiorno, due camere matrimoniali ognuna con bagno privato, grande cucina abitabile e terrazza panoramica. Accesso diretto al lago tramite giardino condominiale e posto auto privato in ascensore meccanico. A pochi metri dal Lido di Argegno e dal pontile per Bellagio.",
+    "description_en": "Historic lakefront apartment in Argegno: a rustic stone well exposed in the living room, two double bedrooms each with private bathroom, a large eat-in kitchen and a panoramic terrace. Direct lake access via a shared garden and a private parking spot in a mechanical car lift. Steps from the Argegno Lido and the public ferry to Bellagio.",
+    "description_ru": "Исторические апартаменты на берегу озера в Ардженьо: рустикальный каменный колодец в гостиной, две двуспальные спальни — каждая со своей ванной комнатой, большая жилая кухня и панорамная терраса. Прямой выход к озеру через общий сад и собственное парковочное место в механическом автоподъёмнике. В нескольких шагах от пляжа Lido di Argegno и причала парома до Белладжо.",
     "descriptionLong": "Immagina di aprire le persiane al mattino e di trovarti il Lago di Como ai piedi della finestra. Non vicino: proprio sotto, l'acqua che riflette la facciata gialla della casa, le barche che ondeggiano al pontile, le montagne dell'altra sponda che cambiano colore con la luce. Argegno è uno di quei borghi che il tempo ha protetto dalla fretta, e questa casa storica sul lungolago, con il suo affresco mariano che veglia sulla facciata da oltre un secolo, ne custodisce il cuore. All'interno la ristrutturazione recente ha trasformato l'antico palazzo in uno spazio luminoso e contemporaneo, dove travi bianche a vista, parquet in rovere chiaro e arredi su misura convivono con i muri originali. Il dettaglio che ricorderai più di tutti è il pozzo rustico in pietra naturale che attraversa il soggiorno: un elemento autoctono dell'edificio, lasciato a vista durante il restauro, che racconta secoli di vita del borgo e oggi diventa il pezzo unico di questa casa. È raro trovare sul Lago di Como uno spazio dove la pietra grezza della montagna entra letteralmente in salotto. Il Lido di Argegno è letteralmente a due passi — pochi metri lungo la riva e ci sei, con la sua spiaggia, la piscina e il ristorante sull'acqua. Ma se preferisci restare in casa, l'accesso diretto al lago tramite il giardino condominiale ti porta a fare colazione con i piedi nell'acqua.",
     "descriptionLong_en": "Imagine opening the shutters in the morning and finding Lake Como at your window. Not nearby: right below, the water reflecting the yellow facade of the house, the boats swaying at the dock, the mountains on the other shore changing colour with the light. Argegno is one of those villages that time has protected from the rush, and this historic house on the lakefront, with the Madonna fresco that has watched over its facade for more than a century, holds its very heart. Inside, the recent renovation has turned the old palazzo into a bright, contemporary space, where white exposed wooden beams, light oak parquet and custom furnishings coexist with the original walls. The detail you'll remember most is the rustic stone well that crosses the living room — an autochthonous element of the building, left exposed during the restoration, telling centuries of village life and today the standout piece of this home. It is rare to find a space on Lake Como where the raw stone of the mountain enters the living room itself. The Argegno Lido is literally steps away — a short walk along the shore and you're there, with its beach, swimming pool and lakeside restaurant. But if you'd rather stay in, direct lake access through the shared garden lets you have breakfast with your feet in the water.",
     "descriptionLong_ru": "Представьте, что открываете ставни утром и обнаруживаете озеро Комо прямо под окном. Не рядом — именно внизу: вода отражает жёлтый фасад дома, лодки покачиваются у пирса, горы на другом берегу меняют цвет вместе со светом. Ардженьо — один из тех деревень, которые время уберегло от суеты, и этот исторический дом на набережной с фреской Мадонны, более века наблюдающей за фасадом, хранит самое сердце места. Внутри недавняя реконструкция превратила старинное здание в светлое современное пространство: открытые белые деревянные балки, паркет из светлого дуба и мебель на заказ соседствуют с оригинальными стенами. Главная деталь, которую вы запомните, — рустикальный каменный колодец, проходящий через гостиную: автохтонный элемент здания, оставленный открытым во время реставрации. Он рассказывает столетия деревенской жизни и сегодня становится визитной карточкой дома. Редко на озере Комо встретишь пространство, где грубый горный камень буквально входит в гостиную. Пляж Lido di Argegno буквально в двух шагах — короткая прогулка вдоль берега, и вы там: пляж, бассейн и ресторан на воде. А если предпочитаете остаться дома, прямой выход к озеру через общий сад позволит вам позавтракать с ногами в воде.",
@@ -382,45 +381,45 @@
         "order": 2
       },
       {
-        "url": "/images/listing/casa-del-pozzo/Sala-Pranzo-1.jpeg",
-        "alt": "Casa del Pozzo — sala da pranzo con pozzo rustico in pietra naturale a vista",
-        "room": "Pozzo rustico in soggiorno",
-        "order": 3
-      },
-      {
         "url": "/images/listing/casa-del-pozzo/Soggiorno-1.jpeg",
         "alt": "Casa del Pozzo — soggiorno contemporaneo con divano blu, travi bianche e parquet rovere",
         "room": "Soggiorno",
+        "order": 3
+      },
+      {
+        "url": "/images/listing/casa-del-pozzo/Cucina-4.jpeg",
+        "alt": "Casa del Pozzo — cucina open-space con isola centrale, orologio rosso vintage e soffitto a travi bianche",
+        "room": "Cucina con isola",
         "order": 4
       },
       {
-        "url": "/images/listing/casa-del-pozzo/Esterno-2.jpeg",
-        "alt": "Casa del Pozzo — terrazza panoramica con palma e cipresso e scalinata verso il pontile",
-        "room": "Terrazza",
+        "url": "/images/listing/casa-del-pozzo/Sala-Pranzo-1.jpeg",
+        "alt": "Casa del Pozzo — sala da pranzo con pozzo rustico in pietra naturale a vista",
+        "room": "Pozzo rustico in soggiorno",
         "order": 5
-      },
-      {
-        "url": "/images/listing/casa-del-pozzo/Cucina-1.jpeg",
-        "alt": "Casa del Pozzo — cucina open-space con top in pietra nera e mobili in rovere sbiancato",
-        "room": "Cucina",
-        "order": 6
       },
       {
         "url": "/images/listing/casa-del-pozzo/Vista-Lago-1.jpeg",
         "alt": "Casa del Pozzo — vista sul lago dalla finestra con pontile galleggiante",
         "room": "Vista lago dalla camera",
-        "order": 7
+        "order": 6
       },
       {
         "url": "/images/listing/casa-del-pozzo/Camera-1.jpeg",
         "alt": "Casa del Pozzo — prima camera matrimoniale con travi bianche a vista e vista lago",
         "room": "Camera matrimoniale 1",
-        "order": 8
+        "order": 7
       },
       {
         "url": "/images/listing/casa-del-pozzo/Bagno-1.jpeg",
         "alt": "Casa del Pozzo — bagno principale con piastrelle turchesi e doccia walk-in",
         "room": "Bagno principale",
+        "order": 8
+      },
+      {
+        "url": "/images/listing/casa-del-pozzo/Esterno-2.jpeg",
+        "alt": "Casa del Pozzo — terrazza panoramica con palma e cipresso e scalinata verso il pontile",
+        "room": "Terrazza",
         "order": 9
       },
       {
@@ -430,63 +429,63 @@
         "order": 10
       },
       {
-        "url": "/images/listing/casa-del-pozzo/Vista-Lago-4.jpeg",
-        "alt": "Casa del Pozzo — vista dalla terrazza con il Lido di Argegno e villa adiacente",
-        "room": "Vista terrazza",
-        "order": 11
-      },
-      {
-        "url": "/images/listing/casa-del-pozzo/Vista-Lago-2.jpeg",
-        "alt": "Casa del Pozzo — vista lago dalla seconda camera con zattere ormeggiate",
-        "room": "Vista lago dalla camera 2",
-        "order": 12
-      },
-      {
         "url": "/images/listing/casa-del-pozzo/Bagno-Lavanderia-1.jpeg",
         "alt": "Casa del Pozzo — secondo bagno con zona lavanderia (lavatrice + asciugatrice)",
         "room": "Bagno con lavanderia",
-        "order": 13
+        "order": 11
+      },
+      {
+        "url": "/images/listing/casa-del-pozzo/Vista-Lago-4.jpeg",
+        "alt": "Casa del Pozzo — vista dalla terrazza con il Lido di Argegno e villa adiacente",
+        "room": "Vista terrazza",
+        "order": 12
       },
       {
         "url": "/images/listing/casa-del-pozzo/Soggiorno-2.jpeg",
         "alt": "Casa del Pozzo — soggiorno visto dal corridoio d'ingresso, divano blu profondo e doppia finestra sul lago",
         "room": "Soggiorno (vista dall'ingresso)",
-        "order": 14
-      },
-      {
-        "url": "/images/listing/casa-del-pozzo/Soggiorno-3.jpeg",
-        "alt": "Casa del Pozzo — soggiorno panoramico con divano blu, poltrona e libreria a parete",
-        "room": "Soggiorno panoramico",
-        "order": 15
-      },
-      {
-        "url": "/images/listing/casa-del-pozzo/Cucina-2.jpeg",
-        "alt": "Casa del Pozzo — cucina con lavello in pietra nera, piano cottura a induzione e vista verso la zona giorno",
-        "room": "Cucina (zona lavello)",
-        "order": 16
+        "order": 13
       },
       {
         "url": "/images/listing/casa-del-pozzo/Cucina-3.jpeg",
         "alt": "Casa del Pozzo — cucina abitabile con macchina del caffè Nespresso, forno integrato e dispensa a colonna",
         "room": "Cucina abitabile",
-        "order": 17
+        "order": 14
       },
       {
-        "url": "/images/listing/casa-del-pozzo/Cucina-4.jpeg",
-        "alt": "Casa del Pozzo — cucina open-space con isola centrale, orologio rosso vintage e soffitto a travi bianche",
-        "room": "Cucina con isola",
-        "order": 18
-      },
-      {
-        "url": "/images/listing/casa-del-pozzo/Cucina-5.jpeg",
-        "alt": "Casa del Pozzo — vista d'insieme della cucina open-space con pozzo rustico in pietra",
-        "room": "Cucina + pozzo (open-space)",
-        "order": 19
+        "url": "/images/listing/casa-del-pozzo/Vista-Lago-2.jpeg",
+        "alt": "Casa del Pozzo — vista lago dalla seconda camera con zattere ormeggiate",
+        "room": "Vista lago dalla camera 2",
+        "order": 15
       },
       {
         "url": "/images/listing/casa-del-pozzo/Sala-Pranzo-2.jpeg",
         "alt": "Casa del Pozzo — sala da pranzo con tavolo in rovere chiaro, sedie dorate e pozzo rustico in pietra accanto",
         "room": "Sala da pranzo (angolo pozzo)",
+        "order": 16
+      },
+      {
+        "url": "/images/listing/casa-del-pozzo/Soggiorno-3.jpeg",
+        "alt": "Casa del Pozzo — soggiorno panoramico con divano blu, poltrona e libreria a parete",
+        "room": "Soggiorno panoramico",
+        "order": 17
+      },
+      {
+        "url": "/images/listing/casa-del-pozzo/Cucina-2.jpeg",
+        "alt": "Casa del Pozzo — cucina con lavello in pietra nera, piano cottura a induzione e vista verso la zona giorno",
+        "room": "Cucina (zona lavello)",
+        "order": 18
+      },
+      {
+        "url": "/images/listing/casa-del-pozzo/Sala-Pranzo-5.jpeg",
+        "alt": "Casa del Pozzo — zona giorno con pozzo rustico, tavolo da pranzo e cucina sullo sfondo",
+        "room": "Zona giorno open-space",
+        "order": 19
+      },
+      {
+        "url": "/images/listing/casa-del-pozzo/Cucina-5.jpeg",
+        "alt": "Casa del Pozzo — vista d'insieme della cucina open-space con pozzo rustico in pietra",
+        "room": "Cucina + pozzo (open-space)",
         "order": 20
       },
       {
@@ -496,15 +495,15 @@
         "order": 21
       },
       {
-        "url": "/images/listing/casa-del-pozzo/Sala-Pranzo-5.jpeg",
-        "alt": "Casa del Pozzo — zona giorno con pozzo rustico, tavolo da pranzo e cucina sullo sfondo",
-        "room": "Zona giorno open-space",
-        "order": 22
-      },
-      {
         "url": "/images/listing/casa-del-pozzo/Sala-Pranzo-6.jpeg",
         "alt": "Casa del Pozzo — sala da pranzo vista dal lato salotto, con pozzo rustico al centro e porta d'ingresso",
         "room": "Sala pranzo (lato salotto)",
+        "order": 22
+      },
+      {
+        "url": "/images/listing/casa-del-pozzo/Cucina-1.jpeg",
+        "alt": "Casa del Pozzo — cucina open-space con top in pietra nera e mobili in rovere sbiancato",
+        "room": "Cucina",
         "order": 23
       }
     ],

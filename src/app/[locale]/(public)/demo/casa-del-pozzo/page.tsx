@@ -11,7 +11,6 @@ import {
   ArrowLeft,
   Navigation,
   ChevronRight,
-  Lock,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { getPortfolioEntry } from "@/lib/portfolio";
@@ -22,66 +21,24 @@ import { PotentialDashboard } from "@/components/demo/potential-dashboard";
 
 type DemoLocale = "it" | "en" | "ru";
 const DEMO_COPY: Record<DemoLocale, {
-  badge: string;
-  breadcrumbDemo: string;
   locationBadge: string;
   guestAccessTitle: string;
   servicesTitle: string;
-  internalCta: React.ReactNode;
 }> = {
   it: {
-    badge: "Pagina demo · non indicizzata · accesso interno Host Como",
-    breadcrumbDemo: "demo",
     locationBadge: "Argegno · Lago di Como",
     guestAccessTitle: "Accesso per gli ospiti",
     servicesTitle: "Servizi inclusi",
-    internalCta: (
-      <>
-        Pagina demo per onboarding interno. Una volta firmato il mandato di
-        gestione con il proprietario, spostare l&apos;entry in{" "}
-        <code className="mx-1 px-1.5 py-0.5 rounded bg-muted/60 text-xs">
-          /properties/casa-del-pozzo
-        </code>{" "}
-        rimuovendo questa pagina demo, e attivare la pubblicazione su Airbnb /
-        Booking con i pricing definiti nella dashboard sopra.
-      </>
-    ),
   },
   en: {
-    badge: "Demo page · not indexed · Host Como internal use",
-    breadcrumbDemo: "demo",
     locationBadge: "Argegno · Lake Como",
     guestAccessTitle: "Guest access",
     servicesTitle: "Included services",
-    internalCta: (
-      <>
-        Internal onboarding demo page. Once the management mandate is signed
-        with the owner, move the entry to{" "}
-        <code className="mx-1 px-1.5 py-0.5 rounded bg-muted/60 text-xs">
-          /properties/casa-del-pozzo
-        </code>{" "}
-        removing this demo page, and activate publication on Airbnb / Booking
-        with the pricing defined in the dashboard above.
-      </>
-    ),
   },
   ru: {
-    badge: "Демо-страница · не индексируется · внутренний доступ Host Como",
-    breadcrumbDemo: "демо",
     locationBadge: "Ардженьо · Озеро Комо",
     guestAccessTitle: "Заселение и доступ гостей",
     servicesTitle: "Включённые услуги",
-    internalCta: (
-      <>
-        Внутренняя демо-страница для онбординга. После подписания договора
-        управления с владельцем перенесите запись в{" "}
-        <code className="mx-1 px-1.5 py-0.5 rounded bg-muted/60 text-xs">
-          /properties/casa-del-pozzo
-        </code>{" "}
-        удалив эту демо-страницу, и активируйте публикацию на Airbnb / Booking
-        с ценами, определёнными на дашборде выше.
-      </>
-    ),
   },
 };
 
@@ -166,12 +123,6 @@ export default function CasaDelPozzoDemoPage() {
   return (
     <div className="pt-24 pb-20 bg-muted/20 min-h-screen">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Demo badge */}
-        <div className="mb-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-100 text-amber-900 text-xs font-semibold">
-          <Lock className="h-3.5 w-3.5" />
-          {demoCopy.badge}
-        </div>
-
         <nav
           aria-label="Breadcrumb"
           className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4 flex-wrap"
@@ -186,10 +137,6 @@ export default function CasaDelPozzoDemoPage() {
           >
             {tNav("properties")}
           </Link>
-          <ChevronRight className="h-3 w-3 opacity-60" aria-hidden />
-          <span className="text-muted-foreground/70" aria-hidden>
-            {demoCopy.breadcrumbDemo}
-          </span>
           <ChevronRight className="h-3 w-3 opacity-60" aria-hidden />
           <span className="text-foreground font-medium" aria-current="page">
             {property.name}
@@ -327,12 +274,6 @@ export default function CasaDelPozzoDemoPage() {
 
           {/* Potential dashboard */}
           <PotentialDashboard />
-
-          {/* Internal CTA */}
-          <div className="bg-primary/[0.04] border border-primary/10 rounded-2xl p-5 flex items-start gap-3 text-sm text-muted-foreground">
-            <Info className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-            <p>{demoCopy.internalCta}</p>
-          </div>
         </div>
       </div>
     </div>
