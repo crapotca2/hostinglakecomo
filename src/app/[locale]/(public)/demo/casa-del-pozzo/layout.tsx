@@ -10,16 +10,16 @@ export async function generateMetadata({
   const { locale } = await params;
   const title =
     locale === "en"
-      ? "Casa del Pozzo — Argegno (demo)"
+      ? "Aqua Vista di Splendore — Argegno (demo)"
       : locale === "ru"
-      ? "Casa del Pozzo — Ардженьо (демо)"
-      : "Casa del Pozzo — Argegno (demo)";
+      ? "Aqua Vista di Splendore — Ардженьо (демо)"
+      : "Aqua Vista di Splendore — Argegno (demo)";
   const description =
     locale === "en"
-      ? "Internal preview of Casa del Pozzo, a historic lakefront apartment in Argegno. Not indexed."
+      ? "Internal preview of Aqua Vista di Splendore, a historic lakefront apartment in Argegno. Not indexed."
       : locale === "ru"
-      ? "Внутренний предпросмотр Casa del Pozzo, исторических апартаментов на берегу озера в Ардженьо. Не индексируется."
-      : "Anteprima interna di Casa del Pozzo, appartamento storico fronte lago ad Argegno. Non indicizzata.";
+      ? "Внутренний предпросмотр Aqua Vista di Splendore, исторических апартаментов на берегу озера в Ардженьо. Не индексируется."
+      : "Anteprima interna di Aqua Vista di Splendore, appartamento storico fronte lago ad Argegno. Non indicizzata.";
   return buildMetadata({
     locale,
     pathname: "/demo/casa-del-pozzo",

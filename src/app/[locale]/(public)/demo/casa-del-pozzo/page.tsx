@@ -82,7 +82,7 @@ export default function CasaDelPozzoDemoPage() {
   const tDetail = useTranslations("properties.detail");
   const tNav = useTranslations("nav");
   const locale = useLocale();
-  const property = getPortfolioEntry("casa-del-pozzo");
+  const property = getPortfolioEntry("aqua-vista-di-splendore");
 
   if (!property) {
     return (

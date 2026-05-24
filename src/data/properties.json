@@ -297,7 +297,7 @@
     }
   },
   {
-    "slug": "casa-del-pozzo",
+    "slug": "aqua-vista-di-splendore",
     "name": "Aqua Vista di Splendore",
     "type": "apartment",
     "zone": "primo-bacino",
@@ -515,9 +515,9 @@
     "touristTaxRate": 3,
     "maxTouristTaxNights": 14,
     "geo": {
-      "lat": 45.86635,
-      "lng": 9.1233,
-      "displayName": "44 Via Spluga, Argegno (CO), Lombardia"
+      "lat": 45.9443,
+      "lng": 9.1288,
+      "displayName": "Via Spluga 44, Argegno (CO), 22023, Lombardia, Italia"
     }
   }
 ]

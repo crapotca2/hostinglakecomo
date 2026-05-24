@@ -49,6 +49,23 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    // Property slug was renamed casa-del-pozzo -> aqua-vista-di-splendore
+    // on 2026-05-24 to match the owner-confirmed name. Permanent 308 keeps
+    // any externally shared /properties/casa-del-pozzo link working.
+    return [
+      {
+        source: "/properties/casa-del-pozzo",
+        destination: "/properties/aqua-vista-di-splendore",
+        permanent: true,
+      },
+      {
+        source: "/:locale(en|ru)/properties/casa-del-pozzo",
+        destination: "/:locale/properties/aqua-vista-di-splendore",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);
