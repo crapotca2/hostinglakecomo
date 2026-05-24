@@ -24,9 +24,24 @@ import { ExperiencesSection } from "@/components/public/experiences-section";
 import { JsonLdLodging } from "@/components/seo/jsonld-lodging";
 import { JsonLdBreadcrumb } from "@/components/seo/jsonld-breadcrumb";
 
-function MapEmbed({ lat, lng, name }: { lat: number; lng: number; name: string }) {
+function MapEmbed({
+  lat,
+  lng,
+  address,
+  name,
+}: {
+  lat: number;
+  lng: number;
+  address?: string;
+  name: string;
+}) {
   const t = useTranslations("properties.detail");
   const link = `https://www.google.com/maps?q=${lat},${lng}`;
+  // Prefer a postal address as the embed query when available: Google's
+  // geocoder pins the actual building, not the raw lat/lng (which can land
+  // a few hundred meters off when the geo block is hand-edited rather than
+  // sourced from a precise GPS reading). Fallback to coordinates.
+  const embedQuery = address && address.trim() ? address : `${lat},${lng}`;
   return (
     <div className="bg-white rounded-2xl border border-border/50 overflow-hidden">
       <div className="p-5 flex items-center justify-between gap-3 border-b border-border/40">
@@ -46,7 +61,7 @@ function MapEmbed({ lat, lng, name }: { lat: number; lng: number; name: string }
         </a>
       </div>
       <GoogleMapEmbed
-        query={`${lat},${lng}`}
+        query={embedQuery}
         title={`Map ${name}`}
         zoom={16}
         className="h-72 sm:h-80"
@@ -238,7 +253,17 @@ export default function PropertyDetailPage() {
             )}
           </div>
 
-          {geo && <MapEmbed lat={geo.lat} lng={geo.lng} name={property.name} />}
+          {geo && (
+            <MapEmbed
+              lat={geo.lat}
+              lng={geo.lng}
+              address={
+                geo.displayName ||
+                `${property.address.street}, ${property.address.city} (${property.address.province}), ${property.address.zip}`
+              }
+              name={property.name}
+            />
+          )}
 
           {airbnbListing &&
             airbnbListing.rating != null &&
