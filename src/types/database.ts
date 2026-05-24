@@ -311,6 +311,120 @@ export interface CompetitorZoneStatsDoc extends BaseDoc {
   computedAt: Date;
 }
 
+// ── EVENTS (pricing modifier source) ──
+
+export type EventCategory =
+  | "luxury"          // Concorso d'Eleganza, Villa d'Este — moltiplicatore alto
+  | "music"           // Bellagio Music Festival
+  | "sport"           // Concorso nautico, regate
+  | "cultural"        // Festa del Lago Bellagio, Festa di Sant'Abbondio
+  | "trade-fair"      // Salone Nautico
+  | "religious"       // Festa patronale
+  | "season-bookend"  // Capodanno, Ferragosto
+  | "other";
+
+export interface EventDoc extends BaseDoc {
+  name: string;
+  category: EventCategory;
+  startDate: Date;       // inclusiva
+  endDate: Date;         // inclusiva
+  // Geo anchor — il modificatore si applica solo a property entro radiusKm.
+  // Se geo è null → applica a tutta la sponda Como (uso raro, solo nazionali).
+  geo?: { lat: number; lng: number } | null;
+  radiusKm?: number;
+  // Modificatore moltiplicativo applicato a base_price.
+  // 1.0 = neutro, 1.35 = +35%, 0.95 = -5%. Range raccomandato [0.85, 1.80].
+  priceMultiplier: number;
+  zones?: CompetitorZone[];      // opzionale: limit by zone
+  source?: string;               // url o nota provenienza
+  notes?: string;
+  active: boolean;
+}
+
+// ── WEATHER FORECAST (short-term pricing modifier, <14gg) ──
+
+export type WeatherBucket = "sunny" | "cloudy" | "rainy" | "stormy";
+
+export interface WeatherForecastDoc extends BaseDoc {
+  zone: CompetitorZone;
+  date: Date;            // 1 doc per (zone, date)
+  bucket: WeatherBucket;
+  tempMaxC: number;
+  tempMinC: number;
+  precipMm: number;
+  fetchedAt: Date;
+  source: string;        // es. "openweathermap"
+}
+
+// ── PRICING RULES (overrides + per-property config) ──
+
+export interface PricingRuleDoc extends BaseDoc {
+  propertyId: ObjectId;
+  // Floor del prezzo nudo (€/notte) per la coppia (2 ospiti baseline).
+  // Tutto il pricing engine moltiplica/somma sopra questo.
+  basePriceFloor: number;
+  // Numero di ospiti incluso nel base_price (Lago Como default: 2).
+  baseGuests: number;
+  // Sovrapprezzo per ospite oltre baseGuests.
+  extraPerGuest: number;
+  // Override modulatori M1-M6 (es. per disabilitare meteo su una property).
+  enabledModulators?: {
+    season?: boolean;
+    dayOfWeek?: boolean;
+    competitorAnchor?: boolean;
+    leadTime?: boolean;
+    events?: boolean;
+    weather?: boolean;
+  };
+  // Anchor target su competitor (es. 0.50 = mediana, 0.60 = p60 zona).
+  competitorAnchorPercentile?: number;
+  // Hard min stay (notti). Default applicato dall'engine: 3.
+  hardMinStay?: number;
+  // Counter-cyclical: massimo sconto applicabile quando zona alta e noi bassi.
+  maxCounterCyclicalDiscount?: number;  // es. 0.15 = -15%
+  active: boolean;
+}
+
+// ── PRICING DECISIONS (audit trail di ogni suggested price calcolato) ──
+
+export interface PricingDecisionDoc extends BaseDoc {
+  propertyId: ObjectId;
+  targetDate: Date;        // notte oggetto del pricing
+  guests: number;
+  suggestedPrice: number;
+  basePriceFloor: number;
+  breakdown: {
+    name: string;          // es. "season", "dow", "competitor-anchor"
+    type: "multiplier" | "addend";
+    value: number;         // multiplier es 1.6, addend es +40
+    runningTotal: number;  // valore €/notte dopo applicare questo step
+    reason: string;        // human-readable IT
+  }[];
+  appliedStrategicRules: {
+    name: string;          // es. "counter-cyclical-discount", "last-minute-burn"
+    delta: number;         // es. -25 (€/notte) o +10
+    reason: string;
+  }[];
+  enforcedMinStay: number;
+  signalsSnapshot: {
+    competitorMedianADR?: number;
+    competitorZoneOccupancy?: number;
+    ourOccupancyForward30d?: number;
+    leadTimeDays?: number;
+    activeEventIds?: ObjectId[];
+    weatherBucket?: WeatherBucket;
+  };
+  warnings: string[];
+  computedAt: Date;
+  // Quando l'owner approva/modifica il suggested price, qui registriamo
+  // la sua scelta finale (per costruire dataset per future ML).
+  ownerDecision?: {
+    finalPrice: number;
+    approvedAt: Date;
+    overrideReason?: string;
+  };
+}
+
 // ── COMPLIANCE RECORDS ──
 
 export type ComplianceType = "alloggiati_web" | "istat" | "tassa_soggiorno";
