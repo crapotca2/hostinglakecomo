@@ -19,7 +19,7 @@ export function BrandHero({
   const hasPhoto = Boolean(heroImage);
   return (
     <div className="relative bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-10 pb-8 sm:pt-14 sm:pb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-24 pb-8 sm:pt-32 sm:pb-12">
         <div
           className={
             hasPhoto

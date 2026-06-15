@@ -49,13 +49,13 @@ export function LocaleSwitcher({
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={`https://flagcdn.com/40x30/${cc}.png`}
-              srcSet={`https://flagcdn.com/80x60/${cc}.png 2x`}
+              src={`https://flagcdn.com/48x36/${cc}.png`}
+              srcSet={`https://flagcdn.com/96x72/${cc}.png 2x`}
               alt=""
               aria-hidden
-              width={20}
-              height={15}
-              className="rounded-sm shadow-[0_0_0_1px_rgba(15,23,42,0.08)] object-cover"
+              width={24}
+              height={18}
+              className="rounded-[3px] shadow-[0_0_0_1px_rgba(255,255,255,0.25),0_1px_2px_rgba(15,23,42,0.18)] object-cover flex-shrink-0"
               loading="lazy"
             />
             <span className="hidden sm:inline">{LOCALE_LABELS[loc]}</span>
