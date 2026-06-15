@@ -14,6 +14,8 @@ import type {
   CompetitorCalendarSnapshotDoc,
   CompetitorMonthlyStatsDoc,
   CompetitorZoneStatsDoc,
+  WelcomeBookDoc,
+  HouseGuideDoc,
 } from "@/types/database";
 
 const USE_MEMORY =
@@ -57,4 +59,6 @@ export const collections = {
     getCollection<CompetitorMonthlyStatsDoc>("competitor_monthly_stats"),
   competitorZoneStats: () =>
     getCollection<CompetitorZoneStatsDoc>("competitor_zone_stats"),
+  welcomeBooks: () => getCollection<WelcomeBookDoc>("welcome_books"),
+  houseGuides: () => getCollection<HouseGuideDoc>("house_guides"),
 };

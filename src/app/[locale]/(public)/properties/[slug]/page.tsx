@@ -13,6 +13,7 @@ import {
   Star,
   Navigation,
   ChevronRight,
+  BookOpen,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { getPortfolioEntry } from "@/lib/portfolio";
@@ -291,6 +292,26 @@ export default function PropertyDetailPage() {
             </div>
           )}
 
+          {slug === "aqua-vista-di-splendore" && (
+            <Link
+              href={`/properties/${slug}/welcome`}
+              className="group bg-gradient-to-br from-[#1D3A62] to-[#2E5A8C] hover:from-[#2E5A8C] hover:to-[#1D3A62] text-white rounded-2xl p-5 sm:p-6 flex items-center gap-4 transition-colors shadow-sm hover:shadow-md"
+            >
+              <div className="h-12 w-12 rounded-xl bg-white/15 ring-1 ring-white/25 flex items-center justify-center flex-shrink-0">
+                <BookOpen className="h-6 w-6" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-base sm:text-lg font-semibold leading-tight mb-0.5">
+                  {welcomeTitle(locale)}
+                </h3>
+                <p className="text-xs sm:text-sm text-white/80 leading-snug">
+                  {welcomeSubtitle(locale)}
+                </p>
+              </div>
+              <ChevronRight className="h-5 w-5 text-white/70 group-hover:translate-x-0.5 transition-transform flex-shrink-0" />
+            </Link>
+          )}
+
           <div className="bg-primary/[0.04] border border-primary/10 rounded-2xl p-5 flex items-start gap-3 text-sm text-muted-foreground">
             <Info className="h-4 w-4 text-primary shrink-0 mt-0.5" />
             <p>
@@ -308,4 +329,16 @@ export default function PropertyDetailPage() {
       </div>
     </div>
   );
+}
+
+function welcomeTitle(locale: string): string {
+  if (locale === "en") return "View house guide";
+  if (locale === "ru") return "Гид по дому";
+  return "Vedi la guida di casa";
+}
+
+function welcomeSubtitle(locale: string): string {
+  if (locale === "en") return "Tour, area guide, parking & practical info";
+  if (locale === "ru") return "Тур, гид по зоне, парковка и полезная информация";
+  return "Tour della casa, guida alla zona, parcheggi e info utili";
 }

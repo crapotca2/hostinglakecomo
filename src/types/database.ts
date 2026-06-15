@@ -326,3 +326,373 @@ export interface ComplianceRecordDoc extends BaseDoc {
   fileUrl?: string;
   bookingIds: ObjectId[];
 }
+
+// ──────────────────────────────────────────────────────────────────────
+// WELCOME BOOK + HOUSE GUIDE — guida ospiti + manuale operativo casa
+// ──────────────────────────────────────────────────────────────────────
+// Schema portato da host-como-agentic-web. Stesso shape dei documenti
+// MongoDB per riutilizzo degli script di seed. createdAt/updatedAt sono
+// ISO string (non Date) — è come il welcome book scrive nei doc.
+
+export type SupportedLocale = "it" | "en" | "ru" | "de" | "es" | "fr";
+export const SUPPORTED_LOCALES: SupportedLocale[] = ["it", "en", "ru", "de", "es", "fr"];
+
+export type LocalizedText = {
+  it: string;
+  en: string;
+  ru: string;
+  de: string;
+  es?: string;
+  fr?: string;
+};
+export type LocalizedTextOptional = Partial<Record<SupportedLocale, string>>;
+
+export interface WelcomeBookPOI {
+  name: string;
+  type:
+    | "bar"
+    | "restaurant"
+    | "supermarket"
+    | "pharmacy"
+    | "atm"
+    | "post"
+    | "newsstand"
+    | "bakery"
+    | "boat-rental"
+    | "bike-rental"
+    | "outdoor-activity"
+    | "ferry-stop"
+    | "bus-stop"
+    | "funicular";
+  address: string;
+  coordinates?: { lat: number; lng: number };
+  distanceMeters?: number;
+  walkMinutes?: number;
+  brandLogo?: string;
+  directionsUrl?: string;
+  phone?: string;
+  whatsapp?: string;
+  website?: string;
+  hours?: {
+    monday?: string;
+    tuesday?: string;
+    wednesday?: string;
+    thursday?: string;
+    friday?: string;
+    saturday?: string;
+    sunday?: string;
+    notes?: LocalizedTextOptional;
+  };
+  notes?: LocalizedTextOptional;
+  googleMapsUrl?: string;
+  photoUrl?: string;
+}
+
+export interface WelcomeBookRestaurant extends WelcomeBookPOI {
+  type: "restaurant";
+  priceRange: "€" | "€€" | "€€€" | "€€€€";
+  cuisine?: string[];
+  tripadvisorRating?: number;
+  tripadvisorReviewCount?: number;
+  tripadvisorUrl?: string;
+  signatureDishes?: LocalizedTextOptional[];
+  bookingRecommended?: boolean;
+  reservationPhone?: string;
+}
+
+export interface WelcomeBookContact {
+  name: string;
+  category: string;
+  brandLogo?: string;
+  heroImage?: string;
+  isTopChoice?: boolean;
+  phone?: string;
+  whatsapp?: string;
+  email?: string;
+  website?: string;
+  address?: string;
+  notes?: LocalizedTextOptional;
+}
+
+export interface WelcomeBookDestination {
+  name: string;
+  type: "city" | "village" | "villa" | "natural" | "experience";
+  description: LocalizedText;
+  travelOptions: Array<{
+    mode: "ferry" | "car" | "bus" | "walking" | "bike" | "funicular";
+    durationMinutes: number;
+    cost?: string;
+    notes?: LocalizedTextOptional;
+  }>;
+  bestTime?: LocalizedTextOptional;
+  highlights?: LocalizedText[];
+  coordinates?: { lat: number; lng: number };
+  address?: string;
+  googleMapsUrl?: string;
+  directionsUrl?: string;
+  officialUrl?: string;
+  photoUrl?: string;
+  isFeatured?: boolean;
+}
+
+export interface ParkingSpot {
+  name: string;
+  type: "free" | "paid-blue-stripe" | "paid-private" | "garage";
+  address: string;
+  coordinates?: { lat: number; lng: number };
+  distanceMeters?: number;
+  walkMinutes?: number;
+  pricing?: LocalizedTextOptional;
+  hours?: LocalizedTextOptional;
+  notes?: LocalizedTextOptional;
+  googleMapsUrl?: string;
+  hasEvCharging?: boolean;
+}
+
+export interface EvChargingStation {
+  stationName: string;
+  operator?: string;
+  address: string;
+  city: string;
+  coordinates?: { lat: number; lng: number };
+  distanceFromPropertyKm?: number;
+  driveMinutesFromProperty?: number;
+  connectors?: Array<{
+    type: string;
+    powerKw: number;
+    pricePerKwhEur?: number;
+  }>;
+  accessHours?: LocalizedTextOptional;
+  notes?: LocalizedTextOptional;
+  googleMapsUrl?: string;
+  appUrl?: string;
+}
+
+export interface ParkingAndCharging {
+  localParking: ParkingSpot[];
+  evChargingStations: EvChargingStation[];
+  generalInfo: LocalizedText;
+}
+
+export interface PharmacyShift {
+  pharmacyName: string;
+  address: string;
+  phone?: string;
+  shiftStart: string;
+  shiftEnd: string;
+  shiftType: "diurno" | "notturno" | "h24" | "festivo";
+  coordinates?: { lat: number; lng: number };
+  googleMapsUrl?: string;
+  distanceFromPropertyKm?: number;
+}
+
+export interface WelcomeBookTransport {
+  ferry?: {
+    pontileName: string;
+    pontileAddress: string;
+    walkMinutesFromHouse?: number;
+    operator?: string;
+    operatorUrl?: string;
+    seasonalSchedule?: {
+      highSeason?: LocalizedTextOptional;
+      lowSeason?: LocalizedTextOptional;
+    };
+    keyDestinations?: Array<{
+      name: string;
+      minutes: number;
+      priceAdultEur?: number;
+      frequencyNotes?: LocalizedTextOptional;
+    }>;
+  };
+  bus?: {
+    stopName: string;
+    stopAddress: string;
+    walkMinutesFromHouse?: number;
+    operator?: string;
+    operatorUrl?: string;
+    line?: string;
+    frequency?: LocalizedTextOptional;
+    keyDestinations?: Array<{
+      name: string;
+      minutes: number;
+      priceAdultEur?: number;
+    }>;
+  };
+  funicular?: {
+    name: string;
+    address: string;
+    walkMinutesFromHouse?: number;
+    operatorUrl?: string;
+    operatingMonths?: string;
+    schedule?: LocalizedTextOptional;
+    priceRoundTripEur?: number;
+    notes?: LocalizedTextOptional;
+  };
+  taxi?: WelcomeBookContact[];
+  parking?: {
+    private?: LocalizedTextOptional;
+    publicPaid?: Array<{
+      name: string;
+      address: string;
+      hourlyRateEur?: number;
+      notes?: LocalizedTextOptional;
+    }>;
+    freeAreas?: Array<{
+      name: string;
+      notes?: LocalizedTextOptional;
+    }>;
+  };
+}
+
+export interface LocalStory {
+  title: LocalizedText;
+  body: LocalizedText;
+  icon?: string;
+  source?: string;
+}
+
+export interface WelcomeBookSections {
+  welcome: LocalizedText;
+  walkable: WelcomeBookPOI[];
+  transport: WelcomeBookTransport;
+  parkingAndCharging?: ParkingAndCharging;
+  shopping: WelcomeBookPOI[];
+  atmBanking?: WelcomeBookPOI[];
+  boatRentals: WelcomeBookContact[];
+  boatTours?: WelcomeBookContact[];
+  bikeRentals: WelcomeBookContact[];
+  dayTrips: WelcomeBookDestination[];
+  drivingTrips: WelcomeBookDestination[];
+  activeOutdoor: WelcomeBookPOI[];
+  eatingDrinking: WelcomeBookRestaurant[];
+  emergencyPharmacies: PharmacyShift[];
+  emergencies: WelcomeBookContact[];
+  waste: LocalizedText;
+  localStories?: LocalStory[];
+}
+
+export interface WelcomeBookDoc {
+  _id?: ObjectId | string;
+  propertySlug: string;
+  version: number;
+  status: "draft" | "published";
+  publishedAt?: string;
+  sections: WelcomeBookSections;
+  qrPayloads?: {
+    mainGuide?: string;
+    houseGuide?: string;
+    hostContact?: string;
+  };
+  generatedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// ── HOUSE GUIDE ──
+
+export interface HouseGuideAppliance {
+  name: LocalizedText;
+  instructions: LocalizedText;
+  manualUrl?: string;
+  brand?: string;
+}
+
+export interface HouseGuideBedroom {
+  name: LocalizedText;
+  surfaceSqm?: number;
+  bedType: string;
+  view?: LocalizedTextOptional;
+  bathroomAttached?: boolean;
+  amenities?: LocalizedText[];
+}
+
+export interface HouseGuideBathroom {
+  name: LocalizedText;
+  features: string[];
+  notes?: LocalizedTextOptional;
+}
+
+export type HouseGuidePhotos = Partial<Record<string, string[]>>;
+
+export interface HouseGuideSections {
+  welcome: LocalizedText;
+  photos?: HouseGuidePhotos;
+  wifi: {
+    ssid: string;
+    password: string;
+    qrPayload?: string;
+    notes?: LocalizedTextOptional;
+    routerLocation?: LocalizedTextOptional;
+  };
+  bedrooms: HouseGuideBedroom[];
+  livingRoom: LocalizedText;
+  diningArea?: LocalizedText;
+  diningArea_chips?: Array<{ icon?: "utensils" | "baby" | "ruler"; label: LocalizedText }>;
+  kitchen: {
+    description: LocalizedText;
+    appliances: HouseGuideAppliance[];
+    historicElements?: LocalizedTextOptional;
+  };
+  bathrooms: HouseGuideBathroom[];
+  outdoor: {
+    courtyard: LocalizedText;
+    beach?: LocalizedText;
+    safety?: LocalizedText;
+  };
+  parking: {
+    description: LocalizedText;
+    liftInstructions?: LocalizedText;
+    maxDimensions?: {
+      heightM: number;
+      lengthM: number;
+      widthM: number;
+      wheelStopLengthM?: number;
+    };
+    evChargingAllowed: boolean;
+  };
+  climate: {
+    ac?: LocalizedText;
+    heating?: LocalizedText;
+  };
+  waste: LocalizedText;
+  babyEquipment?: LocalizedText;
+  ringCameraDisclosure?: LocalizedText;
+  rules: LocalizedText;
+  touristTax: {
+    eurPerPersonPerNight: number;
+    classification?: string;
+    exemptions?: LocalizedText;
+    paymentMethod?: LocalizedText;
+    maxConsecutiveNights?: number;
+    seasonPeriod?: LocalizedTextOptional;
+  };
+  emergencies: WelcomeBookContact[];
+  checkin?: LocalizedText;
+  checkout: LocalizedText;
+  feedback?: LocalizedText;
+  legal: {
+    cin: string;
+    cir?: string;
+  };
+}
+
+export interface HouseGuideDoc {
+  _id?: ObjectId | string;
+  propertySlug: string;
+  version: number;
+  status: "draft" | "published";
+  publishedAt?: string;
+  hero: {
+    tagline: LocalizedText;
+    spaceDescription: LocalizedText;
+  };
+  sections: HouseGuideSections;
+  qrPayloads?: {
+    wifi?: string;
+    welcomeBookLink?: string;
+    hostContact?: string;
+  };
+  generatedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}

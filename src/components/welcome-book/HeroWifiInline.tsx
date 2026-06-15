@@ -1,0 +1,60 @@
+import { Wifi } from "lucide-react";
+import { ScannableQr } from "./ScannableQr";
+
+const NAVY = "#1D3A62";
+
+function buildWifiQrPayload(ssid: string, password: string, auth: "WPA" | "WEP" | "nopass" = "WPA") {
+  const esc = (s: string) => s.replace(/([\\;,:"])/g, "\\$1");
+  return `WIFI:T:${auth};S:${esc(ssid)};P:${esc(password)};;`;
+}
+
+export function HeroWifiInline({
+  ssid,
+  password,
+  ssidLabel,
+  passwordLabel,
+  scanLabel,
+}: {
+  ssid: string;
+  password: string;
+  ssidLabel: string;
+  passwordLabel: string;
+  scanLabel: string;
+}) {
+  const payload = buildWifiQrPayload(ssid, password, "WPA");
+  return (
+    <div className="mt-6 rounded-2xl border border-slate-200 bg-white shadow-sm p-4 sm:p-5 max-w-md w-full mx-auto lg:mx-0 text-left">
+      <div className="flex items-center gap-2 mb-3">
+        <Wifi className="w-4 h-4" style={{ color: NAVY }} strokeWidth={2.2} />
+        <span
+          className="text-[10px] uppercase tracking-[0.22em] font-bold"
+          style={{ color: NAVY }}
+        >
+          Wi-Fi
+        </span>
+      </div>
+      <div className="grid grid-cols-[1fr_auto] gap-4 items-center">
+        <div className="space-y-2.5 min-w-0">
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.18em] font-semibold text-slate-500 mb-0.5">
+              {ssidLabel}
+            </p>
+            <p className="font-mono text-sm font-bold text-slate-900 break-all">{ssid}</p>
+          </div>
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.18em] font-semibold text-slate-500 mb-0.5">
+              {passwordLabel}
+            </p>
+            <p className="font-mono text-sm font-bold text-slate-900 break-all">{password}</p>
+          </div>
+        </div>
+        <ScannableQr
+          url={payload}
+          ariaLabel={scanLabel}
+          className="w-20 h-20 sm:w-24 sm:h-24"
+          size={240}
+        />
+      </div>
+    </div>
+  );
+}

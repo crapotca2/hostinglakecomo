@@ -174,3 +174,19 @@
 .dot-pulse {
   animation: pulse-dot 2s ease-in-out infinite;
 }
+
+/* ═══ Welcome book (Aqua Vista) ═══ */
+/* TexturedSection usa -ml-[50vw] -mr-[50vw] w-screen per fare full-bleed.
+   Senza overflow-x: clip sul body, comparirebbe la scrollbar orizzontale. */
+body {
+  overflow-x: clip;
+}
+/* Su mobile, in una grid 3-col a 2-col, la 3a tile orfana viene centrata. */
+@media (max-width: 767px) {
+  .last-tile-center-mobile > *:nth-child(3):last-child {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
