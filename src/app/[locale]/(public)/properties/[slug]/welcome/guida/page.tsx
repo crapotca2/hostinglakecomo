@@ -284,6 +284,7 @@ function PoiList({ items, locale }: { items: WelcomeBookPOI[]; locale: Supported
             minLabel={label("min", locale)}
             infoLabel={label("moreInfo", locale)}
             callLabel={label("call", locale)}
+            openInMapsLabel={label("openInMaps", locale)}
           />
         );
       })}
@@ -631,7 +632,7 @@ function DestinationList({
             }`}
           >
             {dest.photoUrl && (
-              <div className={`relative bg-slate-100 ${featured ? "min-h-[260px] md:min-h-0" : "w-full aspect-[16/10]"}`}>
+              <div className={`relative bg-slate-100 ${featured ? "min-h-[280px] md:min-h-0" : "w-full aspect-[4/3] md:aspect-[16/10]"}`}>
                 <Image
                   src={dest.photoUrl}
                   alt={dest.name}
@@ -698,12 +699,21 @@ function DestinationList({
                 </details>
               )}
 
-              <div className="mt-auto pt-4 flex flex-wrap gap-3 text-xs">
+              <div className="mt-auto pt-4 flex flex-col md:flex-row md:flex-wrap gap-3 text-xs">
                 <a
                   href={directionsHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-[#1D3A62] font-semibold underline underline-offset-2"
+                  className="md:hidden inline-flex items-center justify-center gap-1.5 bg-[#1D3A62] text-white hover:bg-[#2E5A8C] transition-colors rounded-xl px-3.5 py-2 text-sm font-semibold w-full"
+                >
+                  <Navigation className="w-4 h-4" />
+                  {label("openInMaps", locale)}
+                </a>
+                <a
+                  href={directionsHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden md:inline-flex items-center gap-1.5 text-[#1D3A62] font-semibold underline underline-offset-2"
                 >
                   <Navigation className="w-3.5 h-3.5" />
                   {label("getDirections", locale)}
@@ -746,7 +756,7 @@ function RestaurantList({
             className="snap-start flex-shrink-0 w-[80vw] sm:w-[300px] md:w-[320px] rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-lg transition-shadow overflow-hidden flex flex-col"
           >
             <div className="p-4 flex-1 flex gap-3">
-              <div className="flex flex-col items-center gap-1 flex-shrink-0">
+              <div className="hidden md:flex flex-col items-center gap-1 flex-shrink-0">
                 <ScannableQr
                   url={directionsHref}
                   ariaLabel={label("scanForDirections", locale)}
@@ -791,6 +801,16 @@ function RestaurantList({
                     </span>
                   )}
                 </div>
+
+                <a
+                  href={directionsHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="md:hidden mt-2 inline-flex items-center justify-center gap-1.5 w-full px-3 py-1.5 rounded-lg bg-[#1D3A62] text-white hover:bg-[#2E5A8C] transition-colors text-xs font-semibold"
+                >
+                  <Navigation className="w-3.5 h-3.5" />
+                  {label("openInMaps", locale)}
+                </a>
 
                 {rst.cuisine && rst.cuisine.length > 0 && (
                   <p className="text-[11px] text-slate-600 mt-1.5 line-clamp-1">
@@ -1191,6 +1211,7 @@ function label(key: string, locale: SupportedLocale): string {
     min: { it: "min", en: "min", ru: "мин", de: "Min" },
     minWalk: { it: "min a piedi", en: "min walk", ru: "мин пешком", de: "Min zu Fuß" },
     getDirections: { it: "Indicazioni", en: "Directions", ru: "Маршрут", de: "Wegbeschreibung" },
+    openInMaps: { it: "Apri Maps", en: "Open Maps", ru: "Открыть карту", de: "In Maps öffnen", es: "Abrir Maps", fr: "Ouvrir Maps" },
     bestTime: { it: "Quando andarci", en: "Best time", ru: "Лучшее время", de: "Beste Zeit", es: "Mejor momento", fr: "Meilleur moment" },
     scanForDirections: { it: "Inquadra per le indicazioni", en: "Scan for directions", ru: "Отсканируйте для маршрута", de: "Scannen für Wegbeschreibung" },
     scanShort: { it: "Inquadra", en: "Scan", ru: "Скан", de: "Scan", es: "Escanea", fr: "Scanne" },

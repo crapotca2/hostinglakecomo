@@ -146,6 +146,7 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
                 paidLabel: label("paid", locale),
                 notes: p.notes ? t(p.notes) : undefined,
                 infoLabel: label("moreInfo", locale),
+                openInMapsLabel: label("openInMaps", locale),
               }}
             />
           );
@@ -182,6 +183,7 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
                 appUrl: e.appUrl,
                 appWebsiteLabel: label("appWebsite", locale),
                 infoLabel: label("moreInfo", locale),
+                openInMapsLabel: label("openInMaps", locale),
               }}
             />
           );
@@ -318,6 +320,14 @@ const LABELS: Record<string, Partial<Record<SupportedLocale, string>>> = {
     de: "EV-Ladestationen",
     es: "Estaciones de carga EV",
     fr: "Bornes de recharge EV",
+  },
+  openInMaps: {
+    it: "Apri Maps",
+    en: "Open Maps",
+    ru: "Открыть карту",
+    de: "In Maps öffnen",
+    es: "Abrir Maps",
+    fr: "Ouvrir Maps",
   },
   privatePriceChip: {
     it: "€10 / notte",

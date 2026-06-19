@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Footprints, Car, Zap, Info, X, Globe } from "lucide-react";
+import { Footprints, Car, Zap, Info, X, Globe, Navigation } from "lucide-react";
 import { ScannableQr } from "./ScannableQr";
 
 export type ParkingPoiData = {
@@ -22,6 +22,7 @@ export type ParkingPoiData = {
   appUrl?: string;
   infoLabel: string;
   appWebsiteLabel?: string;
+  openInMapsLabel?: string;
 };
 
 export function ParkingPoiCard({ poi }: { poi: ParkingPoiData }) {
@@ -31,7 +32,7 @@ export function ParkingPoiCard({ poi }: { poi: ParkingPoiData }) {
   return (
     <article className="rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:border-[#1D3A62]/30 transition-all overflow-hidden p-4 sm:p-5">
       <div className="flex items-start gap-3.5">
-        <div className="flex flex-col items-center gap-1 flex-shrink-0">
+        <div className="hidden md:flex flex-col items-center gap-1 flex-shrink-0">
           <ScannableQr
             url={poi.qrUrl}
             ariaLabel={poi.scanAriaLabel}
@@ -105,6 +106,18 @@ export function ParkingPoiCard({ poi }: { poi: ParkingPoiData }) {
               </button>
             )}
           </div>
+
+          {poi.openInMapsLabel && (
+            <a
+              href={poi.qrUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="md:hidden mt-3 inline-flex items-center justify-center gap-1.5 w-full px-3.5 py-2 rounded-xl bg-[#1D3A62] text-white hover:bg-[#2E5A8C] transition-colors text-sm font-semibold"
+            >
+              <Navigation className="w-4 h-4" />
+              {poi.openInMapsLabel}
+            </a>
+          )}
         </div>
       </div>
 
