@@ -29,6 +29,8 @@ import { LocaleSwitcher } from "@/components/welcome-book/LocaleSwitcher";
 import { HubNav } from "@/components/welcome-book/HubNav";
 import { HeroWifiInline } from "@/components/welcome-book/HeroWifiInline";
 import { TileCard } from "@/components/welcome-book/TileCard";
+import { CheckinVideo } from "@/components/welcome-book/CheckinVideo";
+import { getCheckinVideo } from "@/lib/welcome-book/checkin-videos";
 import { sharedLabel } from "@/components/welcome-book/sharedLabels";
 import { ReviewBlock } from "@/components/welcome-book/ReviewBlock";
 import { TexturedSection, GroupHeader } from "@/components/welcome-book/TexturedSection";
@@ -59,6 +61,7 @@ export default async function InfoUtiliPage({ params, searchParams }: PageProps)
   const propertyCity = portfolioEntry?.address.city ?? "Argegno";
 
   const t = (text: Parameters<typeof pickLocalized>[0]) => pickLocalized(text, locale, DEFAULT_LOCALE);
+  const checkinVideo = getCheckinVideo(slug, locale);
   const hostEntry = guide.sections.emergencies.find((e: WelcomeBookContact) => e.category === "host");
   const hostPhone = hostEntry?.phone;
   const hostWhatsapp = hostEntry?.whatsapp && !hostEntry.whatsapp.includes("DA_INSERIRE")
@@ -99,6 +102,18 @@ export default async function InfoUtiliPage({ params, searchParams }: PageProps)
   const textModal = (title: string, body: string) => (
     <div className="p-6 sm:p-8">
       <h2 className="text-2xl font-bold text-slate-900 mb-4">{title}</h2>
+      <RichBody body={body} />
+    </div>
+  );
+
+  const checkinModal = (title: string, body: string) => (
+    <div className="p-6 sm:p-8">
+      <h2 className="text-2xl font-bold text-slate-900 mb-4">{title}</h2>
+      {checkinVideo && (
+        <div className="mb-5">
+          <CheckinVideo src={checkinVideo.src} poster={checkinVideo.poster} ariaLabel={title} />
+        </div>
+      )}
       <RichBody body={body} />
     </div>
   );
@@ -286,7 +301,7 @@ export default async function InfoUtiliPage({ params, searchParams }: PageProps)
                 title={label("checkin", locale)}
                 subtitle="14:30 - 21:00"
               >
-                {textModal(label("checkin", locale), t(guide.sections.checkin))}
+                {checkinModal(label("checkin", locale), t(guide.sections.checkin))}
               </TileCard>
             )}
             <TileCard
