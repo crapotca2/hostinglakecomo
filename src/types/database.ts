@@ -22,6 +22,16 @@ export interface UserDoc extends BaseDoc {
   kycStatus?: "pending" | "verified" | "restricted";
 }
 
+// Codice OTP passwordless per il login owner. Un solo codice attivo per email
+// (upsert). codeHash = sha256(codice:email); scadenza breve + attempts cap;
+// one-time (cancellato dopo l'uso).
+export interface OtpCodeDoc extends BaseDoc {
+  email: string;
+  codeHash: string;
+  expiresAt: Date;
+  attempts: number;
+}
+
 // ── PROPERTIES ──
 
 export type PropertyStatus = "active" | "draft" | "inactive";

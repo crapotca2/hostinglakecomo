@@ -4,6 +4,7 @@ import { compare } from "bcryptjs";
 import { headers } from "next/headers";
 import { rateLimitByIp } from "@/lib/security/rate-limit";
 import { collections } from "@/lib/mongodb/collections";
+import { verifyOtp } from "@/lib/auth/otp";
 import type { UserRole } from "@/types/database";
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL ?? "actopark@gmail.com";
@@ -79,6 +80,45 @@ export const authOptions: NextAuthOptions = {
         if (!ok) return null;
         const claims = await resolveUserClaims(ADMIN_EMAIL);
         return { id: "1", name: ADMIN_NAME, email: ADMIN_EMAIL, ...claims };
+      },
+    }),
+    // Login passwordless per i PROPRIETARI: email + codice OTP (a 6 cifre).
+    // Il codice viene richiesto via POST /api/auth/otp/request e verificato qui.
+    CredentialsProvider({
+      id: "otp",
+      name: "OTP",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        code: { label: "Codice", type: "text" },
+      },
+      async authorize(credentials) {
+        const email = credentials?.email?.trim().toLowerCase();
+        const code = credentials?.code?.trim();
+        if (!email || !code) return null;
+
+        const rl = rateLimitByIp(clientIp(), {
+          key: "auth:otp-verify",
+          windowMs: 5 * 60_000,
+          max: 15,
+        });
+        if (!rl.ok) return null;
+
+        const ok = await verifyOtp(email, code);
+        if (!ok) return null;
+
+        const usersCol = await collections.users();
+        const user = await usersCol.findOne({ email });
+        if (!user) return null;
+        const role = user.role ?? "owner";
+        const ownerId =
+          role === "owner" && user._id ? user._id.toString() : null;
+        return {
+          id: user._id?.toString() ?? email,
+          name: user.name,
+          email: user.email,
+          role,
+          ownerId,
+        };
       },
     }),
   ],

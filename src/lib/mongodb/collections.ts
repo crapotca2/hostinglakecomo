@@ -16,6 +16,7 @@ import type {
   CompetitorZoneStatsDoc,
   WelcomeBookDoc,
   HouseGuideDoc,
+  OtpCodeDoc,
 } from "@/types/database";
 
 const USE_MEMORY =
@@ -40,6 +41,7 @@ function getCollection<T extends { _id?: any }>(name: string) {
 
 export const collections = {
   users: () => getCollection<UserDoc>("users"),
+  otpCodes: () => getCollection<OtpCodeDoc>("otp_codes"),
   properties: () => getCollection<PropertyDoc>("properties"),
   bookings: () => getCollection<BookingDoc>("bookings"),
   services: () => getCollection<ServiceDoc>("services"),
