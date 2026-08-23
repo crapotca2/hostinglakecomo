@@ -1168,6 +1168,7 @@
       },
       "loading": "Caricamento...",
       "empty": "Nessun rendiconto disponibile",
+      "downloadPdf": "Scarica PDF",
       "headers": {
         "period": "Periodo",
         "bookings": "Prenotaz.",

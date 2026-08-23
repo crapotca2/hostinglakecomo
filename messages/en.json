@@ -1168,6 +1168,7 @@
       },
       "loading": "Loading...",
       "empty": "No statements available",
+      "downloadPdf": "Download PDF",
       "headers": {
         "period": "Period",
         "bookings": "Bookings",

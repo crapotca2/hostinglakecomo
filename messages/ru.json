@@ -1168,6 +1168,7 @@
       },
       "loading": "Загрузка...",
       "empty": "Нет доступных сводок",
+      "downloadPdf": "Скачать PDF",
       "headers": {
         "period": "Период",
         "bookings": "Брон.",

@@ -1,6 +1,6 @@
 "use client";
 
-import { FileText, ArrowUpRight } from "lucide-react";
+import { FileText, ArrowUpRight, Download } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { useStatements } from "@/hooks/use-statements";
 
@@ -83,6 +83,7 @@ export default function StatementsPage() {
                   <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.expenses")}</th>
                   <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.net")}</th>
                   <th className="text-center text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.status")}</th>
+                  <th className="px-4 py-3.5"></th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border/30">
@@ -113,6 +114,17 @@ export default function StatementsPage() {
                         <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${STATUS_STYLES[s.status]}`}>
                           {t(`status.${statusKey}`)}
                         </span>
+                      </td>
+                      <td className="px-4 py-4 text-right">
+                        <a
+                          href={`/api/reports/statements/pdf?period=${s.period}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title={t("downloadPdf")}
+                          className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-primary/[0.08] hover:text-primary transition-colors"
+                        >
+                          <Download className="h-4 w-4" />
+                        </a>
                       </td>
                     </tr>
                   );
