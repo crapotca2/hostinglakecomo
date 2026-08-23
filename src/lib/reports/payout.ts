@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
 import type { BookingDoc } from "@/types/database";
 
@@ -20,9 +21,16 @@ const MONTH_NAMES = [
   "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre",
 ];
 
-export async function getMonthlyPayouts(year: number): Promise<MonthlyPayout[]> {
+export async function getMonthlyPayouts(
+  year: number,
+  ownerId: string,
+): Promise<MonthlyPayout[]> {
   const bookingsCol = await collections.bookings();
-  const bookings = (await bookingsCol.find({}).toArray() as BookingDoc[]).filter(
+  const bookings = (
+    (await bookingsCol
+      .find({ ownerId: new ObjectId(ownerId) })
+      .toArray()) as BookingDoc[]
+  ).filter(
     (b: BookingDoc) => b.checkIn.getFullYear() === year && b.status !== "cancelled"
   );
 
@@ -63,7 +71,10 @@ export async function getMonthlyPayouts(year: number): Promise<MonthlyPayout[]> 
   return result;
 }
 
-export async function getPayoutForPeriod(period: string): Promise<{
+export async function getPayoutForPeriod(
+  period: string,
+  ownerId: string,
+): Promise<{
   payout: MonthlyPayout | null;
   bookings: BookingDoc[];
 }> {
@@ -72,11 +83,15 @@ export async function getPayoutForPeriod(period: string): Promise<{
   const monthIdx = parseInt(monthStr, 10) - 1;
   if (isNaN(year) || isNaN(monthIdx)) return { payout: null, bookings: [] };
 
-  const all = await getMonthlyPayouts(year);
+  const all = await getMonthlyPayouts(year, ownerId);
   const payout = all.find((p) => p.period === period) || null;
 
   const bookingsCol = await collections.bookings();
-  const bookings = (await bookingsCol.find({}).toArray() as BookingDoc[]).filter(
+  const bookings = (
+    (await bookingsCol
+      .find({ ownerId: new ObjectId(ownerId) })
+      .toArray()) as BookingDoc[]
+  ).filter(
     (b: BookingDoc) =>
       b.checkIn.getFullYear() === year &&
       b.checkIn.getMonth() === monthIdx &&

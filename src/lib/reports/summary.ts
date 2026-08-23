@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
 import type { BookingDoc, PaymentDoc, PropertyDoc } from "@/types/database";
 
@@ -11,9 +12,9 @@ export interface BookingSummaryRow {
   avgStay: number;
 }
 
-export async function getBookingsSummary(from: Date, to: Date, groupBy: "day" | "week" | "month" = "month"): Promise<BookingSummaryRow[]> {
+export async function getBookingsSummary(from: Date, to: Date, ownerId: string, groupBy: "day" | "week" | "month" = "month"): Promise<BookingSummaryRow[]> {
   const bookingsCol = await collections.bookings();
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
   const bookings = allBookings.filter(
     (b) => b.status !== "cancelled" && b.checkIn >= from && b.checkIn <= to
   );
@@ -61,9 +62,20 @@ export interface PaymentSummaryRow {
   netAmount: number;
 }
 
-export async function getPaymentsSummary(from: Date, to: Date): Promise<PaymentSummaryRow[]> {
+export async function getPaymentsSummary(from: Date, to: Date, ownerId: string): Promise<PaymentSummaryRow[]> {
+  // PaymentDoc non ha ownerId: si scopa via i booking dell'owner (bookingId).
+  const bookingsCol = await collections.bookings();
+  const bIds = (
+    (await bookingsCol
+      .find({ ownerId: new ObjectId(ownerId) })
+      .toArray()) as BookingDoc[]
+  )
+    .map((b) => b._id)
+    .filter((id): id is ObjectId => Boolean(id));
   const paymentsCol = await collections.payments();
-  const allPayments = (await paymentsCol.find({}).toArray()) as PaymentDoc[];
+  const allPayments = (await paymentsCol
+    .find({ bookingId: { $in: bIds } })
+    .toArray()) as PaymentDoc[];
   const payments = allPayments.filter((p) => p.createdAt >= from && p.createdAt <= to);
 
   const buckets = new Map<string, { count: number; succeeded: number; failed: number; refunded: number; total: number }>();
@@ -100,11 +112,11 @@ export interface TaxSummaryRow {
   cedolareSeccaEstimate: number;
 }
 
-export async function getTaxesSummary(from: Date, to: Date): Promise<TaxSummaryRow[]> {
+export async function getTaxesSummary(from: Date, to: Date, ownerId: string): Promise<TaxSummaryRow[]> {
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();
-  const properties = (await propsCol.find({}).toArray()) as PropertyDoc[];
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
+  const properties = (await propsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as PropertyDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
 
   const rows: TaxSummaryRow[] = [];
   for (const p of properties) {

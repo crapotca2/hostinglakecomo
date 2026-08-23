@@ -8,11 +8,11 @@ import {
   getRepeatGuests,
   getListingSitePerformance,
 } from "@/lib/reports/analysis";
-import { requireSession } from "@/lib/security/require-session";
+import { resolveOwnerScope } from "@/lib/security/require-session";
 
 export async function GET(req: NextRequest) {
-  const auth = await requireSession();
-  if (!auth.ok) return auth.response;
+  const scope = await resolveOwnerScope(req);
+  if (!scope.ok) return scope.response;
   await ensureSeeded();
   const { searchParams } = new URL(req.url);
   const type = searchParams.get("type") || "overview";
@@ -23,17 +23,17 @@ export async function GET(req: NextRequest) {
 
   switch (type) {
     case "overview":
-      return NextResponse.json({ stats: await getOverview(from, to) });
+      return NextResponse.json({ stats: await getOverview(from, to, scope.ownerId) });
     case "days-in-advance":
-      return NextResponse.json({ rows: await getDaysInAdvance(from, to) });
+      return NextResponse.json({ rows: await getDaysInAdvance(from, to, scope.ownerId) });
     case "occupancy":
-      return NextResponse.json({ rows: await getOccupancyReport(from, to) });
+      return NextResponse.json({ rows: await getOccupancyReport(from, to, scope.ownerId) });
     case "gaps":
-      return NextResponse.json({ rows: await getAvailabilityGaps(from, to) });
+      return NextResponse.json({ rows: await getAvailabilityGaps(from, to, scope.ownerId) });
     case "repeat-guests":
-      return NextResponse.json({ rows: await getRepeatGuests() });
+      return NextResponse.json({ rows: await getRepeatGuests(scope.ownerId) });
     case "site-performance":
-      return NextResponse.json({ rows: await getListingSitePerformance(from, to) });
+      return NextResponse.json({ rows: await getListingSitePerformance(from, to, scope.ownerId) });
     default:
       return NextResponse.json({ error: "Unknown type" }, { status: 400 });
   }

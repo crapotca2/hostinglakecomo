@@ -3,9 +3,32 @@ import type { NextAuthOptions } from "next-auth";
 import { compare } from "bcryptjs";
 import { headers } from "next/headers";
 import { rateLimitByIp } from "@/lib/security/rate-limit";
+import { collections } from "@/lib/mongodb/collections";
+import type { UserRole } from "@/types/database";
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL ?? "actopark@gmail.com";
 const ADMIN_NAME = process.env.ADMIN_NAME ?? "Andrei";
+
+/**
+ * Risolve role + ownerId dell'utente dalla collection users. Un utente
+ * role="owner" ha ownerId = il proprio _id (le query owner-facing filtrano su
+ * bookings/properties.ownerId). Se non esiste un UserDoc, è il bootstrap admin.
+ */
+async function resolveUserClaims(
+  email: string,
+): Promise<{ role: UserRole; ownerId: string | null }> {
+  try {
+    const usersCol = await collections.users();
+    const user = await usersCol.findOne({ email });
+    if (!user) return { role: "admin", ownerId: null };
+    const role = user.role ?? "admin";
+    const ownerId =
+      role === "owner" && user._id ? user._id.toString() : null;
+    return { role, ownerId };
+  } catch {
+    return { role: "admin", ownerId: null };
+  }
+}
 
 function clientIp(): string {
   try {
@@ -46,17 +69,36 @@ export const authOptions: NextAuthOptions = {
           // Dev-only fallback to plain ADMIN_PASSWORD to ease local bootstrap.
           const plain = process.env.ADMIN_PASSWORD;
           if (plain && password === plain) {
-            return { id: "1", name: ADMIN_NAME, email: ADMIN_EMAIL };
+            const claims = await resolveUserClaims(ADMIN_EMAIL);
+            return { id: "1", name: ADMIN_NAME, email: ADMIN_EMAIL, ...claims };
           }
           return null;
         }
 
         const ok = await compare(password, hash);
         if (!ok) return null;
-        return { id: "1", name: ADMIN_NAME, email: ADMIN_EMAIL };
+        const claims = await resolveUserClaims(ADMIN_EMAIL);
+        return { id: "1", name: ADMIN_NAME, email: ADMIN_EMAIL, ...claims };
       },
     }),
   ],
   session: { strategy: "jwt" },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = (user as { role?: UserRole }).role;
+        token.ownerId = (user as { ownerId?: string | null }).ownerId ?? null;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.id = token.sub ?? session.user.id;
+        session.user.role = token.role;
+        session.user.ownerId = token.ownerId ?? null;
+      }
+      return session;
+    },
+  },
   pages: { signIn: "/login" },
 };

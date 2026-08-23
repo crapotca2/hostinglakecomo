@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
 import type { BookingDoc } from "@/types/database";
 
@@ -19,11 +20,11 @@ const SOURCE_META: Record<string, { label: string; color: string }> = {
   other: { label: "Altro", color: "#9CA3AF" },
 };
 
-export async function getSourceBreakdown(year: number): Promise<SourceBreakdown[]> {
+export async function getSourceBreakdown(year: number, ownerId: string): Promise<SourceBreakdown[]> {
   const bookingsCol = await collections.bookings();
   const start = new Date(year, 0, 1);
   const end = new Date(year + 1, 0, 1);
-  const bookings = (await bookingsCol.find({}).toArray() as BookingDoc[]).filter(
+  const bookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray() as BookingDoc[]).filter(
     (b: BookingDoc) => b.checkIn >= start && b.checkIn < end && b.status !== "cancelled"
   );
 

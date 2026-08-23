@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
 import type { BookingDoc, PropertyDoc } from "@/types/database";
 
@@ -15,11 +16,11 @@ export interface OverviewStats {
   revPar: number;
 }
 
-export async function getOverview(from: Date, to: Date): Promise<OverviewStats> {
+export async function getOverview(from: Date, to: Date, ownerId: string): Promise<OverviewStats> {
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();
-  const activeProps = (await propsCol.find({ status: "active" }).toArray()) as PropertyDoc[];
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
+  const activeProps = (await propsCol.find({ status: "active", ownerId: new ObjectId(ownerId) }).toArray()) as PropertyDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
   const bookings = allBookings.filter(
     (b) => b.status !== "cancelled" && b.checkIn >= from && b.checkIn <= to
   );
@@ -53,9 +54,9 @@ export interface DaysInAdvanceBucket {
   percentage: number;
 }
 
-export async function getDaysInAdvance(from: Date, to: Date): Promise<DaysInAdvanceBucket[]> {
+export async function getDaysInAdvance(from: Date, to: Date, ownerId: string): Promise<DaysInAdvanceBucket[]> {
   const bookingsCol = await collections.bookings();
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
   const bookings = allBookings.filter(
     (b) => b.status !== "cancelled" && b.checkIn >= from && b.checkIn <= to
   );
@@ -97,11 +98,11 @@ export interface OccupancyRow {
   guestNights: number;
 }
 
-export async function getOccupancyReport(from: Date, to: Date): Promise<OccupancyRow[]> {
+export async function getOccupancyReport(from: Date, to: Date, ownerId: string): Promise<OccupancyRow[]> {
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();
-  const properties = (await propsCol.find({ status: "active" }).toArray()) as PropertyDoc[];
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
+  const properties = (await propsCol.find({ status: "active", ownerId: new ObjectId(ownerId) }).toArray()) as PropertyDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
   const totalDays = Math.max(1, Math.round((to.getTime() - from.getTime()) / 86400000));
 
   return properties
@@ -144,11 +145,11 @@ export interface AvailabilityGap {
   potentialRevenue: number;
 }
 
-export async function getAvailabilityGaps(from: Date, to: Date, minGapDays = 2): Promise<AvailabilityGap[]> {
+export async function getAvailabilityGaps(from: Date, to: Date, ownerId: string, minGapDays = 2): Promise<AvailabilityGap[]> {
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();
-  const properties = (await propsCol.find({ status: "active" }).toArray()) as PropertyDoc[];
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
+  const properties = (await propsCol.find({ status: "active", ownerId: new ObjectId(ownerId) }).toArray()) as PropertyDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
 
   const gaps: AvailabilityGap[] = [];
   for (const p of properties) {
@@ -202,9 +203,9 @@ export interface RepeatGuestRow {
   avgRate: number;
 }
 
-export async function getRepeatGuests(): Promise<RepeatGuestRow[]> {
+export async function getRepeatGuests(ownerId: string): Promise<RepeatGuestRow[]> {
   const bookingsCol = await collections.bookings();
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
 
   const byEmail = new Map<string, BookingDoc[]>();
   for (const b of allBookings) {
@@ -246,9 +247,9 @@ export interface SitePerformanceRow {
   conversionValue: number;
 }
 
-export async function getListingSitePerformance(from: Date, to: Date): Promise<SitePerformanceRow[]> {
+export async function getListingSitePerformance(from: Date, to: Date, ownerId: string): Promise<SitePerformanceRow[]> {
   const bookingsCol = await collections.bookings();
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
   const bookings = allBookings.filter(
     (b) => b.status !== "cancelled" && b.checkIn >= from && b.checkIn <= to
   );

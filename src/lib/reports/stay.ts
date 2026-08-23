@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
 import type { BookingDoc, PropertyDoc } from "@/types/database";
 
@@ -15,14 +16,14 @@ export interface DailyChecklistItem {
   bookingId: string;
 }
 
-export async function getDailyChecklist(date: Date = new Date()): Promise<DailyChecklistItem[]> {
+export async function getDailyChecklist(ownerId: string, date: Date = new Date()): Promise<DailyChecklistItem[]> {
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();
   const dayStart = new Date(date.getFullYear(), date.getMonth(), date.getDate());
   const dayEnd = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59);
 
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
-  const allProps = (await propsCol.find({}).toArray()) as PropertyDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
+  const allProps = (await propsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as PropertyDoc[];
   const propMap = new Map(allProps.map((p) => [p._id!.toString(), p.name]));
 
   const items: DailyChecklistItem[] = [];
@@ -64,11 +65,11 @@ export interface DateRangeRow {
   bookingId: string;
 }
 
-export async function getDateRange(from: Date, to: Date): Promise<DateRangeRow[]> {
+export async function getDateRange(from: Date, to: Date, ownerId: string): Promise<DateRangeRow[]> {
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
-  const allProps = (await propsCol.find({}).toArray()) as PropertyDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
+  const allProps = (await propsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as PropertyDoc[];
   const propMap = new Map(allProps.map((p) => [p._id!.toString(), p.name]));
 
   const rows: DateRangeRow[] = [];
@@ -100,11 +101,11 @@ export interface AvailabilityRow {
   occupancyPct: number;
 }
 
-export async function getAvailableNights(from: Date, to: Date): Promise<AvailabilityRow[]> {
+export async function getAvailableNights(from: Date, to: Date, ownerId: string): Promise<AvailabilityRow[]> {
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();
-  const properties = (await propsCol.find({ status: "active" }).toArray()) as PropertyDoc[];
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
+  const properties = (await propsCol.find({ status: "active", ownerId: new ObjectId(ownerId) }).toArray()) as PropertyDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
 
   const totalNights = Math.max(1, Math.round((to.getTime() - from.getTime()) / 86400000));
   const rows: AvailabilityRow[] = [];
@@ -143,11 +144,11 @@ export interface EmptyUnitRow {
   daysEmpty: number;
 }
 
-export async function getEmptyUnits(asOf: Date = new Date()): Promise<EmptyUnitRow[]> {
+export async function getEmptyUnits(ownerId: string, asOf: Date = new Date()): Promise<EmptyUnitRow[]> {
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();
-  const properties = (await propsCol.find({ status: "active" }).toArray()) as PropertyDoc[];
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
+  const properties = (await propsCol.find({ status: "active", ownerId: new ObjectId(ownerId) }).toArray()) as PropertyDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
 
   const rows: EmptyUnitRow[] = [];
   for (const p of properties) {

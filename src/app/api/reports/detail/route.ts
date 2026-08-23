@@ -9,11 +9,11 @@ import {
   getListingSiteFees,
   getCreditCardHistory,
 } from "@/lib/reports/detail";
-import { requireSession } from "@/lib/security/require-session";
+import { resolveOwnerScope } from "@/lib/security/require-session";
 
 export async function GET(req: NextRequest) {
-  const auth = await requireSession();
-  if (!auth.ok) return auth.response;
+  const scope = await resolveOwnerScope(req);
+  if (!scope.ok) return scope.response;
   await ensureSeeded();
   const { searchParams } = new URL(req.url);
   const type = searchParams.get("type") || "bookings";
@@ -24,19 +24,19 @@ export async function GET(req: NextRequest) {
 
   switch (type) {
     case "bookings":
-      return NextResponse.json({ rows: await getBookingsDetail(from, to) });
+      return NextResponse.json({ rows: await getBookingsDetail(from, to, scope.ownerId) });
     case "name-crosscheck":
-      return NextResponse.json({ rows: await getNameCrosscheck() });
+      return NextResponse.json({ rows: await getNameCrosscheck(scope.ownerId) });
     case "emails":
-      return NextResponse.json({ rows: await getEmailList() });
+      return NextResponse.json({ rows: await getEmailList(scope.ownerId) });
     case "payments":
-      return NextResponse.json({ rows: await getPaymentsDetail(from, to) });
+      return NextResponse.json({ rows: await getPaymentsDetail(from, to, scope.ownerId) });
     case "taxes":
-      return NextResponse.json({ rows: await getTaxesDetail(from, to) });
+      return NextResponse.json({ rows: await getTaxesDetail(from, to, scope.ownerId) });
     case "listing-fees":
-      return NextResponse.json({ rows: await getListingSiteFees(from, to) });
+      return NextResponse.json({ rows: await getListingSiteFees(from, to, scope.ownerId) });
     case "cc-history":
-      return NextResponse.json({ rows: await getCreditCardHistory(from, to) });
+      return NextResponse.json({ rows: await getCreditCardHistory(from, to, scope.ownerId) });
     default:
       return NextResponse.json({ error: "Unknown type" }, { status: 400 });
   }

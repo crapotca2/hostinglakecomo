@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
 import type { BookingDoc, PaymentDoc, PropertyDoc } from "@/types/database";
 
@@ -23,11 +24,11 @@ export interface BookingDetailRow {
   createdAt: string;
 }
 
-export async function getBookingsDetail(from: Date, to: Date): Promise<BookingDetailRow[]> {
+export async function getBookingsDetail(from: Date, to: Date, ownerId: string): Promise<BookingDetailRow[]> {
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
-  const allProps = (await propsCol.find({}).toArray()) as PropertyDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
+  const allProps = (await propsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as PropertyDoc[];
   const propMap = new Map(allProps.map((p) => [p._id!.toString(), p.name]));
 
   const bookings = allBookings.filter((b) => b.checkIn >= from && b.checkIn <= to);
@@ -67,11 +68,11 @@ export interface NameCrosscheckRow {
   totalSpent: number;
 }
 
-export async function getNameCrosscheck(): Promise<NameCrosscheckRow[]> {
+export async function getNameCrosscheck(ownerId: string): Promise<NameCrosscheckRow[]> {
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
-  const allProps = (await propsCol.find({}).toArray()) as PropertyDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
+  const allProps = (await propsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as PropertyDoc[];
   const propMap = new Map(allProps.map((p) => [p._id!.toString(), p.name]));
 
   const byName = new Map<string, BookingDoc[]>();
@@ -113,9 +114,9 @@ export interface EmailListRow {
   country: string;
 }
 
-export async function getEmailList(): Promise<EmailListRow[]> {
+export async function getEmailList(ownerId: string): Promise<EmailListRow[]> {
   const bookingsCol = await collections.bookings();
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
 
   const byEmail = new Map<string, BookingDoc[]>();
   for (const b of allBookings) {
@@ -154,9 +155,20 @@ export interface PaymentDetailRow {
   bookingId: string;
 }
 
-export async function getPaymentsDetail(from: Date, to: Date): Promise<PaymentDetailRow[]> {
+export async function getPaymentsDetail(from: Date, to: Date, ownerId: string): Promise<PaymentDetailRow[]> {
+  // PaymentDoc non ha ownerId: si scopa via i booking dell'owner (bookingId).
+  const bookingsCol = await collections.bookings();
+  const bIds = (
+    (await bookingsCol
+      .find({ ownerId: new ObjectId(ownerId) })
+      .toArray()) as BookingDoc[]
+  )
+    .map((b) => b._id)
+    .filter((id): id is ObjectId => Boolean(id));
   const paymentsCol = await collections.payments();
-  const all = (await paymentsCol.find({}).toArray()) as PaymentDoc[];
+  const all = (await paymentsCol
+    .find({ bookingId: { $in: bIds } })
+    .toArray()) as PaymentDoc[];
   const filtered = all.filter((p) => p.createdAt >= from && p.createdAt <= to);
   return filtered
     .map((p) => ({
@@ -184,11 +196,11 @@ export interface TaxDetailRow {
   cedolareSecca: number;
 }
 
-export async function getTaxesDetail(from: Date, to: Date): Promise<TaxDetailRow[]> {
+export async function getTaxesDetail(from: Date, to: Date, ownerId: string): Promise<TaxDetailRow[]> {
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
-  const allProps = (await propsCol.find({}).toArray()) as PropertyDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
+  const allProps = (await propsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as PropertyDoc[];
   const propMap = new Map(allProps.map((p) => [p._id!.toString(), p.name]));
 
   return allBookings
@@ -215,9 +227,9 @@ export interface ListingFeeRow {
   netRevenue: number;
 }
 
-export async function getListingSiteFees(from: Date, to: Date): Promise<ListingFeeRow[]> {
+export async function getListingSiteFees(from: Date, to: Date, ownerId: string): Promise<ListingFeeRow[]> {
   const bookingsCol = await collections.bookings();
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
   const bookings = allBookings.filter(
     (b) => b.status !== "cancelled" && b.checkIn >= from && b.checkIn <= to
   );
@@ -257,9 +269,19 @@ export interface CCHistoryRow {
   type: string;
 }
 
-export async function getCreditCardHistory(from: Date, to: Date): Promise<CCHistoryRow[]> {
+export async function getCreditCardHistory(from: Date, to: Date, ownerId: string): Promise<CCHistoryRow[]> {
+  const bookingsCol = await collections.bookings();
+  const bIds = (
+    (await bookingsCol
+      .find({ ownerId: new ObjectId(ownerId) })
+      .toArray()) as BookingDoc[]
+  )
+    .map((b) => b._id)
+    .filter((id): id is ObjectId => Boolean(id));
   const paymentsCol = await collections.payments();
-  const all = (await paymentsCol.find({}).toArray()) as PaymentDoc[];
+  const all = (await paymentsCol
+    .find({ bookingId: { $in: bIds } })
+    .toArray()) as PaymentDoc[];
   return all
     .filter((p) => p.stripePaymentIntentId && p.createdAt >= from && p.createdAt <= to)
     .map((p) => ({

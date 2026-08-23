@@ -20,11 +20,11 @@ export interface PropertyPerformance {
   occupancy: number;
 }
 
-export async function getMonthlyRevenue(year: number): Promise<MonthlyRevenue[]> {
+export async function getMonthlyRevenue(year: number, ownerId: string): Promise<MonthlyRevenue[]> {
   const bookingsCol = await collections.bookings();
   const start = new Date(year, 0, 1);
   const end = new Date(year + 1, 0, 1);
-  const bookings = (await bookingsCol.find({}).toArray() as BookingDoc[]).filter(
+  const bookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray() as BookingDoc[]).filter(
     (b: BookingDoc) => b.checkIn >= start && b.checkIn < end && b.status !== "cancelled"
   );
 
@@ -50,10 +50,10 @@ export async function getMonthlyRevenue(year: number): Promise<MonthlyRevenue[]>
   return result;
 }
 
-export async function getPropertyPerformance(year: number): Promise<PropertyPerformance[]> {
+export async function getPropertyPerformance(year: number, ownerId: string): Promise<PropertyPerformance[]> {
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();
-  const properties = await propsCol.find({ status: "active" }).toArray();
+  const properties = await propsCol.find({ status: "active", ownerId: new ObjectId(ownerId) }).toArray();
 
   const start = new Date(year, 0, 1);
   const end = new Date(year + 1, 0, 1);
@@ -62,7 +62,7 @@ export async function getPropertyPerformance(year: number): Promise<PropertyPerf
   const result: PropertyPerformance[] = [];
 
   for (const p of properties) {
-    const propertyBookings = (await bookingsCol.find({ propertyId: p._id as ObjectId }).toArray() as BookingDoc[]).filter(
+    const propertyBookings = (await bookingsCol.find({ propertyId: p._id as ObjectId, ownerId: new ObjectId(ownerId) }).toArray() as BookingDoc[]).filter(
       (b: BookingDoc) => b.checkIn >= start && b.checkIn < end && b.status !== "cancelled"
     );
 
@@ -86,9 +86,9 @@ export async function getPropertyPerformance(year: number): Promise<PropertyPerf
   return result.sort((a, b) => b.revenue - a.revenue);
 }
 
-export async function getKpiSummary(year: number) {
-  const monthly = await getMonthlyRevenue(year);
-  const properties = await getPropertyPerformance(year);
+export async function getKpiSummary(year: number, ownerId: string) {
+  const monthly = await getMonthlyRevenue(year, ownerId);
+  const properties = await getPropertyPerformance(year, ownerId);
 
   const totalRevenue = monthly.reduce((s, m) => s + m.revenue, 0);
   const totalBookings = monthly.reduce((s, m) => s + m.bookings, 0);

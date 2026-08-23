@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
 import type { BookingDoc, PropertyDoc } from "@/types/database";
 
@@ -13,9 +14,9 @@ export interface CommissionSummaryRow {
 
 const AIRBIBBY_RATE = 0.10;
 
-export async function getCommissionSummary(from: Date, to: Date): Promise<CommissionSummaryRow[]> {
+export async function getCommissionSummary(from: Date, to: Date, ownerId: string): Promise<CommissionSummaryRow[]> {
   const bookingsCol = await collections.bookings();
-  const all = (await bookingsCol.find({}).toArray()) as BookingDoc[];
+  const all = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
   const bookings = all.filter((b) => b.status !== "cancelled" && b.checkIn >= from && b.checkIn <= to);
 
   const bySource = new Map<string, BookingDoc[]>();
@@ -58,11 +59,11 @@ export interface CommissionDetailRow {
   ownerPayout: number;
 }
 
-export async function getCommissionDetail(from: Date, to: Date): Promise<CommissionDetailRow[]> {
+export async function getCommissionDetail(from: Date, to: Date, ownerId: string): Promise<CommissionDetailRow[]> {
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
-  const allProps = (await propsCol.find({}).toArray()) as PropertyDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
+  const allProps = (await propsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as PropertyDoc[];
   const propMap = new Map(allProps.map((p) => [p._id!.toString(), p.name]));
 
   return allBookings
@@ -97,9 +98,9 @@ export interface OwnerRemittanceRow {
   netPayout: number;
 }
 
-export async function getOwnerRemittanceSummary(year: number): Promise<OwnerRemittanceRow[]> {
+export async function getOwnerRemittanceSummary(year: number, ownerId: string): Promise<OwnerRemittanceRow[]> {
   const bookingsCol = await collections.bookings();
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
   const bookings = allBookings.filter(
     (b) => b.status !== "cancelled" && b.checkIn.getFullYear() === year
   );
@@ -145,11 +146,11 @@ export interface OwnerRemittanceDetailRow {
   netPayout: number;
 }
 
-export async function getOwnerRemittanceDetail(from: Date, to: Date): Promise<OwnerRemittanceDetailRow[]> {
+export async function getOwnerRemittanceDetail(from: Date, to: Date, ownerId: string): Promise<OwnerRemittanceDetailRow[]> {
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();
-  const properties = (await propsCol.find({}).toArray()) as PropertyDoc[];
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
+  const properties = (await propsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as PropertyDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
 
   const rows: OwnerRemittanceDetailRow[] = [];
   const monthsInRange = new Set<string>();
@@ -214,12 +215,12 @@ export interface BookingRemittanceRow {
   netPayout: number;
 }
 
-export async function getOwnerStatementBookings(from: Date, to: Date): Promise<BookingRemittanceRow[]> {
+export async function getOwnerStatementBookings(from: Date, to: Date, ownerId: string): Promise<BookingRemittanceRow[]> {
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();
-  const allProps = (await propsCol.find({}).toArray()) as PropertyDoc[];
+  const allProps = (await propsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as PropertyDoc[];
   const propMap = new Map(allProps.map((p) => [p._id!.toString(), p.name]));
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
 
   return allBookings
     .filter((b) => b.status !== "cancelled" && b.checkIn >= from && b.checkIn <= to)

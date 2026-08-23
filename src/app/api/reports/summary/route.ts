@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ensureSeeded } from "@/lib/seed/ensure-seeded";
 import { getBookingsSummary, getPaymentsSummary, getTaxesSummary } from "@/lib/reports/summary";
-import { requireSession } from "@/lib/security/require-session";
+import { resolveOwnerScope } from "@/lib/security/require-session";
 
 export async function GET(req: NextRequest) {
-  const auth = await requireSession();
-  if (!auth.ok) return auth.response;
+  const scope = await resolveOwnerScope(req);
+  if (!scope.ok) return scope.response;
   await ensureSeeded();
   const { searchParams } = new URL(req.url);
   const type = searchParams.get("type") || "bookings";
@@ -14,8 +14,8 @@ export async function GET(req: NextRequest) {
   const from = fromStr ? new Date(fromStr) : new Date(new Date().getFullYear(), 0, 1);
   const to = toStr ? new Date(toStr) : new Date();
 
-  if (type === "bookings") return NextResponse.json({ rows: await getBookingsSummary(from, to) });
-  if (type === "payments") return NextResponse.json({ rows: await getPaymentsSummary(from, to) });
-  if (type === "taxes") return NextResponse.json({ rows: await getTaxesSummary(from, to) });
+  if (type === "bookings") return NextResponse.json({ rows: await getBookingsSummary(from, to, scope.ownerId) });
+  if (type === "payments") return NextResponse.json({ rows: await getPaymentsSummary(from, to, scope.ownerId) });
+  if (type === "taxes") return NextResponse.json({ rows: await getTaxesSummary(from, to, scope.ownerId) });
   return NextResponse.json({ error: "Unknown type" }, { status: 400 });
 }
