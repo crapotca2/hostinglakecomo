@@ -18,18 +18,27 @@ export async function seedOwner(): Promise<{ users: number; holidays: number }> 
   const adminEmail = process.env.ADMIN_EMAIL ?? "actopark@gmail.com";
   const adminName = process.env.ADMIN_NAME ?? "Andrei";
 
-  const existingOwner = await usersCol.findOne({ email: adminEmail });
-  if (!existingOwner) {
-    const owner: UserDoc = {
+  // L'account di login a password è il MASTER / property-manager del team:
+  // role "admin" → vede tutti i proprietari (sezioni separate) e i loro immobili.
+  // I singoli proprietari sono UserDoc distinti con role "owner".
+  const existingAdmin = await usersCol.findOne({ email: adminEmail });
+  if (!existingAdmin) {
+    const admin: UserDoc = {
       _id: OWNER_ID,
       name: adminName,
       email: adminEmail,
-      role: "owner",
+      role: "admin",
       language: "it",
       createdAt: now,
       updatedAt: now,
     };
-    await usersCol.insertOne(owner);
+    await usersCol.insertOne(admin);
+  } else if (existingAdmin.role !== "admin") {
+    // Migra i doc legacy creati come "owner" al ruolo admin.
+    await usersCol.updateOne(
+      { email: adminEmail },
+      { $set: { role: "admin", updatedAt: now } },
+    );
   }
 
   const countries = ["IT", "DE", "FR", "GB", "NL", "CH", "US"];
@@ -60,5 +69,5 @@ export async function seedOwner(): Promise<{ users: number; holidays: number }> 
     }
   }
 
-  return { users: existingOwner ? 0 : 1, holidays: holidaysInserted };
+  return { users: existingAdmin ? 0 : 1, holidays: holidaysInserted };
 }

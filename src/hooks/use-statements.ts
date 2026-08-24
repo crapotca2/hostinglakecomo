@@ -16,12 +16,19 @@ export interface MonthlyPayout {
   status: "paid" | "pending";
 }
 
-export function useStatements(year?: number) {
+export function useStatements(
+  year?: number,
+  ownerId?: string | null,
+  enabled = true,
+) {
   const yr = year ?? new Date().getFullYear();
   return useQuery({
-    queryKey: ["statements", yr],
+    queryKey: ["statements", yr, ownerId ?? null],
+    enabled,
     queryFn: async () => {
-      const res = await fetch(`/api/reports/statements?year=${yr}`);
+      const qs = new URLSearchParams({ year: String(yr) });
+      if (ownerId) qs.set("ownerId", ownerId);
+      const res = await fetch(`/api/reports/statements?${qs.toString()}`);
       if (!res.ok) throw new Error("Failed to fetch statements");
       return (await res.json()) as { year: number; payouts: MonthlyPayout[] };
     },

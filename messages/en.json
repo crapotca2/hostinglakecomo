@@ -983,6 +983,7 @@
       "section": "Management",
       "items": {
         "overview": "Overview",
+        "owners": "Owners",
         "properties": "Properties",
         "bookings": "Bookings",
         "calendar": "Calendar",

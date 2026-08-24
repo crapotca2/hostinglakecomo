@@ -11,14 +11,17 @@ import {
   Shield,
   Settings,
   LogOut,
+  Users,
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
+import { useMe } from "@/hooks/use-me";
 
 const NAV_ITEMS = [
   { href: "/dashboard", icon: LayoutDashboard, key: "overview" },
+  { href: "/dashboard/owners", icon: Users, key: "owners", adminOnly: true },
   { href: "/dashboard/properties", icon: Home, key: "properties" },
   { href: "/dashboard/bookings", icon: CalendarDays, key: "bookings" },
   { href: "/dashboard/calendar", icon: CalendarDays, key: "calendar" },
@@ -33,6 +36,10 @@ const NAV_ITEMS = [
 export function Sidebar() {
   const pathname = usePathname();
   const t = useTranslations("dashboard.sidebar");
+  const { data: me } = useMe();
+  const navItems = NAV_ITEMS.filter(
+    (item) => !("adminOnly" in item && item.adminOnly) || me?.role === "admin",
+  );
 
   return (
     <aside className="w-[260px] shrink-0 bg-white h-screen sticky top-0 flex flex-col border-r border-border/60">
@@ -56,7 +63,7 @@ export function Sidebar() {
       <div className="flex-1 overflow-y-auto scrollbar-thin px-3 pt-5">
         <span className="section-label px-3">{t("section")}</span>
         <nav className="space-y-1 mt-3">
-          {NAV_ITEMS.map((item) => {
+          {navItems.map((item) => {
             const active = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
             return (
               <Link

@@ -983,6 +983,7 @@
       "section": "Управление",
       "items": {
         "overview": "Обзор",
+        "owners": "Владельцы",
         "properties": "Объекты",
         "bookings": "Бронирования",
         "calendar": "Календарь",

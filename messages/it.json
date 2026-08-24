@@ -983,6 +983,7 @@
       "section": "Gestione",
       "items": {
         "overview": "Overview",
+        "owners": "Proprietari",
         "properties": "Proprietà",
         "bookings": "Prenotazioni",
         "calendar": "Calendario",

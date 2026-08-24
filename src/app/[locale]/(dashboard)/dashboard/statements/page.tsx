@@ -1,8 +1,11 @@
 "use client";
 
-import { FileText, ArrowUpRight, Download } from "lucide-react";
+import { useState } from "react";
+import { FileText, ArrowUpRight, Download, Users } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { useStatements } from "@/hooks/use-statements";
+import { useMe } from "@/hooks/use-me";
+import { useOwners } from "@/hooks/use-owners";
 
 const STATUS_STYLES: Record<string, string> = {
   paid: "bg-emerald-50 text-emerald-700",
@@ -23,13 +26,36 @@ export default function StatementsPage() {
   const t = useTranslations("dashboard.statements");
   const locale = useLocale();
   const currentYear = new Date().getFullYear();
-  const { data, isLoading } = useStatements(currentYear);
+
+  const { data: me } = useMe();
+  const isAdmin = me?.role === "admin";
+  // ownerId iniziale dal deep-link ?ownerId=… (navigazione dalla pagina Proprietari).
+  const [ownerId, setOwnerId] = useState<string | null>(() => {
+    if (typeof window === "undefined") return null;
+    return new URLSearchParams(window.location.search).get("ownerId");
+  });
+
+  // Admin: elenco proprietari per il selettore. Owner: hook disabilitato (auto-scope).
+  const { data: ownersData } = useOwners(isAdmin);
+  const owners = ownersData?.owners ?? [];
+  const selectedOwner = owners.find((o) => o.ownerId === ownerId) ?? null;
+
+  // Owner → auto-scoping dalla sessione. Admin → deve scegliere un proprietario.
+  const needsOwnerPick = isAdmin && !ownerId;
+  const { data, isLoading } = useStatements(
+    currentYear,
+    isAdmin ? ownerId : undefined,
+    !needsOwnerPick,
+  );
 
   const payouts = data?.payouts || [];
   const ytdGross = payouts.reduce((s, p) => s + p.grossRevenue, 0);
   const ytdCommissions = payouts.reduce((s, p) => s + p.otaCommissions + p.airbibbyCommission, 0);
   const ytdExpenses = payouts.reduce((s, p) => s + p.expenses + p.touristTax, 0);
   const ytdNet = payouts.reduce((s, p) => s + p.netPayout, 0);
+
+  const pdfHref = (period: string) =>
+    `/api/reports/statements/pdf?period=${period}${ownerId ? `&ownerId=${ownerId}` : ""}`;
 
   return (
     <div className="p-6 space-y-6 animate-fade-in">
@@ -42,98 +68,135 @@ export default function StatementsPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white rounded-2xl p-5 border border-border/50">
-          <div className="text-xs text-muted-foreground mb-1">{t("kpis.ytdGross")}</div>
-          <div className="text-2xl font-bold">{isLoading ? "—" : formatEuro(ytdGross, locale)}</div>
-        </div>
-        <div className="bg-white rounded-2xl p-5 border border-border/50">
-          <div className="text-xs text-muted-foreground mb-1">{t("kpis.totalCommissions")}</div>
-          <div className="text-2xl font-bold">{isLoading ? "—" : formatEuro(ytdCommissions, locale)}</div>
-          <div className="text-xs text-muted-foreground mt-1">{t("kpis.commissionsHint")}</div>
-        </div>
-        <div className="bg-white rounded-2xl p-5 border border-border/50">
-          <div className="text-xs text-muted-foreground mb-1">{t("kpis.operatingExpenses")}</div>
-          <div className="text-2xl font-bold">{isLoading ? "—" : formatEuro(ytdExpenses, locale)}</div>
-          <div className="text-xs text-muted-foreground mt-1">{t("kpis.expensesHint")}</div>
-        </div>
-        <div className="bg-white rounded-2xl p-5 border border-border/50">
-          <div className="text-xs text-muted-foreground mb-1">{t("kpis.netPayoutYtd")}</div>
-          <div className="text-2xl font-bold text-primary">{isLoading ? "—" : formatEuro(ytdNet, locale)}</div>
-          <div className="flex items-center gap-1 text-xs text-emerald-600 mt-1">
-            <ArrowUpRight className="h-3 w-3" /> {t("kpis.netPayoutHint")}
+      {isAdmin && (
+        <div className="bg-white rounded-2xl border border-border/50 p-4 flex flex-col sm:flex-row sm:items-center gap-3">
+          <div className="flex items-center gap-2 shrink-0">
+            <Users className="h-4 w-4 text-primary" />
+            <label className="text-sm font-medium">Proprietario</label>
           </div>
+          <select
+            value={ownerId ?? ""}
+            onChange={(e) => setOwnerId(e.target.value || null)}
+            className="rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 min-w-[240px]"
+          >
+            <option value="">— Seleziona un proprietario —</option>
+            {owners.map((o) => (
+              <option key={o.ownerId} value={o.ownerId}>
+                {o.name} ({o.propertiesCount} immobili)
+              </option>
+            ))}
+          </select>
+          {selectedOwner && (
+            <span className="text-xs text-muted-foreground sm:ml-auto truncate">
+              {selectedOwner.properties.map((p) => p.name).join(" · ") || "Nessun immobile"}
+            </span>
+          )}
         </div>
-      </div>
+      )}
 
-      <div className="bg-white rounded-2xl border border-border/50 overflow-hidden">
-        {isLoading ? (
-          <div className="p-12 text-center text-sm text-muted-foreground">{t("loading")}</div>
-        ) : payouts.length === 0 ? (
-          <div className="p-12 text-center text-sm text-muted-foreground">{t("empty")}</div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-border/40">
-                  <th className="text-left text-xs font-semibold text-muted-foreground px-6 py-3.5">{t("headers.period")}</th>
-                  <th className="text-center text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.bookings")}</th>
-                  <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.gross")}</th>
-                  <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.commissions")}</th>
-                  <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.expenses")}</th>
-                  <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.net")}</th>
-                  <th className="text-center text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.status")}</th>
-                  <th className="px-4 py-3.5"></th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border/30">
-                {payouts.map((s) => {
-                  const statusKey = (
-                    ["paid", "pending"].includes(s.status) ? s.status : "pending"
-                  ) as StatusKey;
-                  return (
-                    <tr key={s.period} className="hover:bg-muted/20 transition-colors">
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-3">
-                          <div className="h-9 w-9 rounded-xl bg-primary/[0.08] flex items-center justify-center">
-                            <FileText className="h-4 w-4 text-primary" />
-                          </div>
-                          <span className="text-sm font-medium">{s.label}</span>
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 text-sm text-center">{s.bookingCount}</td>
-                      <td className="px-4 py-4 text-sm text-right font-medium tabular-nums">{formatEuro(s.grossRevenue, locale)}</td>
-                      <td className="px-4 py-4 text-sm text-right text-muted-foreground tabular-nums">
-                        -{formatEuro(s.otaCommissions + s.airbibbyCommission, locale)}
-                      </td>
-                      <td className="px-4 py-4 text-sm text-right text-muted-foreground tabular-nums">
-                        -{formatEuro(s.expenses + s.touristTax, locale)}
-                      </td>
-                      <td className="px-4 py-4 text-sm text-right font-bold text-primary tabular-nums">{formatEuro(s.netPayout, locale)}</td>
-                      <td className="px-4 py-4 text-center">
-                        <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${STATUS_STYLES[s.status]}`}>
-                          {t(`status.${statusKey}`)}
-                        </span>
-                      </td>
-                      <td className="px-4 py-4 text-right">
-                        <a
-                          href={`/api/reports/statements/pdf?period=${s.period}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          title={t("downloadPdf")}
-                          className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-primary/[0.08] hover:text-primary transition-colors"
-                        >
-                          <Download className="h-4 w-4" />
-                        </a>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+      {needsOwnerPick ? (
+        <div className="bg-white rounded-2xl border border-border/50 p-12 text-center">
+          <Users className="h-8 w-8 text-muted-foreground mx-auto mb-3" />
+          <p className="text-sm text-muted-foreground">
+            Seleziona un proprietario per vedere il suo rendiconto.
+          </p>
+        </div>
+      ) : (
+        <>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-white rounded-2xl p-5 border border-border/50">
+              <div className="text-xs text-muted-foreground mb-1">{t("kpis.ytdGross")}</div>
+              <div className="text-2xl font-bold">{isLoading ? "—" : formatEuro(ytdGross, locale)}</div>
+            </div>
+            <div className="bg-white rounded-2xl p-5 border border-border/50">
+              <div className="text-xs text-muted-foreground mb-1">{t("kpis.totalCommissions")}</div>
+              <div className="text-2xl font-bold">{isLoading ? "—" : formatEuro(ytdCommissions, locale)}</div>
+              <div className="text-xs text-muted-foreground mt-1">{t("kpis.commissionsHint")}</div>
+            </div>
+            <div className="bg-white rounded-2xl p-5 border border-border/50">
+              <div className="text-xs text-muted-foreground mb-1">{t("kpis.operatingExpenses")}</div>
+              <div className="text-2xl font-bold">{isLoading ? "—" : formatEuro(ytdExpenses, locale)}</div>
+              <div className="text-xs text-muted-foreground mt-1">{t("kpis.expensesHint")}</div>
+            </div>
+            <div className="bg-white rounded-2xl p-5 border border-border/50">
+              <div className="text-xs text-muted-foreground mb-1">{t("kpis.netPayoutYtd")}</div>
+              <div className="text-2xl font-bold text-primary">{isLoading ? "—" : formatEuro(ytdNet, locale)}</div>
+              <div className="flex items-center gap-1 text-xs text-emerald-600 mt-1">
+                <ArrowUpRight className="h-3 w-3" /> {t("kpis.netPayoutHint")}
+              </div>
+            </div>
           </div>
-        )}
-      </div>
+
+          <div className="bg-white rounded-2xl border border-border/50 overflow-hidden">
+            {isLoading ? (
+              <div className="p-12 text-center text-sm text-muted-foreground">{t("loading")}</div>
+            ) : payouts.length === 0 ? (
+              <div className="p-12 text-center text-sm text-muted-foreground">{t("empty")}</div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-border/40">
+                      <th className="text-left text-xs font-semibold text-muted-foreground px-6 py-3.5">{t("headers.period")}</th>
+                      <th className="text-center text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.bookings")}</th>
+                      <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.gross")}</th>
+                      <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.commissions")}</th>
+                      <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.expenses")}</th>
+                      <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.net")}</th>
+                      <th className="text-center text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.status")}</th>
+                      <th className="px-4 py-3.5"></th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-border/30">
+                    {payouts.map((s) => {
+                      const statusKey = (
+                        ["paid", "pending"].includes(s.status) ? s.status : "pending"
+                      ) as StatusKey;
+                      return (
+                        <tr key={s.period} className="hover:bg-muted/20 transition-colors">
+                          <td className="px-6 py-4">
+                            <div className="flex items-center gap-3">
+                              <div className="h-9 w-9 rounded-xl bg-primary/[0.08] flex items-center justify-center">
+                                <FileText className="h-4 w-4 text-primary" />
+                              </div>
+                              <span className="text-sm font-medium">{s.label}</span>
+                            </div>
+                          </td>
+                          <td className="px-4 py-4 text-sm text-center">{s.bookingCount}</td>
+                          <td className="px-4 py-4 text-sm text-right font-medium tabular-nums">{formatEuro(s.grossRevenue, locale)}</td>
+                          <td className="px-4 py-4 text-sm text-right text-muted-foreground tabular-nums">
+                            -{formatEuro(s.otaCommissions + s.airbibbyCommission, locale)}
+                          </td>
+                          <td className="px-4 py-4 text-sm text-right text-muted-foreground tabular-nums">
+                            -{formatEuro(s.expenses + s.touristTax, locale)}
+                          </td>
+                          <td className="px-4 py-4 text-sm text-right font-bold text-primary tabular-nums">{formatEuro(s.netPayout, locale)}</td>
+                          <td className="px-4 py-4 text-center">
+                            <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${STATUS_STYLES[s.status]}`}>
+                              {t(`status.${statusKey}`)}
+                            </span>
+                          </td>
+                          <td className="px-4 py-4 text-right">
+                            <a
+                              href={pdfHref(s.period)}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              title={t("downloadPdf")}
+                              className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-primary/[0.08] hover:text-primary transition-colors"
+                            >
+                              <Download className="h-4 w-4" />
+                            </a>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }
