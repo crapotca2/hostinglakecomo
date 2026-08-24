@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { generateIstatExport } from "@/lib/compliance/istat";
 import { ensureSeeded } from "@/lib/seed/ensure-seeded";
-import { requireSession } from "@/lib/security/require-session";
+import { resolveOwnerScope } from "@/lib/security/require-session";
 
 export async function GET(req: NextRequest) {
-  const auth = await requireSession();
-  if (!auth.ok) return auth.response;
+  const scope = await resolveOwnerScope(req);
+  if (!scope.ok) return scope.response;
   await ensureSeeded();
   const { searchParams } = new URL(req.url);
   const now = new Date();
@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
   const year = parseInt(searchParams.get("year") || String(now.getFullYear()), 10);
   const format = searchParams.get("format") || "json";
 
-  const { rows, csv } = await generateIstatExport(month, year);
+  const { rows, csv } = await generateIstatExport(month, year, scope.ownerId);
 
   if (format === "csv") {
     return new NextResponse(csv, {

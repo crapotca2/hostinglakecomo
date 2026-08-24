@@ -1,13 +1,15 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
 import { ensureSeeded } from "@/lib/seed/ensure-seeded";
 import type { BookingDoc } from "@/types/database";
-import { requireSession } from "@/lib/security/require-session";
+import { resolveOwnerScope } from "@/lib/security/require-session";
 
-export async function GET() {
-  const auth = await requireSession();
-  if (!auth.ok) return auth.response;
+export async function GET(req: NextRequest) {
+  const scope = await resolveOwnerScope(req);
+  if (!scope.ok) return scope.response;
   await ensureSeeded();
+  const ownerFilter = { ownerId: new ObjectId(scope.ownerId) };
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();
 
@@ -15,7 +17,7 @@ export async function GET() {
   const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
   const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
 
-  const allBookings = await bookingsCol.find({}).toArray();
+  const allBookings = await bookingsCol.find(ownerFilter).toArray();
   const thisMonthBookings = allBookings.filter(
     (b: BookingDoc) =>
       b.checkIn >= monthStart &&
@@ -34,8 +36,10 @@ export async function GET() {
     0
   );
 
-  // Occupancy: nights booked / nights available (this month, across all properties)
-  const properties = await propsCol.find({ status: "active" }).toArray();
+  // Occupancy: nights booked / nights available (this month, owner's active properties)
+  const properties = await propsCol
+    .find({ ...ownerFilter, status: "active" })
+    .toArray();
   const daysInMonth = new Date(
     now.getFullYear(),
     now.getMonth() + 1,

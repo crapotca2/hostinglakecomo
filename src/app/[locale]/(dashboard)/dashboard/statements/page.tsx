@@ -1,11 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { FileText, ArrowUpRight, Download, Users } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { useStatements } from "@/hooks/use-statements";
-import { useMe } from "@/hooks/use-me";
-import { useOwners } from "@/hooks/use-owners";
+import { useOwnerScope } from "@/components/owner-scope";
 
 const STATUS_STYLES: Record<string, string> = {
   paid: "bg-emerald-50 text-emerald-700",
@@ -27,26 +25,10 @@ export default function StatementsPage() {
   const locale = useLocale();
   const currentYear = new Date().getFullYear();
 
-  const { data: me } = useMe();
-  const isAdmin = me?.role === "admin";
-  // ownerId iniziale dal deep-link ?ownerId=… (navigazione dalla pagina Proprietari).
-  const [ownerId, setOwnerId] = useState<string | null>(() => {
-    if (typeof window === "undefined") return null;
-    return new URLSearchParams(window.location.search).get("ownerId");
-  });
-
-  // Admin: elenco proprietari per il selettore. Owner: hook disabilitato (auto-scope).
-  const { data: ownersData } = useOwners(isAdmin);
-  const owners = ownersData?.owners ?? [];
-  const selectedOwner = owners.find((o) => o.ownerId === ownerId) ?? null;
-
-  // Owner → auto-scoping dalla sessione. Admin → deve scegliere un proprietario.
-  const needsOwnerPick = isAdmin && !ownerId;
-  const { data, isLoading } = useStatements(
-    currentYear,
-    isAdmin ? ownerId : undefined,
-    !needsOwnerPick,
-  );
+  // Owner-scope globale: gli owner si auto-scopano; l'admin sceglie dal selettore
+  // nell'header (needsPick = admin senza selezione).
+  const { ownerId, needsPick } = useOwnerScope();
+  const { data, isLoading } = useStatements(currentYear);
 
   const payouts = data?.payouts || [];
   const ytdGross = payouts.reduce((s, p) => s + p.grossRevenue, 0);
@@ -68,33 +50,7 @@ export default function StatementsPage() {
         </p>
       </div>
 
-      {isAdmin && (
-        <div className="bg-white rounded-2xl border border-border/50 p-4 flex flex-col sm:flex-row sm:items-center gap-3">
-          <div className="flex items-center gap-2 shrink-0">
-            <Users className="h-4 w-4 text-primary" />
-            <label className="text-sm font-medium">Proprietario</label>
-          </div>
-          <select
-            value={ownerId ?? ""}
-            onChange={(e) => setOwnerId(e.target.value || null)}
-            className="rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 min-w-[240px]"
-          >
-            <option value="">— Seleziona un proprietario —</option>
-            {owners.map((o) => (
-              <option key={o.ownerId} value={o.ownerId}>
-                {o.name} ({o.propertiesCount} immobili)
-              </option>
-            ))}
-          </select>
-          {selectedOwner && (
-            <span className="text-xs text-muted-foreground sm:ml-auto truncate">
-              {selectedOwner.properties.map((p) => p.name).join(" · ") || "Nessun immobile"}
-            </span>
-          )}
-        </div>
-      )}
-
-      {needsOwnerPick ? (
+      {needsPick ? (
         <div className="bg-white rounded-2xl border border-border/50 p-12 text-center">
           <Users className="h-8 w-8 text-muted-foreground mx-auto mb-3" />
           <p className="text-sm text-muted-foreground">

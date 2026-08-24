@@ -1,12 +1,15 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import { useOwnerScope } from "@/components/owner-scope";
 
 export function useDashboardStats() {
+  const { ownerId, isAdmin } = useOwnerScope();
   return useQuery({
-    queryKey: ["dashboard-stats"],
+    queryKey: ["dashboard-stats", ownerId],
+    enabled: !(isAdmin && !ownerId),
     queryFn: async () => {
-      const res = await fetch("/api/dashboard/stats");
+      const res = await fetch(`/api/dashboard/stats${ownerId ? `?ownerId=${ownerId}` : ""}`);
       if (!res.ok) throw new Error("Failed to fetch dashboard stats");
       return (await res.json()) as {
         monthRevenue: number;

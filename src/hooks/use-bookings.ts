@@ -1,6 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import { useOwnerScope } from "@/components/owner-scope";
 
 export interface BookingFilters {
   propertyId?: string;
@@ -10,14 +11,17 @@ export interface BookingFilters {
 }
 
 export function useBookings(filters: BookingFilters = {}) {
+  const { ownerId, isAdmin } = useOwnerScope();
   return useQuery({
-    queryKey: ["bookings", filters],
+    queryKey: ["bookings", filters, ownerId],
+    enabled: !(isAdmin && !ownerId),
     queryFn: async () => {
       const params = new URLSearchParams();
       if (filters.propertyId) params.set("propertyId", filters.propertyId);
       if (filters.status) params.set("status", filters.status);
       if (filters.from) params.set("from", filters.from);
       if (filters.to) params.set("to", filters.to);
+      if (ownerId) params.set("ownerId", ownerId);
       const res = await fetch(`/api/bookings?${params.toString()}`);
       if (!res.ok) throw new Error("Failed to fetch bookings");
       const data = await res.json();

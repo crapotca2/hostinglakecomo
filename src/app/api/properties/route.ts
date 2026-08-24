@@ -1,16 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
+import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
 import { ensureSeeded } from "@/lib/seed/ensure-seeded";
-import { requireSession } from "@/lib/security/require-session";
+import { resolveOwnerScope } from "@/lib/security/require-session";
 
 export async function GET(req: NextRequest) {
-  const auth = await requireSession();
-  if (!auth.ok) return auth.response;
+  const scope = await resolveOwnerScope(req);
+  if (!scope.ok) return scope.response;
   await ensureSeeded();
   const { searchParams } = new URL(req.url);
   const status = searchParams.get("status");
 
-  const filter: Record<string, any> = {};
+  const filter: Record<string, any> = { ownerId: new ObjectId(scope.ownerId) };
   if (status) filter.status = status;
 
   const propsCol = await collections.properties();

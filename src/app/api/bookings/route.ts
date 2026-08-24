@@ -2,11 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { collections } from "@/lib/mongodb/collections";
 import { ensureSeeded } from "@/lib/seed/ensure-seeded";
 import { ObjectId } from "mongodb";
-import { requireSession } from "@/lib/security/require-session";
+import { resolveOwnerScope } from "@/lib/security/require-session";
 
 export async function GET(req: NextRequest) {
-  const auth = await requireSession();
-  if (!auth.ok) return auth.response;
+  const scope = await resolveOwnerScope(req);
+  if (!scope.ok) return scope.response;
   await ensureSeeded();
   const { searchParams } = new URL(req.url);
   const propertyId = searchParams.get("propertyId");
@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
   const from = searchParams.get("from");
   const to = searchParams.get("to");
 
-  const filter: Record<string, any> = {};
+  const filter: Record<string, any> = { ownerId: new ObjectId(scope.ownerId) };
   if (propertyId) filter.propertyId = new ObjectId(propertyId);
   if (status) filter.status = status;
   if (from || to) {

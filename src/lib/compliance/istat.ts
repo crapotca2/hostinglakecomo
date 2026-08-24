@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
 import type { BookingDoc } from "@/types/database";
 
@@ -10,13 +11,16 @@ export interface IstatRow {
 
 export async function generateIstatExport(
   month: number,
-  year: number
+  year: number,
+  ownerId: string
 ): Promise<{ rows: IstatRow[]; csv: string }> {
   const bookingsCol = await collections.bookings();
   const start = new Date(year, month - 1, 1);
   const end = new Date(year, month, 0, 23, 59, 59);
 
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
+  const allBookings = (await bookingsCol
+    .find({ ownerId: new ObjectId(ownerId) })
+    .toArray()) as BookingDoc[];
   const bookings = allBookings.filter(
     (b) => b.status !== "cancelled" && b.checkIn <= end && b.checkOut >= start
   );

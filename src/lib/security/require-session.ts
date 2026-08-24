@@ -62,13 +62,17 @@ export async function resolveOwnerScope(req: NextRequest): Promise<OwnerScope> {
       };
     }
   } else {
-    // admin (o altri ruoli): deve selezionare esplicitamente un owner.
-    ownerId = new URL(req.url).searchParams.get("ownerId");
+    // admin (o altri ruoli): l'owner selezionato arriva da ?ownerId oppure dal
+    // cookie hc_owner_scope impostato dal selettore nell'header.
+    ownerId =
+      new URL(req.url).searchParams.get("ownerId") ||
+      req.cookies.get("hc_owner_scope")?.value ||
+      null;
     if (!ownerId) {
       return {
         ok: false,
         response: NextResponse.json(
-          { error: "admin: specifica ?ownerId=<id>" },
+          { error: "admin: seleziona un proprietario" },
           { status: 400 },
         ),
       };

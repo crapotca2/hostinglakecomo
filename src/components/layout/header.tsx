@@ -10,6 +10,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { LanguageToggle } from "@/components/public/language-toggle";
+import { OwnerSwitcher } from "@/components/owner-switcher";
 
 export function Header() {
   const t = useTranslations("dashboard.header");
@@ -17,13 +18,16 @@ export function Header() {
   return (
     <TooltipProvider>
       <header className="sticky top-0 z-40 h-20 glass border-b border-border/40 flex items-center justify-between px-6">
-        <div className="flex items-center gap-2.5 bg-background/80 rounded-xl px-3.5 py-2 border border-border/60 w-80 hover:border-border transition-colors">
-          <Search className="h-4 w-4 text-muted-foreground/60" />
-          <input
-            type="text"
-            placeholder={t("searchPlaceholder")}
-            className="text-sm bg-transparent border-none outline-none flex-1 placeholder:text-muted-foreground/40"
-          />
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5 bg-background/80 rounded-xl px-3.5 py-2 border border-border/60 w-64 hover:border-border transition-colors">
+            <Search className="h-4 w-4 text-muted-foreground/60" />
+            <input
+              type="text"
+              placeholder={t("searchPlaceholder")}
+              className="text-sm bg-transparent border-none outline-none flex-1 placeholder:text-muted-foreground/40"
+            />
+          </div>
+          <OwnerSwitcher />
         </div>
 
         <div className="flex items-center gap-2">

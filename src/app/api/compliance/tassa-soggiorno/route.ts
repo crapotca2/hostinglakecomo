@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { generateTouristTaxReport } from "@/lib/compliance/tassa-soggiorno";
 import { ensureSeeded } from "@/lib/seed/ensure-seeded";
-import { requireSession } from "@/lib/security/require-session";
+import { resolveOwnerScope } from "@/lib/security/require-session";
 
 export async function GET(req: NextRequest) {
-  const auth = await requireSession();
-  if (!auth.ok) return auth.response;
+  const scope = await resolveOwnerScope(req);
+  if (!scope.ok) return scope.response;
   await ensureSeeded();
   const { searchParams } = new URL(req.url);
   const fromParam = searchParams.get("from");
@@ -17,6 +17,6 @@ export async function GET(req: NextRequest) {
     : new Date(now.getFullYear(), Math.floor(now.getMonth() / 3) * 3, 1);
   const to = toParam ? new Date(toParam) : now;
 
-  const { rows, totalOwed } = await generateTouristTaxReport(from, to);
+  const { rows, totalOwed } = await generateTouristTaxReport(from, to, scope.ownerId);
   return NextResponse.json({ from, to, rows, totalOwed });
 }

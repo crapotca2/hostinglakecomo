@@ -1,6 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import { useOwnerScope } from "@/components/owner-scope";
 
 export interface MonthlyPayout {
   period: string;
@@ -16,15 +17,12 @@ export interface MonthlyPayout {
   status: "paid" | "pending";
 }
 
-export function useStatements(
-  year?: number,
-  ownerId?: string | null,
-  enabled = true,
-) {
+export function useStatements(year?: number) {
   const yr = year ?? new Date().getFullYear();
+  const { ownerId, isAdmin } = useOwnerScope();
   return useQuery({
-    queryKey: ["statements", yr, ownerId ?? null],
-    enabled,
+    queryKey: ["statements", yr, ownerId],
+    enabled: !(isAdmin && !ownerId),
     queryFn: async () => {
       const qs = new URLSearchParams({ year: String(yr) });
       if (ownerId) qs.set("ownerId", ownerId);

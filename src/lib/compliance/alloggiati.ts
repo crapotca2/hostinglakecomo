@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
 import type { BookingDoc } from "@/types/database";
 
@@ -21,10 +22,13 @@ export interface AlloggiatiRecord {
 
 export async function generateAlloggiatiExport(
   from: Date,
-  to: Date
+  to: Date,
+  ownerId: string
 ): Promise<{ content: string; records: AlloggiatiRecord[] }> {
   const bookingsCol = await collections.bookings();
-  const allBookings = (await bookingsCol.find({}).toArray()) as BookingDoc[];
+  const allBookings = (await bookingsCol
+    .find({ ownerId: new ObjectId(ownerId) })
+    .toArray()) as BookingDoc[];
   const bookings = allBookings.filter(
     (b) =>
       b.status !== "cancelled" &&

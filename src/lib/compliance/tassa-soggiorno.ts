@@ -14,12 +14,15 @@ export interface TaxRow {
 
 export async function generateTouristTaxReport(
   from: Date,
-  to: Date
+  to: Date,
+  ownerId: string
 ): Promise<{ rows: TaxRow[]; totalOwed: number }> {
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();
 
-  const properties = (await propsCol.find({}).toArray()) as PropertyDoc[];
+  const properties = (await propsCol
+    .find({ ownerId: new ObjectId(ownerId) })
+    .toArray()) as PropertyDoc[];
   const rows: TaxRow[] = [];
   let totalOwed = 0;
 

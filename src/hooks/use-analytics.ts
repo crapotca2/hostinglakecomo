@@ -1,6 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import { useOwnerScope } from "@/components/owner-scope";
 
 export interface AnalyticsData {
   year: number;
@@ -17,10 +18,14 @@ export interface AnalyticsData {
 
 export function useAnalytics(year?: number) {
   const yr = year ?? new Date().getFullYear();
+  const { ownerId, isAdmin } = useOwnerScope();
   return useQuery({
-    queryKey: ["analytics", yr],
+    queryKey: ["analytics", yr, ownerId],
+    enabled: !(isAdmin && !ownerId),
     queryFn: async () => {
-      const res = await fetch(`/api/reports/analytics?year=${yr}`);
+      const qs = new URLSearchParams({ year: String(yr) });
+      if (ownerId) qs.set("ownerId", ownerId);
+      const res = await fetch(`/api/reports/analytics?${qs.toString()}`);
       if (!res.ok) throw new Error("Failed to fetch analytics");
       return (await res.json()) as AnalyticsData;
     },
