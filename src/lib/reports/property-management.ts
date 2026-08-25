@@ -1,6 +1,25 @@
 import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
 import type { BookingDoc, PropertyDoc } from "@/types/database";
+import { breakdownForBooking, feeRateForProperty } from "./fee-model";
+
+async function loadProps(ownerId: string): Promise<{
+  propMap: Map<string, string>;
+  rateMap: Map<string, number>;
+}> {
+  const propsCol = await collections.properties();
+  const props = (await propsCol
+    .find({ ownerId: new ObjectId(ownerId) })
+    .toArray()) as PropertyDoc[];
+  return {
+    propMap: new Map(props.map((p) => [p._id!.toString(), p.name])),
+    rateMap: new Map(props.map((p) => [p._id!.toString(), feeRateForProperty(p)])),
+  };
+}
+
+const rateOfFactory =
+  (rateMap: Map<string, number>) => (b: BookingDoc) =>
+    rateMap.get(b.propertyId.toString()) ?? 0.1;
 
 export interface CommissionSummaryRow {
   source: string;
@@ -12,10 +31,10 @@ export interface CommissionSummaryRow {
   ownerPayout: number;
 }
 
-const AIRBIBBY_RATE = 0.10;
-
 export async function getCommissionSummary(from: Date, to: Date, ownerId: string): Promise<CommissionSummaryRow[]> {
   const bookingsCol = await collections.bookings();
+  const { rateMap } = await loadProps(ownerId);
+  const rateOf = rateOfFactory(rateMap);
   const all = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
   const bookings = all.filter((b) => b.status !== "cancelled" && b.checkIn >= from && b.checkIn <= to);
 
@@ -28,18 +47,19 @@ export async function getCommissionSummary(from: Date, to: Date, ownerId: string
 
   const rows: CommissionSummaryRow[] = [];
   for (const [source, list] of Array.from(bySource.entries())) {
-    const grossRevenue = list.reduce((s, b) => s + (b.pricing?.totalAmount || 0), 0);
-    const otaCommission = list.reduce((s, b) => s + (b.pricing?.commissionAmount || 0), 0);
-    const airbibbyCommission = grossRevenue * AIRBIBBY_RATE;
-    const ownerPayout = list.reduce((s, b) => s + (b.pricing?.ownerPayout || 0), 0);
+    let gross = 0, ota = 0, fee = 0, net = 0;
+    for (const b of list) {
+      const d = breakdownForBooking(b, rateOf(b));
+      gross += d.totalRevenue; ota += d.otaCommission; fee += d.managementFee; net += d.netPayout;
+    }
     rows.push({
       source,
       bookings: list.length,
-      grossRevenue: Math.round(grossRevenue),
-      otaCommission: Math.round(otaCommission),
-      airbibbyCommission: Math.round(airbibbyCommission),
-      totalCommission: Math.round(otaCommission + airbibbyCommission),
-      ownerPayout: Math.round(ownerPayout),
+      grossRevenue: Math.round(gross),
+      otaCommission: Math.round(ota),
+      airbibbyCommission: Math.round(fee),
+      totalCommission: Math.round(ota + fee),
+      ownerPayout: Math.round(net),
     });
   }
   return rows.sort((a, b) => b.grossRevenue - a.grossRevenue);
@@ -61,15 +81,14 @@ export interface CommissionDetailRow {
 
 export async function getCommissionDetail(from: Date, to: Date, ownerId: string): Promise<CommissionDetailRow[]> {
   const bookingsCol = await collections.bookings();
-  const propsCol = await collections.properties();
+  const { propMap, rateMap } = await loadProps(ownerId);
+  const rateOf = rateOfFactory(rateMap);
   const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
-  const allProps = (await propsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as PropertyDoc[];
-  const propMap = new Map(allProps.map((p) => [p._id!.toString(), p.name]));
 
   return allBookings
     .filter((b) => b.status !== "cancelled" && b.checkIn >= from && b.checkIn <= to)
     .map((b) => {
-      const gross = b.pricing?.totalAmount || 0;
+      const d = breakdownForBooking(b, rateOf(b));
       return {
         bookingId: b._id!.toString(),
         checkIn: b.checkIn.toISOString().slice(0, 10),
@@ -77,11 +96,11 @@ export async function getCommissionDetail(from: Date, to: Date, ownerId: string)
         guestName: b.guestInfo.name,
         source: b.source,
         nights: b.nights,
-        grossRevenue: Math.round(gross),
+        grossRevenue: Math.round(d.totalRevenue),
         otaCommissionRate: Math.round((b.pricing?.commissionRate || 0) * 1000) / 10,
-        otaCommission: Math.round(b.pricing?.commissionAmount || 0),
-        airbibbyCommission: Math.round(gross * AIRBIBBY_RATE),
-        ownerPayout: Math.round(b.pricing?.ownerPayout || 0),
+        otaCommission: Math.round(d.otaCommission),
+        airbibbyCommission: Math.round(d.managementFee),
+        ownerPayout: Math.round(d.netPayout),
       };
     })
     .sort((a, b) => b.checkIn.localeCompare(a.checkIn));
@@ -92,6 +111,7 @@ export interface OwnerRemittanceRow {
   bookings: number;
   grossRevenue: number;
   otaCommissions: number;
+  cedolare: number;
   airbibbyCommission: number;
   operatingExpenses: number;
   touristTax: number;
@@ -100,35 +120,35 @@ export interface OwnerRemittanceRow {
 
 export async function getOwnerRemittanceSummary(year: number, ownerId: string): Promise<OwnerRemittanceRow[]> {
   const bookingsCol = await collections.bookings();
+  const { rateMap } = await loadProps(ownerId);
+  const rateOf = rateOfFactory(rateMap);
   const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
   const bookings = allBookings.filter(
     (b) => b.status !== "cancelled" && b.checkIn.getFullYear() === year
   );
 
-  const months = Array.from({ length: 12 }, (_, i) => ({
-    month: i,
-    bookings: [] as BookingDoc[],
-  }));
+  const months = Array.from({ length: 12 }, (_, i) => ({ month: i, bookings: [] as BookingDoc[] }));
   for (const b of bookings) months[b.checkIn.getMonth()].bookings.push(b);
 
   return months
     .filter((m) => m.bookings.length > 0)
     .map((m) => {
-      const gross = m.bookings.reduce((s, b) => s + (b.pricing?.totalAmount || 0), 0);
-      const ota = m.bookings.reduce((s, b) => s + (b.pricing?.commissionAmount || 0), 0);
-      const ab = gross * AIRBIBBY_RATE;
-      const expenses = gross * 0.05;
-      const tax = m.bookings.reduce((s, b) => s + (b.pricing?.touristTax || 0), 0);
-      const netPayout = gross - ota - ab - expenses - tax;
+      let gross = 0, ota = 0, ced = 0, fee = 0, tax = 0, net = 0;
+      for (const b of m.bookings) {
+        const d = breakdownForBooking(b, rateOf(b));
+        gross += d.totalRevenue; ota += d.otaCommission; ced += d.cedolare;
+        fee += d.managementFee; tax += d.touristTax; net += d.netPayout;
+      }
       return {
         period: `${year}-${String(m.month + 1).padStart(2, "0")}`,
         bookings: m.bookings.length,
         grossRevenue: Math.round(gross),
         otaCommissions: Math.round(ota),
-        airbibbyCommission: Math.round(ab),
-        operatingExpenses: Math.round(expenses),
+        cedolare: Math.round(ced),
+        airbibbyCommission: Math.round(fee),
+        operatingExpenses: 0,
         touristTax: Math.round(tax * 100) / 100,
-        netPayout: Math.round(netPayout),
+        netPayout: Math.round(net),
       };
     });
 }
@@ -140,6 +160,7 @@ export interface OwnerRemittanceDetailRow {
   nights: number;
   grossRevenue: number;
   otaCommissions: number;
+  cedolare: number;
   airbibbyCommission: number;
   expenses: number;
   touristTax: number;
@@ -167,6 +188,7 @@ export async function getOwnerRemittanceDetail(from: Date, to: Date, ownerId: st
 
     for (const p of properties) {
       const pid = p._id!.toString();
+      const rate = feeRateForProperty(p);
       const bookings = allBookings.filter(
         (b) => b.propertyId.toString() === pid &&
                b.status !== "cancelled" &&
@@ -174,12 +196,12 @@ export async function getOwnerRemittanceDetail(from: Date, to: Date, ownerId: st
       );
       if (bookings.length === 0) continue;
 
-      const gross = bookings.reduce((s, b) => s + (b.pricing?.totalAmount || 0), 0);
-      const ota = bookings.reduce((s, b) => s + (b.pricing?.commissionAmount || 0), 0);
-      const ab = gross * AIRBIBBY_RATE;
-      const expenses = gross * 0.05;
-      const tax = bookings.reduce((s, b) => s + (b.pricing?.touristTax || 0), 0);
-      const nights = bookings.reduce((s, b) => s + b.nights, 0);
+      let gross = 0, ota = 0, ced = 0, fee = 0, tax = 0, net = 0, nights = 0;
+      for (const b of bookings) {
+        const d = breakdownForBooking(b, rate);
+        gross += d.totalRevenue; ota += d.otaCommission; ced += d.cedolare;
+        fee += d.managementFee; tax += d.touristTax; net += d.netPayout; nights += b.nights;
+      }
 
       rows.push({
         period,
@@ -188,10 +210,11 @@ export async function getOwnerRemittanceDetail(from: Date, to: Date, ownerId: st
         nights,
         grossRevenue: Math.round(gross),
         otaCommissions: Math.round(ota),
-        airbibbyCommission: Math.round(ab),
-        expenses: Math.round(expenses),
+        cedolare: Math.round(ced),
+        airbibbyCommission: Math.round(fee),
+        expenses: 0,
         touristTax: Math.round(tax * 100) / 100,
-        netPayout: Math.round(gross - ota - ab - expenses - tax),
+        netPayout: Math.round(net),
       });
     }
   }
@@ -209,7 +232,9 @@ export interface BookingRemittanceRow {
   source: string;
   grossRevenue: number;
   otaCommission: number;
+  cedolare: number;
   airbibbyCommission: number;
+  cleaning: number;
   expenses: number;
   touristTax: number;
   netPayout: number;
@@ -217,19 +242,14 @@ export interface BookingRemittanceRow {
 
 export async function getOwnerStatementBookings(from: Date, to: Date, ownerId: string): Promise<BookingRemittanceRow[]> {
   const bookingsCol = await collections.bookings();
-  const propsCol = await collections.properties();
-  const allProps = (await propsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as PropertyDoc[];
-  const propMap = new Map(allProps.map((p) => [p._id!.toString(), p.name]));
+  const { propMap, rateMap } = await loadProps(ownerId);
+  const rateOf = rateOfFactory(rateMap);
   const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
 
   return allBookings
     .filter((b) => b.status !== "cancelled" && b.checkIn >= from && b.checkIn <= to)
     .map((b) => {
-      const gross = b.pricing?.totalAmount || 0;
-      const ota = b.pricing?.commissionAmount || 0;
-      const ab = gross * AIRBIBBY_RATE;
-      const expenses = gross * 0.05;
-      const tax = b.pricing?.touristTax || 0;
+      const d = breakdownForBooking(b, rateOf(b));
       return {
         period: `${b.checkIn.getFullYear()}-${String(b.checkIn.getMonth() + 1).padStart(2, "0")}`,
         bookingId: b._id!.toString(),
@@ -239,12 +259,14 @@ export async function getOwnerStatementBookings(from: Date, to: Date, ownerId: s
         checkOut: b.checkOut.toISOString().slice(0, 10),
         nights: b.nights,
         source: b.source,
-        grossRevenue: Math.round(gross),
-        otaCommission: Math.round(ota),
-        airbibbyCommission: Math.round(ab),
-        expenses: Math.round(expenses),
-        touristTax: Math.round(tax * 100) / 100,
-        netPayout: Math.round(gross - ota - ab - expenses - tax),
+        grossRevenue: Math.round(d.totalRevenue),
+        otaCommission: Math.round(d.otaCommission),
+        cedolare: Math.round(d.cedolare),
+        airbibbyCommission: Math.round(d.managementFee),
+        cleaning: Math.round(d.cleaning),
+        expenses: 0,
+        touristTax: Math.round(d.touristTax * 100) / 100,
+        netPayout: Math.round(d.netPayout),
       };
     })
     .sort((a, b) => b.checkIn.localeCompare(a.checkIn));

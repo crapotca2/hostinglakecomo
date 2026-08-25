@@ -1165,7 +1165,12 @@
         "operatingExpenses": "Spese Operative",
         "expensesHint": "Pulizie + tassa soggiorno",
         "netPayoutYtd": "Net Payout YTD",
-        "netPayoutHint": "Il tuo guadagno netto"
+        "netPayoutHint": "Il tuo guadagno netto",
+        "revenueHint": "Alloggio + notte extra",
+        "otaCommissions": "Commissioni OTA",
+        "hostComo": "Host Como",
+        "cedolare": "Cedolare 21%",
+        "cedolareHint": "Anticipo d'imposta trattenuto dall'OTA"
       },
       "loading": "Caricamento...",
       "empty": "Nessun rendiconto disponibile",
@@ -1177,7 +1182,10 @@
         "commissions": "Commissioni",
         "expenses": "Spese",
         "net": "Netto",
-        "status": "Stato"
+        "status": "Stato",
+        "ota": "Comm. OTA",
+        "cedolare": "Cedolare",
+        "hostComo": "Host Como"
       },
       "status": {
         "paid": "Pagato",
@@ -1200,7 +1208,20 @@
         "month": "Mese",
         "year": "Anno",
         "download": "Scarica CSV",
-        "months": ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"]
+        "months": [
+          "Gen",
+          "Feb",
+          "Mar",
+          "Apr",
+          "Mag",
+          "Giu",
+          "Lug",
+          "Ago",
+          "Set",
+          "Ott",
+          "Nov",
+          "Dic"
+        ]
       },
       "tax": {
         "title": "Tassa di soggiorno",
@@ -1234,10 +1255,22 @@
       "notifications": {
         "title": "Notifiche",
         "items": [
-          { "label": "Nuova prenotazione", "desc": "Ricevi una notifica per ogni nuova prenotazione" },
-          { "label": "Check-in ospiti", "desc": "Notifica al check-in degli ospiti" },
-          { "label": "Report mensile", "desc": "Ricevi il rendiconto mensile via email" },
-          { "label": "Manutenzione urgente", "desc": "Alert per richieste di manutenzione urgente" }
+          {
+            "label": "Nuova prenotazione",
+            "desc": "Ricevi una notifica per ogni nuova prenotazione"
+          },
+          {
+            "label": "Check-in ospiti",
+            "desc": "Notifica al check-in degli ospiti"
+          },
+          {
+            "label": "Report mensile",
+            "desc": "Ricevi il rendiconto mensile via email"
+          },
+          {
+            "label": "Manutenzione urgente",
+            "desc": "Alert per richieste di manutenzione urgente"
+          }
         ]
       },
       "security": {

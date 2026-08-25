@@ -96,6 +96,8 @@ export interface PropertyDoc extends BaseDoc {
   beds24RoomId?: string;
   touristTaxRate?: number;
   maxTouristTaxNights?: number;
+  /** Aliquota commissione Host Como sui ricavi alloggio (varia per immobile, es. 0.15). */
+  managementFeeRate?: number;
 }
 
 // ── BOOKINGS ──
@@ -141,6 +143,16 @@ export interface BookingDoc extends BaseDoc {
     commissionAmount: number;
     ownerPayout: number;
     touristTax: number;
+    /** Ricavi alloggio (ex pulizie). Se assente = totalAmount − cleaningFee. */
+    roomRevenue?: number;
+    /** Cedolare secca 21% trattenuta dall'OTA. Se assente = 21% × totalAmount. */
+    cedolare?: number;
+    /** Notte extra diretta (fuori OTA). */
+    extraNight?: number;
+    /** Parcheggio incassato (partita 50/50). */
+    parking?: number;
+    /** Aliquota commissione Host Como denormalizzata sulla prenotazione. */
+    managementFeeRate?: number;
   };
   stripePaymentId?: string;
   beds24Id?: string;

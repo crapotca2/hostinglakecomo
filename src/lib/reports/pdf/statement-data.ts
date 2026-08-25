@@ -13,7 +13,9 @@ export interface StatementTotals {
   nights: number;
   grossRevenue: number;
   otaCommission: number;
+  cedolare: number;
   airbibbyCommission: number;
+  cleaning: number;
   expenses: number;
   touristTax: number;
   netPayout: number;
@@ -71,7 +73,9 @@ export async function getStatementData(
       nights: acc.nights + r.nights,
       grossRevenue: acc.grossRevenue + r.grossRevenue,
       otaCommission: acc.otaCommission + r.otaCommission,
+      cedolare: acc.cedolare + r.cedolare,
       airbibbyCommission: acc.airbibbyCommission + r.airbibbyCommission,
+      cleaning: acc.cleaning + r.cleaning,
       expenses: acc.expenses + r.expenses,
       touristTax: Math.round((acc.touristTax + r.touristTax) * 100) / 100,
       netPayout: acc.netPayout + r.netPayout,
@@ -81,7 +85,9 @@ export async function getStatementData(
       nights: 0,
       grossRevenue: 0,
       otaCommission: 0,
+      cedolare: 0,
       airbibbyCommission: 0,
+      cleaning: 0,
       expenses: 0,
       touristTax: 0,
       netPayout: 0,

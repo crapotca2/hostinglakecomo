@@ -1,16 +1,27 @@
 import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
-import type { BookingDoc } from "@/types/database";
+import type { BookingDoc, PropertyDoc } from "@/types/database";
+import { aggregateBreakdown, feeRateForProperty } from "./fee-model";
 
 export interface MonthlyPayout {
   period: string;
   label: string;
   propertiesCount: number;
+  /** Ricavi alloggio + notte extra (base del netto). */
   grossRevenue: number;
+  roomRevenue: number;
   otaCommissions: number;
+  /** Cedolare secca 21% trattenuta dall'OTA. */
+  cedolare: number;
+  /** Commissione Host Como (aliquota × ricavi alloggio). */
   airbibbyCommission: number;
+  /** Deprecato: spese operative (ora 0, pulizie sono partita di giro). */
   expenses: number;
+  /** Pulizie (partita di giro, fuori dal netto). */
+  cleaning: number;
   touristTax: number;
+  /** Quota parcheggio del proprietario (50%). */
+  parkingOwner: number;
   netPayout: number;
   bookingCount: number;
   status: "paid" | "pending";
@@ -21,11 +32,22 @@ const MONTH_NAMES = [
   "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre",
 ];
 
+async function loadRateMap(ownerId: string): Promise<Map<string, number>> {
+  const propsCol = await collections.properties();
+  const props = (await propsCol
+    .find({ ownerId: new ObjectId(ownerId) })
+    .toArray()) as PropertyDoc[];
+  return new Map(props.map((p) => [p._id!.toString(), feeRateForProperty(p)]));
+}
+
 export async function getMonthlyPayouts(
   year: number,
   ownerId: string,
 ): Promise<MonthlyPayout[]> {
   const bookingsCol = await collections.bookings();
+  const rateMap = await loadRateMap(ownerId);
+  const rateOf = (b: BookingDoc) => rateMap.get(b.propertyId.toString()) ?? 0.1;
+
   const bookings = (
     (await bookingsCol
       .find({ ownerId: new ObjectId(ownerId) })
@@ -43,26 +65,24 @@ export async function getMonthlyPayouts(
     const monthBookings = bookings.filter((b: BookingDoc) => b.checkIn.getMonth() === i);
     if (monthBookings.length === 0 && (year !== currentYear || i > currentMonth)) continue;
 
-    const grossRevenue = monthBookings.reduce((s: number, b: BookingDoc) => s + (b.pricing?.totalAmount || 0), 0);
-    const otaCommissions = monthBookings.reduce((s: number, b: BookingDoc) => s + (b.pricing?.commissionAmount || 0), 0);
-    const airbibbyCommission = Math.round(grossRevenue * 0.1);
-    const expenses = Math.round(grossRevenue * 0.05);
-    const touristTax = monthBookings.reduce((s: number, b: BookingDoc) => s + (b.pricing?.touristTax || 0), 0);
-    const netPayout = grossRevenue - otaCommissions - airbibbyCommission - expenses - touristTax;
+    const agg = aggregateBreakdown(monthBookings, rateOf);
     const propsSet = new Set(monthBookings.map((b: BookingDoc) => b.propertyId.toString()));
-
     const isPast = year < currentYear || (year === currentYear && i < currentMonth);
 
     result.push({
       period: `${year}-${String(i + 1).padStart(2, "0")}`,
       label: `${MONTH_NAMES[i]} ${year}`,
       propertiesCount: propsSet.size,
-      grossRevenue,
-      otaCommissions,
-      airbibbyCommission,
-      expenses,
-      touristTax,
-      netPayout,
+      grossRevenue: agg.totalRevenue,
+      roomRevenue: agg.roomRevenue,
+      otaCommissions: agg.otaCommission,
+      cedolare: agg.cedolare,
+      airbibbyCommission: agg.managementFee,
+      expenses: 0,
+      cleaning: agg.cleaning,
+      touristTax: agg.touristTax,
+      parkingOwner: agg.parkingOwner,
+      netPayout: agg.netPayout,
       bookingCount: monthBookings.length,
       status: isPast ? "paid" : "pending",
     });

@@ -32,8 +32,9 @@ export default function StatementsPage() {
 
   const payouts = data?.payouts || [];
   const ytdGross = payouts.reduce((s, p) => s + p.grossRevenue, 0);
-  const ytdCommissions = payouts.reduce((s, p) => s + p.otaCommissions + p.airbibbyCommission, 0);
-  const ytdExpenses = payouts.reduce((s, p) => s + p.expenses + p.touristTax, 0);
+  const ytdOta = payouts.reduce((s, p) => s + p.otaCommissions, 0);
+  const ytdCedolare = payouts.reduce((s, p) => s + (p.cedolare || 0), 0);
+  const ytdHostComo = payouts.reduce((s, p) => s + p.airbibbyCommission, 0);
   const ytdNet = payouts.reduce((s, p) => s + p.netPayout, 0);
 
   const pdfHref = (period: string) =>
@@ -63,16 +64,17 @@ export default function StatementsPage() {
             <div className="bg-white rounded-2xl p-5 border border-border/50">
               <div className="text-xs text-muted-foreground mb-1">{t("kpis.ytdGross")}</div>
               <div className="text-2xl font-bold">{isLoading ? "—" : formatEuro(ytdGross, locale)}</div>
+              <div className="text-xs text-muted-foreground mt-1">{t("kpis.revenueHint")}</div>
             </div>
             <div className="bg-white rounded-2xl p-5 border border-border/50">
-              <div className="text-xs text-muted-foreground mb-1">{t("kpis.totalCommissions")}</div>
-              <div className="text-2xl font-bold">{isLoading ? "—" : formatEuro(ytdCommissions, locale)}</div>
-              <div className="text-xs text-muted-foreground mt-1">{t("kpis.commissionsHint")}</div>
+              <div className="text-xs text-muted-foreground mb-1">{t("kpis.otaCommissions")}</div>
+              <div className="text-2xl font-bold">{isLoading ? "—" : formatEuro(ytdOta, locale)}</div>
+              <div className="text-xs text-muted-foreground mt-1">{t("kpis.hostComo")}: {isLoading ? "—" : formatEuro(ytdHostComo, locale)}</div>
             </div>
             <div className="bg-white rounded-2xl p-5 border border-border/50">
-              <div className="text-xs text-muted-foreground mb-1">{t("kpis.operatingExpenses")}</div>
-              <div className="text-2xl font-bold">{isLoading ? "—" : formatEuro(ytdExpenses, locale)}</div>
-              <div className="text-xs text-muted-foreground mt-1">{t("kpis.expensesHint")}</div>
+              <div className="text-xs text-muted-foreground mb-1">{t("kpis.cedolare")}</div>
+              <div className="text-2xl font-bold">{isLoading ? "—" : formatEuro(ytdCedolare, locale)}</div>
+              <div className="text-xs text-muted-foreground mt-1">{t("kpis.cedolareHint")}</div>
             </div>
             <div className="bg-white rounded-2xl p-5 border border-border/50">
               <div className="text-xs text-muted-foreground mb-1">{t("kpis.netPayoutYtd")}</div>
@@ -96,8 +98,9 @@ export default function StatementsPage() {
                       <th className="text-left text-xs font-semibold text-muted-foreground px-6 py-3.5">{t("headers.period")}</th>
                       <th className="text-center text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.bookings")}</th>
                       <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.gross")}</th>
-                      <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.commissions")}</th>
-                      <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.expenses")}</th>
+                      <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.ota")}</th>
+                      <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.cedolare")}</th>
+                      <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.hostComo")}</th>
                       <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.net")}</th>
                       <th className="text-center text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.status")}</th>
                       <th className="px-4 py-3.5"></th>
@@ -121,10 +124,13 @@ export default function StatementsPage() {
                           <td className="px-4 py-4 text-sm text-center">{s.bookingCount}</td>
                           <td className="px-4 py-4 text-sm text-right font-medium tabular-nums">{formatEuro(s.grossRevenue, locale)}</td>
                           <td className="px-4 py-4 text-sm text-right text-muted-foreground tabular-nums">
-                            -{formatEuro(s.otaCommissions + s.airbibbyCommission, locale)}
+                            -{formatEuro(s.otaCommissions, locale)}
                           </td>
                           <td className="px-4 py-4 text-sm text-right text-muted-foreground tabular-nums">
-                            -{formatEuro(s.expenses + s.touristTax, locale)}
+                            -{formatEuro(s.cedolare || 0, locale)}
+                          </td>
+                          <td className="px-4 py-4 text-sm text-right text-muted-foreground tabular-nums">
+                            -{formatEuro(s.airbibbyCommission, locale)}
                           </td>
                           <td className="px-4 py-4 text-sm text-right font-bold text-primary tabular-nums">{formatEuro(s.netPayout, locale)}</td>
                           <td className="px-4 py-4 text-center">

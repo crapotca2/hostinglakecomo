@@ -8,10 +8,14 @@ export interface MonthlyPayout {
   label: string;
   propertiesCount: number;
   grossRevenue: number;
+  roomRevenue: number;
   otaCommissions: number;
+  cedolare: number;
   airbibbyCommission: number;
   expenses: number;
+  cleaning: number;
   touristTax: number;
+  parkingOwner: number;
   netPayout: number;
   bookingCount: number;
   status: "paid" | "pending";

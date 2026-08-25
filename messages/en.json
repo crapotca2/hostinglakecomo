@@ -1165,7 +1165,12 @@
         "operatingExpenses": "Operating Expenses",
         "expensesHint": "Cleaning + tourist tax",
         "netPayoutYtd": "Net Payout YTD",
-        "netPayoutHint": "Your net earnings"
+        "netPayoutHint": "Your net earnings",
+        "revenueHint": "Room + extra night",
+        "otaCommissions": "OTA commissions",
+        "hostComo": "Host Como",
+        "cedolare": "Flat tax 21%",
+        "cedolareHint": "Tax advance withheld by the OTA"
       },
       "loading": "Loading...",
       "empty": "No statements available",
@@ -1177,7 +1182,10 @@
         "commissions": "Commissions",
         "expenses": "Expenses",
         "net": "Net",
-        "status": "Status"
+        "status": "Status",
+        "ota": "OTA comm.",
+        "cedolare": "Flat tax",
+        "hostComo": "Host Como"
       },
       "status": {
         "paid": "Paid",
@@ -1200,7 +1208,20 @@
         "month": "Month",
         "year": "Year",
         "download": "Download CSV",
-        "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        "months": [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec"
+        ]
       },
       "tax": {
         "title": "Tourist tax",
@@ -1234,10 +1255,22 @@
       "notifications": {
         "title": "Notifications",
         "items": [
-          { "label": "New booking", "desc": "Receive a notification for every new booking" },
-          { "label": "Guest check-in", "desc": "Notification when guests check in" },
-          { "label": "Monthly report", "desc": "Receive the monthly statement by email" },
-          { "label": "Urgent maintenance", "desc": "Alerts for urgent maintenance requests" }
+          {
+            "label": "New booking",
+            "desc": "Receive a notification for every new booking"
+          },
+          {
+            "label": "Guest check-in",
+            "desc": "Notification when guests check in"
+          },
+          {
+            "label": "Monthly report",
+            "desc": "Receive the monthly statement by email"
+          },
+          {
+            "label": "Urgent maintenance",
+            "desc": "Alerts for urgent maintenance requests"
+          }
         ]
       },
       "security": {

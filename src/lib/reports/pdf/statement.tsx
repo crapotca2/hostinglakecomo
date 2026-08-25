@@ -148,8 +148,7 @@ function itDate(iso: string): string {
 
 function StatementDocument({ data }: { data: StatementData }) {
   const { owner, periodLabel, from, to, rows, totals, generatedAt } = data;
-  const totalCommission = totals.otaCommission + totals.airbibbyCommission;
-  const totalDeductions = totalCommission + totals.expenses + totals.touristTax;
+  const totalDeductions = totals.otaCommission + totals.cedolare + totals.airbibbyCommission;
 
   return (
     <Document
@@ -235,7 +234,7 @@ function StatementDocument({ data }: { data: StatementData }) {
         {/* Riepilogo economico */}
         <View style={styles.summaryBox}>
           <View style={styles.sumRow}>
-            <Text style={styles.sumLabel}>Ricavi lordi</Text>
+            <Text style={styles.sumLabel}>Ricavi (alloggio + notte extra)</Text>
             <Text style={styles.sumValue}>{euro(totals.grossRevenue)}</Text>
           </View>
           <View style={styles.sumRow}>
@@ -243,16 +242,12 @@ function StatementDocument({ data }: { data: StatementData }) {
             <Text style={[styles.sumValue, styles.sumNegative]}>− {euro(totals.otaCommission)}</Text>
           </View>
           <View style={styles.sumRow}>
-            <Text style={styles.sumLabel}>Commissione gestione Host Como (10%)</Text>
+            <Text style={styles.sumLabel}>Cedolare secca 21% (trattenuta OTA)</Text>
+            <Text style={[styles.sumValue, styles.sumNegative]}>− {euro(totals.cedolare)}</Text>
+          </View>
+          <View style={styles.sumRow}>
+            <Text style={styles.sumLabel}>Commissione gestione Host Como</Text>
             <Text style={[styles.sumValue, styles.sumNegative]}>− {euro(totals.airbibbyCommission)}</Text>
-          </View>
-          <View style={styles.sumRow}>
-            <Text style={styles.sumLabel}>Spese operative (5%)</Text>
-            <Text style={[styles.sumValue, styles.sumNegative]}>− {euro(totals.expenses)}</Text>
-          </View>
-          <View style={styles.sumRow}>
-            <Text style={styles.sumLabel}>Imposta di soggiorno</Text>
-            <Text style={[styles.sumValue, styles.sumNegative]}>− {euro(totals.touristTax)}</Text>
           </View>
           <View style={styles.netRow}>
             <Text style={styles.netLabel}>Netto spettante al proprietario</Text>
@@ -261,11 +256,12 @@ function StatementDocument({ data }: { data: StatementData }) {
         </View>
 
         <Text style={styles.methodology}>
-          Metodologia: il netto proprietario è calcolato come Ricavi lordi − Commissioni portali (OTA)
-          − Commissione di gestione Host Como (10% sul lordo) − Spese operative (5% sul lordo) − Imposta
-          di soggiorno. Totale detrazioni: {euro(totalDeductions)}. Gli importi si riferiscono alle
-          prenotazioni con data di check-in compresa nel periodo di competenza. Documento generato
-          automaticamente; per chiarimenti contattare il team Host Como.
+          Metodologia: il netto proprietario è calcolato come Ricavi (alloggio + notte extra) −
+          Commissioni portali (OTA) − Cedolare secca 21% (anticipo d&apos;imposta trattenuto dall&apos;OTA) −
+          Commissione di gestione Host Como (sui soli ricavi alloggio). Totale detrazioni: {euro(totalDeductions)}.
+          Pulizie ({euro(totals.cleaning)}) e imposta di soggiorno ({euro(totals.touristTax)}) sono partite di
+          giro (incassate e girate a fornitori/comune), escluse dal netto. Gli importi si riferiscono alle
+          prenotazioni con data di check-in nel periodo di competenza. Documento generato automaticamente.
         </Text>
 
         <View style={styles.footer} fixed>

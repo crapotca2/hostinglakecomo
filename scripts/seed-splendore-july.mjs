@@ -23,23 +23,32 @@ const now = new Date();
 
 const r2 = (n) => Math.round(n * 100) / 100;
 
+// Aliquota commissione Host Como per questo immobile (varia per casa; Splendore 15%).
+const FEE_RATE = 0.15;
+const CLEANING = 80;
+
 // Dati per-prenotazione dal rendiconto ufficiale.
-//  gross  = lordo OTA (alloggio + pulizia, come esposto dal canale)
-//  ota    = commissione OTA reale (Airbnb: host fee; Booking: 15% + 1,5% bancaria)
-//  tax    = tassa di soggiorno (3 € × ospiti × notti)
-//  net    = "netto a banca" reale (già al netto di commissioni OTA + cedolare 21%)
-//  status = checked_out | cancelled
+//  gross    = lordo OTA (alloggio + pulizia, come esposto dal canale)
+//  ota      = commissione OTA reale (Airbnb: host fee; Booking: 15% + 1,5% bancaria)
+//  cedolare = ritenuta 21% trattenuta dall'OTA (valori esatti dal rendiconto)
+//  tax      = tassa di soggiorno (3 € × ospiti × notti)
+//  parking  = parcheggio incassato (10 €/notte; partita 50/50)
+//  extra    = notte extra diretta (fuori OTA)
+//  status   = checked_out | cancelled
 const D = [
-  { name: "Zack Meyers",        source: "airbnb",  ci: "2026-07-08", co: "2026-07-15", nights: 7, guests: 3, gross: 2029.40, ota: 74.27,  tax: 63, net: 1591.96, status: "checked_out" },
-  { name: "Alexandre Schein",   source: "airbnb",  ci: "2026-07-15", co: "2026-07-18", nights: 3, guests: 4, gross: 1033.14, ota: 38.06,  tax: 36, net: 819.54,  status: "checked_out" },
-  { name: "Grzegorz Klimaszyk", source: "booking", ci: "2026-07-18", co: "2026-07-22", nights: 4, guests: 4, gross: 1264.00, ota: 208.56, tax: 48, net: 790.00,  status: "checked_out" },
-  { name: "Brian Søgaard",      source: "airbnb",  ci: "2026-07-23", co: "2026-07-29", nights: 6, guests: 2, gross: 1986.80, ota: 73.20,  tax: 72, net: 78.80,   status: "cancelled" },
-  { name: "Frédéric Poitiers",  source: "booking", ci: "2026-07-27", co: "2026-07-30", nights: 3, guests: 5, gross: 1190.00, ota: 196.35, tax: 45, net: 743.75,  status: "checked_out" },
-  { name: "Jean Claude Varin",  source: "booking", ci: "2026-07-30", co: "2026-08-03", nights: 4, guests: 4, gross: 1160.00, ota: 191.40, tax: 48, net: 725.00,  status: "checked_out" },
-  { name: "Jacek Rączewski",    source: "booking", ci: "2026-08-03", co: "2026-08-06", nights: 3, guests: 4, gross: 1064.00, ota: 175.56, tax: 36, net: 665.00,  status: "checked_out" },
+  { name: "Zack Meyers",        source: "airbnb",  ci: "2026-07-08", co: "2026-07-15", nights: 7, guests: 3, gross: 2029.40, ota: 74.27,  cedolare: 426.17, tax: 63, parking: 70, extra: 0,   status: "checked_out" },
+  { name: "Alexandre Schein",   source: "airbnb",  ci: "2026-07-15", co: "2026-07-18", nights: 3, guests: 4, gross: 1033.14, ota: 38.06,  cedolare: 218.40, tax: 36, parking: 0,  extra: 0,   status: "checked_out" },
+  { name: "Grzegorz Klimaszyk", source: "booking", ci: "2026-07-18", co: "2026-07-22", nights: 4, guests: 4, gross: 1264.00, ota: 208.56, cedolare: 265.44, tax: 48, parking: 40, extra: 0,   status: "checked_out" },
+  { name: "Brian Søgaard",      source: "airbnb",  ci: "2026-07-23", co: "2026-07-29", nights: 6, guests: 2, gross: 1986.80, ota: 73.20,  cedolare: 420.00, tax: 72, parking: 0,  extra: 0,   status: "cancelled" },
+  { name: "Frédéric Poitiers",  source: "booking", ci: "2026-07-27", co: "2026-07-30", nights: 3, guests: 5, gross: 1190.00, ota: 196.35, cedolare: 249.90, tax: 45, parking: 0,  extra: 0,   status: "checked_out" },
+  { name: "Jean Claude Varin",  source: "booking", ci: "2026-07-30", co: "2026-08-03", nights: 4, guests: 4, gross: 1160.00, ota: 191.40, cedolare: 243.60, tax: 48, parking: 40, extra: 250, status: "checked_out" },
+  { name: "Jacek Rączewski",    source: "booking", ci: "2026-08-03", co: "2026-08-06", nights: 3, guests: 4, gross: 1064.00, ota: 175.56, cedolare: 223.44, tax: 36, parking: 0,  extra: 0,   status: "checked_out" },
 ];
 
 function bookingDoc(d) {
+  const room = r2(d.gross - CLEANING); // ricavi alloggio (ex pulizie)
+  const fee = r2(room * FEE_RATE); // commissione Host Como sui ricavi alloggio
+  const net = r2(room + d.extra - d.ota - d.cedolare - fee); // netto proprietario
   return {
     _id: new ObjectId(),
     propertyId,
@@ -52,12 +61,17 @@ function bookingDoc(d) {
     source: d.source,
     guestInfo: { name: d.name, email: "" },
     pricing: {
-      nightlyRate: r2((d.gross - 80) / d.nights), // alloggio ex-pulizia / notti
-      cleaningFee: 80,
+      nightlyRate: r2(room / d.nights),
+      cleaningFee: CLEANING,
       totalAmount: d.gross,
+      roomRevenue: room,
       commissionRate: Math.round((d.ota / d.gross) * 10000) / 10000,
       commissionAmount: d.ota,
-      ownerPayout: d.net, // netto a banca reale (rif. per PDF; la dashboard ricalcola)
+      cedolare: d.cedolare,
+      extraNight: d.extra,
+      parking: d.parking,
+      managementFeeRate: FEE_RATE,
+      ownerPayout: net,
       touristTax: d.tax,
     },
     createdAt: now,
@@ -97,6 +111,7 @@ async function main() {
           beds24PropertyId: "345437",
           beds24RoomId: "713401",
           touristTaxRate: 3,
+          managementFeeRate: FEE_RATE,
           updatedAt: now,
         },
         $setOnInsert: { createdAt: now },
