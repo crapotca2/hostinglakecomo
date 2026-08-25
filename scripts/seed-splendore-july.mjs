@@ -1,7 +1,9 @@
-// Seed DEMO — carica lo storico di luglio 2026 di Alessandro Splendore
-// (rendiconto Aqua Vista) nel DB del portale, così la dashboard owner mostra
-// dati reali. Dati esatti dal rendiconto Excel (periodo fino al 25/07):
-// Zack, Alexandre, Grzegorz. Idempotente (rimpiazza i booking di questo owner).
+// Seed REALE — carica il rendiconto di luglio 2026 di Alessandro Splendore
+// (Aqua Vista di Splendore, Via Spluga 44 – Argegno, room Beds24 713401) nel DB
+// del portale, così la dashboard owner mostra i dati veri. Numeri esatti dal
+// rendiconto ufficiale (RENDICONTO-luglio-2026.md / OSPITI-aqua-vista-splendore.md):
+// 7 prenotazioni (3 Airbnb + 4 Booking), di cui Brian cancellato/rimborsato.
+// Idempotente (rimpiazza i booking di questo owner).
 //
 // USO: MONGODB_URI="mongodb+srv://…" MONGODB_DB=air_bibby \
 //        node scripts/seed-splendore-july.mjs
@@ -19,19 +21,25 @@ const ownerId = new ObjectId("000000000000000000000010");
 const propertyId = new ObjectId("000000000000000000000011");
 const now = new Date();
 
-// Dati per-prenotazione dal rendiconto (alloggio, commissione OTA, tassa sogg.).
-const D = [
-  { name: "Zack Meyers", source: "airbnb", ci: "2026-07-08", co: "2026-07-15", nights: 7, guests: 3, gross: 1949.4, ota: 74.27, tax: 63 },
-  { name: "Alexandre Schein", source: "airbnb", ci: "2026-07-15", co: "2026-07-18", nights: 3, guests: 4, gross: 960.0, ota: 38.06, tax: 36 },
-  { name: "Grzegorz Klimaszyk", source: "booking", ci: "2026-07-18", co: "2026-07-22", nights: 4, guests: 4, gross: 1184.0, ota: 208.56, tax: 48 },
-];
-
 const r2 = (n) => Math.round(n * 100) / 100;
 
+// Dati per-prenotazione dal rendiconto ufficiale.
+//  gross  = lordo OTA (alloggio + pulizia, come esposto dal canale)
+//  ota    = commissione OTA reale (Airbnb: host fee; Booking: 15% + 1,5% bancaria)
+//  tax    = tassa di soggiorno (3 € × ospiti × notti)
+//  net    = "netto a banca" reale (già al netto di commissioni OTA + cedolare 21%)
+//  status = checked_out | cancelled
+const D = [
+  { name: "Zack Meyers",        source: "airbnb",  ci: "2026-07-08", co: "2026-07-15", nights: 7, guests: 3, gross: 2029.40, ota: 74.27,  tax: 63, net: 1591.96, status: "checked_out" },
+  { name: "Alexandre Schein",   source: "airbnb",  ci: "2026-07-15", co: "2026-07-18", nights: 3, guests: 4, gross: 1033.14, ota: 38.06,  tax: 36, net: 819.54,  status: "checked_out" },
+  { name: "Grzegorz Klimaszyk", source: "booking", ci: "2026-07-18", co: "2026-07-22", nights: 4, guests: 4, gross: 1264.00, ota: 208.56, tax: 48, net: 790.00,  status: "checked_out" },
+  { name: "Brian Søgaard",      source: "airbnb",  ci: "2026-07-23", co: "2026-07-29", nights: 6, guests: 2, gross: 1986.80, ota: 73.20,  tax: 72, net: 78.80,   status: "cancelled" },
+  { name: "Frédéric Poitiers",  source: "booking", ci: "2026-07-27", co: "2026-07-30", nights: 3, guests: 5, gross: 1190.00, ota: 196.35, tax: 45, net: 743.75,  status: "checked_out" },
+  { name: "Jean Claude Varin",  source: "booking", ci: "2026-07-30", co: "2026-08-03", nights: 4, guests: 4, gross: 1160.00, ota: 191.40, tax: 48, net: 725.00,  status: "checked_out" },
+  { name: "Jacek Rączewski",    source: "booking", ci: "2026-08-03", co: "2026-08-06", nights: 3, guests: 4, gross: 1064.00, ota: 175.56, tax: 36, net: 665.00,  status: "checked_out" },
+];
+
 function bookingDoc(d) {
-  const mgmt = r2(d.gross * 0.1); // portale: gestione 10%
-  const exp = r2(d.gross * 0.05); // portale: spese 5%
-  const ownerPayout = r2(d.gross - d.ota - mgmt - exp - d.tax);
   return {
     _id: new ObjectId(),
     propertyId,
@@ -40,16 +48,16 @@ function bookingDoc(d) {
     checkOut: new Date(d.co + "T00:00:00Z"),
     nights: d.nights,
     guests: d.guests,
-    status: "checked_out",
+    status: d.status,
     source: d.source,
     guestInfo: { name: d.name, email: "" },
     pricing: {
-      nightlyRate: r2(d.gross / d.nights),
+      nightlyRate: r2((d.gross - 80) / d.nights), // alloggio ex-pulizia / notti
       cleaningFee: 80,
       totalAmount: d.gross,
       commissionRate: Math.round((d.ota / d.gross) * 10000) / 10000,
       commissionAmount: d.ota,
-      ownerPayout,
+      ownerPayout: d.net, // netto a banca reale (rif. per PDF; la dashboard ricalcola)
       touristTax: d.tax,
     },
     createdAt: now,
@@ -65,7 +73,7 @@ async function main() {
     await db.collection("users").updateOne(
       { _id: ownerId },
       {
-        $set: { name: "Alessandro Splendore", email: "alessandro.splendore@hostcomo.com", role: "owner", updatedAt: now },
+        $set: { name: "Alessandro Splendore", email: "alessandro.splendore@hostcomo.com", role: "owner", ownerId, updatedAt: now },
         $setOnInsert: { createdAt: now },
       },
       { upsert: true },
@@ -81,11 +89,11 @@ async function main() {
           type: "villa",
           zone: "secondo-bacino",
           description: "",
-          address: { street: "", city: "Argegno", province: "CO", zip: "22010" },
-          details: { bedrooms: 2, bathrooms: 1, maxGuests: 4, sqMeters: 140, hasParking: true, hasLakeView: true },
+          address: { street: "Via Spluga 44", city: "Argegno", province: "CO", zip: "22010" },
+          details: { bedrooms: 2, bathrooms: 1, maxGuests: 5, sqMeters: 140, hasParking: true, hasLakeView: true },
           amenities: [],
           images: [],
-          pricing: { basePrice: 290, cleaningFee: 80, weekendMultiplier: 1 },
+          pricing: { basePrice: 370, cleaningFee: 80, weekendMultiplier: 1 },
           beds24PropertyId: "345437",
           beds24RoomId: "713401",
           touristTaxRate: 3,
@@ -98,9 +106,9 @@ async function main() {
     await db.collection("bookings").deleteMany({ ownerId });
     const docs = D.map(bookingDoc);
     await db.collection("bookings").insertMany(docs);
-    console.log(`✅ seed in ${dbName}: owner Alessandro Splendore + property aqua-vista-splendore + ${docs.length} booking`);
+    console.log(`✅ seed REALE in ${dbName}: owner Alessandro Splendore + property aqua-vista-splendore + ${docs.length} booking`);
     for (const b of docs) {
-      console.log(`   · ${b.guestInfo.name.padEnd(20)} ${b.checkIn.toISOString().slice(0, 10)} gross=${b.pricing.totalAmount} ownerPayout=${b.pricing.ownerPayout}`);
+      console.log(`   · ${b.guestInfo.name.padEnd(20)} ${b.checkIn.toISOString().slice(0, 10)} ${String(b.status).padEnd(11)} gross=${b.pricing.totalAmount} net=${b.pricing.ownerPayout}`);
     }
   } finally {
     await c.close();
