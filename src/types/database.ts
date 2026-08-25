@@ -15,6 +15,8 @@ export interface UserDoc extends BaseDoc {
   email: string;
   phone?: string;
   role: UserRole;
+  /** Hash bcrypt della password per il login proprietari (email + password). */
+  passwordHash?: string;
   image?: string;
   language?: "it" | "en" | "de" | "fr";
   stripeCustomerId?: string;

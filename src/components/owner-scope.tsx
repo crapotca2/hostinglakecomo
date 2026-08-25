@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { useMe } from "@/hooks/use-me";
 
 interface OwnerScope {
@@ -21,6 +22,7 @@ const STORAGE_KEY = "hc_owner_scope";
 export function OwnerScopeProvider({ children }: { children: React.ReactNode }) {
   const { data: me, isLoading } = useMe();
   const [selected, setSelected] = useState<string | null>(null);
+  const pathname = usePathname();
 
   // Persiste anche in un cookie: così le richieste server-side (route handler)
   // possono risolvere l'owner selezionato senza che ogni fetch aggiunga ?ownerId.
@@ -56,6 +58,18 @@ export function OwnerScopeProvider({ children }: { children: React.ReactNode }) 
       persist(init); // allinea il cookie allo stato ripristinato
     }
   }, []);
+
+  // Ri-sincronizza dalla URL a ogni navigazione client-side: un link con
+  // ?ownerId=… (es. dalla pagina Proprietari) deve impostare lo scope anche
+  // senza remount del provider. Non azzera la selezione se il param è assente.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const url = new URLSearchParams(window.location.search).get("ownerId");
+    if (url) {
+      setSelected(url);
+      persist(url);
+    }
+  }, [pathname]);
 
   const setOwnerId = (id: string | null) => {
     setSelected(id);

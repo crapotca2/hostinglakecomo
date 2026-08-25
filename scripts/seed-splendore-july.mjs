@@ -9,9 +9,13 @@
 //        node scripts/seed-splendore-july.mjs
 
 import { MongoClient, ObjectId } from "mongodb";
+import { hash as bcryptHash } from "bcryptjs";
 
 const uri = process.env.MONGODB_URI;
 const dbName = process.env.MONGODB_DB || "air_bibby";
+// Login proprietario: email (nome accesso) + password. Modificabile via env.
+const OWNER_EMAIL = process.env.OWNER_EMAIL || "alessandro.splendore@hostcomo.com";
+const OWNER_PASSWORD = process.env.OWNER_PASSWORD || "Splendore2026!";
 if (!uri) {
   console.error("❌ MONGODB_URI mancante");
   process.exit(1);
@@ -84,10 +88,11 @@ async function main() {
   await c.connect();
   try {
     const db = c.db(dbName);
+    const passwordHash = await bcryptHash(OWNER_PASSWORD, 12);
     await db.collection("users").updateOne(
       { _id: ownerId },
       {
-        $set: { name: "Alessandro Splendore", email: "alessandro.splendore@hostcomo.com", role: "owner", ownerId, updatedAt: now },
+        $set: { name: "Alessandro Splendore", email: OWNER_EMAIL, role: "owner", ownerId, passwordHash, updatedAt: now },
         $setOnInsert: { createdAt: now },
       },
       { upsert: true },
@@ -122,6 +127,7 @@ async function main() {
     const docs = D.map(bookingDoc);
     await db.collection("bookings").insertMany(docs);
     console.log(`✅ seed REALE in ${dbName}: owner Alessandro Splendore + property aqua-vista-splendore + ${docs.length} booking`);
+    console.log(`   login proprietario → email: ${OWNER_EMAIL} · password: ${OWNER_PASSWORD}`);
     for (const b of docs) {
       console.log(`   · ${b.guestInfo.name.padEnd(20)} ${b.checkIn.toISOString().slice(0, 10)} ${String(b.status).padEnd(11)} gross=${b.pricing.totalAmount} net=${b.pricing.ownerPayout}`);
     }

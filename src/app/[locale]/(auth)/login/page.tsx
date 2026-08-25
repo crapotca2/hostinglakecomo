@@ -22,16 +22,13 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  // Owner (OTP)
+  // Owner (email + password)
   const [email, setEmail] = useState("");
-  const [code, setCode] = useState("");
-  const [otpStep, setOtpStep] = useState<"email" | "code">("email");
 
   function switchMode(m: Mode) {
     setMode(m);
     setError("");
     setInfo("");
-    setOtpStep("email");
   }
 
   async function handleAdmin(e: React.FormEvent) {
@@ -48,33 +45,18 @@ export default function LoginPage() {
     else if (result?.url) window.location.href = result.url;
   }
 
-  async function handleOwnerEmail(e: React.FormEvent) {
+  async function handleOwner(e: React.FormEvent) {
     e.preventDefault();
     setError("");
     setLoading(true);
-    // Risposta sempre 200 (anti-enumeration): avanziamo comunque allo step codice.
-    await fetch("/api/auth/otp/request", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    }).catch(() => {});
-    setLoading(false);
-    setInfo("Se l'email è registrata, ti abbiamo inviato un codice a 6 cifre.");
-    setOtpStep("code");
-  }
-
-  async function handleOwnerCode(e: React.FormEvent) {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-    const result = await signIn("otp", {
+    const result = await signIn("owner", {
       email,
-      code,
+      password,
       callbackUrl: "/dashboard",
       redirect: false,
     });
     setLoading(false);
-    if (result?.error) setError("Codice non valido o scaduto.");
+    if (result?.error) setError(t("errorInvalid"));
     else window.location.href = result?.url ?? "/dashboard";
   }
 
@@ -125,52 +107,42 @@ export default function LoginPage() {
               {t("submit")}
             </button>
           </form>
-        ) : otpStep === "email" ? (
-          <form onSubmit={handleOwnerEmail} className="space-y-6">
-            <div className="space-y-2">
+        ) : (
+          <form onSubmit={handleOwner} className="space-y-6">
+            <div className="space-y-3">
               <input
                 type="email"
+                autoComplete="username"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="La tua email"
                 className={inputClass}
               />
-              {error && <p className="text-sm text-red-500">{error}</p>}
-            </div>
-            <button type="submit" disabled={loading} className={submitClass}>
-              {loading ? "Invio…" : "Ricevi il codice"}
-            </button>
-          </form>
-        ) : (
-          <form onSubmit={handleOwnerCode} className="space-y-6">
-            <div className="space-y-2">
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="current-password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder={t("passwordPlaceholder")}
+                  className={inputClass + " pr-11"}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((v) => !v)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                  tabIndex={-1}
+                >
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
               {info && <p className="text-sm text-muted-foreground">{info}</p>}
-              <input
-                type="text"
-                inputMode="numeric"
-                autoComplete="one-time-code"
-                required
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-                placeholder="Codice a 6 cifre"
-                className={inputClass + " tracking-[0.3em] text-center"}
-              />
               {error && <p className="text-sm text-red-500">{error}</p>}
             </div>
             <button type="submit" disabled={loading} className={submitClass}>
               {loading ? "Verifica…" : "Accedi"}
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setOtpStep("email");
-                setError("");
-                setInfo("");
-              }}
-              className="w-full text-xs text-muted-foreground hover:text-foreground"
-            >
-              Usa un'altra email
             </button>
           </form>
         )}

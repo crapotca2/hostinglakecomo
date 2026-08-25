@@ -121,6 +121,44 @@ export const authOptions: NextAuthOptions = {
         };
       },
     }),
+    // Login PROPRIETARI con email (nome accesso) + password. Cerca l'utente per
+    // email nella collection users e confronta l'hash bcrypt (users.passwordHash).
+    CredentialsProvider({
+      id: "owner",
+      name: "Owner",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        const email = credentials?.email?.trim().toLowerCase();
+        const password = credentials?.password;
+        if (!email || !password) return null;
+
+        const rl = rateLimitByIp(clientIp(), {
+          key: "auth:owner-login",
+          windowMs: 5 * 60_000,
+          max: 10,
+        });
+        if (!rl.ok) return null;
+
+        const usersCol = await collections.users();
+        const user = await usersCol.findOne({ email });
+        if (!user || !user.passwordHash) return null;
+        const ok = await compare(password, user.passwordHash);
+        if (!ok) return null;
+
+        const role = user.role ?? "owner";
+        const ownerId = role === "owner" && user._id ? user._id.toString() : null;
+        return {
+          id: user._id?.toString() ?? email,
+          name: user.name,
+          email: user.email,
+          role,
+          ownerId,
+        };
+      },
+    }),
   ],
   session: { strategy: "jwt" },
   callbacks: {
