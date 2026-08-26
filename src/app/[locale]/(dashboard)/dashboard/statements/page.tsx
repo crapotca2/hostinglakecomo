@@ -1,6 +1,6 @@
 "use client";
 
-import { FileText, ArrowUpRight, Download, Users } from "lucide-react";
+import { FileText, ArrowUpRight, Download, Users, FileSpreadsheet } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { useStatements } from "@/hooks/use-statements";
 import { useOwnerScope } from "@/components/owner-scope";
@@ -39,6 +39,8 @@ export default function StatementsPage() {
 
   const pdfHref = (period: string) =>
     `/api/reports/statements/pdf?period=${period}${ownerId ? `&ownerId=${ownerId}` : ""}`;
+  const xlsxHref = (period: string) =>
+    `/api/reports/statements/xlsx?period=${period}${ownerId ? `&ownerId=${ownerId}` : ""}`;
 
   return (
     <div className="p-6 space-y-6 animate-fade-in">
@@ -143,15 +145,24 @@ export default function StatementsPage() {
                             </span>
                           </td>
                           <td className="px-4 py-4 text-right">
-                            <a
-                              href={pdfHref(s.period)}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              title={t("downloadPdf")}
-                              className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-primary/[0.08] hover:text-primary transition-colors"
-                            >
-                              <Download className="h-4 w-4" />
-                            </a>
+                            <div className="inline-flex items-center gap-1">
+                              <a
+                                href={xlsxHref(s.period)}
+                                title={t("downloadXlsx")}
+                                className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-emerald-50 hover:text-emerald-600 transition-colors"
+                              >
+                                <FileSpreadsheet className="h-4 w-4" />
+                              </a>
+                              <a
+                                href={pdfHref(s.period)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title={t("downloadPdf")}
+                                className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-primary/[0.08] hover:text-primary transition-colors"
+                              >
+                                <Download className="h-4 w-4" />
+                              </a>
+                            </div>
                           </td>
                         </tr>
                       );

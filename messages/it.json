@@ -1195,7 +1195,8 @@
         "paid": "Pagato",
         "pending": "In elaborazione"
       },
-      "taxAdvanceHint": "Tassa di soggiorno incassata in loco/nel payout, da versare al comune (cassa già in mano)"
+      "taxAdvanceHint": "Tassa di soggiorno incassata in loco/nel payout, da versare al comune (cassa già in mano)",
+      "downloadXlsx": "Scarica Excel"
     },
     "compliance": {
       "title": "Compliance",

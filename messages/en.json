@@ -1195,7 +1195,8 @@
         "paid": "Paid",
         "pending": "Processing"
       },
-      "taxAdvanceHint": "City tax collected on site/in payout, to remit to the Comune (cash on hand)"
+      "taxAdvanceHint": "City tax collected on site/in payout, to remit to the Comune (cash on hand)",
+      "downloadXlsx": "Download Excel"
     },
     "compliance": {
       "title": "Compliance",
