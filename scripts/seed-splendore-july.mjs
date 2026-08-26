@@ -55,22 +55,6 @@ const D = [
   { name: "Scott Johnson",      nat: "",   source: "booking", ref: "6034318176", ci: "2026-08-17", co: "2026-08-20", nights: 3, guests: 2, gross: 1100.00, ota: 181.50, cedolare: 231.00, tax: 18, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "collected" },
 ];
 
-// Pagamento guest (incasso lordo) per prenotazione, per popolare la pagina Pagamenti.
-function paymentDoc(bookingDoc, d) {
-  const refunded = d.status === "cancelled";
-  return {
-    _id: new ObjectId(),
-    type: "booking",
-    bookingId: bookingDoc._id,
-    stripePaymentIntentId: `${d.source}:${d.ref}`,
-    amount: d.gross,
-    currency: "EUR",
-    status: refunded ? "refunded" : "succeeded",
-    createdAt: new Date(d.ci + "T12:00:00Z"),
-    updatedAt: now,
-  };
-}
-
 function bookingDoc(d) {
   const room = r2(d.gross - CLEANING); // ricavi alloggio (ex pulizie)
   const fee = r2(room * FEE_RATE); // commissione Host Como sui ricavi alloggio
@@ -147,7 +131,8 @@ async function main() {
       },
       { upsert: true },
     );
-    // Pulisci i pagamenti legati ai vecchi booking di questo owner, poi i booking.
+    // Pulisci i pagamenti legati ai vecchi booking di questo owner (dati Stripe
+    // inventati, rimossi) e i booking, poi reinserisci i booking.
     const oldIds = (await db.collection("bookings").find({ ownerId }).project({ _id: 1 }).toArray()).map((b) => b._id);
     if (oldIds.length) await db.collection("payments").deleteMany({ bookingId: { $in: oldIds } });
     await db.collection("bookings").deleteMany({ ownerId });
@@ -155,10 +140,7 @@ async function main() {
     const docs = D.map(bookingDoc);
     await db.collection("bookings").insertMany(docs);
 
-    const payments = docs.map((doc, i) => paymentDoc(doc, D[i]));
-    await db.collection("payments").insertMany(payments);
-
-    console.log(`✅ seed REALE in ${dbName}: owner Alessandro Splendore + property aqua-vista-splendore + ${docs.length} booking + ${payments.length} pagamenti`);
+    console.log(`✅ seed REALE in ${dbName}: owner Alessandro Splendore + property aqua-vista-splendore + ${docs.length} booking`);
     console.log(`   login proprietario → email: ${OWNER_EMAIL} · password: ${OWNER_PASSWORD}`);
     for (const b of docs) {
       console.log(`   · ${b.guestInfo.name.padEnd(20)} ${b.checkIn.toISOString().slice(0, 10)} ${String(b.status).padEnd(11)} gross=${b.pricing.totalAmount} net=${b.pricing.ownerPayout}`);

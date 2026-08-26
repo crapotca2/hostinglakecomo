@@ -76,6 +76,7 @@ export interface CommissionDetailRow {
   grossRevenue: number;
   otaCommissionRate: number;
   otaCommission: number;
+  cedolare: number;
   airbibbyCommission: number;
   ownerPayout: number;
 }
@@ -100,6 +101,7 @@ export async function getCommissionDetail(from: Date, to: Date, ownerId: string)
         grossRevenue: Math.round(d.totalRevenue),
         otaCommissionRate: Math.round((b.pricing?.commissionRate || 0) * 1000) / 10,
         otaCommission: Math.round(d.otaCommission),
+        cedolare: Math.round(d.cedolare),
         airbibbyCommission: Math.round(d.managementFee),
         ownerPayout: Math.round(d.netPayout),
       };
@@ -175,28 +177,25 @@ export async function getOwnerRemittanceDetail(from: Date, to: Date, ownerId: st
   const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
 
   const rows: OwnerRemittanceDetailRow[] = [];
-  const monthsInRange = new Set<string>();
-  for (let d = new Date(from); d <= to; d = new Date(d.getFullYear(), d.getMonth() + 1, 1)) {
-    monthsInRange.add(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`);
+  // Raggruppa per CICLO di fatturazione 25→25 (come il Rendiconto) + immobile,
+  // così i conteggi delle due tab coincidono.
+  const inRange = allBookings.filter(
+    (b) => b.status !== "cancelled" && b.checkIn >= from && b.checkIn <= to
+  );
+  const groups = new Map<string, { period: string; property: PropertyDoc; bookings: BookingDoc[] }>();
+  for (const b of inRange) {
+    const p = properties.find((pp) => pp._id!.toString() === b.propertyId.toString());
+    if (!p) continue;
+    const period = cyclePeriodKey(b.checkIn);
+    const key = `${period}|${b.propertyId.toString()}`;
+    const g = groups.get(key) || { period, property: p, bookings: [] };
+    g.bookings.push(b);
+    groups.set(key, g);
   }
 
-  for (const period of Array.from(monthsInRange)) {
-    const [yStr, mStr] = period.split("-");
-    const year = parseInt(yStr, 10);
-    const monthIdx = parseInt(mStr, 10) - 1;
-    const mStart = new Date(year, monthIdx, 1);
-    const mEnd = new Date(year, monthIdx + 1, 0, 23, 59, 59);
-
-    for (const p of properties) {
-      const pid = p._id!.toString();
+  for (const { period, property: p, bookings } of Array.from(groups.values())) {
+    {
       const rate = feeRateForProperty(p);
-      const bookings = allBookings.filter(
-        (b) => b.propertyId.toString() === pid &&
-               b.status !== "cancelled" &&
-               b.checkIn >= mStart && b.checkIn <= mEnd
-      );
-      if (bookings.length === 0) continue;
-
       let gross = 0, ota = 0, ced = 0, fee = 0, tax = 0, net = 0, nights = 0;
       for (const b of bookings) {
         const d = breakdownForBooking(b, rate);

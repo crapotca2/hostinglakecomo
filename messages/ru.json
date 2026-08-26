@@ -1616,7 +1616,8 @@
             "otaRate": "Ставка платформы",
             "otaCommission": "Комиссия платформы",
             "ownCommission": "Комиссия HLC",
-            "ownerNet": "Чистая собственника"
+            "ownerNet": "Чистая собственника",
+            "cedolare": "Налог 21%"
           }
         },
         "ownerSummary": {

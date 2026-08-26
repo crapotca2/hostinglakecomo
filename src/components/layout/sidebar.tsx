@@ -7,7 +7,6 @@ import {
   CalendarDays,
   BarChart3,
   FileText,
-  CreditCard,
   Shield,
   Settings,
   LogOut,
@@ -28,7 +27,6 @@ const NAV_ITEMS = [
   { href: "/dashboard/analytics", icon: BarChart3, key: "analytics" },
   { href: "/dashboard/reports", icon: FileText, key: "reports" },
   { href: "/dashboard/statements", icon: FileText, key: "statements" },
-  { href: "/dashboard/payments", icon: CreditCard, key: "payments" },
   { href: "/dashboard/compliance", icon: Shield, key: "compliance" },
   { href: "/dashboard/settings", icon: Settings, key: "settings" },
 ] as const;

@@ -1616,7 +1616,8 @@
             "otaRate": "OTA rate",
             "otaCommission": "OTA comm.",
             "ownCommission": "HLC comm.",
-            "ownerNet": "Owner net"
+            "ownerNet": "Owner net",
+            "cedolare": "Flat tax 21%"
           }
         },
         "ownerSummary": {

@@ -48,25 +48,25 @@ export async function generateTouristTaxReport(
     if (bookings.length === 0) continue;
 
     const rate = p.touristTaxRate || 0;
-    // Tetto notti opzionale: se non impostato (o 0) → nessun tetto (Argegno).
-    const maxNights =
-      p.maxTouristTaxNights && p.maxTouristTaxNights > 0
-        ? p.maxTouristTaxNights
-        : Infinity;
+    const dayMs = 24 * 60 * 60 * 1000;
 
     let due = 0, collected = 0, pending = 0, uncollected = 0, nights = 0, guests = 0;
     for (const b of bookings) {
-      const taxableNights = Math.min(b.nights, maxNights);
-      const dueB = taxableNights * b.guests * rate;
-      // Importo effettivo per prenotazione: usa quello salvato se presente.
-      const amount = b.pricing?.touristTax ?? dueB;
+      // Presenze = notti-ospite che ricadono nel periodo [from,to] (come ISTAT):
+      // uno stay a cavallo del mese conta solo le sue notti nel periodo.
+      let nightsInRange = 0;
+      for (let d = new Date(b.checkIn); d < b.checkOut; d = new Date(d.getTime() + dayMs)) {
+        if (d >= from && d <= to) nightsInRange++;
+      }
+      const presences = nightsInRange * b.guests;
+      const dueB = presences * rate; // 3€ × presenze
       due += dueB;
-      nights += taxableNights;
+      nights += nightsInRange;
       guests += b.guests;
       const st = b.touristTaxStatus ?? "collected";
-      if (st === "uncollected") uncollected += amount;
-      else if (st === "pending") pending += amount;
-      else collected += amount;
+      if (st === "uncollected") uncollected += dueB;
+      else if (st === "pending") pending += dueB;
+      else collected += dueB;
     }
 
     rows.push({

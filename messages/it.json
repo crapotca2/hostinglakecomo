@@ -1616,7 +1616,8 @@
             "otaRate": "Tasso piattaforma",
             "otaCommission": "Comm. piattaforma",
             "ownCommission": "Comm. HLC",
-            "ownerNet": "Netto proprietario"
+            "ownerNet": "Netto proprietario",
+            "cedolare": "Cedolare 21%"
           }
         },
         "ownerSummary": {

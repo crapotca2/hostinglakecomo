@@ -108,7 +108,7 @@ function CommissionDetailView({ from, to }: { from: string; to: string }) {
   const t = useTranslations("dashboard.reports.propertyManagement.commissionDetail");
   const { data, isLoading } = useReport("commission-detail", { from, to });
   const rows = data?.rows || [];
-  const columns: ReportColumn<{ bookingId: string; checkIn: string; propertyName: string; guestName: string; source: string; nights: number; grossRevenue: number; otaCommissionRate: number; otaCommission: number; airbibbyCommission: number; ownerPayout: number }>[] = [
+  const columns: ReportColumn<{ bookingId: string; checkIn: string; propertyName: string; guestName: string; source: string; nights: number; grossRevenue: number; otaCommissionRate: number; otaCommission: number; cedolare: number; airbibbyCommission: number; ownerPayout: number }>[] = [
     { key: "checkIn", label: t("columns.checkIn") },
     { key: "propertyName", label: t("columns.property") },
     { key: "guestName", label: t("columns.guest") },
@@ -117,6 +117,7 @@ function CommissionDetailView({ from, to }: { from: string; to: string }) {
     { key: "grossRevenue", label: t("columns.gross"), align: "right", numeric: true, render: (r) => formatEuro(r.grossRevenue) },
     { key: "otaCommissionRate", label: t("columns.otaRate"), align: "center", numeric: true, render: (r) => `${r.otaCommissionRate}%` },
     { key: "otaCommission", label: t("columns.otaCommission"), align: "right", numeric: true, render: (r) => formatEuro(r.otaCommission) },
+    { key: "cedolare", label: t("columns.cedolare"), align: "right", numeric: true, render: (r) => formatEuro(r.cedolare) },
     { key: "airbibbyCommission", label: t("columns.ownCommission"), align: "right", numeric: true, render: (r) => formatEuro(r.airbibbyCommission) },
     { key: "ownerPayout", label: t("columns.ownerNet"), align: "right", numeric: true, render: (r) => formatEuro(r.ownerPayout) },
   ];
