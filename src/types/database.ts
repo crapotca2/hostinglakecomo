@@ -156,6 +156,8 @@ export interface BookingDoc extends BaseDoc {
     /** Aliquota commissione Host Como denormalizzata sulla prenotazione. */
     managementFeeRate?: number;
   };
+  /** Stato d'incasso della tassa di soggiorno (default: collected). */
+  touristTaxStatus?: "collected" | "pending" | "uncollected";
   stripePaymentId?: string;
   beds24Id?: string;
   beds24LastSync?: Date;

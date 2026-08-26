@@ -1235,7 +1235,9 @@
           "bookings": "Prenotaz.",
           "nights": "Notti",
           "guests": "Ospiti",
-          "owed": "Dovuto"
+          "owed": "Dovuto",
+          "collected": "Incassata",
+          "uncollected": "Non incassata"
         },
         "totalLabel": "Totale da versare al Comune",
         "empty": "Nessuna prenotazione nel periodo selezionato"

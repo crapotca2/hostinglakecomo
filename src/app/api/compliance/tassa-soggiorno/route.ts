@@ -17,6 +17,6 @@ export async function GET(req: NextRequest) {
     : new Date(now.getFullYear(), Math.floor(now.getMonth() / 3) * 3, 1);
   const to = toParam ? new Date(toParam) : now;
 
-  const { rows, totalOwed } = await generateTouristTaxReport(from, to, scope.ownerId);
-  return NextResponse.json({ from, to, rows, totalOwed });
+  const report = await generateTouristTaxReport(from, to, scope.ownerId);
+  return NextResponse.json({ from, to, ...report });
 }

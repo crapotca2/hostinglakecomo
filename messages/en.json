@@ -1235,7 +1235,9 @@
           "bookings": "Bookings",
           "nights": "Nights",
           "guests": "Guests",
-          "owed": "Owed"
+          "owed": "Owed",
+          "collected": "Collected",
+          "uncollected": "Uncollected"
         },
         "totalLabel": "Total due to the Municipality",
         "empty": "No bookings in the selected period"

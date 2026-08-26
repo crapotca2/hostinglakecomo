@@ -163,8 +163,11 @@ function TaxSection({
   const t = useTranslations("dashboard.compliance.tax");
   const locale = useLocale();
   const [data, setData] = useState<{
-    rows: Array<{ propertyId: string; propertyName: string; bookingCount: number; totalNights: number; totalGuests: number; taxCollected: number; taxOwed: number }>;
-    totalOwed: number;
+    rows: Array<{ propertyId: string; propertyName: string; bookingCount: number; totalNights: number; totalGuests: number; taxDue: number; taxCollected: number; taxPending: number; taxUncollected: number }>;
+    totalDue: number;
+    totalCollected: number;
+    totalPending: number;
+    totalUncollected: number;
   } | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -234,6 +237,8 @@ function TaxSection({
                 <th className="text-center text-xs font-semibold text-muted-foreground py-2">{t("headers.bookings")}</th>
                 <th className="text-center text-xs font-semibold text-muted-foreground py-2">{t("headers.nights")}</th>
                 <th className="text-center text-xs font-semibold text-muted-foreground py-2">{t("headers.guests")}</th>
+                <th className="text-right text-xs font-semibold text-muted-foreground py-2">{t("headers.collected")}</th>
+                <th className="text-right text-xs font-semibold text-muted-foreground py-2">{t("headers.uncollected")}</th>
                 <th className="text-right text-xs font-semibold text-muted-foreground py-2">{t("headers.owed")}</th>
               </tr>
             </thead>
@@ -244,17 +249,23 @@ function TaxSection({
                   <td className="py-2 text-sm text-center">{r.bookingCount}</td>
                   <td className="py-2 text-sm text-center">{r.totalNights}</td>
                   <td className="py-2 text-sm text-center">{r.totalGuests}</td>
-                  <td className="py-2 text-sm text-right font-semibold tabular-nums">
-                    {fmt(r.taxOwed)}
+                  <td className="py-2 text-sm text-right tabular-nums text-emerald-600">{fmt(r.taxCollected)}</td>
+                  <td className="py-2 text-sm text-right tabular-nums text-amber-600">
+                    {fmt(r.taxUncollected + r.taxPending)}
                   </td>
+                  <td className="py-2 text-sm text-right font-semibold tabular-nums">{fmt(r.taxDue)}</td>
                 </tr>
               ))}
               <tr className="border-t-2 border-primary/30">
                 <td colSpan={4} className="py-3 text-sm font-bold">
                   {t("totalLabel")}
                 </td>
+                <td className="py-3 text-sm font-bold text-emerald-600 text-right tabular-nums">{fmt(data.totalCollected)}</td>
+                <td className="py-3 text-sm font-bold text-amber-600 text-right tabular-nums">
+                  {fmt(data.totalUncollected + data.totalPending)}
+                </td>
                 <td className="py-3 text-base font-bold text-primary text-right tabular-nums">
-                  {fmt(data.totalOwed)}
+                  {fmt(data.totalDue)}
                 </td>
               </tr>
             </tbody>
