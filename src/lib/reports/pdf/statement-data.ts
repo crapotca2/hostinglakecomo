@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
 import { getOwnerStatementBookings, type BookingRemittanceRow } from "@/lib/reports/property-management";
+import { cycleBounds } from "@/lib/reports/period";
 import type { UserDoc } from "@/types/database";
 
 const MONTH_NAMES = [
@@ -62,8 +63,8 @@ export async function getStatementData(
   })) as UserDoc | null;
   if (!owner) return null;
 
-  const from = new Date(year, monthIdx, 1);
-  const to = new Date(year, monthIdx + 1, 0, 23, 59, 59);
+  // Periodo = ciclo di fatturazione 25→25 che chiude il 25 del mese indicato.
+  const { from, to } = cycleBounds(year, monthIdx);
 
   const rows = await getOwnerStatementBookings(from, to, ownerId);
 

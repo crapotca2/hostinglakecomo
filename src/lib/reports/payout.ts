@@ -2,6 +2,7 @@ import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
 import type { BookingDoc, PropertyDoc } from "@/types/database";
 import { aggregateBreakdown, feeRateForProperty } from "./fee-model";
+import { billingCycle, cycleBounds } from "./period";
 
 export interface MonthlyPayout {
   period: string;
@@ -48,26 +49,29 @@ export async function getMonthlyPayouts(
   const rateMap = await loadRateMap(ownerId);
   const rateOf = (b: BookingDoc) => rateMap.get(b.propertyId.toString()) ?? 0.1;
 
+  // Ciclo di fatturazione 25→25: una prenotazione appartiene al ciclo del suo
+  // check-in (dal 25 in poi conta nel mese successivo).
   const bookings = (
     (await bookingsCol
       .find({ ownerId: new ObjectId(ownerId) })
       .toArray()) as BookingDoc[]
-  ).filter(
-    (b: BookingDoc) => b.checkIn.getFullYear() === year && b.status !== "cancelled"
-  );
+  ).filter((b: BookingDoc) => {
+    const c = billingCycle(b.checkIn);
+    return c.year === year && b.status !== "cancelled";
+  });
 
   const now = new Date();
-  const currentMonth = now.getMonth();
-  const currentYear = now.getFullYear();
 
   const result: MonthlyPayout[] = [];
   for (let i = 11; i >= 0; i--) {
-    const monthBookings = bookings.filter((b: BookingDoc) => b.checkIn.getMonth() === i);
-    if (monthBookings.length === 0 && (year !== currentYear || i > currentMonth)) continue;
+    const monthBookings = bookings.filter((b: BookingDoc) => billingCycle(b.checkIn).monthIdx === i);
+    const { from, to } = cycleBounds(year, i);
+    const started = from <= now;
+    if (monthBookings.length === 0 && !started) continue;
 
     const agg = aggregateBreakdown(monthBookings, rateOf);
     const propsSet = new Set(monthBookings.map((b: BookingDoc) => b.propertyId.toString()));
-    const isPast = year < currentYear || (year === currentYear && i < currentMonth);
+    const isPast = to <= now; // ciclo chiuso
 
     result.push({
       period: `${year}-${String(i + 1).padStart(2, "0")}`,
@@ -111,12 +115,10 @@ export async function getPayoutForPeriod(
     (await bookingsCol
       .find({ ownerId: new ObjectId(ownerId) })
       .toArray()) as BookingDoc[]
-  ).filter(
-    (b: BookingDoc) =>
-      b.checkIn.getFullYear() === year &&
-      b.checkIn.getMonth() === monthIdx &&
-      b.status !== "cancelled"
-  );
+  ).filter((b: BookingDoc) => {
+    const c = billingCycle(b.checkIn);
+    return c.year === year && c.monthIdx === monthIdx && b.status !== "cancelled";
+  });
 
   return { payout, bookings };
 }

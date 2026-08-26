@@ -1225,7 +1225,7 @@
       },
       "tax": {
         "title": "Tassa di soggiorno",
-        "description": "Calcolo trimestrale da versare al Comune. Le tariffe sono configurate per proprietà (tipicamente €2-4 per persona/notte, max 5 notti).",
+        "description": "Calcolo della tassa di soggiorno da versare al Comune, secondo la tariffa configurata per ciascuna proprietà (Argegno: 3€ a persona per notte, senza tetto di notti).",
         "from": "Dal",
         "to": "Al",
         "calculate": "Calcola",

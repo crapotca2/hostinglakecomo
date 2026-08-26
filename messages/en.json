@@ -1225,7 +1225,7 @@
       },
       "tax": {
         "title": "Tourist tax",
-        "description": "Quarterly calculation due to the Municipality. Rates are configured per property (typically EUR 2-4 per person/night, capped at 5 nights).",
+        "description": "Tourist tax to remit to the Comune, based on the rate configured per property (Argegno: €3 per person per night, no night cap).",
         "from": "From",
         "to": "To",
         "calculate": "Calculate",

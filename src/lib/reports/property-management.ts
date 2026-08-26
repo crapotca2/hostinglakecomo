@@ -2,6 +2,7 @@ import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
 import type { BookingDoc, PropertyDoc } from "@/types/database";
 import { breakdownForBooking, feeRateForProperty } from "./fee-model";
+import { billingCycle, cyclePeriodKey } from "./period";
 
 async function loadProps(ownerId: string): Promise<{
   propMap: Map<string, string>;
@@ -124,11 +125,11 @@ export async function getOwnerRemittanceSummary(year: number, ownerId: string): 
   const rateOf = rateOfFactory(rateMap);
   const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
   const bookings = allBookings.filter(
-    (b) => b.status !== "cancelled" && b.checkIn.getFullYear() === year
+    (b) => b.status !== "cancelled" && billingCycle(b.checkIn).year === year
   );
 
   const months = Array.from({ length: 12 }, (_, i) => ({ month: i, bookings: [] as BookingDoc[] }));
-  for (const b of bookings) months[b.checkIn.getMonth()].bookings.push(b);
+  for (const b of bookings) months[billingCycle(b.checkIn).monthIdx].bookings.push(b);
 
   return months
     .filter((m) => m.bookings.length > 0)
@@ -247,11 +248,11 @@ export async function getOwnerStatementBookings(from: Date, to: Date, ownerId: s
   const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
 
   return allBookings
-    .filter((b) => b.status !== "cancelled" && b.checkIn >= from && b.checkIn <= to)
+    .filter((b) => b.status !== "cancelled" && b.checkIn >= from && b.checkIn < to)
     .map((b) => {
       const d = breakdownForBooking(b, rateOf(b));
       return {
-        period: `${b.checkIn.getFullYear()}-${String(b.checkIn.getMonth() + 1).padStart(2, "0")}`,
+        period: cyclePeriodKey(b.checkIn),
         bookingId: b._id!.toString(),
         propertyName: propMap.get(b.propertyId.toString()) || "—",
         guestName: b.guestInfo.name,
