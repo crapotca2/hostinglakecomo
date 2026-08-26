@@ -8,7 +8,6 @@ import {
   WEEKDAY_LABELS,
 } from "@/lib/date-utils";
 import { DayCell } from "./day-cell";
-import type { Holiday } from "@/hooks/use-holidays";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Booking {
@@ -18,21 +17,19 @@ interface Booking {
   checkOut: string;
   status: string;
   source: string;
-  guestInfo: { name: string };
+  guestInfo: { name: string; nationality?: string };
 }
 
 interface MonthGridProps {
   month: Date;
   onMonthChange: (date: Date) => void;
   bookings: Booking[];
-  holidays: Holiday[];
 }
 
 export function MonthGrid({
   month,
   onMonthChange,
   bookings,
-  holidays,
 }: MonthGridProps) {
   const days = getMonthGrid(month);
   const today = new Date();
@@ -91,7 +88,6 @@ export function MonthGrid({
             date={day}
             inCurrentMonth={isSameMonth(day, month)}
             bookings={bookings}
-            holidays={holidays}
             isToday={isSameDay(day, today)}
           />
         ))}

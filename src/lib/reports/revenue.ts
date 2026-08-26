@@ -57,7 +57,7 @@ export async function getPropertyPerformance(year: number, ownerId: string): Pro
 
   const start = new Date(year, 0, 1);
   const end = new Date(year + 1, 0, 1);
-  const daysInYear = 365;
+  const DAY = 24 * 60 * 60 * 1000;
 
   const result: PropertyPerformance[] = [];
 
@@ -70,7 +70,15 @@ export async function getPropertyPerformance(year: number, ownerId: string): Pro
     const nights = propertyBookings.reduce((s: number, b: BookingDoc) => s + b.nights, 0);
     const bookings = propertyBookings.length;
     const avgRate = nights > 0 ? Math.round(revenue / nights) : 0;
-    const occupancy = Math.round((nights / daysInYear) * 100);
+    // Occupancy sul periodo di ATTIVITÀ (dal primo check-in all'ultimo check-out),
+    // non annualizzata su 365 giorni: riflette quanto è stata piena mentre operava.
+    let occupancy = 0;
+    if (propertyBookings.length > 0) {
+      const firstCI = Math.min(...propertyBookings.map((b) => b.checkIn.getTime()));
+      const lastCO = Math.max(...propertyBookings.map((b) => b.checkOut.getTime()));
+      const activeDays = Math.max(1, Math.round((lastCO - firstCI) / DAY));
+      occupancy = Math.min(100, Math.round((nights / activeDays) * 100));
+    }
 
     result.push({
       propertyId: p._id!.toString(),

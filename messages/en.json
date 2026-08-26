@@ -1086,7 +1086,8 @@
         "nights": "Nights",
         "source": "Source",
         "amount": "Amount",
-        "status": "Status"
+        "status": "Status",
+        "guests": "Guests"
       },
       "status": {
         "confirmed": "Confirmed",
@@ -1105,7 +1106,7 @@
     },
     "calendar": {
       "title": "Calendar",
-      "subtitle": "Unified booking view with public holidays",
+      "subtitle": "Unified booking view with guest origin",
       "holidaysTitle": "Holidays shown",
       "loadingCalendar": "Loading calendar...",
       "legendTitle": "Legend",
@@ -1123,7 +1124,9 @@
         "NL": "Netherlands",
         "CH": "Switzerland",
         "US": "United States"
-      }
+      },
+      "provenanceTitle": "Guest origin",
+      "provenanceEmpty": "No guest origin recorded"
     },
     "payments": {
       "title": "Payments",

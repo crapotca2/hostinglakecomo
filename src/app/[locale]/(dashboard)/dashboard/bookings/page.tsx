@@ -13,6 +13,7 @@ import { Users, Search, ArrowUp, ArrowDown, ArrowUpDown } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { useBookings } from "@/hooks/use-bookings";
 import { useProperties } from "@/hooks/use-properties";
+import { flagEmoji, countryName } from "@/lib/countries";
 
 const STATUS_STYLES: Record<string, string> = {
   confirmed: "bg-emerald-50 text-emerald-700",
@@ -53,9 +54,11 @@ type BookingRow = {
   propertyId: string;
   propertyName: string;
   guestName: string;
+  nationality?: string;
   checkIn: string;
   checkOut: string;
   nights: number;
+  guests: number;
   source: string;
   amount: number;
   status: string;
@@ -100,9 +103,11 @@ export default function BookingsPage() {
         propertyId: b.propertyId,
         propertyName: propertyMap.get(b.propertyId) || "—",
         guestName: b.guestInfo.name,
+        nationality: b.guestInfo.nationality,
         checkIn: b.checkIn,
         checkOut: b.checkOut,
         nights: b.nights,
+        guests: b.guests,
         source: b.source,
         amount: b.pricing.totalAmount,
         status: b.status,
@@ -119,7 +124,14 @@ export default function BookingsPage() {
             <div className="h-8 w-8 rounded-full bg-primary/[0.08] flex items-center justify-center shrink-0">
               <Users className="h-3.5 w-3.5 text-primary" />
             </div>
-            <span className="text-sm font-medium">{row.original.guestName}</span>
+            <span className="text-sm font-medium">
+              {flagEmoji(row.original.nationality) && (
+                <span className="mr-1" title={countryName(row.original.nationality)}>
+                  {flagEmoji(row.original.nationality)}
+                </span>
+              )}
+              {row.original.guestName}
+            </span>
           </div>
         ),
       },
@@ -148,6 +160,13 @@ export default function BookingsPage() {
         header: t("headers.nights"),
         cell: ({ row }) => (
           <span className="text-sm text-center block">{row.original.nights}</span>
+        ),
+      },
+      {
+        accessorKey: "guests",
+        header: t("headers.guests"),
+        cell: ({ row }) => (
+          <span className="text-sm text-center block tabular-nums">{row.original.guests}</span>
         ),
       },
       {

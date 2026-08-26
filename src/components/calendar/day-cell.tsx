@@ -1,6 +1,5 @@
-import { isSameDay, formatDayLabel, formatDateISO } from "@/lib/date-utils";
-import { HolidayBadge } from "./holiday-badge";
-import type { Holiday } from "@/hooks/use-holidays";
+import { formatDayLabel, formatDateISO } from "@/lib/date-utils";
+import { flagEmoji, countryName } from "@/lib/countries";
 
 interface Booking {
   _id: string;
@@ -9,14 +8,13 @@ interface Booking {
   checkOut: string;
   status: string;
   source: string;
-  guestInfo: { name: string };
+  guestInfo: { name: string; nationality?: string };
 }
 
 interface DayCellProps {
   date: Date;
   inCurrentMonth: boolean;
   bookings: Booking[];
-  holidays: Holiday[];
   isToday: boolean;
 }
 
@@ -32,7 +30,6 @@ export function DayCell({
   date,
   inCurrentMonth,
   bookings,
-  holidays,
   isToday,
 }: DayCellProps) {
   const dateIso = formatDateISO(date);
@@ -41,7 +38,6 @@ export function DayCell({
     const co = b.checkOut.slice(0, 10);
     return dateIso >= ci && dateIso < co;
   });
-  const dayHolidays = holidays.filter((h) => h.date === dateIso);
 
   return (
     <div
@@ -57,24 +53,22 @@ export function DayCell({
         >
           {formatDayLabel(date)}
         </span>
-        <div className="flex flex-wrap gap-0.5 justify-end">
-          {dayHolidays.slice(0, 3).map((h, i) => (
-            <HolidayBadge key={i} holiday={h} />
-          ))}
-        </div>
       </div>
       <div className="space-y-0.5">
-        {dayBookings.slice(0, 3).map((b) => (
+        {dayBookings.slice(0, 3).map((b) => {
+          const flag = flagEmoji(b.guestInfo.nationality);
+          return (
           <div
             key={b._id}
-            title={`${b.guestInfo.name} (${b.source})`}
+            title={`${b.guestInfo.name} · ${countryName(b.guestInfo.nationality) || "—"} (${b.source})`}
             className={`text-[10px] text-white px-1.5 py-0.5 rounded truncate ${
               SOURCE_COLORS[b.source] || SOURCE_COLORS.other
             }`}
           >
-            {b.guestInfo.name}
+            {flag ? `${flag} ` : ""}{b.guestInfo.name}
           </div>
-        ))}
+          );
+        })}
         {dayBookings.length > 3 && (
           <div className="text-[10px] text-muted-foreground">
             +{dayBookings.length - 3}

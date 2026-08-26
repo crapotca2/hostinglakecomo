@@ -18,6 +18,10 @@ export default function AnalyticsPage() {
   const { data, isLoading } = useAnalytics(currentYear);
 
   const maxMonthRevenue = data ? Math.max(...data.monthly.map((m) => m.revenue), 1) : 1;
+  // Parte dal primo mese con attività (es. luglio) invece che da gennaio.
+  const firstActiveIdx = data ? data.monthly.findIndex((m) => m.revenue > 0) : -1;
+  const visibleMonths = data && firstActiveIdx >= 0 ? data.monthly.slice(firstActiveIdx) : [];
+  const CHART_H = 160; // px area barre
 
   return (
     <div className="p-6 space-y-6 animate-fade-in">
@@ -41,18 +45,23 @@ export default function AnalyticsPage() {
         <h2 className="text-sm font-semibold mb-6">{t("monthlyRevenue")}</h2>
         {isLoading ? (
           <div className="h-48 bg-muted/20 animate-pulse rounded" />
+        ) : visibleMonths.length === 0 ? (
+          <div className="h-48 flex items-center justify-center text-sm text-muted-foreground">
+            {t("noData")}
+          </div>
         ) : (
-          <div className="flex items-end gap-2 h-48">
-            {(data?.monthly || []).map((d) => (
-              <div key={d.month} className="flex-1 flex flex-col items-center gap-1">
-                <div className="text-[10px] font-medium text-foreground">
+          <div className="flex items-end gap-3">
+            {visibleMonths.map((d) => (
+              <div key={d.month} className="flex-1 flex flex-col items-center">
+                <div className="text-[10px] font-medium text-foreground mb-1">
                   {d.revenue > 0 ? `€${(d.revenue / 1000).toFixed(1)}k` : "—"}
                 </div>
                 <div
-                  className="w-full rounded-t-md bg-primary/80 hover:bg-primary transition-colors min-h-[4px]"
-                  style={{ height: `${Math.max(2, (d.revenue / maxMonthRevenue) * 100)}%` }}
+                  className="w-full rounded-t-md bg-primary/80 hover:bg-primary transition-colors"
+                  style={{ height: `${Math.max(4, (d.revenue / maxMonthRevenue) * CHART_H)}px` }}
+                  title={`${d.label}: ${formatEuro(d.revenue)}`}
                 />
-                <div className="text-[10px] text-muted-foreground">{d.label}</div>
+                <div className="text-[10px] text-muted-foreground mt-1">{d.label}</div>
               </div>
             ))}
           </div>

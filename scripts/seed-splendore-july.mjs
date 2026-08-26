@@ -40,14 +40,15 @@ const CLEANING = 80;
 //  extra    = notte extra diretta (fuori OTA)
 //  status   = checked_out | cancelled
 //  taxStatus = stato incasso tassa: collected | pending | uncollected
+//  nat = provenienza ospite (ISO alpha-2)
 const D = [
-  { name: "Zack Meyers",        source: "airbnb",  ref: "HM5ANJRCAN", ci: "2026-07-08", co: "2026-07-15", nights: 7, guests: 3, gross: 2029.40, ota: 74.27,  cedolare: 426.17, tax: 63, parking: 70, extra: 0,   status: "checked_out", taxStatus: "collected" },
-  { name: "Alexandre Schein",   source: "airbnb",  ref: "HMBAF4D42J", ci: "2026-07-15", co: "2026-07-18", nights: 3, guests: 4, gross: 1033.14, ota: 38.06,  cedolare: 218.40, tax: 36, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "collected" },
-  { name: "Grzegorz Klimaszyk", source: "booking", ref: "5589247653", ci: "2026-07-18", co: "2026-07-22", nights: 4, guests: 4, gross: 1264.00, ota: 208.56, cedolare: 265.44, tax: 48, parking: 40, extra: 0,   status: "checked_out", taxStatus: "collected" },
-  { name: "Brian Søgaard",      source: "airbnb",  ref: "HMNFQ4TARW", ci: "2026-07-23", co: "2026-07-29", nights: 6, guests: 4, gross: 1986.80, ota: 73.20,  cedolare: 420.00, tax: 72, parking: 0,  extra: 0,   status: "cancelled",   taxStatus: "collected" },
-  { name: "Frédéric Poitiers",  source: "booking", ref: "6827537609", ci: "2026-07-27", co: "2026-07-30", nights: 3, guests: 5, gross: 1190.00, ota: 196.35, cedolare: 249.90, tax: 45, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "uncollected" },
-  { name: "Jean Claude Varin",  source: "booking", ref: "5081550102", ci: "2026-07-30", co: "2026-08-03", nights: 4, guests: 4, gross: 1160.00, ota: 191.40, cedolare: 243.60, tax: 48, parking: 40, extra: 250, status: "checked_out", taxStatus: "collected" },
-  { name: "Jacek Rączewski",    source: "booking", ref: "6356049116", ci: "2026-08-03", co: "2026-08-06", nights: 3, guests: 4, gross: 1064.00, ota: 175.56, cedolare: 223.44, tax: 36, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "collected" },
+  { name: "Zack Meyers",        nat: "US", source: "airbnb",  ref: "HM5ANJRCAN", ci: "2026-07-08", co: "2026-07-15", nights: 7, guests: 3, gross: 2029.40, ota: 74.27,  cedolare: 426.17, tax: 63, parking: 70, extra: 0,   status: "checked_out", taxStatus: "collected" },
+  { name: "Alexandre Schein",   nat: "DE", source: "airbnb",  ref: "HMBAF4D42J", ci: "2026-07-15", co: "2026-07-18", nights: 3, guests: 4, gross: 1033.14, ota: 38.06,  cedolare: 218.40, tax: 36, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "collected" },
+  { name: "Grzegorz Klimaszyk", nat: "PL", source: "booking", ref: "5589247653", ci: "2026-07-18", co: "2026-07-22", nights: 4, guests: 4, gross: 1264.00, ota: 208.56, cedolare: 265.44, tax: 48, parking: 40, extra: 0,   status: "checked_out", taxStatus: "collected" },
+  { name: "Brian Søgaard",      nat: "DK", source: "airbnb",  ref: "HMNFQ4TARW", ci: "2026-07-23", co: "2026-07-29", nights: 6, guests: 4, gross: 1986.80, ota: 73.20,  cedolare: 420.00, tax: 72, parking: 0,  extra: 0,   status: "cancelled",   taxStatus: "collected" },
+  { name: "Frédéric Poitiers",  nat: "FR", source: "booking", ref: "6827537609", ci: "2026-07-27", co: "2026-07-30", nights: 3, guests: 5, gross: 1190.00, ota: 196.35, cedolare: 249.90, tax: 45, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "uncollected" },
+  { name: "Jean Claude Varin",  nat: "FR", source: "booking", ref: "5081550102", ci: "2026-07-30", co: "2026-08-03", nights: 4, guests: 4, gross: 1160.00, ota: 191.40, cedolare: 243.60, tax: 48, parking: 40, extra: 250, status: "checked_out", taxStatus: "collected" },
+  { name: "Jacek Rączewski",    nat: "PL", source: "booking", ref: "6356049116", ci: "2026-08-03", co: "2026-08-06", nights: 3, guests: 4, gross: 1064.00, ota: 175.56, cedolare: 223.44, tax: 36, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "collected" },
 ];
 
 // Pagamento guest (incasso lordo) per prenotazione, per popolare la pagina Pagamenti.
@@ -81,7 +82,7 @@ function bookingDoc(d) {
     status: d.status,
     source: d.source,
     touristTaxStatus: d.taxStatus,
-    guestInfo: { name: d.name, email: "" },
+    guestInfo: { name: d.name, email: "", nationality: d.nat },
     pricing: {
       nightlyRate: r2(room / d.nights),
       cleaningFee: CLEANING,
