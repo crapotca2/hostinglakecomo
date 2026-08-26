@@ -1188,12 +1188,14 @@
         "status": "Статус",
         "ota": "Комис. OTA",
         "cedolare": "Налог",
-        "hostComo": "Host Como"
+        "hostComo": "Host Como",
+        "taxAdvance": "Аванс налога"
       },
       "status": {
         "paid": "Оплачено",
         "pending": "В обработке"
-      }
+      },
+      "taxAdvanceHint": "Туристический налог, собранный на месте, к уплате в муниципалитет"
     },
     "compliance": {
       "title": "Compliance",

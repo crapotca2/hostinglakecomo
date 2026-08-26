@@ -15,6 +15,7 @@ export interface MonthlyPayout {
   expenses: number;
   cleaning: number;
   touristTax: number;
+  touristTaxCollected: number;
   parkingOwner: number;
   netPayout: number;
   bookingCount: number;

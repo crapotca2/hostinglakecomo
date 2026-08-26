@@ -158,6 +158,10 @@ export interface BookingDoc extends BaseDoc {
   };
   /** Stato d'incasso della tassa di soggiorno (default: collected). */
   touristTaxStatus?: "collected" | "pending" | "uncollected";
+  /** Provenienza per singolo ospite (per ISTAT/ROSS con gruppi misti).
+   *  Se assente si usa guestInfo.nationality × guests. La somma dei count
+   *  dovrebbe corrispondere a `guests`. */
+  guestOrigins?: { code: string; count: number }[];
   stripePaymentId?: string;
   beds24Id?: string;
   beds24LastSync?: Date;

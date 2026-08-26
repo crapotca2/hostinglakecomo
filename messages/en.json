@@ -1188,12 +1188,14 @@
         "status": "Status",
         "ota": "OTA comm.",
         "cedolare": "Flat tax",
-        "hostComo": "Host Como"
+        "hostComo": "Host Como",
+        "taxAdvance": "Tax advance"
       },
       "status": {
         "paid": "Paid",
         "pending": "Processing"
-      }
+      },
+      "taxAdvanceHint": "City tax collected on site/in payout, to remit to the Comune (cash on hand)"
     },
     "compliance": {
       "title": "Compliance",

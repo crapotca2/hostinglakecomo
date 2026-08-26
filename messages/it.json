@@ -1188,12 +1188,14 @@
         "status": "Stato",
         "ota": "Comm. OTA",
         "cedolare": "Cedolare",
-        "hostComo": "Host Como"
+        "hostComo": "Host Como",
+        "taxAdvance": "Anticipo tassa"
       },
       "status": {
         "paid": "Pagato",
         "pending": "In elaborazione"
-      }
+      },
+      "taxAdvanceHint": "Tassa di soggiorno incassata in loco/nel payout, da versare al comune (cassa già in mano)"
     },
     "compliance": {
       "title": "Compliance",

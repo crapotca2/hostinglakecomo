@@ -102,6 +102,7 @@ export default function StatementsPage() {
                       <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.cedolare")}</th>
                       <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.hostComo")}</th>
                       <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.net")}</th>
+                      <th className="text-right text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.taxAdvance")}</th>
                       <th className="text-center text-xs font-semibold text-muted-foreground px-4 py-3.5">{t("headers.status")}</th>
                       <th className="px-4 py-3.5"></th>
                     </tr>
@@ -133,6 +134,9 @@ export default function StatementsPage() {
                             -{formatEuro(s.airbibbyCommission, locale)}
                           </td>
                           <td className="px-4 py-4 text-sm text-right font-bold text-primary tabular-nums">{formatEuro(s.netPayout, locale)}</td>
+                          <td className="px-4 py-4 text-sm text-right text-emerald-600 tabular-nums" title={t("taxAdvanceHint")}>
+                            +{formatEuro(s.touristTaxCollected || 0, locale)}
+                          </td>
                           <td className="px-4 py-4 text-center">
                             <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${STATUS_STYLES[s.status]}`}>
                               {t(`status.${statusKey}`)}

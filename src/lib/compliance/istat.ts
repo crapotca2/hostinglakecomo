@@ -59,12 +59,21 @@ export async function generateIstatExport(
   };
 
   for (const b of bookings) {
-    const country = (b.guestInfo.nationality || "IT").toUpperCase();
-    // Arrivi: solo se il check-in cade nel mese.
-    if (b.checkIn >= start && b.checkIn <= end) bump(country, "arrivals", b.guests);
-    // Presenze: notti dello stay che ricadono nel mese.
+    // Provenienza per-ospite se disponibile (gruppi misti), altrimenti una sola
+    // nazionalità per l'intera prenotazione.
+    const origins =
+      b.guestOrigins && b.guestOrigins.length > 0
+        ? b.guestOrigins.map((o) => ({ code: (o.code || "IT").toUpperCase(), count: o.count }))
+        : [{ code: (b.guestInfo.nationality || "IT").toUpperCase(), count: b.guests }];
+
+    const arrivesInMonth = b.checkIn >= start && b.checkIn <= end;
+    let nightsInMonth = 0;
     for (let d = new Date(b.checkIn); d < b.checkOut; d = new Date(d.getTime() + dayMs)) {
-      if (d >= start && d <= end) bump(country, "presences", b.guests);
+      if (d >= start && d <= end) nightsInMonth++;
+    }
+    for (const o of origins) {
+      if (arrivesInMonth) bump(o.code, "arrivals", o.count);
+      bump(o.code, "presences", o.count * nightsInMonth);
     }
   }
 

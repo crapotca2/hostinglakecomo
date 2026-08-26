@@ -21,6 +21,9 @@ export interface MonthlyPayout {
   /** Pulizie (partita di giro, fuori dal netto). */
   cleaning: number;
   touristTax: number;
+  /** Tassa di soggiorno effettivamente incassata in loco/nel payout (anticipo di
+   *  cassa da versare al comune). */
+  touristTaxCollected: number;
   /** Quota parcheggio del proprietario (50%). */
   parkingOwner: number;
   netPayout: number;
@@ -70,6 +73,11 @@ export async function getMonthlyPayouts(
     if (monthBookings.length === 0 && !started) continue;
 
     const agg = aggregateBreakdown(monthBookings, rateOf);
+    const touristTaxCollected = Math.round(
+      monthBookings
+        .filter((b) => (b.touristTaxStatus ?? "collected") !== "uncollected")
+        .reduce((s, b) => s + (b.pricing?.touristTax || 0), 0) * 100,
+    ) / 100;
     const propsSet = new Set(monthBookings.map((b: BookingDoc) => b.propertyId.toString()));
     const isPast = to <= now; // ciclo chiuso
 
@@ -85,6 +93,7 @@ export async function getMonthlyPayouts(
       expenses: 0,
       cleaning: agg.cleaning,
       touristTax: agg.touristTax,
+      touristTaxCollected,
       parkingOwner: agg.parkingOwner,
       netPayout: agg.netPayout,
       bookingCount: monthBookings.length,

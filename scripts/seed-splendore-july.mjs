@@ -42,7 +42,7 @@ const CLEANING = 80;
 //  taxStatus = stato incasso tassa: collected | pending | uncollected
 //  nat = provenienza ospite (ISO alpha-2)
 const D = [
-  { name: "Zack Meyers",        nat: "US", source: "airbnb",  ref: "HM5ANJRCAN", ci: "2026-07-08", co: "2026-07-15", nights: 7, guests: 4, gross: 2029.40, ota: 74.27,  cedolare: 426.17, tax: 84, parking: 70, extra: 0,   status: "checked_out", taxStatus: "collected" },
+  { name: "Zack Meyers",        nat: "US", source: "airbnb",  ref: "HM5ANJRCAN", ci: "2026-07-08", co: "2026-07-15", nights: 7, guests: 2, gross: 2029.40, ota: 74.27,  cedolare: 426.17, tax: 42, parking: 70, extra: 0,   status: "checked_out", taxStatus: "collected", origins: [{ code: "US", count: 1 }, { code: "ES", count: 1 }] },
   { name: "Alexandre Schein",   nat: "US", source: "airbnb",  ref: "HMBAF4D42J", ci: "2026-07-15", co: "2026-07-18", nights: 3, guests: 4, gross: 1033.14, ota: 38.06,  cedolare: 218.40, tax: 36, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "collected" },
   { name: "Grzegorz Klimaszyk", nat: "PL", source: "booking", ref: "5589247653", ci: "2026-07-18", co: "2026-07-22", nights: 4, guests: 3, gross: 1264.00, ota: 208.56, cedolare: 265.44, tax: 36, parking: 40, extra: 0,   status: "checked_out", taxStatus: "collected" },
   { name: "Brian Søgaard",      nat: "DK", source: "airbnb",  ref: "HMNFQ4TARW", ci: "2026-07-23", co: "2026-07-29", nights: 6, guests: 4, gross: 1986.80, ota: 73.20,  cedolare: 420.00, tax: 72, parking: 0,  extra: 0,   status: "cancelled",   taxStatus: "collected" },
@@ -86,6 +86,7 @@ function bookingDoc(d) {
     status: d.status,
     source: d.source,
     touristTaxStatus: d.taxStatus,
+    ...(d.origins ? { guestOrigins: d.origins } : {}),
     guestInfo: { name: d.name, email: "", nationality: d.nat },
     pricing: {
       nightlyRate: r2(room / d.nights),
