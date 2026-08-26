@@ -40,14 +40,30 @@ const CLEANING = 80;
 //  extra    = notte extra diretta (fuori OTA)
 //  status   = checked_out | cancelled
 const D = [
-  { name: "Zack Meyers",        source: "airbnb",  ci: "2026-07-08", co: "2026-07-15", nights: 7, guests: 3, gross: 2029.40, ota: 74.27,  cedolare: 426.17, tax: 63, parking: 70, extra: 0,   status: "checked_out" },
-  { name: "Alexandre Schein",   source: "airbnb",  ci: "2026-07-15", co: "2026-07-18", nights: 3, guests: 4, gross: 1033.14, ota: 38.06,  cedolare: 218.40, tax: 36, parking: 0,  extra: 0,   status: "checked_out" },
-  { name: "Grzegorz Klimaszyk", source: "booking", ci: "2026-07-18", co: "2026-07-22", nights: 4, guests: 4, gross: 1264.00, ota: 208.56, cedolare: 265.44, tax: 48, parking: 40, extra: 0,   status: "checked_out" },
-  { name: "Brian Søgaard",      source: "airbnb",  ci: "2026-07-23", co: "2026-07-29", nights: 6, guests: 2, gross: 1986.80, ota: 73.20,  cedolare: 420.00, tax: 72, parking: 0,  extra: 0,   status: "cancelled" },
-  { name: "Frédéric Poitiers",  source: "booking", ci: "2026-07-27", co: "2026-07-30", nights: 3, guests: 5, gross: 1190.00, ota: 196.35, cedolare: 249.90, tax: 45, parking: 0,  extra: 0,   status: "checked_out" },
-  { name: "Jean Claude Varin",  source: "booking", ci: "2026-07-30", co: "2026-08-03", nights: 4, guests: 4, gross: 1160.00, ota: 191.40, cedolare: 243.60, tax: 48, parking: 40, extra: 250, status: "checked_out" },
-  { name: "Jacek Rączewski",    source: "booking", ci: "2026-08-03", co: "2026-08-06", nights: 3, guests: 4, gross: 1064.00, ota: 175.56, cedolare: 223.44, tax: 36, parking: 0,  extra: 0,   status: "checked_out" },
+  { name: "Zack Meyers",        source: "airbnb",  ref: "HM5ANJRCAN", ci: "2026-07-08", co: "2026-07-15", nights: 7, guests: 3, gross: 2029.40, ota: 74.27,  cedolare: 426.17, tax: 63, parking: 70, extra: 0,   status: "checked_out" },
+  { name: "Alexandre Schein",   source: "airbnb",  ref: "HMBAF4D42J", ci: "2026-07-15", co: "2026-07-18", nights: 3, guests: 4, gross: 1033.14, ota: 38.06,  cedolare: 218.40, tax: 36, parking: 0,  extra: 0,   status: "checked_out" },
+  { name: "Grzegorz Klimaszyk", source: "booking", ref: "5589247653", ci: "2026-07-18", co: "2026-07-22", nights: 4, guests: 4, gross: 1264.00, ota: 208.56, cedolare: 265.44, tax: 48, parking: 40, extra: 0,   status: "checked_out" },
+  { name: "Brian Søgaard",      source: "airbnb",  ref: "HMNFQ4TARW", ci: "2026-07-23", co: "2026-07-29", nights: 6, guests: 2, gross: 1986.80, ota: 73.20,  cedolare: 420.00, tax: 72, parking: 0,  extra: 0,   status: "cancelled" },
+  { name: "Frédéric Poitiers",  source: "booking", ref: "6827537609", ci: "2026-07-27", co: "2026-07-30", nights: 3, guests: 5, gross: 1190.00, ota: 196.35, cedolare: 249.90, tax: 45, parking: 0,  extra: 0,   status: "checked_out" },
+  { name: "Jean Claude Varin",  source: "booking", ref: "5081550102", ci: "2026-07-30", co: "2026-08-03", nights: 4, guests: 4, gross: 1160.00, ota: 191.40, cedolare: 243.60, tax: 48, parking: 40, extra: 250, status: "checked_out" },
+  { name: "Jacek Rączewski",    source: "booking", ref: "6356049116", ci: "2026-08-03", co: "2026-08-06", nights: 3, guests: 4, gross: 1064.00, ota: 175.56, cedolare: 223.44, tax: 36, parking: 0,  extra: 0,   status: "checked_out" },
 ];
+
+// Pagamento guest (incasso lordo) per prenotazione, per popolare la pagina Pagamenti.
+function paymentDoc(bookingDoc, d) {
+  const refunded = d.status === "cancelled";
+  return {
+    _id: new ObjectId(),
+    type: "booking",
+    bookingId: bookingDoc._id,
+    stripePaymentIntentId: `${d.source}:${d.ref}`,
+    amount: d.gross,
+    currency: "EUR",
+    status: refunded ? "refunded" : "succeeded",
+    createdAt: new Date(d.ci + "T12:00:00Z"),
+    updatedAt: now,
+  };
+}
 
 function bookingDoc(d) {
   const room = r2(d.gross - CLEANING); // ricavi alloggio (ex pulizie)
@@ -123,10 +139,18 @@ async function main() {
       },
       { upsert: true },
     );
+    // Pulisci i pagamenti legati ai vecchi booking di questo owner, poi i booking.
+    const oldIds = (await db.collection("bookings").find({ ownerId }).project({ _id: 1 }).toArray()).map((b) => b._id);
+    if (oldIds.length) await db.collection("payments").deleteMany({ bookingId: { $in: oldIds } });
     await db.collection("bookings").deleteMany({ ownerId });
+
     const docs = D.map(bookingDoc);
     await db.collection("bookings").insertMany(docs);
-    console.log(`✅ seed REALE in ${dbName}: owner Alessandro Splendore + property aqua-vista-splendore + ${docs.length} booking`);
+
+    const payments = docs.map((doc, i) => paymentDoc(doc, D[i]));
+    await db.collection("payments").insertMany(payments);
+
+    console.log(`✅ seed REALE in ${dbName}: owner Alessandro Splendore + property aqua-vista-splendore + ${docs.length} booking + ${payments.length} pagamenti`);
     console.log(`   login proprietario → email: ${OWNER_EMAIL} · password: ${OWNER_PASSWORD}`);
     for (const b of docs) {
       console.log(`   · ${b.guestInfo.name.padEnd(20)} ${b.checkIn.toISOString().slice(0, 10)} ${String(b.status).padEnd(11)} gross=${b.pricing.totalAmount} net=${b.pricing.ownerPayout}`);
