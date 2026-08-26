@@ -1224,7 +1224,13 @@
           "Oct",
           "Nov",
           "Dec"
-        ]
+        ],
+        "preview": "Preview",
+        "origin": "Origin",
+        "arrivals": "Arrivals",
+        "presences": "Nights",
+        "total": "TOTAL",
+        "empty": "No data in period"
       },
       "tax": {
         "title": "Tourist tax",

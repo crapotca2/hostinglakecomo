@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
   const year = parseInt(searchParams.get("year") || String(now.getFullYear()), 10);
   const format = searchParams.get("format") || "json";
 
-  const { rows, csv } = await generateIstatExport(month, year, scope.ownerId);
+  const { rows, total, csv } = await generateIstatExport(month, year, scope.ownerId);
 
   if (format === "csv") {
     return new NextResponse(csv, {
@@ -24,5 +24,5 @@ export async function GET(req: NextRequest) {
     });
   }
 
-  return NextResponse.json({ rows, rowCount: rows.length });
+  return NextResponse.json({ rows, total, rowCount: rows.length });
 }

@@ -21,6 +21,10 @@ export default function CompliancePage() {
   const [alloggiatiTo, setAlloggiatiTo] = useState(now.toISOString().slice(0, 10));
   const [istatMonth, setIstatMonth] = useState(String(now.getMonth() + 1));
   const [istatYear, setIstatYear] = useState(String(now.getFullYear()));
+  const [istatData, setIstatData] = useState<{
+    rows: Array<{ origin: string; arrivals: number; presences: number }>;
+    total: { arrivals: number; presences: number };
+  } | null>(null);
   const [quarterFrom, setQuarterFrom] = useState(
     new Date(now.getFullYear(), Math.floor(now.getMonth() / 3) * 3, 1).toISOString().slice(0, 10)
   );
@@ -36,6 +40,11 @@ export default function CompliancePage() {
   function downloadIstat() {
     const url = `/api/compliance/istat?month=${istatMonth}&year=${istatYear}&format=csv`;
     downloadFile(url);
+  }
+
+  async function loadIstat() {
+    const res = await fetch(`/api/compliance/istat?month=${istatMonth}&year=${istatYear}`);
+    if (res.ok) setIstatData(await res.json());
   }
 
   return (
@@ -130,6 +139,12 @@ export default function CompliancePage() {
             />
           </div>
           <button
+            onClick={loadIstat}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-sm font-medium hover:bg-muted/50 transition-colors"
+          >
+            {t("istat.preview")}
+          </button>
+          <button
             onClick={downloadIstat}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-colors"
           >
@@ -137,6 +152,37 @@ export default function CompliancePage() {
             {t("istat.download")}
           </button>
         </div>
+
+        {istatData && (
+          <div className="mt-5 overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border/40">
+                  <th className="text-left text-xs font-semibold text-primary py-2">{t("istat.origin")}</th>
+                  <th className="text-right text-xs font-semibold text-primary py-2 px-4">{t("istat.arrivals")}</th>
+                  <th className="text-right text-xs font-semibold text-primary py-2 px-4">{t("istat.presences")}</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border/30">
+                <tr className="font-bold text-emerald-700">
+                  <td className="py-2">{t("istat.total")}</td>
+                  <td className="py-2 px-4 text-right tabular-nums">{istatData.total.arrivals}</td>
+                  <td className="py-2 px-4 text-right tabular-nums">{istatData.total.presences}</td>
+                </tr>
+                {istatData.rows.map((r) => (
+                  <tr key={r.origin} className="text-emerald-700">
+                    <td className="py-2 font-medium">{r.origin}</td>
+                    <td className="py-2 px-4 text-right tabular-nums">{r.arrivals}</td>
+                    <td className="py-2 px-4 text-right tabular-nums">{r.presences}</td>
+                  </tr>
+                ))}
+                {istatData.rows.length === 0 && (
+                  <tr><td colSpan={3} className="py-4 text-center text-muted-foreground">{t("istat.empty")}</td></tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
 
       <TaxSection

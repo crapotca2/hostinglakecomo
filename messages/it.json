@@ -1224,7 +1224,13 @@
           "Ott",
           "Nov",
           "Dic"
-        ]
+        ],
+        "preview": "Anteprima",
+        "origin": "Origine",
+        "arrivals": "Arrivi",
+        "presences": "Presenze",
+        "total": "TOTALE",
+        "empty": "Nessun dato nel periodo"
       },
       "tax": {
         "title": "Tassa di soggiorno",

@@ -1,22 +1,48 @@
 import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
 import type { BookingDoc } from "@/types/database";
+import { countryName } from "@/lib/countries";
 
 export interface IstatRow {
-  date: string;
-  arrivals: number;
-  presences: number;
+  origin: string; // nome paese in italiano (maiuscolo), es. "FRANCIA"
   countryCode: string;
+  arrivals: number; // ospiti arrivati nel mese
+  presences: number; // presenze = notti-ospite nel mese
 }
 
+// Nomi ISTAT/ROSS ufficiali per i casi che differiscono da countryName().
+const ISTAT_NAMES: Record<string, string> = {
+  US: "STATI UNITI D'AMERICA",
+  GB: "REGNO UNITO",
+};
+
+function originName(code: string): string {
+  const cc = (code || "IT").toUpperCase();
+  return ISTAT_NAMES[cc] || countryName(cc).toUpperCase() || cc;
+}
+
+/**
+ * Report flussi turistici in formato ROSS 1000 (Regione Lombardia): aggregato
+ * per **Origine** con Arrivi e Presenze del mese + riga TOTALE.
+ * - Arrivi = ospiti la cui data di check-in cade nel mese.
+ * - Presenze = notti-ospite ricadenti nel mese (uno stay a cavallo conta solo
+ *   le notti del mese).
+ * NB: la nazionalità è a livello di prenotazione; per gruppi con provenienze
+ * miste il dato ufficiale ROSS (per singolo ospite) è più granulare.
+ */
 export async function generateIstatExport(
   month: number,
   year: number,
   ownerId: string
-): Promise<{ rows: IstatRow[]; csv: string }> {
+): Promise<{
+  rows: IstatRow[];
+  total: { arrivals: number; presences: number };
+  csv: string;
+}> {
   const bookingsCol = await collections.bookings();
   const start = new Date(year, month - 1, 1);
   const end = new Date(year, month, 0, 23, 59, 59);
+  const dayMs = 24 * 60 * 60 * 1000;
 
   const allBookings = (await bookingsCol
     .find({ ownerId: new ObjectId(ownerId) })
@@ -25,43 +51,40 @@ export async function generateIstatExport(
     (b) => b.status !== "cancelled" && b.checkIn <= end && b.checkOut >= start
   );
 
-  const byDateCountry = new Map<string, { arrivals: number; presences: number }>();
+  const byCountry = new Map<string, { arrivals: number; presences: number }>();
+  const bump = (code: string, field: "arrivals" | "presences", n: number) => {
+    const prev = byCountry.get(code) || { arrivals: 0, presences: 0 };
+    prev[field] += n;
+    byCountry.set(code, prev);
+  };
 
   for (const b of bookings) {
-    const country = b.guestInfo.nationality || "IT";
-
-    if (b.checkIn >= start && b.checkIn <= end) {
-      const key = `${b.checkIn.toISOString().slice(0, 10)}|${country}`;
-      const prev = byDateCountry.get(key) || { arrivals: 0, presences: 0 };
-      prev.arrivals += b.guests;
-      byDateCountry.set(key, prev);
-    }
-
-    const dayMs = 24 * 60 * 60 * 1000;
+    const country = (b.guestInfo.nationality || "IT").toUpperCase();
+    // Arrivi: solo se il check-in cade nel mese.
+    if (b.checkIn >= start && b.checkIn <= end) bump(country, "arrivals", b.guests);
+    // Presenze: notti dello stay che ricadono nel mese.
     for (let d = new Date(b.checkIn); d < b.checkOut; d = new Date(d.getTime() + dayMs)) {
-      if (d >= start && d <= end) {
-        const key = `${d.toISOString().slice(0, 10)}|${country}`;
-        const prev = byDateCountry.get(key) || { arrivals: 0, presences: 0 };
-        prev.presences += b.guests;
-        byDateCountry.set(key, prev);
-      }
+      if (d >= start && d <= end) bump(country, "presences", b.guests);
     }
   }
 
-  const rows: IstatRow[] = [];
-  for (const [key, vals] of Array.from(byDateCountry.entries())) {
-    const [date, country] = key.split("|");
-    rows.push({
-      date,
-      arrivals: vals.arrivals,
-      presences: vals.presences,
-      countryCode: country,
-    });
-  }
-  rows.sort((a, b) => (a.date + a.countryCode).localeCompare(b.date + b.countryCode));
+  const rows: IstatRow[] = Array.from(byCountry.entries())
+    .map(([code, v]) => ({
+      origin: originName(code),
+      countryCode: code,
+      arrivals: v.arrivals,
+      presences: v.presences,
+    }))
+    .sort((a, b) => b.presences - a.presences || b.arrivals - a.arrivals);
 
-  const header = "Data;Arrivi;Presenze;Paese";
-  const csv = [header, ...rows.map((r) => `${r.date};${r.arrivals};${r.presences};${r.countryCode}`)].join("\n");
+  const total = rows.reduce(
+    (acc, r) => ({ arrivals: acc.arrivals + r.arrivals, presences: acc.presences + r.presences }),
+    { arrivals: 0, presences: 0 }
+  );
 
-  return { rows, csv };
+  const header = "Origine;Arrivi;Presenze";
+  const body = rows.map((r) => `${r.origin};${r.arrivals};${r.presences}`);
+  const csv = [header, `TOTALE;${total.arrivals};${total.presences}`, ...body].join("\n");
+
+  return { rows, total, csv };
 }
