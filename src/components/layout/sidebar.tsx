@@ -24,7 +24,7 @@ const NAV_ITEMS = [
   { href: "/dashboard/properties", icon: Home, key: "properties" },
   { href: "/dashboard/bookings", icon: CalendarDays, key: "bookings" },
   { href: "/dashboard/calendar", icon: CalendarDays, key: "calendar" },
-  { href: "/dashboard/analytics", icon: BarChart3, key: "analytics" },
+  { href: "/dashboard/reports/property-management", icon: BarChart3, key: "analytics" },
   { href: "/dashboard/reports", icon: FileText, key: "reports" },
   { href: "/dashboard/statements", icon: FileText, key: "statements" },
   { href: "/dashboard/compliance", icon: Shield, key: "compliance" },

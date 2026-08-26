@@ -14,10 +14,16 @@ export interface IstatRow {
 const ISTAT_NAMES: Record<string, string> = {
   US: "STATI UNITI D'AMERICA",
   GB: "REGNO UNITO",
+  "??": "DA CONFERMARE",
 };
 
+// Sentinella per nazionalità mancante: NON assumere ITALIA (falserebbe un dato
+// legale). La compliance mostra "DA CONFERMARE" finché la schedina non è nota.
+const UNKNOWN = "??";
+
 function originName(code: string): string {
-  const cc = (code || "IT").toUpperCase();
+  const cc = (code || UNKNOWN).toUpperCase();
+  if (cc === UNKNOWN) return ISTAT_NAMES[UNKNOWN];
   return ISTAT_NAMES[cc] || countryName(cc).toUpperCase() || cc;
 }
 
@@ -63,8 +69,8 @@ export async function generateIstatExport(
     // nazionalità per l'intera prenotazione.
     const origins =
       b.guestOrigins && b.guestOrigins.length > 0
-        ? b.guestOrigins.map((o) => ({ code: (o.code || "IT").toUpperCase(), count: o.count }))
-        : [{ code: (b.guestInfo.nationality || "IT").toUpperCase(), count: b.guests }];
+        ? b.guestOrigins.map((o) => ({ code: (o.code || UNKNOWN).toUpperCase(), count: o.count }))
+        : [{ code: (b.guestInfo.nationality || UNKNOWN).toUpperCase(), count: b.guests }];
 
     const arrivesInMonth = b.checkIn >= start && b.checkIn <= end;
     let nightsInMonth = 0;

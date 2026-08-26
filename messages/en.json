@@ -1577,14 +1577,14 @@
         }
       },
       "propertyManagement": {
-        "titleStrong": "Property management",
-        "subtitle": "Commissions, owner remittance and detailed statements",
+        "titleStrong": "Analytics & Statements",
+        "subtitle": "Charts, commissions and owner statements in a single view",
         "tabs": {
           "commissionSummary": "Commission summary",
           "commissionDetail": "Commission detail",
           "ownerSummary": "Owner remittance",
           "ownerDetail": "Owner detail",
-          "bookingRemittance": "Booking remittance"
+          "overview": "Overview"
         },
         "commissionSummary": {
           "tableTitle": "Commission summary by channel",
@@ -1670,6 +1670,28 @@
             "tax": "Tax",
             "net": "Net"
           }
+        },
+        "overview": {
+          "channelMix": "Revenue by channel",
+          "monthlyRevenue": "Monthly revenue",
+          "monthlyPresences": "Monthly presences (guest-nights)",
+          "kpiRevenue": "Gross revenue",
+          "kpiNet": "Owner net",
+          "kpiBookings": "Bookings",
+          "kpiOccupancy": "Avg. occupancy",
+          "noData": "No data in range"
+        },
+        "expand": {
+          "bookingsInPeriod": "Bookings in period",
+          "guest": "Guest",
+          "checkIn": "Check-in",
+          "nights": "Nights",
+          "channel": "Channel",
+          "gross": "Gross",
+          "ota": "OTA comm.",
+          "ownFee": "Host Como",
+          "tax": "City tax",
+          "net": "Net"
         }
       },
       "stay": {

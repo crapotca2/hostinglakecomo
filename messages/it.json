@@ -1577,14 +1577,14 @@
         }
       },
       "propertyManagement": {
-        "titleStrong": "Property management",
-        "subtitle": "Commissioni, rendiconti proprietario e prospetti dettagliati",
+        "titleStrong": "Analytics & Rendiconti",
+        "subtitle": "Grafici, commissioni e rendiconti proprietario in un'unica vista",
         "tabs": {
           "commissionSummary": "Riepilogo commissioni",
           "commissionDetail": "Dettaglio commissioni",
           "ownerSummary": "Rendiconto proprietario",
           "ownerDetail": "Dettaglio proprietario",
-          "bookingRemittance": "Prospetto per prenotazione"
+          "overview": "Panoramica"
         },
         "commissionSummary": {
           "tableTitle": "Riepilogo commissioni per canale",
@@ -1670,6 +1670,28 @@
             "tax": "Tassa",
             "net": "Netto"
           }
+        },
+        "overview": {
+          "channelMix": "Ricavi per canale",
+          "monthlyRevenue": "Ricavi mensili",
+          "monthlyPresences": "Presenze mensili (notti-ospite)",
+          "kpiRevenue": "Ricavo lordo",
+          "kpiNet": "Netto proprietario",
+          "kpiBookings": "Prenotazioni",
+          "kpiOccupancy": "Occupazione media",
+          "noData": "Nessun dato nel periodo"
+        },
+        "expand": {
+          "bookingsInPeriod": "Prenotazioni del periodo",
+          "guest": "Ospite",
+          "checkIn": "Check-in",
+          "nights": "Notti",
+          "channel": "Canale",
+          "gross": "Lordo",
+          "ota": "Comm. OTA",
+          "ownFee": "Host Como",
+          "tax": "Tassa sogg.",
+          "net": "Netto"
         }
       },
       "stay": {

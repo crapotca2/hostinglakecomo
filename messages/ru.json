@@ -1577,14 +1577,14 @@
         }
       },
       "propertyManagement": {
-        "titleStrong": "Property management",
-        "subtitle": "Комиссии, отчёты собственнику и подробные сводки",
+        "titleStrong": "Аналитика и отчёты",
+        "subtitle": "Графики, комиссии и отчёты собственнику в одном месте",
         "tabs": {
           "commissionSummary": "Сводка комиссий",
           "commissionDetail": "Детализация комиссий",
           "ownerSummary": "Отчёт собственнику",
           "ownerDetail": "Детализация собственника",
-          "bookingRemittance": "Сводка по бронированию"
+          "overview": "Обзор"
         },
         "commissionSummary": {
           "tableTitle": "Сводка комиссий по каналам",
@@ -1670,6 +1670,28 @@
             "tax": "Налог",
             "net": "Чистая"
           }
+        },
+        "overview": {
+          "channelMix": "Доход по каналам",
+          "monthlyRevenue": "Доход по месяцам",
+          "monthlyPresences": "Ночёвки по месяцам (гость-ночи)",
+          "kpiRevenue": "Валовой доход",
+          "kpiNet": "Чистыми собственнику",
+          "kpiBookings": "Бронирования",
+          "kpiOccupancy": "Средняя загрузка",
+          "noData": "Нет данных за период"
+        },
+        "expand": {
+          "bookingsInPeriod": "Бронирования периода",
+          "guest": "Гость",
+          "checkIn": "Заезд",
+          "nights": "Ночи",
+          "channel": "Канал",
+          "gross": "Брутто",
+          "ota": "Комиссия ОТА",
+          "ownFee": "Host Como",
+          "tax": "Турналог",
+          "net": "Нетто"
         }
       },
       "stay": {
