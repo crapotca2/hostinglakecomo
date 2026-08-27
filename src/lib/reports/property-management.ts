@@ -27,6 +27,7 @@ export interface CommissionSummaryRow {
   bookings: number;
   grossRevenue: number;
   otaCommission: number;
+  cedolare: number;
   airbibbyCommission: number;
   totalCommission: number;
   ownerPayout: number;
@@ -48,16 +49,17 @@ export async function getCommissionSummary(from: Date, to: Date, ownerId: string
 
   const rows: CommissionSummaryRow[] = [];
   for (const [source, list] of Array.from(bySource.entries())) {
-    let gross = 0, ota = 0, fee = 0, net = 0;
+    let gross = 0, ota = 0, ced = 0, fee = 0, net = 0;
     for (const b of list) {
       const d = breakdownForBooking(b, rateOf(b));
-      gross += d.totalRevenue; ota += d.otaCommission; fee += d.managementFee; net += d.netPayout;
+      gross += d.totalRevenue; ota += d.otaCommission; ced += d.cedolare; fee += d.managementFee; net += d.netPayout;
     }
     rows.push({
       source,
       bookings: list.length,
       grossRevenue: Math.round(gross),
       otaCommission: Math.round(ota),
+      cedolare: Math.round(ced),
       airbibbyCommission: Math.round(fee),
       totalCommission: Math.round(ota + fee),
       ownerPayout: Math.round(net),

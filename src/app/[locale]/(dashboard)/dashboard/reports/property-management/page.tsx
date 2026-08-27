@@ -168,28 +168,30 @@ function CommissionSummaryView({ from, to }: { from: string; to: string }) {
   const t = useTranslations("dashboard.reports.propertyManagement.commissionSummary");
   const { data, isLoading } = useReport("commission-summary", { from, to });
   const rows = data?.rows || [];
-  const totals = rows.reduce((s: { gross: number; ota: number; ab: number; payout: number }, r: { grossRevenue: number; otaCommission: number; airbibbyCommission: number; ownerPayout: number }) => ({
+  const totals = rows.reduce((s: { gross: number; ota: number; ced: number; ab: number; payout: number }, r: { grossRevenue: number; otaCommission: number; cedolare: number; airbibbyCommission: number; ownerPayout: number }) => ({
     gross: s.gross + r.grossRevenue,
     ota: s.ota + r.otaCommission,
+    ced: s.ced + (r.cedolare || 0),
     ab: s.ab + r.airbibbyCommission,
     payout: s.payout + r.ownerPayout,
-  }), { gross: 0, ota: 0, ab: 0, payout: 0 });
+  }), { gross: 0, ota: 0, ced: 0, ab: 0, payout: 0 });
 
-  const columns: ReportColumn<{ source: string; bookings: number; grossRevenue: number; otaCommission: number; airbibbyCommission: number; totalCommission: number; ownerPayout: number }>[] = [
+  const columns: ReportColumn<{ source: string; bookings: number; grossRevenue: number; otaCommission: number; cedolare: number; airbibbyCommission: number; totalCommission: number; ownerPayout: number }>[] = [
     { key: "source", label: t("columns.channel") },
     { key: "bookings", label: t("columns.bookings"), align: "center", numeric: true },
     { key: "grossRevenue", label: t("columns.gross"), align: "right", numeric: true, render: (r) => formatEuro(r.grossRevenue) },
     { key: "otaCommission", label: t("columns.otaCommission"), align: "right", numeric: true, render: (r) => formatEuro(r.otaCommission) },
+    { key: "cedolare", label: t("columns.cedolare"), align: "right", numeric: true, render: (r) => formatEuro(r.cedolare || 0) },
     { key: "airbibbyCommission", label: t("columns.ownCommission"), align: "right", numeric: true, render: (r) => formatEuro(r.airbibbyCommission) },
-    { key: "totalCommission", label: t("columns.totalCommission"), align: "right", numeric: true, render: (r) => formatEuro(r.totalCommission) },
-    { key: "ownerPayout", label: t("columns.ownerNet"), align: "right", numeric: true, render: (r) => formatEuro(r.ownerPayout) },
+    { key: "ownerPayout", label: t("columns.ownerNet"), align: "right", numeric: true, render: (r) => <span className="font-semibold text-primary">{formatEuro(r.ownerPayout)}</span> },
   ];
 
   return (
     <>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
         <StatCard label={t("stats.grossRevenue")} value={formatEuro(totals.gross)} loading={isLoading} />
         <StatCard label={t("stats.otaCommissions")} value={formatEuro(totals.ota)} loading={isLoading} />
+        <StatCard label={t("stats.cedolare")} value={formatEuro(totals.ced)} loading={isLoading} />
         <StatCard label={t("stats.ownCommission")} value={formatEuro(totals.ab)} loading={isLoading} />
         <StatCard label={t("stats.ownerNetTotal")} value={formatEuro(totals.payout)} loading={isLoading} />
       </div>
@@ -202,18 +204,26 @@ function CommissionDetailView({ from, to }: { from: string; to: string }) {
   const t = useTranslations("dashboard.reports.propertyManagement.commissionDetail");
   const { data, isLoading } = useReport("commission-detail", { from, to });
   const rows = data?.rows || [];
+  // Vista compatta: niente colonna Immobile (owner-scoped, ridondante); comm.
+  // OTA in un'unica colonna con €·% così il Netto resta sempre visibile.
   const columns: ReportColumn<{ bookingId: string; checkIn: string; propertyName: string; guestName: string; source: string; nights: number; grossRevenue: number; otaCommissionRate: number; otaCommission: number; cedolare: number; airbibbyCommission: number; ownerPayout: number }>[] = [
     { key: "checkIn", label: t("columns.checkIn") },
-    { key: "propertyName", label: t("columns.property") },
     { key: "guestName", label: t("columns.guest") },
     { key: "source", label: t("columns.source") },
     { key: "nights", label: t("columns.nights"), align: "center", numeric: true },
     { key: "grossRevenue", label: t("columns.gross"), align: "right", numeric: true, render: (r) => formatEuro(r.grossRevenue) },
-    { key: "otaCommissionRate", label: t("columns.otaRate"), align: "center", numeric: true, render: (r) => `${r.otaCommissionRate}%` },
-    { key: "otaCommission", label: t("columns.otaCommission"), align: "right", numeric: true, render: (r) => formatEuro(r.otaCommission) },
+    {
+      key: "otaCommission", label: t("columns.otaCommission"), align: "right", numeric: true,
+      render: (r) => (
+        <span className="whitespace-nowrap">
+          {formatEuro(r.otaCommission)}
+          <span className="text-muted-foreground text-xs"> · {r.otaCommissionRate}%</span>
+        </span>
+      ),
+    },
     { key: "cedolare", label: t("columns.cedolare"), align: "right", numeric: true, render: (r) => formatEuro(r.cedolare) },
     { key: "airbibbyCommission", label: t("columns.ownCommission"), align: "right", numeric: true, render: (r) => formatEuro(r.airbibbyCommission) },
-    { key: "ownerPayout", label: t("columns.ownerNet"), align: "right", numeric: true, render: (r) => formatEuro(r.ownerPayout) },
+    { key: "ownerPayout", label: t("columns.ownerNet"), align: "right", numeric: true, render: (r) => <span className="font-semibold text-primary">{formatEuro(r.ownerPayout)}</span> },
   ];
   return <ReportTable title={t("tableTitle")} columns={columns} rows={rows} loading={isLoading} onExportCSV={() => downloadCSV("commission-detail.csv", rows)} />;
 }

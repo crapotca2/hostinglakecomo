@@ -66,7 +66,12 @@ function esc(s: string): string {
 const num = (ref: string, s: number, v: number) => `<c r="${ref}" s="${s}"><v>${v}</v></c>`;
 const str = (ref: string, s: number, v: string) =>
   `<c r="${ref}" s="${s}" t="inlineStr"><is><t xml:space="preserve">${esc(v)}</t></is></c>`;
-const fml = (ref: string, s: number, f: string) => `<c r="${ref}" s="${s}"><f>${esc(f)}</f></c>`;
+// Con un valore in cache Excel mostra subito il numero (anche in Visualizzazione
+// protetta, senza dover ricalcolare). La formula resta cliccabile/verificabile.
+const fml = (ref: string, s: number, f: string, v?: number) =>
+  v === undefined || !isFinite(v)
+    ? `<c r="${ref}" s="${s}"><f>${esc(f)}</f></c>`
+    : `<c r="${ref}" s="${s}"><f>${esc(f)}</f><v>${Math.round(v * 1e6) / 1e6}</v></c>`;
 const emptyC = (ref: string, s: number) => `<c r="${ref}" s="${s}"/>`;
 
 interface Labels {
@@ -151,6 +156,35 @@ function buildSheet(input: RendicontoXlsxInput, L: Labels, title: string): strin
   };
   const COLS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q"];
 
+  // Valori in cache: calcolati qui così Excel li mostra subito (anche in
+  // Visualizzazione protetta, senza ricalcolo). Le formule restano verificabili.
+  const bk = input.bookings;
+  const nVal = (b: XlsxBooking) => 3 * b.guests * b.nights;
+  const oVal = (b: XlsxBooking) => (b.channel === "Airbnb" ? nVal(b) : 0);
+  const pVal = (b: XlsxBooking) => b.room + b.cleaning + oVal(b) - b.ota - b.cedolare;
+  const qVal = (b: XlsxBooking) => (b.nights ? b.room / b.nights : 0);
+  const counted = bk.filter((b) => b.counts);
+  const sum = (f: (b: XlsxBooking) => number) => counted.reduce((s, b) => s + f(b), 0);
+  const T_ = {
+    E: sum((b) => b.nights), F: sum((b) => b.guests), G: sum((b) => b.room), H: sum((b) => b.cleaning),
+    I: sum((b) => b.ota), J: sum((b) => b.cedolare), K: sum((b) => b.parking), L: sum((b) => b.extra),
+    N: sum(nVal), O: sum(oVal), P: sum(pVal),
+  };
+  const feeVal = T_.G * input.feeRate;
+  const totalRevVal = T_.G + T_.L;
+  const totalCostsVal = T_.I + T_.J + feeVal;
+  const netVal = totalRevVal - totalCostsVal;
+  const parkTotalVal = input.parking.reduce((s, p) => s + p.amount, 0);
+  const gridQ = input.nightGrid.map((n) => (n.bookingIndex != null ? qVal(bk[n.bookingIndex]) : null));
+  const sumT = gridQ.reduce<number>((s, v) => s + (v || 0), 0);
+  const occ = D ? gridQ.filter((v) => v != null && v > 0).length / D : 0;
+  const airbnbRoom = counted.filter((b) => b.channel === "Airbnb").reduce((s, b) => s + b.room, 0);
+  const bookingRoom = counted.filter((b) => b.channel === "Booking").reduce((s, b) => s + b.room, 0);
+  const countedQ_ = counted.map(qVal);
+  const minQ = countedQ_.length ? Math.min(...countedQ_) : 0;
+  const maxQ = countedQ_.length ? Math.max(...countedQ_) : 0;
+  const avgGuests = counted.length ? T_.F / counted.length : 0;
+
   // R1 titolo, R2 nota
   put(1, str("A1", S.title, title));
   put(2, str("A2", S.note, "Valori calcolati da formule Excel (clicca sulle celle per verificarli)."));
@@ -183,17 +217,17 @@ function buildSheet(input: RendicontoXlsxInput, L: Labels, title: string): strin
     put(r, num(`K${r}`, sEur, b.parking));
     put(r, num(`L${r}`, sEur, b.extra));
     put(r, num(`M${r}`, sCtr, b.counts ? 1 : 0));
-    put(r, fml(`N${r}`, sEur, `3*F${r}*E${r}`));
-    put(r, fml(`O${r}`, sEur, `IF(B${r}="Airbnb",N${r},0)`));
-    put(r, fml(`P${r}`, sEur, `G${r}+H${r}+O${r}-I${r}-J${r}`));
-    put(r, fml(`Q${r}`, sEur, `G${r}/E${r}`));
+    put(r, fml(`N${r}`, sEur, `3*F${r}*E${r}`, nVal(b)));
+    put(r, fml(`O${r}`, sEur, `IF(B${r}="Airbnb",N${r},0)`, oVal(b)));
+    put(r, fml(`P${r}`, sEur, `G${r}+H${r}+O${r}-I${r}-J${r}`, pVal(b)));
+    put(r, fml(`Q${r}`, sEur, `G${r}/E${r}`, qVal(b)));
   });
 
   // Riga Totale (SUMIF su M=1)
   const sumif = (col: string) => `SUMIF($M$5:$M$${4 + N},1,${col}5:${col}${4 + N})`;
   put(TOT, str(`A${TOT}`, S.totTxt, L.totalRow));
-  for (const col of ["E", "F"]) put(TOT, fml(`${col}${TOT}`, S.totTxt, sumif(col)));
-  for (const col of ["G", "H", "I", "J", "K", "L", "N", "O", "P"]) put(TOT, fml(`${col}${TOT}`, S.totEur, sumif(col)));
+  for (const col of ["E", "F"] as const) put(TOT, fml(`${col}${TOT}`, S.totTxt, sumif(col), T_[col]));
+  for (const col of ["G", "H", "I", "J", "K", "L", "N", "O", "P"] as const) put(TOT, fml(`${col}${TOT}`, S.totEur, sumif(col), T_[col]));
   put(TOT, emptyC(`M${TOT}`, S.totTxt));
   put(TOT, emptyC(`Q${TOT}`, S.totTxt));
 
@@ -201,7 +235,7 @@ function buildSheet(input: RendicontoXlsxInput, L: Labels, title: string): strin
   input.nightGrid.forEach((n, i) => {
     const r = 5 + i;
     put(r, str(`S${r}`, S.txt, n.label));
-    if (n.bookingIndex != null) put(r, fml(`T${r}`, S.eur, `Q${5 + n.bookingIndex}`));
+    if (n.bookingIndex != null) put(r, fml(`T${r}`, S.eur, `Q${5 + n.bookingIndex}`, qVal(bk[n.bookingIndex])));
     else put(r, emptyC(`T${r}`, S.eur));
   });
 
@@ -210,18 +244,18 @@ function buildSheet(input: RendicontoXlsxInput, L: Labels, title: string): strin
   put(b0, str(`A${b0}`, S.secA, L.secB));
   for (const c of ["B", "C", "D"]) put(b0, emptyC(`${c}${b0}`, S.secBar));
   put(b0 + 1, str(`A${b0 + 1}`, S.subLbl, L.revenue));
-  put(b0 + 2, str(`A${b0 + 2}`, S.txt, L.roomRev)); put(b0 + 2, fml(`B${b0 + 2}`, S.eur, `G${TOT}`));
-  put(b0 + 3, str(`A${b0 + 3}`, S.txt, L.extraNight)); put(b0 + 3, fml(`B${b0 + 3}`, S.eur, `L${TOT}`));
-  put(b0 + 4, str(`A${b0 + 4}`, S.totTxt, L.totalRevenue)); put(b0 + 4, fml(`B${b0 + 4}`, S.totEur, `B${b0 + 2}+B${b0 + 3}`));
+  put(b0 + 2, str(`A${b0 + 2}`, S.txt, L.roomRev)); put(b0 + 2, fml(`B${b0 + 2}`, S.eur, `G${TOT}`, T_.G));
+  put(b0 + 3, str(`A${b0 + 3}`, S.txt, L.extraNight)); put(b0 + 3, fml(`B${b0 + 3}`, S.eur, `L${TOT}`, T_.L));
+  put(b0 + 4, str(`A${b0 + 4}`, S.totTxt, L.totalRevenue)); put(b0 + 4, fml(`B${b0 + 4}`, S.totEur, `B${b0 + 2}+B${b0 + 3}`, totalRevVal));
   put(b0 + 5, str(`A${b0 + 5}`, S.subLbl, L.costs));
-  put(b0 + 6, str(`A${b0 + 6}`, S.txt, L.otaComm)); put(b0 + 6, fml(`B${b0 + 6}`, S.eur, `I${TOT}`));
-  put(b0 + 7, str(`A${b0 + 7}`, S.txt, L.flatTax)); put(b0 + 7, fml(`B${b0 + 7}`, S.eur, `J${TOT}`));
-  put(b0 + 8, str(`A${b0 + 8}`, S.txt, L.hostFee(input.feeRate))); put(b0 + 8, fml(`B${b0 + 8}`, S.eur, `G${TOT}*${input.feeRate}`));
-  put(b0 + 9, str(`A${b0 + 9}`, S.totTxt, L.totalCosts)); put(b0 + 9, fml(`B${b0 + 9}`, S.totEur, `B${b0 + 6}+B${b0 + 7}+B${b0 + 8}`));
-  put(b0 + 10, str(`A${b0 + 10}`, S.netLbl, L.netOwner)); put(b0 + 10, fml(`B${b0 + 10}`, S.netEur, `B${b0 + 4}-B${b0 + 9}`));
+  put(b0 + 6, str(`A${b0 + 6}`, S.txt, L.otaComm)); put(b0 + 6, fml(`B${b0 + 6}`, S.eur, `I${TOT}`, T_.I));
+  put(b0 + 7, str(`A${b0 + 7}`, S.txt, L.flatTax)); put(b0 + 7, fml(`B${b0 + 7}`, S.eur, `J${TOT}`, T_.J));
+  put(b0 + 8, str(`A${b0 + 8}`, S.txt, L.hostFee(input.feeRate))); put(b0 + 8, fml(`B${b0 + 8}`, S.eur, `G${TOT}*${input.feeRate}`, feeVal));
+  put(b0 + 9, str(`A${b0 + 9}`, S.totTxt, L.totalCosts)); put(b0 + 9, fml(`B${b0 + 9}`, S.totEur, `B${b0 + 6}+B${b0 + 7}+B${b0 + 8}`, totalCostsVal));
+  put(b0 + 10, str(`A${b0 + 10}`, S.netLbl, L.netOwner)); put(b0 + 10, fml(`B${b0 + 10}`, S.netEur, `B${b0 + 4}-B${b0 + 9}`, netVal));
   put(b0 + 12, str(`A${b0 + 12}`, S.note, L.passthrough));
-  put(b0 + 13, str(`A${b0 + 13}`, S.txt, L.cleaning)); put(b0 + 13, fml(`B${b0 + 13}`, S.eur, `H${TOT}`));
-  put(b0 + 14, str(`A${b0 + 14}`, S.txt, L.cityTax)); put(b0 + 14, fml(`B${b0 + 14}`, S.eur, `N${TOT}`));
+  put(b0 + 13, str(`A${b0 + 13}`, S.txt, L.cleaning)); put(b0 + 13, fml(`B${b0 + 13}`, S.eur, `H${TOT}`, T_.H));
+  put(b0 + 14, str(`A${b0 + 14}`, S.txt, L.cityTax)); put(b0 + 14, fml(`B${b0 + 14}`, S.eur, `N${TOT}`, T_.N));
 
   // ---- Sezione C parcheggi ----
   const c0 = g.cStart;
@@ -239,9 +273,9 @@ function buildSheet(input: RendicontoXlsxInput, L: Labels, title: string): strin
   const pt = g.parkTotRow;
   put(pt, str(`A${pt}`, S.totTxt, L.pTotal));
   put(pt, emptyC(`B${pt}`, S.totTxt));
-  put(pt, fml(`C${pt}`, S.totEurFill, input.parking.length ? `SUM(C${c0 + 2}:C${pt - 1})` : "0"));
-  put(pt + 1, str(`A${pt + 1}`, S.txt, L.pOwner)); put(pt + 1, fml(`C${pt + 1}`, S.eur, `C${pt}*0.5`));
-  put(pt + 2, str(`A${pt + 2}`, S.txt, L.pMgmt)); put(pt + 2, fml(`C${pt + 2}`, S.eur, `C${pt}*0.5`));
+  put(pt, fml(`C${pt}`, S.totEurFill, input.parking.length ? `SUM(C${c0 + 2}:C${pt - 1})` : "0", parkTotalVal));
+  put(pt + 1, str(`A${pt + 1}`, S.txt, L.pOwner)); put(pt + 1, fml(`C${pt + 1}`, S.eur, `C${pt}*0.5`, parkTotalVal * 0.5));
+  put(pt + 2, str(`A${pt + 2}`, S.txt, L.pMgmt)); put(pt + 2, fml(`C${pt + 2}`, S.eur, `C${pt}*0.5`, parkTotalVal * 0.5));
 
   // ---- Sezione E KPI ----
   const e0 = g.eStart;
@@ -250,26 +284,26 @@ function buildSheet(input: RendicontoXlsxInput, L: Labels, title: string): strin
   const sideS = `S5:S${g.lastSideRow}`;
   const sideT = `T5:T${g.lastSideRow}`;
   const countedQ = input.bookings.map((b, i) => (b.counts ? `Q${5 + i}` : null)).filter(Boolean).join(",") || `Q5`;
-  put(e0 + 1, str(`A${e0 + 1}`, S.txt, L.kpiRoomRev)); put(e0 + 1, fml(`B${e0 + 1}`, S.eur, `G${TOT}`));
-  put(e0 + 2, str(`A${e0 + 2}`, S.txt, L.kpiNightsSold)); put(e0 + 2, fml(`B${e0 + 2}`, S.int, `E${TOT}`));
-  put(e0 + 3, str(`A${e0 + 3}`, S.txt, L.kpiNightsAvail(L === IT ? input.availLabelIt : input.availLabelEn))); put(e0 + 3, fml(`B${e0 + 3}`, S.int, `COUNTA(${sideS})`));
-  put(e0 + 4, str(`A${e0 + 4}`, S.txt, L.kpiOcc)); put(e0 + 4, fml(`B${e0 + 4}`, S.pct, `COUNTIF(${sideT},">0")/COUNTA(${sideS})`));
-  put(e0 + 5, str(`A${e0 + 5}`, S.txt, L.kpiAdr)); put(e0 + 5, fml(`B${e0 + 5}`, S.eur, `G${TOT}/E${TOT}`));
-  put(e0 + 6, str(`A${e0 + 6}`, S.txt, L.kpiRevpar)); put(e0 + 6, fml(`B${e0 + 6}`, S.eur, `SUM(${sideT})/COUNTA(${sideS})`));
-  put(e0 + 7, str(`A${e0 + 7}`, S.txt, L.kpiMin)); put(e0 + 7, fml(`B${e0 + 7}`, S.eur, `MIN(${countedQ})`));
-  put(e0 + 8, str(`A${e0 + 8}`, S.txt, L.kpiMax)); put(e0 + 8, fml(`B${e0 + 8}`, S.eur, `MAX(${countedQ})`));
-  put(e0 + 9, str(`A${e0 + 9}`, S.txt, L.kpiAvgGuests)); put(e0 + 9, fml(`B${e0 + 9}`, S.dec1, `AVERAGEIF($M$5:$M$${4 + N},1,F5:F${4 + N})`));
+  put(e0 + 1, str(`A${e0 + 1}`, S.txt, L.kpiRoomRev)); put(e0 + 1, fml(`B${e0 + 1}`, S.eur, `G${TOT}`, T_.G));
+  put(e0 + 2, str(`A${e0 + 2}`, S.txt, L.kpiNightsSold)); put(e0 + 2, fml(`B${e0 + 2}`, S.int, `E${TOT}`, T_.E));
+  put(e0 + 3, str(`A${e0 + 3}`, S.txt, L.kpiNightsAvail(L === IT ? input.availLabelIt : input.availLabelEn))); put(e0 + 3, fml(`B${e0 + 3}`, S.int, `COUNTA(${sideS})`, D));
+  put(e0 + 4, str(`A${e0 + 4}`, S.txt, L.kpiOcc)); put(e0 + 4, fml(`B${e0 + 4}`, S.pct, `COUNTIF(${sideT},">0")/COUNTA(${sideS})`, occ));
+  put(e0 + 5, str(`A${e0 + 5}`, S.txt, L.kpiAdr)); put(e0 + 5, fml(`B${e0 + 5}`, S.eur, `G${TOT}/E${TOT}`, T_.E ? T_.G / T_.E : 0));
+  put(e0 + 6, str(`A${e0 + 6}`, S.txt, L.kpiRevpar)); put(e0 + 6, fml(`B${e0 + 6}`, S.eur, `SUM(${sideT})/COUNTA(${sideS})`, D ? sumT / D : 0));
+  put(e0 + 7, str(`A${e0 + 7}`, S.txt, L.kpiMin)); put(e0 + 7, fml(`B${e0 + 7}`, S.eur, `MIN(${countedQ})`, minQ));
+  put(e0 + 8, str(`A${e0 + 8}`, S.txt, L.kpiMax)); put(e0 + 8, fml(`B${e0 + 8}`, S.eur, `MAX(${countedQ})`, maxQ));
+  put(e0 + 9, str(`A${e0 + 9}`, S.txt, L.kpiAvgGuests)); put(e0 + 9, fml(`B${e0 + 9}`, S.dec1, `AVERAGEIF($M$5:$M$${4 + N},1,F5:F${4 + N})`, avgGuests));
 
   // ---- blocco dati grafici ----
   const ch = g.chStart;
   put(ch, str(`A${ch}`, S.note, L.chartData));
   const rng = (col: string) => `${col}5:${col}${4 + N}`;
-  put(ch + 1, str(`A${ch + 1}`, S.txt, L.chAirbnb)); put(ch + 1, fml(`B${ch + 1}`, S.eurChart, `SUMIFS(${rng("G")},${rng("B")},"Airbnb",${rng("M")},1)`));
-  put(ch + 2, str(`A${ch + 2}`, S.txt, L.chBooking)); put(ch + 2, fml(`B${ch + 2}`, S.eurChart, `SUMIFS(${rng("G")},${rng("B")},"Booking",${rng("M")},1)`));
-  put(ch + 3, str(`A${ch + 3}`, S.txt, L.chOta)); put(ch + 3, fml(`B${ch + 3}`, S.eurChart, `I${TOT}`));
-  put(ch + 4, str(`A${ch + 4}`, S.txt, L.chCedolare)); put(ch + 4, fml(`B${ch + 4}`, S.eurChart, `J${TOT}`));
-  put(ch + 5, str(`A${ch + 5}`, S.txt, L.chFee(input.feeRate))); put(ch + 5, fml(`B${ch + 5}`, S.eurChart, `B${g.bStart + 8}`));
-  put(ch + 6, str(`A${ch + 6}`, S.txt, L.chNet)); put(ch + 6, fml(`B${ch + 6}`, S.eurChart, `B${g.bStart + 10}`));
+  put(ch + 1, str(`A${ch + 1}`, S.txt, L.chAirbnb)); put(ch + 1, fml(`B${ch + 1}`, S.eurChart, `SUMIFS(${rng("G")},${rng("B")},"Airbnb",${rng("M")},1)`, airbnbRoom));
+  put(ch + 2, str(`A${ch + 2}`, S.txt, L.chBooking)); put(ch + 2, fml(`B${ch + 2}`, S.eurChart, `SUMIFS(${rng("G")},${rng("B")},"Booking",${rng("M")},1)`, bookingRoom));
+  put(ch + 3, str(`A${ch + 3}`, S.txt, L.chOta)); put(ch + 3, fml(`B${ch + 3}`, S.eurChart, `I${TOT}`, T_.I));
+  put(ch + 4, str(`A${ch + 4}`, S.txt, L.chCedolare)); put(ch + 4, fml(`B${ch + 4}`, S.eurChart, `J${TOT}`, T_.J));
+  put(ch + 5, str(`A${ch + 5}`, S.txt, L.chFee(input.feeRate))); put(ch + 5, fml(`B${ch + 5}`, S.eurChart, `B${g.bStart + 8}`, feeVal));
+  put(ch + 6, str(`A${ch + 6}`, S.txt, L.chNet)); put(ch + 6, fml(`B${ch + 6}`, S.eurChart, `B${g.bStart + 10}`, netVal));
 
   // ---- serializza righe ----
   const rowNums = Array.from(rows.keys()).sort((a, b) => a - b);

@@ -1593,7 +1593,8 @@
             "grossRevenue": "Валовая выручка",
             "otaCommissions": "Комиссии платформ",
             "ownCommission": "Комиссия Хост Комо",
-            "ownerNetTotal": "Чистая сумма собственнику"
+            "ownerNetTotal": "Чистая сумма собственнику",
+            "cedolare": "Налог 21%"
           },
           "columns": {
             "channel": "Канал",
@@ -1602,7 +1603,8 @@
             "otaCommission": "Комиссия платформы",
             "ownCommission": "Комиссия Хост Комо",
             "totalCommission": "Всего комиссий",
-            "ownerNet": "Чистая собственника"
+            "ownerNet": "Чистая собственника",
+            "cedolare": "Налог 21%"
           }
         },
         "commissionDetail": {

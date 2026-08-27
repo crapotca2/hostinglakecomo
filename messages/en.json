@@ -1593,7 +1593,8 @@
             "grossRevenue": "Gross revenue",
             "otaCommissions": "OTA commissions",
             "ownCommission": "Host Como commission",
-            "ownerNetTotal": "Owner net total"
+            "ownerNetTotal": "Owner net total",
+            "cedolare": "Flat tax 21%"
           },
           "columns": {
             "channel": "Channel",
@@ -1602,7 +1603,8 @@
             "otaCommission": "OTA comm.",
             "ownCommission": "HLC comm.",
             "totalCommission": "Total commission",
-            "ownerNet": "Owner net"
+            "ownerNet": "Owner net",
+            "cedolare": "Flat tax 21%"
           }
         },
         "commissionDetail": {

@@ -1593,7 +1593,8 @@
             "grossRevenue": "Ricavi lordi",
             "otaCommissions": "Commissioni piattaforme",
             "ownCommission": "Commissione Como Host",
-            "ownerNetTotal": "Totale netto proprietario"
+            "ownerNetTotal": "Totale netto proprietario",
+            "cedolare": "Cedolare 21%"
           },
           "columns": {
             "channel": "Canale",
@@ -1602,7 +1603,8 @@
             "otaCommission": "Comm. piattaforma",
             "ownCommission": "Comm. Como Host",
             "totalCommission": "Totale commissioni",
-            "ownerNet": "Netto proprietario"
+            "ownerNet": "Netto proprietario",
+            "cedolare": "Cedolare 21%"
           }
         },
         "commissionDetail": {
