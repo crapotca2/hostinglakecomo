@@ -992,7 +992,8 @@
         "statements": "Rendiconti",
         "payments": "Pagamenti",
         "compliance": "Compliance",
-        "settings": "Impostazioni"
+        "settings": "Impostazioni",
+        "compensi": "Compensi"
       },
       "backToSite": "Torna al Sito",
       "logout": "Esci"
@@ -1795,6 +1796,20 @@
       "bookings": "Prenotazioni",
       "avgPerNight": "Media",
       "perNightSuffix": "/notte"
+    },
+    "compensi": {
+      "titleStrong": "Compensi soci",
+      "subtitle": "Note spese interne Host Como (una per socio), maggiorate del 4% INPS",
+      "adminOnly": "Sezione riservata agli amministratori.",
+      "pickOwner": "Seleziona un proprietario per generare le note spese.",
+      "period": "Periodo",
+      "all": "Tutto",
+      "consulenza": "Consulenza (50% commissione)",
+      "inps": "Rivalsa INPS 4%",
+      "totale": "Totale netto",
+      "downloadPdf": "Scarica PDF",
+      "bookings": "{n} prenotazioni nel calcolo",
+      "note": "Documenti interni: ogni socio fattura la propria metà della commissione Host Como (15% sui ricavi alloggio) + 4% INPS. Non visibili al proprietario."
     }
   }
 }

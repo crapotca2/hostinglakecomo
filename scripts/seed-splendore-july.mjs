@@ -100,7 +100,7 @@ async function main() {
     await db.collection("users").updateOne(
       { _id: ownerId },
       {
-        $set: { name: "Alessandro Splendore", email: OWNER_EMAIL, role: "owner", ownerId, passwordHash, updatedAt: now },
+        $set: { name: "Alessandro Splendore", email: OWNER_EMAIL, role: "owner", ownerId, passwordHash, fiscalCode: "SPLSDR77D22Z133Q", updatedAt: now },
         $setOnInsert: { createdAt: now },
       },
       { upsert: true },

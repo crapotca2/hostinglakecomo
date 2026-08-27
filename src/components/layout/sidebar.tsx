@@ -11,6 +11,7 @@ import {
   Settings,
   LogOut,
   Users,
+  Wallet,
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
@@ -27,6 +28,7 @@ const NAV_ITEMS = [
   { href: "/dashboard/reports/property-management", icon: BarChart3, key: "analytics" },
   { href: "/dashboard/reports", icon: FileText, key: "reports" },
   { href: "/dashboard/statements", icon: FileText, key: "statements" },
+  { href: "/dashboard/compensi", icon: Wallet, key: "compensi", adminOnly: true },
   { href: "/dashboard/compliance", icon: Shield, key: "compliance" },
   { href: "/dashboard/settings", icon: Settings, key: "settings" },
 ] as const;
