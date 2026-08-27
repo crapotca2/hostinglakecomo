@@ -18,7 +18,7 @@ function formatEuro(amount: number, locale: string): string {
 
 interface NoteSummary {
   partner: string; partnerName: string; propertyName: string; periodLabel: string;
-  consulenza: number; parcheggio: number; inps: number; totale: number; anticipo: number; bookings: number;
+  consulenza: number; inps: number; lordo: number; parcheggio: number; anticipo: number; totale: number; bookings: number;
 }
 
 export default function CompensiPage() {
@@ -115,16 +115,19 @@ function PartnerCard({ partner, ownerId, period, locale, t }: { partner: string;
       </div>
       <div className="p-6 space-y-2">
         <Row label={t("consulenza")} value={isLoading || !data ? "—" : formatEuro(data.consulenza, locale)} />
-        {data && data.parcheggio > 0 ? (
-          <Row label={t("parcheggio")} value={formatEuro(data.parcheggio, locale)} />
-        ) : null}
         <Row label={t("inps")} value={isLoading || !data ? "—" : formatEuro(data.inps, locale)} muted />
+        <div className="border-t border-border/40 pt-2 mt-2">
+          <Row label={t("lordo")} value={isLoading || !data ? "—" : formatEuro(data.lordo, locale)} />
+        </div>
+        {data && data.parcheggio > 0 ? (
+          <Row label={t("parcheggio")} value={`+ ${formatEuro(data.parcheggio, locale)}`} />
+        ) : null}
+        {data && data.anticipo > 0 ? (
+          <Row label={t("anticipo")} value={`− ${formatEuro(data.anticipo, locale)}`} muted />
+        ) : null}
         <div className="border-t border-border/40 pt-2 mt-2">
           <Row label={t("totale")} value={isLoading || !data ? "—" : formatEuro(data.totale, locale)} strong />
         </div>
-        {data && data.anticipo > 0 ? (
-          <Row label={t("anticipo")} value={formatEuro(data.anticipo, locale)} muted />
-        ) : null}
         {data ? <div className="text-[11px] text-muted-foreground pt-1">{t("bookings", { n: data.bookings })}</div> : null}
       </div>
     </div>

@@ -36,10 +36,11 @@ export interface PartnerNoteData {
   propertyName: string;
   months: PartnerNoteMonth[];
   consulenza: number; // = Σ month.total (quota socio del 15% ÷ 2)
-  parcheggio: number; // quota parcheggio del socio = Σ parcheggio × 25%
   inps: number; // 4% sulla sola consulenza
-  totale: number; // consulenza + parcheggio + inps
-  anticipo: number; // tassa soggiorno riscossa in loco (voce neutra, fuori dal totale)
+  lordo: number; // lordo da versare = consulenza + inps
+  parcheggio: number; // quota parcheggio del socio = Σ parcheggio × 25% (si aggiunge)
+  anticipo: number; // tassa soggiorno riscossa in loco (si sottrae dal totale)
+  totale: number; // lordo + parcheggio − anticipo
 }
 
 function monthsPhrase(labels: string[]): string {
@@ -132,7 +133,8 @@ export async function getPartnerNoteData(
 
   const consulenza = r2(months.reduce((s, m) => s + m.total, 0));
   const inps = r2(consulenza * INPS_RATE);
-  const totale = r2(consulenza + parcheggio + inps);
+  const lordo = r2(consulenza + inps); // lordo da versare (INPS sul lordo)
+  const totale = r2(lordo + parcheggio - anticipo);
 
   const year = counted.length > 0 ? counted[0].checkIn.getUTCFullYear() : new Date().getUTCFullYear();
   const periodLabel = `${monthsPhrase(months.map((m) => m.label))} ${year}`;
@@ -154,9 +156,10 @@ export async function getPartnerNoteData(
     propertyName: property.name,
     months,
     consulenza,
-    parcheggio,
     inps,
-    totale,
+    lordo,
+    parcheggio,
     anticipo,
+    totale,
   };
 }
