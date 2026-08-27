@@ -73,8 +73,14 @@ function NoteDoc({ data }: { data: PartnerNoteData }) {
         <View style={styles.body}>
           <View style={styles.bodyRow}>
             <Text style={styles.bodyLabel}>Consulenza</Text>
-            <Text style={styles.bodyVal}>{eur(data.consulenza)}</Text>
+            <Text style={styles.bodyVal}>€ {eur(data.consulenza)}</Text>
           </View>
+          {data.parcheggio > 0 ? (
+            <View style={styles.bodyRow}>
+              <Text style={styles.bodyLabel}>Quota parcheggio (25%)</Text>
+              <Text style={styles.bodyVal}>€ {eur(data.parcheggio)}</Text>
+            </View>
+          ) : null}
           <View style={styles.bodyRow}>
             <Text style={styles.bodyLabel}>Rivalsa contr. previd. 4%</Text>
             <Text style={styles.bodyVal}>€ {eur(data.inps)}</Text>
@@ -83,6 +89,12 @@ function NoteDoc({ data }: { data: PartnerNoteData }) {
             <Text style={styles.bodyLabelBold}>Totale Netto</Text>
             <Text style={styles.bodyValTotal}>€ {eur(data.totale)}</Text>
           </View>
+          {data.anticipo > 0 ? (
+            <View style={styles.bodyRow}>
+              <Text style={styles.bodyLabel}>Anticipo su pagamento</Text>
+              <Text style={styles.bodyVal}>€ {eur(data.anticipo)}</Text>
+            </View>
+          ) : null}
         </View>
 
         <Text style={styles.payTitle}>Modalità di pagamento:</Text>
@@ -122,8 +134,8 @@ function NoteDoc({ data }: { data: PartnerNoteData }) {
               </View>
             ))}
             <View style={styles.entrate}>
-              <Text style={styles.entrateTxt}>Entrate € {eur(m.entrate)} : 2 =</Text>
-              <Text style={styles.entrateVal}>€ {eur(m.half)}</Text>
+              <Text style={styles.entrateTxt}>Subtotale {m.label.toLowerCase()}</Text>
+              <Text style={styles.entrateVal}>€ {eur(m.total)}</Text>
             </View>
           </View>
         ))}

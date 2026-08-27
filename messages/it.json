@@ -1805,11 +1805,13 @@
       "period": "Periodo",
       "all": "Tutto",
       "consulenza": "Consulenza (50% commissione)",
+      "parcheggio": "Quota parcheggio (25%)",
       "inps": "Rivalsa INPS 4%",
       "totale": "Totale netto",
+      "anticipo": "Anticipo su pagamento",
       "downloadPdf": "Scarica PDF",
       "bookings": "{n} prenotazioni nel calcolo",
-      "note": "Documenti interni: ogni socio fattura la propria metà della commissione Host Como (15% sui ricavi alloggio) + 4% INPS. Non visibili al proprietario."
+      "note": "Documenti interni: ogni socio fattura la propria metà della commissione Host Como (15% sui ricavi alloggio) + 4% INPS, più il 25% del parcheggio. Non visibili al proprietario."
     }
   }
 }

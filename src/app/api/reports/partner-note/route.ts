@@ -37,8 +37,10 @@ export async function GET(req: NextRequest) {
       propertyName: data.propertyName,
       periodLabel: data.periodLabel,
       consulenza: data.consulenza,
+      parcheggio: data.parcheggio,
       inps: data.inps,
       totale: data.totale,
+      anticipo: data.anticipo,
       bookings: data.months.reduce((s, m) => s + m.rows.length, 0),
     });
   }
