@@ -40,7 +40,10 @@ export async function GET(req: NextRequest) {
       inps: data.inps,
       lordo: data.lordo,
       parcheggio: data.parcheggio,
-      anticipo: data.anticipo,
+      favore: data.favore,
+      favoreNote: data.favoreNote,
+      acconto: data.acconto,
+      accontoGuests: data.accontoGuests,
       totale: data.totale,
       bookings: data.months.reduce((s, m) => s + m.rows.length, 0),
     });

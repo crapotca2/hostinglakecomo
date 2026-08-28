@@ -36,6 +36,27 @@ export interface OtpCodeDoc extends BaseDoc {
   attempts: number;
 }
 
+// ── PARTNER ADJUSTMENTS (rettifiche manuali payout soci) ──
+
+/** Una rettifica manuale del payout di un socio in un periodo. `favore` si
+ *  aggiunge al dovuto, `acconto` (contante del proprietario incassato in loco)
+ *  si sottrae. Importo sempre positivo; il segno lo dà `kind`. */
+export interface PartnerAdjustmentEntry {
+  period: string; // "YYYY-MM" (ciclo 25→25) del payout a cui appartiene (per cassa)
+  kind: "favore" | "acconto";
+  partner: "angelo" | "andrei";
+  amount: number; // sempre positivo
+  note?: string; // es. nome ospite o descrizione ("check-in amici di Alessandro")
+}
+
+/** Rettifiche manuali per il payout interno dei soci Host Como (una per owner).
+ *  Contiene i dati NON ricavabili dalle prenotazioni: favori una tantum e acconti
+ *  incassati in loco, imputati per cassa al periodo di regolazione. */
+export interface PartnerAdjustmentsDoc extends BaseDoc {
+  ownerId: ObjectId;
+  entries: PartnerAdjustmentEntry[];
+}
+
 // ── PROPERTIES ──
 
 export type PropertyStatus = "active" | "draft" | "inactive";

@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
 import { cycleBounds } from "@/lib/reports/period";
 import { feeRateForProperty } from "@/lib/reports/fee-model";
-import type { BookingDoc, PropertyDoc, UserDoc } from "@/types/database";
+import type { BookingDoc, PropertyDoc, UserDoc, PartnerAdjustmentEntry } from "@/types/database";
 import { PARTNERS, INPS_RATE, type PartnerConfig } from "./partners";
 
 const MONTHS_IT = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
@@ -39,8 +39,11 @@ export interface PartnerNoteData {
   inps: number; // 4% sulla sola consulenza
   lordo: number; // lordo da versare = consulenza + inps
   parcheggio: number; // quota parcheggio del socio = Σ parcheggio × 25% (si aggiunge)
-  anticipo: number; // tassa soggiorno riscossa in loco (si sottrae dal totale)
-  totale: number; // lordo + parcheggio − anticipo
+  favore: number; // voce manuale una tantum a questo socio nel periodo (si aggiunge)
+  favoreNote?: string; // etichetta del favore (es. "check-in amici di Alessandro")
+  acconto: number; // contante incassato in loco DA QUESTO socio (si sottrae)
+  accontoGuests: string[]; // ospiti i cui contanti sono in mano al socio (per l'etichetta)
+  totale: number; // lordo + parcheggio + favore − acconto
 }
 
 function monthsPhrase(labels: string[]): string {
@@ -123,18 +126,25 @@ export async function getPartnerNoteData(
   // Como (50%) è poi divisa 50/50 tra i due soci → 25% a testa del parcheggio.
   const parcheggio = r2(counted.reduce((s, b) => s + (b.pricing?.parking ?? 0) * 0.25, 0));
 
-  // Anticipo: tassa di soggiorno riscossa in loco (Booking, in struttura). Voce
-  // neutra/informativa — NON entra nel totale fatturato del socio.
-  const anticipo = r2(
-    counted
-      .filter((b) => b.source === "booking" && (b.touristTaxStatus ?? "collected") === "collected")
-      .reduce((s, b) => s + (b.pricing?.touristTax ?? 0), 0),
+  // Rettifiche manuali per cassa (favori + acconti incassati in loco). Imputate
+  // al periodo di regolazione, non al ciclo del check-in (un acconto può riferirsi
+  // a una prenotazione di un altro ciclo). period "all" = tutte quelle del socio.
+  const adjCol = await collections.partnerAdjustments();
+  const adj = await adjCol.findOne({ ownerId: new ObjectId(ownerId) });
+  const entries = ((adj?.entries ?? []) as PartnerAdjustmentEntry[]).filter(
+    (e) => e.partner === partnerKey && (period === "all" || e.period === period),
   );
+  const favoreEntries = entries.filter((e) => e.kind === "favore");
+  const accontoEntries = entries.filter((e) => e.kind === "acconto");
+  const favore = r2(favoreEntries.reduce((s, e) => s + e.amount, 0));
+  const favoreNote = favoreEntries.find((e) => e.note)?.note;
+  const acconto = r2(accontoEntries.reduce((s, e) => s + e.amount, 0));
+  const accontoGuests = accontoEntries.map((e) => e.note).filter((n): n is string => !!n);
 
   const consulenza = r2(months.reduce((s, m) => s + m.total, 0));
   const inps = r2(consulenza * INPS_RATE);
   const lordo = r2(consulenza + inps); // lordo da versare (INPS sul lordo)
-  const totale = r2(lordo + parcheggio - anticipo);
+  const totale = r2(lordo + parcheggio + favore - acconto);
 
   const year = counted.length > 0 ? counted[0].checkIn.getUTCFullYear() : new Date().getUTCFullYear();
   const periodLabel = `${monthsPhrase(months.map((m) => m.label))} ${year}`;
@@ -159,7 +169,10 @@ export async function getPartnerNoteData(
     inps,
     lordo,
     parcheggio,
-    anticipo,
+    favore,
+    favoreNote,
+    acconto,
+    accontoGuests,
     totale,
   };
 }

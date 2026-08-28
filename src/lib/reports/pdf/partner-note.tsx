@@ -89,10 +89,18 @@ function NoteDoc({ data }: { data: PartnerNoteData }) {
               <Text style={styles.bodyVal}>+ € {eur(data.parcheggio)}</Text>
             </View>
           ) : null}
-          {data.anticipo > 0 ? (
+          {data.favore > 0 ? (
             <View style={styles.bodyRow}>
-              <Text style={styles.bodyLabel}>Anticipo su pagamento</Text>
-              <Text style={styles.bodyVal}>− € {eur(data.anticipo)}</Text>
+              <Text style={styles.bodyLabel}>{data.favoreNote || "Voce aggiuntiva"}</Text>
+              <Text style={styles.bodyVal}>+ € {eur(data.favore)}</Text>
+            </View>
+          ) : null}
+          {data.acconto > 0 ? (
+            <View style={styles.bodyRow}>
+              <Text style={styles.bodyLabel}>
+                Acconto incassato in loco{data.accontoGuests.length ? ` (${data.accontoGuests.join(" / ")})` : ""}
+              </Text>
+              <Text style={styles.bodyVal}>- € {eur(data.acconto)}</Text>
             </View>
           ) : null}
           <View style={styles.bodyRowTotal}>

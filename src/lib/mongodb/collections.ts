@@ -17,6 +17,7 @@ import type {
   WelcomeBookDoc,
   HouseGuideDoc,
   OtpCodeDoc,
+  PartnerAdjustmentsDoc,
 } from "@/types/database";
 
 const USE_MEMORY =
@@ -63,4 +64,6 @@ export const collections = {
     getCollection<CompetitorZoneStatsDoc>("competitor_zone_stats"),
   welcomeBooks: () => getCollection<WelcomeBookDoc>("welcome_books"),
   houseGuides: () => getCollection<HouseGuideDoc>("house_guides"),
+  partnerAdjustments: () =>
+    getCollection<PartnerAdjustmentsDoc>("partner_adjustments"),
 };

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslations, useLocale } from "next-intl";
-import { Download, Users, Wallet, ShieldAlert } from "lucide-react";
+import { Download, Users, Wallet, ShieldAlert, Plus, Trash2, Save, SlidersHorizontal } from "lucide-react";
 import { useMe } from "@/hooks/use-me";
 import { useOwnerScope } from "@/components/owner-scope";
 import { useStatements } from "@/hooks/use-statements";
@@ -18,7 +18,9 @@ function formatEuro(amount: number, locale: string): string {
 
 interface NoteSummary {
   partner: string; partnerName: string; propertyName: string; periodLabel: string;
-  consulenza: number; inps: number; lordo: number; parcheggio: number; anticipo: number; totale: number; bookings: number;
+  consulenza: number; inps: number; lordo: number; parcheggio: number;
+  favore: number; favoreNote?: string; acconto: number; accontoGuests: string[];
+  totale: number; bookings: number;
 }
 
 export default function CompensiPage() {
@@ -69,6 +71,8 @@ export default function CompensiPage() {
               <PartnerCard key={partner} partner={partner} ownerId={ownerId} period={period} locale={locale} t={t} />
             ))}
           </div>
+
+          <AdjustmentsEditor ownerId={ownerId} period={period} t={t} />
 
           <p className="text-xs text-muted-foreground">{t("note")}</p>
         </>
@@ -122,13 +126,147 @@ function PartnerCard({ partner, ownerId, period, locale, t }: { partner: string;
         {data && data.parcheggio > 0 ? (
           <Row label={t("parcheggio")} value={`+ ${formatEuro(data.parcheggio, locale)}`} />
         ) : null}
-        {data && data.anticipo > 0 ? (
-          <Row label={t("anticipo")} value={`− ${formatEuro(data.anticipo, locale)}`} muted />
+        {data && data.favore > 0 ? (
+          <Row label={data.favoreNote || t("favore")} value={`+ ${formatEuro(data.favore, locale)}`} />
+        ) : null}
+        {data && data.acconto > 0 ? (
+          <Row
+            label={`${t("acconto")}${data.accontoGuests?.length ? ` (${data.accontoGuests.join(" / ")})` : ""}`}
+            value={`− ${formatEuro(data.acconto, locale)}`}
+            muted
+          />
         ) : null}
         <div className="border-t border-border/40 pt-2 mt-2">
           <Row label={t("totale")} value={isLoading || !data ? "—" : formatEuro(data.totale, locale)} strong />
         </div>
         {data ? <div className="text-[11px] text-muted-foreground pt-1">{t("bookings", { n: data.bookings })}</div> : null}
+      </div>
+    </div>
+  );
+}
+
+interface AdjEntry {
+  period: string;
+  kind: "favore" | "acconto";
+  partner: "angelo" | "andrei";
+  amount: number;
+  note?: string;
+}
+
+function AdjustmentsEditor({ ownerId, period, t }: { ownerId: string; period: string; t: ReturnType<typeof useTranslations> }) {
+  const qc = useQueryClient();
+  const { data } = useQuery({
+    queryKey: ["partner-adjustments", ownerId],
+    queryFn: async () => {
+      const res = await fetch(`/api/reports/partner-adjustments?ownerId=${ownerId}`);
+      if (!res.ok) throw new Error("fetch failed");
+      return (await res.json()).entries as AdjEntry[];
+    },
+  });
+  const [draft, setDraft] = useState<AdjEntry[] | null>(null);
+  const rows = draft ?? data ?? [];
+  const dirty = draft !== null;
+
+  const save = useMutation({
+    mutationFn: async (entries: AdjEntry[]) => {
+      const res = await fetch(`/api/reports/partner-adjustments`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ownerId, entries }),
+      });
+      if (!res.ok) throw new Error("save failed");
+      return (await res.json()).entries as AdjEntry[];
+    },
+    onSuccess: (saved) => {
+      setDraft(null);
+      qc.setQueryData(["partner-adjustments", ownerId], saved);
+      qc.invalidateQueries({ queryKey: ["partner-note"] });
+    },
+  });
+
+  const update = (i: number, patch: Partial<AdjEntry>) => {
+    const next = rows.map((r, j) => (j === i ? { ...r, ...patch } : r));
+    setDraft(next);
+  };
+  const add = () =>
+    setDraft([...rows, { period: period === "all" ? "2026-07" : period, kind: "acconto", partner: "angelo", amount: 0, note: "" }]);
+  const remove = (i: number) => setDraft(rows.filter((_, j) => j !== i));
+
+  return (
+    <div className="bg-white rounded-2xl border border-border/50 overflow-hidden">
+      <div className="px-6 py-4 border-b border-border/40 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="h-10 w-10 rounded-xl bg-primary/[0.08] flex items-center justify-center">
+            <SlidersHorizontal className="h-5 w-5 text-primary" />
+          </div>
+          <div>
+            <div className="text-sm font-semibold">{t("adjTitle")}</div>
+            <div className="text-[11px] text-muted-foreground">{t("adjSubtitle")}</div>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <button onClick={add} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-border/50 text-xs font-medium hover:bg-muted/50">
+            <Plus className="h-3.5 w-3.5" /> {t("adjAdd")}
+          </button>
+          <button
+            onClick={() => save.mutate(rows)}
+            disabled={!dirty || save.isPending}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary text-white text-xs font-medium hover:bg-primary/90 disabled:opacity-40"
+          >
+            <Save className="h-3.5 w-3.5" /> {save.isPending ? "…" : t("adjSave")}
+          </button>
+        </div>
+      </div>
+      <div className="p-4 overflow-x-auto">
+        {rows.length === 0 ? (
+          <p className="text-xs text-muted-foreground px-2 py-4 text-center">{t("adjNone")}</p>
+        ) : (
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                <th className="text-left font-semibold px-2 py-1">{t("adjPeriod")}</th>
+                <th className="text-left font-semibold px-2 py-1">{t("adjKind")}</th>
+                <th className="text-left font-semibold px-2 py-1">{t("adjPartner")}</th>
+                <th className="text-right font-semibold px-2 py-1">{t("adjAmount")}</th>
+                <th className="text-left font-semibold px-2 py-1">{t("adjNote")}</th>
+                <th className="px-2 py-1" />
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((r, i) => (
+                <tr key={i} className="border-t border-border/30">
+                  <td className="px-2 py-1">
+                    <input value={r.period} onChange={(e) => update(i, { period: e.target.value })} placeholder="2026-07" className="w-20 rounded border border-border/50 px-1.5 py-1 tabular-nums" />
+                  </td>
+                  <td className="px-2 py-1">
+                    <select value={r.kind} onChange={(e) => update(i, { kind: e.target.value as AdjEntry["kind"] })} className="rounded border border-border/50 px-1.5 py-1">
+                      <option value="favore">{t("favore")}</option>
+                      <option value="acconto">{t("acconto")}</option>
+                    </select>
+                  </td>
+                  <td className="px-2 py-1">
+                    <select value={r.partner} onChange={(e) => update(i, { partner: e.target.value as AdjEntry["partner"] })} className="rounded border border-border/50 px-1.5 py-1">
+                      <option value="angelo">Angelo</option>
+                      <option value="andrei">Andrei</option>
+                    </select>
+                  </td>
+                  <td className="px-2 py-1 text-right">
+                    <input type="number" step="0.01" value={r.amount} onChange={(e) => update(i, { amount: Number(e.target.value) })} className="w-24 rounded border border-border/50 px-1.5 py-1 text-right tabular-nums" />
+                  </td>
+                  <td className="px-2 py-1">
+                    <input value={r.note ?? ""} onChange={(e) => update(i, { note: e.target.value })} placeholder="—" className="w-full min-w-[140px] rounded border border-border/50 px-1.5 py-1" />
+                  </td>
+                  <td className="px-2 py-1 text-right">
+                    <button onClick={() => remove(i)} className="text-muted-foreground hover:text-red-600" title={t("adjRemove")}>
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+        <p className="text-[11px] text-muted-foreground px-2 pt-3">{t("adjHint")}</p>
       </div>
     </div>
   );
