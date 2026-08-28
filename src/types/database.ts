@@ -123,6 +123,8 @@ export interface PropertyDoc extends BaseDoc {
   maxTouristTaxNights?: number;
   /** Aliquota commissione Host Como sui ricavi alloggio (varia per immobile, es. 0.15). */
   managementFeeRate?: number;
+  /** Se false, la Nota spese dei soci NON aggiunge la rivalsa INPS 4% (default: true). */
+  inpsRivalsa?: boolean;
 }
 
 // ── BOOKINGS ──

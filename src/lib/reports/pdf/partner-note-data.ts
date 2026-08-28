@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
-import { cycleBounds } from "@/lib/reports/period";
+import { billingCycle, cycleBounds } from "@/lib/reports/period";
 import { feeRateForProperty } from "@/lib/reports/fee-model";
 import type { BookingDoc, PropertyDoc, UserDoc, PartnerAdjustmentEntry } from "@/types/database";
 import { PARTNERS, INPS_RATE, type PartnerConfig } from "./partners";
@@ -92,8 +92,10 @@ export async function getPartnerNoteData(
     .filter((b) => b.status !== "cancelled")
     .sort((a, b) => a.checkIn.getTime() - b.checkIn.getTime());
 
-  // Raggruppa per mese solare del check-in (come il template). Il pagamento per
-  // riga è GIÀ la quota del socio: alloggio × fee% ÷ 2 (niente più "Entrate : 2").
+  // Raggruppa per CICLO 25→25 (come il rendiconto Host Como): il mese di
+  // competenza è quello in cui il ciclo chiude il 25. Es. un check-in del 30/07
+  // rientra nel ciclo di agosto. Il pagamento per riga è GIÀ la quota del socio:
+  // alloggio × fee% ÷ 2 (niente più "Entrate : 2").
   const byMonth = new Map<number, PartnerNoteRow[]>();
   for (const b of counted) {
     const p = b.pricing || {};
@@ -108,7 +110,7 @@ export async function getPartnerNoteData(
       feePct: Math.round(feeRate * 100),
       pagamento: r2((alloggio * feeRate) / 2),
     };
-    const mi = b.checkIn.getUTCMonth();
+    const { monthIdx: mi } = billingCycle(b.checkIn);
     const arr = byMonth.get(mi) || [];
     arr.push(row);
     byMonth.set(mi, arr);
@@ -142,11 +144,12 @@ export async function getPartnerNoteData(
   const accontoGuests = accontoEntries.map((e) => e.note).filter((n): n is string => !!n);
 
   const consulenza = r2(months.reduce((s, m) => s + m.total, 0));
-  const inps = r2(consulenza * INPS_RATE);
-  const lordo = r2(consulenza + inps); // lordo da versare (INPS sul lordo)
+  // Rivalsa INPS 4% opzionale per immobile (property.inpsRivalsa === false → niente INPS).
+  const inps = property.inpsRivalsa === false ? 0 : r2(consulenza * INPS_RATE);
+  const lordo = r2(consulenza + inps); // lordo da versare (= consulenza se senza INPS)
   const totale = r2(lordo + parcheggio + favore - acconto);
 
-  const year = counted.length > 0 ? counted[0].checkIn.getUTCFullYear() : new Date().getUTCFullYear();
+  const year = counted.length > 0 ? billingCycle(counted[0].checkIn).year : new Date().getUTCFullYear();
   const periodLabel = `${monthsPhrase(months.map((m) => m.label))} ${year}`;
   const gen = new Date(generatedAtIso);
 

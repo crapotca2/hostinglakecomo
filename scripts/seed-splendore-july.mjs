@@ -139,6 +139,7 @@ async function main() {
           beds24RoomId: "713401",
           touristTaxRate: 3,
           managementFeeRate: FEE_RATE,
+          inpsRivalsa: false, // Alessandro: la Nota spese soci NON aggiunge la rivalsa INPS 4%
           updatedAt: now,
         },
         $setOnInsert: { createdAt: now },
