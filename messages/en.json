@@ -1417,10 +1417,24 @@
         "subtitle": "Detailed reports, line by line",
         "tabs": {
           "bookings": "Bookings",
-          "guests": "Guest directory",
-          "transactions": "Transactions",
+          "parking": "Parking",
           "taxes": "Taxes",
           "listingFees": "Listing fees"
+        },
+        "parking": {
+          "tableTitle": "Parking — who used it ({count})",
+          "subtitle": "Parking is a 50/50 item: half to the owner, half to Host Como.",
+          "empty": "No parking used in this period",
+          "totalLabel": "Total",
+          "columns": {
+            "checkIn": "Check-in",
+            "checkOut": "Check-out",
+            "guest": "Guest",
+            "nights": "Nights",
+            "parking": "Parking",
+            "ownerShare": "Owner share",
+            "hostShare": "Host Como share"
+          }
         },
         "bookings": {
           "tableTitle": "Bookings detail ({count})",

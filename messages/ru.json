@@ -1417,10 +1417,24 @@
         "subtitle": "Подробные отчёты построчно",
         "tabs": {
           "bookings": "Бронирования",
-          "guests": "Данные гостей",
-          "transactions": "Транзакции",
+          "parking": "Парковка",
           "taxes": "Налоги",
           "listingFees": "Комиссии платформ"
+        },
+        "parking": {
+          "tableTitle": "Парковка — кто пользовался ({count})",
+          "subtitle": "Парковка делится 50/50: половина владельцу, половина Host Como.",
+          "empty": "Парковка не использовалась в этом периоде",
+          "totalLabel": "Итого",
+          "columns": {
+            "checkIn": "Заезд",
+            "checkOut": "Выезд",
+            "guest": "Гость",
+            "nights": "Ночи",
+            "parking": "Парковка",
+            "ownerShare": "Доля владельца",
+            "hostShare": "Доля Host Como"
+          }
         },
         "bookings": {
           "tableTitle": "Детализация бронирований ({count})",

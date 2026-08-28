@@ -3,20 +3,20 @@
 import { useState } from "react";
 import { Link } from "@/i18n/routing";
 import { useQuery } from "@tanstack/react-query";
-import { useLocale, useTranslations } from "next-intl";
-import { ArrowLeft, CalendarDays, Users, CreditCard, Receipt, Percent } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { ArrowLeft, CalendarDays, Car, Receipt, Percent } from "lucide-react";
 import { ReportTable, type ReportColumn } from "@/components/reports/report-table";
 import { ReportFilters, presetToDateRange } from "@/components/reports/report-filters";
 import { downloadCSV } from "@/components/reports/csv-export";
 
-type Tab = "bookings" | "guests" | "transactions" | "taxes" | "listing-fees";
+type Tab = "bookings" | "parking" | "taxes" | "listing-fees";
 
 function formatEuro(amount: number): string {
   return new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(amount);
 }
 
-function localeTag(locale: string): string {
-  return locale === "en" ? "en-GB" : locale === "ru" ? "ru-RU" : "it-IT";
+function formatEuro2(amount: number): string {
+  return new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR", minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(amount);
 }
 
 export default function DetailReportsPage() {
@@ -45,8 +45,7 @@ export default function DetailReportsPage() {
 
       <div className="flex items-center gap-1 bg-white rounded-xl p-1 border border-border/50 w-fit flex-wrap">
         <TabBtn active={tab === "bookings"} onClick={() => setTab("bookings")} icon={CalendarDays} label={t("tabs.bookings")} />
-        <TabBtn active={tab === "guests"} onClick={() => setTab("guests")} icon={Users} label={t("tabs.guests")} />
-        <TabBtn active={tab === "transactions"} onClick={() => setTab("transactions")} icon={CreditCard} label={t("tabs.transactions")} />
+        <TabBtn active={tab === "parking"} onClick={() => setTab("parking")} icon={Car} label={t("tabs.parking")} />
         <TabBtn active={tab === "taxes"} onClick={() => setTab("taxes")} icon={Receipt} label={t("tabs.taxes")} />
         <TabBtn active={tab === "listing-fees"} onClick={() => setTab("listing-fees")} icon={Percent} label={t("tabs.listingFees")} />
       </div>
@@ -61,8 +60,7 @@ export default function DetailReportsPage() {
       />
 
       {tab === "bookings" && <BookingsDetailView from={from} to={to} />}
-      {tab === "guests" && <GuestsView />}
-      {tab === "transactions" && <TransactionsView from={from} to={to} />}
+      {tab === "parking" && <ParkingView from={from} to={to} />}
       {tab === "taxes" && <TaxesDetailView from={from} to={to} />}
       {tab === "listing-fees" && <ListingFeesView from={from} to={to} />}
     </div>
@@ -133,117 +131,65 @@ function BookingsDetailView({ from, to }: { from: string; to: string }) {
   );
 }
 
-function GuestsView() {
-  const t = useTranslations("dashboard.reports.detail.guests");
-  const crosscheck = useQuery({
-    queryKey: ["detail", "ncc"],
-    queryFn: async () => (await fetch(`/api/reports/detail?type=name-crosscheck`)).json(),
-  });
-  const emails = useQuery({
-    queryKey: ["detail", "emails"],
-    queryFn: async () => (await fetch(`/api/reports/detail?type=emails`)).json(),
-  });
-  const nccRows = crosscheck.data?.rows || [];
-  const emailRows = emails.data?.rows || [];
+interface ParkingRow {
+  bookingId: string;
+  checkIn: string;
+  checkOut: string;
+  guestName: string;
+  nights: number;
+  parking: number;
+  ownerShare: number;
+  hostShare: number;
+}
 
-  const nccCols: ReportColumn<(typeof nccRows)[0]>[] = [
-    { key: "guestName", label: t("columns.name") },
-    { key: "bookingCount", label: t("columns.bookings"), align: "center", numeric: true },
-    { key: "emails", label: t("columns.emails"), render: (r) => r.emails.join(", ") },
-    { key: "phones", label: t("columns.phones"), render: (r) => r.phones.join(", ") },
-    { key: "totalSpent", label: t("columns.totalSpent"), align: "right", numeric: true, render: (r) => formatEuro(r.totalSpent) },
+function ParkingView({ from, to }: { from: string; to: string }) {
+  const t = useTranslations("dashboard.reports.detail.parking");
+  const { data, isLoading } = useReport("parking", from, to);
+  const rows: ParkingRow[] = data?.rows || [];
+  const totals = rows.reduce(
+    (acc, r) => ({
+      parking: acc.parking + r.parking,
+      ownerShare: acc.ownerShare + r.ownerShare,
+      hostShare: acc.hostShare + r.hostShare,
+    }),
+    { parking: 0, ownerShare: 0, hostShare: 0 }
+  );
+  const columns: ReportColumn<ParkingRow>[] = [
+    { key: "checkIn", label: t("columns.checkIn") },
+    { key: "checkOut", label: t("columns.checkOut") },
+    { key: "guestName", label: t("columns.guest") },
+    { key: "nights", label: t("columns.nights"), align: "center", numeric: true },
+    { key: "parking", label: t("columns.parking"), align: "right", numeric: true, render: (r) => formatEuro2(r.parking) },
+    { key: "ownerShare", label: t("columns.ownerShare"), align: "right", numeric: true, render: (r) => formatEuro2(r.ownerShare) },
+    { key: "hostShare", label: t("columns.hostShare"), align: "right", numeric: true, render: (r) => formatEuro2(r.hostShare) },
   ];
-  const emailCols: ReportColumn<(typeof emailRows)[0]>[] = [
-    { key: "email", label: t("columns.email") },
-    { key: "guestName", label: t("columns.name") },
-    { key: "country", label: t("columns.country"), align: "center" },
-    { key: "lastBooking", label: t("columns.lastBooking") },
-    { key: "totalBookings", label: t("columns.totalBookings"), align: "center", numeric: true },
-    { key: "totalSpent", label: t("columns.total"), align: "right", numeric: true, render: (r) => formatEuro(r.totalSpent) },
-  ];
-
   return (
     <div className="space-y-4">
       <ReportTable
-        title={t("crosscheckTitle")}
-        subtitle={t("crosscheckSubtitle")}
-        columns={nccCols}
-        rows={nccRows}
-        loading={crosscheck.isLoading}
-        onExportCSV={() =>
-          downloadCSV(
-            "name-crosscheck.csv",
-            nccRows.map((r: { emails: string[]; phones: string[]; properties: string[] } & Record<string, unknown>) => ({
-              ...r,
-              emails: r.emails.join(";"),
-              phones: r.phones.join(";"),
-              properties: r.properties.join(";"),
-            }))
-          )
-        }
-        emptyMessage={t("crosscheckEmpty")}
+        title={t("tableTitle", { count: rows.length })}
+        subtitle={t("subtitle")}
+        columns={columns}
+        rows={rows}
+        loading={isLoading}
+        onExportCSV={() => downloadCSV("parking-detail.csv", rows as unknown as Record<string, unknown>[])}
+        emptyMessage={t("empty")}
       />
-      <ReportTable
-        title={t("emailListTitle")}
-        subtitle={t("emailListSubtitle", { count: emailRows.length })}
-        columns={emailCols}
-        rows={emailRows}
-        loading={emails.isLoading}
-        onExportCSV={() => downloadCSV("email-list.csv", emailRows)}
-      />
+      {rows.length > 0 && (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <TotalCard label={`${t("totalLabel")} · ${t("columns.parking")}`} value={formatEuro2(totals.parking)} />
+          <TotalCard label={t("columns.ownerShare")} value={formatEuro2(totals.ownerShare)} highlight />
+          <TotalCard label={t("columns.hostShare")} value={formatEuro2(totals.hostShare)} />
+        </div>
+      )}
     </div>
   );
 }
 
-function TransactionsView({ from, to }: { from: string; to: string }) {
-  const t = useTranslations("dashboard.reports.detail.transactions");
-  const locale = useLocale();
-  const tag = localeTag(locale);
-  const payments = useReport("payments", from, to);
-  const cc = useReport("cc-history", from, to);
-  const paymentRows = payments.data?.rows || [];
-  const ccRows = cc.data?.rows || [];
-
-  const pCols: ReportColumn<(typeof paymentRows)[0]>[] = [
-    {
-      key: "createdAt",
-      label: t("columns.date"),
-      render: (r) => new Date(r.createdAt).toLocaleString(tag, { dateStyle: "short", timeStyle: "short" }),
-    },
-    { key: "type", label: t("columns.type") },
-    { key: "status", label: t("columns.status") },
-    { key: "stripePaymentIntentId", label: t("columns.paymentId") },
-    { key: "amount", label: t("columns.amount"), align: "right", numeric: true, render: (r) => formatEuro(r.amount) },
-  ];
-  const ccCols: ReportColumn<(typeof ccRows)[0]>[] = [
-    {
-      key: "createdAt",
-      label: t("columns.date"),
-      render: (r) => new Date(r.createdAt).toLocaleString(tag, { dateStyle: "short", timeStyle: "short" }),
-    },
-    { key: "stripeIntent", label: t("columns.stripeIntent") },
-    { key: "type", label: t("columns.type") },
-    { key: "status", label: t("columns.status") },
-    { key: "amount", label: t("columns.amount"), align: "right", numeric: true, render: (r) => formatEuro(r.amount) },
-  ];
-
+function TotalCard({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
   return (
-    <div className="space-y-4">
-      <ReportTable
-        title={t("paymentsTitle")}
-        columns={pCols}
-        rows={paymentRows}
-        loading={payments.isLoading}
-        onExportCSV={() => downloadCSV("payments-detail.csv", paymentRows)}
-      />
-      <ReportTable
-        title={t("ccTitle")}
-        subtitle={t("ccSubtitle")}
-        columns={ccCols}
-        rows={ccRows}
-        loading={cc.isLoading}
-        onExportCSV={() => downloadCSV("cc-history.csv", ccRows)}
-      />
+    <div className={`rounded-xl border p-4 ${highlight ? "border-primary/40 bg-primary/[0.04]" : "border-border/50 bg-white"}`}>
+      <div className="text-xs text-muted-foreground">{label}</div>
+      <div className={`text-lg font-semibold tabular-nums mt-1 ${highlight ? "text-primary" : ""}`}>{value}</div>
     </div>
   );
 }

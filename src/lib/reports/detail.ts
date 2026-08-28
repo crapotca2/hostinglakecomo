@@ -218,6 +218,44 @@ export async function getTaxesDetail(from: Date, to: Date, ownerId: string): Pro
     .sort((a, b) => b.checkIn.localeCompare(a.checkIn));
 }
 
+export interface ParkingDetailRow {
+  bookingId: string;
+  checkIn: string;
+  checkOut: string;
+  guestName: string;
+  nights: number;
+  parking: number;
+  ownerShare: number; // 50% al proprietario
+  hostShare: number; // 50% a Host Como
+}
+
+/**
+ * Parcheggio per prenotazione: chi lo ha utilizzato e la ripartizione 50/50
+ * (metà proprietario, metà Host Como). Solo prenotazioni con parcheggio > 0.
+ * SEMPRE scopato per ownerId (guardrail #3).
+ */
+export async function getParkingDetail(from: Date, to: Date, ownerId: string): Promise<ParkingDetailRow[]> {
+  const bookingsCol = await collections.bookings();
+  const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
+  return allBookings
+    .filter((b) => b.status !== "cancelled" && (b.pricing?.parking ?? 0) > 0 && b.checkIn >= from && b.checkIn <= to)
+    .map((b) => {
+      const parking = Math.round((b.pricing?.parking ?? 0) * 100) / 100;
+      const ownerShare = Math.round(parking * 50) / 100; // parking * 0.5
+      return {
+        bookingId: b._id!.toString(),
+        checkIn: b.checkIn.toISOString().slice(0, 10),
+        checkOut: b.checkOut.toISOString().slice(0, 10),
+        guestName: b.guestInfo.name,
+        nights: b.nights,
+        parking,
+        ownerShare,
+        hostShare: Math.round((parking - ownerShare) * 100) / 100,
+      };
+    })
+    .sort((a, b) => a.checkIn.localeCompare(b.checkIn));
+}
+
 export interface ListingFeeRow {
   source: string;
   bookings: number;

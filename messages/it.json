@@ -1417,10 +1417,24 @@
         "subtitle": "Report dettagliati riga per riga",
         "tabs": {
           "bookings": "Prenotazioni",
-          "guests": "Anagrafica ospiti",
-          "transactions": "Transazioni",
+          "parking": "Parcheggio",
           "taxes": "Imposte",
           "listingFees": "Commissioni piattaforme"
+        },
+        "parking": {
+          "tableTitle": "Parcheggio — chi lo ha utilizzato ({count})",
+          "subtitle": "Il parcheggio è una partita 50/50: metà al proprietario, metà a Host Como.",
+          "empty": "Nessun parcheggio utilizzato nel periodo",
+          "totalLabel": "Totale",
+          "columns": {
+            "checkIn": "Check-in",
+            "checkOut": "Check-out",
+            "guest": "Ospite",
+            "nights": "Notti",
+            "parking": "Parcheggio",
+            "ownerShare": "Quota proprietario",
+            "hostShare": "Quota Host Como"
+          }
         },
         "bookings": {
           "tableTitle": "Dettaglio prenotazioni ({count})",

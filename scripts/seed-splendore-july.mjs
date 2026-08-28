@@ -56,7 +56,7 @@ const D = [
   { name: "Jean Claude Varin",  nat: "FR", source: "direct",  ref: "5081550102-EXTRA", ci: "2026-08-02", co: "2026-08-03", nights: 1, guests: 4, gross: 250.00,  ota: 0,      cedolare: 0,      tax: 12, parking: 0,  extra: 0, status: "checked_out", taxStatus: "collected", direct: true },
   { name: "Jacek Rączewski",    nat: "PL", source: "booking", ref: "6356049116", ci: "2026-08-03", co: "2026-08-06", nights: 3, guests: 4, gross: 1064.00, ota: 175.56, cedolare: 223.44, tax: 36, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "collected" },
   // --- Agosto: nuove prenotazioni dai report Airbnb/Booking (cartella new/) ---
-  { name: "Gruppo di Joanna",   nat: "SE", source: "airbnb",  ref: "AIRBNB-0808",  ci: "2026-08-08", co: "2026-08-11", nights: 3, guests: 4, gross: 1100.00, ota: 40.26,  cedolare: 231.00, tax: 36, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "collected" },
+  { name: "Gruppo di Joanna",   nat: "SE", source: "airbnb",  ref: "AIRBNB-0808",  ci: "2026-08-08", co: "2026-08-11", nights: 3, guests: 4, gross: 1100.00, ota: 40.26,  cedolare: 231.00, tax: 36, parking: 40, extra: 0,   status: "checked_out", taxStatus: "collected" },
   { name: "Gareth Davies",      nat: "GB", source: "booking", ref: "6523247001", ci: "2026-08-13", co: "2026-08-17", nights: 4, guests: 4, gross: 1470.00, ota: 242.55, cedolare: 308.70, tax: 48, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "collected" },
   { name: "Scott Johnson",      nat: "GB", source: "booking", ref: "6034318176", ci: "2026-08-17", co: "2026-08-20", nights: 3, guests: 2, gross: 1100.00, ota: 181.50, cedolare: 231.00, tax: 18, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "collected" },
 ];
