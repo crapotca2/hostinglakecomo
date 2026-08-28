@@ -97,9 +97,7 @@ function NoteDoc({ data }: { data: PartnerNoteData }) {
           ) : null}
           {data.acconto > 0 ? (
             <View style={styles.bodyRow}>
-              <Text style={styles.bodyLabel}>
-                Acconto incassato in loco{data.accontoGuests.length ? ` (${data.accontoGuests.join(" / ")})` : ""}
-              </Text>
+              <Text style={styles.bodyLabel}>Acconto incassato in loco</Text>
               <Text style={styles.bodyVal}>- € {eur(data.acconto)}</Text>
             </View>
           ) : null}
