@@ -181,6 +181,10 @@ export interface BookingDoc extends BaseDoc {
   };
   /** Stato d'incasso della tassa di soggiorno (default: collected). */
   touristTaxStatus?: "collected" | "pending" | "uncollected";
+  /** true = questo record è la CONTINUAZIONE fisica di un altro soggiorno (es.
+   *  notte extra diretta agganciata a una prenotazione OTA): stesse persone, NON
+   *  un nuovo arrivo. Conta le presenze ma è escluso dagli ARRIVI ISTAT/ROSS. */
+  istatContinuation?: boolean;
   /** Provenienza per singolo ospite (per ISTAT/ROSS con gruppi misti).
    *  Se assente si usa guestInfo.nationality × guests. La somma dei count
    *  dovrebbe corrispondere a `guests`. */

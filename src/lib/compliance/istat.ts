@@ -72,7 +72,9 @@ export async function generateIstatExport(
         ? b.guestOrigins.map((o) => ({ code: (o.code || UNKNOWN).toUpperCase(), count: o.count }))
         : [{ code: (b.guestInfo.nationality || UNKNOWN).toUpperCase(), count: b.guests }];
 
-    const arrivesInMonth = b.checkIn >= start && b.checkIn <= end;
+    // Le continuazioni (notte extra diretta agganciata a un altro soggiorno) NON
+    // sono un nuovo arrivo: contano le presenze ma sono escluse dagli arrivi.
+    const arrivesInMonth = b.checkIn >= start && b.checkIn <= end && !b.istatContinuation;
     let nightsInMonth = 0;
     for (let d = new Date(b.checkIn); d < b.checkOut; d = new Date(d.getTime() + dayMs)) {
       if (d >= start && d <= end) nightsInMonth++;

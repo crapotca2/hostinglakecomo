@@ -1238,7 +1238,9 @@
       },
       "tax": {
         "title": "Tourist tax",
-        "description": "Tourist tax to remit to the Comune, based on the rate configured per property (Argegno: €3 per person per night, no night cap).",
+        "description": "Tourist tax to remit to the Comune by calendar month (1st → end of month), based on the rate configured per property (Argegno: €3 per person per night, no night cap).",
+        "month": "Month",
+        "year": "Year",
         "from": "From",
         "to": "To",
         "calculate": "Calculate",

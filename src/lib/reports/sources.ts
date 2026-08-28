@@ -15,7 +15,7 @@ const SOURCE_META: Record<string, { label: string; color: string }> = {
   airbnb: { label: "Airbnb", color: "#FF5A5F" },
   booking: { label: "Booking.com", color: "#003580" },
   vrbo: { label: "Vrbo", color: "#3B5998" },
-  direct: { label: "Direct", color: "#1B3A6B" },
+  direct: { label: "Diretto", color: "#1B3A6B" },
   expedia: { label: "Expedia", color: "#FFC72C" },
   other: { label: "Altro", color: "#9CA3AF" },
 };
@@ -32,7 +32,11 @@ export async function getSourceBreakdown(year: number, ownerId: string): Promise
   for (const b of bookings) {
     const key = b.source || "other";
     const prev = bySource.get(key) || { revenue: 0, bookings: 0 };
-    prev.revenue += b.pricing?.totalAmount || 0;
+    // Base ricavi = alloggio + notte extra (ex-pulizie), come il rendiconto
+    // "Ricavi (alloggio + notte extra)"; così la notte diretta di JC (250€)
+    // compare come fetta "Diretto" e il mix combacia coi Reports.
+    const room = b.pricing?.roomRevenue ?? Math.max(0, (b.pricing?.totalAmount || 0) - (b.pricing?.cleaningFee || 0));
+    prev.revenue += room + (b.pricing?.extraNight || 0);
     prev.bookings += 1;
     bySource.set(key, prev);
   }

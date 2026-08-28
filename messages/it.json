@@ -1238,7 +1238,9 @@
       },
       "tax": {
         "title": "Tassa di soggiorno",
-        "description": "Calcolo della tassa di soggiorno da versare al Comune, secondo la tariffa configurata per ciascuna proprietà (Argegno: 3€ a persona per notte, senza tetto di notti).",
+        "description": "Tassa di soggiorno da versare al Comune per mese solare (1 → fine mese), secondo la tariffa configurata per ciascuna proprietà (Argegno: 3€ a persona per notte, senza tetto di notti).",
+        "month": "Mese",
+        "year": "Anno",
         "from": "Dal",
         "to": "Al",
         "calculate": "Calcola",

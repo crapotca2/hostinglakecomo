@@ -20,9 +20,15 @@ export interface TaxRow {
 
 const r2 = (n: number): number => Math.round(n * 100) / 100;
 
+/**
+ * Tassa di soggiorno DA VERSARE al comune. A differenza del rendiconto (ciclo
+ * 25→25), l'adempimento verso il comune è per **mese solare** (1 → ultimo giorno
+ * del mese), come l'export ISTAT. Le presenze sono le notti-ospite ricadenti nel
+ * mese (uno stay a cavallo conta solo le sue notti del mese).
+ */
 export async function generateTouristTaxReport(
-  from: Date,
-  to: Date,
+  month: number,
+  year: number,
   ownerId: string
 ): Promise<{
   rows: TaxRow[];
@@ -34,6 +40,9 @@ export async function generateTouristTaxReport(
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();
 
+  const start = new Date(year, month - 1, 1);
+  const end = new Date(year, month, 0, 23, 59, 59); // ultimo giorno del mese solare
+
   const properties = (await propsCol
     .find({ ownerId: new ObjectId(ownerId) })
     .toArray()) as PropertyDoc[];
@@ -43,7 +52,7 @@ export async function generateTouristTaxReport(
   for (const p of properties) {
     const allBookings = (await bookingsCol.find({ propertyId: p._id as ObjectId }).toArray()) as BookingDoc[];
     const bookings = allBookings.filter(
-      (b) => b.status !== "cancelled" && b.checkOut > from && b.checkIn < to
+      (b) => b.status !== "cancelled" && b.checkIn <= end && b.checkOut >= start
     );
     if (bookings.length === 0) continue;
 
@@ -52,11 +61,11 @@ export async function generateTouristTaxReport(
 
     let due = 0, collected = 0, pending = 0, uncollected = 0, nights = 0, guests = 0;
     for (const b of bookings) {
-      // Presenze = notti-ospite che ricadono nel periodo [from,to] (come ISTAT):
-      // uno stay a cavallo del mese conta solo le sue notti nel periodo.
+      // Presenze = notti-ospite che ricadono nel mese solare [start,end] (come
+      // ISTAT): uno stay a cavallo del mese conta solo le sue notti nel mese.
       let nightsInRange = 0;
       for (let d = new Date(b.checkIn); d < b.checkOut; d = new Date(d.getTime() + dayMs)) {
-        if (d >= from && d <= to) nightsInRange++;
+        if (d >= start && d <= end) nightsInRange++;
       }
       const presences = nightsInRange * b.guests;
       const dueB = presences * rate; // 3€ × presenze

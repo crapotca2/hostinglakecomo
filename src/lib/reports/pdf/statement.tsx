@@ -148,7 +148,6 @@ function itDate(iso: string): string {
 
 function StatementDocument({ data }: { data: StatementData }) {
   const { owner, periodLabel, from, to, rows, totals, generatedAt } = data;
-  const totalDeductions = totals.otaCommission + totals.cedolare + totals.airbibbyCommission;
 
   return (
     <Document
@@ -250,19 +249,10 @@ function StatementDocument({ data }: { data: StatementData }) {
             <Text style={[styles.sumValue, styles.sumNegative]}>− {euro(totals.airbibbyCommission)}</Text>
           </View>
           <View style={styles.netRow}>
-            <Text style={styles.netLabel}>Netto spettante al proprietario</Text>
+            <Text style={styles.netLabel}>Netto periodo</Text>
             <Text style={styles.netValue}>{euro(totals.netPayout)}</Text>
           </View>
         </View>
-
-        <Text style={styles.methodology}>
-          Metodologia: il netto proprietario è calcolato come Ricavi (alloggio + notte extra) −
-          Commissioni portali (OTA) − Cedolare secca 21% (anticipo d&apos;imposta trattenuto dall&apos;OTA) −
-          Commissione di gestione Host Como (sui soli ricavi alloggio). Totale detrazioni: {euro(totalDeductions)}.
-          Pulizie ({euro(totals.cleaning)}) e imposta di soggiorno ({euro(totals.touristTax)}) sono partite di
-          giro (incassate e girate a fornitori/comune), escluse dal netto. Gli importi si riferiscono alle
-          prenotazioni con data di check-in nel periodo di competenza. Documento generato automaticamente.
-        </Text>
 
         <View style={styles.footer} fixed>
           <Text>

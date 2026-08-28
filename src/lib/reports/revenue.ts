@@ -1,6 +1,7 @@
 import { collections } from "@/lib/mongodb/collections";
 import type { BookingDoc } from "@/types/database";
 import { ObjectId } from "mongodb";
+import { billingCycle } from "@/lib/reports/period";
 
 export interface MonthlyRevenue {
   month: string;
@@ -40,8 +41,11 @@ export async function getMonthlyRevenue(year: number, ownerId: string): Promise<
     nights: 0,
   }));
 
+  // Bucketing per CICLO 25→25 (come il rendiconto/Reports), non per mese solare,
+  // così le notti/ricavi mensili dell'Analytics coincidono con i Reports.
   for (const b of bookings) {
-    const monthIdx = b.checkIn.getMonth();
+    const { year: cy, monthIdx } = billingCycle(b.checkIn);
+    if (cy !== year) continue; // un check-in ≥25/12 cade nel ciclo di gennaio dell'anno dopo
     result[monthIdx].revenue += b.pricing?.totalAmount || 0;
     result[monthIdx].bookings += 1;
     result[monthIdx].nights += b.nights;

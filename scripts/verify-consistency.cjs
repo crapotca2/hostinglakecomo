@@ -38,6 +38,7 @@ const { breakdownForBooking, feeRateForProperty } = require("@/lib/reports/fee-m
 const { cyclePeriodKey } = require("@/lib/reports/period");
 const { getCommissionSummary, getOwnerRemittanceSummary, getOwnerRemittanceDetail, getOwnerStatementBookings } = require("@/lib/reports/property-management");
 const { getMonthlyPayouts } = require("@/lib/reports/payout");
+const { getMonthlyRevenue } = require("@/lib/reports/revenue");
 const { generateTouristTaxReport } = require("@/lib/compliance/tassa-soggiorno");
 const { generateIstatExport } = require("@/lib/compliance/istat");
 const { getRendicontoXlsx } = require("@/lib/reports/xlsx/rendiconto-data");
@@ -87,11 +88,12 @@ async function main() {
   const byPeriod = {};
   for (const x of bd) {
     const p = cyclePeriodKey(x.b.checkIn);
-    (byPeriod[p] ||= { gross: 0, net: 0, cedolare: 0, count: 0 });
+    (byPeriod[p] ||= { gross: 0, net: 0, cedolare: 0, count: 0, nights: 0 });
     byPeriod[p].gross += x.d.totalRevenue;
     byPeriod[p].net += x.d.netPayout;
     byPeriod[p].cedolare += x.d.cedolare;
     byPeriod[p].count += 1;
+    byPeriod[p].nights += x.b.nights;
   }
   for (const p of Object.keys(byPeriod)) { byPeriod[p].gross = r2(byPeriod[p].gross); byPeriod[p].net = r2(byPeriod[p].net); byPeriod[p].cedolare = r2(byPeriod[p].cedolare); }
 
@@ -105,6 +107,7 @@ async function main() {
   const ownerDetail = await getOwnerRemittanceDetail(from, to, OWNER);
   const stmtBookings = await getOwnerStatementBookings(from, to, OWNER);
   const payouts = await getMonthlyPayouts(YEAR, OWNER);
+  const monthlyRevenue = await getMonthlyRevenue(YEAR, OWNER);
 
   const sum = (arr, f) => arr.reduce((s, x) => s + (f(x) || 0), 0);
 
@@ -168,11 +171,28 @@ async function main() {
     ], 1.5);
   }
 
-  // D) Tassa di soggiorno: compliance totalDue ↔ canonico (3€×presenze) ↔ payouts
-  const tax = await generateTouristTaxReport(from, to, OWNER);
+  // C2) NOTTI per ciclo: canonico ↔ ownerDetail ↔ Analytics (getMonthlyRevenue).
+  // Le notti dell'Analytics ora seguono il ciclo 25→25 come i Reports.
+  for (const period of Object.keys(byPeriod).sort()) {
+    const mr = monthlyRevenue.find((m) => m.month === period);
+    const odNights = sum(ownerDetail.filter((r) => r.period === period), (r) => r.nights);
+    assertEqMulti(`NOTTI ciclo ${period} (canonico ↔ Reports ↔ Analytics)`, [
+      { name: "canon", v: byPeriod[period].nights },
+      { name: "ownerDetail", v: odNights },
+      { name: "analytics", v: mr ? mr.nights : NaN },
+    ], 0);
+  }
+
+  // D) Tassa di soggiorno: compliance (mese solare, sommato sui mesi) ↔ canonico
+  // (Σ pricing.touristTax) ↔ payouts. La somma mensile = totale annuo delle presenze.
+  let taxTotalDue = 0;
+  for (let m = 1; m <= 12; m++) {
+    const tr = await generateTouristTaxReport(m, YEAR, OWNER);
+    taxTotalDue += tr.totalDue;
+  }
   assertEqMulti("TASSA soggiorno dovuta (compliance ↔ canonico ↔ payouts)", [
     { name: "canon", v: C.tax },
-    { name: "compliance.totalDue", v: tax.totalDue },
+    { name: "compliance.totalDue(Σmesi)", v: taxTotalDue },
     { name: "payouts.tax", v: sum(payouts, (r) => r.touristTax) },
   ], 1.5);
 

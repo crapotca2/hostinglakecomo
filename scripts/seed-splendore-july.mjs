@@ -47,7 +47,12 @@ const D = [
   { name: "Grzegorz Klimaszyk", nat: "PL", source: "booking", ref: "5589247653", ci: "2026-07-18", co: "2026-07-22", nights: 4, guests: 3, gross: 1264.00, ota: 208.56, cedolare: 265.44, tax: 36, parking: 40, extra: 0,   status: "checked_out", taxStatus: "collected" },
   { name: "Brian Søgaard",      nat: "DK", source: "airbnb",  ref: "HMNFQ4TARW", ci: "2026-07-23", co: "2026-07-29", nights: 6, guests: 4, gross: 2000.00, ota: 73.20,  cedolare: 420.00, tax: 72, parking: 0,  extra: 0,   status: "cancelled",   taxStatus: "collected" },
   { name: "Frédéric Poitiers",  nat: "FR", source: "booking", ref: "6827537609", ci: "2026-07-27", co: "2026-07-30", nights: 3, guests: 5, gross: 1190.00, ota: 196.35, cedolare: 249.90, tax: 45, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "uncollected" },
-  { name: "Jean Claude Varin",  nat: "FR", source: "booking", ref: "5081550102", ci: "2026-07-30", co: "2026-08-03", nights: 4, guests: 4, gross: 1160.00, ota: 191.40, cedolare: 243.60, tax: 48, parking: 40, extra: 250, status: "checked_out", taxStatus: "collected" },
+  // Jean Claude: 3 notti via Booking + 1 notte extra DIRETTA (prenotata da noi,
+  // fuori OTA). Split in due record → la notte diretta ha canale "direct" ed è
+  // contata come notte; tassa 48 = 36 (Booking 3nt) + 12 (diretta 1nt); netto
+  // 733 = 483 (Booking) + 250 (diretta) invariato.
+  { name: "Jean Claude Varin",  nat: "FR", source: "booking", ref: "5081550102",       ci: "2026-07-30", co: "2026-08-02", nights: 3, guests: 4, gross: 1160.00, ota: 191.40, cedolare: 243.60, tax: 36, parking: 40, extra: 0,   status: "checked_out", taxStatus: "collected" },
+  { name: "Jean Claude Varin",  nat: "FR", source: "direct",  ref: "5081550102-EXTRA", ci: "2026-08-02", co: "2026-08-03", nights: 1, guests: 4, gross: 0,       ota: 0,      cedolare: 0,      tax: 12, parking: 0,  extra: 250, status: "checked_out", taxStatus: "collected", direct: true },
   { name: "Jacek Rączewski",    nat: "PL", source: "booking", ref: "6356049116", ci: "2026-08-03", co: "2026-08-06", nights: 3, guests: 4, gross: 1064.00, ota: 175.56, cedolare: 223.44, tax: 36, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "collected" },
   // --- Agosto: nuove prenotazioni dai report Airbnb/Booking (cartella new/) ---
   { name: "Gruppo di Joanna",   nat: "SE", source: "airbnb",  ref: "AIRBNB-0808",  ci: "2026-08-08", co: "2026-08-11", nights: 3, guests: 4, gross: 1100.00, ota: 40.26,  cedolare: 231.00, tax: 36, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "collected" },
@@ -56,8 +61,14 @@ const D = [
 ];
 
 function bookingDoc(d) {
-  const room = r2(d.gross - CLEANING); // ricavi alloggio (ex pulizie)
-  const fee = r2(room * FEE_RATE); // commissione Host Como sui ricavi alloggio
+  // Record "direct" = notte extra diretta (fuori OTA): nessuna stanza OTA, niente
+  // pulizie/commissioni/cedolare/fee; il ricavo è la sola notte extra. È una
+  // continuazione fisica di un altro soggiorno → esclusa dagli arrivi ISTAT.
+  const isDirect = d.direct === true;
+  const room = isDirect ? 0 : r2(d.gross - CLEANING); // ricavi alloggio (ex pulizie)
+  const cleaning = isDirect ? 0 : CLEANING;
+  const totalAmount = isDirect ? d.extra : d.gross;
+  const fee = r2(room * FEE_RATE); // commissione Host Como sui soli ricavi alloggio
   const net = r2(room + d.extra - d.ota - d.cedolare - fee); // netto proprietario
   return {
     _id: new ObjectId(),
@@ -71,13 +82,14 @@ function bookingDoc(d) {
     source: d.source,
     touristTaxStatus: d.taxStatus,
     ...(d.origins ? { guestOrigins: d.origins } : {}),
+    ...(isDirect ? { istatContinuation: true } : {}),
     guestInfo: { name: d.name, email: "", nationality: d.nat },
     pricing: {
-      nightlyRate: r2(room / d.nights),
-      cleaningFee: CLEANING,
-      totalAmount: d.gross,
+      nightlyRate: r2((isDirect ? d.extra : room) / d.nights),
+      cleaningFee: cleaning,
+      totalAmount,
       roomRevenue: room,
-      commissionRate: Math.round((d.ota / d.gross) * 10000) / 10000,
+      commissionRate: totalAmount > 0 ? Math.round((d.ota / totalAmount) * 10000) / 10000 : 0,
       commissionAmount: d.ota,
       cedolare: d.cedolare,
       extraNight: d.extra,

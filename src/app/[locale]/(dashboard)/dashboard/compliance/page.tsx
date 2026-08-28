@@ -25,10 +25,8 @@ export default function CompliancePage() {
     rows: Array<{ origin: string; arrivals: number; presences: number }>;
     total: { arrivals: number; presences: number };
   } | null>(null);
-  const [quarterFrom, setQuarterFrom] = useState(
-    new Date(now.getFullYear(), Math.floor(now.getMonth() / 3) * 3, 1).toISOString().slice(0, 10)
-  );
-  const [quarterTo, setQuarterTo] = useState(now.toISOString().slice(0, 10));
+  const [taxMonth, setTaxMonth] = useState(String(now.getMonth() + 1));
+  const [taxYear, setTaxYear] = useState(String(now.getFullYear()));
 
   const months = t.raw("istat.months") as string[];
 
@@ -186,25 +184,28 @@ export default function CompliancePage() {
       </div>
 
       <TaxSection
-        quarterFrom={quarterFrom}
-        setQuarterFrom={setQuarterFrom}
-        quarterTo={quarterTo}
-        setQuarterTo={setQuarterTo}
+        taxMonth={taxMonth}
+        setTaxMonth={setTaxMonth}
+        taxYear={taxYear}
+        setTaxYear={setTaxYear}
+        months={months}
       />
     </div>
   );
 }
 
 function TaxSection({
-  quarterFrom,
-  setQuarterFrom,
-  quarterTo,
-  setQuarterTo,
+  taxMonth,
+  setTaxMonth,
+  taxYear,
+  setTaxYear,
+  months,
 }: {
-  quarterFrom: string;
-  setQuarterFrom: (v: string) => void;
-  quarterTo: string;
-  setQuarterTo: (v: string) => void;
+  taxMonth: string;
+  setTaxMonth: (v: string) => void;
+  taxYear: string;
+  setTaxYear: (v: string) => void;
+  months: string[];
 }) {
   const t = useTranslations("dashboard.compliance.tax");
   const locale = useLocale();
@@ -220,7 +221,7 @@ function TaxSection({
   async function loadTax() {
     setLoading(true);
     try {
-      const res = await fetch(`/api/compliance/tassa-soggiorno?from=${quarterFrom}&to=${quarterTo}`);
+      const res = await fetch(`/api/compliance/tassa-soggiorno?month=${taxMonth}&year=${taxYear}`);
       const json = await res.json();
       setData(json);
     } finally {
@@ -249,21 +250,26 @@ function TaxSection({
       </div>
       <div className="flex flex-wrap items-end gap-3 mt-4 mb-4">
         <div>
-          <label className="text-xs font-medium text-muted-foreground mb-1 block">{t("from")}</label>
-          <input
-            type="date"
-            value={quarterFrom}
-            onChange={(e) => setQuarterFrom(e.target.value)}
-            className="rounded-lg border border-border px-3 py-2 text-sm"
-          />
+          <label className="text-xs font-medium text-muted-foreground mb-1 block">{t("month")}</label>
+          <select
+            value={taxMonth}
+            onChange={(e) => setTaxMonth(e.target.value)}
+            className="rounded-lg border border-border px-3 py-2 text-sm bg-white"
+          >
+            {months.map((m, i) => (
+              <option key={i} value={i + 1}>
+                {m}
+              </option>
+            ))}
+          </select>
         </div>
         <div>
-          <label className="text-xs font-medium text-muted-foreground mb-1 block">{t("to")}</label>
+          <label className="text-xs font-medium text-muted-foreground mb-1 block">{t("year")}</label>
           <input
-            type="date"
-            value={quarterTo}
-            onChange={(e) => setQuarterTo(e.target.value)}
-            className="rounded-lg border border-border px-3 py-2 text-sm"
+            type="number"
+            value={taxYear}
+            onChange={(e) => setTaxYear(e.target.value)}
+            className="rounded-lg border border-border px-3 py-2 text-sm w-24"
           />
         </div>
         <button
