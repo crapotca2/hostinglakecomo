@@ -1,5 +1,7 @@
 import { formatDayLabel, formatDateISO } from "@/lib/date-utils";
 import { flagEmoji, countryName } from "@/lib/countries";
+import { rainForDate, maintenanceForDate } from "@/lib/calendar-annotations";
+import { CloudRain, Wrench } from "lucide-react";
 
 interface Booking {
   _id: string;
@@ -18,13 +20,21 @@ interface DayCellProps {
   isToday: boolean;
 }
 
+// Colore badge per canale (bg + testo). Il diretto è giallo Host Como.
 const SOURCE_COLORS: Record<string, string> = {
-  airbnb: "bg-[#FF5A5F]",
-  booking: "bg-[#003580]",
-  vrbo: "bg-[#3B5998]",
-  direct: "bg-primary",
-  other: "bg-gray-400",
+  airbnb: "bg-[#FF5A5F] text-white",
+  booking: "bg-[#003580] text-white",
+  vrbo: "bg-[#3B5998] text-white",
+  direct: "bg-[#EAB308] text-black",
+  other: "bg-gray-400 text-white",
 };
+
+// Intensità pioggia → colore icona.
+const RAIN_COLOR = {
+  light: "text-sky-400",
+  moderate: "text-sky-500",
+  heavy: "text-blue-600",
+} as const;
 
 export function DayCell({
   date,
@@ -38,11 +48,13 @@ export function DayCell({
     const co = b.checkOut.slice(0, 10);
     return dateIso >= ci && dateIso < co;
   });
+  const rain = rainForDate(dateIso);
+  const maintenance = maintenanceForDate(dateIso);
 
   return (
     <div
       className={`min-h-[90px] p-1.5 border border-border/40 ${
-        inCurrentMonth ? "bg-white" : "bg-muted/20"
+        maintenance ? "bg-amber-50" : inCurrentMonth ? "bg-white" : "bg-muted/20"
       } ${isToday ? "ring-2 ring-primary ring-inset" : ""}`}
     >
       <div className="flex items-start justify-between mb-1">
@@ -53,6 +65,18 @@ export function DayCell({
         >
           {formatDayLabel(date)}
         </span>
+        <div className="flex items-center gap-1">
+          {rain && (
+            <span title={`Pioggia ${rain.mm.toLocaleString("it-IT")} mm`} className="inline-flex">
+              <CloudRain className={`h-3.5 w-3.5 ${RAIN_COLOR[rain.level]}`} />
+            </span>
+          )}
+          {maintenance && (
+            <span title={maintenance.reason} className="inline-flex">
+              <Wrench className="h-3.5 w-3.5 text-amber-600" />
+            </span>
+          )}
+        </div>
       </div>
       <div className="space-y-0.5">
         {dayBookings.slice(0, 3).map((b) => {
@@ -61,7 +85,7 @@ export function DayCell({
           <div
             key={b._id}
             title={`${b.guestInfo.name} · ${countryName(b.guestInfo.nationality) || "—"} (${b.source})`}
-            className={`text-[10px] text-white px-1.5 py-0.5 rounded truncate ${
+            className={`text-[10px] px-1.5 py-0.5 rounded truncate ${
               SOURCE_COLORS[b.source] || SOURCE_COLORS.other
             }`}
           >

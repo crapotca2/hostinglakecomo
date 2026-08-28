@@ -1111,6 +1111,8 @@
       "holidaysTitle": "Festività visualizzate",
       "loadingCalendar": "Caricamento calendario...",
       "legendTitle": "Legenda",
+      "legendWeather": "Pioggia",
+      "legendMaintenance": "Manutenzione",
       "channels": {
         "airbnb": "Airbnb",
         "booking": "Booking.com",

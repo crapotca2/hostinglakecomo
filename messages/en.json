@@ -1111,6 +1111,8 @@
       "holidaysTitle": "Holidays shown",
       "loadingCalendar": "Loading calendar...",
       "legendTitle": "Legend",
+      "legendWeather": "Rain",
+      "legendMaintenance": "Maintenance",
       "channels": {
         "airbnb": "Airbnb",
         "booking": "Booking.com",

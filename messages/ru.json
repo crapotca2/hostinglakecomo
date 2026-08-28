@@ -1111,6 +1111,8 @@
       "holidaysTitle": "Отображаемые праздники",
       "loadingCalendar": "Загрузка календаря...",
       "legendTitle": "Легенда",
+      "legendWeather": "Дождь",
+      "legendMaintenance": "Ремонт",
       "channels": {
         "airbnb": "Airbnb",
         "booking": "Booking.com",

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Link } from "@/i18n/routing";
 import {
   Home,
@@ -8,16 +9,13 @@ import {
   Users,
   Euro,
   ArrowRight,
+  CloudRain,
+  Wrench,
 } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { useDashboardStats } from "@/hooks/use-dashboard-stats";
-
-const STATUS_STYLES: Record<string, string> = {
-  confirmed: "bg-emerald-50 text-emerald-700",
-  checked_in: "bg-blue-50 text-blue-700",
-  pending: "bg-amber-50 text-amber-700",
-  cancelled: "bg-red-50 text-red-600",
-};
+import { useBookings } from "@/hooks/use-bookings";
+import { MonthGrid } from "@/components/calendar/month-grid";
 
 const QUICK_ACTIONS = [
   { key: "properties", href: "/dashboard/properties", icon: Home },
@@ -43,8 +41,11 @@ function formatDate(iso: string, locale: string): string {
 
 export default function DashboardPage() {
   const { data, isLoading } = useDashboardStats();
+  const { data: bookings, isLoading: bookingsLoading } = useBookings();
   const t = useTranslations("dashboard.overview");
+  const tc = useTranslations("dashboard.calendar");
   const locale = useLocale();
+  const [month, setMonth] = useState(new Date());
 
   return (
     <div className="p-6 space-y-6 animate-fade-in">
@@ -139,12 +140,11 @@ export default function DashboardPage() {
                   <th className="text-left text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-4 py-3">{t("recent.headers.dates")}</th>
                   <th className="text-center text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-4 py-3">{t("recent.headers.nights")}</th>
                   <th className="text-left text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-4 py-3">{t("recent.headers.source")}</th>
-                  <th className="text-right text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-4 py-3">{t("recent.headers.amount")}</th>
-                  <th className="text-center text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-6 py-3">{t("recent.headers.status")}</th>
+                  <th className="text-right text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-6 py-3">{t("recent.headers.amount")}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border/30">
-                {data.recentBookings.map((b) => (
+                {data.recentBookings.slice(0, 3).map((b) => (
                   <tr key={b._id} className="hover:bg-muted/20 transition-colors">
                     <td className="px-6 py-3.5">
                       <div className="flex items-center gap-3">
@@ -161,13 +161,8 @@ export default function DashboardPage() {
                     <td className="px-4 py-3.5 text-sm text-muted-foreground">
                       {t(`source.${b.source}` as `source.${"airbnb" | "booking" | "vrbo" | "direct" | "other"}`)}
                     </td>
-                    <td className="px-4 py-3.5 text-sm font-semibold text-right tabular-nums">
+                    <td className="px-6 py-3.5 text-sm font-semibold text-right tabular-nums">
                       {formatEuro(b.pricing.totalAmount, locale)}
-                    </td>
-                    <td className="px-6 py-3.5 text-center">
-                      <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${STATUS_STYLES[b.status]}`}>
-                        {t(`status.${b.status}` as `status.${"confirmed" | "checked_in" | "pending" | "cancelled"}`)}
-                      </span>
                     </td>
                   </tr>
                 ))}
@@ -175,6 +170,42 @@ export default function DashboardPage() {
             </table>
           </div>
         )}
+      </div>
+
+      {/* Calendario */}
+      <div className="space-y-3">
+        <h2 className="text-sm font-semibold px-1">{tc("title")}</h2>
+        {bookingsLoading ? (
+          <div className="bg-white rounded-2xl border border-border/50 p-12 text-center text-sm text-muted-foreground">
+            {tc("loadingCalendar")}
+          </div>
+        ) : (
+          <MonthGrid month={month} onMonthChange={setMonth} bookings={bookings || []} />
+        )}
+        <div className="bg-white rounded-2xl border border-border/50 p-4">
+          <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <div className="h-3 w-3 rounded bg-[#FF5A5F]" />
+              {tc("channels.airbnb")}
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="h-3 w-3 rounded bg-[#003580]" />
+              {tc("channels.booking")}
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="h-3 w-3 rounded bg-[#EAB308]" />
+              {tc("channels.direct")}
+            </div>
+            <div className="flex items-center gap-2">
+              <CloudRain className="h-3.5 w-3.5 text-sky-500" />
+              {tc("legendWeather")}
+            </div>
+            <div className="flex items-center gap-2">
+              <Wrench className="h-3.5 w-3.5 text-amber-600" />
+              {tc("legendMaintenance")}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

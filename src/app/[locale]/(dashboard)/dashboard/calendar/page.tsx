@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { MonthGrid } from "@/components/calendar/month-grid";
 import { useBookings } from "@/hooks/use-bookings";
-import { CalendarDays } from "lucide-react";
+import { CalendarDays, CloudRain, Wrench } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { flagEmoji, countryName } from "@/lib/countries";
 
@@ -87,8 +87,16 @@ export default function CalendarPage() {
             {t("channels.vrbo")}
           </div>
           <div className="flex items-center gap-2">
-            <div className="h-3 w-3 rounded bg-primary" />
+            <div className="h-3 w-3 rounded bg-[#EAB308]" />
             {t("channels.direct")}
+          </div>
+          <div className="flex items-center gap-2">
+            <CloudRain className="h-3.5 w-3.5 text-sky-500" />
+            {t("legendWeather")}
+          </div>
+          <div className="flex items-center gap-2">
+            <Wrench className="h-3.5 w-3.5 text-amber-600" />
+            {t("legendMaintenance")}
           </div>
         </div>
       </div>

@@ -15,7 +15,7 @@ const SOURCE_META: Record<string, { label: string; color: string }> = {
   airbnb: { label: "Airbnb", color: "#FF5A5F" },
   booking: { label: "Booking.com", color: "#003580" },
   vrbo: { label: "Vrbo", color: "#3B5998" },
-  direct: { label: "Diretto", color: "#1B3A6B" },
+  direct: { label: "Diretto", color: "#EAB308" },
   expedia: { label: "Expedia", color: "#FFC72C" },
   other: { label: "Altro", color: "#9CA3AF" },
 };
