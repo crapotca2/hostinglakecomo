@@ -1080,6 +1080,7 @@
       },
       "loading": "Caricamento...",
       "empty": "Nessuna prenotazione trovata",
+      "cleaning": "pulizia",
       "headers": {
         "guest": "Ospite",
         "property": "Proprietà",

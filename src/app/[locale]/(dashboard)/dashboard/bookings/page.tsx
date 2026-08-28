@@ -60,7 +60,8 @@ type BookingRow = {
   nights: number;
   guests: number;
   source: string;
-  amount: number;
+  amount: number; // notti + notte diretta (ricavi alloggio, senza pulizia)
+  cleaning: number; // pulizia, mostrata separata
   status: string;
 };
 
@@ -109,7 +110,12 @@ export default function BookingsPage() {
         nights: b.nights,
         guests: b.guests,
         source: b.source,
-        amount: b.pricing.totalAmount,
+        // Importo = ricavi delle notti (alloggio + eventuale notte diretta), su cui
+        // Host Como calcola il suo 15%. La pulizia è mostrata a parte.
+        amount:
+          (b.pricing.roomRevenue ?? Math.max(0, (b.pricing.totalAmount || 0) - (b.pricing.cleaningFee || 0))) +
+          (b.pricing.extraNight || 0),
+        cleaning: b.pricing.cleaningFee || 0,
         status: b.status,
       }));
   }, [bookings, propertyMap, search, sourceFilter]);
@@ -191,9 +197,16 @@ export default function BookingsPage() {
         accessorKey: "amount",
         header: t("headers.amount"),
         cell: ({ row }) => (
-          <span className="text-sm font-semibold text-right tabular-nums block">
-            {formatEuro(row.original.amount, locale)}
-          </span>
+          <div className="text-center">
+            <div className="text-sm font-semibold tabular-nums">
+              {formatEuro(row.original.amount, locale)}
+            </div>
+            {row.original.cleaning > 0 && (
+              <div className="text-[11px] text-muted-foreground tabular-nums">
+                + {formatEuro(row.original.cleaning, locale)} {t("cleaning")}
+              </div>
+            )}
+          </div>
         ),
       },
       {

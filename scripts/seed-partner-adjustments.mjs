@@ -17,10 +17,11 @@ const now = new Date();
 
 // Acconti = contante del proprietario (parcheggio + notte extra diretta + tassa
 // di soggiorno riscossa in loco) tenuto dal socio, imputato PER CASSA al periodo
-// di regolazione. Fonte: ricostruzione incassi diretti fornita da Andrei.
-//  - Angelo, luglio: Grzegorz parcheggio 40 + tassa 48 = 88.
-//  - Andrei, luglio: Jean Claude notte diretta 250 + parcheggio 40 + tassa 45 = 335
-//    (imputato a luglio perché il contante è stato consegnato al check-in del 30/07,
+// di regolazione. Fonte: ricostruzione incassi diretti fornita da Andrei, con le
+// tasse allineate ai dati dichiarati alle autorità (schedine Alloggiati).
+//  - Angelo, luglio: Grzegorz parcheggio 40 + tassa 36 (3 ospiti dichiarati) = 76.
+//  - Andrei, luglio: Jean Claude notte diretta 250 + parcheggio 40 + tassa 48
+//    (4 ospiti) = 338 (imputato a luglio: contante consegnato al check-in del 30/07,
 //    anche se il ciclo del soggiorno è agosto).
 //  - Andrei, agosto: tasse di soggiorno riscosse in loco al check-out —
 //    Jacek 36, Gareth 48, Scott 18.
@@ -28,8 +29,8 @@ const now = new Date();
 // NON è un acconto (compare solo nel parcheggio 50/50 del proprietario).
 const entries = [
   { period: "2026-07", kind: "favore", partner: "andrei", amount: 40, note: "check-in amici di Alessandro" },
-  { period: "2026-07", kind: "acconto", partner: "angelo", amount: 88, note: "Grzegorz (parcheggio + tassa)" },
-  { period: "2026-07", kind: "acconto", partner: "andrei", amount: 335, note: "Jean Claude (diretto + parcheggio + tassa)" },
+  { period: "2026-07", kind: "acconto", partner: "angelo", amount: 76, note: "Grzegorz (parcheggio + tassa)" },
+  { period: "2026-07", kind: "acconto", partner: "andrei", amount: 338, note: "Jean Claude (diretto + parcheggio + tassa)" },
   { period: "2026-08", kind: "acconto", partner: "andrei", amount: 36, note: "Jacek (tassa soggiorno)" },
   { period: "2026-08", kind: "acconto", partner: "andrei", amount: 48, note: "Gareth (tassa soggiorno)" },
   { period: "2026-08", kind: "acconto", partner: "andrei", amount: 18, note: "Scott (tassa soggiorno)" },

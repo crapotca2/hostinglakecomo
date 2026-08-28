@@ -35,7 +35,13 @@ export function useBookings(filters: BookingFilters = {}) {
         status: string;
         source: string;
         guestInfo: { name: string; email: string; nationality?: string };
-        pricing: { totalAmount: number; ownerPayout: number };
+        pricing: {
+          totalAmount: number;
+          ownerPayout: number;
+          roomRevenue?: number;
+          cleaningFee?: number;
+          extraNight?: number;
+        };
       }>;
     },
   });

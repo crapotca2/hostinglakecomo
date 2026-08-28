@@ -1080,6 +1080,7 @@
       },
       "loading": "Loading...",
       "empty": "No bookings found",
+      "cleaning": "cleaning",
       "headers": {
         "guest": "Guest",
         "property": "Property",
