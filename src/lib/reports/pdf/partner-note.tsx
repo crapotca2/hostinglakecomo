@@ -76,15 +76,17 @@ function NoteDoc({ data }: { data: PartnerNoteData }) {
             <Text style={styles.bodyVal}>€ {eur(data.consulenza)}</Text>
           </View>
           {data.inps > 0 ? (
-            <View style={styles.bodyRow}>
-              <Text style={styles.bodyLabel}>Rivalsa contr. previd. 4%</Text>
-              <Text style={styles.bodyVal}>€ {eur(data.inps)}</Text>
-            </View>
+            <>
+              <View style={styles.bodyRow}>
+                <Text style={styles.bodyLabel}>Rivalsa contr. previd. 4%</Text>
+                <Text style={styles.bodyVal}>€ {eur(data.inps)}</Text>
+              </View>
+              <View style={styles.bodyRow}>
+                <Text style={styles.bodyLabelBold}>Lordo da versare</Text>
+                <Text style={styles.bodyVal}>€ {eur(data.lordo)}</Text>
+              </View>
+            </>
           ) : null}
-          <View style={styles.bodyRow}>
-            <Text style={styles.bodyLabelBold}>Lordo da versare</Text>
-            <Text style={styles.bodyVal}>€ {eur(data.lordo)}</Text>
-          </View>
           {data.parcheggio > 0 ? (
             <View style={styles.bodyRow}>
               <Text style={styles.bodyLabel}>Quota parcheggio (25%)</Text>

@@ -1818,7 +1818,7 @@
     },
     "compensi": {
       "titleStrong": "Partner payouts",
-      "subtitle": "Internal Host Como expense notes (one per partner), plus 4% INPS",
+      "subtitle": "Internal Host Como expense notes (one per partner)",
       "adminOnly": "Admins only.",
       "pickOwner": "Select an owner to generate the expense notes.",
       "period": "Period",
@@ -1832,7 +1832,7 @@
       "totale": "Net total",
       "downloadPdf": "Download PDF",
       "bookings": "{n} bookings in the calculation",
-      "note": "Internal documents: each partner invoices their half of the Host Como fee (15% of room revenue) + 4% INPS = gross to pay; the 25% parking share and favours are added, on-site cash advances subtracted. Not visible to the owner.",
+      "note": "Internal documents: each partner invoices their half of the Host Como fee (15% of room revenue, 25→25 cycle); where applicable the 4% INPS surcharge is added. The 25% parking share and favours are then added, on-site cash advances subtracted. Not visible to the owner.",
       "adjTitle": "Manual adjustments",
       "adjSubtitle": "One-off favours and on-site cash advances, per period",
       "adjAdd": "Add",

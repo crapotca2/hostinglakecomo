@@ -120,11 +120,11 @@ function PartnerCard({ partner, ownerId, period, locale, t }: { partner: string;
       <div className="p-6 space-y-2">
         <Row label={t("consulenza")} value={isLoading || !data ? "—" : formatEuro(data.consulenza, locale)} />
         {data && data.inps > 0 ? (
-          <Row label={t("inps")} value={formatEuro(data.inps, locale)} muted />
+          <div className="border-t border-border/40 pt-2 mt-2 space-y-2">
+            <Row label={t("inps")} value={formatEuro(data.inps, locale)} muted />
+            <Row label={t("lordo")} value={formatEuro(data.lordo, locale)} />
+          </div>
         ) : null}
-        <div className="border-t border-border/40 pt-2 mt-2">
-          <Row label={t("lordo")} value={isLoading || !data ? "—" : formatEuro(data.lordo, locale)} />
-        </div>
         {data && data.parcheggio > 0 ? (
           <Row label={t("parcheggio")} value={`+ ${formatEuro(data.parcheggio, locale)}`} />
         ) : null}

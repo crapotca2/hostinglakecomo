@@ -1818,7 +1818,7 @@
     },
     "compensi": {
       "titleStrong": "Compensi soci",
-      "subtitle": "Note spese interne Host Como (una per socio), maggiorate del 4% INPS",
+      "subtitle": "Note spese interne Host Como (una per socio)",
       "adminOnly": "Sezione riservata agli amministratori.",
       "pickOwner": "Seleziona un proprietario per generare le note spese.",
       "period": "Periodo",
@@ -1832,7 +1832,7 @@
       "totale": "Totale netto",
       "downloadPdf": "Scarica PDF",
       "bookings": "{n} prenotazioni nel calcolo",
-      "note": "Documenti interni: ogni socio fattura la propria metà della commissione Host Como (15% sui ricavi alloggio) + 4% INPS = lordo da versare; al lordo si aggiunge il 25% del parcheggio e i favori, e si sottraggono gli acconti incassati in loco. Non visibili al proprietario.",
+      "note": "Documenti interni: ogni socio fattura la propria metà della commissione Host Como (15% sui ricavi alloggio, ciclo 25→25); dove prevista si aggiunge la rivalsa INPS 4%. Si aggiunge poi il 25% del parcheggio e i favori, e si sottraggono gli acconti incassati in loco. Non visibili al proprietario.",
       "adjTitle": "Rettifiche manuali",
       "adjSubtitle": "Favori una tantum e acconti incassati in loco, per periodo",
       "adjAdd": "Aggiungi",
