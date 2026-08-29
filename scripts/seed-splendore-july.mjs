@@ -27,8 +27,8 @@ const now = new Date();
 
 const r2 = (n) => Math.round(n * 100) / 100;
 
-// Aliquota commissione Host Como per questo immobile (varia per casa; Splendore 15%).
-const FEE_RATE = 0.15;
+// Aliquota commissione Host Como per questo immobile (varia per casa; Splendore 14%).
+const FEE_RATE = 0.14;
 const CLEANING = 80;
 
 // Dati per-prenotazione dal rendiconto ufficiale.
@@ -49,8 +49,8 @@ const D = [
   { name: "Frédéric Poitiers",  nat: "FR", source: "booking", ref: "6827537609", ci: "2026-07-27", co: "2026-07-30", nights: 3, guests: 5, gross: 1190.00, ota: 196.35, cedolare: 249.90, tax: 45, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "uncollected" },
   // Jean Claude: 3 notti via Booking + 1 notte DIRETTA (prenotata da noi, fuori
   // OTA). Split in due record → la notte diretta ha canale "direct" ed è contata
-  // come notte. Anche sul diretto Host Como trattiene la sua fee 15% (250 → fee
-  // 37,50, netto 212,50). Nessuna cedolare sul diretto (incasso in loco, fuori
+  // come notte. Anche sul diretto Host Como trattiene la sua fee 14% (250 → fee
+  // 35,00, netto 215,00). Nessuna cedolare sul diretto (incasso in loco, fuori
   // ritenuta OTA). Tassa 48 = 36 (Booking 3nt) + 12 (diretta 1nt).
   { name: "Jean Claude Varin",  nat: "FR", source: "booking", ref: "5081550102",       ci: "2026-07-30", co: "2026-08-02", nights: 3, guests: 4, gross: 1160.00, ota: 191.40, cedolare: 243.60, tax: 36, parking: 40, extra: 0, status: "checked_out", taxStatus: "collected" },
   { name: "Jean Claude Varin",  nat: "FR", source: "direct",  ref: "5081550102-EXTRA", ci: "2026-08-02", co: "2026-08-03", nights: 1, guests: 4, gross: 250.00,  ota: 0,      cedolare: 0,      tax: 12, parking: 0,  extra: 0, status: "checked_out", taxStatus: "collected", direct: true },
@@ -63,7 +63,7 @@ const D = [
 
 function bookingDoc(d) {
   // Record "direct" = notte diretta (fuori OTA): niente pulizie/commissioni OTA/
-  // cedolare, ma Host Como trattiene comunque la sua fee 15% sul ricavo. È una
+  // cedolare, ma Host Como trattiene comunque la sua fee 14% sul ricavo. È una
   // continuazione fisica di un altro soggiorno → esclusa dagli arrivi ISTAT.
   const isDirect = d.direct === true;
   // Diretto: l'intero incasso è ricavo alloggio (soggetto a fee). OTA: alloggio = gross − pulizie.

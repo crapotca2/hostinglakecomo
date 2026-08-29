@@ -9,7 +9,7 @@ import type { BookingDoc, PropertyDoc } from "@/types/database";
  *                        − commissione Host Como (rate × ricavi alloggio)
  *
  * - La **commissione Host Como è sui soli ricavi alloggio** (esclusi pulizie,
- *   parcheggio, tassa) e la sua **aliquota varia per immobile** (per Splendore 15%).
+ *   parcheggio, tassa) e la sua **aliquota varia per immobile** (per Splendore 14%).
  * - **Pulizie** e **tassa di soggiorno** sono partite di giro (incassate e girate a
  *   impresa/comune) → fuori dal netto.
  * - Il **parcheggio** è una partita separata **50/50** (metà proprietario, metà gestione).

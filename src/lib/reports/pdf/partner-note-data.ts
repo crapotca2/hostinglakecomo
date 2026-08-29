@@ -35,7 +35,7 @@ export interface PartnerNoteData {
   periodLabel: string; // "luglio e agosto 2026"
   propertyName: string;
   months: PartnerNoteMonth[];
-  consulenza: number; // = Σ month.total (quota socio del 15% ÷ 2)
+  consulenza: number; // = Σ month.total (quota socio = fee immobile ÷ 2)
   inps: number; // 4% sulla sola consulenza
   lordo: number; // lordo da versare = consulenza + inps
   parcheggio: number; // quota parcheggio del socio = Σ parcheggio × 25% (si aggiunge)

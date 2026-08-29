@@ -1,6 +1,6 @@
 // Soci Host Como che emettono la Nota spese (compenso) per la consulenza di
 // ospitalità. Ogni socio fattura la propria metà della commissione Host Como
-// (15% sui ricavi alloggio) + rivalsa INPS 4%. Dati bancari per l'accredito.
+// (aliquota per immobile sui ricavi alloggio) + eventuale rivalsa INPS 4%. Dati bancari per l'accredito.
 
 export interface PartnerConfig {
   key: "angelo" | "andrei";

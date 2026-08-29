@@ -37,7 +37,7 @@ export interface XlsxParking {
 export interface RendicontoXlsxInput {
   titleIt: string;
   titleEn: string;
-  feeRate: number; // 0.15 per Splendore
+  feeRate: number; // aliquota per immobile (es. 0.14 per Splendore)
   bookings: XlsxBooking[]; // in ordine cronologico
   parking: XlsxParking[];
   nightGrid: { label: string; bookingIndex: number | null }[]; // notti disponibili nel periodo

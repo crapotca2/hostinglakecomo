@@ -111,7 +111,7 @@ export default function BookingsPage() {
         guests: b.guests,
         source: b.source,
         // Importo = ricavi delle notti (alloggio + eventuale notte diretta), su cui
-        // Host Como calcola il suo 15%. La pulizia è mostrata a parte.
+        // Host Como calcola la sua commissione. La pulizia è mostrata a parte.
         amount:
           (b.pricing.roomRevenue ?? Math.max(0, (b.pricing.totalAmount || 0) - (b.pricing.cleaningFee || 0))) +
           (b.pricing.extraNight || 0),
