@@ -1702,6 +1702,16 @@
           "kpiNet": "Чистыми собственнику",
           "kpiBookings": "Бронирования",
           "kpiOccupancy": "Средняя загрузка",
+          "priceTitle": "Цена за бронирование",
+          "priceSubtitle": "Доход за ночи (без уборки) — база для комиссии Host Como",
+          "priceAvg": "Средняя цена",
+          "priceMedian": "Медианная цена",
+          "priceMin": "Минимум",
+          "priceMax": "Максимум",
+          "pricePerNight": "В среднем за ночь",
+          "chartPrice": "Цена за ночи",
+          "chartPerNight": "За ночь",
+          "chartCleaning": "уборка",
           "noData": "Нет данных за период"
         },
         "expand": {

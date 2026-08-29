@@ -98,6 +98,89 @@ export async function getPropertyPerformance(year: number, ownerId: string): Pro
   return result.sort((a, b) => b.revenue - a.revenue);
 }
 
+export interface BookingPrice {
+  bookingId: string;
+  guest: string;
+  source: string;
+  checkIn: string; // yyyy-MM-dd
+  checkOut: string; // yyyy-MM-dd
+  nights: number;
+  guests: number;
+  price: number; // ricavi notti = alloggio + notte diretta (ex-pulizia)
+  cleaning: number; // pulizia (partita di giro, mostrata a parte)
+  pricePerNight: number; // price / nights
+}
+
+export interface BookingPriceStats {
+  count: number;
+  avg: number; // prezzo medio per prenotazione
+  median: number;
+  min: number;
+  max: number;
+  avgPerNight: number; // ADR sui ricavi notti
+}
+
+/**
+ * Prezzo delle singole prenotazioni dell'anno (ciclo 25→25 come il resto
+ * dell'Analytics), per l'istogramma e l'analisi prezzi. `price` = ricavi notti
+ * (alloggio + notte diretta, esclusa la pulizia che è partita di giro), la
+ * stessa base su cui Host Como calcola la sua commissione. SEMPRE owner-scoped.
+ */
+export async function getBookingPrices(
+  year: number,
+  ownerId: string,
+): Promise<{ bookings: BookingPrice[]; stats: BookingPriceStats }> {
+  const bookingsCol = await collections.bookings();
+  const start = new Date(year, 0, 1);
+  const end = new Date(year + 1, 0, 1);
+  const all = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
+
+  const bookings: BookingPrice[] = [];
+  for (const b of all) {
+    if (b.status === "cancelled") continue;
+    if (!(b.checkIn >= start && b.checkIn < end)) continue;
+    const { year: cy } = billingCycle(b.checkIn);
+    if (cy !== year) continue; // coerente con getMonthlyRevenue
+    const p = b.pricing || {};
+    const room = p.roomRevenue ?? Math.max(0, (p.totalAmount ?? 0) - (p.cleaningFee ?? 0));
+    const price = Math.round((room + (p.extraNight ?? 0)) * 100) / 100;
+    bookings.push({
+      bookingId: b._id!.toString(),
+      guest: b.guestInfo?.name || "—",
+      source: b.source || "other",
+      checkIn: b.checkIn.toISOString().slice(0, 10),
+      checkOut: b.checkOut.toISOString().slice(0, 10),
+      nights: b.nights,
+      guests: b.guests,
+      price,
+      cleaning: p.cleaningFee ?? 0,
+      pricePerNight: b.nights > 0 ? Math.round((price / b.nights) * 100) / 100 : price,
+    });
+  }
+  bookings.sort((a, b) => a.checkIn.localeCompare(b.checkIn));
+
+  const prices = bookings.map((b) => b.price);
+  const sorted = [...prices].sort((a, b) => a - b);
+  const sum = prices.reduce((s, v) => s + v, 0);
+  const totalNights = bookings.reduce((s, b) => s + b.nights, 0);
+  const median = sorted.length === 0
+    ? 0
+    : sorted.length % 2
+      ? sorted[(sorted.length - 1) / 2]
+      : Math.round(((sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2) * 100) / 100;
+
+  const stats: BookingPriceStats = {
+    count: bookings.length,
+    avg: bookings.length ? Math.round((sum / bookings.length) * 100) / 100 : 0,
+    median,
+    min: sorted.length ? sorted[0] : 0,
+    max: sorted.length ? sorted[sorted.length - 1] : 0,
+    avgPerNight: totalNights ? Math.round((sum / totalNights) * 100) / 100 : 0,
+  };
+
+  return { bookings, stats };
+}
+
 export async function getKpiSummary(year: number, ownerId: string) {
   const monthly = await getMonthlyRevenue(year, ownerId);
   const properties = await getPropertyPerformance(year, ownerId);

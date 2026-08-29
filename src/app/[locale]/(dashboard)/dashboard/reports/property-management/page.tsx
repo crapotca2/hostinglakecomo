@@ -13,7 +13,7 @@ import { ReportTable, type ReportColumn } from "@/components/reports/report-tabl
 import { ReportFilters, presetToDateRange } from "@/components/reports/report-filters";
 import { StatCard } from "@/components/reports/stat-card";
 import { downloadCSV } from "@/components/reports/csv-export";
-import { useAnalytics } from "@/hooks/use-analytics";
+import { useAnalytics, type AnalyticsData } from "@/hooks/use-analytics";
 
 type Tab = "overview" | "commission-summary" | "commission-detail" | "owner-summary" | "owner-detail";
 
@@ -111,6 +111,9 @@ function OverviewView() {
         <StatCard label={t("kpiRevenue") + " / notte"} value={formatEuro(data.kpis.avgRate)} />
       </div>
 
+      {/* Analisi prezzo per prenotazione — istogramma + statistiche */}
+      <PriceAnalysisSection data={data} />
+
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Torta ricavi per canale */}
         <div className="bg-white rounded-2xl border border-border/50 p-6">
@@ -156,6 +159,75 @@ function OverviewView() {
               <YAxis tick={{ fontSize: 11 }} allowDecimals={false} />
               <Tooltip />
               <Bar dataKey="nights" fill={TEAL_LIGHT} radius={[4, 4, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// ANALISI PREZZO PER PRENOTAZIONE — istogramma (barre colorate per canale) +
+// statistiche (media/mediana/min/max, media a notte). "Prezzo" = ricavi notti.
+// ---------------------------------------------------------------------------
+type PriceRow = AnalyticsData["bookingPrices"][number] & { label: string; fill: string };
+
+function PriceTooltip({
+  active, payload, t,
+}: {
+  active?: boolean;
+  payload?: Array<{ payload: PriceRow }>;
+  t: ReturnType<typeof useTranslations>;
+}) {
+  if (!active || !payload?.length) return null;
+  const d = payload[0].payload;
+  const dm = (iso: string) => `${iso.slice(8, 10)}/${iso.slice(5, 7)}`;
+  return (
+    <div className="bg-white border border-border/50 rounded-lg shadow-sm px-3 py-2 text-xs">
+      <div className="font-semibold">{d.guest}</div>
+      <div className="text-muted-foreground">{dm(d.checkIn)} → {dm(d.checkOut)} · {d.nights} · {d.guests} osp.</div>
+      <div className="mt-1">{t("chartPrice")}: <span className="font-semibold">{formatEuro(d.price)}</span></div>
+      <div className="text-muted-foreground">{t("chartPerNight")}: {formatEuro(d.pricePerNight)}</div>
+      {d.cleaning > 0 ? <div className="text-muted-foreground">+ {formatEuro(d.cleaning)} {t("chartCleaning")}</div> : null}
+    </div>
+  );
+}
+
+function PriceAnalysisSection({ data }: { data: AnalyticsData }) {
+  const t = useTranslations("dashboard.reports.propertyManagement.overview");
+  const bookings = data.bookingPrices ?? [];
+  if (bookings.length === 0) return null;
+  const stats = data.priceStats;
+  const colorBySource = new Map(data.sources.map((s) => [s.source, s.color]));
+  const chartData: PriceRow[] = bookings.map((b) => ({
+    ...b,
+    label: b.guest.split(" ")[0],
+    fill: colorBySource.get(b.source) || "#9CA3AF",
+  }));
+
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+        <StatCard label={t("priceAvg")} value={formatEuro(stats.avg)} />
+        <StatCard label={t("priceMedian")} value={formatEuro(stats.median)} />
+        <StatCard label={t("priceMin")} value={formatEuro(stats.min)} />
+        <StatCard label={t("priceMax")} value={formatEuro(stats.max)} />
+        <StatCard label={t("pricePerNight")} value={formatEuro(stats.avgPerNight)} />
+      </div>
+      <div className="bg-white rounded-2xl border border-border/50 p-6">
+        <h2 className="text-sm font-semibold">{t("priceTitle")}</h2>
+        <p className="text-xs text-muted-foreground mt-1 mb-4">{t("priceSubtitle")}</p>
+        <div style={{ width: "100%", height: 300 }}>
+          <ResponsiveContainer>
+            <BarChart data={chartData} margin={{ top: 8, right: 12, left: -4, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
+              <XAxis dataKey="label" tick={{ fontSize: 11 }} interval={0} angle={-25} textAnchor="end" height={54} />
+              <YAxis tick={{ fontSize: 11 }} tickFormatter={(v: number) => new Intl.NumberFormat("it-IT").format(v)} />
+              <Tooltip content={<PriceTooltip t={t} />} cursor={{ fill: "rgba(0,0,0,0.04)" }} />
+              <Bar dataKey="price" radius={[4, 4, 0, 0]}>
+                {chartData.map((d) => <Cell key={d.bookingId} fill={d.fill} />)}
+              </Bar>
             </BarChart>
           </ResponsiveContainer>
         </div>

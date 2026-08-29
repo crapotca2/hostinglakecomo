@@ -1702,6 +1702,16 @@
           "kpiNet": "Owner net",
           "kpiBookings": "Bookings",
           "kpiOccupancy": "Avg. occupancy",
+          "priceTitle": "Price per booking",
+          "priceSubtitle": "Night revenue (excluding cleaning), the base the Host Como fee is charged on",
+          "priceAvg": "Average price",
+          "priceMedian": "Median price",
+          "priceMin": "Minimum",
+          "priceMax": "Maximum",
+          "pricePerNight": "Avg. per night",
+          "chartPrice": "Night price",
+          "chartPerNight": "Per night",
+          "chartCleaning": "cleaning",
           "noData": "No data in range"
         },
         "expand": {

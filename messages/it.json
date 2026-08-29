@@ -1702,6 +1702,16 @@
           "kpiNet": "Netto proprietario",
           "kpiBookings": "Prenotazioni",
           "kpiOccupancy": "Occupazione media",
+          "priceTitle": "Prezzo per prenotazione",
+          "priceSubtitle": "Ricavi delle notti (esclusa la pulizia), la base su cui si calcola la commissione Host Como",
+          "priceAvg": "Prezzo medio",
+          "priceMedian": "Prezzo mediano",
+          "priceMin": "Minimo",
+          "priceMax": "Massimo",
+          "pricePerNight": "Media a notte",
+          "chartPrice": "Prezzo notti",
+          "chartPerNight": "A notte",
+          "chartCleaning": "pulizia",
           "noData": "Nessun dato nel periodo"
         },
         "expand": {
