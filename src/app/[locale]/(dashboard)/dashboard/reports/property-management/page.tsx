@@ -187,8 +187,8 @@ function PriceTooltip({
     <div className="bg-white border border-border/50 rounded-lg shadow-sm px-3 py-2 text-xs">
       <div className="font-semibold">{d.guest}</div>
       <div className="text-muted-foreground">{dm(d.checkIn)} → {dm(d.checkOut)} · {d.nights} · {d.guests} osp.</div>
-      <div className="mt-1">{t("chartPrice")}: <span className="font-semibold">{formatEuro(d.price)}</span></div>
-      <div className="text-muted-foreground">{t("chartPerNight")}: {formatEuro(d.pricePerNight)}</div>
+      <div className="mt-1">{t("chartPerNight")}: <span className="font-semibold">{formatEuro(d.pricePerNight)}</span></div>
+      <div className="text-muted-foreground">{t("chartPrice")}: {formatEuro(d.price)}</div>
       {d.cleaning > 0 ? <div className="text-muted-foreground">+ {formatEuro(d.cleaning)} {t("chartCleaning")}</div> : null}
     </div>
   );
@@ -209,11 +209,11 @@ function PriceAnalysisSection({ data }: { data: AnalyticsData }) {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-        <StatCard label={t("priceAvg")} value={formatEuro(stats.avg)} />
-        <StatCard label={t("priceMedian")} value={formatEuro(stats.median)} />
-        <StatCard label={t("priceMin")} value={formatEuro(stats.min)} />
-        <StatCard label={t("priceMax")} value={formatEuro(stats.max)} />
         <StatCard label={t("pricePerNight")} value={formatEuro(stats.avgPerNight)} />
+        <StatCard label={t("medianPerNight")} value={formatEuro(stats.medianPerNight)} />
+        <StatCard label={t("minPerNight")} value={formatEuro(stats.minPerNight)} />
+        <StatCard label={t("maxPerNight")} value={formatEuro(stats.maxPerNight)} />
+        <StatCard label={t("priceAvg")} value={formatEuro(stats.avg)} />
       </div>
       <div className="bg-white rounded-2xl border border-border/50 p-6">
         <h2 className="text-sm font-semibold">{t("priceTitle")}</h2>
@@ -225,7 +225,7 @@ function PriceAnalysisSection({ data }: { data: AnalyticsData }) {
               <XAxis dataKey="label" tick={{ fontSize: 11 }} interval={0} angle={-25} textAnchor="end" height={54} />
               <YAxis tick={{ fontSize: 11 }} tickFormatter={(v: number) => new Intl.NumberFormat("it-IT").format(v)} />
               <Tooltip content={<PriceTooltip t={t} />} cursor={{ fill: "rgba(0,0,0,0.04)" }} />
-              <Bar dataKey="price" radius={[4, 4, 0, 0]}>
+              <Bar dataKey="pricePerNight" radius={[4, 4, 0, 0]}>
                 {chartData.map((d) => <Cell key={d.bookingId} fill={d.fill} />)}
               </Bar>
             </BarChart>

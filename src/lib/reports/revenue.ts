@@ -113,11 +113,14 @@ export interface BookingPrice {
 
 export interface BookingPriceStats {
   count: number;
-  avg: number; // prezzo medio per prenotazione
+  avg: number; // prezzo medio per prenotazione (totale notti)
   median: number;
   min: number;
   max: number;
-  avgPerNight: number; // ADR sui ricavi notti
+  avgPerNight: number; // ADR ponderato = Σ ricavi notti / Σ notti
+  medianPerNight: number; // mediana delle tariffe a notte
+  minPerNight: number;
+  maxPerNight: number;
 }
 
 /**
@@ -159,23 +162,31 @@ export async function getBookingPrices(
   }
   bookings.sort((a, b) => a.checkIn.localeCompare(b.checkIn));
 
+  const median = (arr: number[]): number => {
+    const s = [...arr].sort((a, b) => a - b);
+    if (s.length === 0) return 0;
+    return s.length % 2
+      ? s[(s.length - 1) / 2]
+      : Math.round(((s[s.length / 2 - 1] + s[s.length / 2]) / 2) * 100) / 100;
+  };
+
   const prices = bookings.map((b) => b.price);
+  const perNight = bookings.map((b) => b.pricePerNight);
   const sorted = [...prices].sort((a, b) => a - b);
+  const sortedN = [...perNight].sort((a, b) => a - b);
   const sum = prices.reduce((s, v) => s + v, 0);
   const totalNights = bookings.reduce((s, b) => s + b.nights, 0);
-  const median = sorted.length === 0
-    ? 0
-    : sorted.length % 2
-      ? sorted[(sorted.length - 1) / 2]
-      : Math.round(((sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2) * 100) / 100;
 
   const stats: BookingPriceStats = {
     count: bookings.length,
     avg: bookings.length ? Math.round((sum / bookings.length) * 100) / 100 : 0,
-    median,
+    median: median(prices),
     min: sorted.length ? sorted[0] : 0,
     max: sorted.length ? sorted[sorted.length - 1] : 0,
     avgPerNight: totalNights ? Math.round((sum / totalNights) * 100) / 100 : 0,
+    medianPerNight: median(perNight),
+    minPerNight: sortedN.length ? sortedN[0] : 0,
+    maxPerNight: sortedN.length ? sortedN[sortedN.length - 1] : 0,
   };
 
   return { bookings, stats };

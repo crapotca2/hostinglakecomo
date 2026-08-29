@@ -18,7 +18,10 @@ export interface AnalyticsData {
     bookingId: string; guest: string; source: string; checkIn: string; checkOut: string;
     nights: number; guests: number; price: number; cleaning: number; pricePerNight: number;
   }>;
-  priceStats: { count: number; avg: number; median: number; min: number; max: number; avgPerNight: number };
+  priceStats: {
+    count: number; avg: number; median: number; min: number; max: number;
+    avgPerNight: number; medianPerNight: number; minPerNight: number; maxPerNight: number;
+  };
 }
 
 export function useAnalytics(year?: number) {
