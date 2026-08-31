@@ -141,7 +141,7 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
                   subtitle={bathSubtitle(guide.sections.bathrooms[0].features, locale)}
                   captionBelow
                 >
-                  <BathroomModalContent guide={guide} index={0} t={t} />
+                  <BathroomModalContent guide={guide} index={0} t={t} locale={locale} />
                 </TileCard>
               )}
             </div>
@@ -184,7 +184,7 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
                   subtitle={bathSubtitle(guide.sections.bathrooms[1].features, locale)}
                   captionBelow
                 >
-                  <BathroomModalContent guide={guide} index={1} t={t} />
+                  <BathroomModalContent guide={guide} index={1} t={t} locale={locale} />
                 </TileCard>
               )}
             </div>
@@ -231,7 +231,7 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
                   subtitle={bathSubtitle(b.features, locale)}
                   captionBelow
                 >
-                  <BathroomModalContent guide={guide} index={i} t={t} />
+                  <BathroomModalContent guide={guide} index={i} t={t} locale={locale} />
                 </TileCard>
               ))}
             </div>
@@ -243,22 +243,27 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
           /* Appartamenti compatti: pranzo/cucina/soggiorno + un unico tile
              "Spazi esterni" (edificio + cortile), tutti allineati in una riga. */
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 last-tile-center-mobile">
-            {guide.sections.photos?.diningArea && guide.sections.photos.diningArea.length > 0 && (
+            {guide.sections.photos?.diningArea && guide.sections.photos.diningArea.length > 0 ? (
+              /* Cucina e zona pranzo in un unico tile */
               <TileCard
-                photo={guide.sections.photos.diningArea[0]}
-                title={sectionLabel("dining", locale)}
+                photo={guide.sections.photos?.kitchen?.[0] ?? guide.sections.photos.diningArea[0]}
+                title={sectionLabel("kitchenDining", locale)}
                 captionBelow
               >
-                <DiningModalContent guide={guide} t={t} locale={locale} />
+                <div className="divide-y divide-slate-100">
+                  <KitchenModalContent guide={guide} t={t} locale={locale} />
+                  <DiningModalContent guide={guide} t={t} locale={locale} />
+                </div>
+              </TileCard>
+            ) : (
+              <TileCard
+                photo={guide.sections.photos?.kitchen?.[0]}
+                title={sectionLabel("kitchen", locale)}
+                captionBelow
+              >
+                <KitchenModalContent guide={guide} t={t} locale={locale} />
               </TileCard>
             )}
-            <TileCard
-              photo={guide.sections.photos?.kitchen?.[0]}
-              title={sectionLabel("kitchen", locale)}
-              captionBelow
-            >
-              <KitchenModalContent guide={guide} t={t} locale={locale} />
-            </TileCard>
             <TileCard
               photo={guide.sections.photos?.livingRoom?.[0]}
               title={sectionLabel("living", locale)}
@@ -414,10 +419,12 @@ function BathroomModalContent({
   guide,
   index,
   t,
+  locale,
 }: {
   guide: HouseGuideDoc;
   index: number;
   t: Translator;
+  locale: SupportedLocale;
 }) {
   const b = guide.sections.bathrooms[index];
   if (!b) return null;
@@ -434,7 +441,7 @@ function BathroomModalContent({
               key={j}
               className="text-xs px-2 py-0.5 rounded-full bg-[#E8EDF5] text-[#1D3A62] font-medium"
             >
-              {f}
+              {featureLabel(f, locale)}
             </span>
           ))}
         </div>
@@ -603,9 +610,36 @@ function bathSubtitle(features: string[] | undefined, locale: SupportedLocale): 
   return map[primary]?.[locale] ?? map[primary]?.it ?? features[0];
 }
 
+// Localise a bathroom feature chip (stored as an Italian string) into the
+// active language; unknown features fall back to the raw string.
+function featureLabel(feature: string, locale: SupportedLocale): string {
+  const f = feature.toLowerCase();
+  const map: Record<string, Partial<Record<SupportedLocale, string>>> = {
+    doccia: { it: "Doccia", en: "Shower", ru: "Душ", de: "Dusche", pl: "Prysznic", es: "Ducha", fr: "Douche" },
+    vasca: { it: "Vasca", en: "Bathtub", ru: "Ванна", de: "Badewanne", pl: "Wanna", es: "Bañera", fr: "Baignoire" },
+    lavatrice: { it: "Lavatrice", en: "Washing machine", ru: "Стиральная машина", de: "Waschmaschine", pl: "Pralka", es: "Lavadora", fr: "Lave-linge" },
+    asciugacapelli: { it: "Asciugacapelli", en: "Hair dryer", ru: "Фен", de: "Föhn", pl: "Suszarka", es: "Secador", fr: "Sèche-cheveux" },
+    bidet: { it: "Bidet", en: "Bidet", ru: "Биде", de: "Bidet", pl: "Bidet", es: "Bidé", fr: "Bidet" },
+  };
+  const key = f.includes("doccia")
+    ? "doccia"
+    : f.includes("vasca")
+      ? "vasca"
+      : f.includes("lavatrice")
+        ? "lavatrice"
+        : f.includes("asciugacapelli") || f.includes("phon")
+          ? "asciugacapelli"
+          : f.includes("bidet")
+            ? "bidet"
+            : null;
+  if (key) return map[key][locale] ?? map[key].it ?? feature;
+  return feature;
+}
+
 function sectionLabel(key: string, locale: SupportedLocale): string {
   const labels: Record<string, Partial<Record<SupportedLocale, string>>> = {
     rooms: { it: "Camere e bagni", en: "Rooms & bathrooms", ru: "Комнаты и ванные", de: "Zimmer & Bäder", pl: "Pokoje i łazienki", es: "Habitaciones y baños", fr: "Chambres et salles de bain" },
+    kitchenDining: { it: "Cucina e zona pranzo", en: "Kitchen & dining area", ru: "Кухня и столовая", de: "Küche & Essbereich", pl: "Kuchnia i jadalnia", es: "Cocina y comedor", fr: "Cuisine et coin repas" },
     living: { it: "Soggiorno", en: "Living Room", ru: "Гостиная", de: "Wohnzimmer", pl: "Salon" },
     kitchen: { it: "Cucina", en: "Kitchen", ru: "Кухня", de: "Küche", pl: "Kuchnia" },
     dining: { it: "Zona pranzo", en: "Dining area", ru: "Обеденная зона", de: "Essbereich", pl: "Jadalnia", es: "Comedor" },

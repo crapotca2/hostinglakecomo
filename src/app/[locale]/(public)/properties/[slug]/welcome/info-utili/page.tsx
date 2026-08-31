@@ -332,39 +332,61 @@ export default async function InfoUtiliPage({ params, searchParams }: PageProps)
 
         <TexturedSection>
           <GroupHeader label={label("groupHome", locale)} />
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-            {guide.sections.livingInItaly ? (
-              <TileCard
-                icon={<Clock />}
-                title={label("livingInItaly", locale)}
-              >
-                {textModal(label("livingInItaly", locale), t(guide.sections.livingInItaly))}
-              </TileCard>
-            ) : (
+          {guide.sections.livingInItaly ? (
+            <div className="space-y-3 sm:space-y-4">
+              {/* Testo diretto, senza click: guida "all'italiana" per chi è qui la prima volta */}
+              <div className="rounded-2xl bg-white border border-slate-200 shadow-sm p-5 sm:p-7">
+                <div className="flex items-center gap-2.5 mb-4">
+                  <span className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-[#E8EDF5] flex-shrink-0">
+                    <Clock className="w-5 h-5 text-[#1D3A62]" strokeWidth={2.2} />
+                  </span>
+                  <h2 className="font-bold text-lg sm:text-xl text-slate-900">
+                    {label("livingInItaly", locale)}
+                  </h2>
+                </div>
+                <RichBody body={t(guide.sections.livingInItaly)} />
+              </div>
+              {(guide.sections.babyEquipment || guide.sections.ringCameraDisclosure) && (
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+                  {guide.sections.babyEquipment && (
+                    <TileCard icon={<Baby />} title={label("baby", locale)}>
+                      {textModal(label("baby", locale), t(guide.sections.babyEquipment))}
+                    </TileCard>
+                  )}
+                  {guide.sections.ringCameraDisclosure && (
+                    <TileCard icon={<Video />} title={label("ring", locale)}>
+                      {textModal(label("ring", locale), t(guide.sections.ringCameraDisclosure))}
+                    </TileCard>
+                  )}
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
               <TileCard
                 icon={<Recycle />}
                 title={label("waste", locale)}
               >
                 {textModal(label("waste", locale), t(guide.sections.waste))}
               </TileCard>
-            )}
-            {guide.sections.babyEquipment && (
-              <TileCard
-                icon={<Baby />}
-                title={label("baby", locale)}
-              >
-                {textModal(label("baby", locale), t(guide.sections.babyEquipment))}
-              </TileCard>
-            )}
-            {guide.sections.ringCameraDisclosure && (
-              <TileCard
-                icon={<Video />}
-                title={label("ring", locale)}
-              >
-                {textModal(label("ring", locale), t(guide.sections.ringCameraDisclosure))}
-              </TileCard>
-            )}
-          </div>
+              {guide.sections.babyEquipment && (
+                <TileCard
+                  icon={<Baby />}
+                  title={label("baby", locale)}
+                >
+                  {textModal(label("baby", locale), t(guide.sections.babyEquipment))}
+                </TileCard>
+              )}
+              {guide.sections.ringCameraDisclosure && (
+                <TileCard
+                  icon={<Video />}
+                  title={label("ring", locale)}
+                >
+                  {textModal(label("ring", locale), t(guide.sections.ringCameraDisclosure))}
+                </TileCard>
+              )}
+            </div>
+          )}
         </TexturedSection>
 
         <TexturedSection textured>
