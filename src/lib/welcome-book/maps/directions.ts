@@ -14,13 +14,17 @@ export function propertyOrigin(entry?: {
   geo?: { lat: number; lng: number } | null;
   address?: { street?: string; city?: string; province?: string; zip?: string } | null;
 } | null): string {
-  const geo = entry?.geo;
-  if (geo && Number.isFinite(geo.lat) && Number.isFinite(geo.lng)) {
-    return `${geo.lat},${geo.lng}`;
-  }
+  // Prefer the full postal address (with civic number) as the route origin:
+  // Google resolves "Via Camponuovo 106, 22030, Lipomo, CO" reliably to the
+  // house, and it matches how the owner thinks of the starting point. Fall back
+  // to geo coordinates, then to the legacy Aqua Vista address.
   const a = entry?.address;
   if (a?.street) {
     return [a.street, a.zip, a.city, a.province].filter(Boolean).join(", ");
+  }
+  const geo = entry?.geo;
+  if (geo && Number.isFinite(geo.lat) && Number.isFinite(geo.lng)) {
+    return `${geo.lat},${geo.lng}`;
   }
   return DEFAULT_ORIGIN;
 }

@@ -730,6 +730,11 @@ export interface HouseGuideSections {
      * main option (e.g. city-centre apartments with no on-site parking).
      */
     hasPrivateSpot?: boolean;
+    /**
+     * Short price chip for the private spot (e.g. "€10 / notte", "Gratis").
+     * When omitted the UI falls back to the legacy "€10 / notte" label.
+     */
+    priceChip?: LocalizedTextOptional;
   };
   climate: {
     ac?: LocalizedText;

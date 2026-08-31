@@ -54,6 +54,13 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
   // private spot, the tab centres the nearby public paid parking instead.
   const origin = propertyOrigin(portfolioEntry);
   const hasPrivate = parking.hasPrivateSpot !== false;
+  const publicSpots = (pkc?.localParking ?? []).filter((p: ParkingSpot) => p.type !== "paid-private");
+  const evStations = pkc?.evChargingStations ?? [];
+  // "Private only": the property's sole parking is its own free/reserved spot
+  // (no nearby public spots, no EV) — shown as a direct text block, no click.
+  const privateOnly = hasPrivate && publicSpots.length === 0 && evStations.length === 0;
+  const privatePrice = parking.priceChip ? t(parking.priceChip) : label("privatePriceChip", locale);
+  const privateDesc = parking.description ? t(parking.description) : label("privateDescription", locale);
   const publicTitle = hasPrivate
     ? label("publicParkingArgegno", locale)
     : label("publicParking", locale);
@@ -71,18 +78,20 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
           </h2>
           <span className="inline-flex items-center gap-1 text-sm font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-[#1D3A62] border border-slate-200">
             <Euro className="w-3 h-3" />
-            {label("privatePriceChip", locale)}
+            {privatePrice}
           </span>
         </div>
 
-        <p className="text-base leading-relaxed text-slate-800">
-          {label("privateDescription", locale)}
+        <p className="text-base leading-relaxed text-slate-800 whitespace-pre-line">
+          {privateDesc}
         </p>
 
-        <p className="mt-4 text-sm text-amber-900 bg-amber-50 border border-amber-200 rounded-md p-3 flex items-start gap-2">
-          <AlertTriangle className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
-          <span>{label("condoRules", locale)}</span>
-        </p>
+        {!privateOnly && (
+          <p className="mt-4 text-sm text-amber-900 bg-amber-50 border border-amber-200 rounded-md p-3 flex items-start gap-2">
+            <AlertTriangle className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
+            <span>{label("condoRules", locale)}</span>
+          </p>
+        )}
 
         {parking.maxDimensions && (
           <div className="mt-4">
@@ -103,7 +112,7 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
           </div>
         )}
 
-        {!parking.evChargingAllowed && (
+        {!privateOnly && !parking.evChargingAllowed && (
           <p className="mt-4 text-sm text-red-700 bg-red-50 border border-red-200 rounded-md p-3 flex items-start gap-2">
             <ZapOff className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
             <span>{label("noEvCharging", locale)}</span>
@@ -113,7 +122,6 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
     </div>
   );
 
-  const publicSpots = (pkc?.localParking ?? []).filter((p: ParkingSpot) => p.type !== "paid-private");
   const publicModal = publicSpots.length > 0 ? (
     <div className="p-5 sm:p-7">
       <h2 className="text-2xl font-bold text-slate-900 mb-3">
@@ -224,7 +232,12 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
       <HubNav slug={slug} routeLocale={routeLocale} contentLocale={locale} current="parcheggi" />
 
       <article className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
-        {hasPrivate ? (
+        {privateOnly ? (
+          /* Solo parcheggio privato (es. gratis sotto casa) — testo diretto */
+          <div className="max-w-3xl mx-auto rounded-2xl bg-white border border-slate-200 shadow-[0_20px_50px_-15px_rgba(15,23,42,0.25)]">
+            {privateModal}
+          </div>
+        ) : hasPrivate ? (
           <>
             <div className="hidden md:flex relative items-center justify-center py-6 min-h-[28rem]">
               {publicModal && (
@@ -244,7 +257,7 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
                   photo={guide.sections.photos?.parking?.[0]}
                   icon={<Car />}
                   title={label("housePrivateParking", locale)}
-                  subtitle={label("privatePriceChip", locale)}
+                  subtitle={privatePrice}
                   captionBelow
                 >
                   {privateModal}
@@ -270,7 +283,7 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
                   photo={guide.sections.photos?.parking?.[0]}
                   icon={<Car />}
                   title={label("housePrivateParking", locale)}
-                  subtitle={label("privatePriceChip", locale)}
+                  subtitle={privatePrice}
                   captionBelow
                 >
                   {privateModal}
