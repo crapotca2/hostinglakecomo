@@ -736,6 +736,12 @@ export interface HouseGuideSections {
     heating?: LocalizedText;
   };
   waste: LocalizedText;
+  /**
+   * Optional "how everyday life works in Italy" note (opening hours of shops,
+   * bars, restaurants, etc.). When present it replaces the waste-sorting card
+   * in the "Living in the house" group of the Info tab.
+   */
+  livingInItaly?: LocalizedText;
   babyEquipment?: LocalizedText;
   ringCameraDisclosure?: LocalizedText;
   rules: LocalizedText;

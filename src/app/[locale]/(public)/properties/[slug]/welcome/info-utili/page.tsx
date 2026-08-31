@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import {
   ScrollText,
   Recycle,
+  Clock,
   Baby,
   Video,
   Receipt,
@@ -332,12 +333,21 @@ export default async function InfoUtiliPage({ params, searchParams }: PageProps)
         <TexturedSection>
           <GroupHeader label={label("groupHome", locale)} />
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-            <TileCard
-              icon={<Recycle />}
-              title={label("waste", locale)}
-            >
-              {textModal(label("waste", locale), t(guide.sections.waste))}
-            </TileCard>
+            {guide.sections.livingInItaly ? (
+              <TileCard
+                icon={<Clock />}
+                title={label("livingInItaly", locale)}
+              >
+                {textModal(label("livingInItaly", locale), t(guide.sections.livingInItaly))}
+              </TileCard>
+            ) : (
+              <TileCard
+                icon={<Recycle />}
+                title={label("waste", locale)}
+              >
+                {textModal(label("waste", locale), t(guide.sections.waste))}
+              </TileCard>
+            )}
             {guide.sections.babyEquipment && (
               <TileCard
                 icon={<Baby />}
@@ -462,6 +472,7 @@ const LABELS: Record<string, Partial<Record<SupportedLocale, string>>> = {
   tax: { it: "Tassa di soggiorno", en: "Tourist tax", ru: "Туристический налог", de: "Kurtaxe", pl: "Opłata turystyczna", es: "Tasa turística", fr: "Taxe de séjour" },
   rules: { it: "Regole della casa", en: "House rules", ru: "Правила дома", de: "Hausregeln", pl: "Zasady domu", es: "Reglas de la casa", fr: "Règles de la maison" },
   waste: { it: "Raccolta differenziata", en: "Waste sorting", ru: "Сортировка мусора", de: "Mülltrennung", pl: "Segregacja odpadów", es: "Recogida selectiva", fr: "Tri des déchets" },
+  livingInItaly: { it: "Come funziona in Italia", en: "How things work in Italy", ru: "Как всё устроено в Италии", de: "Alltag in Italien", pl: "Jak to działa we Włoszech", es: "Cómo funciona en Italia", fr: "La vie en Italie" },
   baby: { it: "Bambini", en: "Children", ru: "Дети", de: "Kinder", pl: "Dzieci", es: "Niños", fr: "Enfants" },
   ring: { it: "Videocamera esterna", en: "External camera", ru: "Внешняя камера", de: "Außenkamera", pl: "Kamera zewnętrzna", es: "Cámara exterior", fr: "Caméra extérieure" },
   checkin: { it: "Check-in", en: "Check-in", ru: "Заезд", de: "Check-in", pl: "Zameldowanie", es: "Check-in", fr: "Check-in" },
