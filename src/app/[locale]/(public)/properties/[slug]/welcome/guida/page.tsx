@@ -84,6 +84,16 @@ export default async function WelcomeBookPage({ params, searchParams }: PageProp
   const propertyCity = portfolioEntry?.address.city ?? "Argegno";
   const basePath = `/properties/${slug}/welcome/guida`;
 
+  // Per-property TripAdvisor "restaurants in the area" link (the banner above
+  // the dining list). Como for the city apartments, Argegno for Aqua Vista.
+  const TRIPADVISOR_AREA: Record<string, string> = {
+    "aqua-vista-di-splendore":
+      "https://www.tripadvisor.it/Restaurants-g664175-Argegno_Lake_Como_Lombardy.html",
+  };
+  const tripAdvisorAreaUrl =
+    TRIPADVISOR_AREA[slug] ??
+    "https://www.tripadvisor.it/Restaurants-g187835-Como_Lake_Como_Lombardy.html";
+
   return (
     <main className="font-[family-name:var(--font-outfit)] bg-white">
       <BrandHero
@@ -168,7 +178,7 @@ export default async function WelcomeBookPage({ params, searchParams }: PageProp
                     <TripAdvisorBanner
                       titleKey="tripadvisorRestaurantsTitle"
                       subtitleKey="tripadvisorRestaurantsSubtitle"
-                      url="https://www.tripadvisor.it/Restaurants-g664175-Argegno_Lake_Como_Lombardy.html"
+                      url={tripAdvisorAreaUrl}
                       locale={locale}
                     />
                     <RestaurantList items={wb.sections.eatingDrinking} locale={locale} />
@@ -1243,10 +1253,10 @@ function label(key: string, locale: SupportedLocale): string {
     "type-boat-rental": { it: "Noleggio barche", en: "Boat rental", ru: "Аренда лодок", de: "Bootsverleih" },
     "type-bike-rental": { it: "Noleggio bici", en: "Bike rental", ru: "Аренда велосипедов", de: "Fahrradverleih" },
     tripadvisorRestaurantsTitle: {
-      it: "I ristoranti di Argegno su TripAdvisor",
-      en: "Argegno restaurants on TripAdvisor",
-      ru: "Рестораны Ардженьо на TripAdvisor",
-      de: "Argegnos Restaurants auf TripAdvisor",
+      it: "I ristoranti della zona su TripAdvisor",
+      en: "Area restaurants on TripAdvisor",
+      ru: "Рестораны района на TripAdvisor",
+      de: "Restaurants der Umgebung auf TripAdvisor",
     },
     tripadvisorRestaurantsSubtitle: {
       it: "Vedi tutte le recensioni, foto e classifiche in tempo reale. Inquadra il QR per aprire la pagina sul tuo smartphone.",
