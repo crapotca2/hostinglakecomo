@@ -61,6 +61,11 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
   const splitLayout =
     hasLakeView &&
     (guide.sections.bedrooms.length > 1 || guide.sections.bathrooms.length > 1);
+  // "Cortile" only reads right for the lakefront home; other properties use a
+  // neutral "Spazi esterni" label (fits courtyards, terraces and balconies).
+  const gardenLabel = hasLakeView
+    ? sectionLabel("garden", locale)
+    : sectionLabel("outdoor", locale);
 
   return (
     <main className="font-[family-name:var(--font-outfit)] bg-white">
@@ -273,12 +278,12 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
           )}
           <TileCard
             photo={guide.sections.photos?.garden?.[0]}
-            title={sectionLabel("garden", locale)}
+            title={gardenLabel}
             captionBelow
           >
             <TextRoomModalContent
               photos={guide.sections.photos?.garden ?? []}
-              title={sectionLabel("garden", locale)}
+              title={gardenLabel}
               body={t(guide.sections.outdoor.courtyard)}
             />
           </TileCard>
@@ -548,6 +553,7 @@ function sectionLabel(key: string, locale: SupportedLocale): string {
     dining: { it: "Zona pranzo", en: "Dining area", ru: "Обеденная зона", de: "Essbereich", es: "Comedor" },
     exterior: { it: "Vista esterna casa", en: "House exterior", ru: "Внешний вид дома", de: "Außenansicht Haus", es: "Exterior casa" },
     garden: { it: "Cortile", en: "Courtyard", ru: "Двор", de: "Innenhof", es: "Patio", fr: "Cour" },
+    outdoor: { it: "Spazi esterni", en: "Outdoor spaces", ru: "Открытые пространства", de: "Außenbereiche", es: "Espacios exteriores", fr: "Espaces extérieurs" },
     beach: { it: "Accesso al lago", en: "Lake access", ru: "Выход к озеру", de: "Seezugang", es: "Acceso al lago" },
     sideLake: { it: "Lato lago", en: "Lake side", ru: "Со стороны озера", de: "Seeseite", es: "Lado del lago", fr: "Côté lac" },
     sideCourtyard: { it: "Lato cortile", en: "Courtyard side", ru: "Со стороны двора", de: "Hofseite", es: "Lado del patio", fr: "Côté cour" },
@@ -565,11 +571,11 @@ function label(key: string, locale: SupportedLocale): string {
       es: "Exterior de la casa frente al lago, desde la entrada hasta el muelle.",
     },
     exteriorBlurbCity: {
-      it: "L'esterno dell'edificio storico e l'ingresso indipendente su cortile.",
-      en: "The historic building's exterior and the private entrance onto the courtyard.",
-      ru: "Внешний вид исторического здания и отдельный вход во двор.",
-      de: "Die Außenansicht des historischen Gebäudes und der private Eingang zum Innenhof.",
-      es: "El exterior del edificio histórico y la entrada independiente al patio.",
+      it: "Gli spazi esterni della casa: l'edificio, l'ingresso e i dintorni.",
+      en: "The home's exterior: the building, the entrance and the surroundings.",
+      ru: "Внешние пространства дома: здание, вход и окрестности.",
+      de: "Die Außenbereiche des Hauses: Gebäude, Eingang und Umgebung.",
+      es: "Los espacios exteriores de la casa: el edificio, la entrada y los alrededores.",
     },
   };
   return labels[key]?.[locale] ?? labels[key]?.it ?? key;
