@@ -25,7 +25,7 @@ import { LocaleSwitcher } from "@/components/welcome-book/LocaleSwitcher";
 import { HubNav } from "@/components/welcome-book/HubNav";
 import { HeroWifiInline } from "@/components/welcome-book/HeroWifiInline";
 import { TileCard } from "@/components/welcome-book/TileCard";
-import { sharedLabel } from "@/components/welcome-book/sharedLabels";
+import { sharedLabel, welcomeTitle } from "@/components/welcome-book/sharedLabels";
 import { ReviewBlock } from "@/components/welcome-book/ReviewBlock";
 
 export const dynamic = "force-dynamic";
@@ -71,7 +71,7 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
     <main className="font-[family-name:var(--font-outfit)] bg-white">
       <BrandHero
         eyebrow={`${sharedLabel("guideTo", locale).toUpperCase()} ${propertyCity.toUpperCase()}`}
-        title={`${sharedLabel("welcomeTo", locale)} ${propertyName}`}
+        title={welcomeTitle(propertyName, locale)}
         heroImage={heroImage}
         wifiBlock={
           <HeroWifiInline

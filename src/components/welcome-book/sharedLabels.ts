@@ -10,7 +10,7 @@ const LABELS: Record<string, Partial<Record<SupportedLocale, string>>> = {
     fr: "Guide de",
   },
   welcomeTo: {
-    it: "Benvenuti ad",
+    it: "Benvenuti a",
     en: "Welcome to",
     ru: "Добро пожаловать в",
     de: "Willkommen im",
@@ -45,4 +45,14 @@ const LABELS: Record<string, Partial<Record<SupportedLocale, string>>> = {
 
 export function sharedLabel(key: string, locale: SupportedLocale): string {
   return LABELS[key]?.[locale] ?? LABELS[key]?.it ?? key;
+}
+
+// "Benvenuti a <name>" with the Italian euphonic "d" (ad) added only before a
+// name that starts with a vowel (so "a Casa" but "ad Aqua"/"ad Antica").
+export function welcomeTitle(propertyName: string, locale: SupportedLocale): string {
+  const prefix = sharedLabel("welcomeTo", locale);
+  if (locale === "it" && /^[aeiouàèéìòù]/i.test(propertyName.trim())) {
+    return `${prefix}d ${propertyName}`;
+  }
+  return `${prefix} ${propertyName}`;
 }

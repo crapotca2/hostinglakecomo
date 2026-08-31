@@ -50,7 +50,7 @@ import { ScannableQr } from "@/components/welcome-book/ScannableQr";
 import { Carousel } from "@/components/welcome-book/Carousel";
 import { HubNav } from "@/components/welcome-book/HubNav";
 import { HeroWifiInline } from "@/components/welcome-book/HeroWifiInline";
-import { sharedLabel } from "@/components/welcome-book/sharedLabels";
+import { sharedLabel, welcomeTitle } from "@/components/welcome-book/sharedLabels";
 import { TileCard } from "@/components/welcome-book/TileCard";
 import { ReviewBlock } from "@/components/welcome-book/ReviewBlock";
 import { PoiCard } from "@/components/welcome-book/PoiCard";
@@ -88,7 +88,7 @@ export default async function WelcomeBookPage({ params, searchParams }: PageProp
     <main className="font-[family-name:var(--font-outfit)] bg-white">
       <BrandHero
         eyebrow={`${sharedLabel("guideTo", locale).toUpperCase()} ${propertyCity.toUpperCase()}`}
-        title={`${sharedLabel("welcomeTo", locale)} ${propertyName}`}
+        title={welcomeTitle(propertyName, locale)}
         heroImage={welcomeHero(slug)}
         wifiBlock={
           guide ? (

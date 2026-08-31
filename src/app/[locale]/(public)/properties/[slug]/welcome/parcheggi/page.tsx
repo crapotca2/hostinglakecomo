@@ -16,7 +16,7 @@ import { HubNav } from "@/components/welcome-book/HubNav";
 import { RoomCarousel } from "@/components/welcome-book/RoomCarousel";
 import { HeroWifiInline } from "@/components/welcome-book/HeroWifiInline";
 import { TileCard } from "@/components/welcome-book/TileCard";
-import { sharedLabel } from "@/components/welcome-book/sharedLabels";
+import { sharedLabel, welcomeTitle } from "@/components/welcome-book/sharedLabels";
 import { ReviewBlock } from "@/components/welcome-book/ReviewBlock";
 import { ParkingPoiCard } from "@/components/welcome-book/ParkingPoiCard";
 
@@ -197,7 +197,7 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
     <main className="font-[family-name:var(--font-outfit)] bg-white">
       <BrandHero
         eyebrow={`${sharedLabel("guideTo", locale).toUpperCase()} ${propertyCity.toUpperCase()}`}
-        title={`${sharedLabel("welcomeTo", locale)} ${propertyName}`}
+        title={welcomeTitle(propertyName, locale)}
         heroImage={welcomeHero(slug)}
         wifiBlock={
           <HeroWifiInline

@@ -32,7 +32,7 @@ import { HeroWifiInline } from "@/components/welcome-book/HeroWifiInline";
 import { TileCard } from "@/components/welcome-book/TileCard";
 import { CheckinVideo } from "@/components/welcome-book/CheckinVideo";
 import { getCheckinVideo } from "@/lib/welcome-book/checkin-videos";
-import { sharedLabel } from "@/components/welcome-book/sharedLabels";
+import { sharedLabel, welcomeTitle } from "@/components/welcome-book/sharedLabels";
 import { ReviewBlock } from "@/components/welcome-book/ReviewBlock";
 import { TexturedSection, GroupHeader } from "@/components/welcome-book/TexturedSection";
 
@@ -272,7 +272,7 @@ export default async function InfoUtiliPage({ params, searchParams }: PageProps)
     <main className="font-[family-name:var(--font-outfit)] bg-white">
       <BrandHero
         eyebrow={`${sharedLabel("guideTo", locale).toUpperCase()} ${propertyCity.toUpperCase()}`}
-        title={`${sharedLabel("welcomeTo", locale)} ${propertyName}`}
+        title={welcomeTitle(propertyName, locale)}
         heroImage={welcomeHero(slug)}
         wifiBlock={
           <HeroWifiInline
