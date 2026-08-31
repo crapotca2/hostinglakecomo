@@ -519,5 +519,564 @@
       "lng": 9.1288,
       "displayName": "Via Spluga 44, Argegno (CO), 22023, Lombardia, Italia"
     }
+  },
+  {
+    "slug": "casa-di-pucci",
+    "name": "Casa di Pucci",
+    "type": "apartment",
+    "zone": "centro-como",
+    "description": "Casa tradizionale all'italiana immersa nel verde di Lipomo, a dieci minuti da Como e dal lago. Mobili in legno, camino e una parete-libreria: il calore di una casa di famiglia. Due camere matrimoniali, due bagni, soggiorno ampio — comodi in cinque — con posto auto gratuito sotto casa.",
+    "description_en": "A traditional Italian home in the green of Lipomo, ten minutes from Como and the lake. Wooden furniture, a fireplace and a wall of books: the warmth of a family home. Two double bedrooms, two bathrooms, a spacious living room — sleeps five — with free parking right by the building.",
+    "description_ru": "Традиционный итальянский дом в зелёном Липомо, в десяти минутах от Комо и озера. Деревянная мебель, камин и стена книг — тепло семейного дома. Две двуспальные спальни, две ванные комнаты, просторная гостиная — комфортно впятером — с бесплатной парковкой прямо у дома.",
+    "descriptionLong": "Certe case si visitano. Questa, appena entri, ti sembra già tua. Ogni giorno scegli tu: un caffè in pace sul terrazzo, un tuffo al lago a dieci minuti o una sera davanti al camino con un libro della tua biblioteca. Non è fronte lago: è la tua base tranquilla per viverlo davvero. Milano a un'ora.",
+    "descriptionLong_en": "Some homes you visit. This one feels yours the moment you walk in. Each day you choose: a quiet coffee on the terrace, a swim in the lake ten minutes away, or an evening by the fireplace with a book from the library. Not lakefront — that's the point: your calm base to enjoy it. Milan an hour away.",
+    "descriptionLong_ru": "Некоторые дома вы просто посещаете. Этот с первого шага ощущается своим. Каждый день выбираете вы: спокойный кофе на террасе, купание в озере в десяти минутах или вечер у камина с книгой из библиотеки. Это не первая линия у озера — и в этом смысл: ваша тихая база, чтобы по-настоящему им наслаждаться. Милан в часе езды.",
+    "sections": {
+      "space": "Ultimo piano luminoso e silenzioso, senza vicini sopra. Due camere matrimoniali e due bagni con doccia. Soggiorno ampio con camino, parete-libreria e divano letto (quinto ospite). Cucina completa e ampio balcone arredato. Aria condizionata in soggiorno, Wi-Fi in fibra e posto auto privato. Si sale a piedi: tre piani, senza ascensore — in cambio, l'ultimo piano, con nessuno sopra di te.",
+      "space_en": "Top floor: bright, quiet, no neighbours above. Two double bedrooms and two bathrooms with shower. Spacious living room with a fireplace, a wall of books and a sofa bed (fifth guest). Full kitchen and a large furnished balcony. Air conditioning in the living room, fibre Wi-Fi and private parking. It's a walk up: three floors, no lift — in return, the top floor, with no one above you.",
+      "space_ru": "Верхний этаж: светлый, тихий, без соседей сверху. Две двуспальные спальни и две ванные комнаты с душем. Просторная гостиная с камином, стеной книг и диваном-кроватью (пятый гость). Полностью оборудованная кухня и большой меблированный балкон. Кондиционер в гостиной, оптоволоконный Wi-Fi и частная парковка. Подъём пешком: три этажа, без лифта — зато верхний этаж, и никого над вами.",
+      "neighborhood": "Lipomo è una tranquilla cittadina residenziale sulle prime colline a sud-est di Como, a soli dieci minuti dal centro e dal lago ma lontana dal trambusto. Il lago di Montorfano è a due passi — riserva naturale con il giro del lago a piedi e, d'estate, il lido per un bagno; il prestigioso Golf Club Villa d'Este si trova a Montorfano. Como e il lago sono a dieci minuti: lungolago, funicolare per Brunate, Villa Olmo. Supermercati, farmacie e un McDonald's a pochi minuti; ben collegata, con Milano a circa un'ora.",
+      "neighborhood_en": "Lipomo is a quiet residential town on the first hills southeast of Como, just ten minutes from the centre and the lake yet away from the crowds. Lake Montorfano is a stone's throw away — a nature reserve with a walking loop and a lido for a summer swim; the prestigious Golf Club Villa d'Este is in Montorfano. Como and the lake are ten minutes away: the lakefront promenade, the Brunate funicular, Villa Olmo. Supermarkets, pharmacies and a McDonald's a few minutes away; well connected, with Milan about an hour away.",
+      "neighborhood_ru": "Липомо — тихий жилой городок на первых холмах к юго-востоку от Комо, всего в десяти минутах от центра и озера, но вдали от суеты. Озеро Монторфано в двух шагах — природный заповедник с прогулочным маршрутом вокруг озера и пляжем летом; престижный гольф-клуб Villa d'Este находится в Монторфано. Комо и озеро в десяти минутах: набережная, фуникулёр в Брунате, вилла Ольмо. Супермаркеты, аптеки и McDonald's в нескольких минутах; удобное сообщение, Милан примерно в часе езды."
+    },
+    "extras": [],
+    "facts": {
+      "beds": "2 letti matrimoniali + divano letto",
+      "checkInHours": "Check-in autonomo con cassetta di sicurezza, all'ora che preferisci; check-out entro le 10:00",
+      "floor": "Ultimo piano (terzo), senza ascensore",
+      "parkingNote": "Ampio parcheggio condominiale gratuito per gli ospiti, proprio sotto casa",
+      "touristTaxNote": "Imposta di soggiorno secondo il regolamento del Comune di Lipomo, da saldare al check-in (da confermare)"
+    },
+    "address": {
+      "street": "Via Camponuovo 106",
+      "city": "Lipomo",
+      "province": "CO",
+      "zip": "22030"
+    },
+    "details": {
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "maxGuests": 5,
+      "hasLakeView": false,
+      "hasWifi": true,
+      "hasAC": true,
+      "hasParking": true,
+      "hasGarden": false,
+      "hasPool": false
+    },
+    "amenities": [
+      "Wi-Fi in fibra",
+      "Aria condizionata (soggiorno)",
+      "Cucina completa",
+      "Camino",
+      "Parete-libreria",
+      "2 bagni con doccia",
+      "Balcone arredato",
+      "Posto auto gratuito",
+      "Divano letto",
+      "Riscaldamento",
+      "Ultimo piano senza ascensore",
+      "Self check-in"
+    ],
+    "pricing": {
+      "basePrice": 135,
+      "cleaningFee": 60,
+      "weekendMultiplier": 1.2
+    },
+    "touristTaxRate": 3,
+    "maxTouristTaxNights": 14,
+    "geo": {
+      "lat": 45.7977,
+      "lng": 9.1213,
+      "displayName": "Via Camponuovo, Lipomo (CO), 22030, Lombardia, Italia"
+    },
+    "images": [
+      {
+        "url": "/images/listing/casa-di-pucci/01-soggiorno-1.jpeg",
+        "alt": "Casa di Pucci — Soggiorno",
+        "room": "Soggiorno",
+        "order": 1
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/02-soggiorno-2.jpeg",
+        "alt": "Casa di Pucci — Soggiorno",
+        "room": "Soggiorno",
+        "order": 2
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/03-soggiorno-3.jpeg",
+        "alt": "Casa di Pucci — Soggiorno",
+        "room": "Soggiorno",
+        "order": 3
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/04-soggiorno-4.jpeg",
+        "alt": "Casa di Pucci — Soggiorno",
+        "room": "Soggiorno",
+        "order": 4
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/05-soggiorno-5.jpeg",
+        "alt": "Casa di Pucci — Soggiorno",
+        "room": "Soggiorno",
+        "order": 5
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/06-soggiorno-6.jpeg",
+        "alt": "Casa di Pucci — Soggiorno",
+        "room": "Soggiorno",
+        "order": 6
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/07-soggiorno-7.jpeg",
+        "alt": "Casa di Pucci — Soggiorno",
+        "room": "Soggiorno",
+        "order": 7
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/08-soggiorno-8.jpeg",
+        "alt": "Casa di Pucci — Soggiorno",
+        "room": "Soggiorno",
+        "order": 8
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/09-soggiorno-9.jpeg",
+        "alt": "Casa di Pucci — Soggiorno",
+        "room": "Soggiorno",
+        "order": 9
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/10-soggiorno-10.jpeg",
+        "alt": "Casa di Pucci — Soggiorno",
+        "room": "Soggiorno",
+        "order": 10
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/11-soggiorno-11.jpeg",
+        "alt": "Casa di Pucci — Soggiorno",
+        "room": "Soggiorno",
+        "order": 11
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/12-soggiorno-12.jpeg",
+        "alt": "Casa di Pucci — Soggiorno",
+        "room": "Soggiorno",
+        "order": 12
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/13-libreria-1.jpeg",
+        "alt": "Casa di Pucci — Libreria",
+        "room": "Libreria",
+        "order": 13
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/14-libreria-2.jpeg",
+        "alt": "Casa di Pucci — Libreria",
+        "room": "Libreria",
+        "order": 14
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/15-libreria-3.jpeg",
+        "alt": "Casa di Pucci — Libreria",
+        "room": "Libreria",
+        "order": 15
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/16-libreria-4.jpeg",
+        "alt": "Casa di Pucci — Libreria",
+        "room": "Libreria",
+        "order": 16
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/17-libreria-5.jpeg",
+        "alt": "Casa di Pucci — Libreria",
+        "room": "Libreria",
+        "order": 17
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/18-libreria-6.jpeg",
+        "alt": "Casa di Pucci — Libreria",
+        "room": "Libreria",
+        "order": 18
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/19-libreria-7.jpeg",
+        "alt": "Casa di Pucci — Libreria",
+        "room": "Libreria",
+        "order": 19
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/20-pranzo-1.jpeg",
+        "alt": "Casa di Pucci — Zona pranzo",
+        "room": "Zona pranzo",
+        "order": 20
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/21-pranzo-2.jpeg",
+        "alt": "Casa di Pucci — Zona pranzo",
+        "room": "Zona pranzo",
+        "order": 21
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/22-pranzo-3.jpeg",
+        "alt": "Casa di Pucci — Zona pranzo",
+        "room": "Zona pranzo",
+        "order": 22
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/23-pranzo-4.jpeg",
+        "alt": "Casa di Pucci — Zona pranzo",
+        "room": "Zona pranzo",
+        "order": 23
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/24-pranzo-5.jpeg",
+        "alt": "Casa di Pucci — Zona pranzo",
+        "room": "Zona pranzo",
+        "order": 24
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/25-cucina-1.jpeg",
+        "alt": "Casa di Pucci — Cucina",
+        "room": "Cucina",
+        "order": 25
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/26-cucina-2.jpeg",
+        "alt": "Casa di Pucci — Cucina",
+        "room": "Cucina",
+        "order": 26
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/27-cucina-3.jpeg",
+        "alt": "Casa di Pucci — Cucina",
+        "room": "Cucina",
+        "order": 27
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/28-cucina-4.jpeg",
+        "alt": "Casa di Pucci — Cucina",
+        "room": "Cucina",
+        "order": 28
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/29-cucina-5.jpeg",
+        "alt": "Casa di Pucci — Cucina",
+        "room": "Cucina",
+        "order": 29
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/30-cucina-6.jpeg",
+        "alt": "Casa di Pucci — Cucina",
+        "room": "Cucina",
+        "order": 30
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/31-cucina-7.jpeg",
+        "alt": "Casa di Pucci — Cucina",
+        "room": "Cucina",
+        "order": 31
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/32-cucina-8.jpeg",
+        "alt": "Casa di Pucci — Cucina",
+        "room": "Cucina",
+        "order": 32
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/33-cucina-9.jpeg",
+        "alt": "Casa di Pucci — Cucina",
+        "room": "Cucina",
+        "order": 33
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/34-camera-1-1.jpeg",
+        "alt": "Casa di Pucci — Camera 1",
+        "room": "Camera 1",
+        "order": 34
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/35-camera-1-2.jpeg",
+        "alt": "Casa di Pucci — Camera 1",
+        "room": "Camera 1",
+        "order": 35
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/36-camera-1-3.jpeg",
+        "alt": "Casa di Pucci — Camera 1",
+        "room": "Camera 1",
+        "order": 36
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/37-camera-1-4.jpeg",
+        "alt": "Casa di Pucci — Camera 1",
+        "room": "Camera 1",
+        "order": 37
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/38-camera-1-5.jpeg",
+        "alt": "Casa di Pucci — Camera 1",
+        "room": "Camera 1",
+        "order": 38
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/39-camera-1-6.jpeg",
+        "alt": "Casa di Pucci — Camera 1",
+        "room": "Camera 1",
+        "order": 39
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/40-camera-1-7.jpeg",
+        "alt": "Casa di Pucci — Camera 1",
+        "room": "Camera 1",
+        "order": 40
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/41-camera-1-8.jpeg",
+        "alt": "Casa di Pucci — Camera 1",
+        "room": "Camera 1",
+        "order": 41
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/42-camera-1-9.jpeg",
+        "alt": "Casa di Pucci — Camera 1",
+        "room": "Camera 1",
+        "order": 42
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/43-camera-1-10.jpeg",
+        "alt": "Casa di Pucci — Camera 1",
+        "room": "Camera 1",
+        "order": 43
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/44-camera-2-1.jpeg",
+        "alt": "Casa di Pucci — Camera 2",
+        "room": "Camera 2",
+        "order": 44
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/45-camera-2-2.jpeg",
+        "alt": "Casa di Pucci — Camera 2",
+        "room": "Camera 2",
+        "order": 45
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/46-camera-2-3.jpeg",
+        "alt": "Casa di Pucci — Camera 2",
+        "room": "Camera 2",
+        "order": 46
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/47-camera-2-4.jpeg",
+        "alt": "Casa di Pucci — Camera 2",
+        "room": "Camera 2",
+        "order": 47
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/48-camera-2-5.jpeg",
+        "alt": "Casa di Pucci — Camera 2",
+        "room": "Camera 2",
+        "order": 48
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/49-camera-2-6.jpeg",
+        "alt": "Casa di Pucci — Camera 2",
+        "room": "Camera 2",
+        "order": 49
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/50-camera-2-7.jpeg",
+        "alt": "Casa di Pucci — Camera 2",
+        "room": "Camera 2",
+        "order": 50
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/51-camera-2-8.jpeg",
+        "alt": "Casa di Pucci — Camera 2",
+        "room": "Camera 2",
+        "order": 51
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/52-camera-2-9.jpeg",
+        "alt": "Casa di Pucci — Camera 2",
+        "room": "Camera 2",
+        "order": 52
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/53-camera-2-10.jpeg",
+        "alt": "Casa di Pucci — Camera 2",
+        "room": "Camera 2",
+        "order": 53
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/54-bagno-1-1.jpeg",
+        "alt": "Casa di Pucci — Bagno 1",
+        "room": "Bagno 1",
+        "order": 54
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/55-bagno-1-2.jpeg",
+        "alt": "Casa di Pucci — Bagno 1",
+        "room": "Bagno 1",
+        "order": 55
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/56-bagno-1-3.jpeg",
+        "alt": "Casa di Pucci — Bagno 1",
+        "room": "Bagno 1",
+        "order": 56
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/57-bagno-1-4.jpeg",
+        "alt": "Casa di Pucci — Bagno 1",
+        "room": "Bagno 1",
+        "order": 57
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/58-bagno-1-5.jpeg",
+        "alt": "Casa di Pucci — Bagno 1",
+        "room": "Bagno 1",
+        "order": 58
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/59-bagno-1-6.jpeg",
+        "alt": "Casa di Pucci — Bagno 1",
+        "room": "Bagno 1",
+        "order": 59
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/60-bagno-1-7.jpeg",
+        "alt": "Casa di Pucci — Bagno 1",
+        "room": "Bagno 1",
+        "order": 60
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/61-bagno-1-8.jpeg",
+        "alt": "Casa di Pucci — Bagno 1",
+        "room": "Bagno 1",
+        "order": 61
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/62-bagno-1-9.jpeg",
+        "alt": "Casa di Pucci — Bagno 1",
+        "room": "Bagno 1",
+        "order": 62
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/63-bagno-2-1.jpeg",
+        "alt": "Casa di Pucci — Bagno 2",
+        "room": "Bagno 2",
+        "order": 63
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/64-esterni-1.jpeg",
+        "alt": "Casa di Pucci — Esterni",
+        "room": "Esterni",
+        "order": 64
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/65-esterni-2.jpeg",
+        "alt": "Casa di Pucci — Esterni",
+        "room": "Esterni",
+        "order": 65
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/66-esterni-3.jpeg",
+        "alt": "Casa di Pucci — Esterni",
+        "room": "Esterni",
+        "order": 66
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/67-esterni-4.jpeg",
+        "alt": "Casa di Pucci — Esterni",
+        "room": "Esterni",
+        "order": 67
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/68-esterni-5.jpeg",
+        "alt": "Casa di Pucci — Esterni",
+        "room": "Esterni",
+        "order": 68
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/69-esterni-6.jpeg",
+        "alt": "Casa di Pucci — Esterni",
+        "room": "Esterni",
+        "order": 69
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/70-esterni-7.jpeg",
+        "alt": "Casa di Pucci — Esterni",
+        "room": "Esterni",
+        "order": 70
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/71-esterni-8.jpeg",
+        "alt": "Casa di Pucci — Esterni",
+        "room": "Esterni",
+        "order": 71
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/72-esterni-9.jpeg",
+        "alt": "Casa di Pucci — Esterni",
+        "room": "Esterni",
+        "order": 72
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/73-esterni-10.jpeg",
+        "alt": "Casa di Pucci — Esterni",
+        "room": "Esterni",
+        "order": 73
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/74-esterni-11.jpeg",
+        "alt": "Casa di Pucci — Esterni",
+        "room": "Esterni",
+        "order": 74
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/75-esterni-12.jpeg",
+        "alt": "Casa di Pucci — Esterni",
+        "room": "Esterni",
+        "order": 75
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/76-esterni-13.jpeg",
+        "alt": "Casa di Pucci — Esterni",
+        "room": "Esterni",
+        "order": 76
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/77-esterni-14.jpeg",
+        "alt": "Casa di Pucci — Esterni",
+        "room": "Esterni",
+        "order": 77
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/78-esterni-15.jpeg",
+        "alt": "Casa di Pucci — Esterni",
+        "room": "Esterni",
+        "order": 78
+      },
+      {
+        "url": "/images/listing/casa-di-pucci/79-esterni-16.jpeg",
+        "alt": "Casa di Pucci — Esterni",
+        "room": "Esterni",
+        "order": 79
+      }
+    ],
+    "airbnbListing": {
+      "id": "1715460245498966697",
+      "url": "https://www.airbnb.com/rooms/1715460245498966697",
+      "rating": null,
+      "reviewCount": null
+    },
+    "source": {
+      "origin": "airbnb",
+      "url": "https://www.airbnb.com/rooms/1715460245498966697",
+      "listingId": "1715460245498966697",
+      "scrapedAt": "2026-08-16"
+    }
   }
 ]
