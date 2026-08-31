@@ -148,6 +148,8 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
                 paidStatus: p.type === "free" ? "free" : "paid",
                 freeLabel: label("free", locale),
                 paidLabel: label("paid", locale),
+                pricing: p.pricing ? t(p.pricing) : undefined,
+                hours: p.hours ? t(p.hours) : undefined,
                 notes: p.notes ? t(p.notes) : undefined,
                 infoLabel: label("moreInfo", locale),
                 openInMapsLabel: label("openInMaps", locale),
@@ -292,17 +294,10 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
             </div>
           </>
         ) : (
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             {publicModal ? (
-              <div className="rounded-2xl shadow-[0_20px_50px_-15px_rgba(15,23,42,0.35)]">
-                <TileCard
-                  icon={<Car />}
-                  title={publicTitle}
-                  subtitle={label("freePaid", locale)}
-                  captionBelow
-                >
-                  {publicModal}
-                </TileCard>
+              <div className="rounded-2xl bg-white border border-slate-200 shadow-[0_20px_50px_-15px_rgba(15,23,42,0.25)]">
+                {publicModal}
               </div>
             ) : (
               <p className="text-sm leading-relaxed text-amber-900 bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-2">

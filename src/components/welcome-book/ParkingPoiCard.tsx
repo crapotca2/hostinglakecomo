@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Footprints, Car, Zap, Info, X, Globe, Navigation } from "lucide-react";
+import { Footprints, Car, Zap, Info, X, Globe, Navigation, Euro, Clock } from "lucide-react";
 import { ScannableQr } from "./ScannableQr";
 
 export type ParkingPoiData = {
@@ -18,6 +18,8 @@ export type ParkingPoiData = {
   freeLabel?: string;
   paidLabel?: string;
   powerKw?: number | null;
+  pricing?: string;
+  hours?: string;
   notes?: string;
   appUrl?: string;
   infoLabel: string;
@@ -106,6 +108,23 @@ export function ParkingPoiCard({ poi }: { poi: ParkingPoiData }) {
               </button>
             )}
           </div>
+
+          {(poi.pricing || poi.hours) && (
+            <div className="mt-2.5 space-y-1 text-xs text-slate-700 leading-snug">
+              {poi.pricing && (
+                <p className="flex items-start gap-1.5">
+                  <Euro className="w-3.5 h-3.5 text-[#1D3A62] flex-shrink-0 mt-0.5" />
+                  <span>{poi.pricing}</span>
+                </p>
+              )}
+              {poi.hours && (
+                <p className="flex items-start gap-1.5">
+                  <Clock className="w-3.5 h-3.5 text-[#1D3A62] flex-shrink-0 mt-0.5" />
+                  <span>{poi.hours}</span>
+                </p>
+              )}
+            </div>
+          )}
 
           {poi.openInMapsLabel && (
             <a
