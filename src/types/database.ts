@@ -578,6 +578,20 @@ export interface WelcomeBookTransport {
       priceAdultEur?: number;
     }>;
   };
+  train?: {
+    stationName: string;
+    stationAddress: string;
+    walkMinutesFromHouse?: number;
+    operator?: string;
+    operatorUrl?: string;
+    line?: string;
+    frequency?: LocalizedTextOptional;
+    keyDestinations?: Array<{
+      name: string;
+      minutes: number;
+      priceAdultEur?: number;
+    }>;
+  };
   funicular?: {
     name: string;
     address: string;
@@ -709,6 +723,13 @@ export interface HouseGuideSections {
       wheelStopLengthM?: number;
     };
     evChargingAllowed: boolean;
+    /**
+     * Whether the property has its own reserved/private parking spot. Defaults
+     * to true (back-compat with Aqua Vista). When false, the Parking tab hides
+     * the private-spot card and presents the nearby public paid parking as the
+     * main option (e.g. city-centre apartments with no on-site parking).
+     */
+    hasPrivateSpot?: boolean;
   };
   climate: {
     ac?: LocalizedText;

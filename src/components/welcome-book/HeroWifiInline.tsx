@@ -8,20 +8,37 @@ function buildWifiQrPayload(ssid: string, password: string, auth: "WPA" | "WEP" 
   return `WIFI:T:${auth};S:${esc(ssid)};P:${esc(password)};;`;
 }
 
+/**
+ * While real credentials are pending (ssid empty, "HIDDEN" or "(da comunicare)"),
+ * the Wi-Fi QR should point somewhere useful instead of encoding a bogus
+ * network — for now, the site homepage. Returns undefined when the SSID is real.
+ */
+export function wifiQrOverride(ssid?: string): string | undefined {
+  const s = (ssid ?? "").trim();
+  if (!s || /^(hidden|\(da comunicare\))$/i.test(s)) return "https://hostcomo.com";
+  return undefined;
+}
+
 export function HeroWifiInline({
   ssid,
   password,
   ssidLabel,
   passwordLabel,
   scanLabel,
+  qrUrl,
 }: {
   ssid: string;
   password: string;
   ssidLabel: string;
   passwordLabel: string;
   scanLabel: string;
+  /**
+   * When set, the QR encodes this URL instead of a Wi-Fi join payload. Used as
+   * a placeholder (e.g. the site homepage) while real credentials are pending.
+   */
+  qrUrl?: string;
 }) {
-  const payload = buildWifiQrPayload(ssid, password, "WPA");
+  const payload = qrUrl ?? buildWifiQrPayload(ssid, password, "WPA");
   return (
     <div className="mt-6 rounded-2xl border border-slate-200 bg-white shadow-sm p-4 sm:p-5 max-w-md w-full mx-auto lg:mx-0 text-left">
       <div className="flex items-center gap-2 mb-3">

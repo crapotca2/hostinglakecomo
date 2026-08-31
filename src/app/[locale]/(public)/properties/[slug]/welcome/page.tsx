@@ -23,7 +23,7 @@ import { RoomCarousel } from "@/components/welcome-book/RoomCarousel";
 import { BrandHero } from "@/components/welcome-book/BrandDecorations";
 import { LocaleSwitcher } from "@/components/welcome-book/LocaleSwitcher";
 import { HubNav } from "@/components/welcome-book/HubNav";
-import { HeroWifiInline } from "@/components/welcome-book/HeroWifiInline";
+import { HeroWifiInline, wifiQrOverride } from "@/components/welcome-book/HeroWifiInline";
 import { TileCard } from "@/components/welcome-book/TileCard";
 import { sharedLabel, welcomeTitle } from "@/components/welcome-book/sharedLabels";
 import { ReviewBlock } from "@/components/welcome-book/ReviewBlock";
@@ -66,6 +66,14 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
   const gardenLabel = hasLakeView
     ? sectionLabel("garden", locale)
     : sectionLabel("outdoor", locale);
+  // Compact city apartments (no lake view, no lake access) merge the two
+  // exterior groups (building view + courtyard) into a single "Spazi esterni"
+  // tile and lay the lower area out as one aligned row instead of two.
+  const compactOutdoor = !hasLakeView && !guide.sections.outdoor.beach;
+  const outdoorPhotos = [
+    ...(guide.sections.photos?.exterior ?? []),
+    ...(guide.sections.photos?.garden ?? []),
+  ];
 
   return (
     <main className="font-[family-name:var(--font-outfit)] bg-white">
@@ -80,6 +88,7 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
             ssidLabel={sharedLabel("ssid", locale)}
             passwordLabel={sharedLabel("password", locale)}
             scanLabel={sharedLabel("scanToConnect", locale)}
+            qrUrl={wifiQrOverride(guide.sections.wifi.ssid)}
           />
         }
       />
@@ -230,73 +239,122 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
         </div>
         )}
 
-        {/* Riga 2 — Zona pranzo, Cucina, Soggiorno */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-4 last-tile-center-mobile">
-          {guide.sections.photos?.diningArea && guide.sections.photos.diningArea.length > 0 && (
+        {compactOutdoor ? (
+          /* Appartamenti compatti: pranzo/cucina/soggiorno + un unico tile
+             "Spazi esterni" (edificio + cortile), tutti allineati in una riga. */
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 last-tile-center-mobile">
+            {guide.sections.photos?.diningArea && guide.sections.photos.diningArea.length > 0 && (
+              <TileCard
+                photo={guide.sections.photos.diningArea[0]}
+                title={sectionLabel("dining", locale)}
+                captionBelow
+              >
+                <DiningModalContent guide={guide} t={t} locale={locale} />
+              </TileCard>
+            )}
             <TileCard
-              photo={guide.sections.photos.diningArea[0]}
-              title={sectionLabel("dining", locale)}
+              photo={guide.sections.photos?.kitchen?.[0]}
+              title={sectionLabel("kitchen", locale)}
               captionBelow
             >
-              <DiningModalContent guide={guide} t={t} locale={locale} />
+              <KitchenModalContent guide={guide} t={t} locale={locale} />
             </TileCard>
-          )}
-          <TileCard
-            photo={guide.sections.photos?.kitchen?.[0]}
-            title={sectionLabel("kitchen", locale)}
-            captionBelow
-          >
-            <KitchenModalContent guide={guide} t={t} locale={locale} />
-          </TileCard>
-          <TileCard
-            photo={guide.sections.photos?.livingRoom?.[0]}
-            title={sectionLabel("living", locale)}
-            captionBelow
-          >
-            <TextRoomModalContent
-              photos={guide.sections.photos?.livingRoom ?? []}
-              title={sectionLabel("living", locale)}
-              body={t(guide.sections.livingRoom)}
-            />
-          </TileCard>
-        </div>
-
-        {/* Riga 3 — Vista esterna, Cortile, Accesso lago */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 last-tile-center-mobile">
-          {guide.sections.photos?.exterior && guide.sections.photos.exterior.length > 0 && (
             <TileCard
-              photo={guide.sections.photos.exterior[0]}
-              title={sectionLabel("exterior", locale)}
+              photo={guide.sections.photos?.livingRoom?.[0]}
+              title={sectionLabel("living", locale)}
               captionBelow
             >
               <TextRoomModalContent
-                photos={guide.sections.photos.exterior}
-                title={sectionLabel("exterior", locale)}
-                body={label(hasLakeView ? "exteriorBlurb" : "exteriorBlurbCity", locale)}
+                photos={guide.sections.photos?.livingRoom ?? []}
+                title={sectionLabel("living", locale)}
+                body={t(guide.sections.livingRoom)}
               />
             </TileCard>
-          )}
-          <TileCard
-            photo={guide.sections.photos?.garden?.[0]}
-            title={gardenLabel}
-            captionBelow
-          >
-            <TextRoomModalContent
-              photos={guide.sections.photos?.garden ?? []}
-              title={gardenLabel}
-              body={t(guide.sections.outdoor.courtyard)}
-            />
-          </TileCard>
-          {guide.sections.outdoor.beach && (
-            <TileCard
-              photo={guide.sections.photos?.beach?.[0]}
-              title={sectionLabel("beach", locale)}
-              captionBelow
-            >
-              <BeachModalContent guide={guide} t={t} locale={locale} />
-            </TileCard>
-          )}
-        </div>
+            {outdoorPhotos.length > 0 && (
+              <TileCard
+                photo={guide.sections.photos?.garden?.[0] ?? guide.sections.photos?.exterior?.[0]}
+                title={sectionLabel("outdoor", locale)}
+                captionBelow
+              >
+                <TextRoomModalContent
+                  photos={outdoorPhotos}
+                  title={sectionLabel("outdoor", locale)}
+                  body={t(guide.sections.outdoor.courtyard)}
+                />
+              </TileCard>
+            )}
+          </div>
+        ) : (
+          <>
+            {/* Riga 2 — Zona pranzo, Cucina, Soggiorno */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-4 last-tile-center-mobile">
+              {guide.sections.photos?.diningArea && guide.sections.photos.diningArea.length > 0 && (
+                <TileCard
+                  photo={guide.sections.photos.diningArea[0]}
+                  title={sectionLabel("dining", locale)}
+                  captionBelow
+                >
+                  <DiningModalContent guide={guide} t={t} locale={locale} />
+                </TileCard>
+              )}
+              <TileCard
+                photo={guide.sections.photos?.kitchen?.[0]}
+                title={sectionLabel("kitchen", locale)}
+                captionBelow
+              >
+                <KitchenModalContent guide={guide} t={t} locale={locale} />
+              </TileCard>
+              <TileCard
+                photo={guide.sections.photos?.livingRoom?.[0]}
+                title={sectionLabel("living", locale)}
+                captionBelow
+              >
+                <TextRoomModalContent
+                  photos={guide.sections.photos?.livingRoom ?? []}
+                  title={sectionLabel("living", locale)}
+                  body={t(guide.sections.livingRoom)}
+                />
+              </TileCard>
+            </div>
+
+            {/* Riga 3 — Vista esterna, Cortile, Accesso lago */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 last-tile-center-mobile">
+              {guide.sections.photos?.exterior && guide.sections.photos.exterior.length > 0 && (
+                <TileCard
+                  photo={guide.sections.photos.exterior[0]}
+                  title={sectionLabel("exterior", locale)}
+                  captionBelow
+                >
+                  <TextRoomModalContent
+                    photos={guide.sections.photos.exterior}
+                    title={sectionLabel("exterior", locale)}
+                    body={label(hasLakeView ? "exteriorBlurb" : "exteriorBlurbCity", locale)}
+                  />
+                </TileCard>
+              )}
+              <TileCard
+                photo={guide.sections.photos?.garden?.[0]}
+                title={gardenLabel}
+                captionBelow
+              >
+                <TextRoomModalContent
+                  photos={guide.sections.photos?.garden ?? []}
+                  title={gardenLabel}
+                  body={t(guide.sections.outdoor.courtyard)}
+                />
+              </TileCard>
+              {guide.sections.outdoor.beach && (
+                <TileCard
+                  photo={guide.sections.photos?.beach?.[0]}
+                  title={sectionLabel("beach", locale)}
+                  captionBelow
+                >
+                  <BeachModalContent guide={guide} t={t} locale={locale} />
+                </TileCard>
+              )}
+            </div>
+          </>
+        )}
       </article>
 
       {guide.sections.feedback && (

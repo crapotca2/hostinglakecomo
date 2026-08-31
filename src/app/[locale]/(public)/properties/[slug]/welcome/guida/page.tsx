@@ -10,6 +10,7 @@ import {
   Footprints,
   Car,
   Bus,
+  TrainFront,
   Bike,
   CableCar,
   Navigation,
@@ -55,7 +56,7 @@ import { TileCard } from "@/components/welcome-book/TileCard";
 import { ReviewBlock } from "@/components/welcome-book/ReviewBlock";
 import { PoiCard } from "@/components/welcome-book/PoiCard";
 import { TexturedSection, GroupHeader } from "@/components/welcome-book/TexturedSection";
-import { directionsUrlForPoi } from "@/lib/welcome-book/maps/directions";
+import { directionsUrlForPoi, propertyOrigin } from "@/lib/welcome-book/maps/directions";
 
 export const dynamic = "force-dynamic";
 
@@ -83,6 +84,15 @@ export default async function WelcomeBookPage({ params, searchParams }: PageProp
   const propertyName = portfolioEntry?.name ?? "Aqua Vista";
   const propertyCity = portfolioEntry?.address.city ?? "Argegno";
   const basePath = `/properties/${slug}/welcome/guida`;
+  // Directions/QR routes start from THIS property (geo coords, else address),
+  // not a hardcoded house.
+  const origin = propertyOrigin(portfolioEntry);
+  // While real Wi-Fi credentials are pending, the hero QR points to the site
+  // homepage instead of encoding a placeholder network.
+  const wifiReady =
+    !!guide?.sections.wifi.ssid &&
+    !/^(hidden|\(da comunicare\))$/i.test(guide.sections.wifi.ssid.trim());
+  const wifiQrUrl = wifiReady ? undefined : "https://hostcomo.com";
 
   // Per-property TripAdvisor "restaurants in the area" link (the banner above
   // the dining list). Como for the city apartments, Argegno for Aqua Vista.
@@ -108,6 +118,7 @@ export default async function WelcomeBookPage({ params, searchParams }: PageProp
               ssidLabel={sharedLabel("ssid", locale)}
               passwordLabel={sharedLabel("password", locale)}
               scanLabel={sharedLabel("scanToConnect", locale)}
+              qrUrl={wifiQrUrl}
             />
           ) : undefined
         }
@@ -132,7 +143,7 @@ export default async function WelcomeBookPage({ params, searchParams }: PageProp
                 <TileCard icon={<Footprints />} title={label("walkable", locale)}>
                   <div className="p-5 sm:p-7">
                     <h2 className="text-2xl font-bold text-slate-900 mb-4">{label("walkable", locale)}</h2>
-                    <PoiList items={wb.sections.walkable} locale={locale} />
+                    <PoiList items={wb.sections.walkable} locale={locale} origin={origin} />
                   </div>
                 </TileCard>
               )}
@@ -140,7 +151,7 @@ export default async function WelcomeBookPage({ params, searchParams }: PageProp
                 <TileCard icon={<Banknote />} title={label("atmBanking", locale)}>
                   <div className="p-5 sm:p-7">
                     <h2 className="text-2xl font-bold text-slate-900 mb-4">{label("atmBanking", locale)}</h2>
-                    <PoiList items={wb.sections.atmBanking} locale={locale} />
+                    <PoiList items={wb.sections.atmBanking} locale={locale} origin={origin} />
                   </div>
                 </TileCard>
               )}
@@ -148,7 +159,7 @@ export default async function WelcomeBookPage({ params, searchParams }: PageProp
                 <TileCard icon={<ShoppingBasket />} title={label("shopping", locale)}>
                   <div className="p-5 sm:p-7">
                     <h2 className="text-2xl font-bold text-slate-900 mb-4">{label("shopping", locale)}</h2>
-                    <PoiList items={wb.sections.shopping} locale={locale} />
+                    <PoiList items={wb.sections.shopping} locale={locale} origin={origin} />
                   </div>
                 </TileCard>
               )}
@@ -181,7 +192,7 @@ export default async function WelcomeBookPage({ params, searchParams }: PageProp
                       url={tripAdvisorAreaUrl}
                       locale={locale}
                     />
-                    <RestaurantList items={wb.sections.eatingDrinking} locale={locale} />
+                    <RestaurantList items={wb.sections.eatingDrinking} locale={locale} origin={origin} />
                   </div>
                 </TileCard>
               )}
@@ -209,7 +220,7 @@ export default async function WelcomeBookPage({ params, searchParams }: PageProp
                 <TileCard icon={<Trees />} title={label("activeOutdoor", locale)}>
                   <div className="p-5 sm:p-7">
                     <h2 className="text-2xl font-bold text-slate-900 mb-4">{label("activeOutdoor", locale)}</h2>
-                    <PoiList items={wb.sections.activeOutdoor} locale={locale} />
+                    <PoiList items={wb.sections.activeOutdoor} locale={locale} origin={origin} />
                   </div>
                 </TileCard>
               )}
@@ -224,7 +235,7 @@ export default async function WelcomeBookPage({ params, searchParams }: PageProp
               <TileCard icon={<Sailboat />} title={label("dayTrips", locale)}>
                 <div className="p-5 sm:p-7">
                   <h2 className="text-2xl font-bold text-slate-900 mb-4">{label("dayTrips", locale)}</h2>
-                  <DestinationList items={wb.sections.dayTrips} locale={locale} />
+                  <DestinationList items={wb.sections.dayTrips} locale={locale} origin={origin} />
                 </div>
               </TileCard>
             )}
@@ -232,7 +243,7 @@ export default async function WelcomeBookPage({ params, searchParams }: PageProp
               <TileCard icon={<Car />} title={label("drivingTrips", locale)}>
                 <div className="p-5 sm:p-7">
                   <h2 className="text-2xl font-bold text-slate-900 mb-4">{label("drivingTrips", locale)}</h2>
-                  <DestinationList items={wb.sections.drivingTrips} locale={locale} />
+                  <DestinationList items={wb.sections.drivingTrips} locale={locale} origin={origin} />
                 </div>
               </TileCard>
             )}
@@ -270,13 +281,13 @@ const TYPE_META: Record<string, { Icon: LucideIcon; key: string }> = {
   "bike-rental": { Icon: Bike, key: "type-bike-rental" },
 };
 
-function PoiList({ items, locale }: { items: WelcomeBookPOI[]; locale: SupportedLocale }) {
+function PoiList({ items, locale, origin }: { items: WelcomeBookPOI[]; locale: SupportedLocale; origin: string }) {
   const t = (text: Parameters<typeof pickLocalized>[0]) => pickLocalized(text, locale, DEFAULT_LOCALE);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
       {items.map((poi, i) => {
         const meta = TYPE_META[poi.type] ?? TYPE_META["outdoor-activity"];
-        const directionsHref = poi.directionsUrl ?? directionsUrlForPoi(poi);
+        const directionsHref = poi.directionsUrl ?? directionsUrlForPoi(poi, origin);
         return (
           <PoiCard
             key={i}
@@ -491,7 +502,7 @@ function BoatOptionsSplit({
 
   return (
     <div className="space-y-7 sm:space-y-8">
-      <article className="rounded-2xl overflow-hidden bg-white border border-[#1D3A62] ring-1 ring-[#1D3A62]/20 shadow-sm md:grid md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+      <article className={`rounded-2xl overflow-hidden bg-white border border-[#1D3A62] ring-1 ring-[#1D3A62]/20 shadow-sm${featured.heroImage ? " md:grid md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]" : ""}`}>
         {featured.heroImage && (
           <div className="relative w-full aspect-[16/9] md:aspect-auto md:min-h-full bg-slate-100">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -621,9 +632,11 @@ const TRAVEL_MODE_ICON: Record<string, LucideIcon> = {
 function DestinationList({
   items,
   locale,
+  origin,
 }: {
   items: WelcomeBookDestination[];
   locale: SupportedLocale;
+  origin: string;
 }) {
   const t = (text: Parameters<typeof pickLocalized>[0]) => pickLocalized(text, locale, DEFAULT_LOCALE);
   const cols = items.length >= 3 ? "md:grid-cols-2 lg:grid-cols-3" : "md:grid-cols-2";
@@ -632,7 +645,7 @@ function DestinationList({
       {items.map((dest, i) => {
         const directionsHref =
           dest.directionsUrl ??
-          directionsUrlForPoi({ name: dest.name, address: dest.address ?? dest.name, coordinates: dest.coordinates });
+          directionsUrlForPoi({ name: dest.name, address: dest.address ?? dest.name, coordinates: dest.coordinates }, origin);
         const featured = !!dest.isFeatured;
         const spanFull = featured && items.length >= 3 ? "lg:col-span-3" : "md:col-span-2";
         return (
@@ -752,15 +765,17 @@ function DestinationList({
 function RestaurantList({
   items,
   locale,
+  origin,
 }: {
   items: WelcomeBookRestaurant[];
   locale: SupportedLocale;
+  origin: string;
 }) {
   const t = (text: Parameters<typeof pickLocalized>[0]) => pickLocalized(text, locale, DEFAULT_LOCALE);
   return (
     <Carousel ariaLabel={label("eatingDrinking", locale)}>
       {items.map((rst, i) => {
-        const directionsHref = rst.directionsUrl ?? directionsUrlForPoi(rst);
+        const directionsHref = rst.directionsUrl ?? directionsUrlForPoi(rst, origin);
         return (
           <article
             key={i}
@@ -975,11 +990,56 @@ function TransportCards({
         />
       )}
 
+      {transport.train && (
+        <TransportRow
+          icon={<TrainFront className="w-5 h-5" />}
+          title={label("train", locale)}
+          subtitle={`${transport.train.line ?? ""}${transport.train.operator ? ` · ${transport.train.operator}` : ""}`}
+          stopName={transport.train.stationName}
+          walkMinutes={transport.train.walkMinutesFromHouse}
+          operatorUrl={transport.train.operatorUrl}
+          locale={locale}
+          expandedContent={
+            <>
+              {transport.train.frequency && (
+                <p className="text-sm text-slate-800 leading-relaxed">
+                  {t(transport.train.frequency)}
+                </p>
+              )}
+              {transport.train.keyDestinations && transport.train.keyDestinations.length > 0 && (
+                <div className="mt-3 overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-slate-200 text-left text-[10px] uppercase font-bold text-[#1D3A62]">
+                        <th className="py-1.5 pr-2">{label("destination", locale)}</th>
+                        <th className="py-1.5 pr-2">{label("time", locale)}</th>
+                        <th className="py-1.5 text-right">{label("price", locale)}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {transport.train.keyDestinations.map((d, i) => (
+                        <tr key={i} className="border-b border-slate-100 last:border-0">
+                          <td className="py-1.5 pr-2 font-semibold text-slate-900">{d.name}</td>
+                          <td className="py-1.5 pr-2 text-slate-700 whitespace-nowrap">{d.minutes}&apos;</td>
+                          <td className="py-1.5 font-mono text-[#1D3A62] font-semibold text-right whitespace-nowrap">
+                            €{d.priceAdultEur?.toFixed(2)}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </>
+          }
+        />
+      )}
+
       {transport.funicular && (
         <TransportRow
           icon={<CableCar className="w-5 h-5" />}
-          title={label("funicular", locale)}
-          subtitle={transport.funicular.name}
+          title={transport.funicular.name}
+          subtitle={undefined}
           stopName={undefined}
           walkMinutes={transport.funicular.walkMinutesFromHouse}
           operatorUrl={transport.funicular.operatorUrl}
@@ -1208,6 +1268,7 @@ function label(key: string, locale: SupportedLocale): string {
     transport: { it: "Trasporti", en: "Transport", ru: "Транспорт", de: "Verkehr", pl: "Transport" },
     ferry: { it: "Traghetto", en: "Ferry", ru: "Паром", de: "Fähre", pl: "Prom" },
     bus: { it: "Autobus", en: "Bus", ru: "Автобус", de: "Bus", pl: "Autobus" },
+    train: { it: "Treno", en: "Train", ru: "Поезд", de: "Zug", pl: "Pociąg" },
     funicular: { it: "Funivia per Pigra", en: "Cable car to Pigra", ru: "Фуникулёр в Пигра", de: "Seilbahn nach Pigra", pl: "Kolejka linowa do Pigra" },
     emergencyPharmacies: { it: "Farmacie della zona", en: "Local pharmacies", ru: "Местные аптеки", de: "Apotheken vor Ort", pl: "Apteki w okolicy" },
     pharmaciesNote: {

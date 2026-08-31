@@ -28,7 +28,7 @@ import { BrandHero } from "@/components/welcome-book/BrandDecorations";
 import { welcomeHero } from "@/lib/welcome-book/hero";
 import { LocaleSwitcher } from "@/components/welcome-book/LocaleSwitcher";
 import { HubNav } from "@/components/welcome-book/HubNav";
-import { HeroWifiInline } from "@/components/welcome-book/HeroWifiInline";
+import { HeroWifiInline, wifiQrOverride } from "@/components/welcome-book/HeroWifiInline";
 import { TileCard } from "@/components/welcome-book/TileCard";
 import { CheckinVideo } from "@/components/welcome-book/CheckinVideo";
 import { getCheckinVideo } from "@/lib/welcome-book/checkin-videos";
@@ -281,6 +281,7 @@ export default async function InfoUtiliPage({ params, searchParams }: PageProps)
             ssidLabel={sharedLabel("ssid", locale)}
             passwordLabel={sharedLabel("password", locale)}
             scanLabel={sharedLabel("scanToConnect", locale)}
+            qrUrl={wifiQrOverride(guide.sections.wifi.ssid)}
           />
         }
       />

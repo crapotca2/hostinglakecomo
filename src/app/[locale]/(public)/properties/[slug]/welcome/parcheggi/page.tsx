@@ -14,7 +14,8 @@ import { welcomeHero } from "@/lib/welcome-book/hero";
 import { LocaleSwitcher } from "@/components/welcome-book/LocaleSwitcher";
 import { HubNav } from "@/components/welcome-book/HubNav";
 import { RoomCarousel } from "@/components/welcome-book/RoomCarousel";
-import { HeroWifiInline } from "@/components/welcome-book/HeroWifiInline";
+import { HeroWifiInline, wifiQrOverride } from "@/components/welcome-book/HeroWifiInline";
+import { propertyOrigin, buildDirectionsUrl } from "@/lib/welcome-book/maps/directions";
 import { TileCard } from "@/components/welcome-book/TileCard";
 import { sharedLabel, welcomeTitle } from "@/components/welcome-book/sharedLabels";
 import { ReviewBlock } from "@/components/welcome-book/ReviewBlock";
@@ -25,17 +26,6 @@ export const dynamic = "force-dynamic";
 interface PageProps {
   params: { slug: string; locale: Locale };
   searchParams: { lang?: string };
-}
-
-const HOUSE_ORIGIN = "Via Spluga 44, Argegno";
-
-function buildDirectionsUrl(destination: string): string {
-  const params = new URLSearchParams({
-    api: "1",
-    origin: HOUSE_ORIGIN,
-    destination,
-  });
-  return `https://www.google.com/maps/dir/?${params.toString()}`;
 }
 
 export default async function ParkingPage({ params, searchParams }: PageProps) {
@@ -60,6 +50,13 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
   const parking = guide.sections.parking;
   const pkc = wb?.sections.parkingAndCharging;
   const basePath = `/properties/${slug}/welcome/parcheggi`;
+  // Directions/QR routes start from THIS property. When the property has no
+  // private spot, the tab centres the nearby public paid parking instead.
+  const origin = propertyOrigin(portfolioEntry);
+  const hasPrivate = parking.hasPrivateSpot !== false;
+  const publicTitle = hasPrivate
+    ? label("publicParkingArgegno", locale)
+    : label("publicParking", locale);
 
   const privateModal = (
     <div className="p-5 sm:p-7">
@@ -120,8 +117,14 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
   const publicModal = publicSpots.length > 0 ? (
     <div className="p-5 sm:p-7">
       <h2 className="text-2xl font-bold text-slate-900 mb-3">
-        {label("publicParkingArgegno", locale)}
+        {publicTitle}
       </h2>
+      {!hasPrivate && (
+        <p className="text-sm leading-relaxed text-amber-900 bg-amber-50 border border-amber-200 rounded-md p-3 mb-4 flex items-start gap-2">
+          <AlertTriangle className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
+          <span>{label("noPrivateParkingIntro", locale)}</span>
+        </p>
+      )}
       {pkc?.generalInfo && (
         <p className="text-sm leading-relaxed text-slate-700 mb-5">{t(pkc.generalInfo)}</p>
       )}
@@ -137,7 +140,7 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
                 categoryLabel: label("catPublicParking", locale),
                 name: p.name,
                 address: p.address,
-                qrUrl: buildDirectionsUrl(destination),
+                qrUrl: buildDirectionsUrl(destination, "driving", origin),
                 scanShortLabel: label("scanShort", locale),
                 scanAriaLabel: label("scanAriaParking", locale),
                 minLabel: label("min", locale),
@@ -174,7 +177,7 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
                 categoryLabel: label("catEvCharging", locale),
                 name: e.stationName,
                 address: e.address,
-                qrUrl: buildDirectionsUrl(destination),
+                qrUrl: buildDirectionsUrl(destination, "driving", origin),
                 scanShortLabel: label("scanShort", locale),
                 scanAriaLabel: label("scanAriaEv", locale),
                 minLabel: label("min", locale),
@@ -206,6 +209,7 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
             ssidLabel={sharedLabel("ssid", locale)}
             passwordLabel={sharedLabel("password", locale)}
             scanLabel={sharedLabel("scanToConnect", locale)}
+            qrUrl={wifiQrOverride(guide.sections.wifi.ssid)}
           />
         }
       />
@@ -218,75 +222,107 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
       <HubNav slug={slug} routeLocale={routeLocale} contentLocale={locale} current="parcheggi" />
 
       <article className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
-        <div className="hidden md:flex relative items-center justify-center py-6 min-h-[28rem]">
-          {publicModal && (
-            <div className="relative w-[26%] -mr-10 z-10 transform -rotate-3 scale-[0.92] opacity-95 transition-all duration-300 hover:rotate-0 hover:scale-[0.98] hover:opacity-100 hover:z-40">
-              <TileCard
-                icon={<Car />}
-                title={label("publicParkingArgegno", locale)}
-                subtitle={label("freePaid", locale)}
-              >
-                {publicModal}
-              </TileCard>
+        {hasPrivate ? (
+          <>
+            <div className="hidden md:flex relative items-center justify-center py-6 min-h-[28rem]">
+              {publicModal && (
+                <div className="relative w-[26%] -mr-10 z-10 transform -rotate-3 scale-[0.92] opacity-95 transition-all duration-300 hover:rotate-0 hover:scale-[0.98] hover:opacity-100 hover:z-40">
+                  <TileCard
+                    icon={<Car />}
+                    title={publicTitle}
+                    subtitle={label("freePaid", locale)}
+                  >
+                    {publicModal}
+                  </TileCard>
+                </div>
+              )}
+
+              <div className="relative w-[44%] z-30 shadow-[0_20px_50px_-15px_rgba(15,23,42,0.35)] rounded-2xl">
+                <TileCard
+                  photo={guide.sections.photos?.parking?.[0]}
+                  icon={<Car />}
+                  title={label("housePrivateParking", locale)}
+                  subtitle={label("privatePriceChip", locale)}
+                  captionBelow
+                >
+                  {privateModal}
+                </TileCard>
+              </div>
+
+              {evModal && (
+                <div className="relative w-[26%] -ml-10 z-10 transform rotate-3 scale-[0.92] opacity-95 transition-all duration-300 hover:rotate-0 hover:scale-[0.98] hover:opacity-100 hover:z-40">
+                  <TileCard
+                    icon={<Zap />}
+                    title={label("evCharging", locale)}
+                    subtitle={label("perKw", locale)}
+                  >
+                    {evModal}
+                  </TileCard>
+                </div>
+              )}
             </div>
-          )}
 
-          <div className="relative w-[44%] z-30 shadow-[0_20px_50px_-15px_rgba(15,23,42,0.35)] rounded-2xl">
-            <TileCard
-              photo={guide.sections.photos?.parking?.[0]}
-              icon={<Car />}
-              title={label("housePrivateParking", locale)}
-              subtitle={label("privatePriceChip", locale)}
-              captionBelow
-            >
-              {privateModal}
-            </TileCard>
-          </div>
-
-          {evModal && (
-            <div className="relative w-[26%] -ml-10 z-10 transform rotate-3 scale-[0.92] opacity-95 transition-all duration-300 hover:rotate-0 hover:scale-[0.98] hover:opacity-100 hover:z-40">
-              <TileCard
-                icon={<Zap />}
-                title={label("evCharging", locale)}
-                subtitle={label("perKw", locale)}
-              >
-                {evModal}
-              </TileCard>
+            <div className="md:hidden flex flex-col items-center gap-4">
+              <div className="w-full max-w-md">
+                <TileCard
+                  photo={guide.sections.photos?.parking?.[0]}
+                  icon={<Car />}
+                  title={label("housePrivateParking", locale)}
+                  subtitle={label("privatePriceChip", locale)}
+                  captionBelow
+                >
+                  {privateModal}
+                </TileCard>
+              </div>
+              <div className="grid grid-cols-2 gap-3 w-full max-w-md">
+                {publicModal && (
+                  <TileCard icon={<Car />} title={publicTitle}>
+                    {publicModal}
+                  </TileCard>
+                )}
+                {evModal && (
+                  <TileCard
+                    icon={<Zap />}
+                    title={label("evCharging", locale)}
+                  >
+                    {evModal}
+                  </TileCard>
+                )}
+              </div>
             </div>
-          )}
-        </div>
-
-        <div className="md:hidden flex flex-col items-center gap-4">
-          <div className="w-full max-w-md">
-            <TileCard
-              photo={guide.sections.photos?.parking?.[0]}
-              icon={<Car />}
-              title={label("housePrivateParking", locale)}
-              subtitle={label("privatePriceChip", locale)}
-              captionBelow
-            >
-              {privateModal}
-            </TileCard>
-          </div>
-          <div className="grid grid-cols-2 gap-3 w-full max-w-md">
-            {publicModal && (
-              <TileCard
-                icon={<Car />}
-                title={label("publicParkingArgegno", locale)}
-              >
-                {publicModal}
-              </TileCard>
+          </>
+        ) : (
+          <div className="max-w-2xl mx-auto">
+            {publicModal ? (
+              <div className="rounded-2xl shadow-[0_20px_50px_-15px_rgba(15,23,42,0.35)]">
+                <TileCard
+                  icon={<Car />}
+                  title={publicTitle}
+                  subtitle={label("freePaid", locale)}
+                  captionBelow
+                >
+                  {publicModal}
+                </TileCard>
+              </div>
+            ) : (
+              <p className="text-sm leading-relaxed text-amber-900 bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-2">
+                <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                <span>{label("noPrivateParkingIntro", locale)}</span>
+              </p>
             )}
             {evModal && (
-              <TileCard
-                icon={<Zap />}
-                title={label("evCharging", locale)}
-              >
-                {evModal}
-              </TileCard>
+              <div className="mt-5">
+                <TileCard
+                  icon={<Zap />}
+                  title={label("evCharging", locale)}
+                  subtitle={label("perKw", locale)}
+                >
+                  {evModal}
+                </TileCard>
+              </div>
             )}
           </div>
-        </div>
+        )}
       </article>
 
       {guide.sections.feedback && (
@@ -298,6 +334,14 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
 
 const LABELS: Record<string, Partial<Record<SupportedLocale, string>>> = {
   guideTo: { it: "Guida a", en: "Guide to", ru: "Гид по", de: "Reiseführer", pl: "Przewodnik po", es: "Guía de", fr: "Guide de" },
+  publicParking: { it: "Dove parcheggiare", en: "Where to park", ru: "Где парковаться", de: "Wo parken", pl: "Gdzie zaparkować", es: "Dónde aparcar", fr: "Où se garer" },
+  noPrivateParkingIntro: {
+    it: "L'appartamento è in pieno centro storico (ZTL): non entrate in auto fin sotto casa. Lasciate l'auto nei parcheggi pubblici a pagamento qui sotto — a pochi minuti a piedi — e raggiungeteci a piedi. Inquadrate il QR per il percorso in auto dal vostro punto di partenza al parcheggio.",
+    en: "The apartment is right in the historic centre (ZTL restricted zone): do not drive up to the door. Leave the car in one of the paid public car parks below — a few minutes' walk away — and reach us on foot. Scan the QR for driving directions to the car park.",
+    ru: "Квартира находится в самом историческом центре (зона ZTL): не подъезжайте на машине к дому. Оставьте автомобиль на одной из платных общественных парковок ниже — в нескольких минутах ходьбы — и дойдите до нас пешком. Отсканируйте QR-код для маршрута к парковке.",
+    de: "Die Wohnung liegt mitten in der Altstadt (ZTL-Zone): Fahren Sie nicht bis vor die Tür. Stellen Sie das Auto auf einem der kostenpflichtigen öffentlichen Parkplätze unten ab — wenige Gehminuten entfernt — und kommen Sie zu Fuß zu uns. Scannen Sie den QR-Code für die Route zum Parkplatz.",
+    pl: "Apartament znajduje się w samym centrum historycznym (strefa ZTL): nie wjeżdżajcie samochodem pod same drzwi. Zostawcie auto na jednym z płatnych parkingów publicznych poniżej — kilka minut spacerem — i dojdźcie do nas pieszo. Zeskanujcie kod QR, aby uzyskać trasę dojazdu do parkingu.",
+  },
   housePrivateParking: {
     it: "Parcheggio privato della casa",
     en: "House private parking",
