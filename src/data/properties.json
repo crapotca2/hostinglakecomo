@@ -532,18 +532,18 @@
     "descriptionLong_en": "Some homes you visit. This one feels yours the moment you walk in. Each day you choose: a quiet coffee on the terrace, a swim in the lake ten minutes away, or an evening by the fireplace with a book from the library. Not lakefront — that's the point: your calm base to enjoy it. Milan an hour away.",
     "descriptionLong_ru": "Некоторые дома вы просто посещаете. Этот с первого шага ощущается своим. Каждый день выбираете вы: спокойный кофе на террасе, купание в озере в десяти минутах или вечер у камина с книгой из библиотеки. Это не первая линия у озера — и в этом смысл: ваша тихая база, чтобы по-настоящему им наслаждаться. Милан в часе езды.",
     "sections": {
-      "space": "Ultimo piano luminoso e silenzioso, senza vicini sopra. Due camere matrimoniali e due bagni con doccia. Soggiorno ampio con camino, parete-libreria e divano letto (quinto ospite). Cucina completa e ampio balcone arredato. Aria condizionata in soggiorno, Wi-Fi in fibra e posto auto privato. Si sale a piedi: tre piani, senza ascensore — in cambio, l'ultimo piano, con nessuno sopra di te.",
-      "space_en": "Top floor: bright, quiet, no neighbours above. Two double bedrooms and two bathrooms with shower. Spacious living room with a fireplace, a wall of books and a sofa bed (fifth guest). Full kitchen and a large furnished balcony. Air conditioning in the living room, fibre Wi-Fi and private parking. It's a walk up: three floors, no lift — in return, the top floor, with no one above you.",
-      "space_ru": "Верхний этаж: светлый, тихий, без соседей сверху. Две двуспальные спальни и две ванные комнаты с душем. Просторная гостиная с камином, стеной книг и диваном-кроватью (пятый гость). Полностью оборудованная кухня и большой меблированный балкон. Кондиционер в гостиной, оптоволоконный Wi-Fi и частная парковка. Подъём пешком: три этажа, без лифта — зато верхний этаж, и никого над вами.",
+      "space": "Ultimo piano: luminoso, silenzioso, nessun vicino sopra. Due camere matrimoniali. Due bagni con doccia. Soggiorno ampio e luminoso con camino e parete-libreria. Cucina completa e ampio balcone arredato. Aria condizionata, Wi-Fi in fibra, posto auto privato. Secondo e ultimo piano, si sale a piedi (due piani).",
+      "space_en": "Top floor: bright, quiet, no neighbours above. Two double bedrooms. Two bathrooms with shower. Spacious, bright living room with a fireplace and a wall of books. Full kitchen and a large furnished balcony. Air conditioning, fibre Wi-Fi, private parking. Second and top floor, a two-flight walk up.",
+      "space_ru": "Верхний этаж: светлый, тихий, без соседей сверху. Две двуспальные спальни. Две ванные комнаты с душем. Просторная светлая гостиная с камином и стеной книг. Полностью оборудованная кухня и большой меблированный балкон. Кондиционер, оптоволоконный Wi-Fi, частная парковка. Второй и верхний этаж, подъём пешком (два пролёта).",
       "neighborhood": "Lipomo è una tranquilla cittadina residenziale sulle prime colline a sud-est di Como, a soli dieci minuti dal centro e dal lago ma lontana dal trambusto. Il lago di Montorfano è a due passi — riserva naturale con il giro del lago a piedi e, d'estate, il lido per un bagno; il prestigioso Golf Club Villa d'Este si trova a Montorfano. Como e il lago sono a dieci minuti: lungolago, funicolare per Brunate, Villa Olmo. Supermercati, farmacie e un McDonald's a pochi minuti; ben collegata, con Milano a circa un'ora.",
       "neighborhood_en": "Lipomo is a quiet residential town on the first hills southeast of Como, just ten minutes from the centre and the lake yet away from the crowds. Lake Montorfano is a stone's throw away — a nature reserve with a walking loop and a lido for a summer swim; the prestigious Golf Club Villa d'Este is in Montorfano. Como and the lake are ten minutes away: the lakefront promenade, the Brunate funicular, Villa Olmo. Supermarkets, pharmacies and a McDonald's a few minutes away; well connected, with Milan about an hour away.",
       "neighborhood_ru": "Липомо — тихий жилой городок на первых холмах к юго-востоку от Комо, всего в десяти минутах от центра и озера, но вдали от суеты. Озеро Монторфано в двух шагах — природный заповедник с прогулочным маршрутом вокруг озера и пляжем летом; престижный гольф-клуб Villa d'Este находится в Монторфано. Комо и озеро в десяти минутах: набережная, фуникулёр в Брунате, вилла Ольмо. Супермаркеты, аптеки и McDonald's в нескольких минутах; удобное сообщение, Милан примерно в часе езды."
     },
     "extras": [],
     "facts": {
-      "beds": "2 letti matrimoniali + divano letto",
+      "beds": "2 letti matrimoniali",
       "checkInHours": "Check-in autonomo con cassetta di sicurezza, all'ora che preferisci; check-out entro le 10:00",
-      "floor": "Ultimo piano (terzo), senza ascensore",
+      "floor": "Secondo e ultimo piano, senza ascensore (si sale a piedi, due piani)",
       "parkingNote": "Ampio parcheggio condominiale gratuito per gli ospiti, proprio sotto casa",
       "touristTaxNote": "Imposta di soggiorno secondo il regolamento del Comune di Lipomo, da saldare al check-in (da confermare)"
     },
@@ -556,7 +556,7 @@
     "details": {
       "bedrooms": 2,
       "bathrooms": 2,
-      "maxGuests": 5,
+      "maxGuests": 4,
       "hasLakeView": false,
       "hasWifi": true,
       "hasAC": true,
@@ -573,7 +573,6 @@
       "2 bagni con doccia",
       "Balcone arredato",
       "Posto auto gratuito",
-      "Divano letto",
       "Riscaldamento",
       "Ultimo piano senza ascensore",
       "Self check-in"
