@@ -52,12 +52,26 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
   const t = (text: Parameters<typeof pickLocalized>[0]) => pickLocalized(text, locale, DEFAULT_LOCALE);
   const basePath = `/properties/${slug}/welcome`;
 
+  // Per-property hero image (aqua-vista keeps its original destination shot).
+  const HERO_OVERRIDE: Record<string, string> = {
+    "aqua-vista-di-splendore":
+      "/images/welcome/aqua-vista-di-splendore/destinations/aqua-vista-spritz.webp",
+  };
+  const heroImage = HERO_OVERRIDE[slug] ?? `/images/welcome/${slug}/hero.webp`;
+
+  // Layout: the lake/courtyard split only fits a 2-bedroom lakefront home.
+  // Smaller apartments render a single unified "rooms" section instead.
+  const hasLakeView = portfolioEntry?.details?.hasLakeView ?? true;
+  const splitLayout =
+    hasLakeView &&
+    (guide.sections.bedrooms.length > 1 || guide.sections.bathrooms.length > 1);
+
   return (
     <main className="font-[family-name:var(--font-outfit)] bg-white">
       <BrandHero
         eyebrow={`${sharedLabel("guideTo", locale).toUpperCase()} ${propertyCity.toUpperCase()}`}
         title={`${sharedLabel("welcomeTo", locale)} ${propertyName}`}
-        heroImage="/images/welcome/aqua-vista-di-splendore/destinations/aqua-vista-spritz.webp"
+        heroImage={heroImage}
         wifiBlock={
           <HeroWifiInline
             ssid={guide.sections.wifi.ssid}
@@ -77,7 +91,8 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
       <HubNav slug={slug} routeLocale={routeLocale} contentLocale={locale} current="casa" />
 
       <article className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
-        {/* Riga 1 — LATO LAGO / LATO CORTILE */}
+        {/* Riga 1 — Camere e bagni (split lago/cortile solo per case fronte-lago) */}
+        {splitLayout ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 mb-7 sm:mb-10">
           <div
             className="relative overflow-hidden rounded-3xl p-5 sm:p-7 ring-1 ring-white/10 shadow-[0_8px_24px_-12px_rgba(15,23,42,0.25)]"
@@ -165,6 +180,54 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
             </div>
           </div>
         </div>
+        ) : (
+        <div className="mb-7 sm:mb-10">
+          <div
+            className="relative overflow-hidden rounded-3xl p-5 sm:p-7 ring-1 ring-white/10 shadow-[0_8px_24px_-12px_rgba(15,23,42,0.25)]"
+            style={{ backgroundColor: "#1D3A62" }}
+          >
+            <div
+              aria-hidden
+              className="absolute inset-0 opacity-[0.10] bg-cover bg-center pointer-events-none print:hidden"
+              style={{ backgroundImage: "url('/images/textures/como-trama.webp')" }}
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-br from-white/[0.04] via-transparent to-black/15 pointer-events-none"
+            />
+            <div className="relative flex items-center justify-center gap-2 mb-4 sm:mb-6">
+              <BedDouble className="w-4 h-4 sm:w-5 sm:h-5 text-white" strokeWidth={2.2} />
+              <p className="text-sm sm:text-base uppercase tracking-[0.18em] font-bold text-white">
+                {sectionLabel("rooms", locale)}
+              </p>
+            </div>
+            <div className="relative grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5">
+              {guide.sections.bedrooms.map((b, i) => (
+                <TileCard
+                  key={`bed-${i}`}
+                  photo={guide.sections.photos?.[i === 0 ? "bedroom1" : "bedroom2"]?.[0]}
+                  title={stripParens(t(b.name))}
+                  subtitle={b.bedType.replace(/-/g, " ")}
+                  captionBelow
+                >
+                  <RoomModalContent guide={guide} index={i} t={t} />
+                </TileCard>
+              ))}
+              {guide.sections.bathrooms.map((b, i) => (
+                <TileCard
+                  key={`bath-${i}`}
+                  photo={guide.sections.photos?.[i === 0 ? "bathroom1" : "bathroom2"]?.[0]}
+                  title={stripParens(t(b.name))}
+                  subtitle={bathSubtitle(b.features, locale)}
+                  captionBelow
+                >
+                  <BathroomModalContent guide={guide} index={i} t={t} />
+                </TileCard>
+              ))}
+            </div>
+          </div>
+        </div>
+        )}
 
         {/* Riga 2 — Zona pranzo, Cucina, Soggiorno */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-4 last-tile-center-mobile">
@@ -208,7 +271,7 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
               <TextRoomModalContent
                 photos={guide.sections.photos.exterior}
                 title={sectionLabel("exterior", locale)}
-                body={label("exteriorBlurb", locale)}
+                body={label(hasLakeView ? "exteriorBlurb" : "exteriorBlurbCity", locale)}
               />
             </TileCard>
           )}
@@ -483,6 +546,7 @@ function bathSubtitle(features: string[] | undefined, locale: SupportedLocale): 
 
 function sectionLabel(key: string, locale: SupportedLocale): string {
   const labels: Record<string, Partial<Record<SupportedLocale, string>>> = {
+    rooms: { it: "Camere e bagni", en: "Rooms & bathrooms", ru: "Комнаты и ванные", de: "Zimmer & Bäder", es: "Habitaciones y baños", fr: "Chambres et salles de bain" },
     living: { it: "Soggiorno", en: "Living Room", ru: "Гостиная", de: "Wohnzimmer" },
     kitchen: { it: "Cucina", en: "Kitchen", ru: "Кухня", de: "Küche" },
     dining: { it: "Zona pranzo", en: "Dining area", ru: "Обеденная зона", de: "Essbereich", es: "Comedor" },
@@ -503,6 +567,13 @@ function label(key: string, locale: SupportedLocale): string {
       ru: "Внешний вид дома у озера, от входа до пирса.",
       de: "Seeseitige Außenansicht des Hauses, vom Eingang bis zum Steg.",
       es: "Exterior de la casa frente al lago, desde la entrada hasta el muelle.",
+    },
+    exteriorBlurbCity: {
+      it: "L'esterno dell'edificio storico e l'ingresso indipendente su cortile.",
+      en: "The historic building's exterior and the private entrance onto the courtyard.",
+      ru: "Внешний вид исторического здания и отдельный вход во двор.",
+      de: "Die Außenansicht des historischen Gebäudes und der private Eingang zum Innenhof.",
+      es: "El exterior del edificio histórico y la entrada independiente al patio.",
     },
   };
   return labels[key]?.[locale] ?? labels[key]?.it ?? key;
