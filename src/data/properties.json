@@ -1077,5 +1077,353 @@
       "listingId": "1715460245498966697",
       "scrapedAt": "2026-08-16"
     }
+  },
+  {
+    "slug": "antica-camillus",
+    "name": "Antica Camillus",
+    "type": "apartment",
+    "zone": "centro-como",
+    "description": "Nel cuore del centro storico di Como, a pochi passi dal lago e dal Duomo, un appartamento ristrutturato al piano terra con ingresso indipendente e un affascinante pozzo romano in camera. Tutto raggiungibile a piedi, niente scale: la base ideale per vivere il Lago di Como senza pensieri.",
+    "description_en": "In the heart of Como's old town, steps from the lake and the Cathedral, a renovated ground-floor apartment with a private entrance and a fascinating Roman well in the bedroom. Everything on foot, no stairs: the ideal base to enjoy Lake Como effortlessly.",
+    "description_ru": "В самом сердце старого города Комо, в нескольких шагах от озера и собора — отреставрированная квартира на первом этаже с отдельным входом и удивительным римским колодцем в спальне. Всё пешком, без лестниц: идеальная база, чтобы наслаждаться озером Комо без забот.",
+    "descriptionLong": "Un mix raro di antico e moderno: un pozzo romano autentico nella camera da letto, finiture nuove e un cortile tranquillo a due passi dalla piazza del Duomo. Ti svegli in centro storico, esci e sei già tra i caffè, il lungolago e la funicolare per Brunate. Niente auto, niente scale: solo Como ai tuoi piedi.",
+    "descriptionLong_en": "A rare blend of ancient and modern: a genuine Roman well in the bedroom, fresh finishes and a quiet courtyard a stone's throw from the Cathedral square. You wake up in the old town, step out and you're already among the cafés, the lakefront and the Brunate funicular. No car, no stairs: just Como at your feet.",
+    "descriptionLong_ru": "Редкое сочетание древнего и современного: настоящий римский колодец в спальне, свежая отделка и тихий двор в двух шагах от соборной площади. Вы просыпаетесь в старом городе, выходите — и вы уже среди кафе, набережной и фуникулёра в Брунате. Без машины, без лестниц — только Комо у ваших ног.",
+    "sections": {
+      "space": "Appartamento di 65 m² al piano terra: una camera matrimoniale e un ampio soggiorno con divano letto, comodi fino a 4 ospiti. Cucina completamente attrezzata (piano cottura, forno, lavastoviglie, microonde, macchina del caffè, frigorifero), zona pranzo e area salotto. Bagno privato ampio con doccia a pioggia cromoterapica, asciugacapelli e set di cortesia. Aria condizionata, riscaldamento, Wi-Fi gratuito e Smart TV con Netflix. Lavatrice, ferro e stendino. Ingresso indipendente su cortile tranquillo, tutto al piano terra: nessuna scala.",
+      "space_en": "65 m² ground-floor apartment: one double bedroom and a spacious living room with a sofa bed, comfortable for up to 4 guests. Fully equipped kitchen (hob, oven, dishwasher, microwave, coffee machine, fridge), dining and seating areas. Large private bathroom with a chromotherapy rain shower, hairdryer and toiletries. Air conditioning, heating, free Wi-Fi and a smart TV with Netflix. Washing machine, iron and drying rack. Private entrance onto a quiet courtyard, all on the ground floor: no stairs.",
+      "space_ru": "Квартира 65 м² на первом этаже: одна двуспальная спальня и просторная гостиная с диваном-кроватью, комфортно до 4 гостей. Полностью оборудованная кухня (варочная панель, духовка, посудомоечная машина, микроволновка, кофемашина, холодильник), обеденная и гостиная зоны. Просторная собственная ванная с тропическим душем и хромотерапией, феном и набором косметики. Кондиционер, отопление, бесплатный Wi-Fi и Smart TV с Netflix. Стиральная машина, утюг и сушилка. Отдельный вход с тихого двора, всё на первом этаже: без лестниц.",
+      "neighborhood": "Sei nel centro storico di Como, dentro le mura: il Duomo è a circa 600 metri, la Basilica di Sant'Abbondio poco più in là. A piedi raggiungi il lungolago, la funicolare per Brunate, Villa Olmo e le vie dello shopping. Ristoranti, bar e supermercati sotto casa. Nessun parcheggio in loco (siamo nella città murata): i garage pubblici più vicini sono a pochi minuti a piedi, con indicazioni fornite prima dell'arrivo. Milano a circa un'ora.",
+      "neighborhood_en": "You're in Como's historic centre, within the old walls: the Cathedral is about 600 metres away, the Basilica of Sant'Abbondio a little further. On foot you reach the lakefront, the Brunate funicular, Villa Olmo and the shopping streets. Restaurants, bars and supermarkets right downstairs. No parking on site (we're in the walled city): the nearest public garages are a few minutes' walk, with directions provided before arrival. Milan about an hour away.",
+      "neighborhood_ru": "Вы в историческом центре Комо, внутри старых стен: собор примерно в 600 метрах, базилика Сант-Аббондио чуть дальше. Пешком вы дойдёте до набережной, фуникулёра в Брунате, виллы Ольмо и торговых улиц. Рестораны, бары и супермаркеты прямо рядом. Парковки нет (мы в крепостном городе): ближайшие общественные гаражи — в нескольких минутах ходьбы, с указаниями до приезда. Милан примерно в часе езды."
+    },
+    "extras": [],
+    "facts": {
+      "beds": "1 letto matrimoniale + divano letto",
+      "checkInHours": "Check-in autonomo con accesso a chiave, all'ora che preferisci; check-out entro le 10:00",
+      "floor": "Piano terra, ingresso indipendente su cortile (nessuna scala)",
+      "parkingNote": "Nessun parcheggio in loco (centro storico): garage pubblici a pochi minuti a piedi, indicazioni fornite prima dell'arrivo",
+      "touristTaxNote": "Imposta di soggiorno del Comune di Como, da saldare al check-in"
+    },
+    "address": {
+      "street": "Via Armando Diaz 105",
+      "city": "Como",
+      "province": "CO",
+      "zip": "22100"
+    },
+    "details": {
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "maxGuests": 4,
+      "hasLakeView": false,
+      "hasWifi": true,
+      "hasAC": true,
+      "hasParking": false,
+      "hasGarden": false,
+      "hasPool": false
+    },
+    "amenities": [
+      "Wi-Fi gratuito",
+      "Aria condizionata",
+      "Cucina completa",
+      "Lavastoviglie",
+      "Lavatrice",
+      "Microonde e forno",
+      "Macchina del caffè",
+      "Bagno privato con doccia a pioggia",
+      "Smart TV con Netflix",
+      "Riscaldamento",
+      "Ingresso indipendente",
+      "Piano terra senza scale",
+      "Self check-in"
+    ],
+    "pricing": {
+      "basePrice": 150,
+      "cleaningFee": 55,
+      "weekendMultiplier": 1.2
+    },
+    "touristTaxRate": 3,
+    "maxTouristTaxNights": 14,
+    "geo": {
+      "lat": 45.8084,
+      "lng": 9.0824,
+      "displayName": "Via Armando Diaz 105, Como (CO), 22100, Lombardia, Italia"
+    },
+    "airbnbListing": {
+      "id": "842714745600657662",
+      "url": "https://www.airbnb.com/rooms/842714745600657662",
+      "rating": null,
+      "reviewCount": null
+    },
+    "source": {
+      "origin": "booking",
+      "url": "https://www.booking.com/hotel/it/antica-roma-como-lake-marcus-ac-breakfast-included.html",
+      "scrapedAt": "2026-08-16"
+    },
+    "images": [
+      {
+        "url": "/images/listing/antica-camillus/01-foto-1.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 1
+      },
+      {
+        "url": "/images/listing/antica-camillus/02-foto-2.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 2
+      },
+      {
+        "url": "/images/listing/antica-camillus/03-foto-3.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 3
+      },
+      {
+        "url": "/images/listing/antica-camillus/04-foto-4.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 4
+      },
+      {
+        "url": "/images/listing/antica-camillus/05-foto-5.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 5
+      },
+      {
+        "url": "/images/listing/antica-camillus/06-foto-6.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 6
+      },
+      {
+        "url": "/images/listing/antica-camillus/07-foto-7.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 7
+      },
+      {
+        "url": "/images/listing/antica-camillus/08-foto-8.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 8
+      },
+      {
+        "url": "/images/listing/antica-camillus/09-foto-9.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 9
+      },
+      {
+        "url": "/images/listing/antica-camillus/10-foto-10.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 10
+      },
+      {
+        "url": "/images/listing/antica-camillus/11-foto-11.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 11
+      },
+      {
+        "url": "/images/listing/antica-camillus/12-foto-12.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 12
+      },
+      {
+        "url": "/images/listing/antica-camillus/13-foto-13.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 13
+      },
+      {
+        "url": "/images/listing/antica-camillus/14-foto-14.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 14
+      },
+      {
+        "url": "/images/listing/antica-camillus/15-foto-15.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 15
+      },
+      {
+        "url": "/images/listing/antica-camillus/16-foto-16.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 16
+      },
+      {
+        "url": "/images/listing/antica-camillus/17-foto-17.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 17
+      },
+      {
+        "url": "/images/listing/antica-camillus/18-foto-18.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 18
+      },
+      {
+        "url": "/images/listing/antica-camillus/19-foto-19.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 19
+      },
+      {
+        "url": "/images/listing/antica-camillus/20-foto-20.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 20
+      },
+      {
+        "url": "/images/listing/antica-camillus/21-foto-21.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 21
+      },
+      {
+        "url": "/images/listing/antica-camillus/22-foto-22.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 22
+      },
+      {
+        "url": "/images/listing/antica-camillus/23-foto-23.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 23
+      },
+      {
+        "url": "/images/listing/antica-camillus/24-foto-24.jpeg",
+        "alt": "Antica Camillus — Como centro storico",
+        "order": 24
+      }
+    ]
+  },
+  {
+    "slug": "antica-alicia",
+    "name": "Antica Alicia",
+    "type": "apartment",
+    "zone": "centro-como",
+    "description": "Un rifugio elegante e tranquillo nel centro di Como, perfetto per due. A pochi minuti a piedi dal lago, dal Duomo e dalla funicolare per Brunate: tutto il fascino del lago con la comodità di essere già in centro.",
+    "description_en": "An elegant, quiet retreat in central Como, perfect for two. A few minutes on foot from the lake, the Cathedral and the Brunate funicular: all the charm of the lake with the ease of being already downtown.",
+    "description_ru": "Элегантное и тихое убежище в центре Комо, идеальное для двоих. В нескольких минутах ходьбы от озера, собора и фуникулёра в Брунате: весь шарм озера с удобством быть уже в центре.",
+    "descriptionLong": "Piccola, curata, tutta per voi due. Esci dalla porta e in pochi minuti sei sul lungolago o davanti al Duomo; torni la sera in un appartamento silenzioso e luminoso, in pieno centro ma lontano dal rumore. La base intima per scoprire Como a piedi.",
+    "descriptionLong_en": "Small, well-kept, all for the two of you. Step out the door and in a few minutes you're on the lakefront or in front of the Cathedral; you come back in the evening to a quiet, bright apartment, right downtown yet away from the noise. The intimate base to explore Como on foot.",
+    "descriptionLong_ru": "Небольшая, уютная, только для вас двоих. Выходите за дверь — и через несколько минут вы на набережной или перед собором; вечером вы возвращаетесь в тихую светлую квартиру в самом центре, но вдали от шума. Уютная база, чтобы открывать Комо пешком.",
+    "sections": {
+      "space": "Appartamento di 49 m² con una camera matrimoniale, soggiorno e bagno privato, ideale per 2 ospiti. Cucina attrezzata per prepararsi i pasti in libertà, zona giorno confortevole, aria condizionata e riscaldamento. Wi-Fi gratuito e Smart TV con Netflix. Lavatrice a disposizione per i soggiorni più lunghi. Ambienti curati e luminosi, pensati per un soggiorno riservato.",
+      "space_en": "49 m² apartment with one double bedroom, a living room and a private bathroom, ideal for 2 guests. Equipped kitchen to cook freely, a comfortable living area, air conditioning and heating. Free Wi-Fi and a smart TV with Netflix. Washing machine available for longer stays. Bright, well-kept rooms designed for a private, restful stay.",
+      "space_ru": "Квартира 49 м² с одной двуспальной спальней, гостиной и собственной ванной, идеальная для 2 гостей. Оборудованная кухня, чтобы готовить свободно, уютная гостиная зона, кондиционер и отопление. Бесплатный Wi-Fi и Smart TV с Netflix. Стиральная машина для более длительных поездок. Светлые, аккуратные комнаты для уединённого отдыха.",
+      "neighborhood": "Sei in pieno centro di Como: il Duomo è a circa 500 metri, il lungolago e la funicolare per Brunate a pochi minuti a piedi. Ristoranti, bar, negozi e supermercati tutt'intorno; la stazione Como Lago è a circa 13 minuti a piedi. Nessun parcheggio in loco (centro storico): i garage pubblici più vicini sono a pochi minuti, con indicazioni fornite prima dell'arrivo. Host che parla italiano, inglese e francese, a disposizione per consigli su itinerari e gite in barca. Milano a circa un'ora.",
+      "neighborhood_en": "You're right in the centre of Como: the Cathedral is about 500 metres away, the lakefront and the Brunate funicular a few minutes on foot. Restaurants, bars, shops and supermarkets all around; Como Lago station is about a 13-minute walk. No parking on site (old town): the nearest public garages are a few minutes away, with directions provided before arrival. The host speaks Italian, English and French, on hand for tips on itineraries and boat trips. Milan about an hour away.",
+      "neighborhood_ru": "Вы в самом центре Комо: собор примерно в 500 метрах, набережная и фуникулёр в Брунате — в нескольких минутах ходьбы. Рестораны, бары, магазины и супермаркеты вокруг; станция Como Lago — примерно в 13 минутах ходьбы. Парковки нет (старый город): ближайшие общественные гаражи — в нескольких минутах, с указаниями до приезда. Хозяин говорит по-итальянски, по-английски и по-французски, готов подсказать маршруты и прогулки на лодке. Милан примерно в часе езды."
+    },
+    "extras": [],
+    "facts": {
+      "beds": "1 letto matrimoniale",
+      "checkInHours": "Check-in autonomo all'ora che preferisci; check-out entro le 10:00",
+      "floor": "Appartamento in palazzo del centro storico",
+      "parkingNote": "Nessun parcheggio in loco (centro storico): garage pubblici a pochi minuti a piedi, indicazioni fornite prima dell'arrivo",
+      "touristTaxNote": "Imposta di soggiorno del Comune di Como, da saldare al check-in"
+    },
+    "address": {
+      "street": "Via Armando Diaz 105",
+      "city": "Como",
+      "province": "CO",
+      "zip": "22100"
+    },
+    "details": {
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "maxGuests": 2,
+      "hasLakeView": false,
+      "hasWifi": true,
+      "hasAC": true,
+      "hasParking": false,
+      "hasGarden": false,
+      "hasPool": false
+    },
+    "amenities": [
+      "Wi-Fi gratuito",
+      "Aria condizionata",
+      "Cucina attrezzata",
+      "Lavatrice",
+      "Bagno privato",
+      "Smart TV con Netflix",
+      "Riscaldamento",
+      "Self check-in",
+      "Host multilingue (IT/EN/FR)",
+      "Noleggio bici su richiesta",
+      "Transfer aeroporto su richiesta"
+    ],
+    "pricing": {
+      "basePrice": 105,
+      "cleaningFee": 45,
+      "weekendMultiplier": 1.2
+    },
+    "touristTaxRate": 3,
+    "maxTouristTaxNights": 14,
+    "geo": {
+      "lat": 45.8084,
+      "lng": 9.0824,
+      "displayName": "Via Armando Diaz 105, Como (CO), 22100, Lombardia, Italia"
+    },
+    "airbnbListing": {
+      "id": "1207195427831226962",
+      "url": "https://www.airbnb.com/rooms/1207195427831226962",
+      "rating": null,
+      "reviewCount": null
+    },
+    "source": {
+      "origin": "booking",
+      "url": "https://www.booking.com/hotel/it/antica-alicia.html",
+      "scrapedAt": "2026-08-16"
+    },
+    "images": [
+      {
+        "url": "/images/listing/antica-alicia/01-foto-1.jpeg",
+        "alt": "Antica Alicia — Como centro storico",
+        "order": 1
+      },
+      {
+        "url": "/images/listing/antica-alicia/02-foto-2.jpeg",
+        "alt": "Antica Alicia — Como centro storico",
+        "order": 2
+      },
+      {
+        "url": "/images/listing/antica-alicia/03-foto-3.jpeg",
+        "alt": "Antica Alicia — Como centro storico",
+        "order": 3
+      },
+      {
+        "url": "/images/listing/antica-alicia/04-foto-4.jpeg",
+        "alt": "Antica Alicia — Como centro storico",
+        "order": 4
+      },
+      {
+        "url": "/images/listing/antica-alicia/05-foto-5.jpeg",
+        "alt": "Antica Alicia — Como centro storico",
+        "order": 5
+      },
+      {
+        "url": "/images/listing/antica-alicia/06-foto-6.jpeg",
+        "alt": "Antica Alicia — Como centro storico",
+        "order": 6
+      },
+      {
+        "url": "/images/listing/antica-alicia/07-foto-7.jpeg",
+        "alt": "Antica Alicia — Como centro storico",
+        "order": 7
+      },
+      {
+        "url": "/images/listing/antica-alicia/08-foto-8.jpeg",
+        "alt": "Antica Alicia — Como centro storico",
+        "order": 8
+      },
+      {
+        "url": "/images/listing/antica-alicia/09-foto-9.jpeg",
+        "alt": "Antica Alicia — Como centro storico",
+        "order": 9
+      },
+      {
+        "url": "/images/listing/antica-alicia/10-foto-10.jpeg",
+        "alt": "Antica Alicia — Como centro storico",
+        "order": 10
+      },
+      {
+        "url": "/images/listing/antica-alicia/11-foto-11.jpeg",
+        "alt": "Antica Alicia — Como centro storico",
+        "order": 11
+      },
+      {
+        "url": "/images/listing/antica-alicia/12-foto-12.jpeg",
+        "alt": "Antica Alicia — Como centro storico",
+        "order": 12
+      }
+    ]
   }
 ]
