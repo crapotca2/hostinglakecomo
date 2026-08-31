@@ -4,7 +4,7 @@ import type {
   LocalizedTextOptional,
 } from "@/types/database";
 
-export const SUPPORTED_LOCALES: SupportedLocale[] = ["it", "en", "ru", "de", "es", "fr"];
+export const SUPPORTED_LOCALES: SupportedLocale[] = ["it", "en", "ru", "de", "pl", "es", "fr"];
 export const DEFAULT_LOCALE: SupportedLocale = "it";
 
 export function isSupportedLocale(s: unknown): s is SupportedLocale {
@@ -42,6 +42,7 @@ export const LOCALE_LABELS: Record<SupportedLocale, string> = {
   en: "English",
   ru: "Русский",
   de: "Deutsch",
+  pl: "Polski",
   es: "Español",
   fr: "Français",
 };
@@ -51,6 +52,7 @@ export const LOCALE_FLAGS: Record<SupportedLocale, string> = {
   en: "🇬🇧",
   ru: "🇷🇺",
   de: "🇩🇪",
+  pl: "🇵🇱",
   es: "🇪🇸",
   fr: "🇫🇷",
 };

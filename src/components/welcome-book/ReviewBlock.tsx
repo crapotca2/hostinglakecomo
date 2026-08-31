@@ -7,6 +7,7 @@ const LABELS: Record<string, Partial<Record<SupportedLocale, string>>> = {
     en: "Leave us a review",
     ru: "Оставьте отзыв",
     de: "Hinterlassen Sie eine Bewertung",
+    pl: "Zostaw nam opinię",
     es: "Déjanos una reseña",
     fr: "Laissez-nous un avis",
   },

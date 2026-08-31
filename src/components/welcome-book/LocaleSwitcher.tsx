@@ -7,6 +7,7 @@ const FLAG_COUNTRY: Record<SupportedLocale, string> = {
   en: "gb",
   ru: "ru",
   de: "de",
+  pl: "pl",
   es: "es",
   fr: "fr",
 };

@@ -539,24 +539,24 @@ function bathSubtitle(features: string[] | undefined, locale: SupportedLocale): 
   if (!features || features.length === 0) return undefined;
   const primary = features[0].toLowerCase();
   const map: Record<string, Partial<Record<SupportedLocale, string>>> = {
-    doccia: { it: "doccia", en: "shower", ru: "душ", de: "Dusche", es: "ducha", fr: "douche" },
-    vasca: { it: "vasca", en: "bathtub", ru: "ванна", de: "Badewanne", es: "bañera", fr: "baignoire" },
+    doccia: { it: "doccia", en: "shower", ru: "душ", de: "Dusche", pl: "prysznic", es: "ducha", fr: "douche" },
+    vasca: { it: "vasca", en: "bathtub", ru: "ванна", de: "Badewanne", pl: "wanna", es: "bañera", fr: "baignoire" },
   };
   return map[primary]?.[locale] ?? map[primary]?.it ?? features[0];
 }
 
 function sectionLabel(key: string, locale: SupportedLocale): string {
   const labels: Record<string, Partial<Record<SupportedLocale, string>>> = {
-    rooms: { it: "Camere e bagni", en: "Rooms & bathrooms", ru: "Комнаты и ванные", de: "Zimmer & Bäder", es: "Habitaciones y baños", fr: "Chambres et salles de bain" },
-    living: { it: "Soggiorno", en: "Living Room", ru: "Гостиная", de: "Wohnzimmer" },
-    kitchen: { it: "Cucina", en: "Kitchen", ru: "Кухня", de: "Küche" },
-    dining: { it: "Zona pranzo", en: "Dining area", ru: "Обеденная зона", de: "Essbereich", es: "Comedor" },
-    exterior: { it: "Vista esterna casa", en: "House exterior", ru: "Внешний вид дома", de: "Außenansicht Haus", es: "Exterior casa" },
-    garden: { it: "Cortile", en: "Courtyard", ru: "Двор", de: "Innenhof", es: "Patio", fr: "Cour" },
-    outdoor: { it: "Spazi esterni", en: "Outdoor spaces", ru: "Открытые пространства", de: "Außenbereiche", es: "Espacios exteriores", fr: "Espaces extérieurs" },
-    beach: { it: "Accesso al lago", en: "Lake access", ru: "Выход к озеру", de: "Seezugang", es: "Acceso al lago" },
-    sideLake: { it: "Lato lago", en: "Lake side", ru: "Со стороны озера", de: "Seeseite", es: "Lado del lago", fr: "Côté lac" },
-    sideCourtyard: { it: "Lato cortile", en: "Courtyard side", ru: "Со стороны двора", de: "Hofseite", es: "Lado del patio", fr: "Côté cour" },
+    rooms: { it: "Camere e bagni", en: "Rooms & bathrooms", ru: "Комнаты и ванные", de: "Zimmer & Bäder", pl: "Pokoje i łazienki", es: "Habitaciones y baños", fr: "Chambres et salles de bain" },
+    living: { it: "Soggiorno", en: "Living Room", ru: "Гостиная", de: "Wohnzimmer", pl: "Salon" },
+    kitchen: { it: "Cucina", en: "Kitchen", ru: "Кухня", de: "Küche", pl: "Kuchnia" },
+    dining: { it: "Zona pranzo", en: "Dining area", ru: "Обеденная зона", de: "Essbereich", pl: "Jadalnia", es: "Comedor" },
+    exterior: { it: "Vista esterna casa", en: "House exterior", ru: "Внешний вид дома", de: "Außenansicht Haus", pl: "Widok zewnętrzny domu", es: "Exterior casa" },
+    garden: { it: "Cortile", en: "Courtyard", ru: "Двор", de: "Innenhof", pl: "Dziedziniec", es: "Patio", fr: "Cour" },
+    outdoor: { it: "Spazi esterni", en: "Outdoor spaces", ru: "Открытые пространства", de: "Außenbereiche", pl: "Przestrzenie zewnętrzne", es: "Espacios exteriores", fr: "Espaces extérieurs" },
+    beach: { it: "Accesso al lago", en: "Lake access", ru: "Выход к озеру", de: "Seezugang", pl: "Dostęp do jeziora", es: "Acceso al lago" },
+    sideLake: { it: "Lato lago", en: "Lake side", ru: "Со стороны озера", de: "Seeseite", pl: "Strona jeziora", es: "Lado del lago", fr: "Côté lac" },
+    sideCourtyard: { it: "Lato cortile", en: "Courtyard side", ru: "Со стороны двора", de: "Hofseite", pl: "Strona dziedzińca", es: "Lado del patio", fr: "Côté cour" },
   };
   return labels[key]?.[locale] ?? labels[key]?.it ?? key;
 }
@@ -568,6 +568,7 @@ function label(key: string, locale: SupportedLocale): string {
       en: "Lakefront exterior of the house, from the entrance to the pier.",
       ru: "Внешний вид дома у озера, от входа до пирса.",
       de: "Seeseitige Außenansicht des Hauses, vom Eingang bis zum Steg.",
+      pl: "Zewnętrzna część domu nad jeziorem, od wejścia po pomost.",
       es: "Exterior de la casa frente al lago, desde la entrada hasta el muelle.",
     },
     exteriorBlurbCity: {
@@ -575,6 +576,7 @@ function label(key: string, locale: SupportedLocale): string {
       en: "The home's exterior: the building, the entrance and the surroundings.",
       ru: "Внешние пространства дома: здание, вход и окрестности.",
       de: "Die Außenbereiche des Hauses: Gebäude, Eingang und Umgebung.",
+      pl: "Przestrzenie zewnętrzne domu: budynek, wejście i okolica.",
       es: "Los espacios exteriores de la casa: el edificio, la entrada y los alrededores.",
     },
   };

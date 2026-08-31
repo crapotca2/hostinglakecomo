@@ -393,14 +393,15 @@ export interface ComplianceRecordDoc extends BaseDoc {
 // MongoDB per riutilizzo degli script di seed. createdAt/updatedAt sono
 // ISO string (non Date) — è come il welcome book scrive nei doc.
 
-export type SupportedLocale = "it" | "en" | "ru" | "de" | "es" | "fr";
-export const SUPPORTED_LOCALES: SupportedLocale[] = ["it", "en", "ru", "de", "es", "fr"];
+export type SupportedLocale = "it" | "en" | "ru" | "de" | "pl" | "es" | "fr";
+export const SUPPORTED_LOCALES: SupportedLocale[] = ["it", "en", "ru", "de", "pl", "es", "fr"];
 
 export type LocalizedText = {
   it: string;
   en: string;
   ru: string;
   de: string;
+  pl?: string;
   es?: string;
   fr?: string;
 };
