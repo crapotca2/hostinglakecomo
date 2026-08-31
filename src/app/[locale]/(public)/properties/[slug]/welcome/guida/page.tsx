@@ -44,6 +44,7 @@ import type {
 import type { Locale } from "@/i18n/routing";
 import { getPortfolioEntry } from "@/lib/portfolio";
 import { BrandHero } from "@/components/welcome-book/BrandDecorations";
+import { welcomeHero } from "@/lib/welcome-book/hero";
 import { LocaleSwitcher } from "@/components/welcome-book/LocaleSwitcher";
 import { ScannableQr } from "@/components/welcome-book/ScannableQr";
 import { Carousel } from "@/components/welcome-book/Carousel";
@@ -88,7 +89,7 @@ export default async function WelcomeBookPage({ params, searchParams }: PageProp
       <BrandHero
         eyebrow={`${sharedLabel("guideTo", locale).toUpperCase()} ${propertyCity.toUpperCase()}`}
         title={`${sharedLabel("welcomeTo", locale)} ${propertyName}`}
-        heroImage="/images/welcome/aqua-vista-di-splendore/destinations/aqua-vista-spritz.webp"
+        heroImage={welcomeHero(slug)}
         wifiBlock={
           guide ? (
             <HeroWifiInline

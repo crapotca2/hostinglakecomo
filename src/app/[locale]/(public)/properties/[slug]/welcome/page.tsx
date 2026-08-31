@@ -18,6 +18,7 @@ import {
 import type { SupportedLocale, HouseGuideDoc } from "@/types/database";
 import type { Locale } from "@/i18n/routing";
 import { getPortfolioEntry } from "@/lib/portfolio";
+import { welcomeHero } from "@/lib/welcome-book/hero";
 import { RoomCarousel } from "@/components/welcome-book/RoomCarousel";
 import { BrandHero } from "@/components/welcome-book/BrandDecorations";
 import { LocaleSwitcher } from "@/components/welcome-book/LocaleSwitcher";
@@ -52,12 +53,7 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
   const t = (text: Parameters<typeof pickLocalized>[0]) => pickLocalized(text, locale, DEFAULT_LOCALE);
   const basePath = `/properties/${slug}/welcome`;
 
-  // Per-property hero image (aqua-vista keeps its original destination shot).
-  const HERO_OVERRIDE: Record<string, string> = {
-    "aqua-vista-di-splendore":
-      "/images/welcome/aqua-vista-di-splendore/destinations/aqua-vista-spritz.webp",
-  };
-  const heroImage = HERO_OVERRIDE[slug] ?? `/images/welcome/${slug}/hero.webp`;
+  const heroImage = welcomeHero(slug);
 
   // Layout: the lake/courtyard split only fits a 2-bedroom lakefront home.
   // Smaller apartments render a single unified "rooms" section instead.
@@ -201,7 +197,7 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
                 {sectionLabel("rooms", locale)}
               </p>
             </div>
-            <div className="relative grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5">
+            <div className="relative grid grid-cols-2 gap-4 sm:gap-5 max-w-2xl mx-auto">
               {guide.sections.bedrooms.map((b, i) => (
                 <TileCard
                   key={`bed-${i}`}

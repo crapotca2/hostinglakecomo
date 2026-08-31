@@ -10,6 +10,7 @@ import type { SupportedLocale, HouseGuideDoc, WelcomeBookDoc, ParkingSpot, EvCha
 import type { Locale } from "@/i18n/routing";
 import { getPortfolioEntry } from "@/lib/portfolio";
 import { BrandHero } from "@/components/welcome-book/BrandDecorations";
+import { welcomeHero } from "@/lib/welcome-book/hero";
 import { LocaleSwitcher } from "@/components/welcome-book/LocaleSwitcher";
 import { HubNav } from "@/components/welcome-book/HubNav";
 import { RoomCarousel } from "@/components/welcome-book/RoomCarousel";
@@ -197,7 +198,7 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
       <BrandHero
         eyebrow={`${sharedLabel("guideTo", locale).toUpperCase()} ${propertyCity.toUpperCase()}`}
         title={`${sharedLabel("welcomeTo", locale)} ${propertyName}`}
-        heroImage="/images/welcome/aqua-vista-di-splendore/destinations/aqua-vista-spritz.webp"
+        heroImage={welcomeHero(slug)}
         wifiBlock={
           <HeroWifiInline
             ssid={guide.sections.wifi.ssid}
