@@ -993,7 +993,8 @@
         "payments": "Платежи",
         "compliance": "Compliance",
         "settings": "Настройки",
-        "compensi": "Выплаты"
+        "compensi": "Выплаты",
+        "leads": "Заявки"
       },
       "backToSite": "Вернуться на сайт",
       "logout": "Выйти"
@@ -1858,6 +1859,44 @@
       "adjNote": "Примечание",
       "adjRemove": "Удалить",
       "adjHint": "Бонус = добавляется к сумме; аванс = наличные собственника, собранные на месте, вычитается. Период: YYYY-MM (цикл 25→25) или 'all'."
+    },
+    "leads": {
+      "title": "Заявки",
+      "subtitle": "Контакты, собранные через форму на сайте.",
+      "subtitleCount": "{count} заявок",
+      "loading": "Загрузка...",
+      "empty": "Пока нет заявок.",
+      "forbidden": "Раздел доступен только администраторам.",
+      "filters": {
+        "all": "Все",
+        "new": "Новые",
+        "contacted": "Обработанные",
+        "archived": "Архив"
+      },
+      "headers": {
+        "date": "Дата",
+        "name": "Имя",
+        "interest": "Интерес",
+        "contact": "Контакты",
+        "property": "Объект",
+        "message": "Сообщение",
+        "status": "Статус"
+      },
+      "status": {
+        "new": "Новый",
+        "contacted": "Обработан",
+        "archived": "В архиве"
+      },
+      "interest": {
+        "consulenza": "Консультация",
+        "home-staging": "Хоум-стейджинг",
+        "gestione": "Управление арендой",
+        "valutazione": "Оценка объекта",
+        "partnership": "Партнёрство",
+        "altro": "Другое"
+      },
+      "onPlatform": "Уже на платформе",
+      "emailNotSent": "письмо не отправлено"
     }
   }
 }

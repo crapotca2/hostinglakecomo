@@ -231,6 +231,39 @@ export interface ReviewDoc extends BaseDoc {
   response?: string;
 }
 
+// ── LEADS (form contatti /contact) ──
+
+// Interessi selezionabili nel form: mirror di INTEREST_VALUES in
+// src/app/[locale]/(public)/contact/actions.ts (unica fonte runtime).
+export type LeadInterest =
+  | "consulenza"
+  | "home-staging"
+  | "gestione"
+  | "valutazione"
+  | "partnership"
+  | "altro";
+
+export type LeadStatus = "new" | "contacted" | "archived";
+
+/** Un lead raccolto dal form pubblico /contact. Persistito oltre all'invio
+ *  email via Resend, così da avere un registro interrogabile dalla dashboard
+ *  admin (prima i lead vivevano solo come email in info@hostcomo.com). */
+export interface LeadDoc extends BaseDoc {
+  nome: string;
+  cognome: string;
+  email: string;
+  telefono?: string;
+  interesse: LeadInterest;
+  indirizzo?: string;
+  onPlatform: boolean;
+  linkAnnuncio?: string;
+  messaggio: string;
+  status: LeadStatus;
+  source: "site-form";
+  /** true se l'email di notifica Resend è partita al momento del salvataggio. */
+  emailSent: boolean;
+}
+
 // ── HOLIDAYS ──
 
 export type HolidayType = "national" | "regional" | "religious" | "observance";

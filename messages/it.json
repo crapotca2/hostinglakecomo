@@ -993,7 +993,8 @@
         "payments": "Pagamenti",
         "compliance": "Compliance",
         "settings": "Impostazioni",
-        "compensi": "Compensi"
+        "compensi": "Compensi",
+        "leads": "Lead"
       },
       "backToSite": "Torna al Sito",
       "logout": "Esci"
@@ -1858,6 +1859,44 @@
       "adjNote": "Nota",
       "adjRemove": "Rimuovi",
       "adjHint": "Favore = si aggiunge al dovuto; acconto = contante del proprietario incassato in loco, si sottrae. Periodo: YYYY-MM (ciclo 25→25) oppure 'all'."
+    },
+    "leads": {
+      "title": "Lead",
+      "subtitle": "I contatti raccolti dal form del sito.",
+      "subtitleCount": "{count} lead",
+      "loading": "Caricamento...",
+      "empty": "Nessun lead ancora.",
+      "forbidden": "Sezione riservata agli amministratori.",
+      "filters": {
+        "all": "Tutti",
+        "new": "Nuovi",
+        "contacted": "Contattati",
+        "archived": "Archiviati"
+      },
+      "headers": {
+        "date": "Data",
+        "name": "Nome",
+        "interest": "Interesse",
+        "contact": "Contatti",
+        "property": "Immobile",
+        "message": "Messaggio",
+        "status": "Stato"
+      },
+      "status": {
+        "new": "Nuovo",
+        "contacted": "Contattato",
+        "archived": "Archiviato"
+      },
+      "interest": {
+        "consulenza": "Consulenza",
+        "home-staging": "Home staging",
+        "gestione": "Gestione affitti brevi",
+        "valutazione": "Valutazione immobile",
+        "partnership": "Partnership",
+        "altro": "Altro"
+      },
+      "onPlatform": "Già su piattaforma",
+      "emailNotSent": "email non inviata"
     }
   }
 }

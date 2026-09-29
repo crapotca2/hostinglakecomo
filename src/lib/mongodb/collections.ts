@@ -18,6 +18,7 @@ import type {
   HouseGuideDoc,
   OtpCodeDoc,
   PartnerAdjustmentsDoc,
+  LeadDoc,
 } from "@/types/database";
 
 const USE_MEMORY =
@@ -47,6 +48,7 @@ export const collections = {
   bookings: () => getCollection<BookingDoc>("bookings"),
   services: () => getCollection<ServiceDoc>("services"),
   reviews: () => getCollection<ReviewDoc>("reviews"),
+  leads: () => getCollection<LeadDoc>("leads"),
   holidays: () => getCollection<HolidayDoc>("holidays"),
   payments: () => getCollection<PaymentDoc>("payments"),
   payouts: () => getCollection<PayoutDoc>("payouts"),

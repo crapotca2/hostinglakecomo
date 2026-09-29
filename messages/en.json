@@ -993,7 +993,8 @@
         "payments": "Payments",
         "compliance": "Compliance",
         "settings": "Settings",
-        "compensi": "Payouts"
+        "compensi": "Payouts",
+        "leads": "Leads"
       },
       "backToSite": "Back to Website",
       "logout": "Sign out"
@@ -1858,6 +1859,44 @@
       "adjNote": "Note",
       "adjRemove": "Remove",
       "adjHint": "Favour = added to the due; advance = owner's cash collected on site, subtracted. Period: YYYY-MM (25→25 cycle) or 'all'."
+    },
+    "leads": {
+      "title": "Leads",
+      "subtitle": "Contacts collected from the website form.",
+      "subtitleCount": "{count} leads",
+      "loading": "Loading...",
+      "empty": "No leads yet.",
+      "forbidden": "This section is restricted to administrators.",
+      "filters": {
+        "all": "All",
+        "new": "New",
+        "contacted": "Contacted",
+        "archived": "Archived"
+      },
+      "headers": {
+        "date": "Date",
+        "name": "Name",
+        "interest": "Interest",
+        "contact": "Contact",
+        "property": "Property",
+        "message": "Message",
+        "status": "Status"
+      },
+      "status": {
+        "new": "New",
+        "contacted": "Contacted",
+        "archived": "Archived"
+      },
+      "interest": {
+        "consulenza": "Consulting",
+        "home-staging": "Home staging",
+        "gestione": "Short-let management",
+        "valutazione": "Property valuation",
+        "partnership": "Partnership",
+        "altro": "Other"
+      },
+      "onPlatform": "Already listed",
+      "emailNotSent": "email not sent"
     }
   }
 }

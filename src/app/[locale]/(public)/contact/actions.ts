@@ -2,6 +2,8 @@
 
 import { Resend } from "resend";
 import { z } from "zod";
+import { ObjectId } from "mongodb";
+import { collections } from "@/lib/mongodb/collections";
 
 const INTEREST_VALUES = [
   "consulenza",
@@ -56,13 +58,42 @@ export async function submitContact(formData: FormData): Promise<SubmitResult> {
     return { ok: true };
   }
 
+  const onPlatformBool = data.onPlatform === "on";
+
+  // Persistenza del lead: indipendente dall'invio email (un errore DB non
+  // blocca l'email e viceversa) e ANTECEDENTE al check RESEND, così il lead è
+  // salvato anche se manca la chiave. I bot sono già stati filtrati sopra.
+  let leadId: ObjectId | null = null;
+  try {
+    const now = new Date();
+    const res = await (await collections.leads()).insertOne({
+      nome: data.nome,
+      cognome: data.cognome,
+      email: data.email,
+      telefono: data.telefono || undefined,
+      interesse: data.interesse,
+      indirizzo: data.indirizzo || undefined,
+      onPlatform: onPlatformBool,
+      linkAnnuncio: data.linkAnnuncio || undefined,
+      messaggio: data.messaggio,
+      status: "new",
+      source: "site-form",
+      emailSent: false,
+      createdAt: now,
+      updatedAt: now,
+    });
+    leadId = res.insertedId as ObjectId;
+  } catch (err) {
+    console.error("[contact] Lead persist error:", err);
+  }
+
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.error("[contact] RESEND_API_KEY not set");
+    // Lead comunque salvato sopra: non perdiamo il contatto.
     return { ok: false, error: "config" };
   }
 
-  const onPlatformBool = data.onPlatform === "on";
   const subject = `Nuovo lead Host Como — ${data.nome} ${data.cognome} (${INTEREST_LABELS[data.interesse]})`;
   const html = renderEmail({
     nome: data.nome,
@@ -88,6 +119,17 @@ export async function submitContact(formData: FormData): Promise<SubmitResult> {
     if (result.error) {
       console.error("[contact] Resend error:", result.error);
       return { ok: false, error: "send" };
+    }
+    // Email partita: marca il lead salvato (non bloccante).
+    if (leadId) {
+      try {
+        await (await collections.leads()).updateOne(
+          { _id: leadId },
+          { $set: { emailSent: true, updatedAt: new Date() } },
+        );
+      } catch (err) {
+        console.error("[contact] Lead emailSent update error:", err);
+      }
     }
     return { ok: true };
   } catch (err) {

@@ -12,6 +12,7 @@ import {
   LogOut,
   Users,
   Wallet,
+  Inbox,
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
@@ -22,6 +23,7 @@ import { useMe } from "@/hooks/use-me";
 const NAV_ITEMS = [
   { href: "/dashboard", icon: LayoutDashboard, key: "overview" },
   { href: "/dashboard/owners", icon: Users, key: "owners", adminOnly: true },
+  { href: "/dashboard/leads", icon: Inbox, key: "leads", adminOnly: true },
   { href: "/dashboard/properties", icon: Home, key: "properties" },
   { href: "/dashboard/bookings", icon: CalendarDays, key: "bookings" },
   { href: "/dashboard/calendar", icon: CalendarDays, key: "calendar" },
