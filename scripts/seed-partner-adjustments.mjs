@@ -25,8 +25,12 @@ const now = new Date();
 //    anche se il ciclo del soggiorno è agosto).
 //  - Andrei, agosto: tasse di soggiorno riscosse in loco al check-out —
 //    Jacek 36, Gareth 48, Scott 18.
+//  - Angelo, settembre: Anthony parcheggio 30 + tassa 27 = 57 (contante ritirato al
+//    check-in dei clienti Booking).
+//  - Angelo, ottobre (ciclo 2026-10): tasse in loco — Giuliano 24, Hala 27.
 // NB: Zack parcheggio 70 pagato per BONIFICO (non contante in mano al socio) →
-// NON è un acconto (compare solo nel parcheggio 50/50 del proprietario).
+// NON è un acconto (compare solo nel parcheggio 50/50 del proprietario). Dennis
+// (settembre) ha pagato la tassa via Airbnb e non ha usato il parcheggio → nessun acconto.
 const entries = [
   { period: "2026-07", kind: "favore", partner: "andrei", amount: 40, note: "check-in amici di Alessandro" },
   { period: "2026-07", kind: "acconto", partner: "angelo", amount: 76, note: "Grzegorz (parcheggio + tassa)" },
@@ -34,6 +38,9 @@ const entries = [
   { period: "2026-08", kind: "acconto", partner: "andrei", amount: 36, note: "Jacek (tassa soggiorno)" },
   { period: "2026-08", kind: "acconto", partner: "andrei", amount: 48, note: "Gareth (tassa soggiorno)" },
   { period: "2026-08", kind: "acconto", partner: "andrei", amount: 18, note: "Scott (tassa soggiorno)" },
+  { period: "2026-09", kind: "acconto", partner: "angelo", amount: 57, note: "Anthony (parcheggio 30 + tassa 27)" },
+  { period: "2026-10", kind: "acconto", partner: "angelo", amount: 24, note: "Giuliano (tassa soggiorno)" },
+  { period: "2026-10", kind: "acconto", partner: "angelo", amount: 27, note: "Hala (tassa soggiorno)" },
 ];
 
 async function main() {

@@ -1,8 +1,9 @@
-// Seed REALE — carica il rendiconto di luglio 2026 di Alessandro Splendore
-// (Aqua Vista di Splendore, Via Spluga 44 – Argegno, room Beds24 713401) nel DB
-// del portale, così la dashboard owner mostra i dati veri. Numeri esatti dal
-// rendiconto ufficiale (RENDICONTO-luglio-2026.md / OSPITI-aqua-vista-splendore.md):
-// 7 prenotazioni (3 Airbnb + 4 Booking), di cui Brian cancellato/rimborsato.
+// Seed REALE — carica le prenotazioni di Alessandro Splendore (Aqua Vista di
+// Splendore, Via Spluga 44 – Argegno, room Beds24 713401) nel DB del portale, così
+// la dashboard owner mostra i dati veri. Numeri esatti dai rendiconti/report OTA
+// ufficiali. Copre luglio → ottobre 2026 (luglio+agosto + settembre/ottobre nuove),
+// di cui Brian cancellato/rimborsato. L'array D è l'UNICA fonte: il seed rimpiazza
+// l'intero set di booking di questo owner, quindi appendere qui preserva i precedenti.
 // Idempotente (rimpiazza i booking di questo owner).
 //
 // USO: MONGODB_URI="mongodb+srv://…" MONGODB_DB=air_bibby \
@@ -59,6 +60,21 @@ const D = [
   { name: "Joanna Stiller Lindskog",   nat: "SE", source: "airbnb",  ref: "AIRBNB-0808",  ci: "2026-08-08", co: "2026-08-11", nights: 3, guests: 4, gross: 1100.00, ota: 40.26,  cedolare: 231.00, tax: 36, parking: 40, extra: 0,   status: "checked_out", taxStatus: "collected" },
   { name: "Gareth Davies",      nat: "GB", source: "booking", ref: "6523247001", ci: "2026-08-13", co: "2026-08-17", nights: 4, guests: 4, gross: 1470.00, ota: 242.55, cedolare: 308.70, tax: 48, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "collected" },
   { name: "Scott Johnson",      nat: "GB", source: "booking", ref: "6034318176", ci: "2026-08-17", co: "2026-08-20", nights: 3, guests: 2, gross: 1100.00, ota: 181.50, cedolare: 231.00, tax: 18, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "collected" },
+  // --- Settembre: nuove prenotazioni (ciclo Host Como 25→25 "2026-09" = 25 ago → 24 set) ---
+  // Dennis: Airbnb 5 notti (4→9 set) + 1 notte extra per arrivo anticipato il 3/09,
+  // addebitata 290 € via Centro Soluzioni Airbnb → UN SOLO record di 6 notti con
+  // ricavo alloggio 1490 + 290 = 1780 (la fee Host Como 14% si applica a tutte le
+  // notti, inclusa la extra). OTA host-fee 299,73 e cedolare 332,85 restano sul solo
+  // payout OTA originario (la notte extra è arrivata senza ulteriori trattenute).
+  // Pulizia Airbnb 95 (≠ 80). Tassa 36 = 3 €×2 ospiti×6 notti (30 via Airbnb + 1 notte).
+  { name: "Dennis Scheer",      nat: "DE", source: "airbnb",  ref: "HMR3BQE3ZB", ci: "2026-09-03", co: "2026-09-09", nights: 6, guests: 2, gross: 1875.00, ota: 299.73, cedolare: 332.85, tax: 36, parking: 0,  extra: 0, status: "checked_out", taxStatus: "collected", cleaning: 95 },
+  // Anthony: parcheggio 30 (3 notti×10) + tassa 27 (3×3×3) incassati in loco da
+  // Angelo al check-in → acconto Angelo 57 nel ciclo 2026-09 (vedi partner-adjustments).
+  { name: "Anthony Francis",    nat: "US", source: "booking", ref: "6592228727", ci: "2026-09-17", co: "2026-09-20", nights: 3, guests: 3, gross: 950.00,  ota: 156.75, cedolare: 199.50, tax: 27, parking: 30, extra: 0, status: "checked_out", taxStatus: "collected" },
+  // --- Ciclo 25→25 "2026-10" (check-in dal 25 set): compaiono nel rendiconto/Nota
+  //     spese di OTTOBRE, non di settembre. Tasse di soggiorno in loco da Angelo. ---
+  { name: "Giuliano Gastaldi",  nat: "IT", source: "booking", ref: "6259443401", ci: "2026-09-25", co: "2026-09-27", nights: 2, guests: 4, gross: 660.00,  ota: 108.90, cedolare: 138.60, tax: 24, parking: 0,  extra: 0, status: "checked_out", taxStatus: "collected", origins: [{ code: "IT", count: 4 }] },
+  { name: "Hala Hemeidy",       nat: "BE", source: "booking", ref: "6877139835", ci: "2026-10-02", co: "2026-10-05", nights: 3, guests: 3, gross: 1355.00, ota: 223.57, cedolare: 284.55, tax: 27, parking: 0,  extra: 0, status: "checked_out", taxStatus: "collected" },
 ];
 
 function bookingDoc(d) {
@@ -66,9 +82,10 @@ function bookingDoc(d) {
   // cedolare, ma Host Como trattiene comunque la sua fee 14% sul ricavo. È una
   // continuazione fisica di un altro soggiorno → esclusa dagli arrivi ISTAT.
   const isDirect = d.direct === true;
+  // Pulizia: default 80 €, ma alcune prenotazioni Airbnb la espongono diversa (d.cleaning).
+  const cleaning = isDirect ? 0 : (d.cleaning ?? CLEANING);
   // Diretto: l'intero incasso è ricavo alloggio (soggetto a fee). OTA: alloggio = gross − pulizie.
-  const room = isDirect ? r2(d.gross) : r2(d.gross - CLEANING); // ricavi alloggio (ex pulizie)
-  const cleaning = isDirect ? 0 : CLEANING;
+  const room = isDirect ? r2(d.gross) : r2(d.gross - cleaning); // ricavi alloggio (ex pulizie)
   const totalAmount = d.gross;
   const fee = r2(room * FEE_RATE); // commissione Host Como sui ricavi alloggio (anche sul diretto)
   const net = r2(room + d.extra - d.ota - d.cedolare - fee); // netto proprietario

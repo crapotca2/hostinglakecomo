@@ -2,7 +2,7 @@
 //
 // PIOGGIA — dati reali dell'archivio storico Open-Meteo (modello ERA5) per
 // Argegno, Lago di Como (lat 45.94, lon 9.13, quota 197 m). Valore = somma di
-// precipitazione giornaliera in millimetri. Periodo caricato: 1 lug → 27 ago
+// precipitazione giornaliera in millimetri. Periodo caricato: 1 lug → 4 ott
 // 2026. Fonte: https://archive-api.open-meteo.com/v1/archive (daily
 // precipitation_sum, timezone Europe/Rome). Sono elencati solo i giorni con
 // precipitazione misurabile (> 0 mm); gli altri si intendono asciutti.
@@ -46,6 +46,19 @@ export const RAIN_MM: Record<string, number> = {
   "2026-08-25": 37.4,
   "2026-08-26": 0.9,
   "2026-08-27": 0.8,
+  "2026-08-28": 23.6,
+  "2026-08-29": 1.0,
+  "2026-08-31": 1.5,
+  "2026-09-01": 1.3,
+  "2026-09-02": 1.5,
+  "2026-09-08": 8.0,
+  "2026-09-09": 40.0,
+  "2026-09-10": 9.0,
+  "2026-09-11": 2.6,
+  "2026-09-16": 7.1,
+  "2026-09-17": 21.5,
+  "2026-09-18": 9.7,
+  "2026-10-01": 1.0,
 };
 
 /** Sotto questa soglia (mm) la pioggia è trascurabile e non viene segnalata. */
