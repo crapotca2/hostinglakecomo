@@ -25,12 +25,15 @@ const now = new Date();
 //    anche se il ciclo del soggiorno è agosto).
 //  - Andrei, agosto: tasse di soggiorno riscosse in loco al check-out —
 //    Jacek 36, Gareth 48, Scott 18.
-//  - Angelo, settembre: Anthony parcheggio 30 + tassa 27 = 57 (contante ritirato al
-//    check-in dei clienti Booking).
-//  - Angelo, ottobre (ciclo 2026-10): tasse in loco — Giuliano 24, Hala 27.
+//  - Angelo incassa in loco la tassa di TUTTI i clienti Booking che registra lui,
+//    imputata PER CASSA al mese del check-in (come per Jean Claude):
+//      · settembre: Anthony (parcheggio 30 + tassa 27 = 57) + Giuliano (tassa 24,
+//        check-in 25/09). NB: la consulenza di Giuliano resta nel ciclo 2026-10,
+//        ma il suo contante segue il mese d'incasso (settembre).
+//      · ottobre: Hala (tassa 27, check-in 02/10).
 // NB: Zack parcheggio 70 pagato per BONIFICO (non contante in mano al socio) →
-// NON è un acconto (compare solo nel parcheggio 50/50 del proprietario). Dennis
-// (settembre) ha pagato la tassa via Airbnb e non ha usato il parcheggio → nessun acconto.
+// NON è un acconto (compare solo nel parcheggio 50/50 del proprietario). Dennis ed
+// Ed (Airbnb) hanno pagato la tassa via canale e non hanno usato il parcheggio → nessun acconto.
 const entries = [
   { period: "2026-07", kind: "favore", partner: "andrei", amount: 40, note: "check-in amici di Alessandro" },
   { period: "2026-07", kind: "acconto", partner: "angelo", amount: 76, note: "Grzegorz (parcheggio + tassa)" },
@@ -39,7 +42,7 @@ const entries = [
   { period: "2026-08", kind: "acconto", partner: "andrei", amount: 48, note: "Gareth (tassa soggiorno)" },
   { period: "2026-08", kind: "acconto", partner: "andrei", amount: 18, note: "Scott (tassa soggiorno)" },
   { period: "2026-09", kind: "acconto", partner: "angelo", amount: 57, note: "Anthony (parcheggio 30 + tassa 27)" },
-  { period: "2026-10", kind: "acconto", partner: "angelo", amount: 24, note: "Giuliano (tassa soggiorno)" },
+  { period: "2026-09", kind: "acconto", partner: "angelo", amount: 24, note: "Giuliano (tassa soggiorno, check-in 25/09)" },
   { period: "2026-10", kind: "acconto", partner: "angelo", amount: 27, note: "Hala (tassa soggiorno)" },
 ];
 
