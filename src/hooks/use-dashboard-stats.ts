@@ -26,7 +26,12 @@ export function useDashboardStats() {
           status: string;
           source: string;
           guestInfo: { name: string };
-          pricing: { totalAmount: number };
+          pricing: {
+            totalAmount: number;
+            roomRevenue?: number;
+            cleaningFee?: number;
+            extraNight?: number;
+          };
         }>;
       };
     },

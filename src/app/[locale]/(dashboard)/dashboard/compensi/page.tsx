@@ -7,6 +7,7 @@ import { Download, Users, Wallet, ShieldAlert, Plus, Trash2, Save, SlidersHorizo
 import { useMe } from "@/hooks/use-me";
 import { useOwnerScope } from "@/components/owner-scope";
 import { useStatements } from "@/hooks/use-statements";
+import { cyclePeriodKey } from "@/lib/reports/period";
 
 const PARTNERS = ["angelo", "andrei"] as const;
 
@@ -191,7 +192,7 @@ function AdjustmentsEditor({ ownerId, period, t }: { ownerId: string; period: st
     setDraft(next);
   };
   const add = () =>
-    setDraft([...rows, { period: period === "all" ? "2026-07" : period, kind: "acconto", partner: "angelo", amount: 0, note: "" }]);
+    setDraft([...rows, { period: period === "all" ? cyclePeriodKey(new Date()) : period, kind: "acconto", partner: "angelo", amount: 0, note: "" }]);
   const remove = (i: number) => setDraft(rows.filter((_, j) => j !== i));
 
   return (

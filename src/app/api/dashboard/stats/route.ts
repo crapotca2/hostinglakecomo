@@ -25,10 +25,10 @@ export async function GET(req: NextRequest) {
       b.status !== "cancelled"
   );
 
+  // Prenotazioni "attive" = soggiorni in corso o futuri (non cancellati). Contare
+  // solo confirmed/checked_in dava sempre 0 con uno storico tutto checked_out.
   const activeBookings = allBookings.filter(
-    (b: BookingDoc) =>
-      (b.status === "confirmed" || b.status === "checked_in") &&
-      b.checkOut >= now
+    (b: BookingDoc) => b.status !== "cancelled" && b.checkOut >= now
   );
 
   const monthRevenue = thisMonthBookings.reduce(

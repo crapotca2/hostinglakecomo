@@ -57,7 +57,7 @@ export default function StatementsPage() {
         <div className="bg-white rounded-2xl border border-border/50 p-12 text-center">
           <Users className="h-8 w-8 text-muted-foreground mx-auto mb-3" />
           <p className="text-sm text-muted-foreground">
-            Seleziona un proprietario per vedere il suo rendiconto.
+            {t("pickOwner")}
           </p>
         </div>
       ) : (

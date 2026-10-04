@@ -20,8 +20,8 @@ interface CategoryDef {
 const CATEGORY_DEFS: CategoryDef[] = [
   { slug: "stay", icon: CalendarCheck, count: 4 },
   { slug: "summary", icon: FileText, count: 3 },
-  { slug: "detail", icon: TableProperties, count: 7 },
-  { slug: "analysis", icon: BarChart3, count: 12 },
+  { slug: "detail", icon: TableProperties, count: 4 },
+  { slug: "analysis", icon: BarChart3, count: 6 },
   { slug: "property-management", icon: Wallet, count: 5 },
 ];
 

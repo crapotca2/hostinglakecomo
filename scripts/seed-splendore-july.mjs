@@ -154,7 +154,17 @@ async function main() {
           address: { street: "Via Spluga 44", city: "Argegno", province: "CO", zip: "22010" },
           details: { bedrooms: 2, bathrooms: 2, maxGuests: 5, sqMeters: 140, hasParking: true, hasLakeView: true },
           amenities: [],
-          images: [],
+          // Foto reali servite da public/images/welcome/aqua-vista-di-splendore/casa/
+          images: [
+            { url: "/images/welcome/aqua-vista-di-splendore/casa/exterior/01.webp", alt: "Aqua Vista di Splendore — esterno", order: 0 },
+            { url: "/images/welcome/aqua-vista-di-splendore/casa/beach/01.webp", alt: "Spiaggetta privata sul lago", order: 1 },
+            { url: "/images/welcome/aqua-vista-di-splendore/casa/diningArea/01.webp", alt: "Zona pranzo vista lago", order: 2 },
+            { url: "/images/welcome/aqua-vista-di-splendore/casa/bedroom1/01.webp", alt: "Camera da letto 1", order: 3 },
+            { url: "/images/welcome/aqua-vista-di-splendore/casa/bedroom2/01.webp", alt: "Camera da letto 2", order: 4 },
+            { url: "/images/welcome/aqua-vista-di-splendore/casa/kitchen/01.webp", alt: "Cucina", order: 5 },
+            { url: "/images/welcome/aqua-vista-di-splendore/casa/garden/01.webp", alt: "Giardino", order: 6 },
+            { url: "/images/welcome/aqua-vista-di-splendore/casa/bathroom1/01.webp", alt: "Bagno", order: 7 },
+          ],
           pricing: { basePrice: 370, cleaningFee: 80, weekendMultiplier: 1 },
           beds24PropertyId: "345437",
           beds24RoomId: "713401",

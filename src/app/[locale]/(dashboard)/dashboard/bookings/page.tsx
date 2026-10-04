@@ -345,7 +345,7 @@ export default function BookingsPage() {
                 {table.getRowModel().rows.map((row) => (
                   <tr
                     key={row.id}
-                    className="hover:bg-muted/20 transition-colors cursor-pointer"
+                    className="hover:bg-muted/20 transition-colors"
                   >
                     {row.getVisibleCells().map((cell) => (
                       <td

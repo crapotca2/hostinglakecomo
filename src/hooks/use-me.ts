@@ -6,6 +6,8 @@ export interface Me {
   userId: string;
   role: "admin" | "owner" | "guest";
   ownerId: string | null;
+  name: string | null;
+  email: string | null;
 }
 
 export function useMe() {

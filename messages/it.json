@@ -1020,6 +1020,7 @@
         "viewAll": "Vedi tutte",
         "loading": "Caricamento...",
         "empty": "Nessuna prenotazione recente",
+        "cleaning": "pulizia",
         "headers": {
           "guest": "Ospite",
           "dates": "Date",
@@ -1167,6 +1168,7 @@
     "statements": {
       "title": "Rendiconti",
       "subtitle": "Riepilogo mensile dei payout — Anno {year}",
+      "pickOwner": "Seleziona un proprietario per vedere il suo rendiconto.",
       "kpis": {
         "ytdGross": "Revenue Lordo YTD",
         "totalCommissions": "Commissioni Totali",
@@ -1302,7 +1304,18 @@
         "confirmPassword": "Conferma password"
       },
       "savedMessage": "Impostazioni salvate!",
-      "saveButton": "Salva Modifiche"
+      "saveButton": "Salva Modifiche",
+      "readOnlyNote": "Questi dati provengono dal tuo account. Per modificarli, contatta il team Host Como."
+    },
+    "owners": {
+      "title": "Proprietari",
+      "subtitleAdmin": "Ogni proprietario con i suoi immobili. Apri il rendiconto per vedere i payout.",
+      "subtitleOwner": "I tuoi immobili e il tuo rendiconto.",
+      "loading": "Caricamento…",
+      "empty": "Nessun proprietario registrato.",
+      "propertiesCount": "{count, plural, one {# immobile} other {# immobili}}",
+      "statement": "Rendiconto",
+      "noProperties": "Nessun immobile collegato a questo proprietario."
     },
     "reports": {
       "common": {

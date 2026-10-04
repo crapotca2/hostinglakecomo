@@ -1020,6 +1020,7 @@
         "viewAll": "View all",
         "loading": "Loading...",
         "empty": "No recent bookings",
+        "cleaning": "cleaning",
         "headers": {
           "guest": "Guest",
           "dates": "Dates",
@@ -1167,6 +1168,7 @@
     "statements": {
       "title": "Statements",
       "subtitle": "Monthly payout summary — Year {year}",
+      "pickOwner": "Select an owner to view their statement.",
       "kpis": {
         "ytdGross": "Gross Revenue YTD",
         "totalCommissions": "Total Commissions",
@@ -1302,7 +1304,18 @@
         "confirmPassword": "Confirm password"
       },
       "savedMessage": "Settings saved!",
-      "saveButton": "Save Changes"
+      "saveButton": "Save Changes",
+      "readOnlyNote": "This information comes from your account. To change it, contact the Host Como team."
+    },
+    "owners": {
+      "title": "Owners",
+      "subtitleAdmin": "Each owner with their properties. Open the statement to see payouts.",
+      "subtitleOwner": "Your properties and your statement.",
+      "loading": "Loading…",
+      "empty": "No owners registered.",
+      "propertiesCount": "{count, plural, one {# property} other {# properties}}",
+      "statement": "Statement",
+      "noProperties": "No property linked to this owner."
     },
     "reports": {
       "common": {

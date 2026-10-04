@@ -15,6 +15,7 @@ import {
 import { useTranslations, useLocale } from "next-intl";
 import { useDashboardStats } from "@/hooks/use-dashboard-stats";
 import { useBookings } from "@/hooks/use-bookings";
+import { useMe } from "@/hooks/use-me";
 import { MonthGrid } from "@/components/calendar/month-grid";
 
 const QUICK_ACTIONS = [
@@ -42,6 +43,8 @@ function formatDate(iso: string, locale: string): string {
 export default function DashboardPage() {
   const { data, isLoading } = useDashboardStats();
   const { data: bookings, isLoading: bookingsLoading } = useBookings();
+  const { data: me } = useMe();
+  const firstName = me?.name?.trim().split(/\s+/)[0] ?? "";
   const t = useTranslations("dashboard.overview");
   const tc = useTranslations("dashboard.calendar");
   const locale = useLocale();
@@ -53,7 +56,8 @@ export default function DashboardPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-light">
-            {t("greeting")} <span className="font-semibold">Andrei</span>
+            {t("greeting")}
+            {firstName ? <span className="font-semibold"> {firstName}</span> : null}
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
             {t("subtitle")}
@@ -161,8 +165,22 @@ export default function DashboardPage() {
                     <td className="px-4 py-3.5 text-sm text-muted-foreground">
                       {t(`source.${b.source}` as `source.${"airbnb" | "booking" | "vrbo" | "direct" | "other"}`)}
                     </td>
-                    <td className="px-6 py-3.5 text-sm font-semibold text-right tabular-nums">
-                      {formatEuro(b.pricing.totalAmount, locale)}
+                    <td className="px-6 py-3.5 text-right">
+                      {(() => {
+                        const room = b.pricing.roomRevenue ?? (b.pricing.totalAmount - (b.pricing.cleaningFee ?? 0));
+                        const nightRevenue = room + (b.pricing.extraNight ?? 0);
+                        const cleaning = b.pricing.cleaningFee ?? 0;
+                        return (
+                          <>
+                            <div className="text-sm font-semibold tabular-nums">{formatEuro(nightRevenue, locale)}</div>
+                            {cleaning > 0 ? (
+                              <div className="text-[11px] text-muted-foreground tabular-nums">
+                                + {formatEuro(cleaning, locale)} {t("recent.cleaning")}
+                              </div>
+                            ) : null}
+                          </>
+                        );
+                      })()}
                     </td>
                   </tr>
                 ))}

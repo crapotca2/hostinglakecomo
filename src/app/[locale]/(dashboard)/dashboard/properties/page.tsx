@@ -1,17 +1,15 @@
 "use client";
 
 import {
-  Plus,
   MapPin,
-  MoreHorizontal,
   Eye,
-  Edit2,
   Bed,
   Bath,
   Users,
   Home as HomeIcon,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import { useProperties } from "@/hooks/use-properties";
 
 const STATUS_STYLES: Record<string, string> = {
@@ -49,10 +47,6 @@ export default function PropertiesPage() {
               : t("subtitleCount", { count: properties?.length || 0 })}
           </p>
         </div>
-        <button className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-colors">
-          <Plus className="h-4 w-4" />
-          {t("addButton")}
-        </button>
       </div>
 
       {isLoading ? (
@@ -113,15 +107,9 @@ export default function PropertiesPage() {
                   >
                     {t(`status.${statusKey}`)}
                   </span>
-                  <span className="absolute top-3 right-12 px-2.5 py-1 rounded-full bg-white/90 text-foreground text-[10px] font-semibold uppercase tracking-wider backdrop-blur-sm">
+                  <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-white/90 text-foreground text-[10px] font-semibold uppercase tracking-wider backdrop-blur-sm">
                     {tProps(`types.${typeKey}`)}
                   </span>
-                  <button
-                    className="absolute top-3 right-3 h-8 w-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors"
-                    aria-label="More actions"
-                  >
-                    <MoreHorizontal className="h-4 w-4 text-foreground" />
-                  </button>
                 </div>
                 <div className="p-5 flex-1 flex flex-col">
                   <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1.5">
@@ -148,15 +136,16 @@ export default function PropertiesPage() {
                       {t("perNight")}
                     </span>
                   </div>
-                  <div className="mt-auto flex items-center gap-2">
-                    <button className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-border text-xs font-medium hover:bg-muted/50 transition-colors">
+                  <div className="mt-auto">
+                    <Link
+                      href={`/properties/${p.slug}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-border text-xs font-medium hover:bg-muted/50 transition-colors"
+                    >
                       <Eye className="h-3.5 w-3.5" />
                       {t("view")}
-                    </button>
-                    <button className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-border text-xs font-medium hover:bg-muted/50 transition-colors">
-                      <Edit2 className="h-3.5 w-3.5" />
-                      {t("edit")}
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
