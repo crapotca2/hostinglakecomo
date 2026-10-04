@@ -35,7 +35,7 @@ require.extensions[".ts"] = function (module, filename) {
 // --- funzioni reali delle pagine ---
 const { collections } = require("@/lib/mongodb/collections");
 const { breakdownForBooking, feeRateForProperty } = require("@/lib/reports/fee-model");
-const { cyclePeriodKey } = require("@/lib/reports/period");
+const { periodKey, billingModeForProperty } = require("@/lib/reports/period");
 const { getCommissionSummary, getOwnerRemittanceSummary, getOwnerRemittanceDetail, getOwnerStatementBookings } = require("@/lib/reports/property-management");
 const { getMonthlyPayouts } = require("@/lib/reports/payout");
 const { getMonthlyRevenue } = require("@/lib/reports/revenue");
@@ -71,6 +71,8 @@ async function main() {
   const bookingsCol = await collections.bookings();
   const props = await propsCol.find({ ownerId: new ObjectId(OWNER) }).toArray();
   const rateOf = (b) => feeRateForProperty(props.find((p) => p._id.toString() === b.propertyId.toString()) || props[0]);
+  // Periodo di competenza dell'owner (ciclo 25→25 o mese solare), dal suo immobile.
+  const mode = billingModeForProperty(props[0]);
   const all = await bookingsCol.find({ ownerId: new ObjectId(OWNER) }).toArray();
   const counted = all.filter((b) => b.status !== "cancelled");
 
@@ -84,10 +86,10 @@ async function main() {
     net: r2(bd.reduce((s, x) => s + x.d.netPayout, 0)),
     tax: r2(bd.reduce((s, x) => s + x.d.touristTax, 0)),
   };
-  // canonico per ciclo
+  // canonico per periodo di competenza (ciclo 25→25 o mese solare, per-immobile)
   const byPeriod = {};
   for (const x of bd) {
-    const p = cyclePeriodKey(x.b.checkIn);
+    const p = periodKey(x.b.checkIn, mode);
     (byPeriod[p] ||= { gross: 0, net: 0, cedolare: 0, count: 0, nights: 0 });
     byPeriod[p].gross += x.d.totalRevenue;
     byPeriod[p].net += x.d.netPayout;
@@ -160,7 +162,11 @@ async function main() {
       const ex = cnt.reduce((s, b) => s + b.extra, 0);
       const o = cnt.reduce((s, b) => s + b.ota, 0);
       const ced = cnt.reduce((s, b) => s + b.cedolare, 0);
-      xlsxNet = g + ex - o - ced - g * meta.input.feeRate;
+      // Base fee come nell'Excel: "gross" (Pucci) = room + pulizia + tassa (3×osp×notti).
+      const cl = cnt.reduce((s, b) => s + b.cleaning, 0);
+      const tx = cnt.reduce((s, b) => s + 3 * b.guests * b.nights, 0);
+      const feeBaseAmt = (meta.input.feeBase || "room") === "gross" ? g + cl + tx : g;
+      xlsxNet = g + ex - o - ced - feeBaseAmt * meta.input.feeRate;
     }
     assertEqMulti(`NET ciclo ${period}`, [
       { name: "canon", v: byPeriod[period].net },

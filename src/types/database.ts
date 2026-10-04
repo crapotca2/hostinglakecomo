@@ -123,6 +123,14 @@ export interface PropertyDoc extends BaseDoc {
   maxTouristTaxNights?: number;
   /** Aliquota commissione Host Como sui ricavi alloggio (varia per immobile, es. 0.15). */
   managementFeeRate?: number;
+  /** Base su cui si calcola la commissione Host Como (default: "room").
+   *  - "room": solo ricavi alloggio ex-pulizie (es. Splendore 14%).
+   *  - "gross": lordo = ricavi alloggio + pulizie + tassa di soggiorno (es. Pucci 10%). */
+  managementFeeBase?: "room" | "gross";
+  /** Periodo di competenza del rendiconto (default: "cycle").
+   *  - "cycle": ciclo 25→25 (es. Splendore).
+   *  - "month": mese solare 1→fine mese (es. Pucci). */
+  billingPeriod?: "cycle" | "month";
   /** Se false, la Nota spese dei soci NON aggiunge la rivalsa INPS 4% (default: true). */
   inpsRivalsa?: boolean;
 }
@@ -180,6 +188,11 @@ export interface BookingDoc extends BaseDoc {
     parking?: number;
     /** Aliquota commissione Host Como denormalizzata sulla prenotazione. */
     managementFeeRate?: number;
+    /** Base della commissione Host Como denormalizzata (default: "room"). Vedi PropertyDoc.managementFeeBase. */
+    managementFeeBase?: "room" | "gross";
+    /** Sconti applicati dal canale (es. correzione prezzo medio, sconto fedeltà),
+     *  importi positivi. Solo informativi (il ricavo alloggio è già al netto): mostrati nel rendiconto. */
+    discounts?: { label: string; amount: number }[];
   };
   /** Stato d'incasso della tassa di soggiorno (default: collected). */
   touristTaxStatus?: "collected" | "pending" | "uncollected";

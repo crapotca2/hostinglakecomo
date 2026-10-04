@@ -2,11 +2,12 @@ import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
 import type { BookingDoc, PropertyDoc } from "@/types/database";
 import { breakdownForBooking, feeRateForProperty } from "./fee-model";
-import { billingCycle, cyclePeriodKey } from "./period";
+import { periodForDate, periodKey, billingModeForProperty, type BillingMode } from "./period";
 
 async function loadProps(ownerId: string): Promise<{
   propMap: Map<string, string>;
   rateMap: Map<string, number>;
+  mode: BillingMode;
 }> {
   const propsCol = await collections.properties();
   const props = (await propsCol
@@ -15,6 +16,7 @@ async function loadProps(ownerId: string): Promise<{
   return {
     propMap: new Map(props.map((p) => [p._id!.toString(), p.name])),
     rateMap: new Map(props.map((p) => [p._id!.toString(), feeRateForProperty(p)])),
+    mode: billingModeForProperty(props[0]),
   };
 }
 
@@ -125,15 +127,15 @@ export interface OwnerRemittanceRow {
 
 export async function getOwnerRemittanceSummary(year: number, ownerId: string): Promise<OwnerRemittanceRow[]> {
   const bookingsCol = await collections.bookings();
-  const { rateMap } = await loadProps(ownerId);
+  const { rateMap, mode } = await loadProps(ownerId);
   const rateOf = rateOfFactory(rateMap);
   const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
   const bookings = allBookings.filter(
-    (b) => b.status !== "cancelled" && billingCycle(b.checkIn).year === year
+    (b) => b.status !== "cancelled" && periodForDate(b.checkIn, mode).year === year
   );
 
   const months = Array.from({ length: 12 }, (_, i) => ({ month: i, bookings: [] as BookingDoc[] }));
-  for (const b of bookings) months[billingCycle(b.checkIn).monthIdx].bookings.push(b);
+  for (const b of bookings) months[periodForDate(b.checkIn, mode).monthIdx].bookings.push(b);
 
   return months
     .filter((m) => m.bookings.length > 0)
@@ -176,10 +178,11 @@ export async function getOwnerRemittanceDetail(from: Date, to: Date, ownerId: st
   const bookingsCol = await collections.bookings();
   const propsCol = await collections.properties();
   const properties = (await propsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as PropertyDoc[];
+  const mode = billingModeForProperty(properties[0]);
   const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
 
   const rows: OwnerRemittanceDetailRow[] = [];
-  // Raggruppa per CICLO di fatturazione 25→25 (come il Rendiconto) + immobile,
+  // Raggruppa per PERIODO di competenza (ciclo 25→25 o mese solare) + immobile,
   // così i conteggi delle due tab coincidono.
   const inRange = allBookings.filter(
     (b) => b.status !== "cancelled" && b.checkIn >= from && b.checkIn <= to
@@ -188,7 +191,7 @@ export async function getOwnerRemittanceDetail(from: Date, to: Date, ownerId: st
   for (const b of inRange) {
     const p = properties.find((pp) => pp._id!.toString() === b.propertyId.toString());
     if (!p) continue;
-    const period = cyclePeriodKey(b.checkIn);
+    const period = periodKey(b.checkIn, mode);
     const key = `${period}|${b.propertyId.toString()}`;
     const g = groups.get(key) || { period, property: p, bookings: [] };
     g.bookings.push(b);
@@ -240,11 +243,13 @@ export interface BookingRemittanceRow {
   expenses: number;
   touristTax: number;
   netPayout: number;
+  /** Sconti applicati dal canale (informativi): correzione prezzo medio, fedeltà, ecc. */
+  discounts: { label: string; amount: number }[];
 }
 
 export async function getOwnerStatementBookings(from: Date, to: Date, ownerId: string): Promise<BookingRemittanceRow[]> {
   const bookingsCol = await collections.bookings();
-  const { propMap, rateMap } = await loadProps(ownerId);
+  const { propMap, rateMap, mode } = await loadProps(ownerId);
   const rateOf = rateOfFactory(rateMap);
   const allBookings = (await bookingsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as BookingDoc[];
 
@@ -253,7 +258,7 @@ export async function getOwnerStatementBookings(from: Date, to: Date, ownerId: s
     .map((b) => {
       const d = breakdownForBooking(b, rateOf(b));
       return {
-        period: cyclePeriodKey(b.checkIn),
+        period: periodKey(b.checkIn, mode),
         bookingId: b._id!.toString(),
         propertyName: propMap.get(b.propertyId.toString()) || "—",
         guestName: b.guestInfo.name,
@@ -269,6 +274,7 @@ export async function getOwnerStatementBookings(from: Date, to: Date, ownerId: s
         expenses: 0,
         touristTax: Math.round(d.touristTax * 100) / 100,
         netPayout: Math.round(d.netPayout),
+        discounts: (b.pricing?.discounts ?? []).map((x) => ({ label: x.label, amount: x.amount })),
       };
     })
     .sort((a, b) => b.checkIn.localeCompare(a.checkIn));

@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
-import { cycleBounds } from "@/lib/reports/period";
+import { periodBounds, billingModeForProperty } from "@/lib/reports/period";
 import { feeRateForProperty } from "@/lib/reports/fee-model";
 import type { BookingDoc, PropertyDoc } from "@/types/database";
 import type { RendicontoXlsxInput, XlsxBooking, XlsxParking } from "./rendiconto-xlsx";
@@ -54,7 +54,7 @@ export async function getRendicontoXlsx(ownerId: string, period: string): Promis
   const property = props[0];
   const feeRate = feeRateForProperty(property);
 
-  const { from, to } = cycleBounds(year, monthIdx);
+  const { from, to } = periodBounds(year, monthIdx, billingModeForProperty(property));
 
   const bookingsCol = await collections.bookings();
   const all = (await bookingsCol
@@ -111,6 +111,7 @@ export async function getRendicontoXlsx(ownerId: string, period: string): Promis
     titleIt: `Rendiconto — ${property.name} · ${rangeTitle}`,
     titleEn: `Owner Statement — ${property.name} · ${rangeTitle}`,
     feeRate,
+    feeBase: property.managementFeeBase ?? "room",
     bookings,
     parking,
     nightGrid,

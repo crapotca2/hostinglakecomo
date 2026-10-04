@@ -147,7 +147,7 @@ function itDate(iso: string): string {
 }
 
 function StatementDocument({ data }: { data: StatementData }) {
-  const { owner, periodLabel, from, to, rows, totals, generatedAt } = data;
+  const { owner, periodLabel, from, to, rows, totals, discounts, generatedAt } = data;
 
   return (
     <Document
@@ -253,6 +253,23 @@ function StatementDocument({ data }: { data: StatementData }) {
             <Text style={styles.netValue}>{euro(totals.netPayout)}</Text>
           </View>
         </View>
+
+        {/* Sconti applicati dal canale nel periodo (informativi) */}
+        {discounts && discounts.length > 0 ? (
+          <View wrap={false} style={{ marginTop: 16 }}>
+            <Text style={styles.sectionTitle}>Sconti applicati</Text>
+            {discounts.map((d, i) => (
+              <View
+                key={`${d.guest}-${i}`}
+                style={[styles.tRow, i % 2 === 1 ? { backgroundColor: ZEBRA } : {}]}
+              >
+                <Text style={[styles.td, { flex: 2 }]}>{d.guest}</Text>
+                <Text style={[styles.td, { flex: 3 }]}>{d.label}</Text>
+                <Text style={[styles.td, styles.cNet]}>− {euro(d.amount)}</Text>
+              </View>
+            ))}
+          </View>
+        ) : null}
 
         <View style={styles.footer} fixed>
           <Text>

@@ -38,6 +38,7 @@ export interface RendicontoXlsxInput {
   titleIt: string;
   titleEn: string;
   feeRate: number; // aliquota per immobile (es. 0.14 per Splendore)
+  feeBase?: "room" | "gross"; // base fee: "room" (default) o "gross" (room+pulizia+tassa, es. Pucci 10%)
   bookings: XlsxBooking[]; // in ordine cronologico
   parking: XlsxParking[];
   nightGrid: { label: string; bookingIndex: number | null }[]; // notti disponibili nel periodo
@@ -170,7 +171,10 @@ function buildSheet(input: RendicontoXlsxInput, L: Labels, title: string): strin
     I: sum((b) => b.ota), J: sum((b) => b.cedolare), K: sum((b) => b.parking), L: sum((b) => b.extra),
     N: sum(nVal), O: sum(oVal), P: sum(pVal),
   };
-  const feeVal = T_.G * input.feeRate;
+  // Base fee: "gross" (Pucci) = ricavi alloggio + pulizie + tassa; altrimenti solo alloggio.
+  const feeBaseVal = input.feeBase === "gross" ? T_.G + T_.H + T_.N : T_.G;
+  const feeFormula = input.feeBase === "gross" ? `(G${TOT}+H${TOT}+N${TOT})*${input.feeRate}` : `G${TOT}*${input.feeRate}`;
+  const feeVal = feeBaseVal * input.feeRate;
   const totalRevVal = T_.G + T_.L;
   const totalCostsVal = T_.I + T_.J + feeVal;
   const netVal = totalRevVal - totalCostsVal;
@@ -250,7 +254,7 @@ function buildSheet(input: RendicontoXlsxInput, L: Labels, title: string): strin
   put(b0 + 5, str(`A${b0 + 5}`, S.subLbl, L.costs));
   put(b0 + 6, str(`A${b0 + 6}`, S.txt, L.otaComm)); put(b0 + 6, fml(`B${b0 + 6}`, S.eur, `I${TOT}`, T_.I));
   put(b0 + 7, str(`A${b0 + 7}`, S.txt, L.flatTax)); put(b0 + 7, fml(`B${b0 + 7}`, S.eur, `J${TOT}`, T_.J));
-  put(b0 + 8, str(`A${b0 + 8}`, S.txt, L.hostFee(input.feeRate))); put(b0 + 8, fml(`B${b0 + 8}`, S.eur, `G${TOT}*${input.feeRate}`, feeVal));
+  put(b0 + 8, str(`A${b0 + 8}`, S.txt, L.hostFee(input.feeRate))); put(b0 + 8, fml(`B${b0 + 8}`, S.eur, feeFormula, feeVal));
   put(b0 + 9, str(`A${b0 + 9}`, S.totTxt, L.totalCosts)); put(b0 + 9, fml(`B${b0 + 9}`, S.totEur, `B${b0 + 6}+B${b0 + 7}+B${b0 + 8}`, totalCostsVal));
   put(b0 + 10, str(`A${b0 + 10}`, S.netLbl, L.netOwner)); put(b0 + 10, fml(`B${b0 + 10}`, S.netEur, `B${b0 + 4}-B${b0 + 9}`, netVal));
   put(b0 + 12, str(`A${b0 + 12}`, S.note, L.passthrough));

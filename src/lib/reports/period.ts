@@ -38,3 +38,39 @@ export function cyclePeriodKey(d: Date): string {
   const { year, monthIdx } = billingCycle(d);
   return `${year}-${String(monthIdx + 1).padStart(2, "0")}`;
 }
+
+// ── Periodo di competenza per-immobile ──────────────────────────────────────
+// Alcuni immobili fatturano sul ciclo 25→25 ("cycle", es. Splendore), altri sul
+// MESE SOLARE 1→fine mese ("month", es. Casa di Pucci). Gli helper sotto
+// generalizzano billingCycle/cycleBounds/cyclePeriodKey in base al `mode`.
+
+export type BillingMode = "cycle" | "month";
+
+/** Modalità di periodo di un immobile (default: ciclo 25→25). */
+export function billingModeForProperty(
+  p?: { billingPeriod?: BillingMode } | null,
+): BillingMode {
+  return p?.billingPeriod ?? "cycle";
+}
+
+/** Periodo (anno + indice mese 0-based) di una data secondo il `mode`. */
+export function periodForDate(d: Date, mode: BillingMode): { year: number; monthIdx: number } {
+  if (mode === "month") return { year: d.getFullYear(), monthIdx: d.getMonth() };
+  return billingCycle(d);
+}
+
+/** Estremi [from, to) del periodo (year, monthIdx) secondo il `mode`. */
+export function periodBounds(year: number, monthIdx: number, mode: BillingMode): { from: Date; to: Date } {
+  if (mode === "month") {
+    const from = new Date(year, monthIdx, 1, 0, 0, 0, 0);
+    const to = new Date(year, monthIdx + 1, 1, 0, 0, 0, 0);
+    return { from, to };
+  }
+  return cycleBounds(year, monthIdx);
+}
+
+/** "YYYY-MM" del periodo di una data secondo il `mode`. */
+export function periodKey(d: Date, mode: BillingMode): string {
+  const { year, monthIdx } = periodForDate(d, mode);
+  return `${year}-${String(monthIdx + 1).padStart(2, "0")}`;
+}

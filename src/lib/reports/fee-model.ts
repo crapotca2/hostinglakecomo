@@ -29,7 +29,8 @@ export interface BookingBreakdown {
   cleaning: number; // pass-through
   otaCommission: number;
   cedolare: number; // 21% (trattenuta OTA)
-  managementFee: number; // Host Como = rate × roomRevenue
+  managementBase: number; // base su cui si applica la fee (room, oppure lordo = room+pulizia+tassa)
+  managementFee: number; // Host Como = rate × managementBase
   managementFeeRate: number;
   touristTax: number; // pass-through
   parking: number; // partita 50/50
@@ -56,8 +57,13 @@ export function breakdownForBooking(b: BookingDoc, feeRate: number): BookingBrea
   const otaCommission = p.commissionAmount ?? 0;
   const cedolare = p.cedolare ?? round2(gross * 0.21);
   const rate = p.managementFeeRate ?? feeRate;
-  const managementFee = round2(roomRevenue * rate);
   const touristTax = p.touristTax ?? 0;
+  // Base della fee: "room" (solo alloggio) oppure "gross" (lordo = alloggio +
+  // pulizie + tassa di soggiorno). Pulizie e tassa restano comunque partite di
+  // giro nel netto; cambia solo la base su cui si calcola la commissione.
+  const feeBase = p.managementFeeBase ?? "room";
+  const managementBase = round2(feeBase === "gross" ? roomRevenue + cleaning + touristTax : roomRevenue);
+  const managementFee = round2(managementBase * rate);
   const parking = p.parking ?? 0;
   const totalRevenue = round2(roomRevenue + extraNight);
   const netPayout = round2(totalRevenue - otaCommission - cedolare - managementFee);
@@ -68,6 +74,7 @@ export function breakdownForBooking(b: BookingDoc, feeRate: number): BookingBrea
     cleaning,
     otaCommission,
     cedolare,
+    managementBase,
     managementFee,
     managementFeeRate: rate,
     touristTax,

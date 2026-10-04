@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
-import { billingCycle, cycleBounds } from "@/lib/reports/period";
-import { feeRateForProperty } from "@/lib/reports/fee-model";
+import { periodForDate, periodBounds, billingModeForProperty } from "@/lib/reports/period";
+import { feeRateForProperty, breakdownForBooking } from "@/lib/reports/fee-model";
 import type { BookingDoc, PropertyDoc, UserDoc, PartnerAdjustmentEntry } from "@/types/database";
 import { PARTNERS, INPS_RATE, type PartnerConfig } from "./partners";
 
@@ -78,13 +78,14 @@ export async function getPartnerNoteData(
   if (props.length === 0) return null;
   const property = props[0];
   const feeRate = feeRateForProperty(property);
+  const mode = billingModeForProperty(property);
 
   const bookingsCol = await collections.bookings();
   const query: Record<string, unknown> = { ownerId: new ObjectId(ownerId) };
   if (period !== "all") {
     const m = /^(\d{4})-(\d{2})$/.exec(period);
     if (!m) return null;
-    const { from, to } = cycleBounds(parseInt(m[1], 10), parseInt(m[2], 10) - 1);
+    const { from, to } = periodBounds(parseInt(m[1], 10), parseInt(m[2], 10) - 1, mode);
     query.checkIn = { $gte: from, $lt: to };
   }
   const all = (await bookingsCol.find(query).toArray()) as BookingDoc[];
@@ -98,19 +99,20 @@ export async function getPartnerNoteData(
   // alloggio × fee% ÷ 2 (niente più "Entrate : 2").
   const byMonth = new Map<number, PartnerNoteRow[]>();
   for (const b of counted) {
-    const p = b.pricing || {};
-    const alloggio = p.roomRevenue ?? Math.max(0, (p.totalAmount ?? 0) - (p.cleaningFee ?? 0));
+    // Base e commissione dalla fonte unica: per Splendore base = alloggio, per
+    // Pucci base = lordo (alloggio+pulizia+tassa). La quota del socio = fee ÷ 2.
+    const d = breakdownForBooking(b, feeRate);
     const row: PartnerNoteRow = {
       guest: b.guestInfo?.name || "—",
       checkIn: dm(b.checkIn),
       nights: b.nights,
       pax: b.guests,
-      alloggio: r2(alloggio),
+      alloggio: r2(d.managementBase),
       channel: b.source ? b.source.charAt(0).toUpperCase() + b.source.slice(1) : "—",
       feePct: Math.round(feeRate * 100),
-      pagamento: r2((alloggio * feeRate) / 2),
+      pagamento: r2(d.managementFee / 2),
     };
-    const { monthIdx: mi } = billingCycle(b.checkIn);
+    const { monthIdx: mi } = periodForDate(b.checkIn, mode);
     const arr = byMonth.get(mi) || [];
     arr.push(row);
     byMonth.set(mi, arr);
@@ -149,7 +151,7 @@ export async function getPartnerNoteData(
   const lordo = r2(consulenza + inps); // lordo da versare (= consulenza se senza INPS)
   const totale = r2(lordo + parcheggio + favore - acconto);
 
-  const year = counted.length > 0 ? billingCycle(counted[0].checkIn).year : new Date().getUTCFullYear();
+  const year = counted.length > 0 ? periodForDate(counted[0].checkIn, mode).year : new Date().getUTCFullYear();
   const periodLabel = `${monthsPhrase(months.map((m) => m.label))} ${year}`;
   const gen = new Date(generatedAtIso);
 

@@ -1,8 +1,8 @@
 import { ObjectId } from "mongodb";
 import { collections } from "@/lib/mongodb/collections";
 import { getOwnerStatementBookings, type BookingRemittanceRow } from "@/lib/reports/property-management";
-import { cycleBounds } from "@/lib/reports/period";
-import type { UserDoc } from "@/types/database";
+import { periodBounds, billingModeForProperty } from "@/lib/reports/period";
+import type { PropertyDoc, UserDoc } from "@/types/database";
 
 const MONTH_NAMES = [
   "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
@@ -22,6 +22,12 @@ export interface StatementTotals {
   netPayout: number;
 }
 
+export interface StatementDiscount {
+  guest: string;
+  label: string;
+  amount: number;
+}
+
 export interface StatementData {
   owner: { name: string; email: string };
   period: string; // "YYYY-MM"
@@ -30,6 +36,8 @@ export interface StatementData {
   to: string; // ISO date
   rows: BookingRemittanceRow[];
   totals: StatementTotals;
+  /** Sconti applicati dal canale nel periodo (informativi), per prenotazione. */
+  discounts: StatementDiscount[];
   generatedAt: string; // ISO
 }
 
@@ -63,8 +71,11 @@ export async function getStatementData(
   })) as UserDoc | null;
   if (!owner) return null;
 
-  // Periodo = ciclo di fatturazione 25→25 che chiude il 25 del mese indicato.
-  const { from, to } = cycleBounds(year, monthIdx);
+  // Periodo di competenza per-immobile: ciclo 25→25 (default) o mese solare.
+  const propsCol = await collections.properties();
+  const props = (await propsCol.find({ ownerId: new ObjectId(ownerId) }).toArray()) as PropertyDoc[];
+  const mode = billingModeForProperty(props[0]);
+  const { from, to } = periodBounds(year, monthIdx, mode);
 
   const rows = await getOwnerStatementBookings(from, to, ownerId);
 
@@ -95,6 +106,10 @@ export async function getStatementData(
     },
   );
 
+  const discounts: StatementDiscount[] = rows.flatMap((r) =>
+    (r.discounts ?? []).map((d) => ({ guest: r.guestName, label: d.label, amount: d.amount })),
+  );
+
   return {
     owner: { name: owner.name, email: owner.email },
     period,
@@ -103,6 +118,7 @@ export async function getStatementData(
     to: to.toISOString().slice(0, 10),
     rows,
     totals,
+    discounts,
     generatedAt: generatedAtIso,
   };
 }
