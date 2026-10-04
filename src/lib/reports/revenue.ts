@@ -1,7 +1,6 @@
 import { collections } from "@/lib/mongodb/collections";
 import type { BookingDoc } from "@/types/database";
 import { ObjectId } from "mongodb";
-import { billingCycle } from "@/lib/reports/period";
 
 export interface MonthlyRevenue {
   month: string;
@@ -41,11 +40,13 @@ export async function getMonthlyRevenue(year: number, ownerId: string): Promise<
     nights: 0,
   }));
 
-  // Bucketing per CICLO 25→25 (come il rendiconto/Reports), non per mese solare,
-  // così le notti/ricavi mensili dell'Analytics coincidono con i Reports.
+  // Bucketing per MESE SOLARE (mese di check-in): i giorni dal 25 a fine mese
+  // restano nel mese corrente. L'esclusione 25→25 vale SOLO nel rendiconto/Reports
+  // (fee Host Como), non nei grafici Analytics — richiesta di Andrei.
   for (const b of bookings) {
-    const { year: cy, monthIdx } = billingCycle(b.checkIn);
-    if (cy !== year) continue; // un check-in ≥25/12 cade nel ciclo di gennaio dell'anno dopo
+    const cy = b.checkIn.getUTCFullYear();
+    const monthIdx = b.checkIn.getUTCMonth();
+    if (cy !== year) continue;
     result[monthIdx].revenue += b.pricing?.totalAmount || 0;
     result[monthIdx].bookings += 1;
     result[monthIdx].nights += b.nights;
@@ -141,9 +142,7 @@ export async function getBookingPrices(
   const bookings: BookingPrice[] = [];
   for (const b of all) {
     if (b.status === "cancelled") continue;
-    if (!(b.checkIn >= start && b.checkIn < end)) continue;
-    const { year: cy } = billingCycle(b.checkIn);
-    if (cy !== year) continue; // coerente con getMonthlyRevenue
+    if (!(b.checkIn >= start && b.checkIn < end)) continue; // anno solare
     const p = b.pricing || {};
     const room = p.roomRevenue ?? Math.max(0, (p.totalAmount ?? 0) - (p.cleaningFee ?? 0));
     const price = Math.round((room + (p.extraNight ?? 0)) * 100) / 100;

@@ -171,14 +171,28 @@ async function main() {
     ], 1.5);
   }
 
-  // C2) NOTTI per ciclo: canonico ↔ ownerDetail ↔ Analytics (getMonthlyRevenue).
-  // Le notti dell'Analytics ora seguono il ciclo 25→25 come i Reports.
+  // C2) NOTTI per CICLO 25→25: canonico ↔ ownerDetail (Reports). I Reports usano il
+  // ciclo (i giorni 25→fine mese slittano al ciclo successivo).
   for (const period of Object.keys(byPeriod).sort()) {
-    const mr = monthlyRevenue.find((m) => m.month === period);
     const odNights = sum(ownerDetail.filter((r) => r.period === period), (r) => r.nights);
-    assertEqMulti(`NOTTI ciclo ${period} (canonico ↔ Reports ↔ Analytics)`, [
+    assertEqMulti(`NOTTI ciclo ${period} (canonico ↔ Reports)`, [
       { name: "canon", v: byPeriod[period].nights },
       { name: "ownerDetail", v: odNights },
+    ], 0);
+  }
+
+  // C2b) NOTTI per MESE SOLARE: canonico (mese di check-in) ↔ Analytics
+  // (getMonthlyRevenue). I grafici Analytics seguono il MESE SOLARE — i giorni
+  // 25→fine mese restano nel mese corrente, a differenza del ciclo 25→25 dei Reports.
+  const bySolar = {};
+  for (const x of bd) {
+    const k = `${x.b.checkIn.getUTCFullYear()}-${String(x.b.checkIn.getUTCMonth() + 1).padStart(2, "0")}`;
+    bySolar[k] = (bySolar[k] || 0) + x.b.nights;
+  }
+  for (const k of Object.keys(bySolar).sort()) {
+    const mr = monthlyRevenue.find((m) => m.month === k);
+    assertEqMulti(`NOTTI mese solare ${k} (canonico ↔ Analytics)`, [
+      { name: "canon(solare)", v: bySolar[k] },
       { name: "analytics", v: mr ? mr.nights : NaN },
     ], 0);
   }

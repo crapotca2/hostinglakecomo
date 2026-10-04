@@ -60,6 +60,10 @@ const D = [
   { name: "Joanna Stiller Lindskog",   nat: "SE", source: "airbnb",  ref: "AIRBNB-0808",  ci: "2026-08-08", co: "2026-08-11", nights: 3, guests: 4, gross: 1100.00, ota: 40.26,  cedolare: 231.00, tax: 36, parking: 40, extra: 0,   status: "checked_out", taxStatus: "collected" },
   { name: "Gareth Davies",      nat: "GB", source: "booking", ref: "6523247001", ci: "2026-08-13", co: "2026-08-17", nights: 4, guests: 4, gross: 1470.00, ota: 242.55, cedolare: 308.70, tax: 48, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "collected" },
   { name: "Scott Johnson",      nat: "GB", source: "booking", ref: "6034318176", ci: "2026-08-17", co: "2026-08-20", nights: 3, guests: 2, gross: 1100.00, ota: 181.50, cedolare: 231.00, tax: 18, parking: 0,  extra: 0,   status: "checked_out", taxStatus: "collected" },
+  // Ed Miranda: Airbnb, check-in 28/08 → cade nel ciclo Host Como 25→25 "2026-09".
+  // Tassa 9 (3€×1 osp×3 notti) incassata da Airbnb → nessun contante/acconto socio.
+  // Pulizia Airbnb 95. camera 1151, netto 492,58.
+  { name: "Ed Miranda",         nat: "US", source: "airbnb",  ref: "AIRBNB-ED-2808", ci: "2026-08-28", co: "2026-08-31", nights: 3, guests: 1, gross: 1246.00, ota: 235.62, cedolare: 261.66, tax: 9, parking: 0, extra: 0, status: "checked_out", taxStatus: "collected", cleaning: 95 },
   // --- Settembre: nuove prenotazioni (ciclo Host Como 25→25 "2026-09" = 25 ago → 24 set) ---
   // Dennis: Airbnb 5 notti (4→9 set) + 1 notte extra per arrivo anticipato il 3/09,
   // addebitata 290 € via Centro Soluzioni Airbnb → UN SOLO record di 6 notti con
