@@ -298,6 +298,8 @@
   },
   {
     "slug": "aqua-vista-di-splendore",
+
+    "hasWelcomeBook": true,
     "name": "Aqua Vista di Splendore",
     "type": "apartment",
     "zone": "primo-bacino",
@@ -1423,6 +1425,330 @@
         "url": "/images/listing/antica-alicia/12-foto-12.jpeg",
         "alt": "Antica Alicia — Como centro storico",
         "order": 12
+      }
+    ]
+  },
+  {
+    "slug": "cecilia",
+    "name": "Cecilia",
+    "type": "room",
+    "zone": "primo-bacino",
+    "hasWelcomeBook": true,
+    "description": "Una mastersuite con vista lago nel cuore di Pognana Lario, sulla sponda orientale del Lago di Como tra Como e Bellagio. Camera matrimoniale curata con terrazza privata affacciata sul primo bacino, bagno privato con doccia e un ambiente moderno dai toni verde salvia. Perfetta per una coppia che vuole svegliarsi davanti al lago.",
+    "description_en": "A lake-view mastersuite in the heart of Pognana Lario, on the eastern shore of Lake Como between Como and Bellagio. A tastefully furnished double room with a private terrace over the first basin, an en-suite bathroom with shower and a bright, modern sage-green feel. Perfect for a couple who want to wake up facing the lake.",
+    "description_ru": "Мастер-сюит с видом на озеро в самом сердце Поньяна-Ларио, на восточном берегу озера Комо между Комо и Белладжо. Со вкусом обставленный двухместный номер с собственной террасой над первым бассейном озера, отдельной ванной с душем и светлым современным интерьером в тонах шалфея. Идеально для пары, мечтающей просыпаться с видом на озеро.",
+    "descriptionLong": "Cecilia è una delle due mastersuite di un elegante affittacamere affacciato sul Lago di Como, a Pognana Lario. La camera, di circa 18 m², unisce comfort moderno e dettagli curati: letto matrimoniale, aria condizionata, Smart TV, armadio e un piccolo angolo con frigorifero, bollitore e set per tè e caffè. Il vero protagonista è la terrazza privata con pergolato, da cui lo sguardo corre sul primo bacino del lago e sulle montagne. Il bagno privato è rifinito con doccia, asciugacapelli e piastrelle verde salvia. L'ingresso è indipendente, con serratura smart per un check-in autonomo a qualsiasi ora. Pognana è un borgo tranquillo sulla strada panoramica Como–Bellagio: il bus di linea collega Como in circa un quarto d'ora e Bellagio in circa mezz'ora, mentre l'imbarcadero del paese permette di spostarsi via lago.",
+    "descriptionLong_en": "Cecilia is one of the two mastersuites in an elegant guesthouse overlooking Lake Como, in Pognana Lario. The room, about 18 sqm, blends modern comfort and careful detail: a double bed, air conditioning, a Smart TV, a wardrobe and a small corner with a fridge, kettle and tea/coffee set. The real star is the private pergola terrace, where the eye runs over the lake's first basin and the mountains. The en-suite bathroom is finished with a shower, hairdryer and sage-green tiles. The entrance is independent, with a smart lock for self check-in at any hour. Pognana is a quiet village on the scenic Como–Bellagio road: the line bus connects Como in about fifteen minutes and Bellagio in about half an hour, while the village pier lets you travel by boat.",
+    "descriptionLong_ru": "Cecilia — один из двух мастер-сюитов элегантного гостевого дома с видом на озеро Комо в Поньяна-Ларио. Номер площадью около 18 м² сочетает современный комфорт и продуманные детали: двуспальная кровать, кондиционер, Smart TV, шкаф и небольшой уголок с холодильником, чайником и набором для чая и кофе. Главная героиня — собственная терраса с перголой, откуда взгляд скользит по первому бассейну озера и горам. Отдельная ванная отделана душем, феном и плиткой цвета шалфея. Вход независимый, со смарт-замком для самостоятельного заселения в любое время. Поньяна — тихий посёлок на живописной дороге Комо–Белладжо: рейсовый автобус довозит до Комо примерно за четверть часа, а до Белладжо — примерно за полчаса, а от причала посёлка можно отправиться по озеру.",
+    "sections": {
+      "space": "Camera matrimoniale di circa 18 m² con terrazza privata vista lago. Dotazioni: letto matrimoniale, aria condizionata e riscaldamento, Smart TV a schermo piatto, armadio, frigorifero con bollitore e set per tè/caffè, Wi-Fi gratuito. Bagno privato con doccia, asciugacapelli, biancheria e asciugamani inclusi. Ingresso indipendente con serratura smart. Capienza massima: 2 ospiti. Struttura non fumatori.",
+      "space_en": "Double room of about 18 sqm with a private lake-view terrace. Features: double bed, air conditioning and heating, flat-screen Smart TV, wardrobe, fridge with kettle and tea/coffee set, free Wi-Fi. En-suite bathroom with shower, hairdryer, linens and towels included. Independent entrance with smart lock. Maximum capacity: 2 guests. Non-smoking property.",
+      "space_ru": "Двухместный номер около 18 м² с собственной террасой с видом на озеро. Оснащение: двуспальная кровать, кондиционер и отопление, Smart TV с плоским экраном, шкаф, холодильник с чайником и набором для чая/кофе, бесплатный Wi-Fi. Отдельная ванная с душем, фен, бельё и полотенца включены. Независимый вход со смарт-замком. Максимальная вместимость: 2 гостя. Для некурящих.",
+      "neighborhood": "Pognana Lario è un piccolo comune sulla sponda orientale del primo bacino del Lago di Como, lungo la panoramica strada Lariana che unisce Como a Bellagio. Dal paese si raggiungono a piedi il lungolago e l'imbarcadero; il bus di linea ASF porta a Como in circa 16 minuti e a Bellagio in circa mezz'ora. Nei dintorni: i ristoranti con vista lago del paese e di Careno, l'Orrido di Nesso con il suo ponte medievale a pochi minuti, e tutte le mete classiche del lago raggiungibili in battello o in auto. Un angolo autentico e silenzioso, lontano dalla folla ma vicino a tutto.",
+      "neighborhood_en": "Pognana Lario is a small village on the eastern shore of Lake Como's first basin, along the scenic Lariana road that links Como to Bellagio. The lakefront and the ferry pier are a short walk away; the ASF line bus reaches Como in about 16 minutes and Bellagio in about half an hour. Nearby you'll find the lake-view restaurants of the village and of Careno, the Orrido di Nesso gorge with its medieval bridge just minutes away, and all the classic lake destinations reachable by boat or car. An authentic, quiet spot, away from the crowds yet close to everything.",
+      "neighborhood_ru": "Поньяна-Ларио — небольшой посёлок на восточном берегу первого бассейна озера Комо, вдоль живописной дороги Лариана, соединяющей Комо и Белладжо. До набережной и причала парома — пара минут пешком; рейсовый автобус ASF довозит до Комо примерно за 16 минут, а до Белладжо — примерно за полчаса. Рядом: рестораны с видом на озеро в самом посёлке и в Карено, ущелье Орридо-ди-Нессо со средневековым мостом в нескольких минутах, и все классические направления озера, куда можно добраться на катере или машине. Аутентичный тихий уголок вдали от толп, но рядом со всем."
+    },
+    "extras": [],
+    "facts": {
+      "beds": "1 letto matrimoniale",
+      "checkInHours": "Self check-in con serratura smart, all'ora che preferisci; check-out entro le 10:00",
+      "floor": "Camera in affittacamere con ingresso indipendente",
+      "parkingNote": "Parcheggio lungo la strada Lariana (Via Matteotti) nei pressi della struttura; fermata bus e imbarcadero in paese",
+      "touristTaxNote": "Imposta di soggiorno del Comune di Pognana Lario, da saldare in loco",
+      "smokingNote": "Struttura non fumatori"
+    },
+    "address": {
+      "street": "Via Matteotti 116",
+      "city": "Pognana Lario",
+      "province": "CO",
+      "zip": "22020"
+    },
+    "details": {
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "maxGuests": 2,
+      "hasLakeView": true,
+      "hasWifi": true,
+      "hasAC": true,
+      "hasParking": false,
+      "hasGarden": false,
+      "hasPool": false
+    },
+    "amenities": [
+      "Vista lago",
+      "Letto matrimoniale",
+      "Terrazza privata",
+      "Aria condizionata",
+      "Riscaldamento",
+      "Bagno privato con doccia",
+      "Asciugacapelli",
+      "Wi-Fi gratuito",
+      "Smart TV a schermo piatto",
+      "Frigorifero",
+      "Bollitore e set per tè/caffè",
+      "Armadio/guardaroba",
+      "Biancheria e asciugamani inclusi",
+      "Self check-in con serratura smart",
+      "Struttura non fumatori"
+    ],
+    "pricing": {
+      "basePrice": 110,
+      "cleaningFee": 25,
+      "weekendMultiplier": 1.2
+    },
+    "geo": {
+      "lat": 45.8844475,
+      "lng": 9.1569593,
+      "displayName": "Via Matteotti 116, 22020 Pognana Lario (CO), Lombardia, Italia"
+    },
+    "source": {
+      "origin": "booking",
+      "url": "https://www.booking.com/hotel/it/allevi-rooms-mastersuites-on-the-lake-como.it.html",
+      "scrapedAt": "2026-10-04"
+    },
+    "images": [
+      {
+        "url": "/images/listing/cecilia/00-terrazza-vista-lago.jpeg",
+        "alt": "Cecilia — mastersuite vista lago, Pognana Lario",
+        "order": 0,
+        "room": "Terrazza vista lago"
+      },
+      {
+        "url": "/images/listing/cecilia/01-camera-matrimoniale.jpeg",
+        "alt": "Cecilia — mastersuite vista lago, Pognana Lario",
+        "order": 1,
+        "room": "Camera matrimoniale"
+      },
+      {
+        "url": "/images/listing/cecilia/02-camera-letto.jpeg",
+        "alt": "Cecilia — mastersuite vista lago, Pognana Lario",
+        "order": 2,
+        "room": "Camera matrimoniale"
+      },
+      {
+        "url": "/images/listing/cecilia/03-camera-guardaroba.jpeg",
+        "alt": "Cecilia — mastersuite vista lago, Pognana Lario",
+        "order": 3,
+        "room": "Camera matrimoniale"
+      },
+      {
+        "url": "/images/listing/cecilia/04-camera-dettaglio.jpeg",
+        "alt": "Cecilia — mastersuite vista lago, Pognana Lario",
+        "order": 4,
+        "room": "Camera matrimoniale"
+      },
+      {
+        "url": "/images/listing/cecilia/05-ingresso-angolo-caffe.jpeg",
+        "alt": "Cecilia — mastersuite vista lago, Pognana Lario",
+        "order": 5,
+        "room": "Ingresso e angolo caffè"
+      },
+      {
+        "url": "/images/listing/cecilia/06-bagno-lavabo.jpeg",
+        "alt": "Cecilia — mastersuite vista lago, Pognana Lario",
+        "order": 6,
+        "room": "Bagno privato"
+      },
+      {
+        "url": "/images/listing/cecilia/07-bagno-doccia.jpeg",
+        "alt": "Cecilia — mastersuite vista lago, Pognana Lario",
+        "order": 7,
+        "room": "Bagno privato con doccia"
+      },
+      {
+        "url": "/images/listing/cecilia/08-bagno-specchio.jpeg",
+        "alt": "Cecilia — mastersuite vista lago, Pognana Lario",
+        "order": 8,
+        "room": "Bagno privato"
+      },
+      {
+        "url": "/images/listing/cecilia/09-terrazza-colazione.jpeg",
+        "alt": "Cecilia — mastersuite vista lago, Pognana Lario",
+        "order": 9,
+        "room": "Terrazza — colazione vista lago"
+      },
+      {
+        "url": "/images/listing/cecilia/10-terrazza-pergolato.jpeg",
+        "alt": "Cecilia — mastersuite vista lago, Pognana Lario",
+        "order": 10,
+        "room": "Terrazza vista lago"
+      },
+      {
+        "url": "/images/listing/cecilia/11-camera-cuscini.jpeg",
+        "alt": "Cecilia — mastersuite vista lago, Pognana Lario",
+        "order": 11,
+        "room": "Dettagli camera"
+      },
+      {
+        "url": "/images/listing/cecilia/12-serratura-smart.jpeg",
+        "alt": "Cecilia — mastersuite vista lago, Pognana Lario",
+        "order": 12,
+        "room": "Ingresso con serratura smart"
+      },
+      {
+        "url": "/images/listing/cecilia/13-benvenuto.jpeg",
+        "alt": "Cecilia — mastersuite vista lago, Pognana Lario",
+        "order": 13,
+        "room": "Dettagli di benvenuto"
+      }
+    ]
+  },
+  {
+    "slug": "giulietta",
+    "name": "Giulietta",
+    "type": "room",
+    "zone": "primo-bacino",
+    "hasWelcomeBook": true,
+    "description": "Una mastersuite con vista lago a Pognana Lario, sulla sponda orientale del Lago di Como tra Como e Bellagio. Camera tripla luminosa con letto matrimoniale e divano letto, terrazza privata affacciata sul primo bacino e bagno privato con doccia. L'ideale per una piccola famiglia o tre amici in cerca del lago autentico.",
+    "description_en": "A lake-view mastersuite in Pognana Lario, on the eastern shore of Lake Como between Como and Bellagio. A bright triple room with a double bed and a sofa bed, a private terrace over the first basin and an en-suite bathroom with shower. Ideal for a small family or three friends looking for the authentic lake.",
+    "description_ru": "Мастер-сюит с видом на озеро в Поньяна-Ларио, на восточном берегу озера Комо между Комо и Белладжо. Светлый трёхместный номер с двуспальной кроватью и диваном-кроватью, собственной террасой над первым бассейном озера и отдельной ванной с душем. Идеально для небольшой семьи или троих друзей, ищущих настоящее озеро.",
+    "descriptionLong": "Giulietta è una delle due mastersuite di un elegante affittacamere affacciato sul Lago di Como, a Pognana Lario. La camera, di circa 18 m², ospita fino a tre persone con letto matrimoniale e divano letto, ed è arredata con gusto moderno: aria condizionata, Smart TV, armadio e un angolo con frigorifero, bollitore e set per tè e caffè. Dalla terrazza privata con pergolato si gode una vista aperta sul primo bacino del lago e sulle montagne. Il bagno privato è rifinito con doccia, asciugacapelli e piastrelle verde salvia. L'ingresso è indipendente, con serratura smart per un check-in autonomo a qualsiasi ora. Pognana è un borgo tranquillo sulla strada panoramica Como–Bellagio: il bus di linea collega Como in circa un quarto d'ora e Bellagio in circa mezz'ora, mentre l'imbarcadero del paese permette di spostarsi via lago.",
+    "descriptionLong_en": "Giulietta is one of the two mastersuites in an elegant guesthouse overlooking Lake Como, in Pognana Lario. The room, about 18 sqm, sleeps up to three with a double bed and a sofa bed, and is furnished with modern taste: air conditioning, a Smart TV, a wardrobe and a corner with a fridge, kettle and tea/coffee set. From the private pergola terrace you enjoy an open view over the lake's first basin and the mountains. The en-suite bathroom is finished with a shower, hairdryer and sage-green tiles. The entrance is independent, with a smart lock for self check-in at any hour. Pognana is a quiet village on the scenic Como–Bellagio road: the line bus connects Como in about fifteen minutes and Bellagio in about half an hour, while the village pier lets you travel by boat.",
+    "descriptionLong_ru": "Giulietta — один из двух мастер-сюитов элегантного гостевого дома с видом на озеро Комо в Поньяна-Ларио. Номер площадью около 18 м² вмещает до трёх человек благодаря двуспальной кровати и дивану-кровати и обставлен в современном вкусе: кондиционер, Smart TV, шкаф и уголок с холодильником, чайником и набором для чая и кофе. С собственной террасы с перголой открывается вид на первый бассейн озера и горы. Отдельная ванная отделана душем, феном и плиткой цвета шалфея. Вход независимый, со смарт-замком для самостоятельного заселения в любое время. Поньяна — тихий посёлок на живописной дороге Комо–Белладжо: рейсовый автобус довозит до Комо примерно за четверть часа, а до Белладжо — примерно за полчаса, а от причала посёлка можно отправиться по озеру.",
+    "sections": {
+      "space": "Camera tripla di circa 18 m² con terrazza privata vista lago. Letti: 1 matrimoniale + 1 divano letto (fino a 3 ospiti). Dotazioni: aria condizionata e riscaldamento, Smart TV a schermo piatto, armadio, frigorifero con bollitore e set per tè/caffè, Wi-Fi gratuito. Bagno privato con doccia, asciugacapelli, biancheria e asciugamani inclusi. Ingresso indipendente con serratura smart. Struttura non fumatori.",
+      "space_en": "Triple room of about 18 sqm with a private lake-view terrace. Beds: 1 double + 1 sofa bed (up to 3 guests). Features: air conditioning and heating, flat-screen Smart TV, wardrobe, fridge with kettle and tea/coffee set, free Wi-Fi. En-suite bathroom with shower, hairdryer, linens and towels included. Independent entrance with smart lock. Non-smoking property.",
+      "space_ru": "Трёхместный номер около 18 м² с собственной террасой с видом на озеро. Спальные места: 1 двуспальная кровать + 1 диван-кровать (до 3 гостей). Оснащение: кондиционер и отопление, Smart TV с плоским экраном, шкаф, холодильник с чайником и набором для чая/кофе, бесплатный Wi-Fi. Отдельная ванная с душем, фен, бельё и полотенца включены. Независимый вход со смарт-замком. Для некурящих.",
+      "neighborhood": "Pognana Lario è un piccolo comune sulla sponda orientale del primo bacino del Lago di Como, lungo la panoramica strada Lariana che unisce Como a Bellagio. Dal paese si raggiungono a piedi il lungolago e l'imbarcadero; il bus di linea ASF porta a Como in circa 16 minuti e a Bellagio in circa mezz'ora. Nei dintorni: i ristoranti con vista lago del paese e di Careno, l'Orrido di Nesso con il suo ponte medievale a pochi minuti, e tutte le mete classiche del lago raggiungibili in battello o in auto. Un angolo autentico e silenzioso, lontano dalla folla ma vicino a tutto.",
+      "neighborhood_en": "Pognana Lario is a small village on the eastern shore of Lake Como's first basin, along the scenic Lariana road that links Como to Bellagio. The lakefront and the ferry pier are a short walk away; the ASF line bus reaches Como in about 16 minutes and Bellagio in about half an hour. Nearby you'll find the lake-view restaurants of the village and of Careno, the Orrido di Nesso gorge with its medieval bridge just minutes away, and all the classic lake destinations reachable by boat or car. An authentic, quiet spot, away from the crowds yet close to everything.",
+      "neighborhood_ru": "Поньяна-Ларио — небольшой посёлок на восточном берегу первого бассейна озера Комо, вдоль живописной дороги Лариана, соединяющей Комо и Белладжо. До набережной и причала парома — пара минут пешком; рейсовый автобус ASF довозит до Комо примерно за 16 минут, а до Белладжо — примерно за полчаса. Рядом: рестораны с видом на озеро в самом посёлке и в Карено, ущелье Орридо-ди-Нессо со средневековым мостом в нескольких минутах, и все классические направления озера, куда можно добраться на катере или машине. Аутентичный тихий уголок вдали от толп, но рядом со всем."
+    },
+    "extras": [],
+    "facts": {
+      "beds": "1 letto matrimoniale + 1 divano letto (fino a 3 ospiti)",
+      "checkInHours": "Self check-in con serratura smart, all'ora che preferisci; check-out entro le 10:00",
+      "floor": "Camera in affittacamere con ingresso indipendente",
+      "parkingNote": "Parcheggio lungo la strada Lariana (Via Matteotti) nei pressi della struttura; fermata bus e imbarcadero in paese",
+      "touristTaxNote": "Imposta di soggiorno del Comune di Pognana Lario, da saldare in loco",
+      "smokingNote": "Struttura non fumatori"
+    },
+    "address": {
+      "street": "Via Matteotti 116",
+      "city": "Pognana Lario",
+      "province": "CO",
+      "zip": "22020"
+    },
+    "details": {
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "maxGuests": 3,
+      "hasLakeView": true,
+      "hasWifi": true,
+      "hasAC": true,
+      "hasParking": false,
+      "hasGarden": false,
+      "hasPool": false
+    },
+    "amenities": [
+      "Vista lago",
+      "Letto matrimoniale + divano letto",
+      "Terrazza privata",
+      "Aria condizionata",
+      "Riscaldamento",
+      "Bagno privato con doccia",
+      "Asciugacapelli",
+      "Wi-Fi gratuito",
+      "Smart TV a schermo piatto",
+      "Frigorifero",
+      "Bollitore e set per tè/caffè",
+      "Armadio/guardaroba",
+      "Biancheria e asciugamani inclusi",
+      "Self check-in con serratura smart",
+      "Struttura non fumatori"
+    ],
+    "pricing": {
+      "basePrice": 130,
+      "cleaningFee": 25,
+      "weekendMultiplier": 1.2
+    },
+    "geo": {
+      "lat": 45.8844475,
+      "lng": 9.1569593,
+      "displayName": "Via Matteotti 116, 22020 Pognana Lario (CO), Lombardia, Italia"
+    },
+    "source": {
+      "origin": "booking",
+      "url": "https://www.booking.com/hotel/it/allevi-rooms-mastersuites-on-the-lake-como.it.html",
+      "scrapedAt": "2026-10-04"
+    },
+    "images": [
+      {
+        "url": "/images/listing/giulietta/00-camera-vista-lago.jpeg",
+        "alt": "Giulietta — mastersuite vista lago, Pognana Lario",
+        "order": 0,
+        "room": "Camera con vista lago"
+      },
+      {
+        "url": "/images/listing/giulietta/01-terrazza-vista-lago.jpeg",
+        "alt": "Giulietta — mastersuite vista lago, Pognana Lario",
+        "order": 1,
+        "room": "Terrazza vista lago"
+      },
+      {
+        "url": "/images/listing/giulietta/02-camera-matrimoniale.jpeg",
+        "alt": "Giulietta — mastersuite vista lago, Pognana Lario",
+        "order": 2,
+        "room": "Camera matrimoniale"
+      },
+      {
+        "url": "/images/listing/giulietta/03-camera-ingresso.jpeg",
+        "alt": "Giulietta — mastersuite vista lago, Pognana Lario",
+        "order": 3,
+        "room": "Camera con affaccio lago"
+      },
+      {
+        "url": "/images/listing/giulietta/04-camera-doccia.jpeg",
+        "alt": "Giulietta — mastersuite vista lago, Pognana Lario",
+        "order": 4,
+        "room": "Camera con bagno"
+      },
+      {
+        "url": "/images/listing/giulietta/05-ingresso-angolo-caffe.jpeg",
+        "alt": "Giulietta — mastersuite vista lago, Pognana Lario",
+        "order": 5,
+        "room": "Ingresso e angolo caffè"
+      },
+      {
+        "url": "/images/listing/giulietta/06-bagno-doccia.jpeg",
+        "alt": "Giulietta — mastersuite vista lago, Pognana Lario",
+        "order": 6,
+        "room": "Bagno privato con doccia"
+      },
+      {
+        "url": "/images/listing/giulietta/07-bagno-dettaglio.jpeg",
+        "alt": "Giulietta — mastersuite vista lago, Pognana Lario",
+        "order": 7,
+        "room": "Bagno privato"
+      },
+      {
+        "url": "/images/listing/giulietta/08-bagno-lavabo.jpeg",
+        "alt": "Giulietta — mastersuite vista lago, Pognana Lario",
+        "order": 8,
+        "room": "Bagno privato"
+      },
+      {
+        "url": "/images/listing/giulietta/09-terrazza-pergolato.jpeg",
+        "alt": "Giulietta — mastersuite vista lago, Pognana Lario",
+        "order": 9,
+        "room": "Terrazza vista lago"
+      },
+      {
+        "url": "/images/listing/giulietta/10-terrazza-colazione.jpeg",
+        "alt": "Giulietta — mastersuite vista lago, Pognana Lario",
+        "order": 10,
+        "room": "Terrazza — colazione vista lago"
+      },
+      {
+        "url": "/images/listing/giulietta/11-serratura-smart.jpeg",
+        "alt": "Giulietta — mastersuite vista lago, Pognana Lario",
+        "order": 11,
+        "room": "Ingresso con serratura smart"
+      },
+      {
+        "url": "/images/listing/giulietta/12-benvenuto.jpeg",
+        "alt": "Giulietta — mastersuite vista lago, Pognana Lario",
+        "order": 12,
+        "room": "Dettagli di benvenuto"
       }
     ]
   }

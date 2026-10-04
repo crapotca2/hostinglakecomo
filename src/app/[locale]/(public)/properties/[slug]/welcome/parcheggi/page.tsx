@@ -312,6 +312,14 @@ export default async function ParkingPage({ params, searchParams }: PageProps) {
               <div className="rounded-2xl bg-white border border-slate-200 shadow-[0_20px_50px_-15px_rgba(15,23,42,0.25)]">
                 {publicModal}
               </div>
+            ) : pkc?.generalInfo ? (
+              /* No private spot and no mapped public spots: show the property's
+                 own parking guidance (e.g. on-street in a village) as direct text,
+                 instead of the Como historic-centre ZTL fallback. */
+              <div className="rounded-2xl bg-white border border-slate-200 shadow-[0_20px_50px_-15px_rgba(15,23,42,0.25)] p-5 sm:p-7">
+                <h2 className="text-2xl font-bold text-slate-900 mb-3">{label("publicParking", locale)}</h2>
+                <p className="text-base leading-relaxed text-slate-800 whitespace-pre-line">{t(pkc.generalInfo)}</p>
+              </div>
             ) : (
               <p className="text-sm leading-relaxed text-amber-900 bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-2">
                 <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />

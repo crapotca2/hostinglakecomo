@@ -292,7 +292,7 @@ export default function PropertyDetailPage() {
             </div>
           )}
 
-          {slug === "aqua-vista-di-splendore" && (
+          {property.hasWelcomeBook && (
             <Link
               href={`/properties/${slug}/welcome`}
               className="group bg-gradient-to-br from-[#1D3A62] to-[#2E5A8C] hover:from-[#2E5A8C] hover:to-[#1D3A62] text-white rounded-2xl p-5 sm:p-6 flex items-center gap-4 transition-colors shadow-sm hover:shadow-md"

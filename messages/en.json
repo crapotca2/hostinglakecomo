@@ -896,7 +896,8 @@
       "studio": "Studio",
       "apartment": "Apartment",
       "house": "House",
-      "villa": "Villa"
+      "villa": "Villa",
+      "room": "Room"
     },
     "card": {
       "lakeView": "Lake view",

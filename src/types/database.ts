@@ -732,10 +732,12 @@ export interface HouseGuideSections {
     routerLocation?: LocalizedTextOptional;
   };
   bedrooms: HouseGuideBedroom[];
-  livingRoom: LocalizedText;
+  // Optional: whole-apartment guides always set these, but single-room
+  // (affittacamere) guides omit the living room and kitchen entirely.
+  livingRoom?: LocalizedText;
   diningArea?: LocalizedText;
   diningArea_chips?: Array<{ icon?: "utensils" | "baby" | "ruler"; label: LocalizedText }>;
-  kitchen: {
+  kitchen?: {
     description: LocalizedText;
     appliances: HouseGuideAppliance[];
     historicElements?: LocalizedTextOptional;

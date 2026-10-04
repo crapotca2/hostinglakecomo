@@ -125,6 +125,12 @@ export interface PortfolioEntry {
    * still renders for internal sharing with the owner during onboarding.
    */
   demo?: boolean;
+  /**
+   * When true, the public detail page shows a link to this property's digital
+   * welcome book (/properties/<slug>/welcome). Requires the matching
+   * house_guides / welcome_books documents to exist in MongoDB.
+   */
+  hasWelcomeBook?: boolean;
   description: string;
   descriptionLong?: string;
   sections?: PortfolioSections;

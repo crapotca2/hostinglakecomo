@@ -63,9 +63,13 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
     (guide.sections.bedrooms.length > 1 || guide.sections.bathrooms.length > 1);
   // "Cortile" only reads right for the lakefront home; other properties use a
   // neutral "Spazi esterni" label (fits courtyards, terraces and balconies).
-  const gardenLabel = hasLakeView
-    ? sectionLabel("garden", locale)
-    : sectionLabel("outdoor", locale);
+  // Single-room (affittacamere) guides have a private terrace, not a courtyard.
+  const isRoom = portfolioEntry?.type === "room";
+  const gardenLabel = isRoom
+    ? sectionLabel("terrace", locale)
+    : hasLakeView
+      ? sectionLabel("garden", locale)
+      : sectionLabel("outdoor", locale);
   // Compact city apartments (no lake view, no lake access) merge the two
   // exterior groups (building view + courtyard) into a single "Spazi esterni"
   // tile and lay the lower area out as one aligned row instead of two.
@@ -264,17 +268,19 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
                 <KitchenModalContent guide={guide} t={t} locale={locale} />
               </TileCard>
             )}
-            <TileCard
-              photo={guide.sections.photos?.livingRoom?.[0]}
-              title={sectionLabel("living", locale)}
-              captionBelow
-            >
-              <TextRoomModalContent
-                photos={guide.sections.photos?.livingRoom ?? []}
+            {guide.sections.livingRoom && (
+              <TileCard
+                photo={guide.sections.photos?.livingRoom?.[0]}
                 title={sectionLabel("living", locale)}
-                body={t(guide.sections.livingRoom)}
-              />
-            </TileCard>
+                captionBelow
+              >
+                <TextRoomModalContent
+                  photos={guide.sections.photos?.livingRoom ?? []}
+                  title={sectionLabel("living", locale)}
+                  body={t(guide.sections.livingRoom)}
+                />
+              </TileCard>
+            )}
             {outdoorPhotos.length > 0 && (
               <TileCard
                 photo={guide.sections.photos?.garden?.[0] ?? guide.sections.photos?.exterior?.[0]}
@@ -291,7 +297,8 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
           </div>
         ) : (
           <>
-            {/* Riga 2 — Zona pranzo, Cucina, Soggiorno */}
+            {/* Riga 2 — Zona pranzo, Cucina, Soggiorno (omessi per le camere) */}
+            {(guide.sections.photos?.diningArea?.length || guide.sections.kitchen || guide.sections.livingRoom) && (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-4 last-tile-center-mobile">
               {guide.sections.photos?.diningArea && guide.sections.photos.diningArea.length > 0 && (
                 <TileCard
@@ -302,25 +309,30 @@ export default async function HouseGuidePage({ params, searchParams }: PageProps
                   <DiningModalContent guide={guide} t={t} locale={locale} />
                 </TileCard>
               )}
-              <TileCard
-                photo={guide.sections.photos?.kitchen?.[0]}
-                title={sectionLabel("kitchen", locale)}
-                captionBelow
-              >
-                <KitchenModalContent guide={guide} t={t} locale={locale} />
-              </TileCard>
-              <TileCard
-                photo={guide.sections.photos?.livingRoom?.[0]}
-                title={sectionLabel("living", locale)}
-                captionBelow
-              >
-                <TextRoomModalContent
-                  photos={guide.sections.photos?.livingRoom ?? []}
+              {guide.sections.kitchen && (
+                <TileCard
+                  photo={guide.sections.photos?.kitchen?.[0]}
+                  title={sectionLabel("kitchen", locale)}
+                  captionBelow
+                >
+                  <KitchenModalContent guide={guide} t={t} locale={locale} />
+                </TileCard>
+              )}
+              {guide.sections.livingRoom && (
+                <TileCard
+                  photo={guide.sections.photos?.livingRoom?.[0]}
                   title={sectionLabel("living", locale)}
-                  body={t(guide.sections.livingRoom)}
-                />
-              </TileCard>
+                  captionBelow
+                >
+                  <TextRoomModalContent
+                    photos={guide.sections.photos?.livingRoom ?? []}
+                    title={sectionLabel("living", locale)}
+                    body={t(guide.sections.livingRoom)}
+                  />
+                </TileCard>
+              )}
             </div>
+            )}
 
             {/* Riga 3 — Vista esterna, Cortile, Accesso lago */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 last-tile-center-mobile">
@@ -460,6 +472,7 @@ function KitchenModalContent({
   t: Translator;
   locale: SupportedLocale;
 }) {
+  if (!guide.sections.kitchen) return null;
   return (
     <div className="p-5 sm:p-7">
       <RoomCarousel
@@ -645,6 +658,7 @@ function sectionLabel(key: string, locale: SupportedLocale): string {
     dining: { it: "Zona pranzo", en: "Dining area", ru: "Обеденная зона", de: "Essbereich", pl: "Jadalnia", es: "Comedor" },
     exterior: { it: "Vista esterna casa", en: "House exterior", ru: "Внешний вид дома", de: "Außenansicht Haus", pl: "Widok zewnętrzny domu", es: "Exterior casa" },
     garden: { it: "Cortile", en: "Courtyard", ru: "Двор", de: "Innenhof", pl: "Dziedziniec", es: "Patio", fr: "Cour" },
+    terrace: { it: "Terrazza", en: "Terrace", ru: "Терраса", de: "Terrasse", pl: "Taras", es: "Terraza", fr: "Terrasse" },
     outdoor: { it: "Spazi esterni", en: "Outdoor spaces", ru: "Открытые пространства", de: "Außenbereiche", pl: "Przestrzenie zewnętrzne", es: "Espacios exteriores", fr: "Espaces extérieurs" },
     beach: { it: "Accesso al lago", en: "Lake access", ru: "Выход к озеру", de: "Seezugang", pl: "Dostęp do jeziora", es: "Acceso al lago" },
     sideLake: { it: "Lato lago", en: "Lake side", ru: "Со стороны озера", de: "Seeseite", pl: "Strona jeziora", es: "Lado del lago", fr: "Côté lac" },

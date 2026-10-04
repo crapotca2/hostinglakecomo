@@ -896,7 +896,8 @@
       "studio": "Studio",
       "apartment": "Appartamento",
       "house": "Casa",
-      "villa": "Villa"
+      "villa": "Villa",
+      "room": "Camera"
     },
     "card": {
       "lakeView": "Vista Lago",
