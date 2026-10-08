@@ -1846,11 +1846,13 @@
     },
     "compensi": {
       "titleStrong": "Compensi soci",
+      "managementFee": "Management Fee",
       "subtitle": "Note spese interne Host Como (una per socio)",
       "adminOnly": "Sezione riservata agli amministratori.",
       "pickOwner": "Seleziona un proprietario per generare le note spese.",
       "period": "Periodo",
       "all": "Tutto",
+      "multiSelected": "{n} mesi selezionati",
       "consulenza": "Consulenza (50% commissione)",
       "inps": "Rivalsa INPS 4%",
       "lordo": "Lordo da versare",

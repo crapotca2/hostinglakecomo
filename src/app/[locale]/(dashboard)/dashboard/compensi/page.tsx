@@ -7,6 +7,7 @@ import { Download, Users, Wallet, ShieldAlert, Plus, Trash2, Save, SlidersHorizo
 import { useMe } from "@/hooks/use-me";
 import { useOwnerScope } from "@/components/owner-scope";
 import { useStatements } from "@/hooks/use-statements";
+import { useProperties } from "@/hooks/use-properties";
 import { cyclePeriodKey } from "@/lib/reports/period";
 
 const PARTNERS = ["angelo", "andrei"] as const;
@@ -29,10 +30,17 @@ export default function CompensiPage() {
   const locale = useLocale();
   const { data: me } = useMe();
   const { ownerId } = useOwnerScope();
-  const [period, setPeriod] = useState("all");
+  // Selezione multipla dei mesi: array di chiavi periodo. Vuoto = "Tutto".
+  const [selected, setSelected] = useState<string[]>([]);
   const year = new Date().getFullYear();
   const { data: stmts } = useStatements(year);
+  const { data: properties } = useProperties();
   const periods = stmts?.payouts?.map((p) => p.period) ?? [];
+  const houseName = properties?.[0]?.name ?? "";
+  // Parametro per le API: "all" se nessun mese scelto, altrimenti lista "A,B,C".
+  const periodParam = selected.length === 0 ? "all" : selected.join(",");
+  const toggle = (p: string) =>
+    setSelected((prev) => (prev.includes(p) ? prev.filter((x) => x !== p) : [...prev, p]));
 
   if (me && me.role !== "admin") {
     return (
@@ -48,7 +56,14 @@ export default function CompensiPage() {
   return (
     <div className="p-6 space-y-6 animate-fade-in">
       <div>
-        <h1 className="text-2xl font-light"><span className="font-semibold">{t("titleStrong")}</span></h1>
+        <div className="flex items-center gap-3 flex-wrap">
+          <h1 className="text-2xl font-light"><span className="font-semibold">{t("titleStrong")}</span></h1>
+          {ownerId && houseName ? (
+            <span className="inline-flex items-center rounded-full bg-primary/[0.08] px-3 py-1 text-xs font-semibold text-primary">
+              {t("managementFee")} · {houseName}
+            </span>
+          ) : null}
+        </div>
         <p className="text-sm text-muted-foreground mt-1">{t("subtitle")}</p>
       </div>
 
@@ -61,19 +76,22 @@ export default function CompensiPage() {
         <>
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mr-1">{t("period")}</span>
-            <PeriodBtn active={period === "all"} onClick={() => setPeriod("all")} label={t("all")} />
+            <PeriodBtn active={selected.length === 0} onClick={() => setSelected([])} label={t("all")} />
             {periods.map((p) => (
-              <PeriodBtn key={p} active={period === p} onClick={() => setPeriod(p)} label={p} />
+              <PeriodBtn key={p} active={selected.includes(p)} onClick={() => toggle(p)} label={p} />
             ))}
+            {selected.length > 1 ? (
+              <span className="text-[11px] text-muted-foreground ml-1">{t("multiSelected", { n: selected.length })}</span>
+            ) : null}
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
             {PARTNERS.map((partner) => (
-              <PartnerCard key={partner} partner={partner} ownerId={ownerId} period={period} locale={locale} t={t} />
+              <PartnerCard key={partner} partner={partner} ownerId={ownerId} period={periodParam} locale={locale} t={t} />
             ))}
           </div>
 
-          <AdjustmentsEditor ownerId={ownerId} period={period} t={t} />
+          <AdjustmentsEditor ownerId={ownerId} period={periodParam} t={t} />
 
           <p className="text-xs text-muted-foreground">{t("note")}</p>
         </>
@@ -191,8 +209,11 @@ function AdjustmentsEditor({ ownerId, period, t }: { ownerId: string; period: st
     const next = rows.map((r, j) => (j === i ? { ...r, ...patch } : r));
     setDraft(next);
   };
+  // period può essere "all" o una lista "A,B,C": per una nuova riga uso il primo
+  // mese selezionato (o il ciclo corrente se "Tutto").
+  const defaultPeriod = period === "all" ? cyclePeriodKey(new Date()) : period.split(",")[0];
   const add = () =>
-    setDraft([...rows, { period: period === "all" ? cyclePeriodKey(new Date()) : period, kind: "acconto", partner: "angelo", amount: 0, note: "" }]);
+    setDraft([...rows, { period: defaultPeriod, kind: "acconto", partner: "angelo", amount: 0, note: "" }]);
   const remove = (i: number) => setDraft(rows.filter((_, j) => j !== i));
 
   return (

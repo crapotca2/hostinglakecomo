@@ -57,7 +57,8 @@ function monthsPhrase(labels: string[]): string {
  * un immobile. La consulenza = metà della commissione Host Como (aliquota ×
  * ricavi alloggio) sulle prenotazioni valide del periodo; maggiorata del 4% INPS.
  * Documento INTERNO (intestato al proprietario, emesso dal socio) → solo admin.
- * period: "all" (tutte le prenotazioni) oppure "YYYY-MM" (ciclo 25→25).
+ * period: "all" (tutte le prenotazioni), "YYYY-MM" (ciclo 25→25), o più periodi
+ * separati da virgola ("2026-09,2026-10") per la selezione multipla dei mesi.
  * Ritorna null se socio/owner/property non validi.
  */
 export async function getPartnerNoteData(
@@ -82,11 +83,19 @@ export async function getPartnerNoteData(
 
   const bookingsCol = await collections.bookings();
   const query: Record<string, unknown> = { ownerId: new ObjectId(ownerId) };
-  if (period !== "all") {
-    const m = /^(\d{4})-(\d{2})$/.exec(period);
-    if (!m) return null;
-    const { from, to } = periodBounds(parseInt(m[1], 10), parseInt(m[2], 10) - 1, mode);
-    query.checkIn = { $gte: from, $lt: to };
+  // period: "all" (tutte le prenotazioni) | "YYYY-MM" | lista separata da virgola
+  // di più periodi (es. "2026-09,2026-10") per la selezione multipla dei mesi nel
+  // pannello Compensi. Con più periodi si uniscono le finestre dei cicli via $or.
+  const periodKeys = period === "all" ? [] : period.split(",").map((s) => s.trim()).filter(Boolean);
+  if (periodKeys.length > 0) {
+    const windows: Array<{ checkIn: { $gte: Date; $lt: Date } }> = [];
+    for (const pk of periodKeys) {
+      const m = /^(\d{4})-(\d{2})$/.exec(pk);
+      if (!m) return null;
+      const { from, to } = periodBounds(parseInt(m[1], 10), parseInt(m[2], 10) - 1, mode);
+      windows.push({ checkIn: { $gte: from, $lt: to } });
+    }
+    query.$or = windows;
   }
   const all = (await bookingsCol.find(query).toArray()) as BookingDoc[];
   const counted = all
@@ -135,8 +144,9 @@ export async function getPartnerNoteData(
   // a una prenotazione di un altro ciclo). period "all" = tutte quelle del socio.
   const adjCol = await collections.partnerAdjustments();
   const adj = await adjCol.findOne({ ownerId: new ObjectId(ownerId) });
+  const periodSet = new Set(periodKeys);
   const entries = ((adj?.entries ?? []) as PartnerAdjustmentEntry[]).filter(
-    (e) => e.partner === partnerKey && (period === "all" || e.period === period),
+    (e) => e.partner === partnerKey && (periodKeys.length === 0 || periodSet.has(e.period)),
   );
   const favoreEntries = entries.filter((e) => e.kind === "favore");
   const accontoEntries = entries.filter((e) => e.kind === "acconto");

@@ -1846,11 +1846,13 @@
     },
     "compensi": {
       "titleStrong": "Partner payouts",
+      "managementFee": "Management Fee",
       "subtitle": "Internal Host Como expense notes (one per partner)",
       "adminOnly": "Admins only.",
       "pickOwner": "Select an owner to generate the expense notes.",
       "period": "Period",
       "all": "All",
+      "multiSelected": "{n} months selected",
       "consulenza": "Consultancy (50% commission)",
       "inps": "INPS surcharge 4%",
       "lordo": "Gross to pay",

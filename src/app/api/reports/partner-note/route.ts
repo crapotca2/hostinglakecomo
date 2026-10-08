@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 /**
  * Nota spese (compenso) di un socio Host Como — documento INTERNO, quindi
  * ADMIN-ONLY (un proprietario non deve vedere lo split tra i soci).
- * ?partner=angelo|andrei · ?ownerId=<id> · ?period=all|YYYY-MM · ?format=json|pdf
+ * ?partner=angelo|andrei · ?ownerId=<id> · ?period=all|YYYY-MM|YYYY-MM,YYYY-MM (multi) · ?format=json|pdf
  */
 export async function GET(req: NextRequest) {
   const auth = await requireSession();
@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
   }
 
   const pdf = await renderPartnerNotePdf(data);
-  const filename = `nota-spese-${data.partner.key}-${period}.pdf`;
+  const filename = `nota-spese-${data.partner.key}-${period.replace(/[^0-9A-Za-z-]+/g, "_")}.pdf`;
   return new NextResponse(new Uint8Array(pdf), {
     status: 200,
     headers: {

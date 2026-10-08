@@ -41,9 +41,9 @@ const entries = [
   { period: "2026-08", kind: "acconto", partner: "andrei", amount: 36, note: "Jacek (tassa soggiorno)" },
   { period: "2026-08", kind: "acconto", partner: "andrei", amount: 48, note: "Gareth (tassa soggiorno)" },
   { period: "2026-08", kind: "acconto", partner: "andrei", amount: 18, note: "Scott (tassa soggiorno)" },
-  { period: "2026-09", kind: "acconto", partner: "angelo", amount: 57, note: "Anthony (parcheggio 30 + tassa 27)" },
-  { period: "2026-09", kind: "acconto", partner: "angelo", amount: 24, note: "Giuliano (tassa soggiorno, check-in 25/09)" },
-  { period: "2026-10", kind: "acconto", partner: "angelo", amount: 27, note: "Hala (tassa soggiorno)" },
+  { period: "2026-09", kind: "acconto", partner: "angelo", amount: 57, note: "Anthony 17/09 — tassa 27 + parcheggio 30" },
+  { period: "2026-09", kind: "acconto", partner: "angelo", amount: 24, note: "Giuliano 25/09 — tassa soggiorno" },
+  { period: "2026-10", kind: "acconto", partner: "angelo", amount: 27, note: "Hala 02/10 — tassa soggiorno (incassata da Angelo)" },
 ];
 
 async function main() {
